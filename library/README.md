@@ -6,7 +6,8 @@ The library is a list, not a folder of .rfa files: [`families.csv`](families.csv
 
 ## What each family has
 
-- **Template:** Revit's own metric template for the category (for example `Metric Door.rft`); Generic Model with the right category when that template is missing.
+- **Template:** `Metric Door.rft` and `Metric Window.rft` for doors and windows; `Metric Generic Model face based.rft` with the category set for everything else.
+- **Hosting:** Families are face-based (Sam's rule) so they can be hosted on a level, reference plane or any face; doors and windows are wall-hosted.
 - **Geometry:** LOD 200 envelopes only. A box for equipment, fixtures and furniture (Width, Depth and Height parameters drive it), a leaf for doors and a glazing panel for windows (the template's Width and Height drive them). No product detail.
 - **Types:** placeholder sizes in millimetres, listed in `families.csv`. They are typical sizes, not products.
 - **Identity:** Assembly Code (UniFormat II, unverified), Description and Type Comments saying it is a generic family.

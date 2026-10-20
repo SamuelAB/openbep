@@ -47,10 +47,34 @@ dotnet build -c Release -p:RevitVersion=2025
 |---|---|
 | `App.cs` | Adds the ribbon tab and button. |
 | `LibraryCommand.cs` | Builds the families in `library/families.csv` from Revit's metric templates, with types and OpenBEP shared parameters. |
+| `AutoTest.cs` | Developer test, off unless `%AppData%\OpenBEP\autotest.json` exists (see below). |
 | `SyncCommand.cs` | Dry run, report, choice, then one transaction that adds, binds or deletes. |
 | `BindingList.cs` | Reads the BEP Builder's binding list and merges rows by GUID. |
 | `OpenBepSync.csproj` | Build file; set `RevitVersion`. |
 | `OpenBepSync.addin` | Revit manifest. |
+
+## Developer test (automatic run)
+
+For developers only; nothing happens unless `%AppData%\OpenBEP\autotest.json` exists. When it does, on Revit's first idle moment the add-in:
+
+1. builds the library from `familiesCsv` with no dialogs, and logs each family's category, hosting and solid size per type;
+2. creates a project from `DefaultMetric.rte` (or `template`), saves it in `out`, places the showroom and exports PNGs of the 3D view and the plan;
+3. runs Sync parameters on `bindings` (dry run, apply, second dry run);
+4. if `ifcPsets` is set: fills empty OpenBEP `CA_` parameters, and empty Type Mark, Mark, Manufacturer, Model and Description, with unique test values (warnings deleted, so a duplicate-mark warning cannot roll the fill back) and exports `OpenBEP-autotest.ifc` (IFC4, base quantities, common property sets, plus the user-defined property set file from [`shared-parameters/`](../../shared-parameters/)); check it with `test/check_ifc.py model.ifc plan.ids` (ifcopenshell and ifctester) against the IDS downloaded from the BEP Builder;
+5. saves the project, writes `autotest.log` and `autotest-done.txt` in `out`, and closes Revit (unless `"exit": "no"`).
+
+Every Revit dialog is answered automatically ("save?" questions with No) and logged.
+
+```json
+{ "familiesCsv": "C:\\path\\openbep\\library\\families.csv",
+  "bindings": "C:\\path\\openbep\\revit-addin\\OpenBepSync\\test\\OpenBEP-parameter-bindings-school-example.csv",
+  "ifcPsets": "C:\\path\\openbep\\shared-parameters\\OpenBEP_IFC_PropertySets_v0.1.txt",
+  "out": "C:\\temp\\openbep-autotest" }
+```
+
+Delete `autotest.json` afterwards, or Revit runs the test at every start.
+
+Revit asks again about an unsigned add-in each time the DLL changes. For a rebuild-and-test loop, point the `.addin` at a small fixed loader DLL that reads a build path from a text file and loads it with `Assembly.LoadFrom`, so "Always Load" is clicked once, on the loader only. The released add-in stays a single DLL.
 
 ## Not done yet
 

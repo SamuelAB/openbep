@@ -22,6 +22,7 @@ namespace OpenBepSync
                 ToolTip = "Build the OpenBEP families listed in library/families.csv from Revit's metric templates, with their types and OpenBEP shared parameters. Works with no project open.",
                 AvailabilityClassName = typeof(AlwaysAvailable).FullName
             });
+            AutoTest.Hook(app);   // developer test; does nothing unless %AppData%\OpenBEP\autotest.json exists
             return Result.Succeeded;
         }
 
