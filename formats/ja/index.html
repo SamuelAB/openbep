@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n>ファイル形式では曖昧なBIMは直らない</title>
+<meta name="description" data-i18n-attr content="すべてのプロジェクトでIFCやCOBieを義務づけてもBIMが直らない理由、オープンBIMが正しい点、発注者がまず求めるべきこと。すべての出典へのリンクつき。">
+<link rel="alternate" hreflang="en" href="https://openbep.com/formats/">
+<link rel="alternate" hreflang="fr" href="https://openbep.com/formats/fr/">
+<link rel="alternate" hreflang="ja" href="https://openbep.com/formats/ja/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../why/why.css">
+<style>
+  .claim{font-weight:600;margin:28px 0 4px}
+  ol.steps li{margin:8px 0}
+  .disclose{border-left:3px solid var(--line);padding:6px 12px;background:var(--surface);border-radius:0 var(--r) var(--r) 0}
+</style>
+</head>
+<body>
+<!-- English is the master. Other languages are generated from the dictionary,
+     translations/canbim_strings.csv, by translations/build_pages.py: edit the dictionary, not the generated pages.
+     Blocks marked not:ja and only:ja make the Japanese page differ (see build_pages.py). -->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../app/bep-builder.html?lang=ja">OpenBEP</a>
+    <nav class="top-links">
+      <a href="../../why/ja/" data-i18n>OpenBEPが必要な理由</a>
+      <a href="../../app/bep-builder.html?lang=ja" data-i18n>BEP Builder を開く</a>
+      <ul class="lang">
+        <li><a href=".././" hreflang="en" lang="en">English</a></li>
+        <li><a href=".././fr/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href=".././ja/" hreflang="ja" lang="ja">日本語</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 data-i18n>ファイル形式では曖昧なBIMは直らない</h1>
+  <p class="lede" data-i18n><strong>IFCやCOBieのファイルは、モデルを印刷したものです。計画ではなく、すぐに古くなります。</strong></p>
+  <p data-i18n>日本は慎重な道を選びました。2026年4月から、建築確認申請にBIMを使えるようになりました。設計者はBIMモデルから出力したPDFの図書と、同じモデルから同時に出力したIFCファイルを提出します。審査の対象はPDFの図書です。IFCファイルは審査者が建物の形状を理解する助けとなるもので、国土交通省のマニュアルは、IFCデータのみに含まれる情報に基づいた判断は行わないとしています。<sup><a href="#s38">38</a></sup>BIMデータそのものの審査は2029年春の開始が予定されています。<sup><a href="#s38">38</a></sup></p>
+  <p data-i18n>このページはもともと北米向けに書きました。北米では、すべてのプロジェクトでIFCとオープンなツールを義務づければBIMの問題は解決する、という見方がよく聞かれます。その見方を最も明確に書いているのが、カナダのケベック州政府による2025年の手引きで、以下では「手引き」として引用します。<sup><a href="#s1">1</a></sup></p>
+  <p data-i18n>最初にお断りしておきます。OpenBEPの創設者は、独自の交換形式を持つ会社VIMに勤めています。このページの終わり近くで、ほかの選択肢とあわせてその形式にも触れます。</p>
+  <p data-i18n>オープンBIMの主張の多くには賛成です。賛成できないのは、よく耳にする「公共の発注者がすべてのプロジェクトでIFCとオープンなツールを義務づければ、業界のBIMの問題はなくなる」という考えです。</p>
+  <p data-i18n>私たちの経験では、主な問題はファイル形式ではありません。発注者が何に使うのかを言わずに「BIM」を求めることです。曖昧なモデルをIFCで保存しても、曖昧なモデルのままです。</p>
+
+  <div class="box key">
+    <h2 data-i18n>要点</h2>
+    <ul>
+      <li data-i18n><strong>書き出したファイルは、モデルのPDFです。</strong>読むことはできますが、その中で作業を続けることは誰にもできません。次のチームにはやはりネイティブファイルが必要で、書き出したファイルは最初の改修で古くなります。</li>
+      <li data-i18n><strong>形式が決めるのはファイルの書き方で、中身ではありません。</strong>中身を決めるのは発注者の要件だけです。BIMの活用目的、要素、パラメータ、確認方法です。</li>
+      <li data-i18n><strong>IFCは実装も読解も難しい形式です。</strong>方言に分かれ、大きなモデルに弱く、次のバージョンは完成していない作り直しです。</li>
+      <li data-i18n><strong>COBieはさらに問題があります。</strong>表計算ソフト形式の書き出しで、確認もモデルへのさかのぼりも困難です。英国はこれを義務づけましたが、受け取ったものを使えなかった発注者もおり、buildingSMARTは後継を開発中です。</li>
+      <li data-i18n><strong>オープン標準の中には本当に良いものもあります。</strong>要件のためのIDSと、課題のためのBCFは、要求する価値があります。</li>
+    </ul>
+  </div>
+
+  <p class="note" data-i18n>これは優先順位と順序についての意見の違いであり、誰かの誠意を疑うものではありません。手引き自体も、オープンBIMの活用を「当然望ましい」としつつ、義務も期限も定めていません。<sup><a href="#s1">1</a></sup>日本語以外の資料からの引用は、当方による翻訳です。</p>
+
+  <h2 data-i18n>オープンBIMが正しい点</h2>
+  <div class="box fix">
+    <ul>
+      <li data-i18n><strong>活用目的から始める。</strong>手引きの要約は「すべてはユースケースから始まる」と書いています。<sup><a href="#s1">1</a></sup>OpenBEPもまさにそこから始まります。</li>
+      <li data-i18n><strong>発注者は自らのデータを管理しなければならない。</strong>手引きは、公共の発注者が自らのデータの管理を保つことは「きわめて重要」だとしています。<sup><a href="#s1">1</a></sup>私たちも同意見です。</li>
+      <li data-i18n><strong>要件のためのIDS。</strong>IDSファイルは、各要素が持つべき情報を機械で読める形でまとめた一覧です。手引きは「IDSを作成するのは通常は発注者である」としています。<sup><a href="#s1">1</a></sup>IDSはIFCのクラスとプロパティセットに対して書かれますが、Revitのパラメータとの対応づけがあれば、同じ一覧でIFCファイルだけでなくRevitモデルも確認できます。OpenBEPがすべての計画からIDSを書き出すのはこのためです。</li>
+      <li data-i18n><strong>課題のためのBCF。</strong>BCF(BIM Collaboration Format)は、干渉や調整の課題をツール間で受け渡すための、シンプルで良い標準です。課題ごとに視点とコメントが付きます。一つの仕事をきちんとこなす標準です。</li>
+      <li data-i18n><strong>ファイルの確認。</strong>buildingSMARTは現在、無料のオンラインIFC検証サービスを提供しており、手引きは発注者が受け取ったファイルを確認する方法として紹介しています。<sup><a href="#s1">1</a></sup></li>
+    </ul>
+  </div>
+  <p data-i18n>これらに共通する点に注目してください。IDSとBCFが記述するのは要件と課題です。モデルの原本になろうとはしていません。</p>
+
+  <h2 data-i18n>書き出したファイルは、モデルのPDF</h2>
+  <p data-i18n>手引きは、オープンな形式は「ソフトウェア間の相互運用性を保証する」とし、データ交換は「IFCのデータスキーマで符号化された相互運用可能なファイルによって行われる」としています。<sup><a href="#s1">1</a></sup>形式が保証するのは、別のプログラムでファイルを開けることです。そのファイルを作業できるモデルにするわけではありません。</p>
+  <ul>
+    <li data-i18n>IFCを推進する人たちも、この比較を使っています。2019年のインタビューでは、RevitモデルからのIFCファイルが、WordファイルからつくったPDFにたとえられました。文章は読めても、その中で文書作成はできない、ということです。<sup><a href="#s2">2</a></sup>そのときの論点は、誰でも読めるという点でした。私たちが言いたいのはもう半分です。多くの会社が使う設計ソフトでは、その中で作業を続けることができません。</li>
+    <li data-i18n>Revitのヘルプによると、IFCファイルを開くと既定のテンプレートから新しいモデルが作られます。そのうえで、IFCを<q>参照情報として</q>リンクする方法を案内しています。<sup><a href="#s4">4</a></sup></li>
+    <li data-i18n>公平な反論もあります。Bonsai(旧BlenderBIM)のように、IFCで直接モデリングするツールもあり、その場合はIFCがネイティブファイルです。ただ、現在そのように作業している会社は少なく、要件は実際のプロジェクトの進め方に合っているべきです。</li>
+    <li data-i18n>オランダは、公共機関が要求しなければならない「適用または説明」リストにIFCを載せています。しかし2019年、同国の標準化フォーラムは、IFCモデルはコミュニケーションと調整のための元モデルからの出力であり、「元モデルに代わるものではない」と明確にしました。<sup><a href="#s5">5</a></sup></li>
+    <li data-i18n>2026年4月に始まった日本のBIM図面審査も、同じ考え方です。審査の対象は、BIMモデルから出力したPDFの図書です。一緒に提出するIFCファイルは形状を理解するための参考です。マニュアルによると、IFCデータのみに含まれる情報に基づいた判断は行わず、IFCデータは法定保存の対象とせず、IFCデータを用いた中間検査・完了検査も行いません。<sup><a href="#s38">38</a></sup></li>
+    <li data-i18n>この審査を可能にしたのは、ファイル形式ではありません。通り芯、柱、梁、床、壁などの要素ごとに書かれた共通の「入出力基準」と、それを使う設計者が基準に従うことを誓約する「入出力基準適合誓約書」です。<sup><a href="#s38">38</a></sup>これは発注者側の要件であり、多くのオープンBIMのロードマップが後回しにしている部分です。</li>
+  </ul>
+  <p class="claim" data-i18n>最初の改修で古くなる。</p>
+  <p data-i18n>納品されたIFCやCOBieのファイルは、ある時点のスナップショットです。2016年、ある上級BIMエンジニアはCOBieを<q>毎年配られていた厚さ5センチの電話帳のBIM版で、玄関に届いた時点ですでに古い</q>と表現しました。<sup><a href="#s6">6</a></sup>私たちの経験では、IFCのアーカイブも同じです。建物が改修される日には、作業はネイティブモデルで行われ、そのモデルが更新され、IFCとCOBieのファイルは書き出し直しになります。書き出したファイルのアーカイブは、古い印刷物のアーカイブです。</p>
+  <p data-i18n>ですから、契約上の原本は設計ソフトのネイティブファイルとし、書き出したファイルは、特定の活用目的が必要とする場合に求める追加の成果物とすべきです。これには、私たちが率直に認めるコストがあります。ネイティブファイルはアーカイブを一つのベンダーの形式に縛り、手引きが警告するロックインになります。<sup><a href="#s1">1</a></sup>私たちの答えは、発注者はネイティブファイルを所有し、活用目的ごとに必要なデータと形式を明示することで管理を保てる、というものです。一律のIFCの規則だけでは、その管理は得られません。</p>
+  <p data-i18n>カナダの発注者の中には、すでにこのように書いているところもあります。オンタリオ州の交通機関Metrolinxは、提出のたびにネイティブファイルと交換用ファイルの両方を求め、図面はPDFとネイティブ形式の両方で求め、統合モデルはNavisworksかIFCで受け付けます。<sup><a href="#s37">37</a></sup>ネイティブファイルが作業用の原本であり、書き出したファイルは特定の活用目的に使われます。</p>
+
+  <p class="claim" data-i18n>絞り込みは、発注者が条件を決めるなら利点になる。</p>
+  <p data-i18n>手引きは、IFCの書き出しでは「モデルは必ず『絞り込まれ』、元のモデルが持つすべてのデータは含まれない」と注意しています。<sup><a href="#s1">1</a></sup>これは弱点として書かれています。私たちは逆に考えます。発注者は、設計者が使った作業用のパラメータや補助オブジェクトをすべて欲しいわけではありません。欲しいのは活用目的に必要なデータだけです。これが私たちの<a href="../../lod/">詳細度(LOD)仕様</a>の考え方で、竣工段階のレベルは施工モデルより多くではなく、少なく残します。問題は書き出しが絞り込むことではなく、発注者の要件がなければ、何を残すかを誰も決めないことです。</p>
+
+  <h2 data-i18n>IFCの問題</h2>
+  <p data-i18n>すべてのプロジェクトでIFCを義務づけることは、現在のままの標準の重さを、すべての会社に背負わせることです。IFCを管理するbuildingSMARTも、IFCを扱う研究者も、その重さについて率直に語っています。</p>
+
+  <p class="claim" data-i18n>大きすぎて全部は実装できず、方言に分かれる。</p>
+  <ul>
+    <li data-i18n>buildingSMART自身のブログ:<q>この豊富な取り決めのセットは、ソフトウェア開発者が自社ツールに完全に実装するには多すぎることが多い。</q>そのためソフトウェアは、モデルビュー定義(MVD)と呼ばれるサブセットを実装します。<sup><a href="#s10">10</a></sup></li>
+    <li data-i18n>同じ記事は、次のリリースでMVDが20近くになると数えています。<q>つまりIFCの方言が20あるということだ。ソフトウェアでの実装も20通り。このままでは、気づいたときにはMVDの数は100に達するだろう。</q>さらに<q>コミュニティとして、私たちは外部の人に「IFCは一つではない」と説明してきた</q>と認め、このやり方を<q>持続可能ではない</q>としています。<sup><a href="#s10">10</a></sup></li>
+    <li data-i18n>2021年の研究は、実務の57のIFCモデルを調べました。ほぼすべてが旧バージョンのIFC2x3で、これは今も市場の多くで交換されているバージョンです。IFCの柔軟さは<q>複数の解釈を許し</q>、その結果<q>似た状況に対してばらばらなIFCの解決策が生まれ、相互運用性を大きく妨げている</q>としています。確認した39モデルのうち、十分な意味情報を持っていたのは8モデルだけでした。<sup><a href="#s11">11</a></sup></li>
+    <li data-i18n>ですから、契約に「IFCを納品する」と書くだけでは、ほとんど意味がありません。どのバージョンか、どのサブセットか、どのプロパティかを誰かが決め、受け取る側のソフトウェアがそれに対応しているかを確認する必要があります。</li>
+  </ul>
+
+  <p class="claim" data-i18n>規模に耐えない形状表現。</p>
+  <ul>
+    <li data-i18n>buildingSMARTスペインの技術コーディネーターは2024年に、STEPをもとにしたIFCの構造が<q>ファイルサイズの肥大化と拡張性の限界を招き、より大きく複雑なプロジェクトでのIFCの普及と効果に影響した</q>と書いています。<sup><a href="#s22">22</a></sup></li>
+    <li data-i18n>IFCに対応する調整ソフトの開発会社Reviztoは、IFCファイルは<q>場合によっては元のファイルサイズの5〜10倍</q>に膨らむことがあり、その影響は<q>大規模なプロジェクトで最も顕著</q>だとしています。<sup><a href="#s23">23</a></sup></li>
+    <li data-i18n>buildingSMART自身のブログは、<q>現在のリソース層(主に形状)は整理が必要だ</q>と書いています。<sup><a href="#s10">10</a></sup>ケベック州の手引き自体も、IFCファイルは大きくなり多くの資源を必要とすることがあるため、モデルを小さなファイルに分割する必要があると注意しています。<sup><a href="#s1">1</a></sup></li>
+    <li data-i18n>IFC 5で検討されている解決策は示唆的です。<q>主な形状表現としての三角形メッシュ</q>、そして繰り返し現れるオブジェクトは毎回書き直すのではなく、一つの代表要素から形状を引き継ぐ方式です。<sup><a href="#s22">22</a></sup>つまり、ゲームエンジンや高速なビューアが何年も前から形状を保存してきた方法です。</li>
+  </ul>
+
+  <p class="claim" data-i18n>変わり続ける標準。</p>
+  <ul>
+    <li data-i18n>手引きは、1997年以来スキーマのバージョンが18以上公開されたと数え、IFC 5は「まったく新しいアプローチを採る」としています。<sup><a href="#s1">1</a></sup>IFC 4.3がISO規格になったのは2024年になってからです。<sup><a href="#s1">1</a></sup></li>
+    <li data-i18n>2026年10月の時点で、buildingSMARTのIFC 5のリポジトリは、今もその例を<q>暫定的</q>で<q>実務での使用には適さない</q>とし、<q>追加の文書はまもなく公開される</q>と書き、<q>今後の開発の更新により、これらの例の改訂が必要になる</q>と警告しています。<sup><a href="#s12">12</a></sup></li>
+    <li data-i18n>再びbuildingSMARTスペインのコーディネーターです。新しい概念を加えることは<q>大きな変更を必要とすることが多く、バージョン間の非互換や新機能の採用の難しさにつながりうる</q>。<sup><a href="#s22">22</a></sup></li>
+    <li data-i18n>そのため市場は古いバージョンにとどまります。IFC 5についての投稿の下で、Ivan Shtaerはこう書きました。<q>4〜5年ごとに新しいスキーマへの対応を実装しても、まったく割に合わない。市場には消化する時間がない。大量のデータがこの形式で作られ存在しているため、開発者は2X3への対応を続けざるをえない。</q><sup><a href="#s19">19</a></sup>IFC 4.3は安定したISO規格ですが、今それに合わせて書き出しを調整する会社は、IFC 5でその作業の多くをやり直すことを覚悟すべきです。</li>
+  </ul>
+
+  <p class="claim" data-i18n>IFCが役に立つところ。</p>
+  <p data-i18n>IFCが最も力を発揮するのはインフラです。2024年のISO版であるIFC 4.3は、橋梁、道路、鉄道、水路、港湾施設を加えました。<sup><a href="#s39">39</a></sup>私たちの経験では、こうした仕事でRevitが設計ソフトになることはまれで、複数のツールが一つのモデルを共有する必要があります。米国連邦道路庁のロードマップは、州の機関が工学データのモデル化に使えるオープン標準として、LandXMLとともにIFCを挙げています。<sup><a href="#s35">35</a></sup>それでも、形式が機能するのは、発注者がどのバージョン、どのクラス、どのプロパティかを決め、それを確認する場合だけです。</p>
+
+  <p class="claim" data-i18n>読みにくい。</p>
+  <p data-i18n>これは日々の実務からの私たち自身の見方です。IFCの文書は、経験豊富なBIMマネージャーにとっても、業界で最も使いにくい技術文書の一つです。一つの要素の一つのプロパティをどう書くかを調べるだけで、エンティティ、プロパティセット、MVD、バージョンの層をたどる必要があります。buildingSMART自身も、MVDを用語の中で<q>最も紛らわしい略語の一つ</q>と呼んでいます。<sup><a href="#s10">10</a></sup>専門家でも読むのに苦労する標準は、規模を問わずすべての会社に課す要件の基盤としては不向きです。</p>
+
+
+  <h2 data-i18n>COBieの問題</h2>
+  <p data-i18n>COBieは表計算ソフト形式の引き渡し用フォーマットで、IFCのサブセットとして作られています。英国政府の2011年の建設戦略は、中央政府が資金を出すプロジェクトでこれを義務づけました。<sup><a href="#s3">3</a></sup><sup><a href="#s7">7</a></sup>国の規模での形式の義務づけであり、その結果は記録に残っています。米国では、COBieは国家BIM標準の一部です。全米建築科学研究所(NIBS)が2013年から管理し、2023年にバージョン3.0を公開しました。<sup><a href="#s34">34</a></sup>引き渡し後にそのデータがどう使われているかについて、以下の英国の記録に匹敵する米国の調査は見つかりませんでした。</p>
+  <ul class="evidence">
+    <li data-i18n><strong>中身ではなく形式を求めた発注者。</strong>バーミンガム・シティ大学のBIMプロセスマネージャー:<q>発注者が具体的な要件を示さずに「COBieをくれ」とだけ言うと、コンサルタントは頭を抱えることになる。建物を管理するのに、そこまでの情報はまったく必要ないからだ。不必要に誰かが費用を払うことになる大仕事だ。</q><sup><a href="#s3">3</a></sup></li>
+    <li data-i18n><strong>発注者のシステムに届かなかったデータ。</strong>英国で義務化が始まった2016年、BIM+が取材した人のうち3人が、COBieのデータを保全管理ソフトに取り込むのが難しいと答えました。ハンプシャー州議会の枠組み契約マネージャー:<q>プロジェクトの引き渡し後にデータをCAFMシステムに移したいが、まだ実現できていない。</q>同じ調査で、回答者の58%が、COBieを規定する規格BS 1192-4を一度も使ったことがないと答えました。<sup><a href="#s3">3</a></sup></li>
+    <li data-i18n><strong>短い一覧で十分だった。</strong>ロンドンのキングス・クロスの開発会社Argentが、アセットマネージャー、ファシリティマネージャー、テナントに本当に必要なものを尋ねたところ、答えは<q>かなり短い一覧</q>でした。同社のBIM責任者:<q>COBieのデータを丸ごと納品させるやり方は、私たちが進みたい方向ではない。</q><sup><a href="#s3">3</a></sup></li>
+    <li data-i18n><strong>何年たっても誤解されている。</strong>2020年、施工会社のデジタル責任者でIFCとCOBieの推進者でもあるJohn Fordは、COBieとは何か、その目的、そしてIFCとの関係が理解されていないことが<q>現在の三つの根本的な障壁</q>であり、それに続くのがソフトウェアの<q>ネイティブ対応の不足</q>だと書きました。<sup><a href="#s7">7</a></sup></li>
+    <li data-i18n><strong>情報ではなくファイルに支払う契約。</strong>英国政府の資金による2020年の意見募集では、契約について回答した全員が、一般的な契約は<q>使える、アクセスできる、十分な品質の情報ではなく、書類の納品を促している</q>という点で一致しました。<sup><a href="#s8">8</a></sup></li>
+    <li data-i18n><strong>汎用的な要件。</strong>ウェールズでの2026年の研究では、<q>受け取るEIRは、古いプロジェクトからのコピーか、汎用的すぎて役に立たないかのどちらかだ</q>という声が聞かれました。参加者は、COBieの成果物が納品の終盤に静的な表計算ファイルとして渡されると述べています。<sup><a href="#s9">9</a></sup></li>
+  </ul>
+  <p data-i18n>公平のために言えば、2016年の記事は、住宅のためにCOBieの全データを活用したサンドウェル市のように、COBieを評価する発注者も紹介しています。<sup><a href="#s3">3</a></sup>違いは、そうした発注者がデータで何をするのかを分かっていたことです。</p>
+
+  <p class="claim" data-i18n>なぜうまくいかないのか(私たちの見方)。</p>
+  <p data-i18n>以下は、Revitプロジェクトでの日々の実務からの私たち自身の見方です。</p>
+  <ul>
+    <li data-i18n><strong>集計表の書き出しと大差ない。</strong>COBieのワークブックは、互いにリンクした表計算のシートの集まりです。スペース、ゾーン、システム、予備品、連絡先の間のリンクを除けば、中身のほとんどは、Revitの集計表をExcelやCSVに書き出したものと同じで、手間が増えているだけです。</li>
+    <li data-i18n><strong>モデルに簡単に戻れない。</strong>COBieの行の識別子は通常IFCのGlobalIdで、RevitのエレメントIDではありません。Revitの「IDで選択」はこれを受け付けません。要素を見つけるにはプラグインか、エクスポーターが保存したパラメータが必要です。</li>
+    <li data-i18n><strong>値の出どころが分からない。</strong>COBieは列を定めていますが、どのモデルのパラメータがどの列に入るかは定めていません。同じ値が複数のパラメータから来たり、書き出しの途中で名前が変わったり統合されたりしても、ファイルにはその記録が残りません。二つのチームが同じように記入することはまずありません。</li>
+    <li data-i18n><strong>コンサルタントが必要になる。</strong>チームに有効なCOBieを納品させるには、研修、確認ツール、外部の支援が必要で、その周りには講座やサービスの市場ができています。COBieから後継へと引き渡し標準が入れ替わることについて、Bilal Succarは<q>数えきれない人が数えきれない時間をかけて学び、実装し、解決し、適応してきた。AとBを中心に教材や事業を作った人もいる。彼らは今、すぐにまたそれをやり直し、将来もまたやり直すことになる</q>と書いています。文字は次々と現れる標準を表しています。<sup><a href="#s17">17</a></sup></li>
+  </ul>
+
+  <p class="claim" data-i18n>周りのツール。</p>
+  <p data-i18n>確認用ソフトウェアも同じことを物語っています。2016年、米国陸軍工兵隊の研究開発センター(ERDC)は、オープンソースのCOBie確認ツールCOBieQCReporterを公開しました。COBieの考案者Bill Eastは、それがOracleが2019年に更新を止めたJavaのコードに依存しており、2019年以降の復活やクラウドファンディングによる後継づくりの試みは<q>成功しなかった</q>と書いています。<sup><a href="#s25">25</a></sup>彼の現在の確認ツールCOBieQCは販売されていません。彼のサイトによると、印刷版の利用者マニュアルをオンデマンド印刷サービスで一人一冊購入すると、12か月の無償コピーが提供されます。<q>試用版はない。</q>ライセンスは<q>ソフトウェアを起動するたびに</q>オンラインで確認され、<q>技術サポートは提供されない</q>とされています。<sup><a href="#s24">24</a></sup>Bill Eastはこのソフトウェアを<q>ボランティアの取り組み</q>と説明しており、<sup><a href="#s25">25</a></sup>その労力を疑うものではありません。商用ツールにはほかの確認機能もあります。それでも、COBieを要求する発注者は、考案者による基準となる確認ツールがこうした条件で提供されていることを知っておくべきです。</p>
+  <ul class="evidence">
+    <li data-i18n>buildingSMARTは、COBieの後継とされる新しい枠組みAsset Operations Handoverを開発中です。Justin Kirbyは、Digital Construction WeekでのSkanskaのデジタル建設責任者の講演をまとめ、COBieの<q>硬直した、表計算中心のやり方は、ますます大量のデータの無駄を生んできた。契約に書き込まれることには非常に効果的だが、建物を運営し、清掃し、保守するチームに実際に使われることには、これまで非常に弱かった。</q>と書いています。<sup><a href="#s16">16</a></sup></li>
+    <li data-i18n>Bill Eastはこう返しました。<q>COBieを「表計算」として見ることは、ずっと要点を外してきた。これはプロセスの問題で、コンサルタントや専門工事会社は、情報が最初に作られた時点でそれを納品することが求められる。プロセスを変えなければ、何と呼んでもうまくいかない。</q><sup><a href="#s16">16</a></sup>この点では私たちも彼と同意見です。大事なのはプロセスであり、形式の要件がプロセスを生むわけではありません。</li>
+  </ul>
+  <p data-i18n>今COBieを求める発注者は、消えていく形式に費用を払っています。代わりに、運営部門が実際に使うデータの短い一覧を、そのシステムが取り込める形式で求めてください。</p>
+
+  <h2 data-i18n>ISO 19650は新発見ではない</h2>
+  <p data-i18n>ISO 19650は、国際規格であることで唯一の正解になったかのように紹介されることがよくあります。役に立つ規格ですが、その中心となる考えのほとんどは、何年も前に無料で公開されていました。</p>
+  <ul>
+    <li data-i18n>2010年、ペンシルベニア州立大学のComputer Integrated Construction研究グループは、<em>BIM Project Execution Planning Guide</em>をクリエイティブ・コモンズのライセンスで公開しました。その手順は<q>四つの主要なステップ:1) BIMの目標と活用目的を決める、2) プロジェクトのBIM実行プロセスを設計する、3) 情報交換を作成する、4) BIM導入を支える基盤を定める</q>からなります。<sup><a href="#s13">13</a></sup></li>
+    <li data-i18n>ISO 19650の第1部と第2部は2018年に公開されました。これらが置き換えた英国規格は、英国の手引き自身の言葉で<q>英国のBIMへの取り組みの基礎をなしていた</q>ものです。<sup><a href="#s14">14</a></sup>英国の手引きはこうも明言しています。<q>情報の中身は、資産のライフサイクルの中でこれまでも常に求められてきた情報と同じである。</q><sup><a href="#s15">15</a></sup></li>
+    <li data-i18n>私たちの読み方では、並べてみると、その多くは呼び名の変更です。ペンシルベニア州立大学のBIMの目標と活用目的は、発注者の「情報要件」になりました。情報交換は「交換情報要件」と納品計画になりました。BIM Project Execution Planは「BIM実行計画書」になりました。それでもISO 19650は、任命の連鎖や共通データ環境のワークフローなど、英国規格から有用なものを加えています。</li>
+    <li data-i18n>ですからISO 19650は、契約のための良い共通語彙です。しかし、発注者にどの活用目的が必要かを教えてはくれません。また、その本文はライセンス販売で、ペンシルベニア州立大学の手引きは無料です。</li>
+  </ul>
+
+  <h2 data-i18n>無料のツールがボトルネックなのではない</h2>
+  <p data-i18n>オープンソースのツールは歓迎すべきもので、すでにIDSファイルを書けるものもいくつかあります。<sup><a href="#s1">1</a></sup>しかし私たちの経験では、プロジェクトが役に立つBIMを得られない理由が、ライセンスの価格であることはまれです。妨げになっているのは、必要なものを言えない発注者、それを納品する訓練を受けたことのないチーム、そして結果を誰も確認しないことです。ウェールズの研究の参加者が求めていたのは、実用的なテンプレート、具体的な事例、検証ツールでした。<sup><a href="#s9">9</a></sup>訓練を受けていない人が無料のツールを使えば、無料の曖昧なモデルができあがります。</p>
+
+  <h2 data-i18n>注目すべきほかの設計</h2>
+  <p data-i18n>業界が非常に大きなモデルに耐えるオープンな交換を求めるなら、最初からそのために設計された形式を見る価値があります。どれもISO規格ではなく、それぞれ一社か小さなコミュニティが支えています。いずれもIFCより新しく、以下の主張は各形式自身の文書からのもので、私たちはベンチマークしていません。</p>
+
+  <p class="claim" data-i18n>Fragments(That Open Company)</p>
+  <p data-i18n>IFC.jsを手がけたThat Open Companyは、Fragmentsを公開しています。同社はこれを<q>大きなデータセットを効率よく扱うよう最適化されたオープンBIM形式</q>と説明しており、バイナリでコンパクト、<q>形状、プロパティ、関係</q>に対応します。そのビューアは<q>数百万の要素を数秒で扱えるよう設計</q>されています。形式はGoogleのFlatBuffersをもとにしているため、誰でもどの言語でも読み書きのプログラムを作れ、ライブラリはMITライセンスで公開されています。<sup><a href="#s28">28</a></sup>READMEによると、Fragmentsを作る最も簡単な方法は内蔵のIFCインポーターで、現時点ではIFCを置き換えるのではなく、IFCの上に成り立っています。<sup><a href="#s28">28</a></sup></p>
+
+  <p class="claim" data-i18n>VIM</p>
+  <p class="disclose" data-i18n><strong>開示:</strong>OpenBEPの創設者は、この形式を開発するVIMに勤めています。その点を踏まえてお読みください。</p>
+  <p data-i18n>OpenBEPの創設者の勤務先による、オープンライセンス(MIT)のバイナリ形式です。仕様書は<q>低性能の端末でも効率よく読み込み、描画できるよう最適化された、BIMと製造データのための現代的で効率的なオープンな3Dデータ交換形式</q>と説明しています。<sup><a href="#s26">26</a></sup>形状はインスタンス化された三角形メッシュで、BIMデータはリレーショナルなテーブルです。<sup><a href="#s26">26</a></sup></p>
+  <ul>
+    <li data-i18n><strong>値をさかのぼれる。</strong>COBieの行と違い、各要素の行はRevitのエレメントIDと固有ID、そして元のファイルを保持し、すべてのパラメータ値は、パラメータの名前、グループ、インスタンスかタイプかの区別、共有パラメータのGUIDを持つ記述子を指します。<sup><a href="#s33">33</a></sup>確認ツールは、どのファイルのどの要素のどのパラメータがその値を出したかを示せます。</li>
+    <li data-i18n><strong>モデル自体の構造が保たれる。</strong>ワークセット、フェーズ、レベル、デザインオプション、ビュー、各要素の各マテリアルの体積と面積がテーブルとして保存され、Revitのカテゴリは、別のスキーマのクラスに置き換えられることなく、作成されたとおりに残ります。<sup><a href="#s33">33</a></sup></li>
+    <li data-i18n><strong>オープンなコード。</strong>形式のライブラリとReactベースのWebビューアは、MITライセンスで公開されています。<sup><a href="#s27">27</a></sup></li>
+    <li data-i18n><strong>限界。</strong>一社の形式であり、ISO規格ではありません。保存するのはメッシュだけで、パラメトリックな形状は持ちません。書き出したファイルなので、ほかの書き出しと同じように古くなります。自身の文書によると、RevitのエレメントIDはリンクされたファイルの間で重複することがあり、Revitの固有IDでさえ、組み込み要素で重複した例があります。<sup><a href="#s33">33</a></sup>IFCとのベンチマークはしておらず、サイズや速度については何も主張しません。</li>
+  </ul>
+
+  <p class="claim" data-i18n>その他</p>
+  <ul>
+    <li data-i18n><strong>Speckle</strong>は、<q>お気に入りのAECツールとつながる</q>オープンソースのデータハブで、ツール間でオブジェクトを受け渡し、Apache-2.0ライセンスのWebビューアを備えています。<sup><a href="#s29">29</a></sup></li>
+    <li data-i18n><strong>dotbim</strong>は<q>オープンソースでミニマルなBIMのファイル形式</q>で、MITライセンス、三角形メッシュのみ、文書は1ページです。本人たちの数え方では、IFCの文書は100ページを超えます。<sup><a href="#s30">30</a></sup></li>
+    <li data-i18n><strong>iTwin.js</strong>はBentleyによる<q>インフラのデジタルツインを作成、照会、変更、表示するためのオープンソースのライブラリ</q>で、MITライセンスです。<sup><a href="#s31">31</a></sup></li>
+    <li data-i18n><strong>OpenUSD</strong>はPixarが作ったシーン形式で、その業界団体の言葉では<q>今では映画産業を超えて、建築、エンジニアリング、建設などの産業に受け入れられている</q>形式です。<sup><a href="#s32">32</a></sup>IFC 5の作業は、そこから考え方を借りています。<sup><a href="#s22">22</a></sup></li>
+  </ul>
+  <p data-i18n>私たちは、IFCの代わりにこれらのどれかを要求するよう発注者に求めているのではありません。IFCと同じく、これらは書き出しであって原本ではないので、ネイティブファイルは依然として重要です。私たちが言いたいのはもっと限られた点です。「IFCを納品する」とだけ書いた要件は入れ物を決めるだけですが、「このデータを、このIDSで確認できる形で納品する」と書いた要件は大事な中身を決め、より良い入れ物の余地も残します。</p>
+
+  <h2 data-i18n>実務者の声</h2>
+  <p data-i18n>LinkedInの公開投稿とその返信を読みました。buildingSMART International自身の投稿の下の返信も含みます。引用は英語からの当方の翻訳です。役職が表示されていない人は、名前だけを記しています。IFCを擁護する人の声も引用しています。</p>
+  <ul class="evidence">
+    <li data-i18n>Marko Lazic:<q>20年分の標準があるのに、「とりあえずIFCを送って」が今も午後を台無しにする一言だ。</q>さらに:<q>どの実際のプロジェクトにも、半分壊れた書き出しファイルのフォルダと、形式が落としたものを直すのが仕事のすべてという人が一人いる。</q><sup><a href="#s18">18</a></sup></li>
+    <li data-i18n>Jelena Stevanovicの返信:<q>IFCは解決策として扱われることが多いが、実際は入れ物にすぎない。明確に定義された情報要件と適切な品質確認がなければ、「オープンBIM」はプロセスというより約束のままだ</q>。<sup><a href="#s18">18</a></sup></li>
+    <li data-i18n>同じスレッドでMayur Tannaは、約3,200のオブジェクトからなる統合IFCを一つ監査しました。<q>352の要素がIfcBuildingElementProxyとして書き出され、本来のクラスは書き出し時に失われていた。統合による重複は793</q>、そして<q>実際は28のレベルなのに階が133</q>。彼はこう付け加えています。<q>どこまでが形式のせいで、どこまでが書き出し設定のせいかは、受け取る側からは分からない。</q><sup><a href="#s18">18</a></sup></li>
+    <li data-i18n>buildingSMART Internationalの2026年東京サミットについての投稿への、Stefan Kovacsの返信:<q>アプリケーションの開発は順調に進んでいるが、主に非常に理論的なレベルだ。お金を払う運営者や建設者として、私たちに必要なのは、仕事を支える速い解決策(問題を解決するユースケース)だ。</q>彼はbuildingSMARTに<q>業界に向けて期限つきの目標を設定する</q>よう求めています。<sup><a href="#s20">20</a></sup></li>
+    <li data-i18n>buildingSMARTスイスのBirgitta Schock:<q>openBIMは、10年前なら野心的に思えたほどの技術的成熟度に達した。それでも多くの組織は、それで実際に何を達成したいのかを言葉にするのに今も苦労している。</q><sup><a href="#s21">21</a></sup></li>
+  </ul>
+  <p class="claim" data-i18n>反対の立場</p>
+  <ul class="evidence">
+    <li data-i18n>Lazicへの、Steven S.の返信:<q>「とりあえずIFCを送って」は情報要件ではない。</q>彼の見方では、送り手と受け手はしばしば<q>実際の交換をきちんと定義していない</q>ので、悪いのはいつもIFCとは限りません。<sup><a href="#s18">18</a></sup>Erik Björnhageも同じ点を指摘しています。<q>IFCで仕事をするのは、皆が自分が何を求め、何を受け取るのかを理解している限り、本当は問題ではない。</q><sup><a href="#s18">18</a></sup></li>
+    <li data-i18n>Menno Mekes:<q>オランダの大手施工会社は、ネイティブモデルにしか対応しない大きなプラットフォームを使っているときでさえ、プロジェクトの成果物としてIFCを求め、使っている。</q>そして:<q>とにかく機能する。</q><sup><a href="#s19">19</a></sup></li>
+  </ul>
+  <p data-i18n>擁護する人も批判する人も、同じところにたどり着きます。交換は、定義され確認されたときに機能します。その定義こそ発注者が飛ばしてしまう部分であり、BIM実行計画書はそのためにあります。</p>
+
+  <h3 data-i18n>どれだけの損失だったのか</h3>
+  <p data-i18n>名前の分かるプロジェクトで、COBieやIFCの成果物のために失われた時間や金額の実測値を探しました。上のLinkedInのスレッドも含めて、公開されたものは見つかりませんでした。最も近いのは、一人の実務者が一つのIFCファイルのエラーを数えたものです。資料はその無駄を言葉で説明していますが、数字はありません。実測された事例をご存じなら、出典とともに追加しますのでお知らせください。</p>
+
+  <h2 data-i18n>発注者がまず求めるべきこと</h2>
+  <ol class="steps">
+    <li data-i18n><strong>活用目的。</strong>必要なBIMの活用目的を段階ごとに挙げてください。調整、数量、確認申請、維持管理など。活用目的がなければ、要件もありません。</li>
+    <li data-i18n><strong>中身。</strong>活用目的ごとに、要素、各段階の詳細度、各要素が持つべきパラメータを挙げてください。名前はすべてのプロジェクトで同じにします。</li>
+    <li data-i18n><strong>原本のファイル。</strong>設計ソフトのネイティブファイルを契約上の成果物にしてください。そうすれば次のチームも、次の改修も、作業を続けられます。</li>
+    <li data-i18n><strong>確認できる要件。</strong>要件をIDSファイルとしても出し、納品物を自動で確認できるようにしてください。</li>
+    <li data-i18n><strong>課題はBCFで。</strong>調整の課題はBCFで求め、視点つきでツール間を移動できるようにしてください。</li>
+    <li data-i18n><strong>書き出しは活用目的が必要とするところだけ。</strong>設計ソフトを持たない特定の関係者がモデルを使う必要があるときに、IFCやほかの交換形式を求めてください。バージョンとプロパティを明示します。</li>
+    <li data-i18n><strong>結果の伴う確認。</strong>マイルストーンごとにモデルを確認し、合格するまで支払いを保留してください。</li>
+    <li data-i18n><strong>人が実際に使う引き渡しデータ。</strong>運営部門が実際に使う資産データの短い一覧を、そのシステムが取り込める形式で求めてください。既定でCOBieを求めないでください。</li>
+  </ol>
+  <div class="box fix">
+    <p data-i18n>OpenBEPは、これらの手順を順番に進めます。発注者が活用目的を選び、BEPビルダーがそれを計画書、要素ごとの要件、共有パラメータ、IDSファイル、マイルストーンの確認に変えます。</p>
+    <a class="cta" href="../../app/bep-builder.html?lang=ja" data-i18n>BEPを作成する</a>
+  </div>
+
+  <h2 data-i18n>このページが言っていないこと</h2>
+  <ul>
+    <li data-i18n>書き出しが役に立たないとは言っていません。設計ソフトを持たない人がモデルを使う必要があるとき、書き出しは正しい道具です。</li>
+    <li data-i18n>オープン標準が悪い考えだとは言っていません。IDSとBCFは要求する価値があり、ISO 19650は役に立つ語彙です。</li>
+    <li data-i18n>誰の動機も疑っていません。このページの根拠の多くは、buildingSMARTとオープンBIMを推進する人たち自身によるものです。</li>
+  </ul>
+
+  <h2 id="sources" data-i18n>出典</h2>
+  <p class="note" data-i18n>以下のリンクはすべて2026年10月20日に開いて確認しました。ページ番号はPDFのページです。日本語の資料は原文のまま、英語、フランス語、オランダ語の資料からの引用は当方による翻訳です。</p>
+  <ol class="sources">
+    <li id="s1">É. Poirier, C. Arnould, <a href="https://www.sqi.gouv.qc.ca/fileadmin/fdr_bim_gouv/les_principes_du_bim_ouvert_et_de_son_application_dans_les_projets_publics.pdf"><cite>Les principes du BIM ouvert et de son application dans les projets publics</cite></a>, Feuille de route gouvernementale pour la modélisation des données des infrastructures, <span data-i18n>2025年5月14日承認版</span>, p. 1, 2, 8, 11, 12, 13, 17, 19, 20, 23, 24, 25.</li>
+    <li id="s2">M.-È. Sirois, <a href="https://www.portailconstructo.com/pratiques_innovations/demystifier_bim_ouvert"><cite>Démystifier le BIM ouvert</cite></a>, Portail Constructo, 2019-10-29 <span data-i18n>(buildingSMART Canadaの代表3人へのインタビュー)</span>.</li>
+    <li id="s3">Construction Management (BIM+), <a href="https://constructionmanagement.co.uk/cobie-or-n5ot-cobi4e-clien8ts-conundrum/"><cite>To COBie or not to COBie – the client's conundrum</cite></a>, 2016-06-09.</li>
+    <li id="s4">Autodesk, <a href="https://help.autodesk.com/view/RVT/2023/ENU/?guid=GUID-21EFC097-96F3-428A-AFA4-BFEA4EDAB3D2"><cite>Open an IFC File</cite></a>, Revit 2023 Help.</li>
+    <li id="s5">Forum Standaardisatie, <a href="https://www.forumstandaardisatie.nl/sites/default/files/FS/2019/0424/FS-20190424.04A-Forumadvies-toepassingsgebieden-Geo-standaarden-SETU%2C-WDO%2C-VISI%2C-IFC-en-COINS-2.0.pdf"><cite>Forumadvies toepassingsgebieden … VISI, IFC en COINS 2.0</cite></a>, FS-20190424.04A, 2019.</li>
+    <li id="s6">A. Hannell, <a href="https://constructionmanagement.co.uk/cobie-already-outdated-method-data-management/"><cite>COBie is already an outdated method of data management</cite></a>, Construction Management (BIM+), 2016-06-09.</li>
+    <li id="s7">J. Ford, <a href="https://constructionmanagement.co.uk/future-ifc-cobie-saga/"><cite>The future of the IFC-COBie saga</cite></a>, Construction Management (BIM+), 2020-08-21.</li>
+    <li id="s8">Centre for Digital Built Britain, <a href="https://www.cdbb.cam.ac.uk/files/final_consultationsummaryreport.pdf"><cite>BIM Interoperability Expert Group Report: Public Consultation Summary</cite></a>, 2020-06.</li>
+    <li id="s9">A. Rawdin, A. Khudhair, H. Li, <a href="https://itcon.org/papers/2026_21-ITcon-Rawdin.pdf"><cite>BIM and ISO 19650 implementation in the Welsh construction industry: a case study of bottom-up governance in a non-mandated region</cite></a>, ITcon, 2026, doi:10.36680/j.itcon.2026.021.</li>
+    <li id="s10">L. van Berlo, <a href="https://www.buildingsmart.org/the-curious-case-of-the-mvd/"><cite>The curious case of the MVD</cite></a>, buildingSMART International blog, 2019-12-12.</li>
+    <li id="s11">F. Noardo, K. Arroyo Ohori, T. Krijnen, J. Stoter, <a href="https://www.mdpi.com/2076-3417/11/5/2232"><cite>An Inspection of IFC Models from Practice</cite></a>, Applied Sciences 11(5), 2232, 2021.</li>
+    <li id="s12">buildingSMART International, <a href="https://github.com/buildingSMART/IFC5-development"><cite>IFC 5 development repository</cite></a>, GitHub, README <span data-i18n>(2026年10月20日閲覧)</span>.</li>
+    <li id="s13">Computer Integrated Construction Research Program, <a href="https://www.pankowfoundation.org/site/assets/files/1907/01_bim_project_execution_planning_guide_v2_1_one-sided.pdf"><cite>BIM Project Execution Planning Guide – Version 2.1</cite></a>, The Pennsylvania State University, 2011 (©2010), CC BY-SA 3.0 US, <span data-i18n>用語集</span>.</li>
+    <li id="s14">UK BIM Framework, <a href="https://imiframework.org/wp-content/uploads/2019/10/Information-Management-according-to-BS-EN-ISO-19650_-Guidance-Part-1_Concepts_2ndEdition.pdf"><cite>Information management according to BS EN ISO 19650 – Guidance Part 1: Concepts</cite></a>, 2nd edition, 2019, p. 14.</li>
+    <li id="s15">UK BIM Framework, <a href="https://ukbimframework.org/wp-content/uploads/2020/05/ISO19650-2Edition4.pdf"><cite>Information management according to BS EN ISO 19650 – Guidance Part 2: Processes for Project Delivery</cite></a>, edition 4, 2020, p. 8.</li>
+    <li id="s16">J. Kirby, <a href="https://www.linkedin.com/posts/juzzie_digitalconstructionweek-informationmanagement-activity-7468389805631049728-2Q9s">LinkedIn post on COBie and Asset Operations Handover</a>, 2026-06-04, <span data-i18n>B. Eastの返信つき、2026-06-05</span>.</li>
+    <li id="s17">B. Succar, <a href="https://www.linkedin.com/posts/bsuccar_nbims-buildingsmart-cobie-activity-7468638309590818816-Y57j">LinkedIn post on COBie and AOH</a>, 2026-06-05.</li>
+    <li id="s18">M. Lazic, <a href="https://www.linkedin.com/posts/mrarchitect_ask-anyone-who-exchanges-bim-models-for-a-activity-7482751038924713984-gbUw">LinkedIn post on IFC exchanges</a>, 2026-07-14, <span data-i18n>J. Stevanovic、Steven S.、E. Björnhage、M. Tannaの返信つき、2026-07-14および15</span>.</li>
+    <li id="s19">L. van Berlo, <a href="https://www.linkedin.com/posts/leonvanberlo_easier-said-than-done-ifc-should-sell-itself-activity-7331265957908074498-_QyV">"Easier said than done: IFC should sell itself"</a>, LinkedIn, 2025-05-22, <span data-i18n>I. ShtaerとM. Mekesの返信</span>.</li>
+    <li id="s20">buildingSMART International, <a href="https://www.linkedin.com/posts/buildingsmart-international_activity-7509211936170024960-YLXU">LinkedIn post on the Tokyo 2026 summit</a>, 2026-09-25, <span data-i18n>S. Kovacsの返信、2026-10-04</span>.</li>
+    <li id="s21">B. Schock, <a href="https://www.linkedin.com/posts/birgitta-schock-29851840_openbim-buildingsmart-interoperability-activity-7471877409630474240-euKl">LinkedIn post on openBIM maturity</a>, 2026-06-14.</li>
+    <li id="s22">D. Delgado Vendrell, <a href="https://www.buildingsmart.es/2024/12/03/the-evolution-of-ifc-the-path-to-ifc5/"><cite>The Evolution of IFC: The path to IFC5</cite></a>, buildingSMART Spain, 2024-12-03.</li>
+    <li id="s23">Revizto, <a href="https://revizto.com/resources/blog/what-is-ifc-format"><cite>What is IFC format? Exploring BIM and IFC models in detail</cite></a>, blog <span data-i18n>(2026年10月20日閲覧)</span>.</li>
+    <li id="s24">Prairie Sky Consulting, <a href="https://prairieskyconsulting.com/software"><cite>Software</cite></a>, FAQ <span data-i18n>(2026年10月20日閲覧)</span>.</li>
+    <li id="s25">B. East, <a href="https://prairieskyconsulting.com/blog/f/introducing-the-cobieqc2023-software"><cite>Introducing the COBieQC2023 software</cite></a>, Prairie Sky Consulting, 2023-07-17.</li>
+    <li id="s26">VIMaec, <a href="https://github.com/vimaec/vim-format/blob/master/docs/vim.md"><cite>VIM v1.0.0</cite></a>, format specification, GitHub.</li>
+    <li id="s27">VIMaec, <a href="https://github.com/vimaec/vim-format">vim-format</a> and <a href="https://github.com/vimaec/vim-web">vim-web</a>, GitHub; <span data-i18n>GitHubとnpmに記載のMITライセンス</span>.</li>
+    <li id="s28">That Open Company, <a href="https://github.com/ThatOpen/engine_fragment">engine_fragment</a> (Fragments), GitHub README; <span data-i18n>npmによるMITライセンス(@thatopen/fragments)</span>.</li>
+    <li id="s29">Speckle, <a href="https://github.com/specklesystems/speckle-server">speckle-server</a>, GitHub README; <span data-i18n>npmによるApache-2.0(@speckle/viewer)</span>.</li>
+    <li id="s30">W. Radaczyński, <a href="https://github.com/paireks/dotbim">dotbim</a>, GitHub README and licence.</li>
+    <li id="s31">Bentley Systems, <a href="https://github.com/iTwin/itwinjs-core">iTwin.js</a>, GitHub README; <span data-i18n>npmによるMITライセンス(@itwin/core-backend)</span>.</li>
+    <li id="s32">Alliance for OpenUSD, <a href="https://aousd.org/">aousd.org</a> <span data-i18n>(2026年10月20日閲覧)</span>.</li>
+    <li id="s33">VIMaec, <a href="https://github.com/vimaec/vim-format/blob/master/docs/object-model.md"><cite>VIM object model</cite></a> <span data-i18n>(エレメントIDの節)および</span> <a href="https://github.com/vimaec/vim-format/blob/master/docs/object-model-schema.json"><cite>object-model-schema.json</cite></a> <span data-i18n>(テーブルElement、ParameterDescriptor、Workset、Phase、DesignOption、View、MaterialInElement)、GitHub(2026年10月20日閲覧)</span>.</li>
+    <li id="s34">National Institute of Building Sciences, <a href="https://nibs.org/nbims/v3/cobie/"><cite>COBie Standard</cite></a>, NBIMS-US <span data-i18n>(バージョン履歴、2026年10月20日閲覧)</span>.</li>
+    <li id="s35">Federal Highway Administration, <a href="https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/21064/21064.pdf"><cite>Advancing BIM for Infrastructure: National Strategic Roadmap</cite></a>, FHWA-HRT-21-064, June 2021, <span data-i18n>PDFの18ページと21ページ</span>.</li>
+    <li id="s36">Standards Council of Canada, <a href="https://scc-ccn.ca/standardsdb/standards/4033466">CAN/CGSB/CSA-ISO 19650-2:24</a>, 2024-11-30.</li>
+    <li id="s37">Metrolinx, <a href="https://assets.metrolinx.com/image/upload/v1750963181/Documents/Engineering/Metrolinx_Exchange_Information_Requirements_BIM.pdf"><cite>Metrolinx Exchange Information Requirements (BIM)</cite>, MX-ALM-GDC-003</a>, June 2025, <span data-i18n>15ページ</span>.</li>
+    <li id="s38"><span data-i18n>国土交通省(MLIT)、</span> <a href="https://www.mlit.go.jp/jutakukentiku/content/001990524.pdf"><cite lang="ja">BIM図面審査 申請・審査マニュアル</cite></a> <span data-i18n>、初版、2026年3月24日、PDFの3、17、31、86ページ</span>.</li>
+    <li id="s39">ISO, <a href="https://www.iso.org/standard/84123.html">ISO 16739-1:2024</a>, <span data-i18n>概要(2026年10月20日閲覧)</span>.</li>
+  </ol>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p data-i18n>OpenBEPは独立したオープンプロジェクトです。テキストは<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>、コードはApache 2.0で提供しています。ソースは<a href="https://github.com/SamuelAB/openbep">GitHub</a>で公開しています。</p>
+  </div>
+</footer>
+</body>
+</html>
