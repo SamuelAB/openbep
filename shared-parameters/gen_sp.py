@@ -54,6 +54,7 @@ for key,ks in members.items():
         assert nm not in names, nm
         names.add(nm)
     else: nm='; '.join(sorted({P[k]['rv'][1] for k in blt if P[k]['rv'][1]}))
+    # GUIDs are fixed forever: the namespace keeps the project's first working name on purpose.
     gid=str(uuid.uuid5(uuid.NAMESPACE_URL,'urn:canbim:parameter:'+nm))
     cats=sorted({rc.split(' (')[0] for c,_,_,_ in els for rc in c.get('rc',[])})
     rows.append(dict(id=ck,merged=';'.join(sorted(ks)),name=nm,guid=gid,dt=dt,unit=p.get('u') or '',scope=p['sc'],group=grp,
@@ -63,16 +64,16 @@ rows.sort(key=lambda r:(r['group'],r['name']))
 G=sorted({r['group'] for r in rows}); GID={g:i+1 for i,g in enumerate(G)}
 # Revit shared parameter file (shared ones only)
 L=['# This is a Revit shared parameter file.','# Do not edit manually.','*META\tVERSION\tMINVERSION','META\t2\t1','*GROUP\tID\tNAME']
-L+=[f'GROUP\t{GID[g]}\tCANBIM {g}' for g in G]
+L+=[f'GROUP\t{GID[g]}\tOpenBEP {g}' for g in G]
 L.append('*PARAM\tGUID\tNAME\tDATATYPE\tDATACATEGORY\tGROUP\tVISIBLE\tDESCRIPTION\tUSERMODIFIABLE')
 ns=0
 for r in rows:
     if r['shared']!='yes': continue
     p=r['p']; d=ascii_(f"{p['l']}{' ('+r['unit']+')' if r['unit'] else ''}. {p.get('d','')}").replace('\t',' ').replace('\n',' ')[:250]
     L.append(f"PARAM\t{r['guid']}\t{r['name']}\t{r['dt']}\t\t{GID[r['group']]}\t1\t{d}\t1"); ns+=1
-open('CANBIM_SharedParameters_v'+VER+'.txt','w',encoding='ascii',newline='').write('\r\n'.join(L)+'\r\n')
+open('OpenBEP_SharedParameters_v'+VER+'.txt','w',encoding='ascii',newline='').write('\r\n'.join(L)+'\r\n')
 # manifest: one row per parameter x element
-f=open('CANBIM_Parameters_Manifest_v'+VER+'.csv','w',encoding='utf-8-sig',newline='')
+f=open('OpenBEP_Parameters_Manifest_v'+VER+'.csv','w',encoding='utf-8-sig',newline='')
 w=csv.writer(f); w.writerow(['Parameter (Revit name)','GUID','Shared or built-in','Revit built-in name','Data type','Unit','Instance or type','Group','Label (EN)','Label (FR)','Element type','Revit categories','Required from LOD','BIM uses that need it','IFC target','Example value','Placeholder values the checker rejects','Description','Tool keys merged'])
 for r in rows:
     p=r['p']

@@ -3,15 +3,15 @@
 *META	VERSION	MINVERSION
 META	2	1
 *GROUP	ID	NAME
-GROUP	1	CANBIM 01 Identity and asset
-GROUP	2	CANBIM 02 Architecture
-GROUP	3	CANBIM 03 Structure
-GROUP	4	CANBIM 04 Mechanical
-GROUP	5	CANBIM 05 Plumbing and fire protection
-GROUP	6	CANBIM 06 Electrical and communications
-GROUP	7	CANBIM 07 Site and civil
-GROUP	8	CANBIM 08 Rail, bridges and tunnels
-GROUP	9	CANBIM 09 Specialty systems
+GROUP	1	OpenBEP 01 Identity and asset
+GROUP	2	OpenBEP 02 Architecture
+GROUP	3	OpenBEP 03 Structure
+GROUP	4	OpenBEP 04 Mechanical
+GROUP	5	OpenBEP 05 Plumbing and fire protection
+GROUP	6	OpenBEP 06 Electrical and communications
+GROUP	7	OpenBEP 07 Site and civil
+GROUP	8	OpenBEP 08 Rail, bridges and tunnels
+GROUP	9	OpenBEP 09 Specialty systems
 *PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE
 PARAM	d24e1c2e-c37e-58b2-80df-9757b1599fd2	CA_BarcodeAssetLabel	TEXT		1	1	Barcode / asset label. Barcode or QR label attached to the asset.	1
 PARAM	7c5a7a0d-f50e-5e88-be15-bbc806fe4be5	CA_BuildingAutomationReference	TEXT		1	1	Building automation (BAS) reference. Controller / point name prefix linking the element to the building automation system. Owner property set.	1

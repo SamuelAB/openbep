@@ -17,7 +17,7 @@ Why it matters, with the evidence and every source: [openbep.com/why](https://op
 | [`shared-parameters/`](shared-parameters/) | One universal list of Revit shared parameters (`CA_*`, fixed GUIDs) tied to LODs and BIM uses, plus the full manifest and validation rules. | Draft v0.1, not yet loaded in Revit |
 | [`docs/parameter-dictionary.md`](docs/parameter-dictionary.md) | The parameter dictionary: every parameter with English and French labels, data type, accepted values, categories, uses and LOD. | Draft v0.1 |
 | [`docs/graphics-and-materials-standard.md`](docs/graphics-and-materials-standard.md) | One set of line weights, text styles and material names for Revit projects in Canada. | Draft v0.1 |
-| [`revit-addin/`](revit-addin/) | **CANBIM Sync**: a Revit add-in that makes a model's shared parameters match the plan. | Source only, not yet built or tested |
+| [`revit-addin/`](revit-addin/) | **OpenBEP Sync**: a Revit add-in that makes a model's shared parameters match the plan. | Source only, not yet built or tested |
 | [`translations/`](translations/) | One English-keyed dictionary for every page of the site, with French (Quebec), and a glossary of BIM terms it is checked against. | Filled for French |
 
 ## Try it or run your own copy
@@ -39,4 +39,4 @@ Code is under the [Apache License 2.0](LICENSE). Standards text and data are und
 
 ## About the name
 
-The project was drafted under the working name CANBIM, so some files and the `CA_` parameter prefix still carry it. The `CA_` prefix stays: it marks Canadian parameters, and changing it would change every GUID.
+The project was drafted under the working name CANBIM. Files and groups now carry the OpenBEP name; the add-in still finds shared parameter files exported under the old name. The `CA_` prefix and the GUIDs stay: they mark Canadian parameters, and changing them would break every model that already holds them.

@@ -196,7 +196,7 @@ Each material also carries `CA_UniclassMa`, its code from the free [Uniclass Mat
 
 - **Cut and surface patterns** come from the material, not from overrides, so every view agrees. Each class has one cut pattern, such as `CA_Concrete`, `CA_Insulation_Batt` or `CA_Earth`, drawn with pen 1.
 - **Appearance:** one appearance asset per material, Revit's own library or a plain colour. No imported textures unless the visualisation use is chosen, since they bloat the model.
-- **No duplicates:** Revit copies a material on every family load. The CANBIM Sync add-in should flag any material not starting with `CA_` at each milestone.
+- **No duplicates:** Revit copies a material on every family load. The OpenBEP Sync add-in should flag any material not starting with `CA_` at each milestone.
 
 The parameter dictionary's built-in `Material / Structural Material` field takes these names, so quantities can be totalled by material across a portfolio.
 

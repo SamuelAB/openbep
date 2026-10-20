@@ -13,8 +13,8 @@
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
-    <AssemblyName>CanbimSync</AssemblyName>
-    <RootNamespace>CanbimSync</RootNamespace>
+    <AssemblyName>OpenBepSync</AssemblyName>
+    <RootNamespace>OpenBepSync</RootNamespace>
     <Version>0.1.0</Version>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <OutputPath>bin\$(Configuration)\Revit$(RevitVersion)\</OutputPath>
@@ -25,6 +25,6 @@
     <Reference Include="RevitAPIUI"><HintPath>$(RevitDir)\RevitAPIUI.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Update="CanbimSync.addin" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="OpenBepSync.addin" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

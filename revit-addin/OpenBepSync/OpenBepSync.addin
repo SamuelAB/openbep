@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>OpenBEP Sync</Name>
+    <Assembly>OpenBepSync\OpenBepSync.dll</Assembly>
+    <AddInId>6f1c2b0e-4c1a-5d7e-9b3f-2a8e5c0d4b11</AddInId>
+    <FullClassName>OpenBepSync.App</FullClassName>
+    <VendorId>OpenBEP</VendorId>
+    <VendorDescription>OpenBEP Builder companion</VendorDescription>
+  </AddIn>
+</RevitAddIns>

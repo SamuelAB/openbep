@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace CanbimSync
+namespace OpenBepSync
 {
     /// <summary>One shared parameter the plan requires, merged across all element rows of the binding list.</summary>
     public class RequiredParameter
@@ -17,7 +17,7 @@ namespace CanbimSync
         public HashSet<string> ElementTypes = new HashSet<string>();
     }
 
-    /// <summary>Reads the binding list (CSV) exported by the CANBIM BEP Builder.</summary>
+    /// <summary>Reads the binding list (CSV) exported by the OpenBEP Builder.</summary>
     public static class BindingList
     {
         public static List<RequiredParameter> Read(string path, out string listVersion, out List<string> warnings)
@@ -35,7 +35,7 @@ namespace CanbimSync
             }
             int cName = Col("Revit parameter"), cGuid = Col("GUID"), cKind = Col("Shared or built-in"),
                 cScope = Col("Instance or type"), cEl = Col("Element type"), cCat = Col("Revit category ids");
-            int cVer = head.FindIndex(h => h == "CANBIM list version");
+            int cVer = head.FindIndex(h => h == "OpenBEP list version" || h == "CANBIM list version");
 
             var byGuid = new Dictionary<Guid, RequiredParameter>();
             for (int r = 1; r < rows.Count; r++)

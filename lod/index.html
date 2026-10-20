@@ -244,11 +244,12 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
 function projBanner(){$('#proj').innerHTML=PJ&&PJ.el?`<div class="proj"><span>Showing the levels of</span> <b>${esc(PJ.name||'Your project')}</b> <span>from the BEP Builder in this browser.</span> <a href="../app/bep-builder.html">Change them in the BEP Builder</a></div>`:`<div class="proj"><span>Set the level of each element type at each stage in the BEP Builder's LOD matrix; this page then shows your project's levels too.</span> <a href="../app/bep-builder.html">Open the BEP Builder</a></div>`}
 
 function csv(els){const q=v=>`"${String(v??'').replace(/"/g,'""')}"`;
-  const L=[['Element type','Uniformat II','MasterFormat','Kind','Requirement','Required from LOD','Needed for','Revit parameter','Revit kind','Type or instance','GUID','IFC target (optional)'].map(q).join(',')];
-  els.forEach(c=>{const uf=c.uf.join('; '), mf=c.mf.join('; ');
-    (c.gx||[]).forEach(x=>L.push([c.n,uf,mf,'Geometry: '+KN[x.k],x.t,x.f,(x.u||[]).map(u=>D.uses[u]).join('; '),'','','','',''].map(q).join(',')));
-    c.r.filter(r=>D.P[r[0]]).forEach(r=>{const p=D.P[r[0]]; L.push([c.n,uf,mf,D.idp.includes(r[0])?'Identification':'Parameter',p.l+(r[3]?' ('+r[3]+')':''),r[1],r[2].map(u=>D.uses[u]).join('; '),p.rn||'',RK[p.rk],p.sc==='type'?'Type':'Instance',p.guid||'',p.ifc||''].map(q).join(','))});
-    (c.nx||[]).forEach(x=>L.push([c.n,uf,mf,'Not in the model',x.t,'','','','','','',''].map(q).join(',')))});
+  // Downloads follow the page language; Revit names, GUIDs and IFC targets stay as they are.
+  const L=[['Element type','Uniformat II','MasterFormat','Kind','Requirement','Required from LOD','Needed for','Revit parameter','Revit kind','Type or instance','GUID','IFC target (optional)'].map(tr).map(q).join(',')], us=u=>u.map(x=>tr(D.uses[x])).join('; ');
+  els.forEach(c=>{const uf=c.uf.join('; '), mf=c.mf.join('; '), n=tr(c.n);
+    (c.gx||[]).forEach(x=>L.push([n,uf,mf,tr('Geometry')+(lang()==='fr'?'\u00a0: ':lang()==='ja'?'：':': ')+tr(KN[x.k]),tr(x.t),x.f,us(x.u||[]),'','','','',''].map(q).join(',')));
+    c.r.filter(r=>D.P[r[0]]).forEach(r=>{const p=D.P[r[0]]; L.push([n,uf,mf,tr(D.idp.includes(r[0])?'Identification':'Parameter'),tr(p.l)+(r[3]?' ('+tr(r[3])+')':''),r[1],us(r[2]),p.rn||'',tr(RK[p.rk]),tr(p.sc==='type'?'Type':'Instance'),p.guid||'',p.ifc||''].map(q).join(','))});
+    (c.nx||[]).forEach(x=>L.push([n,uf,mf,tr('Not in the model'),tr(x.t),'','','','','','',''].map(q).join(',')))});
   return '﻿'+L.join('\r\n')}
 function dl(name,text){const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'text/csv'})); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 

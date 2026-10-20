@@ -39,7 +39,7 @@ What others do: National Defence uses one name holding both languages, such as `
 
 ## Data types and how values are checked
 
-Every parameter has one data type and one rule, so a value is either right or wrong. The model checker applies the rules, and they are written out in both languages in CANBIM\_Validation\_Rules\_v0.1.json.
+Every parameter has one data type and one rule, so a value is either right or wrong. The model checker applies the rules, and they are written out in both languages in OpenBEP\_Validation\_Rules\_v0.1.json.
 
 | Type | Revit data type | Count | What is accepted | Example | Type (FR) |
 | --- | --- | --- | --- | --- | --- |
@@ -62,9 +62,9 @@ Still to check: the fire-rating list, the Uniformat and OmniClass patterns, and 
 ## How to use it
 
 1. **Pick the BIM uses and LODs in the BEP Builder.** The tool works out which parameters each element type needs, phase by phase.
-2. **Download two files** from the step "Element requirements": the CANBIM shared parameter file (.txt) and the project's binding list (.csv).
-3. **Load the .txt in Revit** (Manage › Shared Parameters). It holds all 300 CANBIM parameters in 8 groups, with their fixed GUIDs.
-4. **Run CANBIM › Sync parameters** (the Revit add-in). It reads the binding list, shows what it will add or bind and any duplicates with the same name but another GUID, writes a report, and changes nothing until you confirm.
+2. **Download two files** from the step "Element requirements": the OpenBEP shared parameter file (.txt) and the project's binding list (.csv).
+3. **Load the .txt in Revit** (Manage › Shared Parameters). It holds all 300 OpenBEP parameters in 8 groups, with their fixed GUIDs.
+4. **Run OpenBEP › Sync parameters** (the Revit add-in). It reads the binding list, shows what it will add or bind and any duplicates with the same name but another GUID, writes a report, and changes nothing until you confirm.
 5. **Check the model** with the BEP Builder's model checker: export the schedules and it flags missing or wrong values against the rules below.
 
 The add-in is written but not yet built or tested. A Revit MCP tool using the same logic comes after.

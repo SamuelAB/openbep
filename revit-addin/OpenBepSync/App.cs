@@ -1,19 +1,19 @@
 using System.Reflection;
 using Autodesk.Revit.UI;
 
-namespace CanbimSync
+namespace OpenBepSync
 {
-    /// <summary>Adds a CANBIM tab with one button: Sync parameters.</summary>
+    /// <summary>Adds a OpenBEP tab with one button: Sync parameters.</summary>
     public class App : IExternalApplication
     {
         public Result OnStartup(UIControlledApplication app)
         {
-            const string tab = "CANBIM";
+            const string tab = "OpenBEP";
             try { app.CreateRibbonTab(tab); } catch { /* tab already exists */ }
             var panel = app.CreateRibbonPanel(tab, "Parameters");
-            var btn = new PushButtonData("CanbimSync", "Sync\nparameters", Assembly.GetExecutingAssembly().Location, typeof(SyncCommand).FullName)
+            var btn = new PushButtonData("OpenBepSync", "Sync\nparameters", Assembly.GetExecutingAssembly().Location, typeof(SyncCommand).FullName)
             {
-                ToolTip = "Make this model's shared parameters match the CANBIM binding list exported from the BEP Builder. Shows what will change before changing anything."
+                ToolTip = "Make this model's shared parameters match the OpenBEP binding list exported from the BEP Builder. Shows what will change before changing anything."
             };
             panel.AddItem(btn);
             return Result.Succeeded;

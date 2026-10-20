@@ -1,4 +1,4 @@
-# CANBIM universal Revit parameter list, v0.1 (draft)
+# OpenBEP universal Revit parameter list, v0.1 (draft)
 
 One list of Revit parameters that every owner in Canada can ask for, tied to the LODs and BIM uses in the BEP Builder. Each parameter has one name and one fixed GUID. That way, "fire rating" means the same thing on every project and from every firm, and data can be combined across projects.
 
@@ -6,8 +6,8 @@ One list of Revit parameters that every owner in Canada can ask for, tied to the
 
 | File | What it is |
 |---|---|
-| `CANBIM_SharedParameters_v0.1.txt` | A Revit shared parameter file with 319 shared parameters in 9 groups. Nineteen were added for the LOD specification (CA_SpecificationSection, CA_EPDReference, CA_RecycledContent, CA_EmbodiedCarbon, and 15 for baggage handling and passenger boarding bridges in group 09 Specialty systems) and are listed in [`lod/spec.json`](../lod/spec.json), not yet in the manifest. Load it in Revit under Manage › Shared Parameters. |
-| `CANBIM_Parameters_Manifest_v0.1.csv` | The full list, one row per parameter and element type. It covers all 398 parameters: 300 shared and 98 Revit built-in. Each row gives the Revit categories, instance or type, the LOD it is required from, the BIM uses that need it, the IFC target, an example value, the placeholder values the checker rejects, and the English and French labels. |
+| `OpenBEP_SharedParameters_v0.1.txt` | A Revit shared parameter file with 319 shared parameters in 9 groups. Nineteen were added for the LOD specification (CA_SpecificationSection, CA_EPDReference, CA_RecycledContent, CA_EmbodiedCarbon, and 15 for baggage handling and passenger boarding bridges in group 09 Specialty systems) and are listed in [`lod/spec.json`](../lod/spec.json), not yet in the manifest. Load it in Revit under Manage › Shared Parameters. |
+| `OpenBEP_Parameters_Manifest_v0.1.csv` | The full list, one row per parameter and element type. It covers all 398 parameters: 300 shared and 98 Revit built-in. Each row gives the Revit categories, instance or type, the LOD it is required from, the BIM uses that need it, the IFC target, an example value, the placeholder values the checker rejects, and the English and French labels. |
 | `gen_sp.py` | The script that writes the .txt and the manifest from the BEP Builder element library (`lb_all.json`, to be added). GUIDs are derived from names, so reruns give the same GUIDs. |
 
 The BEP Builder (v0.24, step "Element requirements") exports the subset each project needs. That subset comes from the chosen BIM uses and target LODs. The export is a .txt file plus a binding list (CSV). The school example gives 153 shared parameters, 65 built-in parameters and 54 element types.
@@ -49,7 +49,7 @@ The same step also exports an IDS file (buildingSMART Information Delivery Speci
   - An uploaded .txt still needs its categories set, which is what the binding list supplies.
 - **Proposed next step:**
   - Build a small add-in, or a tool on a Revit MCP server, that reads the binding list and makes the model match it.
-  - It would add the missing parameters with the CANBIM GUIDs, bind them to the right categories, and remove the parameters that are not in the plan.
+  - It would add the missing parameters with the OpenBEP GUIDs, bind them to the right categories, and remove the parameters that are not in the plan.
   - Two open-source Revit MCP servers can already create and bind shared parameters: Horizun (Apache-2.0) and LuDattilo (MIT). Neither reconciles a model against a required list.
 
 ## Limits of this draft
@@ -57,4 +57,4 @@ The same step also exports an IDS file (buildingSMART Information Delivery Speci
 - **Not yet loaded in Revit.** The file follows the format of Autodesk's own file, but it should be tested in Revit 2025 to 2027.
 - **Built-in parameter names vary.** Some vary by Revit version and are marked "verify" in the manifest.
 - **Coverage.** The list covers the 63 element types in the BEP Builder, not every Revit category.
-- **Wording.** Labels and descriptions are CANBIM's own. IFC targets are IFC 4.3 property sets.
+- **Wording.** Labels and descriptions are OpenBEP's own. IFC targets are IFC 4.3 property sets.

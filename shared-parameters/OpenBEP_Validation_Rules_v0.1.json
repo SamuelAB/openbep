@@ -26,7 +26,7 @@
     ],
     "rule_en": "Assembly Code: a Uniformat II code (letter A to G, then 2, 4 or more digits, e.g. C1020 or B2010.10) taken from the project classification file.",
     "rule_fr": "Code d’assemblage : un code Uniformat II (lettre A à G suivie de 2, 4 chiffres ou plus, p. ex. C1020 ou B2010.10) tiré du fichier de classification du projet.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BarcodeAssetLabel": {
     "revit_data_type": "TEXT",
@@ -55,7 +55,7 @@
     ],
     "rule_en": "Barcode or QR label: 4 to 40 uppercase letters, digits or hyphens, exactly as encoded on the label.",
     "rule_fr": "Étiquette code-barres ou QR : 4 à 40 lettres majuscules, chiffres ou traits d’union, exactement comme encodé sur l’étiquette.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BuildingAutomationReference": {
     "revit_data_type": "TEXT",
@@ -84,7 +84,7 @@
     ],
     "rule_en": "Building automation reference: point or controller name made of letters, digits, hyphens or underscores, with dots between levels and no spaces.",
     "rule_fr": "Référence d’automatisation du bâtiment : nom de point ou de contrôleur fait de lettres, chiffres, traits d’union ou soulignés, avec des points entre les niveaux et sans espace.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_EnergySourceFuel": {
     "revit_data_type": "TEXT",
@@ -156,7 +156,7 @@
     ],
     "rule_en": "Expected service life: an ISO 8601 duration in whole years from 1 to 99, e.g. P25Y.",
     "rule_fr": "Durée de vie prévue : une durée ISO 8601 en années entières de 1 à 99, p. ex. P25Y.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FinishColour": {
     "revit_data_type": "TEXT",
@@ -185,7 +185,7 @@
     ],
     "rule_en": "Finish colour: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Couleur de finition : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Fire Rating": {
     "revit_data_type": "TEXT",
@@ -214,7 +214,7 @@
     ],
     "rule_en": "Fire Rating: one of 20 min, 30 min, 45 min, 1 h, 1.5 h, 2 h, 3 h or 4 h, written exactly like that (minutes below one hour, hours from one hour up).",
     "rule_fr": "Degré de résistance au feu : une des valeurs 20 min, 30 min, 45 min, 1 h, 1.5 h, 2 h, 3 h ou 4 h, écrite exactement ainsi (minutes sous une heure, heures à partir d’une heure).",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FireResistanceRating": {
     "revit_data_type": "TEXT",
@@ -243,7 +243,7 @@
     ],
     "rule_en": "Fire-resistance rating: one of 20 min, 30 min, 45 min, 1 h, 1.5 h, 2 h, 3 h or 4 h, written exactly like that.",
     "rule_fr": "Degré de résistance au feu : une des valeurs 20 min, 30 min, 45 min, 1 h, 1.5 h, 2 h, 3 h ou 4 h, écrite exactement ainsi.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GrossWeight_kg": {
     "revit_data_type": "NUMBER",
@@ -272,7 +272,7 @@
     ],
     "rule_en": "Gross weight: a number in kg greater than 0, entered without the unit.",
     "rule_fr": "Poids brut : un nombre en kg supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InstallationDate": {
     "revit_data_type": "TEXT",
@@ -301,7 +301,7 @@
     ],
     "rule_en": "Installation date: an ISO 8601 calendar date YYYY-MM-DD.",
     "rule_fr": "Date d’installation : une date ISO 8601 au format AAAA-MM-JJ.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MountingType": {
     "revit_data_type": "TEXT",
@@ -402,7 +402,7 @@
           "NOTKNOWN",
           "UNSET"
         ],
-        "source": "CANBIM proposal (IFC 4.3 Pset_SignalFrame.SignalFrameType is free text)"
+        "source": "OpenBEP proposal (IFC 4.3 Pset_SignalFrame.SignalFrameType is free text)"
       }
     },
     "pattern": null,
@@ -426,7 +426,7 @@
     ],
     "rule_en": "Mounting type: exactly one of the IFC 4.3 values in the allowed list (PEnum_LightFixtureMountingType, PEnum_AirTerminalMountingType, PEnum_SanitaryMounting, PEnum_FanMountingType), written in uppercase exactly as listed, e.g. RECESSED; each element type has its own sub-list (allowed_by_element_type).",
     "rule_fr": "Type de montage : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_LightFixtureMountingType, PEnum_AirTerminalMountingType, PEnum_SanitaryMounting, PEnum_FanMountingType), écrite en majuscules comme dans la liste, p. ex. RECESSED; chaque type d’élément a sa propre sous-liste (allowed_by_element_type).",
-    "source": "IFC 4.3 PEnum_LightFixtureMountingType / PEnum_AirTerminalMountingType / PEnum_SanitaryMounting / PEnum_FanMountingType (railway signals: CANBIM proposal)"
+    "source": "IFC 4.3 PEnum_LightFixtureMountingType / PEnum_AirTerminalMountingType / PEnum_SanitaryMounting / PEnum_FanMountingType (railway signals: OpenBEP proposal)"
   },
   "Mounting": {
     "revit_data_type": "TEXT",
@@ -458,9 +458,9 @@
       "Surface",
       "Default"
     ],
-    "rule_en": "Mounting type: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. SURFACE.",
-    "rule_fr": "Type de montage : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. SURFACE.",
-    "source": "CANBIM proposal"
+    "rule_en": "Mounting type: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. SURFACE.",
+    "rule_fr": "Type de montage : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. SURFACE.",
+    "source": "OpenBEP proposal"
   },
   "CA_OwnerAssetIdentifier": {
     "revit_data_type": "TEXT",
@@ -489,7 +489,7 @@
     ],
     "rule_en": "Owner asset identifier: uppercase letters and digits in hyphen-separated groups ending with a 3- to 6-digit sequence number, e.g. AHU-0003 (match the owner register format).",
     "rule_fr": "Identifiant d’actif du propriétaire : lettres majuscules et chiffres en groupes séparés par des traits d’union, terminés par un numéro de 3 à 6 chiffres, p. ex. AHU-0003 (selon le format du registre du propriétaire).",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PieceFabricationMark": {
     "revit_data_type": "TEXT",
@@ -518,7 +518,7 @@
     ],
     "rule_en": "Fabrication piece mark: letters, digits, dots, slashes or hyphens with no spaces, as on the shop drawings.",
     "rule_fr": "Marque de pièce de fabrication : lettres, chiffres, points, barres obliques ou traits d’union, sans espace, comme sur les dessins d’atelier.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PositionalAccuracy": {
     "revit_data_type": "LENGTH",
@@ -547,7 +547,7 @@
     ],
     "rule_en": "Positional accuracy (as-built): a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Exactitude de position (tel que construit) : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Prefabricated": {
     "revit_data_type": "YESNO",
@@ -608,7 +608,7 @@
     ],
     "rule_en": "Serial number: 3 to 40 letters, digits, dots, slashes or hyphens, copied from the nameplate.",
     "rule_fr": "Numéro de série : 3 à 40 lettres, chiffres, points, barres obliques ou traits d’union, copiés de la plaque signalétique.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_StationChainageRange": {
     "revit_data_type": "LENGTH",
@@ -636,7 +636,7 @@
     ],
     "rule_en": "Station / chainage range: a length in m of 0 or more, entered without the unit.",
     "rule_fr": "Chaînage (début - fin) : une longueur en m positive ou nulle, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_WarrantyDuration": {
     "revit_data_type": "TEXT",
@@ -665,7 +665,7 @@
     ],
     "rule_en": "Warranty duration: an ISO 8601 duration in years, months, weeks or days, e.g. P5Y or P18M.",
     "rule_fr": "Durée de la garantie : une durée ISO 8601 en années, mois, semaines ou jours, p. ex. P5Y ou P18M.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_WarrantyStartDate": {
     "revit_data_type": "TEXT",
@@ -694,7 +694,7 @@
     ],
     "rule_en": "Warranty start date: an ISO 8601 calendar date YYYY-MM-DD.",
     "rule_fr": "Date de début de la garantie : une date ISO 8601 au format AAAA-MM-JJ.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Width": {
     "revit_data_type": "LENGTH",
@@ -723,7 +723,7 @@
     ],
     "rule_en": "Overall thickness: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur totale : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Default Thickness": {
     "revit_data_type": "LENGTH",
@@ -752,7 +752,7 @@
     ],
     "rule_en": "Overall thickness: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur totale : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Description": {
     "revit_data_type": "MULTILINETEXT",
@@ -781,7 +781,7 @@
     ],
     "rule_en": "Description: any non-empty text (line breaks allowed); placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Description : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Export to IFC As / IFC Predefined Type (names vary by Revit version - verify)": {
     "revit_data_type": "TEXT",
@@ -810,7 +810,7 @@
     ],
     "rule_en": "IFC class and predefined type: an IFC 4.3 entity name, optionally followed by a dot and its uppercase predefined type, e.g. IfcLightFixture.POINTSOURCE.",
     "rule_fr": "Classe et type prédéfini IFC : un nom d’entité IFC 4.3, suivi au besoin d’un point et du type prédéfini en majuscules, p. ex. IfcLightFixture.POINTSOURCE.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Function (walls) or shared": {
     "revit_data_type": "YESNO",
@@ -871,7 +871,7 @@
     ],
     "rule_en": "Length: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Longueur : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Manufacturer": {
     "revit_data_type": "TEXT",
@@ -900,7 +900,7 @@
     ],
     "rule_en": "Manufacturer: any non-empty text; placeholders such as TBD, N/A, Manufacturer, Generic or Unknown are rejected.",
     "rule_fr": "Fabricant : tout texte non vide; les valeurs fictives comme TBD, N/A, Manufacturer, Generic ou Unknown sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Mark": {
     "revit_data_type": "TEXT",
@@ -929,7 +929,7 @@
     ],
     "rule_en": "Mark: a unique tag of letters, digits, dots, slashes or hyphens with no spaces, e.g. D-2.014.",
     "rule_fr": "Marque : une étiquette unique faite de lettres, chiffres, points, barres obliques ou traits d’union, sans espace, p. ex. D-2.014.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Material / Structural Material / compound structure": {
     "revit_data_type": "TEXT",
@@ -956,7 +956,7 @@
     ],
     "rule_en": "Primary material: any non-empty text; placeholders such as <By Category>, Default or Default Wall are rejected.",
     "rule_fr": "Matériau : tout texte non vide; les valeurs fictives comme <By Category>, Default ou Default Wall sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Model": {
     "revit_data_type": "TEXT",
@@ -984,7 +984,7 @@
     ],
     "rule_en": "Model name / number: any non-empty text; placeholders such as TBD, N/A, Model or Generic are rejected.",
     "rule_fr": "Modèle : tout texte non vide; les valeurs fictives comme TBD, N/A, Model ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Panel / Circuit Number (read-only, from electrical circuits)": {
     "revit_data_type": "TEXT",
@@ -1013,7 +1013,7 @@
     ],
     "rule_en": "Panel / Circuit Number: panel name, a hyphen, then the circuit number (or up to three numbers separated by commas for multi-pole circuits), e.g. LP-2A-14.",
     "rule_fr": "Panneau / numéro de circuit : nom du panneau, un trait d’union, puis le numéro de circuit (ou jusqu’à trois numéros séparés par des virgules pour les circuits multipolaires), p. ex. LP-2A-14.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Phase Created / Phase Demolished (map to IFC Status on export)": {
     "revit_data_type": "TEXT",
@@ -1079,7 +1079,7 @@
     ],
     "rule_en": "Room / Space: the room number computed by Revit, letters, digits, dots or hyphens with no spaces.",
     "rule_fr": "Local / espace : le numéro de local calculé par Revit, lettres, chiffres, points ou traits d’union, sans espace.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Structural (walls) / Structural Usage": {
     "revit_data_type": "YESNO",
@@ -1140,7 +1140,7 @@
     ],
     "rule_en": "Layer build-up: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Composition : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "System Name": {
     "revit_data_type": "TEXT",
@@ -1169,7 +1169,7 @@
     ],
     "rule_en": "System served: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Système desservi : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Type Mark": {
     "revit_data_type": "TEXT",
@@ -1198,7 +1198,7 @@
     ],
     "rule_en": "Type Mark: 1 to 10 uppercase letters, digits, dots or hyphens, with no spaces, e.g. A1.",
     "rule_fr": "Marque de type : 1 à 10 lettres majuscules, chiffres, points ou traits d’union, sans espace, p. ex. A1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Type Name": {
     "revit_data_type": "TEXT",
@@ -1226,7 +1226,7 @@
     ],
     "rule_en": "Type name: any non-empty text; placeholders such as Default, Standard, Type 1 or Generic are rejected.",
     "rule_fr": "Nom du type : tout texte non vide; les valeurs fictives comme Default, Standard, Type 1 ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Actual Number of Risers": {
     "revit_data_type": "NUMBER",
@@ -1255,7 +1255,7 @@
     ],
     "rule_en": "Number of risers: a whole number of at least 1.",
     "rule_fr": "Nombre de contremarches : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Actual Riser Height": {
     "revit_data_type": "LENGTH",
@@ -1284,7 +1284,7 @@
     ],
     "rule_en": "Riser height: a length in mm greater than 0 and at most 250, entered without the unit.",
     "rule_fr": "Hauteur de contremarche : une longueur en mm supérieure à 0 et d’au plus 250, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Actual Run Width / Width": {
     "revit_data_type": "LENGTH",
@@ -1313,7 +1313,7 @@
     ],
     "rule_en": "Clear width: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Largeur libre : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Actual Tread Depth": {
     "revit_data_type": "LENGTH",
@@ -1342,7 +1342,7 @@
     ],
     "rule_en": "Tread run: a length in mm greater than 0 and at most 500, entered without the unit.",
     "rule_fr": "Giron : une longueur en mm supérieure à 0 et d’au plus 500, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Apparent Load (connector)": {
     "revit_data_type": "NUMBER",
@@ -1371,7 +1371,7 @@
     ],
     "rule_en": "Connected electrical load: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Charge électrique raccordée : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Area": {
     "revit_data_type": "AREA",
@@ -1400,7 +1400,7 @@
     ],
     "rule_en": "Net side area: an area in m² greater than 0, entered without the unit.",
     "rule_fr": "Surface nette : une superficie en m² supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_AccessibleCeiling": {
     "revit_data_type": "YESNO",
@@ -1458,7 +1458,7 @@
     ],
     "rule_en": "Acoustic rating: STC, a space, then a 2-digit sound transmission class, e.g. STC 50.",
     "rule_fr": "Indice acoustique : STC, une espace, puis un indice de transmission du son à 2 chiffres, p. ex. STC 50.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_AirLeakageRate_Lsm2": {
     "revit_data_type": "NUMBER",
@@ -1487,7 +1487,7 @@
     ],
     "rule_en": "Air leakage rate: a number in L/(s·m²) greater than 0, entered without the unit.",
     "rule_fr": "Taux d’infiltration d’air : un nombre en L/(s·m²) supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BarrierFree": {
     "revit_data_type": "YESNO",
@@ -1635,7 +1635,7 @@
     ],
     "rule_en": "Car inside dimensions: width x depth x height in whole millimetres, separated by \" x \", e.g. 1600 x 2400 x 2400.",
     "rule_fr": "Dimensions intérieures de la cabine : largeur x profondeur x hauteur en millimètres entiers, séparées par « x », p. ex. 1600 x 2400 x 2400.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CeilingSystem": {
     "revit_data_type": "TEXT",
@@ -1664,7 +1664,7 @@
     ],
     "rule_en": "Ceiling system: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Système de plafond : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CombustibleConstruction": {
     "revit_data_type": "YESNO",
@@ -1725,7 +1725,7 @@
     ],
     "rule_en": "Curtain wall system: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Système de mur-rideau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignLoad_kNm": {
     "revit_data_type": "NUMBER",
@@ -1754,7 +1754,7 @@
     ],
     "rule_en": "Design load: a number in kN/m greater than 0, entered without the unit.",
     "rule_fr": "Charge de calcul : un nombre en kN/m supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignTemperatureSetPoints": {
     "revit_data_type": "TEXT",
@@ -1783,7 +1783,7 @@
     ],
     "rule_en": "Design set-points: heating value, \" heating / \", cooling value, \" cooling\", in °C without the unit, e.g. 21 heating / 24 cooling.",
     "rule_fr": "Consignes de température : valeur de chauffage, « heating / », valeur de refroidissement, « cooling », en °C sans l’unité, p. ex. 21 heating / 24 cooling.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ExtendsToStructure": {
     "revit_data_type": "YESNO",
@@ -1844,7 +1844,7 @@
     ],
     "rule_en": "Finish: any non-empty text (line breaks allowed); placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Fini : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FireCompartmentBoundary": {
     "revit_data_type": "YESNO",
@@ -1966,7 +1966,7 @@
     ],
     "rule_en": "Frame material: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Matériau du cadre : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GlazingMakeUp": {
     "revit_data_type": "TEXT",
@@ -1995,7 +1995,7 @@
     ],
     "rule_en": "Glazing make-up: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Composition du vitrage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GrossFloorArea": {
     "revit_data_type": "AREA",
@@ -2024,7 +2024,7 @@
     ],
     "rule_en": "Gross floor area: an area in m² greater than 0, entered without the unit.",
     "rule_fr": "Superficie brute : une superficie en m² supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HandrailDiameter": {
     "revit_data_type": "LENGTH",
@@ -2053,7 +2053,7 @@
     ],
     "rule_en": "Handrail diameter: a length in mm greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Diamètre de la main courante : une longueur en mm supérieure à 0 et d’au plus 100, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HardwareSet": {
     "revit_data_type": "TEXT",
@@ -2082,7 +2082,7 @@
     ],
     "rule_en": "Hardware set: HW- followed by 2 or 3 digits and an optional letter, e.g. HW-07.",
     "rule_fr": "Groupe de quincaillerie : HW- suivi de 2 ou 3 chiffres et d’une lettre facultative, p. ex. HW-07.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Headroom": {
     "revit_data_type": "LENGTH",
@@ -2111,7 +2111,7 @@
     ],
     "rule_en": "Headroom: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Échappée : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InfillType": {
     "revit_data_type": "TEXT",
@@ -2140,7 +2140,7 @@
     ],
     "rule_en": "Infill type: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type de remplissage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LeafMaterial": {
     "revit_data_type": "TEXT",
@@ -2169,7 +2169,7 @@
     ],
     "rule_en": "Leaf material: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Matériau de la porte : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LegendMessage": {
     "revit_data_type": "MULTILINETEXT",
@@ -2198,7 +2198,7 @@
     ],
     "rule_en": "Legend / message: any non-empty text (line breaks allowed); placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Message : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MajorOccupancy": {
     "revit_data_type": "TEXT",
@@ -2239,9 +2239,9 @@
       "A2",
       "Group A"
     ],
-    "rule_en": "Major occupancy (NBC group): exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. A-2.",
-    "rule_fr": "Usage principal (groupe du CNB) : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. A-2.",
-    "source": "CANBIM proposal"
+    "rule_en": "Major occupancy (NBC group): exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. A-2.",
+    "rule_fr": "Usage principal (groupe du CNB) : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. A-2.",
+    "source": "OpenBEP proposal"
   },
   "CA_MemberSpaces": {
     "revit_data_type": "TEXT",
@@ -2270,7 +2270,7 @@
     ],
     "rule_en": "Member spaces: room numbers separated by a semicolon and a space, e.g. 2.010; 2.011.",
     "rule_fr": "Espaces membres : numéros de local séparés par un point-virgule et une espace, p. ex. 2.010; 2.011.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NominalDimensions": {
     "revit_data_type": "TEXT",
@@ -2299,7 +2299,7 @@
     ],
     "rule_en": "Nominal dimensions: length x depth x height in whole millimetres, separated by \" x \".",
     "rule_fr": "Dimensions nominales : longueur x profondeur x hauteur en millimètres entiers, séparées par « x ».",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NonSlipSurface": {
     "revit_data_type": "YESNO",
@@ -2356,7 +2356,7 @@
     ],
     "rule_en": "Occupant load: a whole number of 0 or more.",
     "rule_fr": "Nombre de personnes : un nombre entier positif ou nul.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_OperationPartitioning": {
     "revit_data_type": "TEXT",
@@ -2481,7 +2481,7 @@
     ],
     "rule_en": "Outdoor-air ventilation: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Débit d’air neuf : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PartOfAnExit": {
     "revit_data_type": "YESNO",
@@ -2539,7 +2539,7 @@
     ],
     "rule_en": "Performance class: the NAFS class (R, LC, CW or AW), -PG, then the performance grade, e.g. CW-PG50.",
     "rule_fr": "Classe de performance : la classe NAFS (R, LC, CW ou AW), -PG, puis la cote de performance, p. ex. CW-PG50.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ProgramArea": {
     "revit_data_type": "AREA",
@@ -2568,7 +2568,7 @@
     ],
     "rule_en": "Program area: an area in m² greater than 0, entered without the unit.",
     "rule_fr": "Superficie au programme : une superficie en m² supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RatedLoad_kg": {
     "revit_data_type": "NUMBER",
@@ -2597,7 +2597,7 @@
     ],
     "rule_en": "Rated load: a number in kg greater than 0, entered without the unit.",
     "rule_fr": "Charge nominale : un nombre en kg supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RatedPassengers": {
     "revit_data_type": "NUMBER",
@@ -2626,7 +2626,7 @@
     ],
     "rule_en": "Rated passengers: a whole number of at least 1.",
     "rule_fr": "Nombre de passagers : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RatedSpeed_ms": {
     "revit_data_type": "NUMBER",
@@ -2655,7 +2655,7 @@
     ],
     "rule_en": "Rated speed: a number in m/s greater than 0, entered without the unit.",
     "rule_fr": "Vitesse nominale : un nombre en m/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RegulatorDeviceNumber": {
     "revit_data_type": "TEXT",
@@ -2684,7 +2684,7 @@
     ],
     "rule_en": "Regulator device number: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Numéro d’enregistrement de l’appareil : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RequiredIlluminance_lx": {
     "revit_data_type": "NUMBER",
@@ -2713,7 +2713,7 @@
     ],
     "rule_en": "Required illuminance (space): a number in lx greater than 0, entered without the unit.",
     "rule_fr": "Éclairement requis (local) : un nombre en lx supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RetroreflectiveSheeting": {
     "revit_data_type": "TEXT",
@@ -2742,7 +2742,7 @@
     ],
     "rule_en": "Retroreflective sheeting: ASTM D4956 Type followed by a Roman numeral from I to XI.",
     "rule_fr": "Pellicule rétroréfléchissante : ASTM D4956 Type suivi d’un chiffre romain de I à XI.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RoofingMembraneSystem": {
     "revit_data_type": "TEXT",
@@ -2771,7 +2771,7 @@
     ],
     "rule_en": "Roofing membrane system: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Système de membrane de toiture : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SecurityRating": {
     "revit_data_type": "TEXT",
@@ -2800,7 +2800,7 @@
     ],
     "rule_en": "Security rating: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Cote de sécurité : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SeismicRestraint": {
     "revit_data_type": "YESNO",
@@ -2897,9 +2897,9 @@
       "REGULATORY",
       "Sign"
     ],
-    "rule_en": "Sign category: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. Regulatory.",
-    "rule_fr": "Catégorie de panneau : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. Regulatory.",
-    "source": "CANBIM proposal"
+    "rule_en": "Sign category: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. Regulatory.",
+    "rule_fr": "Catégorie de panneau : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Regulatory.",
+    "source": "OpenBEP proposal"
   },
   "CA_SignSize": {
     "revit_data_type": "TEXT",
@@ -2928,7 +2928,7 @@
     ],
     "rule_en": "Sign size: width x height in whole millimetres, e.g. 750 x 750.",
     "rule_fr": "Dimensions du panneau : largeur x hauteur en millimètres entiers, p. ex. 750 x 750.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SmokeStop": {
     "revit_data_type": "YESNO",
@@ -2988,7 +2988,7 @@
     ],
     "rule_en": "Solar reflectance index (SRI): a number of at most 130.",
     "rule_fr": "Indice de réflectance solaire (IRS) : un nombre d’au plus 130.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SoundAbsorption": {
     "revit_data_type": "TEXT",
@@ -3017,7 +3017,7 @@
     ],
     "rule_en": "Sound absorption: NRC, a space, then the noise reduction coefficient from 0.00 to 1.00 in steps of 0.05, e.g. NRC 0.70.",
     "rule_fr": "Absorption acoustique : NRC, une espace, puis le coefficient de réduction du bruit de 0.00 à 1.00 par pas de 0.05, p. ex. NRC 0.70.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SpaceClassification": {
     "revit_data_type": "TEXT",
@@ -3046,7 +3046,7 @@
     ],
     "rule_en": "Space classification: an OmniClass Table 13 code, e.g. 13-25 11 00.",
     "rule_fr": "Classification de l’espace : un code OmniClass de la table 13, p. ex. 13-25 11 00.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Sprinklered": {
     "revit_data_type": "YESNO",
@@ -3104,7 +3104,7 @@
     ],
     "rule_en": "Standard sign code: the designation from the applicable traffic-control manual, e.g. Ra-1 (MUTCDC) or P-90-P (Quebec).",
     "rule_fr": "Code de signalisation normalisé : la désignation du manuel de signalisation applicable, p. ex. Ra-1 (MUTCDC) ou P-90-P (Québec).",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_StopsOpenings": {
     "revit_data_type": "TEXT",
@@ -3133,7 +3133,7 @@
     ],
     "rule_en": "Stops / openings: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Arrêts / ouvertures : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SupplyInstallResponsibility": {
     "revit_data_type": "TEXT",
@@ -3165,9 +3165,9 @@
       "Owner",
       "TBD"
     ],
-    "rule_en": "Supply / install responsibility: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. OFCI.",
-    "rule_fr": "Responsabilité (fourni par / installé par) : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. OFCI.",
-    "source": "CANBIM proposal"
+    "rule_en": "Supply / install responsibility: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. OFCI.",
+    "rule_fr": "Responsabilité (fourni par / installé par) : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. OFCI.",
+    "source": "OpenBEP proposal"
   },
   "CA_SurfaceFlameSpreadRating": {
     "revit_data_type": "TEXT",
@@ -3196,7 +3196,7 @@
     ],
     "rule_en": "Surface flame-spread rating: FSR, a space, then the rating as a whole number, e.g. FSR 25.",
     "rule_fr": "Indice de propagation de la flamme : FSR, une espace, puis l’indice en nombre entier, p. ex. FSR 25.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TactileBraille": {
     "revit_data_type": "YESNO",
@@ -3254,7 +3254,7 @@
     ],
     "rule_en": "Utility connections: any non-empty text (line breaks allowed); placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Raccordements requis : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ZoneArea": {
     "revit_data_type": "AREA",
@@ -3283,7 +3283,7 @@
     ],
     "rule_en": "Zone area: an area in m² greater than 0, entered without the unit.",
     "rule_fr": "Superficie de la zone : une superficie en m² supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ZoneType": {
     "revit_data_type": "TEXT",
@@ -3354,7 +3354,7 @@
     ],
     "rule_en": "Unit cost: a number in CAD greater than 0, entered without the unit.",
     "rule_fr": "Coût unitaire : un nombre en CAD supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Department": {
     "revit_data_type": "TEXT",
@@ -3383,7 +3383,7 @@
     ],
     "rule_en": "Department: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Service : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Floor / Wall / Ceiling / Base Finish": {
     "revit_data_type": "TEXT",
@@ -3412,7 +3412,7 @@
     ],
     "rule_en": "Finishes: finish schedule codes (letters, hyphen, number) separated by \" / \", e.g. RF-1 / PT-2 / ACT-1 / RB-1.",
     "rule_fr": "Finis : codes du tableau des finis (lettres, trait d’union, numéro) séparés par « / », p. ex. RF-1 / PT-2 / ACT-1 / RB-1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Heat Transfer Coefficient (U) - analytical properties": {
     "revit_data_type": "NUMBER",
@@ -3441,7 +3441,7 @@
     ],
     "rule_en": "Thermal transmittance (U): a number in W/(m²·K) greater than 0, entered without the unit.",
     "rule_fr": "Transmittance thermique (U) : un nombre en W/(m²·K) supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Height": {
     "revit_data_type": "LENGTH",
@@ -3470,7 +3470,7 @@
     ],
     "rule_en": "Nominal height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Height Offset From Level": {
     "revit_data_type": "LENGTH",
@@ -3499,7 +3499,7 @@
     ],
     "rule_en": "Ceiling height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur du plafond : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Unbounded Height": {
     "revit_data_type": "LENGTH",
@@ -3528,7 +3528,7 @@
     ],
     "rule_en": "Height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Name": {
     "revit_data_type": "TEXT",
@@ -3557,7 +3557,7 @@
     ],
     "rule_en": "Room name: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Nom du local : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Number": {
     "revit_data_type": "TEXT",
@@ -3586,7 +3586,7 @@
     ],
     "rule_en": "Room number: letters, digits, dots or hyphens with no spaces, unique in the model, e.g. 2.014.",
     "rule_fr": "Numéro de local : lettres, chiffres, points ou traits d’union, sans espace, unique dans le modèle, p. ex. 2.014.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Railing Height": {
     "revit_data_type": "LENGTH",
@@ -3615,7 +3615,7 @@
     ],
     "rule_en": "Guard / railing height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur du garde-corps : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Ramp Max Slope (1/x)": {
     "revit_data_type": "NUMBER",
@@ -3644,7 +3644,7 @@
     ],
     "rule_en": "Slope: a number of at least 1.",
     "rule_fr": "Pente : un nombre d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Sill Height": {
     "revit_data_type": "LENGTH",
@@ -3673,7 +3673,7 @@
     ],
     "rule_en": "Sill height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur d’allège : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Slope": {
     "revit_data_type": "NUMBER",
@@ -3701,7 +3701,7 @@
     ],
     "rule_en": "Slope: a number in % of 0 or more, entered without the unit.",
     "rule_fr": "Pente : un nombre en % positif ou nul, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Solar Heat Gain Coefficient - analytical properties": {
     "revit_data_type": "NUMBER",
@@ -3730,7 +3730,7 @@
     ],
     "rule_en": "Solar heat gain coefficient: a number greater than 0 and at most 1.",
     "rule_fr": "Coefficient de gain de chaleur solaire (CGCS) : un nombre supérieur à 0 et d’au plus 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Thermal Resistance (R) - analytical properties": {
     "revit_data_type": "NUMBER",
@@ -3759,7 +3759,7 @@
     ],
     "rule_en": "Insulation thermal resistance (RSI): a number in m²·K/W greater than 0, entered without the unit.",
     "rule_fr": "Résistance thermique de l’isolant (RSI) : un nombre en m²·K/W supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Visual Light Transmittance - analytical properties": {
     "revit_data_type": "NUMBER",
@@ -3788,7 +3788,7 @@
     ],
     "rule_en": "Visible light transmittance: a number greater than 0 and at most 1.",
     "rule_fr": "Transmission de la lumière visible : un nombre supérieur à 0 et d’au plus 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Volume": {
     "revit_data_type": "VOLUME",
@@ -3817,7 +3817,7 @@
     ],
     "rule_en": "Volume: a volume in m³ greater than 0, entered without the unit.",
     "rule_fr": "Volume : un volume en m³ supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Bar Diameter": {
     "revit_data_type": "TEXT",
@@ -3853,9 +3853,9 @@
       "#5",
       "16 mm"
     ],
-    "rule_en": "Bar size: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. 15M.",
-    "rule_fr": "Diamètre de barre : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. 15M.",
-    "source": "CANBIM proposal"
+    "rule_en": "Bar size: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. 15M.",
+    "rule_fr": "Diamètre de barre : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. 15M.",
+    "source": "OpenBEP proposal"
   },
   "CA_BarCoating": {
     "revit_data_type": "TEXT",
@@ -3887,9 +3887,9 @@
       "epoxy",
       "Coated"
     ],
-    "rule_en": "Bar coating: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. Epoxy coated.",
-    "rule_fr": "Revêtement des barres : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. Epoxy coated.",
-    "source": "CANBIM proposal"
+    "rule_en": "Bar coating: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. Epoxy coated.",
+    "rule_fr": "Revêtement des barres : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Epoxy coated.",
+    "source": "OpenBEP proposal"
   },
   "CA_CoatingCorrosionProtection": {
     "revit_data_type": "TEXT",
@@ -3918,7 +3918,7 @@
     ],
     "rule_en": "Coating / corrosion protection: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Revêtement / protection anticorrosion : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ConcreteCover": {
     "revit_data_type": "LENGTH",
@@ -3947,7 +3947,7 @@
     ],
     "rule_en": "Concrete cover: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Enrobage : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ConcreteExposureClass": {
     "revit_data_type": "TEXT",
@@ -3991,9 +3991,9 @@
       "C1",
       "Exterior"
     ],
-    "rule_en": "Concrete exposure class: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. C-1.",
-    "rule_fr": "Classe d’exposition : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. C-1.",
-    "source": "CANBIM proposal"
+    "rule_en": "Concrete exposure class: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. C-1.",
+    "rule_fr": "Classe d’exposition : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. C-1.",
+    "source": "OpenBEP proposal"
   },
   "CA_DelegatedDesign": {
     "revit_data_type": "YESNO",
@@ -4051,7 +4051,7 @@
     ],
     "rule_en": "Design axial resistance: a number in kN greater than 0, entered without the unit.",
     "rule_fr": "Résistance axiale pondérée : un nombre en kN supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignBearingResistance_kPa": {
     "revit_data_type": "NUMBER",
@@ -4080,7 +4080,7 @@
     ],
     "rule_en": "Design bearing resistance: a number in kPa greater than 0, entered without the unit.",
     "rule_fr": "Résistance pondérée du sol : un nombre en kPa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignLiveLoad_kPa": {
     "revit_data_type": "NUMBER",
@@ -4109,7 +4109,7 @@
     ],
     "rule_en": "Design live load: a number in kPa greater than 0, entered without the unit.",
     "rule_fr": "Surcharge d’utilisation : un nombre en kPa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DiameterSection": {
     "revit_data_type": "TEXT",
@@ -4138,7 +4138,7 @@
     ],
     "rule_en": "Pile diameter or section: the diameter in millimetres followed by \"dia.\", a rectangular section width x depth in millimetres, or an HP section designation such as HP310x110.",
     "rule_fr": "Diamètre ou section du pieu : le diamètre en millimètres suivi de « dia. », une section rectangulaire largeur x profondeur en millimètres, ou une désignation HP comme HP310x110.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DrainageProvisions": {
     "revit_data_type": "MULTILINETEXT",
@@ -4167,7 +4167,7 @@
     ],
     "rule_en": "Drainage provisions: any non-empty text (line breaks allowed); placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Dispositif de drainage : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FireProtection": {
     "revit_data_type": "TEXT",
@@ -4196,7 +4196,7 @@
     ],
     "rule_en": "Fire protection: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Protection incendie : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FrostProtectionDepth": {
     "revit_data_type": "LENGTH",
@@ -4225,7 +4225,7 @@
     ],
     "rule_en": "Frost protection depth: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Profondeur de protection contre le gel : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InstallationRecord": {
     "revit_data_type": "MULTILINETEXT",
@@ -4254,7 +4254,7 @@
     ],
     "rule_en": "Installation record: any non-empty text (line breaks allowed); placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Relevé de mise en place : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ReinforcementGrade": {
     "revit_data_type": "TEXT",
@@ -4283,7 +4283,7 @@
     ],
     "rule_en": "Reinforcement grade: CSA G30.18 followed by the grade 400R, 400W, 500R or 500W.",
     "rule_fr": "Nuance de l’armature : CSA G30.18 suivi de la nuance 400R, 400W, 500R ou 500W.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ReinforcementRatio_kgm3": {
     "revit_data_type": "NUMBER",
@@ -4312,7 +4312,7 @@
     ],
     "rule_en": "Reinforcement ratio: a number in kg/m³ greater than 0, entered without the unit.",
     "rule_fr": "Taux d’armature : un nombre en kg/m³ supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Span": {
     "revit_data_type": "LENGTH",
@@ -4341,7 +4341,7 @@
     ],
     "rule_en": "Span: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Portée : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TotalMass_kg": {
     "revit_data_type": "NUMBER",
@@ -4370,7 +4370,7 @@
     ],
     "rule_en": "Total mass: a number in kg greater than 0, entered without the unit.",
     "rule_fr": "Masse totale : un nombre en kg supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_WallSystem": {
     "revit_data_type": "TEXT",
@@ -4399,7 +4399,7 @@
     ],
     "rule_en": "Wall system: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type de mur de soutènement : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Camber Size": {
     "revit_data_type": "LENGTH",
@@ -4428,7 +4428,7 @@
     ],
     "rule_en": "Camber: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Contre-flèche : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Cut Length / Length": {
     "revit_data_type": "LENGTH",
@@ -4457,7 +4457,7 @@
     ],
     "rule_en": "Length: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Longueur : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Elevation at Bottom": {
     "revit_data_type": "LENGTH",
@@ -4485,7 +4485,7 @@
     ],
     "rule_en": "Bottom elevation: an elevation in m (may be negative), entered without the unit.",
     "rule_fr": "Élévation du dessous : une élévation en m (peut être négative), saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Elevation at Top": {
     "revit_data_type": "LENGTH",
@@ -4513,7 +4513,7 @@
     ],
     "rule_en": "Cut-off elevation: an elevation in m (may be negative), entered without the unit.",
     "rule_fr": "Élévation de recépage : une élévation en m (peut être négative), saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Foundation Thickness": {
     "revit_data_type": "LENGTH",
@@ -4542,7 +4542,7 @@
     ],
     "rule_en": "Thickness: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Moment Connection Start / End": {
     "revit_data_type": "TEXT",
@@ -4571,7 +4571,7 @@
     ],
     "rule_en": "End connection type: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type d’assemblage d’extrémité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Quantity": {
     "revit_data_type": "NUMBER",
@@ -4600,7 +4600,7 @@
     ],
     "rule_en": "Number of bars: a whole number of at least 1.",
     "rule_fr": "Nombre de barres : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Spacing (rebar set layout)": {
     "revit_data_type": "LENGTH",
@@ -4629,7 +4629,7 @@
     ],
     "rule_en": "Spacing: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Espacement : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Structural Material (material properties)": {
     "revit_data_type": "TEXT",
@@ -4658,7 +4658,7 @@
     ],
     "rule_en": "Material grade / strength: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Nuance / résistance : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Total Bar Length": {
     "revit_data_type": "LENGTH",
@@ -4687,7 +4687,7 @@
     ],
     "rule_en": "Total bar length: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Longueur totale des barres : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Type Name / Section Name Key (structural families)": {
     "revit_data_type": "TEXT",
@@ -4716,7 +4716,7 @@
     ],
     "rule_en": "Section / profile: any non-empty text; placeholders such as TBD, N/A, 0, Default or <By Category> are rejected.",
     "rule_fr": "Profil de la section : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Unconnected Height": {
     "revit_data_type": "LENGTH",
@@ -4745,7 +4745,7 @@
     ],
     "rule_en": "Retained height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur retenue : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_AccessDoorProvided": {
     "revit_data_type": "YESNO",
@@ -4950,7 +4950,7 @@
     ],
     "rule_en": "Cooling capacity: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance frigorifique : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CrossSectionShape": {
     "revit_data_type": "TEXT",
@@ -5015,7 +5015,7 @@
     ],
     "rule_en": "Design flows: the flow on each side in L/s, without the unit, separated by \" / \", e.g. 12.0 / 11.5.",
     "rule_fr": "Débits de conception : le débit de chaque côté en L/s, sans l’unité, séparés par « / », p. ex. 12.0 / 11.5.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignSupplyAirflow_Ls": {
     "revit_data_type": "NUMBER",
@@ -5044,7 +5044,7 @@
     ],
     "rule_en": "Design supply airflow: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Débit d’air soufflé : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignSupplyTemperature_C": {
     "revit_data_type": "NUMBER",
@@ -5073,7 +5073,7 @@
     ],
     "rule_en": "Design supply temperature: a number in °C greater than 0 and at most 200, entered without the unit.",
     "rule_fr": "Température d’alimentation de conception : un nombre en °C supérieur à 0 et d’au plus 200, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignWetBulbTemperature_C": {
     "revit_data_type": "NUMBER",
@@ -5101,7 +5101,7 @@
     ],
     "rule_en": "Design wet-bulb temperature: a number in °C from -10 to 40, entered without the unit.",
     "rule_fr": "Température humide de calcul : un nombre en °C de -10 à 40, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DriveType": {
     "revit_data_type": "TEXT",
@@ -5144,7 +5144,7 @@
           "NOTKNOWN",
           "UNSET"
         ],
-        "source": "CANBIM proposal"
+        "source": "OpenBEP proposal"
       }
     },
     "pattern": null,
@@ -5168,7 +5168,7 @@
     ],
     "rule_en": "Drive type: exactly one of the IFC 4.3 values in the allowed list (PEnum_FanMotorConnectionType), written in uppercase exactly as listed, e.g. DIRECTDRIVE; each element type has its own sub-list (allowed_by_element_type).",
     "rule_fr": "Type d’entraînement : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_FanMotorConnectionType), écrite en majuscules comme dans la liste, p. ex. DIRECTDRIVE; chaque type d’élément a sa propre sous-liste (allowed_by_element_type).",
-    "source": "IFC 4.3 PEnum_FanMotorConnectionType (fans) + CANBIM proposal (elevators, escalators, moving walks)"
+    "source": "IFC 4.3 PEnum_FanMotorConnectionType (fans) + OpenBEP proposal (elevators, escalators, moving walks)"
   },
   "CA_DynamicStaticRating": {
     "revit_data_type": "TEXT",
@@ -5232,7 +5232,7 @@
     ],
     "rule_en": "External static pressure: a number in Pa greater than 0, entered without the unit.",
     "rule_fr": "Pression statique externe : un nombre en Pa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FaceType": {
     "revit_data_type": "TEXT",
@@ -5336,7 +5336,7 @@
     ],
     "rule_en": "Fan motor power: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance moteur ventilateur : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FanPowered": {
     "revit_data_type": "YESNO",
@@ -5394,7 +5394,7 @@
     ],
     "rule_en": "Filter rating: MERV 1 to MERV 16, or an ISO 16890 class such as ISO ePM1 50%.",
     "rule_fr": "Cote du filtre : MERV 1 à MERV 16, ou une classe ISO 16890 comme ISO ePM1 50%.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FiringOperatingMode": {
     "revit_data_type": "TEXT",
@@ -5496,7 +5496,7 @@
     ],
     "rule_en": "Full-load efficiency (COP): a number greater than 0 and at most 15.",
     "rule_fr": "Efficacité à pleine charge (COP) : un nombre supérieur à 0 et d’au plus 15.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HasIntegralDamperControl": {
     "revit_data_type": "YESNO",
@@ -5557,7 +5557,7 @@
     ],
     "rule_en": "Heat-recovery effectiveness: a number in % greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Efficacité de récupération : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HeatRejectionCapacity_kW": {
     "revit_data_type": "NUMBER",
@@ -5586,7 +5586,7 @@
     ],
     "rule_en": "Heat rejection capacity: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance de refroidissement : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HeatRejectionRate_kW": {
     "revit_data_type": "NUMBER",
@@ -5615,7 +5615,7 @@
     ],
     "rule_en": "Heat rejection rate: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Taux de rejet thermique : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HeatTransferCapacity_kW": {
     "revit_data_type": "NUMBER",
@@ -5644,7 +5644,7 @@
     ],
     "rule_en": "Heat transfer capacity: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance d’échange : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HeatingCapacity_kW": {
     "revit_data_type": "NUMBER",
@@ -5673,7 +5673,7 @@
     ],
     "rule_en": "Heating capacity: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance calorifique : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HeatingOutput_kW": {
     "revit_data_type": "NUMBER",
@@ -5702,7 +5702,7 @@
     ],
     "rule_en": "Heating output: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance utile : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InletSize": {
     "revit_data_type": "LENGTH",
@@ -5731,7 +5731,7 @@
     ],
     "rule_en": "Inlet size: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Diamètre d’entrée : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InputPower_kW": {
     "revit_data_type": "NUMBER",
@@ -5760,7 +5760,7 @@
     ],
     "rule_en": "Input power: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance absorbée : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InputRating_kW": {
     "revit_data_type": "NUMBER",
@@ -5789,7 +5789,7 @@
     ],
     "rule_en": "Input rating: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance absorbée : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LeakageWhenClosed_Ls": {
     "revit_data_type": "NUMBER",
@@ -5818,7 +5818,7 @@
     ],
     "rule_en": "Leakage when closed: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Fuite en position fermée : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MakeUpWaterRequirement_Ls": {
     "revit_data_type": "NUMBER",
@@ -5847,7 +5847,7 @@
     ],
     "rule_en": "Make-up water requirement: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Besoin en eau d’appoint : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MinimumMaximumAirflow_Ls": {
     "revit_data_type": "NUMBER",
@@ -5876,7 +5876,7 @@
     ],
     "rule_en": "Minimum / maximum airflow: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Débit d’air minimal / maximal : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MinimumOutdoorAirflow_Ls": {
     "revit_data_type": "NUMBER",
@@ -5905,7 +5905,7 @@
     ],
     "rule_en": "Minimum outdoor airflow: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Débit d’air neuf minimal : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NoiseCriterionAtDesignFlow": {
     "revit_data_type": "TEXT",
@@ -5934,7 +5934,7 @@
     ],
     "rule_en": "Noise criterion at design flow: NC, a space, then a 2-digit value, e.g. NC 30.",
     "rule_fr": "Critère de bruit au débit de conception : NC, une espace, puis une valeur à 2 chiffres, p. ex. NC 30.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NominalAirflow_Ls": {
     "revit_data_type": "NUMBER",
@@ -5963,7 +5963,7 @@
     ],
     "rule_en": "Nominal airflow: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Débit d’air nominal : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NumberOfCells": {
     "revit_data_type": "NUMBER",
@@ -5992,7 +5992,7 @@
     ],
     "rule_en": "Number of cells: a whole number of at least 1.",
     "rule_fr": "Nombre de cellules : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NumberOfPlates": {
     "revit_data_type": "NUMBER",
@@ -6021,7 +6021,7 @@
     ],
     "rule_en": "Number of plates: a whole number of at least 1.",
     "rule_fr": "Nombre de plaques : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PartLoadEfficiency": {
     "revit_data_type": "NUMBER",
@@ -6050,7 +6050,7 @@
     ],
     "rule_en": "Part-load efficiency (IPLV): a number greater than 0 and at most 20.",
     "rule_fr": "Efficacité à charge partielle (IPLV) : un nombre supérieur à 0 et d’au plus 20.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PressureClass_Pa": {
     "revit_data_type": "NUMBER",
@@ -6079,7 +6079,7 @@
     ],
     "rule_en": "Pressure class: a number in Pa greater than 0, entered without the unit.",
     "rule_fr": "Classe de pression : un nombre en Pa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PressureRating_kPa": {
     "revit_data_type": "NUMBER",
@@ -6108,7 +6108,7 @@
     ],
     "rule_en": "Pressure rating: a number in kPa greater than 0, entered without the unit.",
     "rule_fr": "Pression nominale : un nombre en kPa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Refrigerant": {
     "revit_data_type": "TEXT",
@@ -6137,7 +6137,7 @@
     ],
     "rule_en": "Refrigerant: the ASHRAE 34 designation with the hyphen, e.g. R-513A or R-1234ze(E).",
     "rule_fr": "Frigorigène : la désignation ASHRAE 34 avec le trait d’union, p. ex. R-513A ou R-1234ze(E).",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ReheatType": {
     "revit_data_type": "TEXT",
@@ -6204,7 +6204,7 @@
     ],
     "rule_en": "Release temperature: a number in °C from 50 to 300, entered without the unit.",
     "rule_fr": "Température de déclenchement : un nombre en °C de 50 à 300, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SealLeakageClass": {
     "revit_data_type": "TEXT",
@@ -6235,9 +6235,9 @@
       "Class A",
       "SMACNA"
     ],
-    "rule_en": "Seal / leakage class: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. Seal class A.",
-    "rule_fr": "Classe d’étanchéité : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. Seal class A.",
-    "source": "CANBIM proposal"
+    "rule_en": "Seal / leakage class: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. Seal class A.",
+    "rule_fr": "Classe d’étanchéité : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Seal class A.",
+    "source": "OpenBEP proposal"
   },
   "CA_Shape": {
     "revit_data_type": "TEXT",
@@ -6303,7 +6303,7 @@
     ],
     "rule_en": "Static pressure: a number in Pa greater than 0, entered without the unit.",
     "rule_fr": "Pression statique : un nombre en Pa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ThermalEfficiency_pct": {
     "revit_data_type": "NUMBER",
@@ -6332,7 +6332,7 @@
     ],
     "rule_en": "Thermal efficiency: a number in % greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Rendement thermique : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ThrowLength": {
     "revit_data_type": "LENGTH",
@@ -6361,7 +6361,7 @@
     ],
     "rule_en": "Throw length: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Portée : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TotalCoolingCapacity_kW": {
     "revit_data_type": "NUMBER",
@@ -6390,7 +6390,7 @@
     ],
     "rule_en": "Total cooling capacity: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance frigorifique : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Connector diameter / width x height": {
     "revit_data_type": "LENGTH",
@@ -6419,7 +6419,7 @@
     ],
     "rule_en": "Neck / connection size: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Dimension du col : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Flow": {
     "revit_data_type": "NUMBER",
@@ -6448,7 +6448,7 @@
     ],
     "rule_en": "Design airflow: a number in L/s greater than 0, entered without the unit.",
     "rule_fr": "Débit d’air de conception : un nombre en L/s supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Insulation Type / Insulation Thickness": {
     "revit_data_type": "TEXT",
@@ -6477,7 +6477,7 @@
     ],
     "rule_en": "Insulation type and thickness: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Isolation (type et épaisseur) : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Lining Type / Lining Thickness": {
     "revit_data_type": "YESNO",
@@ -6536,7 +6536,7 @@
     ],
     "rule_en": "Size: the size string Revit computes in millimetres, width x height (e.g. 300 x 100) or a diameter followed by ø.",
     "rule_fr": "Dimensions : la chaîne de dimensions calculée par Revit en millimètres, largeur x hauteur (p. ex. 300 x 100) ou un diamètre suivi de ø.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Width / Height / Diameter(Trade Size)": {
     "revit_data_type": "TEXT",
@@ -6565,7 +6565,7 @@
     ],
     "rule_en": "Tray width x depth in whole millimetres (e.g. 300 x 100), or the metric trade size of a conduit (e.g. 27).",
     "rule_fr": "Largeur x profondeur du chemin de câbles en millimètres entiers (p. ex. 300 x 100), ou la dimension commerciale métrique d’un conduit (p. ex. 27).",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "System Classification": {
     "revit_data_type": "TEXT",
@@ -6628,7 +6628,7 @@
     ],
     "rule_en": "Electrical supply (V / phase): a number in V greater than 0, entered without the unit.",
     "rule_fr": "Alimentation (V / phase) : un nombre en V supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BarrierFreeFixture": {
     "revit_data_type": "YESNO",
@@ -6718,7 +6718,7 @@
     ],
     "rule_en": "Connection size: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Diamètre de raccordement : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CoverageArea": {
     "revit_data_type": "AREA",
@@ -6747,7 +6747,7 @@
     ],
     "rule_en": "Coverage area: an area in m² greater than 0, entered without the unit.",
     "rule_fr": "Surface de couverture : une superficie en m² supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignHead_kPa": {
     "revit_data_type": "NUMBER",
@@ -6776,7 +6776,7 @@
     ],
     "rule_en": "Design head: a number in kPa greater than 0, entered without the unit.",
     "rule_fr": "Hauteur manométrique : un nombre en kPa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FlowCoefficient": {
     "revit_data_type": "NUMBER",
@@ -6805,7 +6805,7 @@
     ],
     "rule_en": "Flow coefficient (Kv / Cv): a number greater than 0.",
     "rule_fr": "Coefficient de débit (Kv / Cv) : un nombre supérieur à 0.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FlowRateFlushVolume": {
     "revit_data_type": "TEXT",
@@ -6834,7 +6834,7 @@
     ],
     "rule_en": "Flow rate or flush volume: a number then Lpf (litres per flush) or L/min, e.g. 4.8 Lpf.",
     "rule_fr": "Débit ou volume de chasse : un nombre puis Lpf (litres par chasse) ou L/min, p. ex. 4.8 Lpf.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HazardClassification": {
     "revit_data_type": "TEXT",
@@ -6867,9 +6867,9 @@
       "OH2",
       "Light"
     ],
-    "rule_en": "Hazard classification: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. Light hazard.",
-    "rule_fr": "Classe de risque : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. Light hazard.",
-    "source": "CANBIM proposal"
+    "rule_en": "Hazard classification: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. Light hazard.",
+    "rule_fr": "Classe de risque : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Light hazard.",
+    "source": "OpenBEP proposal"
   },
   "CA_JointType": {
     "revit_data_type": "TEXT",
@@ -6898,7 +6898,7 @@
     ],
     "rule_en": "Joint type: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type de joint : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_KFactor": {
     "revit_data_type": "NUMBER",
@@ -6927,7 +6927,7 @@
     ],
     "rule_en": "K-factor: a number greater than 0.",
     "rule_fr": "Facteur K : un nombre supérieur à 0.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MotorNameplatePower_kW": {
     "revit_data_type": "NUMBER",
@@ -6956,7 +6956,7 @@
     ],
     "rule_en": "Motor nameplate power: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance nominale du moteur : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NominalLength": {
     "revit_data_type": "LENGTH",
@@ -6985,7 +6985,7 @@
     ],
     "rule_en": "Nominal length: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Longueur nominale : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NominalSpeed_rpm": {
     "revit_data_type": "NUMBER",
@@ -7014,7 +7014,7 @@
     ],
     "rule_en": "Nominal speed: a number in rpm greater than 0, entered without the unit.",
     "rule_fr": "Vitesse de rotation : un nombre en rpm supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NominalWidth": {
     "revit_data_type": "LENGTH",
@@ -7043,7 +7043,7 @@
     ],
     "rule_en": "Nominal width: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Largeur nominale : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NormallyOpen": {
     "revit_data_type": "YESNO",
@@ -7145,7 +7145,7 @@
     ],
     "rule_en": "Recovery rate: a number in L/h greater than 0, entered without the unit.",
     "rule_fr": "Taux de récupération : un nombre en L/h supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Response": {
     "revit_data_type": "TEXT",
@@ -7248,7 +7248,7 @@
     ],
     "rule_en": "Storage capacity: a number in L greater than 0, entered without the unit.",
     "rule_fr": "Volume de stockage : un nombre en L supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_StorageSetPoint_C": {
     "revit_data_type": "NUMBER",
@@ -7277,7 +7277,7 @@
     ],
     "rule_en": "Storage set-point: a number in °C greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Température de consigne du stockage : un nombre en °C supérieur à 0 et d’au plus 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TemperatureRating_C": {
     "revit_data_type": "NUMBER",
@@ -7306,7 +7306,7 @@
     ],
     "rule_en": "Temperature rating: a number in °C from 50 to 350, entered without the unit.",
     "rule_fr": "Température de déclenchement : un nombre en °C de 50 à 350, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ValveMechanism": {
     "revit_data_type": "TEXT",
@@ -7407,7 +7407,7 @@
     ],
     "rule_en": "Working pressure rating: a number in kPa greater than 0, entered without the unit.",
     "rule_fr": "Pression de service : un nombre en kPa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_WorkingTestPressure_kPa": {
     "revit_data_type": "NUMBER",
@@ -7436,7 +7436,7 @@
     ],
     "rule_en": "Working / test pressure: a number in kPa greater than 0, entered without the unit.",
     "rule_fr": "Pression de service / d’essai : un nombre en kPa supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Connector diameter": {
     "revit_data_type": "LENGTH",
@@ -7465,7 +7465,7 @@
     ],
     "rule_en": "Drain size: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Diamètre du drain : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Elevation from Level / Offset": {
     "revit_data_type": "LENGTH",
@@ -7494,7 +7494,7 @@
     ],
     "rule_en": "Mounting / rim height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur d’installation : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Fixture Units (plumbing connector / family)": {
     "revit_data_type": "NUMBER",
@@ -7523,7 +7523,7 @@
     ],
     "rule_en": "Fixture units (DFU / WSFU): a number greater than 0.",
     "rule_fr": "Facteurs d’évacuation / d’alimentation : un nombre supérieur à 0.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Fluid Type": {
     "revit_data_type": "TEXT",
@@ -7552,7 +7552,7 @@
     ],
     "rule_en": "Fluid / service: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Fluide transporté : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Size / Diameter": {
     "revit_data_type": "LENGTH",
@@ -7581,7 +7581,7 @@
     ],
     "rule_en": "Nominal size: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Diamètre nominal : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Apparent Load / Wattage (electrical data - family dependent)": {
     "revit_data_type": "NUMBER",
@@ -7610,7 +7610,7 @@
     ],
     "rule_en": "Total wattage: a number in W greater than 0, entered without the unit.",
     "rule_fr": "Puissance totale : un nombre en W supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CSAConfiguration": {
     "revit_data_type": "TEXT",
@@ -7639,7 +7639,7 @@
     ],
     "rule_en": "CSA configuration: the CSA C22.2 No. 42 configuration code, e.g. 5-15R, 5-20R or L5-30R.",
     "rule_fr": "Configuration CSA : le code de configuration CSA C22.2 no 42, p. ex. 5-15R, 5-20R ou L5-30R.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CatalogueArticleNumber": {
     "revit_data_type": "TEXT",
@@ -7668,7 +7668,7 @@
     ],
     "rule_en": "Catalogue article number: the full ordering code, 3 to 60 letters, digits, dots, slashes, underscores or hyphens with no spaces.",
     "rule_fr": "Numéro d’article au catalogue : le code de commande complet, 3 à 60 lettres, chiffres, points, barres obliques, soulignés ou traits d’union, sans espace.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ColourRenderingIndex": {
     "revit_data_type": "INTEGER",
@@ -7696,7 +7696,7 @@
     ],
     "rule_en": "Colour rendering index: a whole number from 0 to 100.",
     "rule_fr": "Indice de rendu des couleurs : un nombre entier de 0 à 100.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DetectionSetPoint": {
     "revit_data_type": "TEXT",
@@ -7725,7 +7725,7 @@
     ],
     "rule_en": "Detection set point: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Seuil de détection : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DeviceAddress": {
     "revit_data_type": "TEXT",
@@ -7754,7 +7754,7 @@
     ],
     "rule_en": "Fire alarm device address: loop L1 to L99, a hyphen, then D (detector) or M (module) and a 3-digit address, e.g. L2-D045.",
     "rule_fr": "Adresse du dispositif d’alarme incendie : boucle L1 à L99, un trait d’union, puis D (détecteur) ou M (module) et une adresse à 3 chiffres, p. ex. L2-D045.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Efficiency_pct": {
     "revit_data_type": "NUMBER",
@@ -7783,7 +7783,7 @@
     ],
     "rule_en": "Efficiency: a number in % greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Rendement : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_EmergencySecurityLightingType": {
     "revit_data_type": "TEXT",
@@ -7849,7 +7849,7 @@
     ],
     "rule_en": "Fill ratio: a number in % greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Taux de remplissage : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FuelAutonomy_h": {
     "revit_data_type": "NUMBER",
@@ -7878,7 +7878,7 @@
     ],
     "rule_en": "Fuel autonomy: a number in h greater than 0, entered without the unit.",
     "rule_fr": "Autonomie en carburant : un nombre en h supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FuelTankCapacity_L": {
     "revit_data_type": "NUMBER",
@@ -7907,7 +7907,7 @@
     ],
     "rule_en": "Fuel tank capacity: a number in L greater than 0, entered without the unit.",
     "rule_fr": "Capacité du réservoir : un nombre en L supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GeneratorEfficiency_pct": {
     "revit_data_type": "NUMBER",
@@ -7936,7 +7936,7 @@
     ],
     "rule_en": "Generator efficiency: a number in % greater than 0 and at most 100, entered without the unit.",
     "rule_fr": "Rendement de l’alternateur : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GroundFaultProtected": {
     "revit_data_type": "YESNO",
@@ -8023,7 +8023,7 @@
     ],
     "rule_en": "Heat gain to space: a number in W greater than 0, entered without the unit.",
     "rule_fr": "Gain thermique au local : un nombre en W supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_IPRating": {
     "revit_data_type": "TEXT",
@@ -8052,7 +8052,7 @@
     ],
     "rule_en": "IP rating: IP followed by two characteristic digits (0 to 6, then 0 to 9, X allowed), e.g. IP65.",
     "rule_fr": "Indice de protection : IP suivi de deux chiffres caractéristiques (0 à 6, puis 0 à 9, X permis), p. ex. IP65.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Impedance": {
     "revit_data_type": "TEXT",
@@ -8081,7 +8081,7 @@
     ],
     "rule_en": "Impedance: a percentage with a space before the % sign, e.g. 5.75 %.",
     "rule_fr": "Impédance : un pourcentage avec une espace avant le signe %, p. ex. 5.75 %.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LampLightSourceType": {
     "revit_data_type": "TEXT",
@@ -8151,7 +8151,7 @@
     ],
     "rule_en": "Listing / certification: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Homologation : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MainBoard": {
     "revit_data_type": "YESNO",
@@ -8209,7 +8209,7 @@
     ],
     "rule_en": "Network / head-end reference: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Référence réseau / centrale : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NumberOfGangs": {
     "revit_data_type": "NUMBER",
@@ -8238,7 +8238,7 @@
     ],
     "rule_en": "Number of gangs: a whole number from 1 to 6.",
     "rule_fr": "Nombre de modules : un nombre entier de 1 à 6.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NumberOfLightSources": {
     "revit_data_type": "INTEGER",
@@ -8267,7 +8267,7 @@
     ],
     "rule_en": "Number of light sources: a whole number of at least 1.",
     "rule_fr": "Nombre de sources : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NumberOfSockets": {
     "revit_data_type": "NUMBER",
@@ -8296,7 +8296,7 @@
     ],
     "rule_en": "Number of sockets: a whole number from 1 to 6.",
     "rule_fr": "Nombre de prises : un nombre entier de 1 à 6.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_OnEmergencyLifeSafetyPower": {
     "revit_data_type": "YESNO",
@@ -8399,9 +8399,9 @@
       "Line voltage",
       "TBD"
     ],
-    "rule_en": "Power source: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. PoE+.",
-    "rule_fr": "Source d’alimentation : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. PoE+.",
-    "source": "CANBIM proposal"
+    "rule_en": "Power source: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. PoE+.",
+    "rule_fr": "Source d’alimentation : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. PoE+.",
+    "source": "OpenBEP proposal"
   },
   "CA_PrimaryVoltage_V": {
     "revit_data_type": "NUMBER",
@@ -8430,7 +8430,7 @@
     ],
     "rule_en": "Primary voltage: a number in V greater than 0, entered without the unit.",
     "rule_fr": "Tension primaire : un nombre en V supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RatedOutput_kW": {
     "revit_data_type": "NUMBER",
@@ -8459,7 +8459,7 @@
     ],
     "rule_en": "Rated output: a number in kW greater than 0, entered without the unit.",
     "rule_fr": "Puissance assignée : un nombre en kW supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RatedPower_kVA": {
     "revit_data_type": "NUMBER",
@@ -8488,7 +8488,7 @@
     ],
     "rule_en": "Rated power: a number in kVA greater than 0, entered without the unit.",
     "rule_fr": "Puissance assignée : un nombre en kVA supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SecondaryVoltage_V": {
     "revit_data_type": "NUMBER",
@@ -8517,7 +8517,7 @@
     ],
     "rule_en": "Secondary voltage: a number in V greater than 0, entered without the unit.",
     "rule_fr": "Tension secondaire : un nombre en V supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SecurityZone": {
     "revit_data_type": "TEXT",
@@ -8546,7 +8546,7 @@
     ],
     "rule_en": "Security zone: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Zone de sécurité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SwitchFunction": {
     "revit_data_type": "TEXT",
@@ -8622,9 +8622,9 @@
       "Ladder",
       "Conduit"
     ],
-    "rule_en": "Tray / conduit type: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. EMT.",
-    "rule_fr": "Type de chemin de câbles / conduit : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. EMT.",
-    "source": "CANBIM proposal"
+    "rule_en": "Tray / conduit type: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. EMT.",
+    "rule_fr": "Type de chemin de câbles / conduit : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. EMT.",
+    "source": "OpenBEP proposal"
   },
   "CA_Type": {
     "revit_data_type": "TEXT",
@@ -8653,7 +8653,7 @@
     ],
     "rule_en": "Type (dry / liquid-filled): any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type (sec / à liquide isolant) : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_VectorGroup": {
     "revit_data_type": "TEXT",
@@ -8682,7 +8682,7 @@
     ],
     "rule_en": "Vector group: IEC 60076-1 notation, HV winding (D, Y, YN, Z, ZN), LV winding (d, y, yn, z, zn) and clock number 0 to 11, e.g. Dyn1.",
     "rule_fr": "Groupe de couplage : notation CEI 60076-1, enroulement HT (D, Y, YN, Z, ZN), enroulement BT (d, y, yn, z, zn) et indice horaire de 0 à 11, p. ex. Dyn1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_VideoResolution": {
     "revit_data_type": "TEXT",
@@ -8711,7 +8711,7 @@
     ],
     "rule_en": "Video resolution: width x height in pixels, e.g. 3840 x 2160.",
     "rule_fr": "Résolution vidéo : largeur x hauteur en pixels, p. ex. 3840 x 2160.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_VisualSignalIntensity_cd": {
     "revit_data_type": "NUMBER",
@@ -8740,7 +8740,7 @@
     ],
     "rule_en": "Visual signal intensity: a number in cd greater than 0, entered without the unit.",
     "rule_fr": "Intensité du signal visuel : un nombre en cd supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Elevation from Level": {
     "revit_data_type": "LENGTH",
@@ -8769,7 +8769,7 @@
     ],
     "rule_en": "Mounting height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur de montage : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Enclosure": {
     "revit_data_type": "TEXT",
@@ -8798,7 +8798,7 @@
     ],
     "rule_en": "Enclosure rating: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Indice de protection du boîtier : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Initial Color": {
     "revit_data_type": "NUMBER",
@@ -8827,7 +8827,7 @@
     ],
     "rule_en": "Colour temperature (CCT): a number in K from 1000 to 10000, entered without the unit.",
     "rule_fr": "Température de couleur : un nombre en K de 1000 à 10000, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Initial Intensity (luminous flux option)": {
     "revit_data_type": "NUMBER",
@@ -8856,7 +8856,7 @@
     ],
     "rule_en": "Luminous flux (lumen output): a number in lm greater than 0, entered without the unit.",
     "rule_fr": "Flux lumineux : un nombre en lm supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Light Loss Factor": {
     "revit_data_type": "NUMBER",
@@ -8885,7 +8885,7 @@
     ],
     "rule_en": "Maintenance (light loss) factor: a number greater than 0 and at most 1.",
     "rule_fr": "Facteur de maintenance : un nombre supérieur à 0 et d’au plus 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "MCB Rating": {
     "revit_data_type": "TEXT",
@@ -8914,7 +8914,7 @@
     ],
     "rule_en": "Main device: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Dispositif principal : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Mains": {
     "revit_data_type": "NUMBER",
@@ -8943,7 +8943,7 @@
     ],
     "rule_en": "Rated current (mains / bus): a number in A greater than 0, entered without the unit.",
     "rule_fr": "Courant assigné (barres) : un nombre en A supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Max #1 Pole Breakers": {
     "revit_data_type": "NUMBER",
@@ -8972,7 +8972,7 @@
     ],
     "rule_en": "Number of circuits / spaces: a whole number of at least 1.",
     "rule_fr": "Nombre de circuits / espaces : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Number of Poles": {
     "revit_data_type": "NUMBER",
@@ -9001,7 +9001,7 @@
     ],
     "rule_en": "Phases / number of poles: a whole number from 1 to 3.",
     "rule_fr": "Phases / nombre de pôles : un nombre entier de 1 à 3.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Photometric Web File (Revit does not keep a link to the file)": {
     "revit_data_type": "TEXT",
@@ -9026,7 +9026,7 @@
     ],
     "rule_en": "Photometric web file: a file name (no folder) ending in .ies, other than default.ies.",
     "rule_fr": "Fichier photométrique : un nom de fichier (sans dossier) se terminant par .ies, autre que default.ies.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Service Type": {
     "revit_data_type": "TEXT",
@@ -9061,9 +9061,9 @@
       "Power",
       "Default"
     ],
-    "rule_en": "Service type: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. Power - normal.",
-    "rule_fr": "Type de service : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. Power - normal.",
-    "source": "CANBIM proposal"
+    "rule_en": "Service type: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. Power - normal.",
+    "rule_fr": "Type de service : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Power - normal.",
+    "source": "OpenBEP proposal"
   },
   "Short Circuit Rating": {
     "revit_data_type": "NUMBER",
@@ -9092,7 +9092,7 @@
     ],
     "rule_en": "Short-circuit rating: a number in kA greater than 0, entered without the unit.",
     "rule_fr": "Pouvoir de coupure / tenue aux courts-circuits : un nombre en kA supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Voltage (connector)": {
     "revit_data_type": "NUMBER",
@@ -9121,7 +9121,7 @@
     ],
     "rule_en": "Rated voltage: a number in V greater than 0, entered without the unit.",
     "rule_fr": "Tension assignée : un nombre en V supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "Voltage / Distribution System": {
     "revit_data_type": "NUMBER",
@@ -9150,7 +9150,7 @@
     ],
     "rule_en": "Rated voltage: a number in V greater than 0, entered without the unit.",
     "rule_fr": "Tension assignée : un nombre en V supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BarrierSystemTestLevel": {
     "revit_data_type": "TEXT",
@@ -9179,7 +9179,7 @@
     ],
     "rule_en": "Barrier system and test level: the system description, a comma, then MASH TL-1 to TL-6.",
     "rule_fr": "Système de glissière et niveau d’essai : la description du système, une virgule, puis MASH TL-1 à TL-6.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BeddingClass": {
     "revit_data_type": "TEXT",
@@ -9208,7 +9208,7 @@
     ],
     "rule_en": "Bedding class: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Classe de lit de pose : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ChamberSize": {
     "revit_data_type": "TEXT",
@@ -9237,7 +9237,7 @@
     ],
     "rule_en": "Chamber size: the diameter in whole millimetres followed by \"dia.\" (e.g. 1200 dia.), or length x width in millimetres.",
     "rule_fr": "Dimensions de la chambre : le diamètre en millimètres entiers suivi de « dia. » (p. ex. 1200 dia.), ou longueur x largeur en millimètres.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CoordinateReferenceSystem": {
     "revit_data_type": "TEXT",
@@ -9266,7 +9266,7 @@
     ],
     "rule_en": "Coordinate reference system: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Système de référence de coordonnées : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CoverFrame": {
     "revit_data_type": "TEXT",
@@ -9295,7 +9295,7 @@
     ],
     "rule_en": "Cover / frame: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Couvercle / cadre : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CrossSlope_pct": {
     "revit_data_type": "NUMBER",
@@ -9323,7 +9323,7 @@
     ],
     "rule_en": "Cross slope: a number in % from 0 to 100, entered without the unit.",
     "rule_fr": "Pente transversale : un nombre en % de 0 à 100, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CulvertOpening": {
     "revit_data_type": "TEXT",
@@ -9352,7 +9352,7 @@
     ],
     "rule_en": "Culvert opening: internal width x clear depth in whole millimetres (e.g. 2400 x 1800), or the diameter followed by \"dia.\" for round culverts.",
     "rule_fr": "Ouverture du ponceau : largeur intérieure x hauteur libre en millimètres entiers (p. ex. 2400 x 1800), ou le diamètre suivi de « dia. » pour un ponceau circulaire.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CurbType": {
     "revit_data_type": "TEXT",
@@ -9381,7 +9381,7 @@
     ],
     "rule_en": "Curb type: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type de bordure : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_CutFillVolumes": {
     "revit_data_type": "VOLUME",
@@ -9410,7 +9410,7 @@
     ],
     "rule_en": "Cut / fill volumes: a volume in m³ greater than 0, entered without the unit.",
     "rule_fr": "Volumes de déblai / remblai : un volume en m³ supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Depth": {
     "revit_data_type": "LENGTH",
@@ -9439,7 +9439,7 @@
     ],
     "rule_en": "Depth: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Profondeur : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DepthOfCover": {
     "revit_data_type": "LENGTH",
@@ -9468,7 +9468,7 @@
     ],
     "rule_en": "Depth of cover: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Profondeur de recouvrement : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignSpeed_kmh": {
     "revit_data_type": "NUMBER",
@@ -9497,7 +9497,7 @@
     ],
     "rule_en": "Design speed: a number in km/h greater than 0, entered without the unit.",
     "rule_fr": "Vitesse de base : un nombre en km/h supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DropStructure": {
     "revit_data_type": "YESNO",
@@ -9555,7 +9555,7 @@
     ],
     "rule_en": "End terminal: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Extrémité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FromToStructure": {
     "revit_data_type": "TEXT",
@@ -9584,7 +9584,7 @@
     ],
     "rule_en": "From / to structure: upstream structure ID, the word \"to\", then downstream structure ID, e.g. MH-12 to MH-13.",
     "rule_fr": "Structure amont / aval : identifiant de la structure amont, le mot « to », puis celui de la structure aval, p. ex. MH-12 to MH-13.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GeotechnicalReport": {
     "revit_data_type": "TEXT",
@@ -9613,7 +9613,7 @@
     ],
     "rule_en": "Geotechnical report: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Étude géotechnique : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_HasStepsLadder": {
     "revit_data_type": "YESNO",
@@ -9670,7 +9670,7 @@
     ],
     "rule_en": "Invert elevation(s): an elevation in m (may be negative), entered without the unit.",
     "rule_fr": "Élévation(s) du radier : une élévation en m (peut être négative), saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LaneWidth": {
     "revit_data_type": "LENGTH",
@@ -9699,7 +9699,7 @@
     ],
     "rule_en": "Lane width: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Largeur de voie : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LayerFunction": {
     "revit_data_type": "TEXT",
@@ -9732,9 +9732,9 @@
       "PAVEMENT (surface course)",
       "Base course"
     ],
-    "rule_en": "Layer function: exactly one of the values in the CANBIM allowed list (a proposal, not a standard), written as shown, e.g. SURFACE_COURSE.",
-    "rule_fr": "Fonction de la couche : exactement une des valeurs de la liste permise CANBIM (une proposition, non une norme), écrite telle quelle, p. ex. SURFACE_COURSE.",
-    "source": "CANBIM proposal"
+    "rule_en": "Layer function: exactly one of the values in the OpenBEP allowed list (a proposal, not a standard), written as shown, e.g. SURFACE_COURSE.",
+    "rule_fr": "Fonction de la couche : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. SURFACE_COURSE.",
+    "source": "OpenBEP proposal"
   },
   "CA_LayerMass_t": {
     "revit_data_type": "NUMBER",
@@ -9763,7 +9763,7 @@
     ],
     "rule_en": "Layer mass: a number in t greater than 0, entered without the unit.",
     "rule_fr": "Masse de la couche : un nombre en t supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LayerThickness": {
     "revit_data_type": "LENGTH",
@@ -9792,7 +9792,7 @@
     ],
     "rule_en": "Layer thickness: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur de la couche : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LayerVolume": {
     "revit_data_type": "VOLUME",
@@ -9821,7 +9821,7 @@
     ],
     "rule_en": "Layer volume: a volume in m³ greater than 0, entered without the unit.",
     "rule_fr": "Volume de la couche : un volume en m³ supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MixMaterialSpecification": {
     "revit_data_type": "TEXT",
@@ -9850,7 +9850,7 @@
     ],
     "rule_en": "Mix / material specification: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Enrobé / matériau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_MoveableTemporary": {
     "revit_data_type": "YESNO",
@@ -9908,7 +9908,7 @@
     ],
     "rule_en": "Parking stalls: a whole number of at least 1.",
     "rule_fr": "Places de stationnement : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ParkingUse": {
     "revit_data_type": "TEXT",
@@ -9937,7 +9937,7 @@
     ],
     "rule_en": "Parking use: one or more of Standard, Accessible, Van accessible, EV charging, Visitor, Car share or Motorcycle, separated by \" / \".",
     "rule_fr": "Usage du stationnement : une ou plusieurs des valeurs Standard, Accessible, Van accessible, EV charging, Visitor, Car share ou Motorcycle, séparées par « / ».",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PavementMarking": {
     "revit_data_type": "TEXT",
@@ -9966,7 +9966,7 @@
     ],
     "rule_en": "Pavement marking: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Marquage de la chaussée : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PavementThickness": {
     "revit_data_type": "LENGTH",
@@ -9995,7 +9995,7 @@
     ],
     "rule_en": "Pavement thickness: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur de la chaussée : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PavementType": {
     "revit_data_type": "TEXT",
@@ -10058,7 +10058,7 @@
     ],
     "rule_en": "Pipe class: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Classe de tuyau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PostSpacing": {
     "revit_data_type": "LENGTH",
@@ -10087,7 +10087,7 @@
     ],
     "rule_en": "Post spacing: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Espacement des poteaux : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RimCoverElevation": {
     "revit_data_type": "LENGTH",
@@ -10115,7 +10115,7 @@
     ],
     "rule_en": "Rim / cover elevation: an elevation in m (may be negative), entered without the unit.",
     "rule_fr": "Élévation du couvercle : une élévation en m (peut être négative), saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RoughnessAtHandover_mkm": {
     "revit_data_type": "NUMBER",
@@ -10144,7 +10144,7 @@
     ],
     "rule_en": "Roughness (IRI) at handover: a number in m/km greater than 0 and at most 20, entered without the unit.",
     "rule_fr": "Uni (IRI) à la réception : un nombre en m/km supérieur à 0 et d’au plus 20, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SiteArea": {
     "revit_data_type": "AREA",
@@ -10173,7 +10173,7 @@
     ],
     "rule_en": "Site area: an area in m² greater than 0, entered without the unit.",
     "rule_fr": "Superficie du terrain : une superficie en m² supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SurveySourceAndDate": {
     "revit_data_type": "TEXT",
@@ -10202,7 +10202,7 @@
     ],
     "rule_en": "Survey source and date: the source, a comma, then the survey date as YYYY-MM-DD.",
     "rule_fr": "Source et date du relevé : la source, une virgule, puis la date du relevé au format AAAA-MM-JJ.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TransitionSection": {
     "revit_data_type": "YESNO",
@@ -10340,7 +10340,7 @@
     ],
     "rule_en": "Invert elevation: an elevation in m (may be negative), entered without the unit.",
     "rule_fr": "Élévation du radier : une élévation en m (peut être négative), saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ApproachSpeed_kmh": {
     "revit_data_type": "NUMBER",
@@ -10369,7 +10369,7 @@
     ],
     "rule_en": "Approach speed: a number in km/h greater than 0, entered without the unit.",
     "rule_fr": "Vitesse d’approche : un nombre en km/h supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BallastDepth": {
     "revit_data_type": "LENGTH",
@@ -10398,7 +10398,7 @@
     ],
     "rule_en": "Ballast depth: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur du ballast : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_BallastedTrack": {
     "revit_data_type": "YESNO",
@@ -10455,7 +10455,7 @@
     ],
     "rule_en": "Cant (superelevation): a length in mm from 0 to 200, entered without the unit.",
     "rule_fr": "Dévers : une longueur en mm de 0 à 200, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ContactWireHeight": {
     "revit_data_type": "LENGTH",
@@ -10484,7 +10484,7 @@
     ],
     "rule_en": "Contact wire height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur du fil de contact : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ContinuousWeldedRail": {
     "revit_data_type": "YESNO",
@@ -10542,7 +10542,7 @@
     ],
     "rule_en": "Design code and live load: CSA S6, colon, edition year (2 digits), comma, then the CL live-load model, e.g. CSA S6:19, CL-625.",
     "rule_fr": "Code de conception et surcharge routière : CSA S6, deux-points, année d’édition (2 chiffres), virgule, puis le modèle de charge CL, p. ex. CSA S6:19, CL-625.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DesignMovementRange": {
     "revit_data_type": "TEXT",
@@ -10571,7 +10571,7 @@
     ],
     "rule_en": "Design movement range: longitudinal and transverse ranges in whole millimetres, e.g. ±75 long. / ±10 trans.",
     "rule_fr": "Amplitude de déplacement de conception : amplitudes longitudinale et transversale en millimètres entiers, p. ex. ±75 long. / ±10 trans.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DisplacementAccommodated": {
     "revit_data_type": "YESNO",
@@ -10629,7 +10629,7 @@
     ],
     "rule_en": "Diverging radius: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Rayon de la voie déviée : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_DivergingSpeed_kmh": {
     "revit_data_type": "NUMBER",
@@ -10658,7 +10658,7 @@
     ],
     "rule_en": "Diverging speed: a number in km/h greater than 0, entered without the unit.",
     "rule_fr": "Vitesse en voie déviée : un nombre en km/h supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_EdgeOffsetFromTrack": {
     "revit_data_type": "LENGTH",
@@ -10687,7 +10687,7 @@
     ],
     "rule_en": "Edge offset from track: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Distance du bord à l’axe de la voie : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ElectricalClearance": {
     "revit_data_type": "LENGTH",
@@ -10716,7 +10716,7 @@
     ],
     "rule_en": "Electrical clearance: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Distance d’isolement : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_FasteningSystem": {
     "revit_data_type": "TEXT",
@@ -10745,7 +10745,7 @@
     ],
     "rule_en": "Fastening system: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Système d’attache : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_GasketWaterproofing": {
     "revit_data_type": "TEXT",
@@ -10774,7 +10774,7 @@
     ],
     "rule_en": "Gasket / waterproofing: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Joint / étanchéité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Hand": {
     "revit_data_type": "TEXT",
@@ -10843,7 +10843,7 @@
     ],
     "rule_en": "Inspection element reference: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Élément d’inspection : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_InternalDiameter": {
     "revit_data_type": "LENGTH",
@@ -10872,7 +10872,7 @@
     ],
     "rule_en": "Internal diameter: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Diamètre intérieur : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LineSpeed_kmh": {
     "revit_data_type": "NUMBER",
@@ -10901,7 +10901,7 @@
     ],
     "rule_en": "Line speed: a number in km/h greater than 0, entered without the unit.",
     "rule_fr": "Vitesse de la ligne : un nombre en km/h supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_LiningThickness": {
     "revit_data_type": "LENGTH",
@@ -10930,7 +10930,7 @@
     ],
     "rule_en": "Lining thickness: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Épaisseur du revêtement : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_NumberOfLampsAspects": {
     "revit_data_type": "NUMBER",
@@ -10959,7 +10959,7 @@
     ],
     "rule_en": "Number of lamps / aspects: a whole number of at least 1.",
     "rule_fr": "Nombre de feux : un nombre entier d’au moins 1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PlatformHeightAboveRail": {
     "revit_data_type": "LENGTH",
@@ -10988,7 +10988,7 @@
     ],
     "rule_en": "Platform height above rail: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur du quai au-dessus du rail : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PlatformLength": {
     "revit_data_type": "LENGTH",
@@ -11017,7 +11017,7 @@
     ],
     "rule_en": "Platform length: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Longueur du quai : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PointMachines": {
     "revit_data_type": "NUMBER",
@@ -11045,7 +11045,7 @@
     ],
     "rule_en": "Point machines: a whole number of 0 or more.",
     "rule_fr": "Moteurs d’aiguille : un nombre entier positif ou nul.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PoleHeight": {
     "revit_data_type": "LENGTH",
@@ -11074,7 +11074,7 @@
     ],
     "rule_en": "Pole height: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Hauteur du poteau : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_PoleStrength": {
     "revit_data_type": "TEXT",
@@ -11103,7 +11103,7 @@
     ],
     "rule_en": "Pole strength: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Résistance du poteau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Prestressing": {
     "revit_data_type": "TEXT",
@@ -11132,7 +11132,7 @@
     ],
     "rule_en": "Prestressing: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Précontrainte : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RailSection": {
     "revit_data_type": "TEXT",
@@ -11161,7 +11161,7 @@
     ],
     "rule_en": "Rail section: an AREMA designation such as 115RE or 136RE, or an EN 13674 designation such as 60E1.",
     "rule_fr": "Profil de rail : une désignation AREMA comme 115RE ou 136RE, ou une désignation EN 13674 comme 60E1.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_ReferenceAlignment": {
     "revit_data_type": "TEXT",
@@ -11190,7 +11190,7 @@
     ],
     "rule_en": "Reference alignment: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Alignement de référence : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RequiredSightingDistance": {
     "revit_data_type": "LENGTH",
@@ -11219,7 +11219,7 @@
     ],
     "rule_en": "Required sighting distance: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Distance de visibilité requise : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RingSegmentType": {
     "revit_data_type": "TEXT",
@@ -11248,7 +11248,7 @@
     ],
     "rule_en": "Ring / segment type: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type d’anneau / de voussoir : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_RotationAccommodated": {
     "revit_data_type": "YESNO",
@@ -11306,7 +11306,7 @@
     ],
     "rule_en": "Scour protection: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Protection contre l’affouillement : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SettingTemperaturePreset": {
     "revit_data_type": "TEXT",
@@ -11335,7 +11335,7 @@
     ],
     "rule_en": "Setting temperature / preset: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Température de pose / préréglage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SignalType": {
     "revit_data_type": "TEXT",
@@ -11393,7 +11393,7 @@
     ],
     "rule_en": "Span length: a length in m greater than 0, entered without the unit.",
     "rule_fr": "Longueur de portée : une longueur en m supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_Stagger": {
     "revit_data_type": "LENGTH",
@@ -11422,7 +11422,7 @@
     ],
     "rule_en": "Stagger: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Désaxement : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_StructureNumber": {
     "revit_data_type": "TEXT",
@@ -11451,7 +11451,7 @@
     ],
     "rule_en": "Structure number: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Numéro de la structure : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SupportType": {
     "revit_data_type": "TEXT",
@@ -11519,7 +11519,7 @@
     ],
     "rule_en": "Switch heater: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Réchauffeur d’aiguillage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_SystemHeight": {
     "revit_data_type": "LENGTH",
@@ -11548,7 +11548,7 @@
     ],
     "rule_en": "System height: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Hauteur du système : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TactileWarningSurface": {
     "revit_data_type": "YESNO",
@@ -11646,7 +11646,7 @@
     ],
     "rule_en": "Tie spacing: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Espacement des traverses : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TrackGauge": {
     "revit_data_type": "LENGTH",
@@ -11675,7 +11675,7 @@
     ],
     "rule_en": "Track gauge: a length in mm greater than 0, entered without the unit.",
     "rule_fr": "Écartement de la voie : une longueur en mm supérieure à 0, saisie sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TrackIdentifier": {
     "revit_data_type": "TEXT",
@@ -11704,7 +11704,7 @@
     ],
     "rule_en": "Track identifier: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Identifiant de voie : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_TurnoutType": {
     "revit_data_type": "TEXT",
@@ -11733,7 +11733,7 @@
     ],
     "rule_en": "Turnout type: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Type d’aiguillage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_VerticalLoadCapacity_kN": {
     "revit_data_type": "NUMBER",
@@ -11762,7 +11762,7 @@
     ],
     "rule_en": "Vertical load capacity: a number in kN greater than 0, entered without the unit.",
     "rule_fr": "Capacité verticale : un nombre en kN supérieur à 0, saisi sans l’unité.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   },
   "CA_WearingSurfaceWaterproofing": {
     "revit_data_type": "TEXT",
@@ -11791,6 +11791,6 @@
     ],
     "rule_en": "Wearing surface / waterproofing: any non-empty text; placeholders such as TBD, N/A, Default, <By Category> or Generic are rejected.",
     "rule_fr": "Couche de roulement / imperméabilisation : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
-    "source": "CANBIM proposal"
+    "source": "OpenBEP proposal"
   }
 }
