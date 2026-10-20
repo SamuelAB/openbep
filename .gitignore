@@ -12,3 +12,4 @@ sp_embed.js
 # Translation crawl output (node translations/tools/crawl_app.js)
 translations/build/
 node_modules/
+library/rfa/

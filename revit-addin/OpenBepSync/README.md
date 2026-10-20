@@ -1,6 +1,6 @@
 # OpenBEP Sync: Revit add-in (v0.1, built for Revit 2022, first run in Revit pending)
 
-This add-in adds a **OpenBEP › Sync parameters** button to Revit. It makes a model's shared parameters match the plan written in the BEP Builder.
+This add-in adds an **OpenBEP** tab to Revit with two buttons: **Sync parameters** and **Build family library** (see [`library/`](../../library/)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
 
 ## What it does
 
@@ -46,6 +46,7 @@ dotnet build -c Release -p:RevitVersion=2025
 | File | Role |
 |---|---|
 | `App.cs` | Adds the ribbon tab and button. |
+| `LibraryCommand.cs` | Builds the families in `library/families.csv` from Revit's metric templates, with types and OpenBEP shared parameters. |
 | `SyncCommand.cs` | Dry run, report, choice, then one transaction that adds, binds or deletes. |
 | `BindingList.cs` | Reads the BEP Builder's binding list and merges rows by GUID. |
 | `OpenBepSync.csproj` | Build file; set `RevitVersion`. |
