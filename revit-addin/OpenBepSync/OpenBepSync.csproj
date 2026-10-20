@@ -2,7 +2,7 @@
   <!--
     Build for one Revit version at a time:
       dotnet build -c Release -p:RevitVersion=2025
-    Revit 2025 and later run on .NET 8; Revit 2024 runs on .NET Framework 4.8.
+    Revit 2025 and later run on .NET 8; Revit 2022 to 2024 run on .NET Framework 4.8.
     RevitAPI.dll and RevitAPIUI.dll are referenced from the local Revit install and not copied.
   -->
   <PropertyGroup>

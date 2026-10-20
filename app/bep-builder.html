@@ -1410,10 +1410,12 @@ function spTxt(){const {out}=spProject(), seen=new Map(); out.filter(x=>!x.bi).f
   const L=['# This is a Revit shared parameter file.','# Do not edit manually.','*META\tVERSION\tMINVERSION','META\t2\t1','*GROUP\tID\tNAME',...gs.map(g=>`GROUP\t${g}\tOpenBEP ${SP.g[g-1]}`),'*PARAM\tGUID\tNAME\tDATATYPE\tDATACATEGORY\tGROUP\tVISIBLE\tDESCRIPTION\tUSERMODIFIABLE'];
   [...seen.values()].sort((a,b)=>a.m[3]-b.m[3]||a.m[0].localeCompare(b.m[0])).forEach(x=>L.push(`PARAM\t${x.m[1]}\t${x.m[0]}\t${x.m[2]}\t\t${x.m[3]}\t1\t${spAscii(x.p.l+(x.p.u?' ('+x.p.u+')':'')+'. '+(x.p.d||'')).slice(0,250)}\t1`));
   return {txt:L.join('\r\n')+'\r\n',n:seen.size}}
+// The Revit add-in reads the GUID, scope, 'Revit category ids' (OST_ names) and 'OpenBEP list version' columns by name.
 function spCsv(){const {out,cus}=spProject(), q=v=>`"${String(v??'').replace(/"/g,'""')}"`;
-  const L=[['Revit parameter','GUID','Shared or built-in','Data type','Instance or type','Element type','Revit categories','Required from LOD','Needed for','Example value','IFC target'].map(q).join(',')];
-  out.forEach(x=>L.push([x.bi?x.p.rv[1]:x.m[0],x.bi?'':x.m[1],x.bi?'Built-in':'Shared',x.m[2],x.p.sc==='type'?'Type':'Instance',x.c.n,(x.c.rc||[]).map(r=>r.replace(/ \(.*\)/,'')).join('; '),x.r.from,x.r.uses.map(u=>USEN[u]||u).join('; '),x.r.exp||exOf(x.r.pid,x.c.id)||'',x.p.ifc||''].map(q).join(',')));
-  cus.forEach(x=>L.push([x.r.custom.n,'','Owner addition (not in the OpenBEP list)','','',x.c.n,(x.c.rc||[]).map(r=>r.replace(/ \(.*\)/,'')).join('; '),x.r.custom.lod,'Owner addition',x.r.custom.note||'',''].map(q).join(',')));
+  const rcN=c=>(c.rc||[]).map(r=>r.replace(/ \(.*\)/,'')).join('; '), rcI=c=>(c.rc||[]).map(r=>(r.match(/\((OST_\w+)\)/)||[])[1]).filter(Boolean).join('; ');
+  const L=[['Revit parameter','GUID','Shared or built-in','Data type','Instance or type','Element type','Revit categories','Required from LOD','Needed for','Example value','IFC target','Revit category ids','OpenBEP list version'].map(q).join(',')];
+  out.forEach(x=>L.push([x.bi?x.p.rv[1]:x.m[0],x.bi?'':x.m[1],x.bi?'Built-in':'Shared',x.m[2],x.p.sc==='type'?'Type':'Instance',x.c.n,rcN(x.c),x.r.from,x.r.uses.map(u=>USEN[u]||u).join('; '),x.r.exp||exOf(x.r.pid,x.c.id)||'',x.p.ifc||'',rcI(x.c),SP.v].map(q).join(',')));
+  cus.forEach(x=>L.push([x.r.custom.n,'','Owner addition (not in the OpenBEP list)','','',x.c.n,rcN(x.c),x.r.custom.lod,'Owner addition',x.r.custom.note||'','',rcI(x.c),SP.v].map(q).join(',')));
   return L.join('\n')}
 // IDS 1.0 export: one specification per element type (and IFC class where one type exports to several) at its target LOD.
 // Target per element type: [IFC class or classes, predefined type(s), 1 when the class or type exists only in IFC4X3_ADD2, [pset, property, value] that must also match].

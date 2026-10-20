@@ -1,4 +1,4 @@
-# OpenBEP Sync: Revit add-in (v0.1, source only, not yet built or tested)
+# OpenBEP Sync: Revit add-in (v0.1, built for Revit 2022, first run in Revit pending)
 
 This add-in adds a **OpenBEP › Sync parameters** button to Revit. It makes a model's shared parameters match the plan written in the BEP Builder.
 
@@ -25,13 +25,14 @@ The user's own shared parameter file setting is restored afterwards.
 
 ## Build
 
-Requires Windows, Revit 2024 or later, and the .NET SDK 8.
+Requires Windows, Revit 2022 or later, and the .NET SDK 8 or later.
 
 ```
 dotnet build -c Release -p:RevitVersion=2025
 ```
 
-- Revit 2025 to 2027 build for .NET 8; Revit 2024 builds for .NET Framework 4.8.
+- Revit 2025 to 2027 build for .NET 8; Revit 2022 to 2024 build for .NET Framework 4.8.
+- Built for Revit 2022 (`-p:RevitVersion=2022`) on 2026-10-20 with the .NET SDK 9: no source changes, 0 warnings.
 - `RevitAPI.dll` and `RevitAPIUI.dll` are referenced from `C:\Program Files\Autodesk\Revit <version>`.
 
 ## Install (per user, no admin rights)
@@ -52,6 +53,6 @@ dotnet build -c Release -p:RevitVersion=2025
 
 ## Not done yet
 
-- **Not compiled or run.** No Revit is available where this was written. The first build and test should be on a copy of a model.
+- **Not run yet.** It builds and installs for Revit 2022; the first sync should be on a copy of a model, with the files in [`test/`](test/).
 - **Parameter group.** All parameters go in Revit's "Data" group (`GroupTypeId.Data`). The OpenBEP groups only exist in the .txt.
 - **MCP tool.** The same sync logic can later be exposed as a tool on a Revit MCP server, as Sam chose: add-in first, MCP after.
