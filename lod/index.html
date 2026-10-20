@@ -66,7 +66,8 @@ p.edit{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}p.ed
 .sum>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;font-size:13.5px}
 .sum>div.dim{opacity:.45}
 .sum .chip{margin-bottom:4px}
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tw{overflow:auto;max-height:calc(100vh - 24px);border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tw thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--line)}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 th{font-size:12px;font-weight:600;color:var(--muted);background:var(--sunk);position:sticky;top:0}
@@ -92,15 +93,15 @@ ul.nx{margin:6px 0;padding-left:20px}
 .legend .cap,.sum .cap{font-size:12px;color:var(--muted)}
 .rk{display:inline-block;font-size:11px;font-weight:600;border-radius:3px;padding:0 5px;margin-right:4px;white-space:nowrap}
 .rk.builtin{background:var(--sunk);color:var(--ink)}.rk.shared{background:var(--accent-soft);color:var(--accent)}.rk.family{background:var(--warn-soft);color:var(--warn)}
-td.rv code,td.ifc code{font-family:var(--f-mono);font-size:12px;word-break:break-word}
-td.rv{min-width:190px}td.ifc{min-width:200px;font-size:12.5px}
+td.rv code,div.ifc code{font-family:var(--f-mono);font-size:12px;word-break:break-word}
+td.rv{min-width:190px}div.ifc{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);font-size:12.5px}.rk.ifck{background:var(--sunk);color:var(--muted)}
 td.sc{white-space:nowrap;font-size:12.5px}
 .kinds{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:8px 0 12px}
 .kinds div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;font-size:13px}
 .proj{background:var(--accent-soft);border-radius:var(--r);padding:8px 12px;margin:0 0 14px;font-size:14px}
 .proj .chip{margin:0 2px}
 .filters label.chk{display:flex;gap:6px;align-items:center;font-size:14px;text-transform:none;letter-spacing:0;color:var(--ink)}.chk input{width:auto}
-@media print{.side,.filters,.top .bar,.actions,.intro .legend{display:none}.layout{display:block}body{background:#fff}.tw{overflow:visible}}
+@media print{.side,.filters,.top .bar,.actions,.intro .legend{display:none}.layout{display:block}body{background:#fff}.tw{overflow:visible;max-height:none}}
 </style>
 <script src="../translations/strings.js"></script>
 <script src="../translations/i18n.js"></script>
@@ -214,10 +215,10 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   const rows=c.r.filter(r=>D.P[r[0]]).map(r=>({p:D.P[r[0]],id:r[0],f:r[1],u:r[2],x:r[3]}));
   const rShow=rows.filter(r=>+r.f<=up&&useOk(r.u)), rHidden=rows.length-rShow.length;
   const idRows=D.idp.map(k=>rShow.find(r=>r.id===k)).filter(Boolean), other=rShow.filter(r=>!D.idp.includes(r.id)).sort((a,b)=>+a.f-+b.f||a.p.l.localeCompare(b.p.l));
-  const nCol=LV.length+3+(st.ifc?1:0);
+  const nCol=LV.length+3;
   const gRows=KIND.map(([k,n])=>{const its=gShow.filter(x=>x.k===k).sort((a,b)=>+a.f-+b.f); if(!its.length) return '';
     return `<tr class="k"><td colspan="${LV.length+2}">${esc(n)}</td></tr>`+its.map(x=>`<tr><td class="req">${esc(x.t)}</td>${cells(x.f,g500(x))}<td>${tags(x.u||[])}</td></tr>`).join('')}).join('');
-  const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${exOf(r,c)?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(exOf(r,c))}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small></td>${st.ifc?`<td class="ifc">${ifcCell(r.p)}</td>`:''}</tr>`;
+  const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${exOf(r,c)?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(exOf(r,c))}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</td></tr>`;
   const pRows=(idRows.length?`<tr class="k"><td colspan="${nCol}">Identification and classification</td></tr>${idRows.map(pRow).join('')}`:'')+(other.length?`<tr class="k"><td colspan="${nCol}">Data, by the level it is first needed</td></tr>${other.map(pRow).join('')}`:'');
   $('#el').innerHTML=`<h2>${esc(c.n)}</h2>
   <p class="meta"><span>Revit categories:</span> <span data-notr>${esc((c.rc||[]).join(', '))}</span></p>
@@ -233,7 +234,7 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   <h3>Data: Revit parameters the element must carry</h3>
   <div class="kinds"><div><span class="rk builtin">Revit built-in</span> Comes with Revit in every model. Nothing to add: fill it.</div><div><span class="rk shared">OpenBEP shared</span> Load it from the OpenBEP shared parameter file and add it as a project parameter on the listed categories. Its fixed GUID lets data from different projects and firms be combined, and it can be tagged and scheduled.</div><div><span class="rk family">Family parameter</span> Defined inside the family by its author; check the family before accepting it.</div></div>
   <p class="note">Plain project parameters, made without a shared parameter file, are not used: they cannot be tagged and do not keep the same identity from one project to the next.</p>
-  ${pRows?`<div class="tw"><table><thead><tr><th>Parameter</th>${lvHead()}<th>Needed for</th><th>Revit parameter</th>${st.ifc?'<th>IFC export (optional)</th>':''}</tr></thead><tbody>${pRows}</tbody></table></div>`:'<p class="note">No parameter matches these filters.</p>'}
+  ${pRows?`<div class="tw"><table><thead><tr><th>Parameter</th>${lvHead()}<th>Needed for</th><th>${st.ifc?'Revit parameter and IFC export':'Revit parameter'}</th></tr></thead><tbody>${pRows}</tbody></table></div>`:'<p class="note">No parameter matches these filters.</p>'}
   ${rHidden?`<p class="hidden-note">${rHidden} parameters hidden by the filters.</p>`:''}
   ${(c.nx||[]).length?`<h3>Not expected in the model</h3><ul class="nx">${c.nx.map(x=>`<li>${esc(x.t)}</li>`).join('')}</ul>`:''}
   ${(c.notes||[]).length?`<h3>Notes</h3><ul class="nx">${c.notes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}

@@ -12,6 +12,8 @@ Usage: python3 lod/build_lod.py [--check]
 - Writes lod/spec-data.js, which the LOD specification page loads.
 - Rewrites the block between /*LOD*/ and /*/LOD*/ in app/bep-builder.html, so the
   Builder's element requirements use exactly the same data.
+- Copies lod/illustrations.js (the LOD sketches) between /*ILL*/ and /*/ILL*/ in the app,
+  so the LOD matrix can show the same sketches as the specification page.
 - With --check, changes nothing and fails if either file is out of date.
 Run it after every change to spec.json, then commit the rebuilt files.
 """
@@ -46,6 +48,10 @@ def main(check):
     a, b = '/*LOD*/', '/*/LOD*/'
     i = s.index(a) + len(a); j = s.index(b, i)
     app = s[:i] + blob + s[j:]
+    ill = open(os.path.join(here, 'illustrations.js'), encoding='utf-8').read().strip()
+    a, b = '/*ILL*/', '/*/ILL*/'
+    i = app.index(a) + len(a); j = app.index(b, i)
+    app = app[:i] + '\n' + ill + '\n' + app[j:]
     old_js = open(JS, encoding='utf-8').read() if os.path.exists(JS) else ''
     if check:
         bad = [n for n, ok in (('lod/spec-data.js', old_js == js), ('app/bep-builder.html', app == s)) if not ok]

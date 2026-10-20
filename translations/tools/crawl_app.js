@@ -67,6 +67,12 @@ for (const lang of ['en']) {
   await page.selectOption('#langSel', lang);
   await page.locator('[data-ex="school"]').first().click(); await page.waitForTimeout(200);
   await page.locator('#steps [data-step="5"]').click(); await openAll();
+  // The worked example and the element-type view under a matrix row (one with a 2D and a "not modelled" stage).
+  await page.locator('[data-lodpeekgo]').click(); await page.waitForTimeout(150); await openAll();
+  for (const [k, w, fr] of await page.evaluate(() => window.__canbimStrings())) if (!seen.has(k)) seen.set(k, [w, fr]);
+  await page.locator('button.etchip', { hasText: 'Concrete reinforcement' }).first().click(); await page.waitForTimeout(150); await openAll();
+  for (const [k, w, fr] of await page.evaluate(() => window.__canbimStrings())) if (!seen.has(k)) seen.set(k, [w, fr]);
+  await page.locator('.pk-h .x').click(); await page.waitForTimeout(150);
   if (!(await page.locator('[data-lbgo]').count())) { await page.locator('[data-lodx]').first().click(); await page.waitForTimeout(150); await openAll(); }
   await page.locator('[data-lbgo]').first().click(); await page.waitForTimeout(150); await openAll();
   const setv = (q, v) => page.evaluate(([q, v]) => { const x = document.querySelector(q); if (x) { if (x.type === 'checkbox') x.checked = v; else x.value = v; x.dispatchEvent(new Event('change', { bubbles: true })); } }, [q, v]);
