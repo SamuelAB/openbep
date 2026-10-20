@@ -19345,7 +19345,8 @@
    "m": "str.4",
    "mf": [
     "03 20 00"
-   ]
+   ],
+   "d2": "Reinforcement is usually detailed on drawings and bar schedules, not modelled."
   },
   {
    "id": "curtain_wall",
@@ -22113,7 +22114,8 @@
    "mf": [
     "12 30 00",
     "12 50 00"
-   ]
+   ],
+   "d2": "Loose furniture can stay as a 2D layout unless a BIM use needs it modelled."
   },
   {
    "id": "specialty_equipment",
@@ -24218,7 +24220,8 @@
     "22 13 00",
     "23 21 00",
     "21 13 00"
-   ]
+   ],
+   "d2": "Piping under 50 mm can stay on drawings."
   },
   {
    "id": "valve",
@@ -30747,7 +30750,8 @@
     "26 05 36",
     "26 05 33",
     "26 25 00"
-   ]
+   ],
+   "d2": "Conduit under 50 mm and wiring usually stay on drawings."
   },
   {
    "id": "wiring_device",
@@ -31072,7 +31076,8 @@
    "m": "elec.2",
    "mf": [
     "26 27 26"
-   ]
+   ],
+   "d2": "Receptacles and switches can stay as symbols on electrical plans unless coordination or asset records need them modelled."
   },
   {
    "id": "comm_security_device",
@@ -34519,7 +34524,8 @@
    "mf": [
     "10 14 00",
     "34 41 00"
-   ]
+   ],
+   "d2": "Signs can stay on sign plans and schedules unless wayfinding or asset records need them modelled."
   },
   {
    "id": "rail_track",

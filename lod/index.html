@@ -66,6 +66,7 @@ p.edit{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}p.ed
 .sum>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;font-size:13.5px}
 .sum>div.dim{opacity:.45}
 .sum .chip{margin-bottom:4px}
+.chip.v2D{background:#F1EEE6;color:#555}.l2d{border-style:dashed!important}
 .tw{overflow:auto;max-height:calc(100vh - 24px);border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 .tw thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--line)}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
@@ -169,7 +170,8 @@ const lang=()=>document.documentElement.lang||'en';
 const tr=t=>{const L=lang(); if(L==='en'||typeof trText!=='function') return t; return trText(t,(window.OPENBEP_STRINGS||{})[L]||{},L)||t};
 const $=s=>document.querySelector(s);
 
-$('#legend').innerHTML=LV.map(v=>`<div><span class="chip v${v}">LOD ${v}</span>${ILL.svg('door',v)}<div class="cap">${esc(ILL.cap('door',v))}</div><div>${esc(D.lod[v])}</div></div>`).join('');
+$('#legend').innerHTML=LV.map(v=>`<div><span class="chip v${v}">LOD ${v}</span>${ILL.svg('door',v)}<div class="cap">${esc(ILL.cap('door',v))}</div><div>${esc(D.lod[v])}</div></div>`).join('')
+  +`<div class="l2d"><span class="chip v2D">2D</span><div class="cap">Drawings only, not modelled</div><div>Some elements stay 2D at a stage or for the whole project: wiring and small conduit, reinforcement detailing, loose furniture layouts. Mark them 2D in the BEP Builder's LOD matrix; the model checker and the IDS file then ask nothing of the model for them. The element pages below say which ones commonly stay 2D.</div></div>`;
 $('#upto').innerHTML=LV.map(v=>`<option value="${v}">LOD ${v}</option>`).join('');
 $('#upto').value=st.upto;
 $('#grp').innerHTML=Object.entries(GRP).map(([k,n])=>`<option value="${k}">${esc(n)}</option>`).join('');
@@ -224,6 +226,7 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   <p class="meta"><span>Revit categories:</span> <span data-notr>${esc((c.rc||[]).join(', '))}</span></p>
   <p class="meta"><span>Uniformat II:</span> <span data-notr>${esc(c.uf.join(', ')||'–')}</span> · <span>MasterFormat:</span> <span data-notr>${esc(c.mf.join(', ')||'–')}</span>${st.ifc?` · <span>IFC:</span> <span data-notr>${esc(c.ifc)}</span>`:''}</p>
   ${projLine(c)}
+  ${c.d2?`<div class="flag d2"><b>Can stay 2D.</b> <span>${esc(c.d2)}</span> <span>Mark it 2D in the BEP Builder's LOD matrix: the model checker and the IDS file then ask nothing of the model for it.</span></div>`:''}
   <p class="edit"><a class="btn" href="../app/bep-builder.html#el=${c.id}">Set its levels and edit these requirements for your project</a> <span class="note">These are the OpenBEP defaults. In the BEP Builder you can move a requirement to another level, drop it, reword what a valid value is or add your own; the result goes into the BEP, the model checker and the IDS file.</span></p>
   <div class="sum">${LV.map(v=>`<div class="${+v>up?'dim':''}"><span class="chip v${v}">LOD ${v}</span>${ik?ILL.svg(ik,v):''}<div>${esc(c.g[v]||'–')}</div></div>`).join('')}</div>
   ${ik&&!['door','duct','ahu'].includes(c.id)?'<p class="note">Sketches show a typical element of this kind, not this exact element type.</p>':''}
