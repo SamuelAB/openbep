@@ -45,19 +45,22 @@ namespace OpenBepSync
             }
             catch (Exception ex) { TaskDialog.Show("OpenBEP", "Could not read the family list: " + ex.Message); return Result.Failed; }
 
-            // 2. Shared parameter definitions, restoring the user's file setting afterwards.
-            var defs = new Dictionary<Guid, ExternalDefinition>();
+            // 2. Shared parameter definitions. The OpenBEP file stays the active one until every family is built:
+            // FamilyManager.AddParameter fails with definitions from a file that is no longer current.
             var previousFile = app.SharedParametersFilename;
-            try
-            {
-                app.SharedParametersFilename = txt;
-                var df = app.OpenSharedParameterFile();
-                if (df == null) { TaskDialog.Show("OpenBEP", "Revit could not open " + txt); return Result.Failed; }
-                foreach (DefinitionGroup g in df.Groups)
-                    foreach (Definition d in g.Definitions)
-                        if (d is ExternalDefinition ed) defs[ed.GUID] = ed;
-            }
+            try { return Build(app, families, paramsByElement, txt, libDir); }
             finally { app.SharedParametersFilename = previousFile; }
+        }
+
+        static Result Build(Application app, List<LibFamily> families, Dictionary<string, List<(Guid guid, string name, bool inst)>> paramsByElement, string txt, string libDir)
+        {
+            var defs = new Dictionary<Guid, ExternalDefinition>();
+            app.SharedParametersFilename = txt;
+            var df = app.OpenSharedParameterFile();
+            if (df == null) { TaskDialog.Show("OpenBEP", "Revit could not open " + txt); return Result.Failed; }
+            foreach (DefinitionGroup g in df.Groups)
+                foreach (Definition d in g.Definitions)
+                    if (d is ExternalDefinition ed) defs[ed.GUID] = ed;
 
             var outDir = Path.Combine(libDir, "rfa", "Revit" + app.VersionNumber);
             Directory.CreateDirectory(outDir);
@@ -298,7 +301,9 @@ namespace OpenBepSync
 
         static void Align(Document d, View v, ReferencePlane rp, Element solid, XYZ normal, List<string> notes)
         {
-            var face = Faces(solid).FirstOrDefault(f => f.FaceNormal.IsAlmostEqualTo(normal));
+            // The parallel face nearest the plane, so a template whose Front is on +Y still aligns.
+            var face = rp == null ? null : Faces(solid).Where(f => Math.Abs(Math.Abs(f.FaceNormal.DotProduct(normal)) - 1) < 1e-6)
+                .OrderBy(f => Math.Abs((f.Origin - rp.BubbleEnd).DotProduct(normal))).FirstOrDefault();
             if (face == null || rp == null) { notes.Add("no face to align to " + rp?.Name); return; }
             try { d.FamilyCreate.NewAlignment(v, rp.GetReference(), face.Reference); }
             catch (Exception ex) { notes.Add($"align to {rp.Name}: {ex.Message}"); }
@@ -321,7 +326,14 @@ namespace OpenBepSync
             if (!hadFB) Pair(d, plan, front, Center(d, "Center (Front/Back)", false), back, pD, false, -w / 2 - Mm(300), notes);
             d.Regenerate();
 
-            var profile = Rect(new XYZ(-w / 2, -dp / 2, 0), new XYZ(w / 2, -dp / 2, 0), new XYZ(w / 2, dp / 2, 0), new XYZ(-w / 2, dp / 2, 0));
+            // A template's own Left/Right/Front/Back planes (Casework) are driven by its Width/Depth but are not
+            // always centred, so the profile is drawn where the planes actually are after regeneration.
+            double x0 = left.BubbleEnd.X, x1 = right.BubbleEnd.X, y0 = front.BubbleEnd.Y, y1 = back.BubbleEnd.Y;
+            if (x1 < x0) { var s = x0; x0 = x1; x1 = s; }
+            if (y1 < y0) { var s = y0; y0 = y1; y1 = s; }
+            if (x1 - x0 < 1e-6) { x0 = -w / 2; x1 = w / 2; }
+            if (y1 - y0 < 1e-6) { y0 = -dp / 2; y1 = dp / 2; }
+            var profile = Rect(new XYZ(x0, y0, 0), new XYZ(x1, y0, 0), new XYZ(x1, y1, 0), new XYZ(x0, y1, 0));
             var sp = SketchPlane.Create(d, Plane.CreateByNormalAndOrigin(XYZ.BasisZ, XYZ.Zero));
             var ext = d.FamilyCreate.NewExtrusion(true, profile, sp, h);
             fm.AssociateElementParameterToFamilyParameter(ext.get_Parameter(BuiltInParameter.EXTRUSION_END_PARAM), pH);
