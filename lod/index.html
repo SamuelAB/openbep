@@ -206,6 +206,9 @@ function ifcCell(p){if(!p.ifc) return '<small>No IFC target</small>';
 function projLine(c){if(!PJ||!PJ.el||!PJ.el[c.id]) return '';
   const e=PJ.el[c.id]; return `<div class="proj"><b>${esc(PJ.name||'Your project')}</b>: <span>levels set in the BEP Builder</span> ${PJ.stages.filter(([s])=>e[s]).map(([s,n])=>`<span class="chip ${/^\d/.test(e[s])?'v'+e[s]:''}">${esc(e[s])}</span> <span>${esc(n)}</span>`).join(' · ')}</div>`}
 
+// Some shared parameters carry a light-fixture example; other element types show their own IFC class or no example.
+const exOf=(r,c)=>{if(!r.p.ex) return ''; if(c.id==='light_fixture'||!['ifc_export_class','type_name','description','manufacturer'].includes(r.id)) return r.p.ex;
+  return r.id==='ifc_export_class'&&c.ifc?c.ifc.split(/[ (;,]/)[0]:''};
 function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   const gShow=(c.gx||[]).filter(x=>+x.f<=up&&useOk(x.u||[])), gHidden=(c.gx||[]).length-gShow.length;
   const rows=c.r.filter(r=>D.P[r[0]]).map(r=>({p:D.P[r[0]],id:r[0],f:r[1],u:r[2],x:r[3]}));
@@ -214,7 +217,7 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   const nCol=LV.length+3+(st.ifc?1:0);
   const gRows=KIND.map(([k,n])=>{const its=gShow.filter(x=>x.k===k).sort((a,b)=>+a.f-+b.f); if(!its.length) return '';
     return `<tr class="k"><td colspan="${LV.length+2}">${esc(n)}</td></tr>`+its.map(x=>`<tr><td class="req">${esc(x.t)}</td>${cells(x.f,g500(x))}<td>${tags(x.u||[])}</td></tr>`).join('')}).join('');
-  const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${r.p.ex?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(r.p.ex)}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small></td>${st.ifc?`<td class="ifc">${ifcCell(r.p)}</td>`:''}</tr>`;
+  const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${exOf(r,c)?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(exOf(r,c))}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small></td>${st.ifc?`<td class="ifc">${ifcCell(r.p)}</td>`:''}</tr>`;
   const pRows=(idRows.length?`<tr class="k"><td colspan="${nCol}">Identification and classification</td></tr>${idRows.map(pRow).join('')}`:'')+(other.length?`<tr class="k"><td colspan="${nCol}">Data, by the level it is first needed</td></tr>${other.map(pRow).join('')}`:'');
   $('#el').innerHTML=`<h2>${esc(c.n)}</h2>
   <p class="meta"><span>Revit categories:</span> <span data-notr>${esc((c.rc||[]).join(', '))}</span></p>

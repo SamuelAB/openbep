@@ -70,7 +70,7 @@ for (const lang of ['en']) {
   const setv = (q, v) => page.evaluate(([q, v]) => { const x = document.querySelector(q); if (x) { if (x.type === 'checkbox') x.checked = v; else x.value = v; x.dispatchEvent(new Event('change', { bubbles: true })); } }, [q, v]);
   await setv('[data-lbnote]', 'Crawl note'); await openAll(); await setv('[data-lbgf]', '400'); await openAll();
   await page.fill('#lbg-t', 'Crawl geometry'); await page.locator('#lbgAdd').click(); await page.waitForTimeout(150); await openAll();
-  await setv('#lb-ho', '500'); await page.waitForTimeout(150); await openAll(); await page.locator('[data-lbview="500"]').click(); await page.waitForTimeout(150); await openAll();
+  await setv('[data-lodt$=".ops"]', '500'); await page.waitForTimeout(150); await openAll(); await page.locator('[data-lbview="500"]').click(); await page.waitForTimeout(150); await openAll();
   for (const [k, w, fr] of await page.evaluate(() => window.__canbimStrings())) if (!seen.has(k)) seen.set(k, [w, fr]);
 }
 // Airport terminal: specialty systems (baggage handling, boarding bridges) and an element type the project adds itself.
