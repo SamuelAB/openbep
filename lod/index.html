@@ -69,6 +69,8 @@ p.edit{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}p.ed
 .chip.v2D{background:#F1EEE6;color:#555}.l2d{border-style:dashed!important}
 .tw{overflow:auto;max-height:calc(100vh - 24px);border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 .tw thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--line)}
+/* Wide screens: no inner scroller, so the header row sticks to the top of the window while the page scrolls. Phones keep the scroller for wide tables. */
+@media (min-width:900px){.tw{overflow:visible;max-height:none}}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 th{font-size:12px;font-weight:600;color:var(--muted);background:var(--sunk);position:sticky;top:0}
