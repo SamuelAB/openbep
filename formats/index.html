@@ -155,11 +155,12 @@
 
   <p class="claim" data-i18n>VIM</p>
   <p class="disclose" data-i18n><strong>Disclosure:</strong> OpenBEP's founder works at VIM, the company behind this format. Weigh this part with that in mind.</p>
-  <p data-i18n>VIM's specification describes it as <q>a modern and efficient open 3D data interchange format designed for BIM and manufacturing data optimized for efficient loading and rendering on low-power devices</q>, built <q>to carry substantial amounts of complex relational data and instanced geometry in an efficient and standardized manner with minimal pre-processing</q>.<sup><a href="#s26">26</a></sup></p>
+  <p data-i18n>An open-licence (MIT) binary format from the employer of OpenBEP's founder. Its specification describes it as <q>a modern and efficient open 3D data interchange format designed for BIM and manufacturing data optimized for efficient loading and rendering on low-power devices</q>.<sup><a href="#s26">26</a></sup> Geometry is instanced triangle meshes; BIM data is relational tables.<sup><a href="#s26">26</a></sup></p>
   <ul>
-    <li data-i18n><strong>Geometry stored for display at scale.</strong> Per its specification, geometry is stored as meshes with instancing, so a repeated object is stored once, and text is deduplicated.<sup><a href="#s26">26</a></sup> IFC can also reuse geometry and store meshes, but its files are built on the STEP layout that buildingSMART itself plans to leave behind.<sup><a href="#s22">22</a></sup></li>
-    <li data-i18n><strong>BIM data kept as tables.</strong> Element parameters are stored in relational tables linked to the geometry, and the schema can be extended without breaking readers.<sup><a href="#s26">26</a></sup></li>
+    <li data-i18n><strong>A value can be traced back.</strong> Unlike a COBie row, each element row keeps the Revit element id and unique id and the source file it came from, and every parameter value points to a descriptor with the parameter's name, group, instance-or-type flag and shared-parameter GUID.<sup><a href="#s33">33</a></sup> A checker can say which parameter, on which element, in which file, gave a value.</li>
+    <li data-i18n><strong>The model's own structure is kept.</strong> Worksets, phases, levels, design options, views and the volume and area of each material in each element are stored as tables, with the Revit category as authored rather than mapped to another schema's classes.<sup><a href="#s33">33</a></sup></li>
     <li data-i18n><strong>Open code.</strong> The format libraries and a React-based web viewer are published under the MIT licence.<sup><a href="#s27">27</a></sup></li>
+    <li data-i18n><strong>Limits.</strong> It is one company's format, not an ISO standard. It stores meshes only, no parametric geometry. It is an export, so it goes stale like any export. Its own documentation says Revit element ids can repeat across linked files, and that even Revit's unique ids have been seen to repeat for built-in elements.<sup><a href="#s33">33</a></sup> We have not benchmarked it against IFC and make no claim about size or speed.</li>
   </ul>
 
   <p class="claim" data-i18n>And others</p>
@@ -248,6 +249,7 @@
     <li id="s30">W. Radaczyński, <a href="https://github.com/paireks/dotbim">dotbim</a>, GitHub README and licence.</li>
     <li id="s31">Bentley Systems, <a href="https://github.com/iTwin/itwinjs-core">iTwin.js</a>, GitHub README; <span data-i18n>MIT licence per npm (@itwin/core-backend)</span>.</li>
     <li id="s32">Alliance for OpenUSD, <a href="https://aousd.org/">aousd.org</a> <span data-i18n>(viewed October 20, 2026)</span>.</li>
+    <li id="s33">VIMaec, <a href="https://github.com/vimaec/vim-format/blob/master/docs/object-model.md"><cite>VIM object model</cite></a> <span data-i18n>(section on element ids) and</span> <a href="https://github.com/vimaec/vim-format/blob/master/docs/object-model-schema.json"><cite>object-model-schema.json</cite></a> <span data-i18n>(tables Element, ParameterDescriptor, Workset, Phase, DesignOption, View, MaterialInElement), GitHub (viewed October 20, 2026)</span>.</li>
   </ol>
 </main>
 
