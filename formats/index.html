@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-i18n>Formats won't fix vague BIM</title>
 <meta name="description" data-i18n-attr content="Why requiring IFC or COBie on every project does not fix BIM, what open BIM gets right, and what owners should ask for first. With links to every source.">
+<link rel="alternate" hreflang="en" href="https://openbep.com/formats/">
+<link rel="alternate" hreflang="fr" href="https://openbep.com/formats/fr/">
+<link rel="alternate" hreflang="ja" href="https://openbep.com/formats/ja/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../why/why.css">
@@ -15,14 +18,20 @@
 </style>
 </head>
 <body>
-<!-- English only for now: Sam reviews the argument before it is translated.
-     Translations will come from translations/canbim_strings.csv like the Why page (see why/README.md). -->
+<!-- English is the master. Other languages are generated from the dictionary,
+     translations/canbim_strings.csv, by translations/build_pages.py: edit the dictionary, not the generated pages.
+     Blocks marked not:ja and only:ja make the Japanese page differ (see build_pages.py). -->
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="../app/bep-builder.html">OpenBEP</a>
+    <a class="brand" href="../app/bep-builder.html?lang=en">OpenBEP</a>
     <nav class="top-links">
       <a href="../why/" data-i18n>Why OpenBEP</a>
-      <a href="../app/bep-builder.html" data-i18n>Open the BEP Builder</a>
+      <a href="../app/bep-builder.html?lang=en" data-i18n>Open the BEP Builder</a>
+      <ul class="lang">
+        <li><a href="./" hreflang="en" lang="en">English</a></li>
+        <li><a href="./fr/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="./ja/" hreflang="ja" lang="ja">日本語</a></li>
+      </ul>
     </nav>
   </div>
 </header>
@@ -30,7 +39,15 @@
 <main class="wrap">
   <h1 data-i18n>A file format won't fix vague BIM</h1>
   <p class="lede" data-i18n><strong>An IFC or COBie file is a printout of the model. It is not a plan, and it goes stale.</strong></p>
-  <p data-i18n>Quebec's government BIM roadmap promotes "open BIM": IFC model files, IDS requirement files, the bSDD data dictionary and the other buildingSMART standards. Its guidance document, written by Érik Poirier and Cloé Arnould and approved in May 2025, is a serious piece of work.<sup><a href="#s1">1</a></sup> One disclosure up front: OpenBEP's founder works at VIM, a company with its own exchange format, which this page discusses with other alternatives near the end. We agree with parts of it. We disagree with an idea we hear often: that if public owners require IFC and open tools on every project, the industry's BIM problems will go away.</p>
+<!--not:ja-->
+  <p data-i18n>Across Canada and the United States, owners are told that open formats are the answer. In the United States, COBie has been part of the national BIM standard since 2012.<sup><a href="#s34">34</a></sup> The federal highway agency's 2021 roadmap for state transportation departments points to the IFC work on bridges and roads as its starting point.<sup><a href="#s35">35</a></sup> Canada published ISO 19650-2 as a national standard in November 2024.<sup><a href="#s36">36</a></sup> The clearest written case for "open BIM" in Canada is Quebec's: its government BIM roadmap promotes IFC model files, IDS requirement files, the bSDD data dictionary and the other buildingSMART standards. Its guidance document, written by Érik Poirier and Cloé Arnould and approved in May 2025, is a serious piece of work, and we quote it below as "the guide".<sup><a href="#s1">1</a></sup></p>
+<!--/not:ja-->
+<!--only:ja
+  <p data-i18n>Japan has taken a careful route. Since April 2026, a building permit application can use BIM: the designer submits PDF drawings exported from the BIM model, with an IFC file exported from the same model at the same time. The PDF drawings are what is reviewed. The IFC file is there to help the reviewer understand the building's shape, and the ministry's manual says no decision is based on information found only in the IFC data.<sup><a href="#s38">38</a></sup> A review of the BIM data itself is planned for spring 2029.<sup><a href="#s38">38</a></sup></p>
+  <p data-i18n>This page was first written for North America, where a common view is that requiring IFC and open tools on every project will fix BIM. The clearest written case for that view is a 2025 government guide from Quebec, in Canada, which we quote below as "the guide".<sup><a href="#s1">1</a></sup></p>
+only:ja-->
+  <p data-i18n>One disclosure up front: OpenBEP's founder works at VIM, a company with its own exchange format, which this page discusses with other alternatives near the end.</p>
+  <p data-i18n>We agree with much of the open BIM case. We disagree with an idea we hear often: that if public owners require IFC and open tools on every project, the industry's BIM problems will go away.</p>
   <p data-i18n>In our experience, the main problem is not the file format. It is that owners ask for "the BIM" without saying what it is for. A vague model saved as IFC is still a vague model.</p>
 
   <div class="box key">
@@ -44,7 +61,7 @@
     </ul>
   </div>
 
-  <p class="note" data-i18n>This is a disagreement about priorities and order, not about anyone's good faith. The guide itself calls open BIM "naturally desirable" and sets no obligation or date.<sup><a href="#s1">1</a></sup> Quotes from French and Dutch sources are our translations.</p>
+  <p class="note" data-i18n>This is a disagreement about priorities and order, not about anyone's good faith. The guide itself calls open BIM "naturally desirable" and sets no obligation or date.<sup><a href="#s1">1</a></sup> Quotes from French, Dutch and Japanese sources are our translations.</p>
 
   <h2 data-i18n>What open BIM gets right</h2>
   <div class="box fix">
@@ -63,12 +80,15 @@
   <ul>
     <li data-i18n>Even advocates of IFC use this comparison. In a 2019 interview, an IFC file from a Revit model was likened to a PDF made from a Word file: you can read the text, but you cannot do word processing in it.<sup><a href="#s2">2</a></sup> The point then was that anyone can read it. Our point is the other half: in the authoring tools most firms use, you cannot keep working in it.</li>
     <li data-i18n>Revit's own help says that opening an IFC file creates a new model from the default template, and points users to linking the IFC <q>as reference information</q> instead.<sup><a href="#s4">4</a></sup></li>
-    <li data-i18n>There is a fair counterpoint: some tools, such as Bonsai (formerly BlenderBIM), author directly in IFC, so for them IFC is the native file. Few Quebec firms work that way today, and a requirement should fit how projects are actually delivered.</li>
+    <li data-i18n>There is a fair counterpoint: some tools, such as Bonsai (formerly BlenderBIM), author directly in IFC, so for them IFC is the native file. Few firms work that way today, and a requirement should fit how projects are actually delivered.</li>
     <li data-i18n>The Netherlands keeps IFC on the "comply or explain" list that public bodies must require. But in 2019 its Standardisation Forum made clear that IFC models are an output of the source model for communication and coordination, and that "they do not replace the source models".<sup><a href="#s5">5</a></sup></li>
+    <li data-i18n>Japan's building permit review, open since April 2026, works the same way. The PDF drawings exported from the BIM model are what is reviewed. The IFC file exported with them is a reference for understanding the shape: the manual says reviewers make no decision based on information found only in the IFC data, the IFC is not kept as a legal record, and it is not used for the interim or final inspections.<sup><a href="#s38">38</a></sup></li>
+    <li data-i18n>What made that review possible was not the file format. It was a common set of input and output rules, written element by element (grids, columns, beams, slabs, walls and so on), that every designer using it submits a written pledge to follow.<sup><a href="#s38">38</a></sup> That is a requirement written by the party that will use the files, and it is the part most open BIM roadmaps leave for later.</li>
   </ul>
   <p class="claim" data-i18n>Stale at the first renovation.</p>
   <p data-i18n>A delivered IFC or COBie file is a snapshot. In 2016 a senior BIM engineer described COBie as <q>the BIM equivalent of the two-inch thick phone directory that we all used to receive every year – it's out of date even as it lands on your doorstep</q>.<sup><a href="#s6">6</a></sup> In our experience the same is true of an IFC archive. The day the building is renovated, the work happens in the native model, which is updated, and the IFC and COBie files have to be exported again. An archive of exports is an archive of old printouts.</p>
   <p data-i18n>So the native authoring files should be the contractual master, and exports are extra outputs, asked for when a named use needs them. This has a cost we accept openly: native files tie the archive to one vendor's format, which is the lock-in the guide warns about.<sup><a href="#s1">1</a></sup> Our answer is that an owner keeps control by owning the native files and by stating, use by use, what data it needs and in which format. A blanket IFC rule does not give that control on its own.</p>
+  <p data-i18n>Some Canadian owners already write it this way. Metrolinx, Ontario's transit agency, asks for both native files and exchange files at every submittal, drawings in both PDF and native format, and accepts federated models as Navisworks or IFC.<sup><a href="#s37">37</a></sup> In that scheme the native file is the working copy and the exports serve named uses.</p>
 
   <p class="claim" data-i18n>Filtering is a feature, if the owner sets the filter.</p>
   <p data-i18n>The guide warns that an IFC export "will necessarily be filtered and will not contain all the data of the original model".<sup><a href="#s1">1</a></sup> That is presented as a weakness. We see it the other way. An owner does not want every working parameter and every helper object a designer used. It wants the data its uses need, and nothing else. That is the idea behind our <a href="../lod/">LOD specification</a>, where the as-built level keeps less than the construction model, not more. The problem is not that exports filter. It is that, without owner requirements, nobody decides what the filter keeps.</p>
@@ -100,14 +120,19 @@
     <li data-i18n>So the market stays on the old versions. Under a post about IFC 5, Ivan Shtaer wrote: <q>implementing support for each new scheme every 4-5 years simply does not pay off. The market does not have time to digest this. The developer is forced to support versions 2X3 because a lot of data was created and exists in this format.</q><sup><a href="#s19">19</a></sup> IFC 4.3 is stable and an ISO standard, but a firm that tunes its exports for it today should expect to do much of that work again for IFC 5.</li>
   </ul>
 
+  <p class="claim" data-i18n>Where IFC earns its place.</p>
+  <p data-i18n>Infrastructure is the strongest case for IFC. Its ISO edition of 2024, IFC 4.3, added bridges, roads, railways, waterways and port facilities.<sup><a href="#s39">39</a></sup> In our experience Revit is rarely the authoring tool on that work, and several tools must share one model. The US federal highway agency's roadmap lists IFC, with LandXML, among the open standards state agencies can use to model engineering data.<sup><a href="#s35">35</a></sup> Even there, the format only works when the owner says which version, which classes and which properties, and checks them.</p>
+
   <p class="claim" data-i18n>Hard to read.</p>
   <p data-i18n>This one is our own view, from daily work: the IFC documentation is some of the hardest technical documentation in our industry to use, even for experienced BIM managers. Finding how one property of one element should be written means going through layers of entities, property sets, MVDs and versions. buildingSMART itself calls MVD <q>one of the most confusing acronyms</q> in its vocabulary.<sup><a href="#s10">10</a></sup> A standard that experts struggle to read is a poor base for a requirement placed on every firm, large or small.</p>
 
+<!--not:ja-->
   <p class="claim" data-i18n>The internet comparison does not hold.</p>
   <p data-i18n>The guide asks readers to imagine the internet without standards like HTML and HTTP, where "you would need a different browser for each website".<sup><a href="#s1">1</a></sup> But a web page looks the same in every browser. Two IFC files of the same wall from two tools often do not: different classes, different property names, missing data, as the 2021 study found.<sup><a href="#s11">11</a></sup> The guide also promises data that "can be used in asset management software decades later".<sup><a href="#s1">1</a></sup> Data kept for decades is only useful if it was consistent in the first place: the same parameters, with the same names, filled in the same way on every project. IFC does not give you that. A shared parameter list and owner requirements do.</p>
+<!--/not:ja-->
 
   <h2 data-i18n>The problem with COBie</h2>
-  <p data-i18n>COBie is a spreadsheet handover format, built as a subset of IFC. The UK government's 2011 construction strategy required it on centrally funded projects.<sup><a href="#s3">3</a></sup><sup><a href="#s7">7</a></sup> That was a format requirement at national scale, and the results are on record.</p>
+  <p data-i18n>COBie is a spreadsheet handover format, built as a subset of IFC. The UK government's 2011 construction strategy required it on centrally funded projects.<sup><a href="#s3">3</a></sup><sup><a href="#s7">7</a></sup> That was a format requirement at national scale, and the results are on record. In the United States, COBie is part of the national BIM standard: the National Institute of Building Sciences has maintained it since 2013 and published version 3.0 in 2023.<sup><a href="#s34">34</a></sup> We found no US study of how its data is used after handover to match the UK record below.</p>
   <ul class="evidence">
     <li data-i18n><strong>Clients who asked for the format, not the content.</strong> Birmingham City University's BIM process manager: <q>When a client just says ‘give me COBie’ without identifying their specific requirements, consultants will be ripping their hair out because that level of information is just not needed to manage buildings. It’s a big job for someone that will have to be paid for unnecessarily.</q><sup><a href="#s3">3</a></sup></li>
     <li data-i18n><strong>Data that could not reach the client's systems.</strong> In 2016, the year the UK mandate took effect, three of the people BIM+ interviewed reported difficulty importing COBie data into their maintenance software. Hampshire County Council's framework manager: <q>We want to be able to transfer data into our CAFM systems after project delivery, but have not delivered that yet.</q> In the same survey, 58% of respondents said they had never used BS 1192-4, the standard that describes COBie.<sup><a href="#s3">3</a></sup></li>
@@ -204,7 +229,7 @@
   </ol>
   <div class="box fix">
     <p data-i18n>OpenBEP does these steps in order. The owner picks the uses, and the BEP Builder turns them into the plan, the element-by-element requirements, the shared parameters, an IDS file and the milestone checks.</p>
-    <a class="cta" href="../app/bep-builder.html" data-i18n>Build a BEP</a>
+    <a class="cta" href="../app/bep-builder.html?lang=en" data-i18n>Build a BEP</a>
   </div>
 
   <h2 data-i18n>What this page does not say</h2>
@@ -215,7 +240,7 @@
   </ul>
 
   <h2 id="sources" data-i18n>Sources</h2>
-  <p class="note" data-i18n>Every link below was opened and checked on October 20, 2026. Page numbers are PDF pages. Quotes from French and Dutch sources are our translations; English quotes are word for word.</p>
+  <p class="note" data-i18n>Every link below was opened and checked on October 20, 2026. Page numbers are PDF pages. Quotes from French, Dutch and Japanese sources are our translations; English quotes are word for word.</p>
   <ol class="sources">
     <li id="s1">É. Poirier, C. Arnould, <a href="https://www.sqi.gouv.qc.ca/fileadmin/fdr_bim_gouv/les_principes_du_bim_ouvert_et_de_son_application_dans_les_projets_publics.pdf"><cite>Les principes du BIM ouvert et de son application dans les projets publics</cite></a>, Feuille de route gouvernementale pour la modélisation des données des infrastructures, <span data-i18n>version approved May 14, 2025</span>, p. 1, 2, 8, 11, 12, 13, 17, 19, 20, 23, 24, 25.</li>
     <li id="s2">M.-È. Sirois, <a href="https://www.portailconstructo.com/pratiques_innovations/demystifier_bim_ouvert"><cite>Démystifier le BIM ouvert</cite></a>, Portail Constructo, 2019-10-29 <span data-i18n>(interview with three buildingSMART Canada representatives)</span>.</li>
@@ -250,6 +275,12 @@
     <li id="s31">Bentley Systems, <a href="https://github.com/iTwin/itwinjs-core">iTwin.js</a>, GitHub README; <span data-i18n>MIT licence per npm (@itwin/core-backend)</span>.</li>
     <li id="s32">Alliance for OpenUSD, <a href="https://aousd.org/">aousd.org</a> <span data-i18n>(viewed October 20, 2026)</span>.</li>
     <li id="s33">VIMaec, <a href="https://github.com/vimaec/vim-format/blob/master/docs/object-model.md"><cite>VIM object model</cite></a> <span data-i18n>(section on element ids) and</span> <a href="https://github.com/vimaec/vim-format/blob/master/docs/object-model-schema.json"><cite>object-model-schema.json</cite></a> <span data-i18n>(tables Element, ParameterDescriptor, Workset, Phase, DesignOption, View, MaterialInElement), GitHub (viewed October 20, 2026)</span>.</li>
+    <li id="s34">National Institute of Building Sciences, <a href="https://nibs.org/nbims/v3/cobie/"><cite>COBie Standard</cite></a>, NBIMS-US <span data-i18n>(version history; viewed October 20, 2026)</span>.</li>
+    <li id="s35">Federal Highway Administration, <a href="https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/21064/21064.pdf"><cite>Advancing BIM for Infrastructure: National Strategic Roadmap</cite></a>, FHWA-HRT-21-064, June 2021, <span data-i18n>PDF pages 18 and 21</span>.</li>
+    <li id="s36">Standards Council of Canada, <a href="https://scc-ccn.ca/standardsdb/standards/4033466">CAN/CGSB/CSA-ISO 19650-2:24</a>, 2024-11-30.</li>
+    <li id="s37">Metrolinx, <a href="https://assets.metrolinx.com/image/upload/v1750963181/Documents/Engineering/Metrolinx_Exchange_Information_Requirements_BIM.pdf"><cite>Metrolinx Exchange Information Requirements (BIM)</cite>, MX-ALM-GDC-003</a>, June 2025, <span data-i18n>PDF page 18 (printed page 15)</span>.</li>
+    <li id="s38"><span data-i18n>Ministry of Land, Infrastructure, Transport and Tourism (MLIT), Japan,</span> <a href="https://www.mlit.go.jp/jutakukentiku/content/001990524.pdf"><cite lang="ja">BIM図面審査 申請・審査マニュアル</cite></a> <span data-i18n>(BIM drawing review: application and review manual), first edition, March 24, 2026, PDF pages 3, 17, 31 and 86</span>.</li>
+    <li id="s39">ISO, <a href="https://www.iso.org/standard/84123.html">ISO 16739-1:2024</a>, <span data-i18n>abstract (viewed October 20, 2026)</span>.</li>
   </ol>
 </main>
 

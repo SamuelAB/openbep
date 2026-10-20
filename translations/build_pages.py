@@ -13,6 +13,10 @@ How it works:
   column per language (fr, ja, es, ...), then where. Add a language by adding a column.
 - Each language page is written to <folder>/<lang>/index.html. A string with no translation
   stays in English and is listed, so nothing is lost silently.
+- A page can differ by language. <!--not:ja-->...<!--/not:ja--> is left out of the Japanese
+  page. <!--only:ja ... only:ja--> is a comment on the English master (so it does not show)
+  and becomes part of the Japanese page only. Its strings are translated like any other.
+- Links to another translated page (../why/, ../formats/) point to the same language.
 """
 import csv, html, os, re, sys
 
@@ -20,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 TABLE = os.path.join(HERE, 'canbim_strings.csv')  # the one dictionary, shared with the app
 # English masters (relative to the repository root) and the where label of their rows
-PAGES = {'why/index.html': 'Why OpenBEP'}
+PAGES = {'why/index.html': 'Why OpenBEP', 'formats/index.html': 'Formats page'}
 
 UNIT = re.compile(r'<(?P<tag>[a-z0-9]+)(?P<attrs>[^>]*\bdata-i18n(?![-\w])[^>]*)>(?P<body>.*?)</(?P=tag)>', re.S)
 ATTR = re.compile(r'(?P<name>content|alt|aria-label|title)="(?P<val>[^"]*)"')
@@ -60,7 +64,16 @@ def relative(val, depth):
     return '../' * depth + val
 
 
+def variants(page, lang):
+    """Keep the parts of a page meant for this language (see the module notes)."""
+    page = re.sub(r'<!--not:%s-->.*?<!--/not:%s-->\n?' % (lang, lang), '', page, flags=re.S)
+    page = re.sub(r'<!--only:(\w+)\n(.*?)\nonly:\1-->\n?',
+                  lambda m: m.group(2) + '\n' if m.group(1) == lang else '', page, flags=re.S)
+    return page
+
+
 def translate(page, lang, table, missing):
+    page = variants(page, lang)
     def body(m):
         key = norm(m.group('body'))
         t = table.get(key)
@@ -84,6 +97,9 @@ def translate(page, lang, table, missing):
     out = re.sub(r'<html lang="en"', '<html lang="%s"' % lang, out, count=1)
     # Links into the app open it in the page's language.
     out = out.replace('bep-builder.html?lang=en', 'bep-builder.html?lang=%s' % lang)
+    # Links to another translated page stay in this language.
+    for folder in sorted({os.path.dirname(p) for p in PAGES}):
+        out = out.replace('href="../%s/"' % folder, 'href="../%s/%s/"' % (folder, lang))
     # The language page sits one folder deeper than the master.
     out = URL.sub(lambda m: '%s="%s"' % (m.group('name'), relative(m.group('val'), 1)), out)
     return out
