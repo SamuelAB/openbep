@@ -198,6 +198,28 @@ Each material also carries `CA_UniclassMa`, its code from the free [Uniclass Mat
 - **Appearance:** one appearance asset per material, Revit's own library or a plain colour. No imported textures unless the visualisation use is chosen, since they bloat the model.
 - **No duplicates:** Revit copies a material on every family load. The OpenBEP Sync add-in should flag any material not starting with `CA_` at each milestone.
 
+### What counts as no material
+
+On real projects the materials that reach the estimator are the ones the model carries, and a model can look finished while most of its elements carry none. Three rules, from LOD 300 on:
+
+| Rule | Why | Règle |
+| --- | --- | --- |
+| `Default`, `<By Category>`, an empty material, or a material whose name is a Revit or family default (`Default Wall`, `Generic`, a family name) is **no material**. An element whose only material is one of these fails the element requirements check for every use that needs quantities or materials. | A family that was never assigned a material still shows a colour and a pattern, so nobody notices until the quantity take-off comes back short. The schedule-export check already rejects `Default`, `<By Category>` and `Default Wall` as placeholder values for the primary material; the IFC check only sees whether a material is attached. This makes the rule explicit for the modeller, whichever file is delivered. | `Default`, `<By Category>`, un matériau vide ou un nom de matériau par défaut de Revit ne sont **pas un matériau**. Un élément qui n'en porte pas d'autre échoue à la vérification. |
+| One material per real material. Fifty concretes that differ only by family of origin are one `CA_Concrete_CastInPlace_35MPa`. The deliverable at each milestone lists every material in use with its count of elements, and the list must fit on a page. | Every duplicate splits the quantity totals and hides the real amount of each material. On one federated hospital model, grouping materials by the words in their names was the only way to get a usable concrete total. | Un seul matériau par matériau réel. La liste des matériaux en usage est livrée à chaque jalon. |
+| Material and category are checked together: a `Generic Models` or `Specialty Equipment` element with a real material still needs a proper category or a classification code before it is counted. | Generic Models is where elements land when the modeller did not find a category. They carry no useful built-in parameters and fall out of every schedule. | Un élément `Generic Models` avec un matériau réel doit tout de même porter une catégorie ou un code de classification. |
+
+### Quantities by material
+
+The quantity take-off and cost estimating uses total the model's area and volume **per material per element**: concrete in a composite column, each layer of a wall, each layer of a floor. Those numbers exist only when:
+
+- the element is a **closed solid** drawn with a Revit family, system family or compound structure (wall, floor, roof, ceiling layers). A mass, an in-place sketch left open, a model line, a linked mesh (DWG, SAT, IFC proxy) or a Direct Shape gives no volume, no length and no material quantity, and the checker cannot invent one;
+- the material is assigned to the **layer or the solid**, not painted on a face. Paint gives an area only, never a volume;
+- the compound structure carries its layers with thicknesses, so each layer's volume follows from the element's geometry.
+
+An element that fails these is reported as "not measurable" and its cost line stays empty rather than guessed. The checker never substitutes a count of one, an average or a default for a missing quantity: a missing number stays missing until the model carries it.
+
+Estimating practices that price by material volume per cost item (for example a quantity standard that lists concrete, formwork and reinforcement per structural element) need these quantities at the preliminary design milestone already, at LOD 200 with generic materials and LOD 300 with the real ones. Say so in the plan's element requirements rather than discovering it at tender.
+
 The parameter dictionary's built-in `Material / Structural Material` field takes these names, so quantities can be totalled by material across a portfolio.
 
 *Matériaux : nommés selon ce qu'ils sont (classe, type, précision), sans marque ni épaisseur. Chaque matériau porte une description en anglais et en français, ses propriétés thermiques si l'usage énergie est choisi, et son fabricant à partir du LOD 400.*
