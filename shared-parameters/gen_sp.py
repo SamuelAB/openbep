@@ -46,16 +46,17 @@ for key,ks in members.items():
     els=[(c,lod,us,k) for k in ks for (c,lod,us) in use[k]]
     grps=collections.Counter(E2G[c['id']] for c,_,_,_ in els)
     grp='01 Identity and asset' if len(grps)>=3 or not grps else grps.most_common(1)[0][0]
-    nm='CA_'+pascal(p['l'])
+    nm='OB_'+pascal(p['l'])
     if dt=='NUMBER' and p.get('u') in UNIT: nm+='_'+UNIT[p['u']]
     if shared_needed:
-        if nm in names: nm='CA_'+''.join(x[:1].upper()+x[1:] for x in re.findall(r'[A-Za-z0-9]+',ascii_(p['l'])))
+        if nm in names: nm='OB_'+''.join(x[:1].upper()+x[1:] for x in re.findall(r'[A-Za-z0-9]+',ascii_(p['l'])))
         if nm in names: print('COLLIDE',nm,ks); nm+='_'+ck
         assert nm not in names, nm
         names.add(nm)
     else: nm='; '.join(sorted({P[k]['rv'][1] for k in blt if P[k]['rv'][1]}))
-    # GUIDs are fixed forever: the namespace keeps the project's first working name on purpose.
-    gid=str(uuid.uuid5(uuid.NAMESPACE_URL,'urn:canbim:parameter:'+nm))
+    # GUIDs are fixed forever: they hash the parameter's first name (CA_ prefix, namespace from the working name CANBIM),
+    # so renaming the prefix to OB_ in October 2026 kept every GUID.
+    gid=str(uuid.uuid5(uuid.NAMESPACE_URL,'urn:canbim:parameter:'+('CA_'+nm[3:] if nm.startswith('OB_') else nm)))
     cats=sorted({rc.split(' (')[0] for c,_,_,_ in els for rc in c.get('rc',[])})
     rows.append(dict(id=ck,merged=';'.join(sorted(ks)),name=nm,guid=gid,dt=dt,unit=p.get('u') or '',scope=p['sc'],group=grp,
       builtin='; '.join(sorted({P[k]['rv'][1] for k in blt if P[k]['rv'][1]})),shared='yes' if shared_needed else 'no',
