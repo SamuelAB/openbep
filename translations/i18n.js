@@ -18,7 +18,8 @@ const I18N_NUM=/\bv\d+(?:\.\d+)+\b|\b\d{4}-\d{2}-\d{2}\b|(?<![\w.,])\d{1,3}(?:,\
 function i18nKey(k){const m=k.match(I18N_LEAD); if(m) k=m[2]; if(/[^:]:$/.test(k)) k=k.slice(0,-1).trim(); let i=0; return k.replace(I18N_NUM,()=>'{'+(++i)+'}')}
 // part: k is one piece of a longer sentence, so a product or firm name (every long word capitalised) stays as typed.
 const I18N_NAME=k=>{const w=k.split(/\s+/); return /^[A-Z0-9]/.test(k)&&!/[.!?]$/.test(k)&&w.every(x=>x.length<4||/^[A-Z0-9(]/.test(x))&&(w.filter(x=>/^[A-Z]/.test(x)).length>1||/^\S*[a-z]\S*[A-Z0-9]/.test(k))};
-function trText(k,T,L,part){if(!k) return null; if(!/[A-Za-z]/.test(k)) return k; if(T[k]) return T[k];
+// A page can define I18N_KEEP(text) to keep text the user typed exactly as typed (never translated).
+function trText(k,T,L,part){if(!k) return null; if(!/[A-Za-z]/.test(k)) return k; if(typeof I18N_KEEP==='function'&&I18N_KEEP(k)) return k; if(T[k]) return T[k];
   let m=k.match(I18N_LEAD); if(m){const t=trText(m[2],T,L); return t&&m[1]+t}
   if(/[^:]:$/.test(k)){const t=trText(k.slice(0,-1).trim(),T,L); return t&&t+I18N_COLON(L)}
   const nums=k.match(I18N_NUM); if(nums){const t=T[i18nKey(k)]; if(t) return t.replace(/\{(\d+)\}/g,(x,i)=>nums[i-1]==null?x:nums[i-1])}
@@ -29,7 +30,8 @@ function trText(k,T,L,part){if(!k) return null; if(!/[A-Za-z]/.test(k)) return k
   if(/^[a-z][a-z]/.test(k)){const t=trText(k[0].toUpperCase()+k.slice(1),T,L,part); if(t) return I18N_CJK(L)||!/^.[a-zà-ÿ]/.test(t)?t:t[0].toLowerCase()+t.slice(1)}
   if(part&&(I18N_NAME(k)||/^(?=.*\d)[A-Z0-9-]{4,}$/.test(k)||/[\u3040-\u30ff\u4e00-\u9fff]/.test(k)&&!/[A-Za-z]{3,} [a-z]{2,}/.test(k))) return k;
   // A value typed by the user in brackets at the end (a product name, or text in the reader's own script) stays as typed.
-  m=k.match(/^(.+?) \(([^()]+)\)(\.?)$/); if(m&&(I18N_NAME(m[2])||!/[A-Za-z]{3}/.test(m[2]))){const t=trText(m[1]+m[3],T,L,part); if(t) return I18N_CJK(L)?t.replace(/。$/,'')+'（'+m[2]+'）'+(m[3]?'。':''):t.replace(/\.$/,'')+' ('+m[2]+')'+m[3]}
+  m=(()=>{const e=k.endsWith(').')?k.length-2:k.endsWith(')')?k.length-1:-1; if(e<0) return null; let d=0; for(let i=e;i>0;i--){if(k[i]===')') d++; else if(k[i]==='('&&!--d) return k[i-1]===' '?[k,k.slice(0,i-1),k.slice(i+1,e),k.slice(e+1)]:null} return null})();
+  if(m&&(I18N_NAME(m[2])||!/[A-Za-z]{3}/.test(m[2])||typeof I18N_KEEP==='function'&&I18N_KEEP(m[2]))){const t=trText(m[1]+m[3],T,L,part); if(t) return I18N_CJK(L)?t.replace(/。$/,'')+'（'+m[2]+'）'+(m[3]?'。':''):t.replace(/\.$/,'')+' ('+m[2]+')'+m[3]}
   return null}
 /*/I18NCORE*/
 

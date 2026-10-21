@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owner training</title>
+<meta name="description" content="What an owner needs to know before writing BIM requirements: twenty short sections that prepare for the OpenBEP owner readiness test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../why/why.css">
+</head>
+<body>
+<!-- English only for now: translated after Sam's review. Generated once from the owner training notes; edit this file directly. -->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../">OpenBEP</a>
+    <nav class="top-links">
+      <a href="../why/">Why OpenBEP</a>
+      <a href="../app/bep-builder.html?lang=en">Open the BEP Builder</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Owner training</h1>
+  <p>This page prepares the owner's project manager and the owner's BIM representative for the readiness test in the OpenBEP Builder. Each section covers one topic: what it is, why it matters to an owner, what to require, and a common mistake. Each section lists the test questions it prepares for. The examples are Canadian and general; Quebec is used where language or local practice changes the answer.</p>
+<p>Questions marked (rep) are asked only of the BIM representative.</p>
+  <p>When you are ready, take the owner readiness test in the Builder, step 1 (Project). Answers are written in your own words. The answer key only shows after you commit your answers.</p>
+  <div class="box key">
+    <h2>Contents</h2>
+    <ol><li><a href="#t1">The purpose of BIM and BIM uses</a></li><li><a href="#t2">EIR and BEP</a></li><li><a href="#t3">Levels of development and information</a></li><li><a href="#t4">Deliverables per milestone</a></li><li><a href="#t5">Accepting and checking models</a></li><li><a href="#t6">File formats: native, IFC, COBie, IDS, BCF</a></li><li><a href="#t7">Common data environment and approvals</a></li><li><a href="#t8">Roles: BIM manager and coordinator</a></li><li><a href="#t9">Team capacity and key people</a></li><li><a href="#t10">Existing conditions</a></li><li><a href="#t11">As-built and handover data</a></li><li><a href="#t12">Contract order of precedence</a></li><li><a href="#t13">Payment tied to accepted milestones</a></li><li><a href="#t14">Change orders</a></li><li><a href="#t15">Procurement and abnormally low bids</a></li><li><a href="#t16">Ownership and intellectual property</a></li><li><a href="#t17">AI and security</a></li><li><a href="#t18">Owner time and capacity</a></li><li><a href="#t19">Small projects</a></li><li><a href="#t20">Language</a></li></ol>
+  </div>
+  <h2 id="t1">1. The purpose of BIM and BIM uses</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A designer proposes 15 BIM uses on a $12 million school. How should the owner decide which to require?</li><li>The owner wants quantity take-offs from the model for cost estimates at the end of schematic design. What must the requirements state for this use to work? <em>(BIM representative only)</em></li></ul></details>
+<p><strong>What it is.</strong> A BIM use is a specific job the model does for the project, such as coordinating trades before construction, producing quantities for an estimate, or giving the maintenance team asset data. The purpose of BIM on a project is the list of results the owner wants from those uses.</p>
+<p><strong>Why it matters to an owner.</strong> Every use costs modelling time, data entry and checking time. A use nobody acts on is paid for and wasted. A use with no stated data requirements gives a model that cannot do the job.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A short statement of the owner's goals: cost certainty, fewer site conflicts, usable handover data, or others.</li>
+<li>Only the uses that serve those goals, each with an owner, a milestone and a deliverable.</li>
+<li>For each use, the elements and parameters it needs. Quantity take-off at the end of schematic design, for example, needs the elements to be measured, the unit for each, the parameters the estimator uses, and the level of development at that milestone.</li>
+</ul>
+<p><strong>Common mistake.</strong> Accepting the designer's long list of uses because it looks thorough. Fifteen uses on a $12 million school means fifteen sets of requirements to write and check.</p>
+<h2 id="t2">2. EIR and BEP</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A design firm sends you its BIM execution plan (BEP) two weeks after award. What do you do with it before modelling starts, and why?</li><li>What is the EIR (exchange information requirements), who writes it, and how is it different from the BEP?</li><li>You are issuing a tender for a design team. List what the BIM part of the tender documents must contain so bidders can price the work.</li></ul></details>
+<p><strong>What it is.</strong> The EIR (exchange information requirements) is the owner's statement of what information it needs, when, and in what form. The BEP (BIM execution plan) is written by the firm or team and says how they will deliver it.</p>
+<p><strong>Why it matters to an owner.</strong> The owner sets the rules and the firm answers them. If the owner does not write requirements, the firm's plan becomes the only rulebook, and it will describe what the firm already does.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>An EIR issued with the tender, containing: the purpose and uses, deliverables per milestone with file formats, the checking and acceptance method, the roles and minimum team, and the owner's own response times.</li>
+<li>A pre-appointment BEP or BIM proposal from each bidder, scored with the bid.</li>
+<li>A post-award BEP checked by the owner against the EIR and accepted or returned in writing before modelling relies on it.</li>
+<li>Updates of the BEP at each stage and when the team or scope changes.</li>
+</ul>
+<p><strong>Common mistake.</strong> Treating the plan as a firm's document that the owner just files. A plan nobody checked is a promise nobody holds.</p>
+<h2 id="t3">3. Levels of development and information</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>Your requirements say only "LOD 300" for the whole model. Name what is missing. <em>(BIM representative only)</em></li><li>Explain what LOD 500 is, and what an owner must settle before asking for it. <em>(BIM representative only)</em></li><li>A milestone model has detailed 3D ductwork but no equipment tags or capacities. Which requirement was missing, and how do LOD and LOI differ? <em>(BIM representative only)</em></li><li>The owner wants to receive door data that the facility team will use for hardware and fire inspections. How do you specify it, element by element? <em>(BIM representative only)</em></li></ul></details>
+<p><strong>What it is.</strong> LOD describes how developed an element is in the model, in geometry and reliability. LOI is the information the element carries: parameters such as fire rating or manufacturer. They are separate. A detailed 3D duct with no tag and no capacity has good geometry and no information.</p>
+<p><strong>Why it matters to an owner.</strong> "LOD 300" alone is not a requirement. It leaves open which elements, which data, by which milestone and who models them. The result is a dispute at acceptance.</p>
+<p><strong>What to require.</strong> For each element or element type that matters:</p>
+<ul>
+<li>the parameters it must carry and their allowed values;</li>
+<li>the milestone from which each parameter is due;</li>
+<li>the use each parameter serves, so no one fills fields nobody needs;</li>
+<li>who models and fills it;</li>
+<li>how the owner checks that it is filled in and correct.</li>
+</ul>
+<p>Door data for a facility team is a worked case: element (door), parameters (fire rating, hardware set, location), allowed values, due at the end of design development, checked by counting filled fields per door type.</p>
+<p>LOD 500 means elements verified in the field after construction. It is not a more detailed model. If the owner wants it, the owner says for which elements, how they are verified and to what tolerance (survey, scan or inspection), who records changes, who updates the model, and who signs the verification. It is extra scope and must be scheduled and paid for.</p>
+<p><strong>Common mistake.</strong> Writing a single LOD number for the whole project and assuming it covers the data.</p>
+<h2 id="t4">4. Deliverables per milestone</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>You are writing what the design team must deliver at the end of schematic design. Name four things the owner should require, besides drawings.</li></ul></details>
+<p><strong>What it is.</strong> A milestone is a point in design or construction (for example the end of schematic design) at which the firm delivers defined information and the owner decides whether to accept it.</p>
+<p><strong>Why it matters to an owner.</strong> Deliverables defined only at the end arrive late and wrong. Per-milestone deliverables let the owner find a gap while it is cheap to fix.</p>
+<p><strong>What to require at each milestone, besides drawings.</strong></p>
+<ul>
+<li>Native model files of each discipline.</li>
+<li>The BEP, updated for the stage.</li>
+<li>A parameter report or schedule export for the elements due at that stage.</li>
+<li>The coordination report and the issue log with status.</li>
+<li>A list of open questions and assumptions the owner must decide.</li>
+</ul>
+<p><strong>Common mistake.</strong> Asking for the model "at the end of the stage" without saying what must be in it.</p>
+<h2 id="t5">5. Accepting and checking models</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>How can an owner tell whether a milestone model meets the requirements?</li><li>The design firm writes in its report that "all models comply with the EIR". What does the owner do with that statement?</li></ul></details>
+<p><strong>What it is.</strong> Acceptance is the owner's decision that a delivered model meets the requirements. It rests on a check of the delivered files.</p>
+<p><strong>Why it matters to an owner.</strong> Looking at a model in 3D shows geometry. It does not show whether the data is present. A firm that checks its own work and reports "compliant" has given an opinion, not verification.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A rule-based check that counts, for each element type, whether each required parameter is present and actually filled in.</li>
+<li>The check run at every milestone, against a threshold agreed in advance.</li>
+<li>The check run by the owner or a party independent of the firm being checked.</li>
+<li>Acceptance tied to the result of the check.</li>
+</ul>
+<p>A plan or a plan-writing tool states the requirements. It does not verify models. Other tools do that: schedule exports from the authoring software, scripts, or rule-checking software reading IDS files.</p>
+<p><strong>Common mistake.</strong> Accepting a "compliant" statement from the firm as proof.</p>
+<h2 id="t6">6. File formats: native, IFC, COBie, IDS, BCF</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A firm proposes to deliver only IFC files at handover and keep its Revit files. How should the owner respond?</li><li>Give two cases where an owner has a good reason to require IFC, and one case where it does not. <em>(BIM representative only)</em></li><li>The facility manager asks for COBie at handover. What do you ask before agreeing? <em>(BIM representative only)</em></li><li>Describe what IDS and BCF are and what an owner uses each one for. <em>(BIM representative only)</em></li></ul></details>
+<p><strong>What it is.</strong> Native files are the files of the authoring software (for example Revit). IFC is an open exchange format, a derived copy. COBie is a structured data format for asset information. IDS is a machine-readable file of information requirements that a checking tool tests models against. BCF is an open format for exchanging issues and comments linked to model views.</p>
+<p><strong>Why it matters to an owner.</strong> The native files are what the next project, the renovation and the operator will edit. IFC loses data and cannot be edited well. Requiring it everywhere costs mapping and checking time on every export.</p>
+<p><strong>OpenBEP's position.</strong></p>
+<ul>
+<li>Native files are the contractual master, delivered at every milestone and at handover with their families and templates.</li>
+<li>IFC is required only when a use needs it: a system or partner that cannot open the native files, a long-term archive, or automated checks that read IFC.</li>
+<li>If IFC is required, the owner supplies the export settings and the data to include.</li>
+<li>IDS and BCF are good practice: IDS for acceptance checks, BCF for review and coordination comments. Neither replaces the model.</li>
+<li>Before agreeing to COBie, ask which system loads it, which asset types and fields it needs, and test the file by loading it before final payment.</li>
+</ul>
+<p><strong>Common mistake.</strong> Requiring IFC because it is "the open standard", with no use that needs it, or accepting IFC alone in place of the native files.</p>
+<h2 id="t7">7. Common data environment and approvals</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>Who should own the common data environment (CDE) at the end of the project, and why does it matter?</li><li>A model is shared to the whole team from the CDE and a contractor builds from it. Who approved it for that use, and what should the CDE show? <em>(BIM representative only)</em></li></ul></details>
+<p><strong>What it is.</strong> The CDE is the shared platform where project information is stored, shared and approved. Files move through states, for example work in progress, shared, published and archived.</p>
+<p><strong>Why it matters to an owner.</strong> The CDE holds the approved versions and the history of who approved what. If it belongs to a firm, that record leaves when the firm does.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>The owner owns the CDE, or it is transferred to the owner at handover with its archive.</li>
+<li>Role-based access, document states and an audit trail.</li>
+<li>Approval for use by a named person with authority, not by the author alone.</li>
+<li>Only the published state used for construction or payment.</li>
+</ul>
+<p><strong>Common mistake.</strong> Leaving the CDE as a firm's internal tool and finding at handover that the history stays behind.</p>
+<h2 id="t8">8. Roles: BIM manager and coordinator</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>Explain the difference between the BIM manager and the BIM coordinator on a project, and which of them the owner should hold to account.</li></ul></details>
+<p><strong>What it is.</strong> The BIM manager sets up and runs the BIM process of a firm or team: standards, the plan, quality. The BIM coordinator brings the discipline models together, runs clash checks and follows issues until they are closed. The owner's BIM representative speaks for the owner.</p>
+<p><strong>Why it matters to an owner.</strong> When these roles are blurred, nobody answers for the plan and nobody closes issues.</p>
+<p><strong>What to require.</strong> Each role named in writing for the project, with its responsibilities. The lead firm is held to account for its team. The owner checks independently.</p>
+<p><strong>Common mistake.</strong> Assuming the coordinator is the owner's person, or that the BIM manager also checks the owner's acceptance.</p>
+<h2 id="t9">9. Team capacity and key people</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A firm replaces the BIM manager it named in its bid. What should the owner require?</li><li>A bid names three modellers for a 24-month project, but each is also named on two other projects. What do you check and ask?</li></ul></details>
+<p><strong>What it is.</strong> The team a firm names at award is the team the owner evaluated. Capacity is the hours each named person actually gives to this project.</p>
+<p><strong>Why it matters to an owner.</strong> A bid can name strong people who are also named on two other projects. Replacing a key person after award changes what the owner bought.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>The weekly hours of each named key person, compared with the owner's estimate.</li>
+<li>A backup for each key person.</li>
+<li>Notice and owner approval before any replacement.</li>
+<li>A replacement of equal, proven skill (CV, test, references).</li>
+<li>The committed hours written into the contract, with the right to refuse a reduction.</li>
+</ul>
+<p><strong>Common mistake.</strong> Reading the team list in the bid and never asking for hours.</p>
+<h2 id="t10">10. Existing conditions</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A renovation has no reliable drawings. The owner orders a laser scan and the design firm models from it. Later the site shows the walls are 80 mm off. Who carries the risk, and how should it have been settled?</li></ul></details>
+<p><strong>What it is.</strong> In a renovation or addition, the model of the existing building comes from drawings, a laser scan or a survey. Each has an accuracy and gaps.</p>
+<p><strong>Why it matters to an owner.</strong> When the existing model is wrong, the cost shows up on site. If the contract does not say who relied on what, the question is argued afterwards, and the owner often pays.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A statement of the accuracy and coverage of any scan or survey the owner supplies.</li>
+<li>A statement from the firm of what it verified itself.</li>
+<li>A clear allocation of reliance: the owner's scan, the firm's verification, or both.</li>
+<li>Areas not scanned or not visible listed as risks, with an allowance.</li>
+</ul>
+<p><strong>Common mistake.</strong> Handing bidders a scan with no statement of what it covers and assuming the firm will absorb the difference.</p>
+<h2 id="t11">11. As-built and handover data</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>Under a standard CCDC 2 stipulated-price contract, who keeps the record of as-built changes, and what does that mean for the as-built model?</li><li>List what the owner should receive in the data package at handover, and when each part is checked.</li><li>When and how should the owner decide what equipment data maintenance needs at handover?</li></ul></details>
+<p><strong>What it is.</strong> The as-built model reflects what was actually built. Handover data is the package the owner's operations team needs: asset data, documents, warranties.</p>
+<p><strong>Why it matters to an owner.</strong> Under a standard CCDC 2 stipulated-price contract, the contractor records as-built changes. Updating the model from those records is extra scope unless it is specified. If nobody is named and paid to do it, the as-built model stays as designed.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A named party, paid, to update the model from the contractor's records, and a named party to check it.</li>
+<li>The as-built model in native files with its verification statement.</li>
+<li>Asset data in the format the maintenance system loads, with asset classes and parameters decided before design starts and checked at each milestone, not only at the end.</li>
+<li>Operation and maintenance documents and warranties linked to the assets.</li>
+<li>The CDE archive and issue history.</li>
+<li>Each part checked before the final payment.</li>
+</ul>
+<p><strong>Common mistake.</strong> Deciding what the maintenance team needs at handover, when it is too late to collect it.</p>
+<h2 id="t12">12. Contract order of precedence</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>The model and the issued drawings disagree on site. Who wins, and how should that be settled before the project?</li></ul></details>
+<p><strong>What it is.</strong> The order of precedence says which document governs when two disagree, for example the model and the issued drawings.</p>
+<p><strong>Why it matters to an owner.</strong> If the contract is silent, a disagreement on site becomes a claim.</p>
+<p><strong>What to require.</strong> The contract and the plan state which governs, for which deliverable, before tender. If the drawings govern, say so and say what the model is for.</p>
+<p><strong>Common mistake.</strong> Leaving the question open because "the model and the drawings come from the same source".</p>
+<h2 id="t13">13. Payment tied to accepted milestones</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>How should the owner tie payment to BIM deliverables?</li></ul></details>
+<p><strong>What it is.</strong> A share of each fee instalment is released only when the milestone BIM deliverable is accepted.</p>
+<p><strong>Why it matters to an owner.</strong> Money is the owner's strongest lever. Owners whose BIM programmes held up made acceptance of the BEP and of each milestone a condition of payment.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A set share of each instalment tied to accepted BIM deliverables.</li>
+<li>Acceptance based on the agreed check, not on a date.</li>
+<li>BEP acceptance as a condition of the first payment.</li>
+<li>The time the owner has to accept, and what happens if it rejects.</li>
+</ul>
+<p><strong>Common mistake.</strong> Paying on time while the BIM deliverables are late, then having no leverage.</p>
+<h2 id="t14">14. Change orders</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>Halfway through design the owner adds a wing to the building. How should the BIM work be handled in the change?</li></ul></details>
+<p><strong>What it is.</strong> A change order adjusts scope, price and schedule after the contract is awarded.</p>
+<p><strong>Why it matters to an owner.</strong> A new wing added halfway through design means more modelling, coordination and checks. If the change order covers only drawings, the BIM work is either unpaid or silently dropped.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>The BIM effort priced in the change, from the rates in the firm's bid.</li>
+<li>The BEP, milestones and schedule updated and re-approved.</li>
+<li>No work on the changed model before the change is approved.</li>
+</ul>
+<p><strong>Common mistake.</strong> Treating BIM as part of the drawings and leaving it out of the change.</p>
+<h2 id="t15">15. Procurement and abnormally low bids</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A bid offers BIM hours far below what the plan needs. What does it signal and what do you do?</li></ul></details>
+<p><strong>What it is.</strong> A bid with BIM hours far below what the plan needs.</p>
+<p><strong>Why it matters to an owner.</strong> It signals thin, late or unpaid BIM work.</p>
+<p><strong>What to require.</strong> The owner's own estimate of BIM hours, prepared before the tender. A low bid is clarified before award or rejected as abnormally low.</p>
+<p><strong>Common mistake.</strong> Awarding on the lowest fee and expecting the plan to be delivered in full.</p>
+<h2 id="t16">16. Ownership and intellectual property</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>Who should own the project model and its data, and what happens to the firm's own families and templates?</li></ul></details>
+<p><strong>What it is.</strong> Who owns, and who may use, the model, the data and the content inside them.</p>
+<p><strong>Why it matters to an owner.</strong> The owner needs to use and modify the delivered model for the life of the facility, including for renovations by another firm.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A right for the owner to use, copy and modify the delivered model and data.</li>
+<li>The firm may keep its own tools and generic content, but the licence to the owner covers anything embedded in the model.</li>
+<li>All of this in the contract, not only in the plan.</li>
+</ul>
+<p><strong>Common mistake.</strong> Leaving ownership to the plan, which is not the contract.</p>
+<h2 id="t17">17. AI and security</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A firm wants to upload your project model to an online AI service to speed up work. What do you require?</li><li>The building is a hospital with sensitive areas. How should model access and sharing be controlled?</li></ul></details>
+<p><strong>What it is.</strong> Project models and data can be sent to outside services, including online AI tools, and can be reached by many users.</p>
+<p><strong>Why it matters to an owner.</strong> The owner has confidentiality and privacy duties. A hospital, a school or a secure facility has sensitive areas.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>Written owner permission before any project data goes to an outside service, including an AI service.</li>
+<li>A statement of which service, where the data is stored and whether it is used to train a model.</li>
+<li>The firm stays responsible for results and a person checks AI output.</li>
+<li>Access by role and need, named users, a log of logins, and access removed when a person leaves.</li>
+<li>Sensitive areas removed or simplified in shared models.</li>
+<li>The plan says what may leave the CDE, and who may take it.</li>
+</ul>
+<p><strong>Common mistake.</strong> Learning after the fact that the model was uploaded to a tool for convenience.</p>
+<h2 id="t18">18. Owner time and capacity</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>The owner takes 25 working days to return design comments on a milestone submission. What happens?</li><li>On a $40 million project the owner's project manager has two hours a week for BIM. What do you do?</li></ul></details>
+<p><strong>What it is.</strong> Reviewing models, answering questions and accepting milestones takes owner time every week.</p>
+<p><strong>Why it matters to an owner.</strong> An owner who takes 25 working days to return comments on a submission leaves the team working on assumptions. Rework, delay and extra-cost claims follow.</p>
+<p><strong>What to require of itself.</strong></p>
+<ul>
+<li>A weekly hours estimate for owner BIM work, based on project size and uses.</li>
+<li>A named owner's BIM adviser or staff member when the hours do not cover it. On a $40 million project, two hours a week for BIM is not enough.</li>
+<li>Training for owner staff before the start.</li>
+<li>Response times written into the plan and the schedule, matching the time the owner can really give.</li>
+</ul>
+<p><strong>Common mistake.</strong> Writing a ten-day response time into the plan with no one assigned to meet it.</p>
+<h2 id="t19">19. Small projects</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A school board plans a $3 million renovation with a small local firm. What BIM requirements are reasonable?</li></ul></details>
+<p><strong>What it is.</strong> A small project is delivered by a small firm with little spare time for BIM. A $3 million school renovation is an example.</p>
+<p><strong>Why it matters to an owner.</strong> Requirements copied from a large project cannot be met and so cannot be enforced.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>A few uses that pay back, for example coordination, review and handover data.</li>
+<li>Fewer, simpler deliverables and a short plan.</li>
+<li>The basics kept: who owns the files, which format is the master, how deliverables are accepted.</li>
+</ul>
+<p><strong>Common mistake.</strong> Reusing a large project's requirements unchanged.</p>
+<h2 id="t20">20. Language</h2>
+<details class="note"><summary>Test questions on this topic</summary><ul><li>A Quebec project has a French-speaking operator. What should the owner say about language in the BIM requirements?</li></ul></details>
+<p><strong>What it is.</strong> On a Quebec project, the operator may work in French. Names of parameters, views and documents in the model are part of what the operator uses.</p>
+<p><strong>Why it matters to an owner.</strong> If language is not stated, the firm chooses, often at handover, and the operator receives data it cannot use.</p>
+<p><strong>What to require.</strong></p>
+<ul>
+<li>The language of deliverables, parameter names and model views stated in the EIR.</li>
+<li>Whether the plan and training material are in French.</li>
+<li>A check at a milestone that the names in the model are the ones the operator can use.</li>
+</ul>
+<p><strong>Common mistake.</strong> Leaving language to the firm.</p>
+</main>
+<footer>
+  <div class="wrap">
+    <p>OpenBEP is an independent open project. Text under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code under Apache 2.0. Source on <a href="https://github.com/SamuelAB/openbep">GitHub</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
