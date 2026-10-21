@@ -43,7 +43,7 @@ namespace OpenBepSync
                 var row = rows[r];
                 if (row.Count <= cCat) continue;
                 if (cVer >= 0 && row.Count > cVer && listVersion == "") listVersion = row[cVer];
-                if (!row[cKind].Equals("Shared", StringComparison.OrdinalIgnoreCase)) continue; // built-ins and owner additions are not added
+                if (!row[cKind].Equals("Shared", StringComparison.OrdinalIgnoreCase)) continue; // built-ins are not added; owner additions come as Shared rows with their own GUID
                 if (!Guid.TryParse(row[cGuid], out var g)) { warnings.Add($"Row {r + 1}: no valid GUID for {row[cName]}"); continue; }
                 bool inst = row[cScope].Equals("Instance", StringComparison.OrdinalIgnoreCase);
                 if (!byGuid.TryGetValue(g, out var p))

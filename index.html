@@ -4,9 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenBEP</title>
-<meta http-equiv="refresh" content="0; url=app/bep-builder.html">
+<meta name="description" content="Vague BIM is useless BIM. OpenBEP is a free, open toolkit that builds a BIM Execution Plan from the uses the owner actually needs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="why/why.css">
+<style>
+  .start{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:28px 0 8px}
+  .start a{display:block;padding:18px 18px 16px;border:1px solid currentColor;border-radius:10px;text-decoration:none;color:inherit}
+  .start a:hover,.start a:focus-visible{background:rgba(127,127,127,.08)}
+  .start b{display:block;font-size:1.15rem;margin-bottom:6px}
+  .start span{display:block;font-size:.95rem;opacity:.85}
+  .start a.main{border-width:2px}
+  .more-links{display:flex;flex-wrap:wrap;gap:6px 18px;padding:0;list-style:none}
+</style>
 </head>
 <body>
-<p><a href="app/bep-builder.html">Open the OpenBEP Builder</a></p>
+<!-- English only for now: translated after Sam's review. -->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./">OpenBEP</a>
+    <nav class="top-links">
+      <a href="why/">Why OpenBEP</a>
+      <a href="formats/">Why a file format won't fix it</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Vague BIM is useless BIM.</h1>
+  <p class="lede">OpenBEP builds a BIM Execution Plan from the uses the owner actually needs: who models what, to what level, by when, and how it is checked.</p>
+  <p>It is free and open. On this site your work stays in your own browser. For real projects, which hold private information, <a href="https://github.com/SamuelAB/openbep/blob/main/docs/self-hosting.md">run your own copy</a>.</p>
+
+  <div class="start">
+    <a class="main" href="app/bep-builder.html"><b>Build a BEP</b><span>Start a blank plan or open one of the two examples (a school and a light rail line).</span></a>
+    <a href="app/bep-builder.html?open=1"><b>Open a project file</b><span>Continue a plan you saved as a project file (.json).</span></a>
+    <a href="lod/"><b>Read the LOD spec</b><span>What each level of development means for each element type: the geometry and the parameters it must carry.</span></a>
+  </div>
+
+  <h2>Also here</h2>
+  <ul class="more-links">
+    <li><a href="training/">Owner training</a></li>
+    <li><a href="app/scorecard.html">Project scorecard</a></li>
+    <li><a href="why/">Why OpenBEP</a></li>
+    <li><a href="formats/">Why a file format won't fix it</a></li>
+    <li><a href="https://github.com/SamuelAB/openbep">Source on GitHub</a></li>
+  </ul>
+</main>
+<footer>
+  <div class="wrap">
+    <p>OpenBEP is an independent open project. Text under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code under Apache 2.0.</p>
+  </div>
+</footer>
 </body>
 </html>
