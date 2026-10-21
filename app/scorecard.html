@@ -77,7 +77,7 @@ th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute
 tr.grp td{background:var(--sunk);font-weight:600;font-family:var(--f-display)}
 td.num,th.num{text-align:right}
 td input.n{width:76px;text-align:right}
-#logRows select{max-width:190px}#logRows input[type=date]{width:150px}
+#logRows select{min-width:11em;max-width:none}#logRows input[type=date]{width:150px}
 .pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap}
 .pill.ok{background:var(--good-soft);color:var(--good)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.na{background:var(--sunk);color:var(--muted)}
 .auto{font-size:11px;color:var(--muted)}
@@ -203,7 +203,7 @@ function win3(m){const i=D.months.indexOf(m);return D.months.slice(Math.max(0,i-
 function val(k,m){if(k.auto){const s=logStats(win3(m));return s[k.auto]}const v=(k.vals||{})[m];return v===''||v==null?null:+v}
 function st(k,v){if(v==null||isNaN(v))return null;return k.hi?(v>=k.target?'ok':v>=k.target*0.9?'warn':'bad'):(v<=k.target?'ok':(k.target>0?v<=k.target*1.1:v<=1)?'warn':'bad')}
 // Months off target in the current run; three slipping months in a run count as one off target, so sitting just under target still escalates.
-function streak(k,m){let n=0,w=0;const i=D.months.indexOf(m);for(let j=i;j>=0;j--){const s=st(k,val(k,D.months[j]));if(s==='bad')n++;else if(s==='warn')w++;else break}return n+Math.floor(w/3)}
+function streak(k,m){let n=0,w=0;const i=D.months.indexOf(m);for(let j=i;j>=0;j--){const s=st(k,val(k,D.months[j]));if(!s)continue;if(s==='bad')n++;else if(s==='warn')w++;else break}return n+Math.floor(w/3)}
 function partyOf(id){return D.parties.find(p=>p.id===id)||{n:'Unassigned',kind:'firm'}}
 function pScore(pid,m){const ks=D.kpis.filter(k=>k.party===pid), s=ks.map(k=>st(k,val(k,m))).filter(Boolean);if(!s.length)return null;return {ok:s.filter(x=>x==='ok').length,n:s.length,cls:s.includes('bad')?'bad':s.includes('warn')?'warn':'ok'}}
 
@@ -256,7 +256,8 @@ function fromBep(S){const sc=S._score||{}, firms=S.firms||[];
   const m=thisMonth();
   return {v:1,fromBep:true,project:{name:(S.project||{}).name||'Untitled project',owner:(S.project||{}).owner||''},commit:{review:(sc.commit||{}).review||(S.owner||{}).review||10},months:[m],cur:m,parties,kpis,log:[],replies:{}}}
 async function saveFile(name,data){try{const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null; if(dl){await dl.save({filename:name,data}); $('#msg').textContent='Saved.'; return}}catch(e){if(e&&e.code==='declined'){$('#msg').textContent='Not saved.';return}}
-  $('#msg').textContent='Saving is not available in this view.'}
+  try{const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([data],{type:/\.json$/.test(name)?'application/json':'text/markdown'})); a.download=name; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); $('#msg').textContent='Saved.'}
+  catch(e){$('#msg').textContent='Saving is not available in this view.'}}
 function report(){const m=D.cur, V=verdict(m), L=[], add=(...x)=>L.push(...x), slug=(D.project.name||'project').replace(/[^\w-]+/g,'-');
   add(`# BIM scorecard: ${D.project.name}`,`Month: ${mLabel(m)} · Generated ${new Date().toISOString().slice(0,10)} with the OpenBEP Project Scorecard`,'');
   add('## Summary',`${D.kpis.filter(k=>st(k,val(k,m))==='ok').length} of ${D.kpis.filter(k=>st(k,val(k,m))).length} measured commitments on target. Main cause of delay: ${V.short.toLowerCase()}.`,'');
@@ -270,7 +271,7 @@ function report(){const m=D.cur, V=verdict(m), L=[], add=(...x)=>L.push(...x), s
 /* ---------- events ---------- */
 document.addEventListener('change',e=>{const t=e.target, d=t.dataset;
   if(t.id==='monthSel'){D.cur=t.value;save();render();return}
-  if(t.id==='fileIn'&&t.files[0]){const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result); if(x.kpis&&x.parties) D=x; else if(x.project&&x.firms) D=fromBep(x); else throw 0; save();render();$('#msg').textContent='Opened '+t.files[0].name+'.'}catch(err){$('#msg').textContent='This file is neither a BEP project file nor a scorecard file.'} t.value=''};r.readAsText(t.files[0]);return}
+  if(t.id==='fileIn'&&t.files[0]){const r=new FileReader();r.onload=()=>{const old=D; try{const x=JSON.parse(r.result); if(x&&Array.isArray(x.kpis)&&Array.isArray(x.parties)) D=Object.assign({months:[],log:[],replies:{},project:{},commit:{}},x); else if(x&&x.project&&Array.isArray(x.firms)) D=fromBep(x); else throw 0; if(!D.months.length){D.months=[thisMonth()]} if(!D.cur) D.cur=D.months[D.months.length-1]; try{render()}catch(e){D=old; render(); throw e} save();$('#msg').textContent='Opened '+t.files[0].name+'.'}catch(err){$('#msg').textContent='This file is neither a BEP project file nor a scorecard file.'} t.value=''};r.readAsText(t.files[0]);return}
   if(d.kparty){const k=D.kpis.find(x=>x.id===d.kparty);k.party=t.value;save();render();return}
   if(d.ksrc){D.kpis.find(x=>x.id===d.ksrc).src=t.value;save();return}
   if(d.log){const x=D.log.find(y=>y.id===d.log);x[d.k]=t.value;save();render();return}
