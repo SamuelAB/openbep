@@ -20,7 +20,7 @@
 <body>
 <!-- English is the master. Other languages are generated from the dictionary,
      translations/canbim_strings.csv, by translations/build_pages.py: edit the dictionary, not the generated pages.
-     Blocks marked not:ja and only:ja make the Japanese page differ (see build_pages.py). -->
+     Blocks marked not:xx and only:xx make a language differ: French keeps the Quebec guide, English and Japanese use national sources (see formats/README.md). -->
 <header class="top">
   <div class="wrap">
     <a class="brand" href="../../app/bep-builder.html?lang=fr">OpenBEP</a>
@@ -80,6 +80,7 @@
     <li data-i18n>Les Pays-Bas gardent l’IFC sur la liste « appliquer ou expliquer » que les organismes publics doivent exiger. Mais en 2019, leur Forum de normalisation a précisé que les maquettes IFC sont un produit de la maquette source, pour la communication et la coordination, et qu’« elles ne remplacent pas les maquettes sources ».<sup><a href="#s5">5</a></sup></li>
     <li data-i18n>L’examen des demandes de permis de construction au Japon, ouvert depuis avril 2026, fonctionne de la même façon. Ce sont les dessins PDF tirés de la maquette BIM qui sont examinés. Le fichier IFC déposé avec eux sert de référence pour comprendre la forme : selon le manuel, les examinateurs ne prennent aucune décision sur la base d’une information qui se trouve seulement dans les données IFC, l’IFC n’est pas conservé comme document légal et il ne sert pas aux inspections en cours de chantier ni à l’inspection finale.<sup><a href="#s38">38</a></sup></li>
     <li data-i18n>Ce qui a rendu cet examen possible, ce n’est pas le format de fichier. C’est un ensemble commun de règles de saisie et de sortie, écrites élément par élément (grilles, poteaux, poutres, dalles, murs, etc.), que chaque concepteur qui s’en sert s’engage par écrit à respecter.<sup><a href="#s38">38</a></sup> C’est une exigence écrite par la partie qui va se servir des fichiers, et c’est la partie que la plupart des feuilles de route du BIM ouvert remettent à plus tard.</li>
+    <li data-i18n>Le rapport canadien de 2024 sur la feuille de route cite le Japon en exemple : selon lui, le ministère <q>a rendu obligatoire l’utilisation de l’IFC pour la vérification de la conformité au code</q>.<sup><a href="#s40">40</a></sup> Le manuel publié depuis par le ministère décrit quelque chose de plus limité : l’IFC est déposé avec les dessins comme référence, et ce sont les dessins qui sont vérifiés.<sup><a href="#s38">38</a></sup></li>
   </ul>
   <p class="claim" data-i18n>Périmé dès la première rénovation.</p>
   <p data-i18n>Un fichier IFC ou COBie livré est un instantané. En 2016, un ingénieur BIM principal décrivait COBie comme <q>l’équivalent BIM de l’annuaire téléphonique de cinq centimètres d’épaisseur qu’on recevait tous chaque année : il est déjà dépassé quand il arrive sur le pas de la porte</q>.<sup><a href="#s6">6</a></sup> D’après notre expérience, c’est la même chose pour une archive IFC. Le jour où le bâtiment est rénové, le travail se fait dans la maquette native, qui est mise à jour, et il faut exporter de nouveau les fichiers IFC et COBie. Une archive d’exports, c’est une archive de vieilles impressions.</p>
@@ -236,7 +237,7 @@
   </ul>
 
   <h2 id="sources" data-i18n>Sources</h2>
-  <p class="note" data-i18n>Chaque lien ci-dessous a été ouvert et vérifié le 20 octobre 2026. Les numéros de page sont ceux du PDF. Les citations du guide québécois sont dans leur version originale; les citations de sources anglaises, néerlandaises et japonaises sont nos traductions.</p>
+  <p class="note" data-i18n>Chaque lien ci-dessous a été ouvert et vérifié le 20 ou le 21 octobre 2026. Les numéros de page sont ceux du PDF. Les citations du guide québécois sont dans leur version originale; les citations de sources anglaises, néerlandaises et japonaises sont nos traductions.</p>
   <ol class="sources">
     <li id="s1">É. Poirier, C. Arnould, <a href="https://www.sqi.gouv.qc.ca/fileadmin/fdr_bim_gouv/les_principes_du_bim_ouvert_et_de_son_application_dans_les_projets_publics.pdf"><cite>Les principes du BIM ouvert et de son application dans les projets publics</cite></a>, Feuille de route gouvernementale pour la modélisation des données des infrastructures, <span data-i18n>version approuvée le 14 mai 2025</span>, p. 1, 2, 8, 11, 12, 13, 17, 19, 20, 23, 24, 25.</li>
     <li id="s2">M.-È. Sirois, <a href="https://www.portailconstructo.com/pratiques_innovations/demystifier_bim_ouvert"><cite>Démystifier le BIM ouvert</cite></a>, Portail Constructo, 2019-10-29 <span data-i18n>(entrevue avec trois représentants de buildingSMART Canada)</span>.</li>
@@ -277,6 +278,8 @@
     <li id="s37">Metrolinx, <a href="https://assets.metrolinx.com/image/upload/v1750963181/Documents/Engineering/Metrolinx_Exchange_Information_Requirements_BIM.pdf"><cite>Metrolinx Exchange Information Requirements (BIM)</cite>, MX-ALM-GDC-003</a>, June 2025, <span data-i18n>page 18 du PDF (page 15 imprimée)</span>.</li>
     <li id="s38"><span data-i18n>ministère de l’Aménagement du territoire, des Infrastructures, des Transports et du Tourisme (MLIT), Japon,</span> <a href="https://www.mlit.go.jp/jutakukentiku/content/001990524.pdf"><cite lang="ja">BIM図面審査 申請・審査マニュアル</cite></a> <span data-i18n>(examen des dessins BIM : manuel de demande et d’examen), première édition, 24 mars 2026, pages 3, 17, 31 et 86 du PDF</span>.</li>
     <li id="s39">ISO, <a href="https://www.iso.org/standard/84123.html">ISO 16739-1:2024</a>, <span data-i18n>résumé (consulté le 20 octobre 2026)</span>.</li>
+    <li id="s40">C. Cozzitorto, F. Jalaei, Y. Sultan, S. Davari, D. Bhonde, <a href="https://doi.org/10.4224/40003364"><cite>openBIM implementations for a Canadian roadmap</cite></a>, National Research Council Canada and buildingSMART Canada, 2024-03-01, <span data-i18n>pages 30, 56, 114 et 121 du PDF</span>.</li>
+    <li id="s41">buildingSMART International, <a href="https://github.com/buildingSMART/validate">validate</a>, <span data-i18n>README, section « Running Validation Checks », GitHub (consulté le 21 octobre 2026)</span>.</li>
   </ol>
 </main>
 
