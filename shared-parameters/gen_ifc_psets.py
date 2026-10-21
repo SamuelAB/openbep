@@ -21,7 +21,13 @@ REVIT = {'TEXT': 'Label', 'MULTILINETEXT': 'Text', 'YESNO': 'Boolean', 'INTEGER'
 
 # Corrections to manifest rows, kept here because the manifest is generated.
 # The Revit name the exporter reads, where the manifest's name carries a note.
-REVIT_NAME = {'Visual Light Transmittance - analytical properties': 'Visual Light Transmittance'}
+REVIT_NAME = {'Visual Light Transmittance - analytical properties': 'Visual Light Transmittance',
+              # The "Voltage" type parameter that panel, device and light families tie to their electrical connector.
+              # The panel's own Distribution System is an element id, not a number the exporter can write.
+              'Voltage / Distribution System': 'Voltage', 'Voltage (connector)': 'Voltage'}
+# Built-in parameters with a Revit unit: the exporter writes a measure and converts from Revit's internal units.
+# Shared NUMBER parameters stay Real: they hold the plain number, and the exporter would rescale it.
+REVIT_UNIT = {'V': 'ElectricVoltage', 'A': 'ElectricCurrent'}
 # IFC targets missing from a manifest row, keyed (Revit name, element type).
 IFC_TARGET = {('Flow', 'Fans'): 'Pset_FanTypeCommon.NominalAirFlowRate'}
 
@@ -70,6 +76,7 @@ def main():
     mapped = set()
     for r in rows:
         n, sc, dt = r['Parameter (Revit name)'], r['Instance or type'].strip().lower(), REVIT.get(r['Data type'], 'Label')
+        if r['Shared or built-in'] != 'Shared' and dt == 'Real': dt = REVIT_UNIT.get(r['Unit'], dt)
         sc = 'type' if sc == 'type' else 'instance'
         own[sc][n] = dt
         for ps, prop, _, ents in standard(r['IFC target']):

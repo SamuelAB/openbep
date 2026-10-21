@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -401,7 +401,7 @@ namespace OpenBepSync
 
         /// <summary>
         /// What makes a generic MEP family behave like one in a project: a light source for light fixtures, a pipe connector for pumps,
-        /// a duct connector for fans, and a panelboard part type with an electrical connector for panels. The connectors' flow and poles
+        /// a duct connector for fans, and a panelboard part type with an electrical connector for panels. The connectors' flow, poles and voltage
         /// are driven by family parameters named as the BEP Builder's IDS reads them.
         /// </summary>
         static void Mep(Document d, LibFamily f, List<string> notes)
@@ -440,6 +440,9 @@ namespace OpenBepSync
                 else pt.Set((int)PartType.PanelBoard);
                 var c = ConnectorElement.CreateElectricalConnector(d, Autodesk.Revit.DB.Electrical.ElectricalSystemType.PowerBalanced, face.Reference);
                 Drive(fm, c.get_Parameter(BuiltInParameter.RBS_ELEC_NUMBER_OF_POLES), "Number of Poles", GroupTypeId.Electrical, SpecTypeId.Int.NumberOfPoles, false, 3, notes);
+                // A Voltage type parameter on the connector, as panel families carry: gen_ifc_psets.py writes it as Pset_ElectricalDeviceCommon.RatedVoltage.
+                Drive(fm, c.get_Parameter(BuiltInParameter.RBS_ELEC_VOLTAGE), "Voltage", GroupTypeId.Electrical, SpecTypeId.ElectricalPotential, false,
+                    UnitUtils.ConvertToInternalUnits(600, UnitTypeId.Volts), notes);
             }
         }
 

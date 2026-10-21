@@ -1,5 +1,6 @@
 # This is a Revit shared parameter file.
 # Do not edit manually.
+# OpenBEP plan fingerprint 08B4C7C1DD62, not a released version
 *META	VERSION	MINVERSION
 META	2	1
 *GROUP	ID	NAME
@@ -33,7 +34,7 @@ PARAM	21d184ec-8a94-529f-840f-6f81b3f00a9a	OB_NominalDimensions	TEXT		2	1	Nomina
 PARAM	4b04b51f-b5ac-58e5-949d-d8fb2c935ae8	OB_OperationPartitioning	TEXT		2	1	Operation / partitioning. Panel arrangement and operation (fixed, casement, awning ...).	1
 PARAM	dea5b738-1317-5850-b57b-86f311b0bf71	OB_OperationType	TEXT		2	1	Operation type. Swing / sliding / folding operation.	1
 PARAM	b65f95f1-116b-55f6-ae79-f8e57388ea91	OB_PerformanceClass	TEXT		2	1	Performance class (NAFS). Performance class and grade (wind, water, structural) under NAFS and the Canadian supplement.	1
-PARAM	bcfb99e9-e769-55b2-8051-6361695294b2	OB_ProgramArea	AREA		2	1	Program area (m ). Area required by the functional program.	1
+PARAM	bcfb99e9-e769-55b2-8051-6361695294b2	OB_ProgramArea	AREA		2	1	Program area (m2). Area required by the functional program.	1
 PARAM	dc6846d4-2891-5bfc-a4ab-6d74eccd996a	OB_RatedLoad_kg	NUMBER		2	1	Rated load (kg). Rated load of the car.	1
 PARAM	8d688d71-ce91-5c2c-ba65-7f37ff120b43	OB_RatedPassengers	NUMBER		2	1	Rated passengers. Rated number of passengers.	1
 PARAM	7cecdf0a-dcfc-5e44-8346-d299ead2c367	OB_RatedSpeed_ms	NUMBER		2	1	Rated speed (m/s). Rated car or step speed.	1
@@ -55,7 +56,7 @@ PARAM	cc1f2cd3-2e4f-5b8d-a750-f1648c442d5c	OB_DiameterSection	TEXT		3	1	Diameter
 PARAM	97d9e3d4-3cec-548a-9032-afcd28c95300	OB_DrainageProvisions	MULTILINETEXT		3	1	Drainage provisions. Drainage behind the wall.	1
 PARAM	c3533fc8-a506-5e8a-9fe3-879ef8d3799b	OB_FireProtection	TEXT		3	1	Fire protection. Applied fire protection (spray, board, intumescent) and rating.	1
 PARAM	5d9fd607-f83c-528a-836c-66c4ab77a011	OB_FrostProtectionDepth	LENGTH		3	1	Frost protection depth (mm). Minimum soil cover or insulation for frost protection. Owner property set.	1
-PARAM	43c350e1-7b60-5569-b8db-3f4d2e642e46	OB_ReinforcementRatio_kgm3	NUMBER		3	1	Reinforcement ratio (kg/m ). Reinforcement mass per concrete volume (for cost before detailing).	1
+PARAM	43c350e1-7b60-5569-b8db-3f4d2e642e46	OB_ReinforcementRatio_kgm3	NUMBER		3	1	Reinforcement ratio (kg/m3). Reinforcement mass per concrete volume (for cost before detailing).	1
 PARAM	82f59833-01b7-5c30-a602-dc5676f2f269	OB_Span	LENGTH		3	1	Span (mm). Clear or design span between supports.	1
 PARAM	2bae5797-bbc2-544c-8196-f9e3a186c193	OB_WallSystem	TEXT		3	1	Wall system. Retaining system (cantilever, MSE, gabion, soldier pile ...).	1
 PARAM	28e22e34-d9ec-5e8f-8af8-06bf248c5793	OB_CircuitType	TEXT		4	1	Circuit type. Open or closed circuit.	1
@@ -124,7 +125,7 @@ PARAM	03bc3ca7-001f-56e0-884e-ee9ce64f84ac	OB_CoverFrame	TEXT		7	1	Cover / frame
 PARAM	0854613c-e882-573b-952a-76ae311bf893	OB_CrossSlope_pct	NUMBER		7	1	Cross slope (%). Cross slope for drainage.	1
 PARAM	4265a600-5010-558a-bac6-66508dc24e18	OB_CulvertOpening	TEXT		7	1	Culvert opening (mm). Internal width and clear depth of a culvert.	1
 PARAM	3603e3f5-adca-57bc-9f19-748f3b17a6f7	OB_CurbType	TEXT		7	1	Curb type. Curb profile, upstand and mountability.	1
-PARAM	8db7bbb6-3076-5b03-9d3d-df5ba1e64e51	OB_CutFillVolumes	VOLUME		7	1	Cut / fill volumes (m ). Earthworks quantities.	1
+PARAM	8db7bbb6-3076-5b03-9d3d-df5ba1e64e51	OB_CutFillVolumes	VOLUME		7	1	Cut / fill volumes (m3). Earthworks quantities.	1
 PARAM	948a50cd-76f9-5c2f-a607-9a9b6932ec5b	OB_Depth	LENGTH		7	1	Depth (m). Rim to invert depth.	1
 PARAM	c0b770e1-db00-5c40-9836-54a111b63ebe	OB_DepthOfCover	LENGTH		7	1	Depth of cover (mm). Minimum cover over the crown.	1
 PARAM	5a52b401-ac2a-528d-b25c-c14c62950f96	OB_DropStructure	YESNO		7	1	Drop structure. Chamber includes a backdrop / drop pipe.	1
@@ -137,6 +138,6 @@ PARAM	9ed66df2-21c2-5a86-9637-d85f47d09d07	OB_PavementThickness	LENGTH		7	1	Pave
 PARAM	4f1185af-24b4-56d2-87f2-7669e59dbbd5	OB_PavementType	TEXT		7	1	Pavement type. Flexible, rigid or unit pavers.	1
 PARAM	958209e2-fad2-52f6-8e98-7c9c4062f48e	OB_PipeClass	TEXT		7	1	Pipe class. Pipe class, DR / SDR or strength class.	1
 PARAM	b0bbe208-c5e8-5638-ade7-896b3b2b9aa1	OB_RimCoverElevation	LENGTH		7	1	Rim / cover elevation (m). Elevation of the cover or grate.	1
-PARAM	e69631c3-fe17-57cd-9da0-d4eea7b88a83	OB_SiteArea	AREA		7	1	Site area (m ). Total site area.	1
+PARAM	e69631c3-fe17-57cd-9da0-d4eea7b88a83	OB_SiteArea	AREA		7	1	Site area (m2). Total site area.	1
 PARAM	7d7beddf-eb63-56bd-97cc-636f7891b101	OB_SurveySourceAndDate	TEXT		7	1	Survey source and date. Source and date of the topographic data.	1
 PARAM	70116548-10e4-5c5c-b22f-2d1f2930baa4	OB_UtilityService	TEXT		7	1	Utility service. Storm, sanitary, combined, water, gas, electrical duct bank ...	1

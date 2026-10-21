@@ -34,7 +34,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Length	Length
 	Light Loss Factor	Real
 	MCB Rating	Label
-	Mains	Real
+	Mains	ElectricCurrent
 	Manufacturer	Label
 	Mark	Label
 	Max #1 Pole Breakers	Real
@@ -358,6 +358,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Unbounded Height	Length
 	Unconnected Height	Length
 	Visual Light Transmittance	Real
+	Voltage	ElectricVoltage
 	Volume	Volume
 	Width	Length
 PropertySet:	Pset_BoilerTypeCommon	T	IfcBoilerType
@@ -567,7 +568,8 @@ PropertySet:	Pset_AudioVisualApplianceTypeCamera	T	IfcAudioVisualApplianceType
 PropertySet:	Pset_ElectricalDeviceCommon	T	IfcDistributionElementType
 	IP_Code	Label	Enclosure
 	NumberOfPoles	Real	Number of Poles
-	RatedCurrent	Real	Mains
+	RatedCurrent	ElectricCurrent	Mains
+	RatedVoltage	ElectricVoltage	Voltage
 PropertySet:	Pset_DistributionChamberElementTypeInspectionChamber	T	IfcDistributionChamberElementType
 	ChamberLengthOrRadius	Label	OB_ChamberSize
 	ChamberWidth	Label	OB_ChamberSize

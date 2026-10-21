@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -205,6 +205,8 @@ namespace OpenBepSync
                             if (d is ExternalDefinition ed) defs[ed.GUID] = ed;
                 }
                 finally { app.SharedParametersFilename = previous; }
+                warnings.AddRange(BindingList.Check(required, SharedParameterFile.Parse(File.ReadAllText(txt), out _, out var fileWarnings)));
+                warnings.AddRange(fileWarnings);
                 var plan = Plan.Build(doc, required, defs, warnings);
                 Log($"SYNC dry run ({version}): {plan.Summary().Replace("\n", " | ")}");
                 using (var t = new Transaction(doc, "OpenBEP: sync parameters"))
@@ -223,10 +225,10 @@ namespace OpenBepSync
         // Built-in text parameters the BEP Builder's IDS asks for that the generic families leave empty
         static readonly HashSet<string> TestBuiltIns = new HashSet<string> { "Type Mark", "Mark", "Manufacturer", "Model", "Description", "MCB Rating", "Mounting" };
         // Built-in numbers the IDS asks for that Revit creates as zero
-        static readonly HashSet<string> TestNumbers = new HashSet<string> { "Mains", "MCB Rating", "Max #1 Pole Breakers", "Short Circuit Rating", "Number of Poles", "Flow" };
+        static readonly HashSet<string> TestNumbers = new HashSet<string> { "Mains", "MCB Rating", "Max #1 Pole Breakers", "Short Circuit Rating", "Number of Poles", "Voltage", "Flow" };
         // Logged for every element that has them, to show which ones Revit lets the test write
         static readonly string[] Watch = { "Light Source", "Initial Color", "Visual Light Transmittance", "Define Thermal Properties by", "Assembly Code", "Part Type",
-            "Mains", "MCB Rating", "Mounting", "Max #1 Pole Breakers", "Short Circuit Rating", "Number of Poles", "Flow", "System Name" };
+            "Mains", "MCB Rating", "Mounting", "Max #1 Pole Breakers", "Short Circuit Rating", "Number of Poles", "Voltage", "Flow", "System Name" };
 
         static void FillTestValues(Document doc)
         {
@@ -262,7 +264,7 @@ namespace OpenBepSync
                         string name = p.Definition.Name;
                         bool number = TestNumbers.Contains(name) && (p.StorageType == StorageType.Double && p.AsDouble() == 0 || p.StorageType == StorageType.Integer && p.AsInteger() == 0);
                         if (!number && p.HasValue && (p.StorageType != StorageType.String || p.AsString() != "")) continue;
-                        if (!number && !(p.IsShared && (name.StartsWith("OB_") || name.StartsWith("CA_"))) && !(p.StorageType == StorageType.String && TestBuiltIns.Contains(name))) continue;
+                        if (!number && !(p.IsShared && OpenBepNames.IsOpenBep(name)) && !(p.StorageType == StorageType.String && TestBuiltIns.Contains(name))) continue;
                         try
                         {
                             if (p.StorageType == StorageType.String) p.Set("test " + name + " " + e.Id.IntegerValue);   // unique, so no duplicate-mark warning
