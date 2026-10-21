@@ -2951,9 +2951,9 @@ function who(id){return id&&NET.me&&id===NET.me.id?'you':(NET.names[id]||'someon
 // The Why page sits next to the app on openbep.com and on self-hosted copies; elsewhere (an embedded copy) the public page is used.
 function whyUrl(){const l={fr:'fr/',ja:'ja/'}[S.lang]||''; return (location.pathname.includes('/app/')?'../why/':'https://openbep.com/why/')+l}
 // Links to the other site pages open them in the Builder's language (the Why and Formats pages have one folder per language, the LOD page reads ?lang=).
-document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]'); if(!a) return; if(a.id==='whyLink'){a.href=whyUrl(); return}
+['click','auxclick','contextmenu','focusin'].forEach(t=>document.addEventListener(t,e=>{const a=e.target.closest&&e.target.closest('a[href]'); if(!a) return; if(a.id==='whyLink'){a.href=whyUrl(); return}
   const h=a.getAttribute('href')||'', l=S.lang||'en', f={fr:'fr/',ja:'ja/'}[l]||''; let m=/^(.*\/(?:formats|why)\/)(?:(?:fr|ja)\/)?(#.*)?$/.exec(h);
-  if(m){a.href=m[1]+f+(m[2]||''); return} m=/^(\.\.\/lod\/)(?:\?lang=\w+)?(#.*)?$/.exec(h); if(m) a.href=m[1]+'?lang='+l+(m[2]||'')},true);
+  if(m){a.href=m[1]+f+(m[2]||''); return} m=/^(\.\.\/lod\/)(?:\?lang=\w+)?(#.*)?$/.exec(h); if(m) a.href=m[1]+'?lang='+l+(m[2]||'')},true));
 function renderOnline(){const el=$('#online'); if(!el) return; el.hidden=false;
   if(!NET.db){el.innerHTML=`<span>Your work is saved in this browser only. To work as a team, save the project file in your team's shared folder and open it here. For real projects, which hold private information, run your own copy.</span> <button class="btn small" type="button" id="onSaveFile">Save project file</button><label class="btn small" for="onOpenFile">Open project file</label><input type="file" id="onOpenFile" accept=".json" hidden> <a href="${whyUrl()}" id="whyLink" target="_blank" rel="noopener">Why OpenBEP</a> · <a href="${location.pathname.includes('/app/')?'../formats/':'https://openbep.com/formats/'}" target="_blank" rel="noopener">Why a file format won't fix it</a> · <a href="https://github.com/SamuelAB/openbep/blob/main/docs/self-hosting.md" target="_blank" rel="noopener">How to run your own copy</a><span id="onStat" class="note" aria-live="polite">${esc(NET.status||'')}</span>`;return}
   const cur=NET.pid&&(NET.list||[]).find(p=>p.id===NET.pid);
