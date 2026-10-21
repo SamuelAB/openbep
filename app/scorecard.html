@@ -6,6 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 10px;font-size:13px}
+.sitenav a{color:inherit}
 /* Layout: a monthly site-meeting sheet. Summary strip, then one card per party, then the commitments ledger and the decision log that feeds it. Same palette as the BEP Builder. */
 :root{
   --bg:#F3F5F2; --surface:#FFFFFF; --sunk:#E9EDE8; --ink:#14201D; --muted:#5A6662; --line:#D5DBD5;
@@ -115,6 +117,12 @@ svg.spark .dot.ok{fill:var(--good)} svg.spark .dot.warn{fill:var(--warn)} svg.sp
     <select class="btn" data-i18n-lang data-notr aria-label="Language"></select>
   </div>
 </header>
+<nav class="sitenav">
+  <a href="bep-builder.html">OpenBEP Builder</a>
+  <a href="../why/">Why OpenBEP</a>
+  <a href="../formats/">Why a file format won't fix it</a>
+  <a href="../lod/">LOD specification</a>
+</nav>
 <div class="ctx">
   <span><label>Project</label><b id="pName"></b></span>
   <span><label for="monthSel">Month</label><select id="monthSel"></select></span>
@@ -292,4 +300,12 @@ document.addEventListener('click',e=>{const t=e.target;
 $('#kForm').addEventListener('submit',e=>{e.preventDefault();D.kpis.push({id:uid(),t:$('#kN').value.trim(),u:$('#kU').value.trim(),target:+$('#kT').value,hi:$('#kH').value==='1',party:$('#kP').value,src:'',auto:'',vals:{}});e.target.reset();save();render()});
 render();
 })();
+</script>
+
+<script>
+/* Links to the other site pages keep the page language: the Builder and the LOD page read ?lang=, Why and Formats have one folder per language. */
+(function(){function fix(a){var h=a.getAttribute('href')||'',l=document.documentElement.lang||'en',f={fr:'fr/',ja:'ja/'}[l]||'',m;
+ if(m=/^(\.\.\/(?:why|formats)\/)(?:(?:fr|ja)\/)?$/.exec(h)) a.href=m[1]+f;
+ else if(m=/^(bep-builder\.html|\.\.\/lod\/)(?:\?lang=\w+)?$/.exec(h)) a.href=m[1]+'?lang='+l}
+['click','auxclick','contextmenu','focusin','mouseover','touchstart'].forEach(function(t){document.addEventListener(t,function(e){var a=e.target.closest&&e.target.closest('.sitenav a');if(a)fix(a)},true)})})();
 </script>

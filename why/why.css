@@ -42,6 +42,7 @@ li{margin:6px 0}
 .box.fix{border-left:4px solid var(--good)}
 .evidence li{margin:10px 0}
 sup a{text-decoration:none;font-size:.75em;padding:0 1px}
+sup+sup::before{content:",";font-size:.75em}  /* separate adjacent footnote links: 3,7 not 37 */
 .sources{font-size:.92rem}
 .sources li{margin:8px 0;overflow-wrap:anywhere}
 .sources .who{color:var(--muted)}
