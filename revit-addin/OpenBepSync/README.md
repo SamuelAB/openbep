@@ -13,13 +13,13 @@ This add-in adds an **OpenBEP** tab to Revit with two buttons: **Sync parameters
 3. **It flags problems**:
    - **Name conflicts**: a parameter with the same name but a different GUID. This is the classic duplicate that makes data unreadable.
    - **Scope mismatches**: a parameter bound as instance in the model when the plan says type, or the reverse. These are left as they are.
-   - **Leftovers**: OpenBEP parameters (`CA_` prefix) in the model that are no longer in the plan.
+   - **Leftovers**: OpenBEP parameters (`OB_` prefix, or `CA_` from before October 2026) in the model that are no longer in the plan.
 4. **It writes a report** (`OpenBEP-sync-report-<date>.csv`) next to the binding list.
 5. **You choose** one of two options:
    - add and bind the missing parameters;
    - also delete the leftover OpenBEP parameters. This asks for confirmation, because their values are deleted too.
 
-   Parameters without the `CA_` prefix are never deleted. Everything happens in one transaction, so one Undo reverses it.
+   Parameters without the `OB_` or `CA_` prefix are never deleted. Everything happens in one transaction, so one Undo reverses it.
 
 The user's own shared parameter file setting is restored afterwards.
 
@@ -60,7 +60,7 @@ For developers only; nothing happens unless `%AppData%\OpenBEP\autotest.json` ex
 1. builds the library from `familiesCsv` with no dialogs, and logs each family's category, hosting and solid size per type;
 2. creates a project from `DefaultMetric.rte` (or `template`), saves it in `out`, places the showroom and exports PNGs of the 3D view and the plan;
 3. runs Sync parameters on `bindings` (dry run, apply, second dry run);
-4. if `ifcPsets` is set: fills empty OpenBEP `CA_` parameters, and empty Type Mark, Mark, Manufacturer, Model and Description, with unique test values (warnings deleted, so a duplicate-mark warning cannot roll the fill back) and exports `OpenBEP-autotest.ifc` (IFC4, base quantities, common property sets, plus the user-defined property set file from [`shared-parameters/`](../../shared-parameters/)); check it with `test/check_ifc.py model.ifc plan.ids` (ifcopenshell and ifctester) against the IDS downloaded from the BEP Builder;
+4. if `ifcPsets` is set: fills empty OpenBEP `OB_` parameters, and empty Type Mark, Mark, Manufacturer, Model and Description, with unique test values (warnings deleted, so a duplicate-mark warning cannot roll the fill back) and exports `OpenBEP-autotest.ifc` (IFC4, base quantities, common property sets, plus the user-defined property set file from [`shared-parameters/`](../../shared-parameters/)); check it with `test/check_ifc.py model.ifc plan.ids` (ifcopenshell and ifctester) against the IDS downloaded from the BEP Builder;
 5. saves the project, writes `autotest.log` and `autotest-done.txt` in `out`, and closes Revit (unless `"exit": "no"`).
 
 Every Revit dialog is answered automatically ("save?" questions with No) and logged.

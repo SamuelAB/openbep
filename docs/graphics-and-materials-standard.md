@@ -25,7 +25,7 @@ National Defence's [CAD/BIM Standard 2.3](https://cafnet.dcc-cdc.gc.ca/cad_bim_g
 | --- | --- | --- | --- |
 | Pen widths | 6 preferred: 0.09 (grids), 0.18, 0.25, 0.35, 0.50, 0.70 | Revit's own metric table, pens 1 to 7 | No template edits; Revit thins lines at small scales by itself |
 | Colour | Never sets the printed width | Same |  |
-| Line patterns | `DND_DOT`, `DND_DASHED_SHORT`, `DND_CENTER_DASH` and others | `CA_Dot`, `CA_Hidden`, `CA_Centre` | Same set, CA\_ names |
+| Line patterns | `DND_DOT`, `DND_DASHED_SHORT`, `DND_CENTER_DASH` and others | `OB_Dot`, `OB_Hidden`, `OB_Centre` | Same set, OB\_ names |
 | Service lines | About 130 named line types with letters in the line (W, SAN, G) | Revit systems and tags, see Service lines below | Revit line patterns can't hold text |
 | Fonts | Arial Narrow 2.5 (notes), 3.5 (room names); Arial 5 (titles) | Same |  |
 | Smallest text | 2.0 mm for object IDs (poles, manholes) | 2.5 mm | Must read at half size |
@@ -40,12 +40,12 @@ The same rules as the [parameter dictionary](parameter-dictionary.md): names are
 
 | Rule | Why | Règle |
 | --- | --- | --- |
-| Names start with `CA_`, in English, no accents | Same name in every model, readable by scripts | Les noms commencent par `CA_`, en anglais, sans accents |
+| Names start with `OB_`, in English, no accents | Same name in every model, readable by scripts | Les noms commencent par `OB_`, en anglais, sans accents |
 | Every item has an English and a French label in this document | French users read the label, not the name | Chaque élément a une étiquette anglaise et française |
 | Metric only: mm on paper, mm or m in the model | Canada builds in metric | Métrique seulement |
 | Sizes are given at print size, not model size | A 2.5 mm note is 2.5 mm on the sheet at any scale | Les tailles sont données à l'impression |
 | The template ships only what this standard lists | Each extra line style, text type or material is a duplicate waiting to happen | Le gabarit contient seulement ce qui est listé ici |
-| Project additions use `CA_X_` and are reported at handover | Lets the owner see what was added and why | Les ajouts de projet utilisent `CA_X_` |
+| Project additions use `OB_X_` and are reported at handover | Lets the owner see what was added and why | Les ajouts de projet utilisent `OB_X_` |
 | No brand names in names; brands go in a parameter | Products change, the name shouldn't | Pas de marque dans les noms |
 
 ## Line types
@@ -75,22 +75,22 @@ Annotation pens are the one place we change Revit: its metric default starts at 
 
 | Name | Dashes and gaps (mm) | Used for | Nom (FR) |
 | --- | --- | --- | --- |
-| `CA_Solid` | continuous | Default | Continu |
-| `CA_Hidden` | 3 dash, 1.5 gap | Hidden edges | Caché |
-| `CA_Overhead` | 6 dash, 3 gap | Above the cut plane | Au-dessus |
-| `CA_Centre` | 12 dash, 3 gap, 1.5 dash, 3 gap | Centrelines, grids | Axe |
-| `CA_Demolish` | 1.5 dash, 1.5 gap | Elements to demolish | À démolir |
-| `CA_Dot` | dot, 1.5 gap | Clearance zones, setbacks | Pointillé |
-| `CA_PropertyLine` | 18 dash, 3 gap, 1.5 dash, 3 gap, 1.5 dash, 3 gap | Property and lot lines | Limite de propriété |
-| `CA_Existing` | 9 dash, 3 gap | Existing to remain (civil) | Existant à conserver |
+| `OB_Solid` | continuous | Default | Continu |
+| `OB_Hidden` | 3 dash, 1.5 gap | Hidden edges | Caché |
+| `OB_Overhead` | 6 dash, 3 gap | Above the cut plane | Au-dessus |
+| `OB_Centre` | 12 dash, 3 gap, 1.5 dash, 3 gap | Centrelines, grids | Axe |
+| `OB_Demolish` | 1.5 dash, 1.5 gap | Elements to demolish | À démolir |
+| `OB_Dot` | dot, 1.5 gap | Clearance zones, setbacks | Pointillé |
+| `OB_PropertyLine` | 18 dash, 3 gap, 1.5 dash, 3 gap, 1.5 dash, 3 gap | Property and lot lines | Limite de propriété |
+| `OB_Existing` | 9 dash, 3 gap | Existing to remain (civil) | Existant à conserver |
 
 ### Service lines
 
-CAD standards draw each utility with its own line type carrying letters, such as DND's `WATER` (W) or `SAN`. Revit line patterns can only hold dashes, gaps and dots. So in Revit a service is a modelled system (pipe, duct, conduit) whose System Classification and `System Name` carry the meaning, and a tag prints the letter code along the run. Site services drawn as lines use `CA_<pen>_<Pattern>` with an overhead (`_OH`) or underground (`_UG`) suffix in the line style name, for example `CA_2_Hidden_UG`.
+CAD standards draw each utility with its own line type carrying letters, such as DND's `WATER` (W) or `SAN`. Revit line patterns can only hold dashes, gaps and dots. So in Revit a service is a modelled system (pipe, duct, conduit) whose System Classification and `System Name` carry the meaning, and a tag prints the letter code along the run. Site services drawn as lines use `OB_<pen>_<Pattern>` with an overhead (`_OH`) or underground (`_UG`) suffix in the line style name, for example `OB_2_Hidden_UG`.
 
 ### Line styles
 
-One pattern per pen where needed, named `CA_<pen>_<Pattern>`: for example `CA_1_Hidden`, `CA_2_Solid`, `CA_2_Overhead`, `CA_5_Solid`, `CA_2_Centre`, `CA_4_Demolish`. Revit's own line styles (`<Hidden>`, `<Overhead>`) are set to the same pens and patterns so both read the same.
+One pattern per pen where needed, named `OB_<pen>_<Pattern>`: for example `OB_1_Hidden`, `OB_2_Solid`, `OB_2_Overhead`, `OB_5_Solid`, `OB_2_Centre`, `OB_4_Demolish`. Revit's own line styles (`<Hidden>`, `<Overhead>`) are set to the same pens and patterns so both read the same.
 
 ### Object styles (key categories)
 
@@ -104,7 +104,7 @@ One pattern per pen where needed, named `CA_<pen>_<Pattern>`: for example `CA_1_
 | Ceilings | 1 | 4 | Solid |
 | Furniture, casework, equipment | 1 | 3 | Solid |
 | Ducts, pipes, cable trays | 2 | 3 | Solid |
-| Grids | 2 | — | `CA_Centre` |
+| Grids | 2 | — | `OB_Centre` |
 | Topography (toposolid) | 2 | 7 | Solid |
 
 Pens are a proposal checked against AEC (UK) and PSPC, not tested on a printed set yet.
@@ -121,11 +121,11 @@ Two fonts, five heights, and nothing below 2.5 mm, so every sheet can still be r
 
 | Name | Font | Height (mm) | Used for | Usage (FR) |
 | --- | --- | --- | --- | --- |
-| `CA_Text_2.5` | Arial Narrow | 2.5 | Notes, tags, schedules | Notes, étiquettes |
-| `CA_Text_2.5_Bold` | Arial Narrow | 2.5 | Note headings | Titres de notes |
-| `CA_Text_3.5` | Arial Narrow | 3.5 | Room names, sub-headings | Noms de locaux |
-| `CA_Text_5_Bold` | Arial | 5 | View titles | Titres de vues |
-| `CA_Text_7_Bold` | Arial | 7 | Sheet titles | Titres de feuilles |
+| `OB_Text_2.5` | Arial Narrow | 2.5 | Notes, tags, schedules | Notes, étiquettes |
+| `OB_Text_2.5_Bold` | Arial Narrow | 2.5 | Note headings | Titres de notes |
+| `OB_Text_3.5` | Arial Narrow | 3.5 | Room names, sub-headings | Noms de locaux |
+| `OB_Text_5_Bold` | Arial | 5 | View titles | Titres de vues |
+| `OB_Text_7_Bold` | Arial | 7 | Sheet titles | Titres de feuilles |
 
 All heights come from the ISO 3098 series. 1.8 mm is not allowed, since PSPC requires approval below 2 mm and Metrolinx requires legibility at half size.
 
@@ -133,14 +133,14 @@ All heights come from the ISO 3098 series. 1.8 mm is not allowed, since PSPC req
 
 | Name | Units | Text | Used for |
 | --- | --- | --- | --- |
-| `CA_Dim_Linear_mm` | mm, no decimals | `CA_Text_2.5` | Buildings |
-| `CA_Dim_Linear_m` | m, 3 decimals | `CA_Text_2.5` | Site, civil, rail |
-| `CA_Dim_Angular` | degrees, 1 decimal | `CA_Text_2.5` | All |
-| `CA_Dim_Radial` | mm | `CA_Text_2.5` | All |
-| `CA_Spot_Elevation_m` | m, 3 decimals | `CA_Text_2.5` | Levels, grading |
-| `CA_Spot_Slope_Percent` | %, 1 decimal | `CA_Text_2.5` | Ramps, roofs, site |
+| `OB_Dim_Linear_mm` | mm, no decimals | `OB_Text_2.5` | Buildings |
+| `OB_Dim_Linear_m` | m, 3 decimals | `OB_Text_2.5` | Site, civil, rail |
+| `OB_Dim_Angular` | degrees, 1 decimal | `OB_Text_2.5` | All |
+| `OB_Dim_Radial` | mm | `OB_Text_2.5` | All |
+| `OB_Spot_Elevation_m` | m, 3 decimals | `OB_Text_2.5` | Levels, grading |
+| `OB_Spot_Slope_Percent` | %, 1 decimal | `OB_Text_2.5` | Ramps, roofs, site |
 
-Arrowheads: `CA_Arrow_Filled_15` for leaders, `CA_Tick_Diagonal` for dimensions.
+Arrowheads: `OB_Arrow_Filled_15` for leaders, `OB_Tick_Diagonal` for dimensions.
 
 ### Bilingual sheets
 
@@ -156,27 +156,27 @@ A material is named for what it is, not for who made it or how thick it is. The 
 
 ### Name pattern
 
-`CA_<Class>_<Type>_<Differentiator>`, following the Open BIM Object Standard pattern.
+`OB_<Class>_<Type>_<Differentiator>`, following the Open BIM Object Standard pattern.
 
 | Example | Class | Matériau (FR) |
 | --- | --- | --- |
-| `CA_Concrete_CastInPlace_35MPa` | Concrete | Béton coulé en place 35 MPa |
-| `CA_Concrete_Precast_50MPa` | Concrete | Béton préfabriqué 50 MPa |
-| `CA_Masonry_ConcreteBlock_Normal` | Masonry | Bloc de béton |
-| `CA_Masonry_Brick_Clay` | Masonry | Brique d'argile |
-| `CA_Metal_Steel_350W` | Metal | Acier 350W |
-| `CA_Metal_Aluminium_Anodized` | Metal | Aluminium anodisé |
-| `CA_Wood_Lumber_SPF` | Wood | Bois d'œuvre É-P-S |
-| `CA_Wood_CLT` | Wood | Bois lamellé-croisé |
-| `CA_Gypsum_Board_TypeX` | Gypsum | Gypse type X |
-| `CA_Insulation_MineralWool_Batt` | Insulation | Laine minérale en matelas |
-| `CA_Insulation_XPS_Board` | Insulation | Polystyrène extrudé |
-| `CA_Membrane_AirVapour_SelfAdhered` | Membrane | Pare-air/vapeur autocollant |
-| `CA_Glass_Laminated_Clear` | Glass | Verre feuilleté clair |
-| `CA_Finish_Paint_Latex` | Finish | Peinture latex |
-| `CA_Earth_Gravel_Granular_A` | Earth | Gravier granulaire A |
+| `OB_Concrete_CastInPlace_35MPa` | Concrete | Béton coulé en place 35 MPa |
+| `OB_Concrete_Precast_50MPa` | Concrete | Béton préfabriqué 50 MPa |
+| `OB_Masonry_ConcreteBlock_Normal` | Masonry | Bloc de béton |
+| `OB_Masonry_Brick_Clay` | Masonry | Brique d'argile |
+| `OB_Metal_Steel_350W` | Metal | Acier 350W |
+| `OB_Metal_Aluminium_Anodized` | Metal | Aluminium anodisé |
+| `OB_Wood_Lumber_SPF` | Wood | Bois d'œuvre É-P-S |
+| `OB_Wood_CLT` | Wood | Bois lamellé-croisé |
+| `OB_Gypsum_Board_TypeX` | Gypsum | Gypse type X |
+| `OB_Insulation_MineralWool_Batt` | Insulation | Laine minérale en matelas |
+| `OB_Insulation_XPS_Board` | Insulation | Polystyrène extrudé |
+| `OB_Membrane_AirVapour_SelfAdhered` | Membrane | Pare-air/vapeur autocollant |
+| `OB_Glass_Laminated_Clear` | Glass | Verre feuilleté clair |
+| `OB_Finish_Paint_Latex` | Finish | Peinture latex |
+| `OB_Earth_Gravel_Granular_A` | Earth | Gravier granulaire A |
 
-Classes are fixed: Concrete, Masonry, Metal, Wood, Gypsum, Insulation, Membrane, Glass, Finish, Plastic, Earth, Generic. `CA_Generic_<Class>` is only for LOD 100 and 200, before the material is known.
+Classes are fixed: Concrete, Masonry, Metal, Wood, Gypsum, Insulation, Membrane, Glass, Finish, Plastic, Earth, Generic. `OB_Generic_<Class>` is only for LOD 100 and 200, before the material is known.
 
 ### Data each material must carry
 
@@ -184,19 +184,19 @@ Classes are fixed: Concrete, Masonry, Metal, Wood, Gypsum, Insulation, Membrane,
 | --- | --- | --- | --- |
 | Class | Always | One of the 12 classes | Classe |
 | Description | Always | Plain English, shown in tags | Description |
-| `CA_Description_FR` | Always | Plain French, shown in French tags | Description française |
+| `OB_Description_FR` | Always | Plain French, shown in French tags | Description française |
 | Keynote | LOD 300 and up | Masterformat section, such as 09 21 16 | Note-clé |
 | Thermal: conductivity (W/(m·K)), density (kg/m³), specific heat (J/(kg·K)) | Energy analysis use | From the manufacturer or a cited reference table, never left at Revit's default | Propriétés thermiques |
 | Structural: strength, modulus | Structural analysis use | From the structural engineer's specification | Propriétés structurales |
 | Manufacturer, Model | LOD 400 and up | The product actually bought | Fabricant, modèle |
 
-Each material also carries `CA_UniclassMa`, its code from the free [Uniclass Materials table](https://uniclass.thenbs.com/taxon/ma), such as Ma\_40\_19 for concrete. The checker refuses a Class and a code that disagree.
+Each material also carries `OB_UniclassMa`, its code from the free [Uniclass Materials table](https://uniclass.thenbs.com/taxon/ma), such as Ma\_40\_19 for concrete. The checker refuses a Class and a code that disagree.
 
 ### Graphics and appearance
 
-- **Cut and surface patterns** come from the material, not from overrides, so every view agrees. Each class has one cut pattern, such as `CA_Concrete`, `CA_Insulation_Batt` or `CA_Earth`, drawn with pen 1.
+- **Cut and surface patterns** come from the material, not from overrides, so every view agrees. Each class has one cut pattern, such as `OB_Concrete`, `OB_Insulation_Batt` or `OB_Earth`, drawn with pen 1.
 - **Appearance:** one appearance asset per material, Revit's own library or a plain colour. No imported textures unless the visualisation use is chosen, since they bloat the model.
-- **No duplicates:** Revit copies a material on every family load. The OpenBEP Sync add-in should flag any material not starting with `CA_` at each milestone.
+- **No duplicates:** Revit copies a material on every family load. The OpenBEP Sync add-in should flag any material not starting with `OB_` at each milestone.
 
 ### What counts as no material
 
@@ -205,7 +205,7 @@ On real projects the materials that reach the estimator are the ones the model c
 | Rule | Why | Règle |
 | --- | --- | --- |
 | `Default`, `<By Category>`, an empty material, or a material whose name is a Revit or family default (`Default Wall`, `Generic`, a family name) is **no material**. An element whose only material is one of these does not meet the element requirements of any use that needs quantities or materials. | A family that was never assigned a material still shows a colour and a pattern, so nobody notices until the quantity take-off comes back short. Written in the plan, the rule is the same for the modeller and for whatever tool checks the delivery, whichever file is delivered. | `Default`, `<By Category>`, un matériau vide ou un nom de matériau par défaut de Revit ne sont **pas un matériau**. Un élément qui n'en porte pas d'autre échoue à la vérification. |
-| One material per real material. Fifty concretes that differ only by family of origin are one `CA_Concrete_CastInPlace_35MPa`. The deliverable at each milestone lists every material in use with its count of elements, and the list must fit on a page. | Every duplicate splits the quantity totals and hides the real amount of each material. On one federated hospital model, grouping materials by the words in their names was the only way to get a usable concrete total. | Un seul matériau par matériau réel. La liste des matériaux en usage est livrée à chaque jalon. |
+| One material per real material. Fifty concretes that differ only by family of origin are one `OB_Concrete_CastInPlace_35MPa`. The deliverable at each milestone lists every material in use with its count of elements, and the list must fit on a page. | Every duplicate splits the quantity totals and hides the real amount of each material. On one federated hospital model, grouping materials by the words in their names was the only way to get a usable concrete total. | Un seul matériau par matériau réel. La liste des matériaux en usage est livrée à chaque jalon. |
 | Material and category are checked together: a `Generic Models` or `Specialty Equipment` element with a real material still needs a proper category or a classification code before it is counted. | Generic Models is where elements land when the modeller did not find a category. They carry no useful built-in parameters and fall out of every schedule. | Un élément `Generic Models` avec un matériau réel doit tout de même porter une catégorie ou un code de classification. |
 
 ### Quantities by material
@@ -235,7 +235,7 @@ The most used graphics standards worldwide, and the rule each one gives us.
 | [VA BIM Manual](https://www.cfm.va.gov/til/bim/BIM-Manual.pdf) (US Veterans Affairs) | Required on VA projects | Dimensions stay linked to the model and are never overridden | Les cotes ne sont jamais modifiées à la main |
 | [Dutch Revit Standards (NLRS)](https://help.daqs.io/NL/NLRS/materiaalNaamgeving/) | Used by large Dutch contractors; Belgium's federal buildings agency runs a version | A classification code tied to each material | Un code de classification par matériau |
 | [Dutch NAA.K.T.](https://www.digigo.nu/ilsen-en-richtlijnen/tools-voor-informatiemanagement/naa-k-t/) (BIM basis ILS) | Required in the Dutch national information standard | Each part of a material name comes from a controlled list, so names can be checked by software | Chaque partie du nom vient d'une liste contrôlée |
-| [Uniclass Materials table](https://uniclass.thenbs.com/taxon/ma) (UK, NBS) | Free; UK national classification | `CA_UniclassMa` code on each material, such as Ma\_40\_19 Concrete | Code Uniclass Ma |
+| [Uniclass Materials table](https://uniclass.thenbs.com/taxon/ma) (UK, NBS) | Free; UK national classification | `OB_UniclassMa` code on each material, such as Ma\_40\_19 Concrete | Code Uniclass Ma |
 | [NBS BIM Object Standard](https://www.thenbs.com/knowledge/exploring-the-nbs-bim-object-standard-metadata-requirements) | UK national object library | Textures at least 512 px, 150 dpi, tileable | Textures d'au moins 512 px |
 | [Transport for NSW](https://standards.transport.nsw.gov.au/_entity/annotation/1a48d971-b235-ed11-9db2-000d3ae019e0) (applies AS 1100) | State transport agency | Every sheet must read at half size | Lisible à demi-échelle |
 
@@ -245,7 +245,7 @@ The NCS is the main US drafting standard, published by NIBS with AIA and CSI. Ve
 
 - **Pen width follows text height:** 2.5 mm text uses a 0.25 mm pen, 4 mm text a 0.35 mm pen, 6 mm titles a 0.50 mm pen. We apply this to our text types.
 - **Minimum CAD text 2.5 mm**, because smaller text can't be read on half-size sets. Same as ours.
-- **No bold, italic or underline in notes.** `CA_Text_2.5_Bold` is kept for note headings only.
+- **No bold, italic or underline in notes.** `OB_Text_2.5_Bold` is kept for note headings only.
 - **Hatch sparingly:** plans at 1:100 and smaller rarely need material hatching, and large areas are hatched only at their edges. This also avoids Revit's 0.05 mm pens at 1:200 and 1:500.
 - **Notes use generic material words** from MasterFormat ("membrane roofing", not a brand). Same rule as our material names.
 - **Dimensions:** at least 14.5 mm from the object and 10 mm between strings. USACE ties these to text height (10 mm and 7.5 mm at 2.5 mm text). We use the USACE rule so spacing scales with text.

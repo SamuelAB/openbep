@@ -13,306 +13,306 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Area	Area
 	Assembly Code	Label
 	Bar Diameter	Label
-	CA_AccessDoorProvided	Boolean
-	CA_AccessibleCeiling	Boolean
-	CA_AcousticRating	Label
-	CA_ActuationOperation	Label
-	CA_AirLeakageRate_Lsm2	Real
-	CA_ApproachSpeed_kmh	Real
-	CA_BallastDepth	Length
-	CA_BallastedTrack	Boolean
-	CA_BarCoating	Label
-	CA_BarcodeAssetLabel	Label
-	CA_BarrierFree	Boolean
-	CA_BarrierFreeFeatures	Boolean
-	CA_BarrierFreeFixture	Boolean
-	CA_BarrierSystemTestLevel	Label
-	CA_BaseDriveArrangement	Label
-	CA_BeddingClass	Label
-	CA_BirdFriendlyGlazing	Boolean
-	CA_BuildingAutomationReference	Label
-	CA_BuiltIn	Boolean
-	CA_CSAConfiguration	Label
-	CA_Cant	Length
-	CA_CapacityControl	Label
-	CA_CarInsideDimensions	Label
-	CA_CatalogueArticleNumber	Label
-	CA_CeilingSystem	Label
-	CA_ChamberSize	Label
-	CA_CircuitType	Label
-	CA_CoatingCorrosionProtection	Label
-	CA_ColourRenderingIndex	Integer
-	CA_CombustibleConstruction	Boolean
-	CA_ConcreteCover	Length
-	CA_ConcreteExposureClass	Label
-	CA_ConnectionSize	Length
-	CA_Construction	Label
-	CA_ContactWireHeight	Length
-	CA_ContinuousWeldedRail	Boolean
-	CA_CoolingCapacity_kW	Real
-	CA_CoordinateReferenceSystem	Label
-	CA_CoverFrame	Label
-	CA_CoverageArea	Area
-	CA_CrossSectionShape	Label
-	CA_CrossSlope_pct	Real
-	CA_CulvertOpening	Label
-	CA_CurbType	Label
-	CA_CurtainWallSystem	Label
-	CA_CutFillVolumes	Volume
-	CA_DelegatedDesign	Boolean
-	CA_Depth	Length
-	CA_DepthOfCover	Length
-	CA_DesignAxialResistance_kN	Real
-	CA_DesignBearingResistance_kPa	Real
-	CA_DesignCodeAndLiveLoad	Label
-	CA_DesignFlows	Label
-	CA_DesignHead_kPa	Real
-	CA_DesignLiveLoad_kPa	Real
-	CA_DesignLoad_kNm	Real
-	CA_DesignMovementRange	Label
-	CA_DesignSpeed_kmh	Real
-	CA_DesignSupplyAirflow_Ls	Real
-	CA_DesignSupplyTemperature_C	Real
-	CA_DesignTemperatureSetPoints	Label
-	CA_DesignWetBulbTemperature_C	Real
-	CA_DetectionSetPoint	Label
-	CA_DeviceAddress	Label
-	CA_DiameterSection	Label
-	CA_DisplacementAccommodated	Boolean
-	CA_DivergingRadius	Length
-	CA_DivergingSpeed_kmh	Real
-	CA_DrainageProvisions	Text
-	CA_DriveType	Label
-	CA_DropStructure	Boolean
-	CA_DynamicStaticRating	Label
-	CA_EdgeOffsetFromTrack	Length
-	CA_Efficiency_pct	Real
-	CA_ElectricalClearance	Length
-	CA_EmergencySecurityLightingType	Label
-	CA_EndTerminal	Label
-	CA_EnergySourceFuel	Label
-	CA_ExpectedServiceLife	Label
-	CA_ExtendsToStructure	Boolean
-	CA_ExternalStaticPressure_Pa	Real
-	CA_FaceType	Label
-	CA_FanArrangement	Label
-	CA_FanMotorPower_kW	Real
-	CA_FanPowered	Boolean
-	CA_FasteningSystem	Label
-	CA_FillRatio_pct	Real
-	CA_FilterRating	Label
-	CA_Finish	Text
-	CA_FinishColour	Label
-	CA_FireCompartmentBoundary	Boolean
-	CA_FireExit	Boolean
-	CA_FireProtection	Label
-	CA_FireResistanceRating	Label
-	CA_FirefightersElevator	Boolean
-	CA_FiringOperatingMode	Label
-	CA_FlowArrangement	Label
-	CA_FlowCoefficient	Real
-	CA_FlowRateFlushVolume	Label
-	CA_FrameMaterial	Label
-	CA_FromToStructure	Label
-	CA_FrostProtectionDepth	Length
-	CA_FuelAutonomy_h	Real
-	CA_FuelTankCapacity_L	Real
-	CA_FullLoadEfficiency	Real
-	CA_GasketWaterproofing	Label
-	CA_GeneratorEfficiency_pct	Real
-	CA_GeotechnicalReport	Label
-	CA_GlazingMakeUp	Label
-	CA_GrossFloorArea	Area
-	CA_GrossWeight_kg	Real
-	CA_GroundFaultProtected	Boolean
-	CA_Hand	Label
-	CA_HandrailDiameter	Length
-	CA_HardwareSet	Label
-	CA_HasCover	Boolean
-	CA_HasIntegralDamperControl	Boolean
-	CA_HasStepsLadder	Boolean
-	CA_HazardClassification	Label
-	CA_Headroom	Length
-	CA_HeatGainToSpace_W	Real
-	CA_HeatRecoveryEffectiveness_pct	Real
-	CA_HeatRejectionCapacity_kW	Real
-	CA_HeatRejectionRate_kW	Real
-	CA_HeatTransferCapacity_kW	Real
-	CA_HeatingCapacity_kW	Real
-	CA_HeatingOutput_kW	Real
-	CA_IPRating	Label
-	CA_Impedance	Label
-	CA_InfillType	Label
-	CA_InletSize	Length
-	CA_InputPower_kW	Real
-	CA_InputRating_kW	Real
-	CA_InspectionElementReference	Label
-	CA_InstallationDate	Label
-	CA_InstallationRecord	Text
-	CA_InternalDiameter	Length
-	CA_InvertElevation	Length
-	CA_JointType	Label
-	CA_KFactor	Real
-	CA_LampLightSourceType	Label
-	CA_LaneWidth	Length
-	CA_LayerFunction	Label
-	CA_LayerMass_t	Real
-	CA_LayerThickness	Length
-	CA_LayerVolume	Volume
-	CA_LeafMaterial	Label
-	CA_LeakageWhenClosed_Ls	Real
-	CA_LegendMessage	Text
-	CA_LineSpeed_kmh	Real
-	CA_LiningThickness	Length
-	CA_ListingCertification	Label
-	CA_MainBoard	Boolean
-	CA_MajorOccupancy	Label
-	CA_MakeUpWaterRequirement_Ls	Real
-	CA_MemberSpaces	Label
-	CA_MinimumMaximumAirflow_Ls	Real
-	CA_MinimumOutdoorAirflow_Ls	Real
-	CA_MixMaterialSpecification	Label
-	CA_MotorNameplatePower_kW	Real
-	CA_MountingType	Label
-	CA_MoveableTemporary	Boolean
-	CA_NetworkHeadEndReference	Label
-	CA_NoiseCriterionAtDesignFlow	Label
-	CA_NominalAirflow_Ls	Real
-	CA_NominalDimensions	Label
-	CA_NominalLength	Length
-	CA_NominalSpeed_rpm	Real
-	CA_NominalWidth	Length
-	CA_NonSlipSurface	Boolean
-	CA_NormallyOpen	Boolean
-	CA_NumberOfCells	Real
-	CA_NumberOfGangs	Real
-	CA_NumberOfLampsAspects	Real
-	CA_NumberOfLightSources	Integer
-	CA_NumberOfPlates	Real
-	CA_NumberOfSockets	Real
-	CA_OccupantLoad	Real
-	CA_OnEmergencyLifeSafetyPower	Boolean
-	CA_Operation	Label
-	CA_OperationPartitioning	Label
-	CA_OperationType	Label
-	CA_OutdoorAirVentilation_Ls	Real
-	CA_OwnerAssetIdentifier	Label
-	CA_ParkingStalls	Real
-	CA_ParkingUse	Label
-	CA_PartLoadEfficiency	Real
-	CA_PartOfAnExit	Boolean
-	CA_PavementMarking	Label
-	CA_PavementThickness	Length
-	CA_PavementType	Label
-	CA_PerformanceClass	Label
-	CA_PieceFabricationMark	Label
-	CA_PipeClass	Label
-	CA_Placing	Label
-	CA_PlatformHeightAboveRail	Length
-	CA_PlatformLength	Length
-	CA_PointMachines	Real
-	CA_PoleHeight	Length
-	CA_PoleStrength	Label
-	CA_PositionalAccuracy	Length
-	CA_PostSpacing	Length
-	CA_PowerSource	Label
-	CA_Prefabricated	Boolean
-	CA_PressureClass_Pa	Real
-	CA_PressureRating_kPa	Real
-	CA_Prestressing	Label
-	CA_PrimaryVoltage_V	Real
-	CA_ProgramArea	Area
-	CA_RailSection	Label
-	CA_RatedLoad_kg	Real
-	CA_RatedOutput_kW	Real
-	CA_RatedPassengers	Real
-	CA_RatedPower_kVA	Real
-	CA_RatedSpeed_ms	Real
-	CA_RecoveryRate_Lh	Real
-	CA_ReferenceAlignment	Label
-	CA_Refrigerant	Label
-	CA_RegulatorDeviceNumber	Label
-	CA_ReheatType	Label
-	CA_ReinforcementGrade	Label
-	CA_ReinforcementRatio_kgm3	Real
-	CA_ReleaseTemperature_C	Real
-	CA_RequiredIlluminance_lx	Real
-	CA_RequiredSightingDistance	Length
-	CA_Response	Label
-	CA_RetroreflectiveSheeting	Label
-	CA_RimCoverElevation	Length
-	CA_RingSegmentType	Label
-	CA_RoofingMembraneSystem	Label
-	CA_RotationAccommodated	Boolean
-	CA_RoughnessAtHandover_mkm	Real
-	CA_ScourProtection	Label
-	CA_SealLeakageClass	Label
-	CA_SecondaryVoltage_V	Real
-	CA_SecurityRating	Label
-	CA_SecurityZone	Label
-	CA_SeismicRestraint	Boolean
-	CA_SelfClosing	Boolean
-	CA_SerialNumber	Label
-	CA_SettingTemperaturePreset	Label
-	CA_Shape	Label
-	CA_SignCategory	Label
-	CA_SignSize	Label
-	CA_SignalType	Label
-	CA_SiteArea	Area
-	CA_SmokeStop	Boolean
-	CA_SolarReflectanceIndex	Real
-	CA_SoundAbsorption	Label
-	CA_SpaceClassification	Label
-	CA_Span	Length
-	CA_SpanLength	Length
-	CA_SprinklerType	Label
-	CA_Sprinklered	Boolean
-	CA_Stagger	Length
-	CA_StandardSignCode	Label
-	CA_StaticPressure_Pa	Real
-	CA_StationChainageRange	Length
-	CA_StopsOpenings	Label
-	CA_StorageCapacity_L	Real
-	CA_StorageSetPoint_C	Real
-	CA_StructureNumber	Label
-	CA_SupplyInstallResponsibility	Label
-	CA_SupportType	Label
-	CA_SurfaceFlameSpreadRating	Label
-	CA_SurveySourceAndDate	Label
-	CA_SwitchFunction	Label
-	CA_SwitchHeater	Label
-	CA_SystemHeight	Length
-	CA_TactileBraille	Boolean
-	CA_TactileWarningSurface	Boolean
-	CA_TemperatureRating_C	Real
-	CA_ThermalEfficiency_pct	Real
-	CA_ThrowLength	Length
-	CA_TieSleeperType	Label
-	CA_TieSpacing	Length
-	CA_TotalCoolingCapacity_kW	Real
-	CA_TotalMass_kg	Real
-	CA_TrackGauge	Length
-	CA_TrackIdentifier	Label
-	CA_TransitionSection	Boolean
-	CA_TrayConduitType	Label
-	CA_TurnoutType	Label
-	CA_Type	Label
-	CA_UtilityConnections	Text
-	CA_UtilityService	Label
-	CA_ValveMechanism	Label
-	CA_VariableFrequencyDrive	Boolean
-	CA_VectorGroup	Label
-	CA_VerticalLoadCapacity_kN	Real
-	CA_VideoResolution	Label
-	CA_VisualSignalIntensity_cd	Real
-	CA_WallSystem	Label
-	CA_WarrantyDuration	Label
-	CA_WarrantyStartDate	Label
-	CA_WearingSurfaceWaterproofing	Label
-	CA_WorkingPressureRating_kPa	Real
-	CA_WorkingTestPressure_kPa	Real
-	CA_ZoneArea	Area
-	CA_ZoneType	Label
+	OB_AccessDoorProvided	Boolean
+	OB_AccessibleCeiling	Boolean
+	OB_AcousticRating	Label
+	OB_ActuationOperation	Label
+	OB_AirLeakageRate_Lsm2	Real
+	OB_ApproachSpeed_kmh	Real
+	OB_BallastDepth	Length
+	OB_BallastedTrack	Boolean
+	OB_BarCoating	Label
+	OB_BarcodeAssetLabel	Label
+	OB_BarrierFree	Boolean
+	OB_BarrierFreeFeatures	Boolean
+	OB_BarrierFreeFixture	Boolean
+	OB_BarrierSystemTestLevel	Label
+	OB_BaseDriveArrangement	Label
+	OB_BeddingClass	Label
+	OB_BirdFriendlyGlazing	Boolean
+	OB_BuildingAutomationReference	Label
+	OB_BuiltIn	Boolean
+	OB_CSAConfiguration	Label
+	OB_Cant	Length
+	OB_CapacityControl	Label
+	OB_CarInsideDimensions	Label
+	OB_CatalogueArticleNumber	Label
+	OB_CeilingSystem	Label
+	OB_ChamberSize	Label
+	OB_CircuitType	Label
+	OB_CoatingCorrosionProtection	Label
+	OB_ColourRenderingIndex	Integer
+	OB_CombustibleConstruction	Boolean
+	OB_ConcreteCover	Length
+	OB_ConcreteExposureClass	Label
+	OB_ConnectionSize	Length
+	OB_Construction	Label
+	OB_ContactWireHeight	Length
+	OB_ContinuousWeldedRail	Boolean
+	OB_CoolingCapacity_kW	Real
+	OB_CoordinateReferenceSystem	Label
+	OB_CoverFrame	Label
+	OB_CoverageArea	Area
+	OB_CrossSectionShape	Label
+	OB_CrossSlope_pct	Real
+	OB_CulvertOpening	Label
+	OB_CurbType	Label
+	OB_CurtainWallSystem	Label
+	OB_CutFillVolumes	Volume
+	OB_DelegatedDesign	Boolean
+	OB_Depth	Length
+	OB_DepthOfCover	Length
+	OB_DesignAxialResistance_kN	Real
+	OB_DesignBearingResistance_kPa	Real
+	OB_DesignCodeAndLiveLoad	Label
+	OB_DesignFlows	Label
+	OB_DesignHead_kPa	Real
+	OB_DesignLiveLoad_kPa	Real
+	OB_DesignLoad_kNm	Real
+	OB_DesignMovementRange	Label
+	OB_DesignSpeed_kmh	Real
+	OB_DesignSupplyAirflow_Ls	Real
+	OB_DesignSupplyTemperature_C	Real
+	OB_DesignTemperatureSetPoints	Label
+	OB_DesignWetBulbTemperature_C	Real
+	OB_DetectionSetPoint	Label
+	OB_DeviceAddress	Label
+	OB_DiameterSection	Label
+	OB_DisplacementAccommodated	Boolean
+	OB_DivergingRadius	Length
+	OB_DivergingSpeed_kmh	Real
+	OB_DrainageProvisions	Text
+	OB_DriveType	Label
+	OB_DropStructure	Boolean
+	OB_DynamicStaticRating	Label
+	OB_EdgeOffsetFromTrack	Length
+	OB_Efficiency_pct	Real
+	OB_ElectricalClearance	Length
+	OB_EmergencySecurityLightingType	Label
+	OB_EndTerminal	Label
+	OB_EnergySourceFuel	Label
+	OB_ExpectedServiceLife	Label
+	OB_ExtendsToStructure	Boolean
+	OB_ExternalStaticPressure_Pa	Real
+	OB_FaceType	Label
+	OB_FanArrangement	Label
+	OB_FanMotorPower_kW	Real
+	OB_FanPowered	Boolean
+	OB_FasteningSystem	Label
+	OB_FillRatio_pct	Real
+	OB_FilterRating	Label
+	OB_Finish	Text
+	OB_FinishColour	Label
+	OB_FireCompartmentBoundary	Boolean
+	OB_FireExit	Boolean
+	OB_FireProtection	Label
+	OB_FireResistanceRating	Label
+	OB_FirefightersElevator	Boolean
+	OB_FiringOperatingMode	Label
+	OB_FlowArrangement	Label
+	OB_FlowCoefficient	Real
+	OB_FlowRateFlushVolume	Label
+	OB_FrameMaterial	Label
+	OB_FromToStructure	Label
+	OB_FrostProtectionDepth	Length
+	OB_FuelAutonomy_h	Real
+	OB_FuelTankCapacity_L	Real
+	OB_FullLoadEfficiency	Real
+	OB_GasketWaterproofing	Label
+	OB_GeneratorEfficiency_pct	Real
+	OB_GeotechnicalReport	Label
+	OB_GlazingMakeUp	Label
+	OB_GrossFloorArea	Area
+	OB_GrossWeight_kg	Real
+	OB_GroundFaultProtected	Boolean
+	OB_Hand	Label
+	OB_HandrailDiameter	Length
+	OB_HardwareSet	Label
+	OB_HasCover	Boolean
+	OB_HasIntegralDamperControl	Boolean
+	OB_HasStepsLadder	Boolean
+	OB_HazardClassification	Label
+	OB_Headroom	Length
+	OB_HeatGainToSpace_W	Real
+	OB_HeatRecoveryEffectiveness_pct	Real
+	OB_HeatRejectionCapacity_kW	Real
+	OB_HeatRejectionRate_kW	Real
+	OB_HeatTransferCapacity_kW	Real
+	OB_HeatingCapacity_kW	Real
+	OB_HeatingOutput_kW	Real
+	OB_IPRating	Label
+	OB_Impedance	Label
+	OB_InfillType	Label
+	OB_InletSize	Length
+	OB_InputPower_kW	Real
+	OB_InputRating_kW	Real
+	OB_InspectionElementReference	Label
+	OB_InstallationDate	Label
+	OB_InstallationRecord	Text
+	OB_InternalDiameter	Length
+	OB_InvertElevation	Length
+	OB_JointType	Label
+	OB_KFactor	Real
+	OB_LampLightSourceType	Label
+	OB_LaneWidth	Length
+	OB_LayerFunction	Label
+	OB_LayerMass_t	Real
+	OB_LayerThickness	Length
+	OB_LayerVolume	Volume
+	OB_LeafMaterial	Label
+	OB_LeakageWhenClosed_Ls	Real
+	OB_LegendMessage	Text
+	OB_LineSpeed_kmh	Real
+	OB_LiningThickness	Length
+	OB_ListingCertification	Label
+	OB_MainBoard	Boolean
+	OB_MajorOccupancy	Label
+	OB_MakeUpWaterRequirement_Ls	Real
+	OB_MemberSpaces	Label
+	OB_MinimumMaximumAirflow_Ls	Real
+	OB_MinimumOutdoorAirflow_Ls	Real
+	OB_MixMaterialSpecification	Label
+	OB_MotorNameplatePower_kW	Real
+	OB_MountingType	Label
+	OB_MoveableTemporary	Boolean
+	OB_NetworkHeadEndReference	Label
+	OB_NoiseCriterionAtDesignFlow	Label
+	OB_NominalAirflow_Ls	Real
+	OB_NominalDimensions	Label
+	OB_NominalLength	Length
+	OB_NominalSpeed_rpm	Real
+	OB_NominalWidth	Length
+	OB_NonSlipSurface	Boolean
+	OB_NormallyOpen	Boolean
+	OB_NumberOfCells	Real
+	OB_NumberOfGangs	Real
+	OB_NumberOfLampsAspects	Real
+	OB_NumberOfLightSources	Integer
+	OB_NumberOfPlates	Real
+	OB_NumberOfSockets	Real
+	OB_OccupantLoad	Real
+	OB_OnEmergencyLifeSafetyPower	Boolean
+	OB_Operation	Label
+	OB_OperationPartitioning	Label
+	OB_OperationType	Label
+	OB_OutdoorAirVentilation_Ls	Real
+	OB_OwnerAssetIdentifier	Label
+	OB_ParkingStalls	Real
+	OB_ParkingUse	Label
+	OB_PartLoadEfficiency	Real
+	OB_PartOfAnExit	Boolean
+	OB_PavementMarking	Label
+	OB_PavementThickness	Length
+	OB_PavementType	Label
+	OB_PerformanceClass	Label
+	OB_PieceFabricationMark	Label
+	OB_PipeClass	Label
+	OB_Placing	Label
+	OB_PlatformHeightAboveRail	Length
+	OB_PlatformLength	Length
+	OB_PointMachines	Real
+	OB_PoleHeight	Length
+	OB_PoleStrength	Label
+	OB_PositionalAccuracy	Length
+	OB_PostSpacing	Length
+	OB_PowerSource	Label
+	OB_Prefabricated	Boolean
+	OB_PressureClass_Pa	Real
+	OB_PressureRating_kPa	Real
+	OB_Prestressing	Label
+	OB_PrimaryVoltage_V	Real
+	OB_ProgramArea	Area
+	OB_RailSection	Label
+	OB_RatedLoad_kg	Real
+	OB_RatedOutput_kW	Real
+	OB_RatedPassengers	Real
+	OB_RatedPower_kVA	Real
+	OB_RatedSpeed_ms	Real
+	OB_RecoveryRate_Lh	Real
+	OB_ReferenceAlignment	Label
+	OB_Refrigerant	Label
+	OB_RegulatorDeviceNumber	Label
+	OB_ReheatType	Label
+	OB_ReinforcementGrade	Label
+	OB_ReinforcementRatio_kgm3	Real
+	OB_ReleaseTemperature_C	Real
+	OB_RequiredIlluminance_lx	Real
+	OB_RequiredSightingDistance	Length
+	OB_Response	Label
+	OB_RetroreflectiveSheeting	Label
+	OB_RimCoverElevation	Length
+	OB_RingSegmentType	Label
+	OB_RoofingMembraneSystem	Label
+	OB_RotationAccommodated	Boolean
+	OB_RoughnessAtHandover_mkm	Real
+	OB_ScourProtection	Label
+	OB_SealLeakageClass	Label
+	OB_SecondaryVoltage_V	Real
+	OB_SecurityRating	Label
+	OB_SecurityZone	Label
+	OB_SeismicRestraint	Boolean
+	OB_SelfClosing	Boolean
+	OB_SerialNumber	Label
+	OB_SettingTemperaturePreset	Label
+	OB_Shape	Label
+	OB_SignCategory	Label
+	OB_SignSize	Label
+	OB_SignalType	Label
+	OB_SiteArea	Area
+	OB_SmokeStop	Boolean
+	OB_SolarReflectanceIndex	Real
+	OB_SoundAbsorption	Label
+	OB_SpaceClassification	Label
+	OB_Span	Length
+	OB_SpanLength	Length
+	OB_SprinklerType	Label
+	OB_Sprinklered	Boolean
+	OB_Stagger	Length
+	OB_StandardSignCode	Label
+	OB_StaticPressure_Pa	Real
+	OB_StationChainageRange	Length
+	OB_StopsOpenings	Label
+	OB_StorageCapacity_L	Real
+	OB_StorageSetPoint_C	Real
+	OB_StructureNumber	Label
+	OB_SupplyInstallResponsibility	Label
+	OB_SupportType	Label
+	OB_SurfaceFlameSpreadRating	Label
+	OB_SurveySourceAndDate	Label
+	OB_SwitchFunction	Label
+	OB_SwitchHeater	Label
+	OB_SystemHeight	Length
+	OB_TactileBraille	Boolean
+	OB_TactileWarningSurface	Boolean
+	OB_TemperatureRating_C	Real
+	OB_ThermalEfficiency_pct	Real
+	OB_ThrowLength	Length
+	OB_TieSleeperType	Label
+	OB_TieSpacing	Length
+	OB_TotalCoolingCapacity_kW	Real
+	OB_TotalMass_kg	Real
+	OB_TrackGauge	Length
+	OB_TrackIdentifier	Label
+	OB_TransitionSection	Boolean
+	OB_TrayConduitType	Label
+	OB_TurnoutType	Label
+	OB_Type	Label
+	OB_UtilityConnections	Text
+	OB_UtilityService	Label
+	OB_ValveMechanism	Label
+	OB_VariableFrequencyDrive	Boolean
+	OB_VectorGroup	Label
+	OB_VerticalLoadCapacity_kN	Real
+	OB_VideoResolution	Label
+	OB_VisualSignalIntensity_cd	Real
+	OB_WallSystem	Label
+	OB_WarrantyDuration	Label
+	OB_WarrantyStartDate	Label
+	OB_WearingSurfaceWaterproofing	Label
+	OB_WorkingPressureRating_kPa	Real
+	OB_WorkingTestPressure_kPa	Real
+	OB_ZoneArea	Area
+	OB_ZoneType	Label
 	Camber Size	Length
 	Connector diameter	Length
 	Cost	Real
@@ -360,231 +360,231 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Volume	Volume
 	Width	Length
 PropertySet:	Pset_BoilerTypeCommon	T	IfcBoilerType
-	EnergySource	Label	CA_EnergySourceFuel
-	NominalEnergyConsumption	Real	CA_InputRating_kW
-	OperatingMode	Label	CA_FiringOperatingMode
-	OutletTemperatureRange	Real	CA_DesignSupplyTemperature_C
-	PressureRating	Real	CA_PressureRating_kPa
-	WaterStorageCapacity	Real	CA_StorageCapacity_L
+	EnergySource	Label	OB_EnergySourceFuel
+	NominalEnergyConsumption	Real	OB_InputRating_kW
+	OperatingMode	Label	OB_FiringOperatingMode
+	OutletTemperatureRange	Real	OB_DesignSupplyTemperature_C
+	PressureRating	Real	OB_PressureRating_kPa
+	WaterStorageCapacity	Real	OB_StorageCapacity_L
 PropertySet:	Pset_EngineTypeCommon	T	IfcEngineType
-	EnergySource	Label	CA_EnergySourceFuel
+	EnergySource	Label	OB_EnergySourceFuel
 PropertySet:	Pset_DamperTypeFireDamper	T	IfcDamperType
-	ActuationType	Label	CA_ActuationOperation
-	ClosureRatingEnum	Label	CA_DynamicStaticRating
-	FireResistanceRating	Label	CA_FireResistanceRating
-	FusibleLinkTemperature	Real	CA_ReleaseTemperature_C
+	ActuationType	Label	OB_ActuationOperation
+	ClosureRatingEnum	Label	OB_DynamicStaticRating
+	FireResistanceRating	Label	OB_FireResistanceRating
+	FusibleLinkTemperature	Real	OB_ReleaseTemperature_C
 PropertySet:	Pset_DamperTypeFireSmokeDamper	T	IfcDamperType
-	ClosureRatingEnum	Label	CA_DynamicStaticRating
-	FireResistanceRating	Label	CA_FireResistanceRating
-	FusibleLinkTemperature	Real	CA_ReleaseTemperature_C
+	ClosureRatingEnum	Label	OB_DynamicStaticRating
+	FireResistanceRating	Label	OB_FireResistanceRating
+	FusibleLinkTemperature	Real	OB_ReleaseTemperature_C
 PropertySet:	Pset_StairCommon	I	IfcStair
-	FireExit	Boolean	CA_PartOfAnExit
+	FireExit	Boolean	OB_PartOfAnExit
 	NumberOfRiser	Real	Actual Number of Risers
-	RequiredHeadroom	Length	CA_Headroom
+	RequiredHeadroom	Length	OB_Headroom
 	RiserHeight	Length	Actual Riser Height
 	TreadLength	Length	Actual Tread Depth
 PropertySet:	Pset_StairFlightCommon	I	IfcStairFlight
-	Headroom	Length	CA_Headroom
+	Headroom	Length	OB_Headroom
 	NumberOfRiser	Real	Actual Number of Risers
 	RiserHeight	Length	Actual Riser Height
 	TreadLength	Length	Actual Tread Depth
 PropertySet:	Pset_WindowCommon	T	IfcWindowType
-	Infiltration	Real	CA_AirLeakageRate_Lsm2
-	MechanicalLoadRating	Label	CA_PerformanceClass
-	WaterTightnessRating	Label	CA_PerformanceClass
-	WindLoadRating	Label	CA_PerformanceClass
+	Infiltration	Real	OB_AirLeakageRate_Lsm2
+	MechanicalLoadRating	Label	OB_PerformanceClass
+	WaterTightnessRating	Label	OB_PerformanceClass
+	WindLoadRating	Label	OB_PerformanceClass
 PropertySet:	Pset_StairCommon	T	IfcStairType
-	HandicapAccessible	Boolean	CA_BarrierFreeFeatures
-	HasNonSkidSurface	Boolean	CA_NonSlipSurface
+	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
+	HasNonSkidSurface	Boolean	OB_NonSlipSurface
 PropertySet:	Pset_RampCommon	T	IfcRampType
-	HandicapAccessible	Boolean	CA_BarrierFreeFeatures
-	HasNonSkidSurface	Boolean	CA_NonSlipSurface
+	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
+	HasNonSkidSurface	Boolean	OB_NonSlipSurface
 PropertySet:	Pset_SpaceCommon	T	IfcSpaceType
-	HandicapAccessible	Boolean	CA_BarrierFreeFeatures
+	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
 PropertySet:	Pset_FurnitureTypeCommon	T	IfcFurnitureType
-	IsBuiltIn	Boolean	CA_BuiltIn
-	NominalDepth	Label	CA_NominalDimensions
-	NominalHeight	Label	CA_NominalDimensions
-	NominalLength	Label	CA_NominalDimensions
+	IsBuiltIn	Boolean	OB_BuiltIn
+	NominalDepth	Label	OB_NominalDimensions
+	NominalHeight	Label	OB_NominalDimensions
+	NominalLength	Label	OB_NominalDimensions
 PropertySet:	Pset_TransportElementElevator	T	IfcTransportElementType
-	ClearDepth	Label	CA_CarInsideDimensions
-	ClearHeight	Label	CA_CarInsideDimensions
-	ClearWidth	Label	CA_CarInsideDimensions
-	FireFightingLift	Boolean	CA_FirefightersElevator
+	ClearDepth	Label	OB_CarInsideDimensions
+	ClearHeight	Label	OB_CarInsideDimensions
+	ClearWidth	Label	OB_CarInsideDimensions
+	FireFightingLift	Boolean	OB_FirefightersElevator
 PropertySet:	Pset_CoveringCommon	T	IfcCoveringType
-	AcousticRating	Label	CA_SoundAbsorption
-	Finish	Text	CA_Finish
+	AcousticRating	Label	OB_SoundAbsorption
+	Finish	Text	OB_Finish
 PropertySet:	Pset_DoorWindowGlazingType	T	IfcDoorType,IfcWindowType
-	FillGas	Label	CA_GlazingMakeUp
-	GlassLayers	Label	CA_GlazingMakeUp
-	GlassThickness1	Label	CA_GlazingMakeUp
-	IsCoated	Label	CA_GlazingMakeUp
-	IsLaminated	Label	CA_GlazingMakeUp
-	IsTempered	Label	CA_GlazingMakeUp
+	FillGas	Label	OB_GlazingMakeUp
+	GlassLayers	Label	OB_GlazingMakeUp
+	GlassThickness1	Label	OB_GlazingMakeUp
+	IsCoated	Label	OB_GlazingMakeUp
+	IsLaminated	Label	OB_GlazingMakeUp
+	IsTempered	Label	OB_GlazingMakeUp
 PropertySet:	Pset_RailingCommon	T	IfcRailingType
-	Diameter	Length	CA_HandrailDiameter
+	Diameter	Length	OB_HandrailDiameter
 	Height	Length	Railing Height
 PropertySet:	Pset_RampCommon	I	IfcRamp
-	FireExit	Boolean	CA_PartOfAnExit
-	RequiredHeadroom	Length	CA_Headroom
+	FireExit	Boolean	OB_PartOfAnExit
+	RequiredHeadroom	Length	OB_Headroom
 PropertySet:	Pset_RampFlightCommon	I	IfcRampFlight
-	Headroom	Length	CA_Headroom
+	Headroom	Length	OB_Headroom
 PropertySet:	Pset_SpaceOccupancyRequirements	I	IfcSpace,IfcSpatialZone,IfcZone
-	AreaPerOccupant	Real	CA_OccupantLoad
-	OccupancyNumber	Real	CA_OccupantLoad
-	OccupancyType	Label	CA_MajorOccupancy
+	AreaPerOccupant	Real	OB_OccupantLoad
+	OccupancyNumber	Real	OB_OccupantLoad
+	OccupancyType	Label	OB_MajorOccupancy
 PropertySet:	Pset_CoveringFlooring	T	IfcCoveringType
-	HasNonSkidSurface	Boolean	CA_NonSlipSurface
+	HasNonSkidSurface	Boolean	OB_NonSlipSurface
 PropertySet:	Pset_SpaceCommon	I	IfcSpace
-	GrossPlannedArea	Area	CA_ProgramArea
-	NetPlannedArea	Area	CA_ProgramArea
+	GrossPlannedArea	Area	OB_ProgramArea
+	NetPlannedArea	Area	OB_ProgramArea
 PropertySet:	Pset_TransportElementCommon	T	IfcTransportElementType
-	CapacityPeople	Real	CA_RatedPassengers
-	CapacityWeight	Real	CA_RatedLoad_kg
+	CapacityPeople	Real	OB_RatedPassengers
+	CapacityWeight	Real	OB_RatedLoad_kg
 PropertySet:	Pset_SpaceFireSafetyRequirements	I	IfcSpace,IfcSpatialZone,IfcZone
-	SprinklerProtection	Boolean	CA_Sprinklered
-	SprinklerProtectionAutomatic	Boolean	CA_Sprinklered
+	SprinklerProtection	Boolean	OB_Sprinklered
+	SprinklerProtectionAutomatic	Boolean	OB_Sprinklered
 PropertySet:	Pset_ZoneCommon	I	IfcZone
-	GrossPlannedArea	Area	CA_ZoneArea
-	NetPlannedArea	Area	CA_ZoneArea
+	GrossPlannedArea	Area	OB_ZoneArea
+	NetPlannedArea	Area	OB_ZoneArea
 PropertySet:	Pset_SlabCommon	I	IfcSlab
 	PitchAngle	Real	Slope
 PropertySet:	Pset_ElementComponentCommon	T	IfcElementComponentType
-	CorrosionTreatment	Label	CA_CoatingCorrosionProtection
+	CorrosionTreatment	Label	OB_CoatingCorrosionProtection
 PropertySet:	Pset_ConcreteElementGeneral	T	IfcBeamType,IfcBuildingElementProxyType,IfcChimneyType,IfcColumnType,IfcFootingType,IfcMemberType,IfcPileType,IfcPlateType,IfcRailingType,IfcRampType,IfcRampFlightType,IfcRoofType,IfcSlabType,IfcStairType,IfcStairFlightType,IfcWallType,IfcCivilElementType
-	ReinforcementStrengthClass	Label	CA_ReinforcementGrade
+	ReinforcementStrengthClass	Label	OB_ReinforcementGrade
 PropertySet:	Pset_BeamCommon	I	IfcBeam
-	Span	Length	CA_Span
+	Span	Length	OB_Span
 PropertySet:	Pset_MemberCommon	I	IfcMember
-	Span	Length	CA_Span
+	Span	Length	OB_Span
 PropertySet:	Pset_PrecastConcreteElementGeneral	I	IfcBeam,IfcBuildingElementProxy,IfcChimney,IfcColumn,IfcFooting,IfcMember,IfcPile,IfcPlate,IfcRamp,IfcRampFlight,IfcRoof,IfcSlab,IfcStair,IfcStairFlight,IfcWall,IfcCivilElement
 	CamberAtMidspan	Length	Camber Size
 PropertySet:	Pset_DamperTypeCommon	T	IfcDamperType
-	LeakageFullyClosed	Real	CA_LeakageWhenClosed_Ls
-	NominalAirFlowRate	Real	CA_NominalAirflow_Ls
-	Operation	Label	CA_ActuationOperation
+	LeakageFullyClosed	Real	OB_LeakageWhenClosed_Ls
+	NominalAirFlowRate	Real	OB_NominalAirflow_Ls
+	Operation	Label	OB_ActuationOperation
 PropertySet:	Pset_FanTypeCommon	T	IfcFanType
-	CapacityControlType	Label	CA_CapacityControl
-	NominalRotationSpeed	Real	CA_NominalSpeed_rpm
-	NominalStaticPressure	Real	CA_StaticPressure_Pa
-	NominalTotalPressure	Real	CA_StaticPressure_Pa
+	CapacityControlType	Label	OB_CapacityControl
+	NominalRotationSpeed	Real	OB_NominalSpeed_rpm
+	NominalStaticPressure	Real	OB_StaticPressure_Pa
+	NominalTotalPressure	Real	OB_StaticPressure_Pa
 PropertySet:	Pset_CoolingTowerTypeCommon	T	IfcCoolingTowerType
-	AmbientDesignWetBulbTemperature	Real	CA_DesignWetBulbTemperature_C
-	CircuitType	Label	CA_CircuitType
-	FlowArrangement	Label	CA_CircuitType
-	NominalCapacity	Real	CA_HeatRejectionCapacity_kW
-	NumberOfCells	Real	CA_NumberOfCells
-	WaterRequirement	Real	CA_MakeUpWaterRequirement_Ls
+	AmbientDesignWetBulbTemperature	Real	OB_DesignWetBulbTemperature_C
+	CircuitType	Label	OB_CircuitType
+	FlowArrangement	Label	OB_CircuitType
+	NominalCapacity	Real	OB_HeatRejectionCapacity_kW
+	NumberOfCells	Real	OB_NumberOfCells
+	WaterRequirement	Real	OB_MakeUpWaterRequirement_Ls
 PropertySet:	Pset_AirTerminalBoxTypeCommon	T	IfcAirTerminalBoxType
-	ArrangementType	Boolean	CA_FanPowered
-	HasFan	Boolean	CA_FanPowered
-	NominalDamperDiameter	Length	CA_InletSize
-	ReheatType	Label	CA_ReheatType
+	ArrangementType	Boolean	OB_FanPowered
+	HasFan	Boolean	OB_FanPowered
+	NominalDamperDiameter	Length	OB_InletSize
+	ReheatType	Label	OB_ReheatType
 PropertySet:	Pset_ChillerTypeCommon	T	IfcChillerType
-	NominalEfficiency	Real	CA_FullLoadEfficiency
-	NominalHeatRejectionRate	Real	CA_HeatRejectionRate_kW
-	NominalPowerConsumption	Real	CA_InputPower_kW
+	NominalEfficiency	Real	OB_FullLoadEfficiency
+	NominalHeatRejectionRate	Real	OB_HeatRejectionRate_kW
+	NominalPowerConsumption	Real	OB_InputPower_kW
 PropertySet:	Pset_HeatExchangerTypePlate	T	IfcHeatExchangerType
-	NumberOfPlates	Real	CA_NumberOfPlates
+	NumberOfPlates	Real	OB_NumberOfPlates
 PropertySet:	Pset_DuctSegmentTypeCommon	T	IfcDuctSegmentType
-	WorkingPressure	Real	CA_PressureClass_Pa
+	WorkingPressure	Real	OB_PressureClass_Pa
 PropertySet:	Pset_DuctFittingTypeCommon	T	IfcDuctFittingType
-	PressureClass	Real	CA_PressureClass_Pa
+	PressureClass	Real	OB_PressureClass_Pa
 PropertySet:	Pset_AirTerminalBoxTypeCommon	I	IfcAirTerminalBox
 	NominalAirFlowRate	Real	Flow
 PropertySet:	Pset_CableCarrierSegmentTypeConduitSegment	I	IfcCableCarrierSegment
 	NominalHeight	Label	Size
 	NominalWidth	Label	Size
 PropertySet:	Pset_PumpOccurrence	I	IfcPump
-	BaseType	Label	CA_BaseDriveArrangement
-	DriveConnectionType	Label	CA_BaseDriveArrangement
+	BaseType	Label	OB_BaseDriveArrangement
+	DriveConnectionType	Label	OB_BaseDriveArrangement
 PropertySet:	Pset_PumpTypeCommon	T	IfcPumpType
-	ConnectionSize	Length	CA_ConnectionSize
+	ConnectionSize	Length	OB_ConnectionSize
 PropertySet:	Pset_SensorTypeSmokeSensor	T	IfcSensorType
-	CoverageArea	Area	CA_CoverageArea
-	SetPointConcentration	Label	CA_DetectionSetPoint
+	CoverageArea	Area	OB_CoverageArea
+	SetPointConcentration	Label	OB_DetectionSetPoint
 PropertySet:	Pset_SensorTypeHeatSensor	T	IfcSensorType
-	CoverageArea	Area	CA_CoverageArea
-	RateOfTemperatureRise	Label	CA_DetectionSetPoint
-	SetPointTemperature	Label	CA_DetectionSetPoint
+	CoverageArea	Area	OB_CoverageArea
+	RateOfTemperatureRise	Label	OB_DetectionSetPoint
+	SetPointTemperature	Label	OB_DetectionSetPoint
 PropertySet:	Pset_ValveTypeCommon	T	IfcValveType
-	FlowCoefficient	Real	CA_FlowCoefficient
-	TestPressure	Real	CA_WorkingTestPressure_kPa
-	ValveMechanism	Label	CA_ValveMechanism
-	ValveOperation	Label	CA_Operation
-	ValvePattern	Label	CA_ValveMechanism
-	WorkingPressure	Real	CA_WorkingTestPressure_kPa
+	FlowCoefficient	Real	OB_FlowCoefficient
+	TestPressure	Real	OB_WorkingTestPressure_kPa
+	ValveMechanism	Label	OB_ValveMechanism
+	ValveOperation	Label	OB_Operation
+	ValvePattern	Label	OB_ValveMechanism
+	WorkingPressure	Real	OB_WorkingTestPressure_kPa
 PropertySet:	Pset_FireSuppressionTerminalTypeSprinkler	T	IfcFireSuppressionTerminalType
-	ActivationTemperature	Real	CA_TemperatureRating_C
-	DischargeCoefficient	Real	CA_KFactor
-	Response	Label	CA_Response
-	SprinklerType	Label	CA_SprinklerType
+	ActivationTemperature	Real	OB_TemperatureRating_C
+	DischargeCoefficient	Real	OB_KFactor
+	Response	Label	OB_Response
+	SprinklerType	Label	OB_SprinklerType
 PropertySet:	Pset_ElectricMotorTypeCommon	T	IfcElectricMotorType
-	MaximumPowerOutput	Real	CA_MotorNameplatePower_kW
+	MaximumPowerOutput	Real	OB_MotorNameplatePower_kW
 PropertySet:	Pset_ValveTypeIsolating	I	IfcValve
-	IsNormallyOpen	Boolean	CA_NormallyOpen
+	IsNormallyOpen	Boolean	OB_NormallyOpen
 PropertySet:	Pset_PipeSegmentTypeCommon	T	IfcPipeSegmentType
-	WorkingPressure	Real	CA_WorkingPressureRating_kPa
+	WorkingPressure	Real	OB_WorkingPressureRating_kPa
 PropertySet:	Pset_PipeFittingTypeCommon	T	IfcPipeFittingType
-	PressureClass	Real	CA_WorkingPressureRating_kPa
+	PressureClass	Real	OB_WorkingPressureRating_kPa
 PropertySet:	Pset_ValveTypeCommon	I	IfcValve
 	Size	Length	Size
 PropertySet:	Pset_PipeSegmentOccurrence	I	IfcPipeSegment
 	Gradient	Real	Slope
 	InvertElevation	Length	Invert Elevation
 PropertySet:	Pset_SensorTypeFireSensor	T	IfcSensorType
-	FireSensorSetPoint	Label	CA_DetectionSetPoint
+	FireSensorSetPoint	Label	OB_DetectionSetPoint
 PropertySet:	Pset_ElectricGeneratorTypeCommon	T	IfcElectricGeneratorType
-	ElectricGeneratorEfficiency	Real	CA_GeneratorEfficiency_pct
-	MaximumPowerOutput	Real	CA_RatedOutput_kW
+	ElectricGeneratorEfficiency	Real	OB_GeneratorEfficiency_pct
+	MaximumPowerOutput	Real	OB_RatedOutput_kW
 PropertySet:	Pset_CableCarrierSegmentTypeCableTraySegment	T	IfcCableCarrierSegmentType
-	HasCover	Boolean	CA_HasCover
+	HasCover	Boolean	OB_HasCover
 PropertySet:	Pset_TransformerTypeCommon	T	IfcTransformerType
-	MaximumApparentPower	Real	CA_RatedPower_kVA
-	PrimaryApparentPower	Real	CA_RatedPower_kVA
-	PrimaryVoltage	Real	CA_PrimaryVoltage_V
-	RealImpedanceRatio	Label	CA_Impedance
-	SecondaryVoltage	Real	CA_SecondaryVoltage_V
-	ShortCircuitVoltage	Label	CA_Impedance
-	TransformerVectorGroup	Label	CA_VectorGroup
+	MaximumApparentPower	Real	OB_RatedPower_kVA
+	PrimaryApparentPower	Real	OB_RatedPower_kVA
+	PrimaryVoltage	Real	OB_PrimaryVoltage_V
+	RealImpedanceRatio	Label	OB_Impedance
+	SecondaryVoltage	Real	OB_SecondaryVoltage_V
+	ShortCircuitVoltage	Label	OB_Impedance
+	TransformerVectorGroup	Label	OB_VectorGroup
 PropertySet:	Pset_SwitchingDeviceTypeCommon	T	IfcSwitchingDeviceType
-	NumberOfGangs	Real	CA_NumberOfGangs
-	SwitchFunction	Label	CA_SwitchFunction
+	NumberOfGangs	Real	OB_NumberOfGangs
+	SwitchFunction	Label	OB_SwitchFunction
 PropertySet:	Pset_JunctionBoxTypeCommon	T	IfcJunctionBoxType
-	NumberOfGangs	Real	CA_NumberOfGangs
+	NumberOfGangs	Real	OB_NumberOfGangs
 PropertySet:	Pset_OutletTypeCommon	T	IfcOutletType
-	NumberOfSockets	Real	CA_NumberOfSockets
+	NumberOfSockets	Real	OB_NumberOfSockets
 PropertySet:	Pset_CableCarrierSegmentTypeConduitSegment	T	IfcCableCarrierSegmentType
-	ConduitShapeType	Label	CA_TrayConduitType
-	IsRigid	Label	CA_TrayConduitType
+	ConduitShapeType	Label	OB_TrayConduitType
+	IsRigid	Label	OB_TrayConduitType
 PropertySet:	Pset_AudioVisualApplianceTypeCamera	T	IfcAudioVisualApplianceType
-	VideoResolutionHeight	Label	CA_VideoResolution
-	VideoResolutionWidth	Label	CA_VideoResolution
+	VideoResolutionHeight	Label	OB_VideoResolution
+	VideoResolutionWidth	Label	OB_VideoResolution
 PropertySet:	Pset_ElectricalDeviceCommon	T	IfcDistributionElementType
 	IP_Code	Label	Enclosure
 	NumberOfPoles	Real	Number of Poles
 	RatedCurrent	Real	Mains
 PropertySet:	Pset_DistributionChamberElementTypeInspectionChamber	T	IfcDistributionChamberElementType
-	ChamberLengthOrRadius	Label	CA_ChamberSize
-	ChamberWidth	Label	CA_ChamberSize
+	ChamberLengthOrRadius	Label	OB_ChamberSize
+	ChamberWidth	Label	OB_ChamberSize
 PropertySet:	Pset_DistributionChamberElementTypeValveChamber	T	IfcDistributionChamberElementType
-	ChamberLengthOrRadius	Label	CA_ChamberSize
+	ChamberLengthOrRadius	Label	OB_ChamberSize
 PropertySet:	Pset_DistributionChamberElementTypeManhole	T	IfcDistributionChamberElementType
-	AccessCoverLoadRating	Label	CA_CoverFrame
-	AccessCoverMaterial	Label	CA_CoverFrame
-	AccessLengthOrRadius	Label	CA_CoverFrame
-	HasSteps	Boolean	CA_HasStepsLadder
+	AccessCoverLoadRating	Label	OB_CoverFrame
+	AccessCoverMaterial	Label	OB_CoverFrame
+	AccessLengthOrRadius	Label	OB_CoverFrame
+	HasSteps	Boolean	OB_HasStepsLadder
 PropertySet:	Pset_PipeSegmentTypeCulvert	T	IfcPipeSegmentType
-	ClearDepth	Label	CA_CulvertOpening
-	InternalWidth	Label	CA_CulvertOpening
+	ClearDepth	Label	OB_CulvertOpening
+	InternalWidth	Label	OB_CulvertOpening
 PropertySet:	Pset_DistributionChamberElementTypeManhole	I	IfcDistributionChamberElement
-	InvertLevel	Length	CA_InvertElevation
-	WithBackdrop	Boolean	CA_DropStructure
+	InvertLevel	Length	OB_InvertElevation
+	WithBackdrop	Boolean	OB_DropStructure
 PropertySet:	Pset_SpaceParking	I	IfcSpace
-	ParkingUnits	Real	CA_ParkingStalls
-	ParkingUse	Label	CA_ParkingUse
+	ParkingUnits	Real	OB_ParkingStalls
+	ParkingUse	Label	OB_ParkingUse
 PropertySet:	Pset_SiteCommon	I	IfcSite
-	TotalArea	Area	CA_SiteArea
+	TotalArea	Area	OB_SiteArea
 PropertySet:	Pset_PrecastConcreteElementGeneral	T	IfcBeamType,IfcBuildingElementProxyType,IfcChimneyType,IfcColumnType,IfcFootingType,IfcMemberType,IfcPileType,IfcPlateType,IfcRampType,IfcRampFlightType,IfcRoofType,IfcSlabType,IfcStairType,IfcStairFlightType,IfcWallType,IfcCivilElementType
-	InitialTension	Label	CA_Prestressing
-	TendonRelaxation	Label	CA_Prestressing
+	InitialTension	Label	OB_Prestressing
+	TendonRelaxation	Label	OB_Prestressing

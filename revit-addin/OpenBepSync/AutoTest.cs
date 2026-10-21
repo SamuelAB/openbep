@@ -216,7 +216,7 @@ namespace OpenBepSync
             catch (Exception ex) { Log("SYNC failed: " + ex.Message); }
         }
 
-        // Every empty CA_ parameter on the OpenBEP instances and their types gets a value, so the IFC export writes it.
+        // Every empty OB_ parameter on the OpenBEP instances and their types gets a value, so the IFC export writes it.
         // Built-in text parameters the BEP Builder's IDS asks for that the generic families leave empty
         static readonly HashSet<string> TestBuiltIns = new HashSet<string> { "Type Mark", "Mark", "Manufacturer", "Model", "Description" };
 
@@ -235,7 +235,7 @@ namespace OpenBepSync
                     foreach (Parameter p in e.Parameters)
                     {
                         if (p.IsReadOnly || p.HasValue && (p.StorageType != StorageType.String || p.AsString() != "")) continue;
-                        if (!(p.IsShared && p.Definition.Name.StartsWith("CA_")) && !(p.StorageType == StorageType.String && TestBuiltIns.Contains(p.Definition.Name))) continue;
+                        if (!(p.IsShared && (p.Definition.Name.StartsWith("OB_") || p.Definition.Name.StartsWith("CA_"))) && !(p.StorageType == StorageType.String && TestBuiltIns.Contains(p.Definition.Name))) continue;
                         try
                         {
                             if (p.StorageType == StorageType.String) p.Set("test " + p.Definition.Name + " " + e.Id.IntegerValue);   // unique, so no duplicate-mark warning

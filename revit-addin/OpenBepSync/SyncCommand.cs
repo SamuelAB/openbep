@@ -13,7 +13,7 @@ namespace OpenBepSync
     /// <summary>
     /// Makes the model's shared parameters match the OpenBEP binding list exported for this project:
     /// adds missing ones with their fixed GUIDs, binds them to the right categories,
-    /// and (only if asked) removes OpenBEP parameters (CA_ prefix) that are no longer in the plan.
+    /// and (only if asked) removes OpenBEP parameters (OB_ prefix, or CA_ from before October 2026) that are no longer in the plan.
     /// Always shows a dry run first and writes a report next to the binding list.
     /// </summary>
     [Transaction(TransactionMode.Manual)]
@@ -155,7 +155,7 @@ namespace OpenBepSync
                 it.Action = missing.Count > 0 ? "extend" : "ok";
                 if (missing.Count > 0) it.Note += "adds " + string.Join(", ", missing.Select(c => c.Name)) + "; ";
             }
-            plan.Extras = inModel.Where(s => s.Name.StartsWith("CA_", StringComparison.Ordinal) && !wanted.Contains(s.GuidValue)).ToList();
+            plan.Extras = inModel.Where(s => (s.Name.StartsWith("OB_", StringComparison.Ordinal) || s.Name.StartsWith("CA_", StringComparison.Ordinal)) && !wanted.Contains(s.GuidValue)).ToList();
             return plan;
         }
 

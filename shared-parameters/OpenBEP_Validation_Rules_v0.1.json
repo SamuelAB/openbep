@@ -28,7 +28,7 @@
     "rule_fr": "Code d’assemblage : un code Uniformat II (lettre A à G suivie de 2, 4 chiffres ou plus, p. ex. C1020 ou B2010.10) tiré du fichier de classification du projet.",
     "source": "OpenBEP proposal"
   },
-  "CA_BarcodeAssetLabel": {
+  "OB_BarcodeAssetLabel": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -57,7 +57,7 @@
     "rule_fr": "Étiquette code-barres ou QR : 4 à 40 lettres majuscules, chiffres ou traits d’union, exactement comme encodé sur l’étiquette.",
     "source": "OpenBEP proposal"
   },
-  "CA_BuildingAutomationReference": {
+  "OB_BuildingAutomationReference": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -86,7 +86,7 @@
     "rule_fr": "Référence d’automatisation du bâtiment : nom de point ou de contrôleur fait de lettres, chiffres, traits d’union ou soulignés, avec des points entre les niveaux et sans espace.",
     "source": "OpenBEP proposal"
   },
-  "CA_EnergySourceFuel": {
+  "OB_EnergySourceFuel": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -129,7 +129,7 @@
     "rule_fr": "Source d’énergie : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_EnergySource), écrite en majuscules comme dans la liste, p. ex. GAS.",
     "source": "IFC 4.3 PEnum_EnergySource"
   },
-  "CA_ExpectedServiceLife": {
+  "OB_ExpectedServiceLife": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "duration",
@@ -158,7 +158,7 @@
     "rule_fr": "Durée de vie prévue : une durée ISO 8601 en années entières de 1 à 99, p. ex. P25Y.",
     "source": "OpenBEP proposal"
   },
-  "CA_FinishColour": {
+  "OB_FinishColour": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -216,7 +216,7 @@
     "rule_fr": "Degré de résistance au feu : une des valeurs 20 min, 30 min, 45 min, 1 h, 1.5 h, 2 h, 3 h ou 4 h, écrite exactement ainsi (minutes sous une heure, heures à partir d’une heure).",
     "source": "OpenBEP proposal"
   },
-  "CA_FireResistanceRating": {
+  "OB_FireResistanceRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -245,7 +245,7 @@
     "rule_fr": "Degré de résistance au feu : une des valeurs 20 min, 30 min, 45 min, 1 h, 1.5 h, 2 h, 3 h ou 4 h, écrite exactement ainsi.",
     "source": "OpenBEP proposal"
   },
-  "CA_GrossWeight_kg": {
+  "OB_GrossWeight_kg": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -274,7 +274,7 @@
     "rule_fr": "Poids brut : un nombre en kg supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_InstallationDate": {
+  "OB_InstallationDate": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "date",
@@ -303,7 +303,7 @@
     "rule_fr": "Date d’installation : une date ISO 8601 au format AAAA-MM-JJ.",
     "source": "OpenBEP proposal"
   },
-  "CA_MountingType": {
+  "OB_MountingType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -462,7 +462,7 @@
     "rule_fr": "Type de montage : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. SURFACE.",
     "source": "OpenBEP proposal"
   },
-  "CA_OwnerAssetIdentifier": {
+  "OB_OwnerAssetIdentifier": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -491,7 +491,7 @@
     "rule_fr": "Identifiant d’actif du propriétaire : lettres majuscules et chiffres en groupes séparés par des traits d’union, terminés par un numéro de 3 à 6 chiffres, p. ex. AHU-0003 (selon le format du registre du propriétaire).",
     "source": "OpenBEP proposal"
   },
-  "CA_PieceFabricationMark": {
+  "OB_PieceFabricationMark": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -520,7 +520,7 @@
     "rule_fr": "Marque de pièce de fabrication : lettres, chiffres, points, barres obliques ou traits d’union, sans espace, comme sur les dessins d’atelier.",
     "source": "OpenBEP proposal"
   },
-  "CA_PositionalAccuracy": {
+  "OB_PositionalAccuracy": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -549,7 +549,7 @@
     "rule_fr": "Exactitude de position (tel que construit) : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_Prefabricated": {
+  "OB_Prefabricated": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -581,7 +581,7 @@
     "rule_fr": "Statut de préfabrication : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_SerialNumber": {
+  "OB_SerialNumber": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -610,7 +610,7 @@
     "rule_fr": "Numéro de série : 3 à 40 lettres, chiffres, points, barres obliques ou traits d’union, copiés de la plaque signalétique.",
     "source": "OpenBEP proposal"
   },
-  "CA_StationChainageRange": {
+  "OB_StationChainageRange": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -638,7 +638,7 @@
     "rule_fr": "Chaînage (début - fin) : une longueur en m positive ou nulle, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_WarrantyDuration": {
+  "OB_WarrantyDuration": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "duration",
@@ -667,7 +667,7 @@
     "rule_fr": "Durée de la garantie : une durée ISO 8601 en années, mois, semaines ou jours, p. ex. P5Y ou P18M.",
     "source": "OpenBEP proposal"
   },
-  "CA_WarrantyStartDate": {
+  "OB_WarrantyStartDate": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "date",
@@ -1402,7 +1402,7 @@
     "rule_fr": "Surface nette : une superficie en m² supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_AccessibleCeiling": {
+  "OB_AccessibleCeiling": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1431,7 +1431,7 @@
     "rule_fr": "Plafond démontable : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_AcousticRating": {
+  "OB_AcousticRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1460,7 +1460,7 @@
     "rule_fr": "Indice acoustique : STC, une espace, puis un indice de transmission du son à 2 chiffres, p. ex. STC 50.",
     "source": "OpenBEP proposal"
   },
-  "CA_AirLeakageRate_Lsm2": {
+  "OB_AirLeakageRate_Lsm2": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -1489,7 +1489,7 @@
     "rule_fr": "Taux d’infiltration d’air : un nombre en L/(s·m²) supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_BarrierFree": {
+  "OB_BarrierFree": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1521,7 +1521,7 @@
     "rule_fr": "Sans obstacles : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_BarrierFreeFeatures": {
+  "OB_BarrierFreeFeatures": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1550,7 +1550,7 @@
     "rule_fr": "Conception sans obstacles : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_BirdFriendlyGlazing": {
+  "OB_BirdFriendlyGlazing": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1579,7 +1579,7 @@
     "rule_fr": "Vitrage sécuritaire pour les oiseaux : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_BuiltIn": {
+  "OB_BuiltIn": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1608,7 +1608,7 @@
     "rule_fr": "Encastré : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_CarInsideDimensions": {
+  "OB_CarInsideDimensions": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1637,7 +1637,7 @@
     "rule_fr": "Dimensions intérieures de la cabine : largeur x profondeur x hauteur en millimètres entiers, séparées par « x », p. ex. 1600 x 2400 x 2400.",
     "source": "OpenBEP proposal"
   },
-  "CA_CeilingSystem": {
+  "OB_CeilingSystem": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1666,7 +1666,7 @@
     "rule_fr": "Système de plafond : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_CombustibleConstruction": {
+  "OB_CombustibleConstruction": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1698,7 +1698,7 @@
     "rule_fr": "Construction combustible : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_CurtainWallSystem": {
+  "OB_CurtainWallSystem": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1727,7 +1727,7 @@
     "rule_fr": "Système de mur-rideau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignLoad_kNm": {
+  "OB_DesignLoad_kNm": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -1756,7 +1756,7 @@
     "rule_fr": "Charge de calcul : un nombre en kN/m supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignTemperatureSetPoints": {
+  "OB_DesignTemperatureSetPoints": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1785,7 +1785,7 @@
     "rule_fr": "Consignes de température : valeur de chauffage, « heating / », valeur de refroidissement, « cooling », en °C sans l’unité, p. ex. 21 heating / 24 cooling.",
     "source": "OpenBEP proposal"
   },
-  "CA_ExtendsToStructure": {
+  "OB_ExtendsToStructure": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1817,7 +1817,7 @@
     "rule_fr": "Jusqu’à la structure : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_Finish": {
+  "OB_Finish": {
     "revit_data_type": "MULTILINETEXT",
     "shared_or_builtin": "Shared",
     "type": "multiline",
@@ -1846,7 +1846,7 @@
     "rule_fr": "Fini : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_FireCompartmentBoundary": {
+  "OB_FireCompartmentBoundary": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1878,7 +1878,7 @@
     "rule_fr": "Séparation coupe-feu : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_FireExit": {
+  "OB_FireExit": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1910,7 +1910,7 @@
     "rule_fr": "Issue : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_FirefightersElevator": {
+  "OB_FirefightersElevator": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -1939,7 +1939,7 @@
     "rule_fr": "Ascenseur pour pompiers : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_FrameMaterial": {
+  "OB_FrameMaterial": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1968,7 +1968,7 @@
     "rule_fr": "Matériau du cadre : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_GlazingMakeUp": {
+  "OB_GlazingMakeUp": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -1997,7 +1997,7 @@
     "rule_fr": "Composition du vitrage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_GrossFloorArea": {
+  "OB_GrossFloorArea": {
     "revit_data_type": "AREA",
     "shared_or_builtin": "Shared",
     "type": "area",
@@ -2026,7 +2026,7 @@
     "rule_fr": "Superficie brute : une superficie en m² supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HandrailDiameter": {
+  "OB_HandrailDiameter": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -2055,7 +2055,7 @@
     "rule_fr": "Diamètre de la main courante : une longueur en mm supérieure à 0 et d’au plus 100, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HardwareSet": {
+  "OB_HardwareSet": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -2084,7 +2084,7 @@
     "rule_fr": "Groupe de quincaillerie : HW- suivi de 2 ou 3 chiffres et d’une lettre facultative, p. ex. HW-07.",
     "source": "OpenBEP proposal"
   },
-  "CA_Headroom": {
+  "OB_Headroom": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -2113,7 +2113,7 @@
     "rule_fr": "Échappée : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_InfillType": {
+  "OB_InfillType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2142,7 +2142,7 @@
     "rule_fr": "Type de remplissage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_LeafMaterial": {
+  "OB_LeafMaterial": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2171,7 +2171,7 @@
     "rule_fr": "Matériau de la porte : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_LegendMessage": {
+  "OB_LegendMessage": {
     "revit_data_type": "MULTILINETEXT",
     "shared_or_builtin": "Shared",
     "type": "multiline",
@@ -2200,7 +2200,7 @@
     "rule_fr": "Message : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_MajorOccupancy": {
+  "OB_MajorOccupancy": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -2243,7 +2243,7 @@
     "rule_fr": "Usage principal (groupe du CNB) : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. A-2.",
     "source": "OpenBEP proposal"
   },
-  "CA_MemberSpaces": {
+  "OB_MemberSpaces": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2272,7 +2272,7 @@
     "rule_fr": "Espaces membres : numéros de local séparés par un point-virgule et une espace, p. ex. 2.010; 2.011.",
     "source": "OpenBEP proposal"
   },
-  "CA_NominalDimensions": {
+  "OB_NominalDimensions": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2301,7 +2301,7 @@
     "rule_fr": "Dimensions nominales : longueur x profondeur x hauteur en millimètres entiers, séparées par « x ».",
     "source": "OpenBEP proposal"
   },
-  "CA_NonSlipSurface": {
+  "OB_NonSlipSurface": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -2330,7 +2330,7 @@
     "rule_fr": "Surface antidérapante : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_OccupantLoad": {
+  "OB_OccupantLoad": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -2358,7 +2358,7 @@
     "rule_fr": "Nombre de personnes : un nombre entier positif ou nul.",
     "source": "OpenBEP proposal"
   },
-  "CA_OperationPartitioning": {
+  "OB_OperationPartitioning": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -2399,7 +2399,7 @@
     "rule_fr": "Mode d’ouverture : exactement une des valeurs IFC 4.3 de la liste permise (IfcWindowTypePartitioningEnum), écrite en majuscules comme dans la liste, p. ex. DOUBLE_PANEL_VERTICAL.",
     "source": "IFC 4.3 IfcWindowTypePartitioningEnum"
   },
-  "CA_OperationType": {
+  "OB_OperationType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -2454,7 +2454,7 @@
     "rule_fr": "Mode d’ouverture : exactement une des valeurs IFC 4.3 de la liste permise (IfcDoorTypeOperationEnum), écrite en majuscules comme dans la liste, p. ex. SINGLE_SWING_LEFT.",
     "source": "IFC 4.3 IfcDoorTypeOperationEnum"
   },
-  "CA_OutdoorAirVentilation_Ls": {
+  "OB_OutdoorAirVentilation_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -2483,7 +2483,7 @@
     "rule_fr": "Débit d’air neuf : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_PartOfAnExit": {
+  "OB_PartOfAnExit": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -2512,7 +2512,7 @@
     "rule_fr": "Fait partie d’une issue : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_PerformanceClass": {
+  "OB_PerformanceClass": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2541,7 +2541,7 @@
     "rule_fr": "Classe de performance : la classe NAFS (R, LC, CW ou AW), -PG, puis la cote de performance, p. ex. CW-PG50.",
     "source": "OpenBEP proposal"
   },
-  "CA_ProgramArea": {
+  "OB_ProgramArea": {
     "revit_data_type": "AREA",
     "shared_or_builtin": "Shared",
     "type": "area",
@@ -2570,7 +2570,7 @@
     "rule_fr": "Superficie au programme : une superficie en m² supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RatedLoad_kg": {
+  "OB_RatedLoad_kg": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -2599,7 +2599,7 @@
     "rule_fr": "Charge nominale : un nombre en kg supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RatedPassengers": {
+  "OB_RatedPassengers": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -2628,7 +2628,7 @@
     "rule_fr": "Nombre de passagers : un nombre entier d’au moins 1.",
     "source": "OpenBEP proposal"
   },
-  "CA_RatedSpeed_ms": {
+  "OB_RatedSpeed_ms": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -2657,7 +2657,7 @@
     "rule_fr": "Vitesse nominale : un nombre en m/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RegulatorDeviceNumber": {
+  "OB_RegulatorDeviceNumber": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2686,7 +2686,7 @@
     "rule_fr": "Numéro d’enregistrement de l’appareil : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_RequiredIlluminance_lx": {
+  "OB_RequiredIlluminance_lx": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -2715,7 +2715,7 @@
     "rule_fr": "Éclairement requis (local) : un nombre en lx supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RetroreflectiveSheeting": {
+  "OB_RetroreflectiveSheeting": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2744,7 +2744,7 @@
     "rule_fr": "Pellicule rétroréfléchissante : ASTM D4956 Type suivi d’un chiffre romain de I à XI.",
     "source": "OpenBEP proposal"
   },
-  "CA_RoofingMembraneSystem": {
+  "OB_RoofingMembraneSystem": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2773,7 +2773,7 @@
     "rule_fr": "Système de membrane de toiture : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SecurityRating": {
+  "OB_SecurityRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2802,7 +2802,7 @@
     "rule_fr": "Cote de sécurité : tout texte non vide; les valeurs fictives comme TBD, N/A, 0, Default ou <By Category> sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SeismicRestraint": {
+  "OB_SeismicRestraint": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -2831,7 +2831,7 @@
     "rule_fr": "Ancrage parasismique : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_SelfClosing": {
+  "OB_SelfClosing": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -2863,7 +2863,7 @@
     "rule_fr": "Fermeture automatique : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_SignCategory": {
+  "OB_SignCategory": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -2901,7 +2901,7 @@
     "rule_fr": "Catégorie de panneau : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Regulatory.",
     "source": "OpenBEP proposal"
   },
-  "CA_SignSize": {
+  "OB_SignSize": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -2930,7 +2930,7 @@
     "rule_fr": "Dimensions du panneau : largeur x hauteur en millimètres entiers, p. ex. 750 x 750.",
     "source": "OpenBEP proposal"
   },
-  "CA_SmokeStop": {
+  "OB_SmokeStop": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -2962,7 +2962,7 @@
     "rule_fr": "Coupe-fumée : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_SolarReflectanceIndex": {
+  "OB_SolarReflectanceIndex": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -2990,7 +2990,7 @@
     "rule_fr": "Indice de réflectance solaire (IRS) : un nombre d’au plus 130.",
     "source": "OpenBEP proposal"
   },
-  "CA_SoundAbsorption": {
+  "OB_SoundAbsorption": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -3019,7 +3019,7 @@
     "rule_fr": "Absorption acoustique : NRC, une espace, puis le coefficient de réduction du bruit de 0.00 à 1.00 par pas de 0.05, p. ex. NRC 0.70.",
     "source": "OpenBEP proposal"
   },
-  "CA_SpaceClassification": {
+  "OB_SpaceClassification": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -3048,7 +3048,7 @@
     "rule_fr": "Classification de l’espace : un code OmniClass de la table 13, p. ex. 13-25 11 00.",
     "source": "OpenBEP proposal"
   },
-  "CA_Sprinklered": {
+  "OB_Sprinklered": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -3077,7 +3077,7 @@
     "rule_fr": "Protégé par gicleurs : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_StandardSignCode": {
+  "OB_StandardSignCode": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -3106,7 +3106,7 @@
     "rule_fr": "Code de signalisation normalisé : la désignation du manuel de signalisation applicable, p. ex. Ra-1 (MUTCDC) ou P-90-P (Québec).",
     "source": "OpenBEP proposal"
   },
-  "CA_StopsOpenings": {
+  "OB_StopsOpenings": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -3135,7 +3135,7 @@
     "rule_fr": "Arrêts / ouvertures : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SupplyInstallResponsibility": {
+  "OB_SupplyInstallResponsibility": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -3169,7 +3169,7 @@
     "rule_fr": "Responsabilité (fourni par / installé par) : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. OFCI.",
     "source": "OpenBEP proposal"
   },
-  "CA_SurfaceFlameSpreadRating": {
+  "OB_SurfaceFlameSpreadRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -3198,7 +3198,7 @@
     "rule_fr": "Indice de propagation de la flamme : FSR, une espace, puis l’indice en nombre entier, p. ex. FSR 25.",
     "source": "OpenBEP proposal"
   },
-  "CA_TactileBraille": {
+  "OB_TactileBraille": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -3227,7 +3227,7 @@
     "rule_fr": "Tactile / braille : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_UtilityConnections": {
+  "OB_UtilityConnections": {
     "revit_data_type": "MULTILINETEXT",
     "shared_or_builtin": "Shared",
     "type": "multiline",
@@ -3256,7 +3256,7 @@
     "rule_fr": "Raccordements requis : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_ZoneArea": {
+  "OB_ZoneArea": {
     "revit_data_type": "AREA",
     "shared_or_builtin": "Shared",
     "type": "area",
@@ -3285,7 +3285,7 @@
     "rule_fr": "Superficie de la zone : une superficie en m² supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ZoneType": {
+  "OB_ZoneType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -3857,7 +3857,7 @@
     "rule_fr": "Diamètre de barre : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. 15M.",
     "source": "OpenBEP proposal"
   },
-  "CA_BarCoating": {
+  "OB_BarCoating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -3891,7 +3891,7 @@
     "rule_fr": "Revêtement des barres : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Epoxy coated.",
     "source": "OpenBEP proposal"
   },
-  "CA_CoatingCorrosionProtection": {
+  "OB_CoatingCorrosionProtection": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -3920,7 +3920,7 @@
     "rule_fr": "Revêtement / protection anticorrosion : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_ConcreteCover": {
+  "OB_ConcreteCover": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -3949,7 +3949,7 @@
     "rule_fr": "Enrobage : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ConcreteExposureClass": {
+  "OB_ConcreteExposureClass": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -3995,7 +3995,7 @@
     "rule_fr": "Classe d’exposition : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. C-1.",
     "source": "OpenBEP proposal"
   },
-  "CA_DelegatedDesign": {
+  "OB_DelegatedDesign": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -4024,7 +4024,7 @@
     "rule_fr": "Conception déléguée : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_DesignAxialResistance_kN": {
+  "OB_DesignAxialResistance_kN": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -4053,7 +4053,7 @@
     "rule_fr": "Résistance axiale pondérée : un nombre en kN supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignBearingResistance_kPa": {
+  "OB_DesignBearingResistance_kPa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -4082,7 +4082,7 @@
     "rule_fr": "Résistance pondérée du sol : un nombre en kPa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignLiveLoad_kPa": {
+  "OB_DesignLiveLoad_kPa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -4111,7 +4111,7 @@
     "rule_fr": "Surcharge d’utilisation : un nombre en kPa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DiameterSection": {
+  "OB_DiameterSection": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -4140,7 +4140,7 @@
     "rule_fr": "Diamètre ou section du pieu : le diamètre en millimètres suivi de « dia. », une section rectangulaire largeur x profondeur en millimètres, ou une désignation HP comme HP310x110.",
     "source": "OpenBEP proposal"
   },
-  "CA_DrainageProvisions": {
+  "OB_DrainageProvisions": {
     "revit_data_type": "MULTILINETEXT",
     "shared_or_builtin": "Shared",
     "type": "multiline",
@@ -4169,7 +4169,7 @@
     "rule_fr": "Dispositif de drainage : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_FireProtection": {
+  "OB_FireProtection": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -4198,7 +4198,7 @@
     "rule_fr": "Protection incendie : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_FrostProtectionDepth": {
+  "OB_FrostProtectionDepth": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -4227,7 +4227,7 @@
     "rule_fr": "Profondeur de protection contre le gel : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_InstallationRecord": {
+  "OB_InstallationRecord": {
     "revit_data_type": "MULTILINETEXT",
     "shared_or_builtin": "Shared",
     "type": "multiline",
@@ -4256,7 +4256,7 @@
     "rule_fr": "Relevé de mise en place : tout texte non vide (sauts de ligne permis); les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_ReinforcementGrade": {
+  "OB_ReinforcementGrade": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -4285,7 +4285,7 @@
     "rule_fr": "Nuance de l’armature : CSA G30.18 suivi de la nuance 400R, 400W, 500R ou 500W.",
     "source": "OpenBEP proposal"
   },
-  "CA_ReinforcementRatio_kgm3": {
+  "OB_ReinforcementRatio_kgm3": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -4314,7 +4314,7 @@
     "rule_fr": "Taux d’armature : un nombre en kg/m³ supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_Span": {
+  "OB_Span": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -4343,7 +4343,7 @@
     "rule_fr": "Portée : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_TotalMass_kg": {
+  "OB_TotalMass_kg": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -4372,7 +4372,7 @@
     "rule_fr": "Masse totale : un nombre en kg supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_WallSystem": {
+  "OB_WallSystem": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -4747,7 +4747,7 @@
     "rule_fr": "Hauteur retenue : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_AccessDoorProvided": {
+  "OB_AccessDoorProvided": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -4776,7 +4776,7 @@
     "rule_fr": "Porte d’accès prévue : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_ActuationOperation": {
+  "OB_ActuationOperation": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -4813,7 +4813,7 @@
     "rule_fr": "Mode de manœuvre : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_FireDamperActuationType + PEnum_DamperOperation), écrite en majuscules comme dans la liste, p. ex. SPRING.",
     "source": "IFC 4.3 PEnum_FireDamperActuationType + PEnum_DamperOperation"
   },
-  "CA_CapacityControl": {
+  "OB_CapacityControl": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -4851,7 +4851,7 @@
     "rule_fr": "Régulation de débit : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_FanCapacityControlType), écrite en majuscules comme dans la liste, p. ex. VARIABLESPEEDDRIVE.",
     "source": "IFC 4.3 PEnum_FanCapacityControlType"
   },
-  "CA_CircuitType": {
+  "OB_CircuitType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -4888,7 +4888,7 @@
     "rule_fr": "Type de circuit : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_CoolingTowerCircuitType), écrite en majuscules comme dans la liste, p. ex. OPENCIRCUIT.",
     "source": "IFC 4.3 PEnum_CoolingTowerCircuitType"
   },
-  "CA_Construction": {
+  "OB_Construction": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -4923,7 +4923,7 @@
     "rule_fr": "Construction : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_AirHandlerConstruction), écrite en majuscules comme dans la liste, p. ex. MANUFACTUREDITEM.",
     "source": "IFC 4.3 PEnum_AirHandlerConstruction"
   },
-  "CA_CoolingCapacity_kW": {
+  "OB_CoolingCapacity_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -4952,7 +4952,7 @@
     "rule_fr": "Puissance frigorifique : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_CrossSectionShape": {
+  "OB_CrossSectionShape": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -4988,7 +4988,7 @@
     "rule_fr": "Forme de la section : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_DuctSegmentShape), écrite en majuscules comme dans la liste, p. ex. RECTANGULAR.",
     "source": "IFC 4.3 PEnum_DuctSegmentShape"
   },
-  "CA_DesignFlows": {
+  "OB_DesignFlows": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -5017,7 +5017,7 @@
     "rule_fr": "Débits de conception : le débit de chaque côté en L/s, sans l’unité, séparés par « / », p. ex. 12.0 / 11.5.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignSupplyAirflow_Ls": {
+  "OB_DesignSupplyAirflow_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5046,7 +5046,7 @@
     "rule_fr": "Débit d’air soufflé : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignSupplyTemperature_C": {
+  "OB_DesignSupplyTemperature_C": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5075,7 +5075,7 @@
     "rule_fr": "Température d’alimentation de conception : un nombre en °C supérieur à 0 et d’au plus 200, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignWetBulbTemperature_C": {
+  "OB_DesignWetBulbTemperature_C": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5103,7 +5103,7 @@
     "rule_fr": "Température humide de calcul : un nombre en °C de -10 à 40, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DriveType": {
+  "OB_DriveType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -5170,7 +5170,7 @@
     "rule_fr": "Type d’entraînement : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_FanMotorConnectionType), écrite en majuscules comme dans la liste, p. ex. DIRECTDRIVE; chaque type d’élément a sa propre sous-liste (allowed_by_element_type).",
     "source": "IFC 4.3 PEnum_FanMotorConnectionType (fans) + OpenBEP proposal (elevators, escalators, moving walks)"
   },
-  "CA_DynamicStaticRating": {
+  "OB_DynamicStaticRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -5205,7 +5205,7 @@
     "rule_fr": "Homologation dynamique / statique : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_FireDamperClosureRating), écrite en majuscules comme dans la liste, p. ex. DYNAMIC.",
     "source": "IFC 4.3 PEnum_FireDamperClosureRating"
   },
-  "CA_ExternalStaticPressure_Pa": {
+  "OB_ExternalStaticPressure_Pa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5234,7 +5234,7 @@
     "rule_fr": "Pression statique externe : un nombre en Pa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_FaceType": {
+  "OB_FaceType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -5274,7 +5274,7 @@
     "rule_fr": "Type de face : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_AirTerminalFaceType), écrite en majuscules comme dans la liste, p. ex. FOURWAYPATTERN.",
     "source": "IFC 4.3 PEnum_AirTerminalFaceType"
   },
-  "CA_FanArrangement": {
+  "OB_FanArrangement": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -5309,7 +5309,7 @@
     "rule_fr": "Disposition du ventilateur : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_AirHandlerFanCoilArrangement), écrite en majuscules comme dans la liste, p. ex. DRAWTHROUGH.",
     "source": "IFC 4.3 PEnum_AirHandlerFanCoilArrangement"
   },
-  "CA_FanMotorPower_kW": {
+  "OB_FanMotorPower_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5338,7 +5338,7 @@
     "rule_fr": "Puissance moteur ventilateur : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_FanPowered": {
+  "OB_FanPowered": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -5367,7 +5367,7 @@
     "rule_fr": "Avec ventilateur : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_FilterRating": {
+  "OB_FilterRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -5396,7 +5396,7 @@
     "rule_fr": "Cote du filtre : MERV 1 à MERV 16, ou une classe ISO 16890 comme ISO ePM1 50%.",
     "source": "OpenBEP proposal"
   },
-  "CA_FiringOperatingMode": {
+  "OB_FiringOperatingMode": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -5432,7 +5432,7 @@
     "rule_fr": "Mode de fonctionnement : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_BoilerOperatingMode), écrite en majuscules comme dans la liste, p. ex. MODULATING.",
     "source": "IFC 4.3 PEnum_BoilerOperatingMode"
   },
-  "CA_FlowArrangement": {
+  "OB_FlowArrangement": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -5469,7 +5469,7 @@
     "rule_fr": "Disposition des écoulements : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_HeatExchangerArrangement), écrite en majuscules comme dans la liste, p. ex. COUNTERFLOW.",
     "source": "IFC 4.3 PEnum_HeatExchangerArrangement"
   },
-  "CA_FullLoadEfficiency": {
+  "OB_FullLoadEfficiency": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5498,7 +5498,7 @@
     "rule_fr": "Efficacité à pleine charge (COP) : un nombre supérieur à 0 et d’au plus 15.",
     "source": "OpenBEP proposal"
   },
-  "CA_HasIntegralDamperControl": {
+  "OB_HasIntegralDamperControl": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -5530,7 +5530,7 @@
     "rule_fr": "Registre intégré : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_HeatRecoveryEffectiveness_pct": {
+  "OB_HeatRecoveryEffectiveness_pct": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5559,7 +5559,7 @@
     "rule_fr": "Efficacité de récupération : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HeatRejectionCapacity_kW": {
+  "OB_HeatRejectionCapacity_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5588,7 +5588,7 @@
     "rule_fr": "Puissance de refroidissement : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HeatRejectionRate_kW": {
+  "OB_HeatRejectionRate_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5617,7 +5617,7 @@
     "rule_fr": "Taux de rejet thermique : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HeatTransferCapacity_kW": {
+  "OB_HeatTransferCapacity_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5646,7 +5646,7 @@
     "rule_fr": "Puissance d’échange : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HeatingCapacity_kW": {
+  "OB_HeatingCapacity_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5675,7 +5675,7 @@
     "rule_fr": "Puissance calorifique : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_HeatingOutput_kW": {
+  "OB_HeatingOutput_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5704,7 +5704,7 @@
     "rule_fr": "Puissance utile : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_InletSize": {
+  "OB_InletSize": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -5733,7 +5733,7 @@
     "rule_fr": "Diamètre d’entrée : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_InputPower_kW": {
+  "OB_InputPower_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5762,7 +5762,7 @@
     "rule_fr": "Puissance absorbée : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_InputRating_kW": {
+  "OB_InputRating_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5791,7 +5791,7 @@
     "rule_fr": "Puissance absorbée : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LeakageWhenClosed_Ls": {
+  "OB_LeakageWhenClosed_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5820,7 +5820,7 @@
     "rule_fr": "Fuite en position fermée : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_MakeUpWaterRequirement_Ls": {
+  "OB_MakeUpWaterRequirement_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5849,7 +5849,7 @@
     "rule_fr": "Besoin en eau d’appoint : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_MinimumMaximumAirflow_Ls": {
+  "OB_MinimumMaximumAirflow_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5878,7 +5878,7 @@
     "rule_fr": "Débit d’air minimal / maximal : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_MinimumOutdoorAirflow_Ls": {
+  "OB_MinimumOutdoorAirflow_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5907,7 +5907,7 @@
     "rule_fr": "Débit d’air neuf minimal : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NoiseCriterionAtDesignFlow": {
+  "OB_NoiseCriterionAtDesignFlow": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -5936,7 +5936,7 @@
     "rule_fr": "Critère de bruit au débit de conception : NC, une espace, puis une valeur à 2 chiffres, p. ex. NC 30.",
     "source": "OpenBEP proposal"
   },
-  "CA_NominalAirflow_Ls": {
+  "OB_NominalAirflow_Ls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -5965,7 +5965,7 @@
     "rule_fr": "Débit d’air nominal : un nombre en L/s supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NumberOfCells": {
+  "OB_NumberOfCells": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -5994,7 +5994,7 @@
     "rule_fr": "Nombre de cellules : un nombre entier d’au moins 1.",
     "source": "OpenBEP proposal"
   },
-  "CA_NumberOfPlates": {
+  "OB_NumberOfPlates": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -6023,7 +6023,7 @@
     "rule_fr": "Nombre de plaques : un nombre entier d’au moins 1.",
     "source": "OpenBEP proposal"
   },
-  "CA_PartLoadEfficiency": {
+  "OB_PartLoadEfficiency": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6052,7 +6052,7 @@
     "rule_fr": "Efficacité à charge partielle (IPLV) : un nombre supérieur à 0 et d’au plus 20.",
     "source": "OpenBEP proposal"
   },
-  "CA_PressureClass_Pa": {
+  "OB_PressureClass_Pa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6081,7 +6081,7 @@
     "rule_fr": "Classe de pression : un nombre en Pa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_PressureRating_kPa": {
+  "OB_PressureRating_kPa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6110,7 +6110,7 @@
     "rule_fr": "Pression nominale : un nombre en kPa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_Refrigerant": {
+  "OB_Refrigerant": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -6139,7 +6139,7 @@
     "rule_fr": "Frigorigène : la désignation ASHRAE 34 avec le trait d’union, p. ex. R-513A ou R-1234ze(E).",
     "source": "OpenBEP proposal"
   },
-  "CA_ReheatType": {
+  "OB_ReheatType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -6177,7 +6177,7 @@
     "rule_fr": "Type de réchauffage : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_AirTerminalBoxReheatType), écrite en majuscules comme dans la liste, p. ex. WATERCOILREHEAT.",
     "source": "IFC 4.3 PEnum_AirTerminalBoxReheatType"
   },
-  "CA_ReleaseTemperature_C": {
+  "OB_ReleaseTemperature_C": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6206,7 +6206,7 @@
     "rule_fr": "Température de déclenchement : un nombre en °C de 50 à 300, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_SealLeakageClass": {
+  "OB_SealLeakageClass": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -6239,7 +6239,7 @@
     "rule_fr": "Classe d’étanchéité : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Seal class A.",
     "source": "OpenBEP proposal"
   },
-  "CA_Shape": {
+  "OB_Shape": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -6276,7 +6276,7 @@
     "rule_fr": "Forme : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_AirTerminalShape), écrite en majuscules comme dans la liste, p. ex. SQUARE.",
     "source": "IFC 4.3 PEnum_AirTerminalShape"
   },
-  "CA_StaticPressure_Pa": {
+  "OB_StaticPressure_Pa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6305,7 +6305,7 @@
     "rule_fr": "Pression statique : un nombre en Pa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ThermalEfficiency_pct": {
+  "OB_ThermalEfficiency_pct": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6334,7 +6334,7 @@
     "rule_fr": "Rendement thermique : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ThrowLength": {
+  "OB_ThrowLength": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -6363,7 +6363,7 @@
     "rule_fr": "Portée : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_TotalCoolingCapacity_kW": {
+  "OB_TotalCoolingCapacity_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6630,7 +6630,7 @@
     "rule_fr": "Alimentation (V / phase) : un nombre en V supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_BarrierFreeFixture": {
+  "OB_BarrierFreeFixture": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -6662,7 +6662,7 @@
     "rule_fr": "Appareil sans obstacles : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_BaseDriveArrangement": {
+  "OB_BaseDriveArrangement": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -6691,7 +6691,7 @@
     "rule_fr": "Base et entraînement : une valeur IFC 4.3 PEnum_PumpBaseType, « / », puis une valeur PEnum_PumpDriveConnectionType, p. ex. FRAME / DIRECTDRIVE.",
     "source": "IFC 4.3 PEnum_PumpBaseType + PEnum_PumpDriveConnectionType"
   },
-  "CA_ConnectionSize": {
+  "OB_ConnectionSize": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -6720,7 +6720,7 @@
     "rule_fr": "Diamètre de raccordement : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_CoverageArea": {
+  "OB_CoverageArea": {
     "revit_data_type": "AREA",
     "shared_or_builtin": "Shared",
     "type": "area",
@@ -6749,7 +6749,7 @@
     "rule_fr": "Surface de couverture : une superficie en m² supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignHead_kPa": {
+  "OB_DesignHead_kPa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6778,7 +6778,7 @@
     "rule_fr": "Hauteur manométrique : un nombre en kPa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_FlowCoefficient": {
+  "OB_FlowCoefficient": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6807,7 +6807,7 @@
     "rule_fr": "Coefficient de débit (Kv / Cv) : un nombre supérieur à 0.",
     "source": "OpenBEP proposal"
   },
-  "CA_FlowRateFlushVolume": {
+  "OB_FlowRateFlushVolume": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -6836,7 +6836,7 @@
     "rule_fr": "Débit ou volume de chasse : un nombre puis Lpf (litres par chasse) ou L/min, p. ex. 4.8 Lpf.",
     "source": "OpenBEP proposal"
   },
-  "CA_HazardClassification": {
+  "OB_HazardClassification": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -6871,7 +6871,7 @@
     "rule_fr": "Classe de risque : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. Light hazard.",
     "source": "OpenBEP proposal"
   },
-  "CA_JointType": {
+  "OB_JointType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -6900,7 +6900,7 @@
     "rule_fr": "Type de joint : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_KFactor": {
+  "OB_KFactor": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6929,7 +6929,7 @@
     "rule_fr": "Facteur K : un nombre supérieur à 0.",
     "source": "OpenBEP proposal"
   },
-  "CA_MotorNameplatePower_kW": {
+  "OB_MotorNameplatePower_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -6958,7 +6958,7 @@
     "rule_fr": "Puissance nominale du moteur : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NominalLength": {
+  "OB_NominalLength": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -6987,7 +6987,7 @@
     "rule_fr": "Longueur nominale : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NominalSpeed_rpm": {
+  "OB_NominalSpeed_rpm": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7016,7 +7016,7 @@
     "rule_fr": "Vitesse de rotation : un nombre en rpm supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NominalWidth": {
+  "OB_NominalWidth": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -7045,7 +7045,7 @@
     "rule_fr": "Largeur nominale : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NormallyOpen": {
+  "OB_NormallyOpen": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -7074,7 +7074,7 @@
     "rule_fr": "Normalement ouvert : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_Operation": {
+  "OB_Operation": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -7118,7 +7118,7 @@
     "rule_fr": "Mode de manœuvre : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_ValveOperation), écrite en majuscules comme dans la liste, p. ex. LEVER.",
     "source": "IFC 4.3 PEnum_ValveOperation"
   },
-  "CA_RecoveryRate_Lh": {
+  "OB_RecoveryRate_Lh": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7147,7 +7147,7 @@
     "rule_fr": "Taux de récupération : un nombre en L/h supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_Response": {
+  "OB_Response": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -7181,7 +7181,7 @@
     "rule_fr": "Réponse : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_SprinklerResponse), écrite en majuscules comme dans la liste, p. ex. QUICK.",
     "source": "IFC 4.3 PEnum_SprinklerResponse"
   },
-  "CA_SprinklerType": {
+  "OB_SprinklerType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -7221,7 +7221,7 @@
     "rule_fr": "Type de gicleur : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_SprinklerType), écrite en majuscules comme dans la liste, p. ex. PENDANT.",
     "source": "IFC 4.3 PEnum_SprinklerType"
   },
-  "CA_StorageCapacity_L": {
+  "OB_StorageCapacity_L": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7250,7 +7250,7 @@
     "rule_fr": "Volume de stockage : un nombre en L supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_StorageSetPoint_C": {
+  "OB_StorageSetPoint_C": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7279,7 +7279,7 @@
     "rule_fr": "Température de consigne du stockage : un nombre en °C supérieur à 0 et d’au plus 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_TemperatureRating_C": {
+  "OB_TemperatureRating_C": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7308,7 +7308,7 @@
     "rule_fr": "Température de déclenchement : un nombre en °C de 50 à 350, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ValveMechanism": {
+  "OB_ValveMechanism": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -7351,7 +7351,7 @@
     "rule_fr": "Mécanisme du robinet : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_ValveMechanism), écrite en majuscules comme dans la liste, p. ex. BUTTERFLY.",
     "source": "IFC 4.3 PEnum_ValveMechanism"
   },
-  "CA_VariableFrequencyDrive": {
+  "OB_VariableFrequencyDrive": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -7380,7 +7380,7 @@
     "rule_fr": "Variateur de fréquence : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_WorkingPressureRating_kPa": {
+  "OB_WorkingPressureRating_kPa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7409,7 +7409,7 @@
     "rule_fr": "Pression de service : un nombre en kPa supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_WorkingTestPressure_kPa": {
+  "OB_WorkingTestPressure_kPa": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7612,7 +7612,7 @@
     "rule_fr": "Puissance totale : un nombre en W supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_CSAConfiguration": {
+  "OB_CSAConfiguration": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -7641,7 +7641,7 @@
     "rule_fr": "Configuration CSA : le code de configuration CSA C22.2 no 42, p. ex. 5-15R, 5-20R ou L5-30R.",
     "source": "OpenBEP proposal"
   },
-  "CA_CatalogueArticleNumber": {
+  "OB_CatalogueArticleNumber": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -7670,7 +7670,7 @@
     "rule_fr": "Numéro d’article au catalogue : le code de commande complet, 3 à 60 lettres, chiffres, points, barres obliques, soulignés ou traits d’union, sans espace.",
     "source": "OpenBEP proposal"
   },
-  "CA_ColourRenderingIndex": {
+  "OB_ColourRenderingIndex": {
     "revit_data_type": "INTEGER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -7698,7 +7698,7 @@
     "rule_fr": "Indice de rendu des couleurs : un nombre entier de 0 à 100.",
     "source": "OpenBEP proposal"
   },
-  "CA_DetectionSetPoint": {
+  "OB_DetectionSetPoint": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -7727,7 +7727,7 @@
     "rule_fr": "Seuil de détection : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_DeviceAddress": {
+  "OB_DeviceAddress": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "identifier",
@@ -7756,7 +7756,7 @@
     "rule_fr": "Adresse du dispositif d’alarme incendie : boucle L1 à L99, un trait d’union, puis D (détecteur) ou M (module) et une adresse à 3 chiffres, p. ex. L2-D045.",
     "source": "OpenBEP proposal"
   },
-  "CA_Efficiency_pct": {
+  "OB_Efficiency_pct": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7785,7 +7785,7 @@
     "rule_fr": "Rendement : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_EmergencySecurityLightingType": {
+  "OB_EmergencySecurityLightingType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -7822,7 +7822,7 @@
     "rule_fr": "Éclairage de sécurité : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_LightFixtureSecurityLightingType), écrite en majuscules comme dans la liste, p. ex. EMERGENCYEXITLIGHT.",
     "source": "IFC 4.3 PEnum_LightFixtureSecurityLightingType"
   },
-  "CA_FillRatio_pct": {
+  "OB_FillRatio_pct": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7851,7 +7851,7 @@
     "rule_fr": "Taux de remplissage : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_FuelAutonomy_h": {
+  "OB_FuelAutonomy_h": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7880,7 +7880,7 @@
     "rule_fr": "Autonomie en carburant : un nombre en h supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_FuelTankCapacity_L": {
+  "OB_FuelTankCapacity_L": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7909,7 +7909,7 @@
     "rule_fr": "Capacité du réservoir : un nombre en L supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_GeneratorEfficiency_pct": {
+  "OB_GeneratorEfficiency_pct": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -7938,7 +7938,7 @@
     "rule_fr": "Rendement de l’alternateur : un nombre en % supérieur à 0 et d’au plus 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_GroundFaultProtected": {
+  "OB_GroundFaultProtected": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -7967,7 +7967,7 @@
     "rule_fr": "Protégé par DDFT : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_HasCover": {
+  "OB_HasCover": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -7996,7 +7996,7 @@
     "rule_fr": "Avec couvercle : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_HeatGainToSpace_W": {
+  "OB_HeatGainToSpace_W": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -8025,7 +8025,7 @@
     "rule_fr": "Gain thermique au local : un nombre en W supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_IPRating": {
+  "OB_IPRating": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8054,7 +8054,7 @@
     "rule_fr": "Indice de protection : IP suivi de deux chiffres caractéristiques (0 à 6, puis 0 à 9, X permis), p. ex. IP65.",
     "source": "OpenBEP proposal"
   },
-  "CA_Impedance": {
+  "OB_Impedance": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8083,7 +8083,7 @@
     "rule_fr": "Impédance : un pourcentage avec une espace avant le signe %, p. ex. 5.75 %.",
     "source": "OpenBEP proposal"
   },
-  "CA_LampLightSourceType": {
+  "OB_LampLightSourceType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -8124,7 +8124,7 @@
     "rule_fr": "Type de lampe : exactement une des valeurs IFC 4.3 de la liste permise (IfcLampTypeEnum), écrite en majuscules comme dans la liste, p. ex. LED.",
     "source": "IFC 4.3 IfcLampTypeEnum"
   },
-  "CA_ListingCertification": {
+  "OB_ListingCertification": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8153,7 +8153,7 @@
     "rule_fr": "Homologation : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_MainBoard": {
+  "OB_MainBoard": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -8182,7 +8182,7 @@
     "rule_fr": "Tableau principal : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_NetworkHeadEndReference": {
+  "OB_NetworkHeadEndReference": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8211,7 +8211,7 @@
     "rule_fr": "Référence réseau / centrale : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_NumberOfGangs": {
+  "OB_NumberOfGangs": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -8240,7 +8240,7 @@
     "rule_fr": "Nombre de modules : un nombre entier de 1 à 6.",
     "source": "OpenBEP proposal"
   },
-  "CA_NumberOfLightSources": {
+  "OB_NumberOfLightSources": {
     "revit_data_type": "INTEGER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -8269,7 +8269,7 @@
     "rule_fr": "Nombre de sources : un nombre entier d’au moins 1.",
     "source": "OpenBEP proposal"
   },
-  "CA_NumberOfSockets": {
+  "OB_NumberOfSockets": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -8298,7 +8298,7 @@
     "rule_fr": "Nombre de prises : un nombre entier de 1 à 6.",
     "source": "OpenBEP proposal"
   },
-  "CA_OnEmergencyLifeSafetyPower": {
+  "OB_OnEmergencyLifeSafetyPower": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -8327,7 +8327,7 @@
     "rule_fr": "Alimentation de secours : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_Placing": {
+  "OB_Placing": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -8365,7 +8365,7 @@
     "rule_fr": "Emplacement : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_LightFixturePlacingType), écrite en majuscules comme dans la liste, p. ex. CEILING.",
     "source": "IFC 4.3 PEnum_LightFixturePlacingType"
   },
-  "CA_PowerSource": {
+  "OB_PowerSource": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -8403,7 +8403,7 @@
     "rule_fr": "Source d’alimentation : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. PoE+.",
     "source": "OpenBEP proposal"
   },
-  "CA_PrimaryVoltage_V": {
+  "OB_PrimaryVoltage_V": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -8432,7 +8432,7 @@
     "rule_fr": "Tension primaire : un nombre en V supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RatedOutput_kW": {
+  "OB_RatedOutput_kW": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -8461,7 +8461,7 @@
     "rule_fr": "Puissance assignée : un nombre en kW supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RatedPower_kVA": {
+  "OB_RatedPower_kVA": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -8490,7 +8490,7 @@
     "rule_fr": "Puissance assignée : un nombre en kVA supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_SecondaryVoltage_V": {
+  "OB_SecondaryVoltage_V": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -8519,7 +8519,7 @@
     "rule_fr": "Tension secondaire : un nombre en V supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_SecurityZone": {
+  "OB_SecurityZone": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8548,7 +8548,7 @@
     "rule_fr": "Zone de sécurité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SwitchFunction": {
+  "OB_SwitchFunction": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -8584,7 +8584,7 @@
     "rule_fr": "Fonction de l’interrupteur : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_SwitchFunctionType), écrite en majuscules comme dans la liste, p. ex. ONOFFSWITCH.",
     "source": "IFC 4.3 PEnum_SwitchFunctionType"
   },
-  "CA_TrayConduitType": {
+  "OB_TrayConduitType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -8626,7 +8626,7 @@
     "rule_fr": "Type de chemin de câbles / conduit : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. EMT.",
     "source": "OpenBEP proposal"
   },
-  "CA_Type": {
+  "OB_Type": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8655,7 +8655,7 @@
     "rule_fr": "Type (sec / à liquide isolant) : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_VectorGroup": {
+  "OB_VectorGroup": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8684,7 +8684,7 @@
     "rule_fr": "Groupe de couplage : notation CEI 60076-1, enroulement HT (D, Y, YN, Z, ZN), enroulement BT (d, y, yn, z, zn) et indice horaire de 0 à 11, p. ex. Dyn1.",
     "source": "OpenBEP proposal"
   },
-  "CA_VideoResolution": {
+  "OB_VideoResolution": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -8713,7 +8713,7 @@
     "rule_fr": "Résolution vidéo : largeur x hauteur en pixels, p. ex. 3840 x 2160.",
     "source": "OpenBEP proposal"
   },
-  "CA_VisualSignalIntensity_cd": {
+  "OB_VisualSignalIntensity_cd": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -9152,7 +9152,7 @@
     "rule_fr": "Tension assignée : un nombre en V supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_BarrierSystemTestLevel": {
+  "OB_BarrierSystemTestLevel": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9181,7 +9181,7 @@
     "rule_fr": "Système de glissière et niveau d’essai : la description du système, une virgule, puis MASH TL-1 à TL-6.",
     "source": "OpenBEP proposal"
   },
-  "CA_BeddingClass": {
+  "OB_BeddingClass": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9210,7 +9210,7 @@
     "rule_fr": "Classe de lit de pose : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_ChamberSize": {
+  "OB_ChamberSize": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9239,7 +9239,7 @@
     "rule_fr": "Dimensions de la chambre : le diamètre en millimètres entiers suivi de « dia. » (p. ex. 1200 dia.), ou longueur x largeur en millimètres.",
     "source": "OpenBEP proposal"
   },
-  "CA_CoordinateReferenceSystem": {
+  "OB_CoordinateReferenceSystem": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9268,7 +9268,7 @@
     "rule_fr": "Système de référence de coordonnées : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_CoverFrame": {
+  "OB_CoverFrame": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9297,7 +9297,7 @@
     "rule_fr": "Couvercle / cadre : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_CrossSlope_pct": {
+  "OB_CrossSlope_pct": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -9325,7 +9325,7 @@
     "rule_fr": "Pente transversale : un nombre en % de 0 à 100, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_CulvertOpening": {
+  "OB_CulvertOpening": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9354,7 +9354,7 @@
     "rule_fr": "Ouverture du ponceau : largeur intérieure x hauteur libre en millimètres entiers (p. ex. 2400 x 1800), ou le diamètre suivi de « dia. » pour un ponceau circulaire.",
     "source": "OpenBEP proposal"
   },
-  "CA_CurbType": {
+  "OB_CurbType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9383,7 +9383,7 @@
     "rule_fr": "Type de bordure : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_CutFillVolumes": {
+  "OB_CutFillVolumes": {
     "revit_data_type": "VOLUME",
     "shared_or_builtin": "Shared",
     "type": "volume",
@@ -9412,7 +9412,7 @@
     "rule_fr": "Volumes de déblai / remblai : un volume en m³ supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_Depth": {
+  "OB_Depth": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -9441,7 +9441,7 @@
     "rule_fr": "Profondeur : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DepthOfCover": {
+  "OB_DepthOfCover": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -9470,7 +9470,7 @@
     "rule_fr": "Profondeur de recouvrement : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignSpeed_kmh": {
+  "OB_DesignSpeed_kmh": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -9499,7 +9499,7 @@
     "rule_fr": "Vitesse de base : un nombre en km/h supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DropStructure": {
+  "OB_DropStructure": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -9528,7 +9528,7 @@
     "rule_fr": "Chute (regard de chute) : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_EndTerminal": {
+  "OB_EndTerminal": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9557,7 +9557,7 @@
     "rule_fr": "Extrémité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_FromToStructure": {
+  "OB_FromToStructure": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9586,7 +9586,7 @@
     "rule_fr": "Structure amont / aval : identifiant de la structure amont, le mot « to », puis celui de la structure aval, p. ex. MH-12 to MH-13.",
     "source": "OpenBEP proposal"
   },
-  "CA_GeotechnicalReport": {
+  "OB_GeotechnicalReport": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9615,7 +9615,7 @@
     "rule_fr": "Étude géotechnique : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_HasStepsLadder": {
+  "OB_HasStepsLadder": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -9644,7 +9644,7 @@
     "rule_fr": "Avec échelons : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_InvertElevation": {
+  "OB_InvertElevation": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -9672,7 +9672,7 @@
     "rule_fr": "Élévation(s) du radier : une élévation en m (peut être négative), saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LaneWidth": {
+  "OB_LaneWidth": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -9701,7 +9701,7 @@
     "rule_fr": "Largeur de voie : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LayerFunction": {
+  "OB_LayerFunction": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -9736,7 +9736,7 @@
     "rule_fr": "Fonction de la couche : exactement une des valeurs de la liste permise OpenBEP (une proposition, non une norme), écrite telle quelle, p. ex. SURFACE_COURSE.",
     "source": "OpenBEP proposal"
   },
-  "CA_LayerMass_t": {
+  "OB_LayerMass_t": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -9765,7 +9765,7 @@
     "rule_fr": "Masse de la couche : un nombre en t supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LayerThickness": {
+  "OB_LayerThickness": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -9794,7 +9794,7 @@
     "rule_fr": "Épaisseur de la couche : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LayerVolume": {
+  "OB_LayerVolume": {
     "revit_data_type": "VOLUME",
     "shared_or_builtin": "Shared",
     "type": "volume",
@@ -9823,7 +9823,7 @@
     "rule_fr": "Volume de la couche : un volume en m³ supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_MixMaterialSpecification": {
+  "OB_MixMaterialSpecification": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9852,7 +9852,7 @@
     "rule_fr": "Enrobé / matériau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_MoveableTemporary": {
+  "OB_MoveableTemporary": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -9881,7 +9881,7 @@
     "rule_fr": "Amovible : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_ParkingStalls": {
+  "OB_ParkingStalls": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -9910,7 +9910,7 @@
     "rule_fr": "Places de stationnement : un nombre entier d’au moins 1.",
     "source": "OpenBEP proposal"
   },
-  "CA_ParkingUse": {
+  "OB_ParkingUse": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9939,7 +9939,7 @@
     "rule_fr": "Usage du stationnement : une ou plusieurs des valeurs Standard, Accessible, Van accessible, EV charging, Visitor, Car share ou Motorcycle, séparées par « / ».",
     "source": "OpenBEP proposal"
   },
-  "CA_PavementMarking": {
+  "OB_PavementMarking": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -9968,7 +9968,7 @@
     "rule_fr": "Marquage de la chaussée : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_PavementThickness": {
+  "OB_PavementThickness": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -9997,7 +9997,7 @@
     "rule_fr": "Épaisseur de la chaussée : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_PavementType": {
+  "OB_PavementType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -10031,7 +10031,7 @@
     "rule_fr": "Type de revêtement : exactement une des valeurs IFC 4.3 de la liste permise (IfcPavementTypeEnum), écrite en majuscules comme dans la liste, p. ex. FLEXIBLE.",
     "source": "IFC 4.3 IfcPavementTypeEnum"
   },
-  "CA_PipeClass": {
+  "OB_PipeClass": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10060,7 +10060,7 @@
     "rule_fr": "Classe de tuyau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_PostSpacing": {
+  "OB_PostSpacing": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10089,7 +10089,7 @@
     "rule_fr": "Espacement des poteaux : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RimCoverElevation": {
+  "OB_RimCoverElevation": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10117,7 +10117,7 @@
     "rule_fr": "Élévation du couvercle : une élévation en m (peut être négative), saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RoughnessAtHandover_mkm": {
+  "OB_RoughnessAtHandover_mkm": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -10146,7 +10146,7 @@
     "rule_fr": "Uni (IRI) à la réception : un nombre en m/km supérieur à 0 et d’au plus 20, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_SiteArea": {
+  "OB_SiteArea": {
     "revit_data_type": "AREA",
     "shared_or_builtin": "Shared",
     "type": "area",
@@ -10175,7 +10175,7 @@
     "rule_fr": "Superficie du terrain : une superficie en m² supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_SurveySourceAndDate": {
+  "OB_SurveySourceAndDate": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10204,7 +10204,7 @@
     "rule_fr": "Source et date du relevé : la source, une virgule, puis la date du relevé au format AAAA-MM-JJ.",
     "source": "OpenBEP proposal"
   },
-  "CA_TransitionSection": {
+  "OB_TransitionSection": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -10233,7 +10233,7 @@
     "rule_fr": "Section de transition : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_UtilityService": {
+  "OB_UtilityService": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -10342,7 +10342,7 @@
     "rule_fr": "Élévation du radier : une élévation en m (peut être négative), saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ApproachSpeed_kmh": {
+  "OB_ApproachSpeed_kmh": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -10371,7 +10371,7 @@
     "rule_fr": "Vitesse d’approche : un nombre en km/h supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_BallastDepth": {
+  "OB_BallastDepth": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10400,7 +10400,7 @@
     "rule_fr": "Épaisseur du ballast : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_BallastedTrack": {
+  "OB_BallastedTrack": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -10429,7 +10429,7 @@
     "rule_fr": "Voie ballastée : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_Cant": {
+  "OB_Cant": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10457,7 +10457,7 @@
     "rule_fr": "Dévers : une longueur en mm de 0 à 200, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ContactWireHeight": {
+  "OB_ContactWireHeight": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10486,7 +10486,7 @@
     "rule_fr": "Hauteur du fil de contact : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ContinuousWeldedRail": {
+  "OB_ContinuousWeldedRail": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -10515,7 +10515,7 @@
     "rule_fr": "Longs rails soudés : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_DesignCodeAndLiveLoad": {
+  "OB_DesignCodeAndLiveLoad": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10544,7 +10544,7 @@
     "rule_fr": "Code de conception et surcharge routière : CSA S6, deux-points, année d’édition (2 chiffres), virgule, puis le modèle de charge CL, p. ex. CSA S6:19, CL-625.",
     "source": "OpenBEP proposal"
   },
-  "CA_DesignMovementRange": {
+  "OB_DesignMovementRange": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10573,7 +10573,7 @@
     "rule_fr": "Amplitude de déplacement de conception : amplitudes longitudinale et transversale en millimètres entiers, p. ex. ±75 long. / ±10 trans.",
     "source": "OpenBEP proposal"
   },
-  "CA_DisplacementAccommodated": {
+  "OB_DisplacementAccommodated": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -10602,7 +10602,7 @@
     "rule_fr": "Déplacement permis : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_DivergingRadius": {
+  "OB_DivergingRadius": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10631,7 +10631,7 @@
     "rule_fr": "Rayon de la voie déviée : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_DivergingSpeed_kmh": {
+  "OB_DivergingSpeed_kmh": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -10660,7 +10660,7 @@
     "rule_fr": "Vitesse en voie déviée : un nombre en km/h supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_EdgeOffsetFromTrack": {
+  "OB_EdgeOffsetFromTrack": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10689,7 +10689,7 @@
     "rule_fr": "Distance du bord à l’axe de la voie : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_ElectricalClearance": {
+  "OB_ElectricalClearance": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10718,7 +10718,7 @@
     "rule_fr": "Distance d’isolement : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_FasteningSystem": {
+  "OB_FasteningSystem": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10747,7 +10747,7 @@
     "rule_fr": "Système d’attache : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_GasketWaterproofing": {
+  "OB_GasketWaterproofing": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10776,7 +10776,7 @@
     "rule_fr": "Joint / étanchéité : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_Hand": {
+  "OB_Hand": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -10816,7 +10816,7 @@
     "rule_fr": "Sens de déviation : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_BranchLineDirection), écrite en majuscules comme dans la liste, p. ex. LEFTDEVIATION.",
     "source": "IFC 4.3 PEnum_BranchLineDirection"
   },
-  "CA_InspectionElementReference": {
+  "OB_InspectionElementReference": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -10845,7 +10845,7 @@
     "rule_fr": "Élément d’inspection : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_InternalDiameter": {
+  "OB_InternalDiameter": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10874,7 +10874,7 @@
     "rule_fr": "Diamètre intérieur : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LineSpeed_kmh": {
+  "OB_LineSpeed_kmh": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -10903,7 +10903,7 @@
     "rule_fr": "Vitesse de la ligne : un nombre en km/h supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_LiningThickness": {
+  "OB_LiningThickness": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10932,7 +10932,7 @@
     "rule_fr": "Épaisseur du revêtement : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_NumberOfLampsAspects": {
+  "OB_NumberOfLampsAspects": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -10961,7 +10961,7 @@
     "rule_fr": "Nombre de feux : un nombre entier d’au moins 1.",
     "source": "OpenBEP proposal"
   },
-  "CA_PlatformHeightAboveRail": {
+  "OB_PlatformHeightAboveRail": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -10990,7 +10990,7 @@
     "rule_fr": "Hauteur du quai au-dessus du rail : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_PlatformLength": {
+  "OB_PlatformLength": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11019,7 +11019,7 @@
     "rule_fr": "Longueur du quai : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_PointMachines": {
+  "OB_PointMachines": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "integer",
@@ -11047,7 +11047,7 @@
     "rule_fr": "Moteurs d’aiguille : un nombre entier positif ou nul.",
     "source": "OpenBEP proposal"
   },
-  "CA_PoleHeight": {
+  "OB_PoleHeight": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11076,7 +11076,7 @@
     "rule_fr": "Hauteur du poteau : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_PoleStrength": {
+  "OB_PoleStrength": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11105,7 +11105,7 @@
     "rule_fr": "Résistance du poteau : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_Prestressing": {
+  "OB_Prestressing": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11134,7 +11134,7 @@
     "rule_fr": "Précontrainte : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_RailSection": {
+  "OB_RailSection": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11163,7 +11163,7 @@
     "rule_fr": "Profil de rail : une désignation AREMA comme 115RE ou 136RE, ou une désignation EN 13674 comme 60E1.",
     "source": "OpenBEP proposal"
   },
-  "CA_ReferenceAlignment": {
+  "OB_ReferenceAlignment": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11192,7 +11192,7 @@
     "rule_fr": "Alignement de référence : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_RequiredSightingDistance": {
+  "OB_RequiredSightingDistance": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11221,7 +11221,7 @@
     "rule_fr": "Distance de visibilité requise : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_RingSegmentType": {
+  "OB_RingSegmentType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11250,7 +11250,7 @@
     "rule_fr": "Type d’anneau / de voussoir : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_RotationAccommodated": {
+  "OB_RotationAccommodated": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -11279,7 +11279,7 @@
     "rule_fr": "Rotation permise : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_ScourProtection": {
+  "OB_ScourProtection": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11308,7 +11308,7 @@
     "rule_fr": "Protection contre l’affouillement : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SettingTemperaturePreset": {
+  "OB_SettingTemperaturePreset": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11337,7 +11337,7 @@
     "rule_fr": "Température de pose / préréglage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SignalType": {
+  "OB_SignalType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -11366,7 +11366,7 @@
     "rule_fr": "Type de signal : une valeur IFC 4.3 PEnum_RailwaySignalType, suivie au besoin de « / » et d’une valeur PEnum_SignalIndicatorType.",
     "source": "IFC 4.3 PEnum_RailwaySignalType + PEnum_SignalIndicatorType"
   },
-  "CA_SpanLength": {
+  "OB_SpanLength": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11395,7 +11395,7 @@
     "rule_fr": "Longueur de portée : une longueur en m supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_Stagger": {
+  "OB_Stagger": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11424,7 +11424,7 @@
     "rule_fr": "Désaxement : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_StructureNumber": {
+  "OB_StructureNumber": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11453,7 +11453,7 @@
     "rule_fr": "Numéro de la structure : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SupportType": {
+  "OB_SupportType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -11492,7 +11492,7 @@
     "rule_fr": "Type de support : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_SupportingSystemType), écrite en majuscules comme dans la liste, p. ex. SIMPLESUPPORT.",
     "source": "IFC 4.3 PEnum_SupportingSystemType"
   },
-  "CA_SwitchHeater": {
+  "OB_SwitchHeater": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11521,7 +11521,7 @@
     "rule_fr": "Réchauffeur d’aiguillage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_SystemHeight": {
+  "OB_SystemHeight": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11550,7 +11550,7 @@
     "rule_fr": "Hauteur du système : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_TactileWarningSurface": {
+  "OB_TactileWarningSurface": {
     "revit_data_type": "YESNO",
     "shared_or_builtin": "Shared",
     "type": "boolean",
@@ -11579,7 +11579,7 @@
     "rule_fr": "Surface d’avertissement tactile : oui ou non seulement (paramètre Oui/Non de Revit, exporté en Yes/No); une valeur vide est refusée.",
     "source": "Revit built-in"
   },
-  "CA_TieSleeperType": {
+  "OB_TieSleeperType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "enum",
@@ -11619,7 +11619,7 @@
     "rule_fr": "Type de traverse : exactement une des valeurs IFC 4.3 de la liste permise (PEnum_SleeperType), écrite en majuscules comme dans la liste, p. ex. MONOBLOCKCONCRETESLEEPER.",
     "source": "IFC 4.3 PEnum_SleeperType"
   },
-  "CA_TieSpacing": {
+  "OB_TieSpacing": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11648,7 +11648,7 @@
     "rule_fr": "Espacement des traverses : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_TrackGauge": {
+  "OB_TrackGauge": {
     "revit_data_type": "LENGTH",
     "shared_or_builtin": "Shared",
     "type": "length",
@@ -11677,7 +11677,7 @@
     "rule_fr": "Écartement de la voie : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_TrackIdentifier": {
+  "OB_TrackIdentifier": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11706,7 +11706,7 @@
     "rule_fr": "Identifiant de voie : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_TurnoutType": {
+  "OB_TurnoutType": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",
@@ -11735,7 +11735,7 @@
     "rule_fr": "Type d’aiguillage : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "CA_VerticalLoadCapacity_kN": {
+  "OB_VerticalLoadCapacity_kN": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Shared",
     "type": "number",
@@ -11764,7 +11764,7 @@
     "rule_fr": "Capacité verticale : un nombre en kN supérieur à 0, saisi sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "CA_WearingSurfaceWaterproofing": {
+  "OB_WearingSurfaceWaterproofing": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Shared",
     "type": "text",

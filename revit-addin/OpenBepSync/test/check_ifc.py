@@ -35,7 +35,7 @@ for e in model.by_type('IfcElement'):
     for ps, props in UE.get_psets(e).items():
         for k, v in props.items():
             if k == 'id': continue
-            if ps == 'OpenBEP' or k.startswith('CA_') or (ps.startswith('Pset_') and isinstance(v, str) and v.startswith('test CA_')):
+            if ps == 'OpenBEP' or k.startswith('OB_') or (ps.startswith('Pset_') and isinstance(v, str) and v.startswith('test OB_')):
                 where[ps].add(k)
 print('IFC classes:', ', '.join(f'{k} x{v}' for k, v in sorted(classes.items())))
 for ps in sorted(where):

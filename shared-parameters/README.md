@@ -6,7 +6,7 @@ One list of Revit parameters that every owner in Canada can ask for, tied to the
 
 | File | What it is |
 |---|---|
-| `OpenBEP_SharedParameters_v0.1.txt` | A Revit shared parameter file with 319 shared parameters in 9 groups. Nineteen were added for the LOD specification (CA_SpecificationSection, CA_EPDReference, CA_RecycledContent, CA_EmbodiedCarbon, and 15 for baggage handling and passenger boarding bridges in group 09 Specialty systems) and are listed in [`lod/spec.json`](../lod/spec.json), not yet in the manifest. Load it in Revit under Manage › Shared Parameters. |
+| `OpenBEP_SharedParameters_v0.1.txt` | A Revit shared parameter file with 319 shared parameters in 9 groups. Nineteen were added for the LOD specification (OB_SpecificationSection, OB_EPDReference, OB_RecycledContent, OB_EmbodiedCarbon, and 15 for baggage handling and passenger boarding bridges in group 09 Specialty systems) and are listed in [`lod/spec.json`](../lod/spec.json), not yet in the manifest. Load it in Revit under Manage › Shared Parameters. |
 | `OpenBEP_Parameters_Manifest_v0.1.csv` | The full list, one row per parameter and element type. It covers all 398 parameters: 300 shared and 98 Revit built-in. Each row gives the Revit categories, instance or type, the LOD it is required from, the BIM uses that need it, the IFC target, an example value, the placeholder values the checker rejects, and the English and French labels. |
 | `gen_sp.py` | The script that writes the .txt and the manifest from the BEP Builder element library (`lb_all.json`, to be added). GUIDs are derived from names, so reruns give the same GUIDs. |
 | `OpenBEP_IFC_PropertySets_v0.1.txt` | Revit IFC exporter user-defined property sets (IFC export › Modify setup › Property Sets). Every manifest shared parameter, and every built-in parameter the manifest names plainly (Type Mark, Manufacturer, Model…), is exported in one property set `OpenBEP` on occurrences, type parameters included, under its Revit name, which is what the BEP Builder's IDS checks. The 103 parameters whose IFC target is a standard IFC4 property are also written into those 61 `Pset_*` sets, on the classes each set applies to. Regenerate with `gen_ifc_psets.py`. |
@@ -27,10 +27,10 @@ The same step also exports an IDS file (buildingSMART Information Delivery Speci
 
 1. **Use Revit's built-in parameters wherever they exist.** For example, Fire Rating, Manufacturer, Model and Flow are built in. They are listed in the manifest as "Built-in" and never duplicated.
 2. **One concept, one parameter.**
-   - Our own data had "Fire-resistance rating" twice: walls and doors use Revit's built-in, dampers need a shared one. They are now one canonical entry, `CA_FireResistanceRating`, used only where Revit has no built-in.
+   - Our own data had "Fire-resistance rating" twice: walls and doors use Revit's built-in, dampers need a shared one. They are now one canonical entry, `OB_FireResistanceRating`, used only where Revit has no built-in.
    - "Acoustic rating", "Mounting type" and "Finish colour" were merged the same way.
    - 18 such groups were merged.
-3. **Names.** Shared parameters use `CA_` plus the English label in PascalCase. NUMBER parameters carry the unit, for example `CA_DesignAirflow_Ls` or `CA_RatedPower_kW`. The French label is in the manifest.
+3. **Names.** Shared parameters use `OB_` (OpenBEP) plus the English label in PascalCase. Until October 2026 the prefix was `CA_`; each GUID is still hashed from that first name, so the rename changed no GUID. NUMBER parameters carry the unit, for example `OB_DesignAirflow_Ls` or `OB_RatedPower_kW`. The French label is in the manifest.
 4. **Data types.**
    - The file uses only the classic tokens that Autodesk's own IFC parameter file uses: TEXT, NUMBER, LENGTH, AREA, VOLUME, YESNO, INTEGER and MULTILINETEXT.
    - Engineering values such as power, flow and pressure are NUMBER, with the unit in the name. Autodesk's IFC parameter file does the same.
