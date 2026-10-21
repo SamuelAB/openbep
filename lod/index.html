@@ -270,6 +270,10 @@ $('#grp').addEventListener('change',e=>{st.grp=e.target.value; list()});
 $('#upto').addEventListener('change',e=>{st.upto=e.target.value; view()});
 $('#ifc').addEventListener('change',e=>{st.ifc=e.target.checked; view()});
 document.addEventListener('change',e=>{if(e.target.matches('select[data-i18n-lang]')) setTimeout(list,50)});
+// Links to the Builder and the Why and Formats pages open them in this page's language.
+['click','auxclick','contextmenu','focusin'].forEach(t=>document.addEventListener(t,e=>{const a=e.target.closest&&e.target.closest('a[href]'); if(!a) return; const h=a.getAttribute('href')||'', l=lang(), f={fr:'fr/',ja:'ja/'}[l]||'';
+  let m=/^(.*bep-builder\.html)(?:\?[^#]*)?(#.*)?$/.exec(h); if(m){a.href=m[1]+'?lang='+l+(m[2]||''); return}
+  m=/^(.*\/(?:formats|why)\/)(?:(?:fr|ja)\/)?(#.*)?$/.exec(h); if(m) a.href=m[1]+f+(m[2]||'')},true));
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(byId[h]){st.el=h; render()}});
 projBanner(); render();
 </script>

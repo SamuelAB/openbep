@@ -97,6 +97,8 @@ def translate(page, lang, table, missing):
     out = re.sub(r'<html lang="en"', '<html lang="%s"' % lang, out, count=1)
     # Links into the app open it in the page's language.
     out = out.replace('bep-builder.html?lang=en', 'bep-builder.html?lang=%s' % lang)
+    # The LOD page reads ?lang= (the master links to it with ?lang=en).
+    out = re.sub(r'href="\.\./lod/(?:\?lang=en)?(#[^"]*)?"', lambda m: 'href="../lod/?lang=%s%s"' % (lang, m.group(1) or ''), out)
     # Links to another translated page stay in this language.
     for folder in sorted({os.path.dirname(p) for p in PAGES}):
         out = out.replace('href="../%s/"' % folder, 'href="../%s/%s/"' % (folder, lang))
