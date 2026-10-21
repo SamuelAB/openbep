@@ -19,6 +19,12 @@ TPL = ifcopenshell.util.pset.get_template('IFC4')
 REVIT = {'TEXT': 'Label', 'MULTILINETEXT': 'Text', 'YESNO': 'Boolean', 'INTEGER': 'Integer', 'NUMBER': 'Real',
          'LENGTH': 'Length', 'AREA': 'Area', 'VOLUME': 'Volume'}
 
+# Corrections to manifest rows, kept here because the manifest is generated.
+# The Revit name the exporter reads, where the manifest's name carries a note.
+REVIT_NAME = {'Visual Light Transmittance - analytical properties': 'Visual Light Transmittance'}
+# IFC targets missing from a manifest row, keyed (Revit name, element type).
+IFC_TARGET = {('Flow', 'Fans'): 'Pset_FanTypeCommon.NominalAirFlowRate'}
+
 
 def entity_ok(name):
     try: SCHEMA.declaration_by_name(name); return True
@@ -54,8 +60,11 @@ def classes(ents, scope):
 def main():
     # Shared parameters, plus built-in Revit parameters whose manifest name is a plain Revit name (Type Name, Mark, Width...);
     # rows like "Size / Diameter" or "Room / Space (calculated, read-only)" describe several parameters and are left out.
-    rows = [r for r in csv.DictReader(open(os.path.join(HERE, f'OpenBEP_Parameters_Manifest_v{VER}.csv'), encoding='utf-8-sig'))
-            if r['Shared or built-in'] == 'Shared' or re.fullmatch(r'[\w #]+', r['Parameter (Revit name)'])]
+    rows = []
+    for r in csv.DictReader(open(os.path.join(HERE, f'OpenBEP_Parameters_Manifest_v{VER}.csv'), encoding='utf-8-sig')):
+        r['Parameter (Revit name)'] = REVIT_NAME.get(r['Parameter (Revit name)'], r['Parameter (Revit name)'])
+        r['IFC target'] = r['IFC target'] or IFC_TARGET.get((r['Parameter (Revit name)'], r['Element type']), '')
+        if r['Shared or built-in'] == 'Shared' or re.fullmatch(r'[\w #]+', r['Parameter (Revit name)']): rows.append(r)
     own = {'instance': {}, 'type': {}}
     std = collections.OrderedDict()   # (pset, I/T, classes) -> {prop: (type, revit name)}
     mapped = set()

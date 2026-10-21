@@ -364,6 +364,8 @@ namespace OpenBepSync
                     else (pW, pD, pH) = Panel(fam, f.Kind == "window", first, notes);
                 }
                 catch (Exception ex) { notes.Add("geometry: " + ex.Message); }
+                try { Mep(fam, f, notes); }
+                catch (Exception ex) { notes.Add("MEP: " + ex.Message); }
 
                 foreach (var p in ps)
                 {
@@ -395,6 +397,63 @@ namespace OpenBepSync
                 }
             }
             return added;
+        }
+
+        /// <summary>
+        /// What makes a generic MEP family behave like one in a project: a light source for light fixtures, a pipe connector for pumps,
+        /// a duct connector for fans, and a panelboard part type with an electrical connector for panels. The connectors' flow and poles
+        /// are driven by family parameters named as the BEP Builder's IDS reads them.
+        /// </summary>
+        static void Mep(Document d, LibFamily f, List<string> notes)
+        {
+            var fm = d.FamilyManager;
+            if (f.CategoryId == "OST_LightingFixtures")
+            {
+                var ls = d.OwnerFamily.LookupParameter("Light Source");
+                if (ls == null || ls.IsReadOnly) notes.Add("no Light Source parameter to turn on");
+                else ls.Set(1);
+                return;
+            }
+            if (f.IfcExportAs != "IfcPump" && f.IfcExportAs != "IfcFan" && f.CategoryId != "OST_ElectricalEquipment") return;
+            d.Regenerate();
+            var ext = new FilteredElementCollector(d).OfClass(typeof(Extrusion)).FirstElement();
+            var face = ext == null ? null : Faces(ext).FirstOrDefault(x => x.FaceNormal.IsAlmostEqualTo(XYZ.BasisX));
+            if (face == null) { notes.Add("no face for a connector"); return; }
+            if (f.IfcExportAs == "IfcPump")
+            {
+                var c = ConnectorElement.CreatePipeConnector(d, Autodesk.Revit.DB.Plumbing.PipeSystemType.SupplyHydronic, face.Reference);
+                c.get_Parameter(BuiltInParameter.RBS_PIPE_FLOW_CONFIGURATION_PARAM)?.Set((int)Autodesk.Revit.DB.Plumbing.PipeFlowConfigurationType.Preset);
+                Drive(fm, c.get_Parameter(BuiltInParameter.RBS_PIPE_FLOW_PARAM), "Flow", GroupTypeId.Plumbing, SpecTypeId.Flow, true,
+                    UnitUtils.ConvertToInternalUnits(5, UnitTypeId.LitersPerSecond), notes);
+            }
+            else if (f.IfcExportAs == "IfcFan")
+            {
+                var c = ConnectorElement.CreateDuctConnector(d, Autodesk.Revit.DB.Mechanical.DuctSystemType.SupplyAir, ConnectorProfileType.Round, face.Reference);
+                c.get_Parameter(BuiltInParameter.RBS_DUCT_FLOW_CONFIGURATION_PARAM)?.Set((int)Autodesk.Revit.DB.Mechanical.DuctFlowConfigurationType.Preset);
+                Drive(fm, c.get_Parameter(BuiltInParameter.RBS_DUCT_FLOW_PARAM), "Flow", GroupTypeId.MechanicalAirflow, SpecTypeId.AirFlow, true,
+                    UnitUtils.ConvertToInternalUnits(1000, UnitTypeId.LitersPerSecond), notes);
+            }
+            else
+            {
+                var pt = d.OwnerFamily.get_Parameter(BuiltInParameter.FAMILY_CONTENT_PART_TYPE);
+                if (pt == null || pt.IsReadOnly) notes.Add("no Part Type parameter for the panelboard");
+                else pt.Set((int)PartType.PanelBoard);
+                var c = ConnectorElement.CreateElectricalConnector(d, Autodesk.Revit.DB.Electrical.ElectricalSystemType.PowerBalanced, face.Reference);
+                Drive(fm, c.get_Parameter(BuiltInParameter.RBS_ELEC_NUMBER_OF_POLES), "Number of Poles", GroupTypeId.Electrical, SpecTypeId.Int.NumberOfPoles, false, 3, notes);
+            }
+        }
+
+        /// <summary>A family parameter that drives a connector parameter, with a starting value.</summary>
+        static void Drive(FamilyManager fm, Parameter target, string name, ForgeTypeId group, ForgeTypeId spec, bool instance, double value, List<string> notes)
+        {
+            try
+            {
+                var p = fm.get_Parameter(name) ?? fm.AddParameter(name, group, spec, instance);
+                if (p.StorageType == StorageType.Integer) fm.Set(p, (int)value); else fm.Set(p, value);
+                if (target == null) notes.Add("connector has no parameter for " + name);
+                else fm.AssociateElementParameterToFamilyParameter(target, p);
+            }
+            catch (Exception ex) { notes.Add(name + " on the connector: " + ex.Message); }
         }
 
         static void Set(FamilyManager fm, FamilyParameter p, double v) { if (p != null && !p.IsDeterminedByFormula && !p.IsInstance) fm.Set(p, v); }
