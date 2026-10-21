@@ -2875,7 +2875,7 @@ function onInput(e){
   else if(d.showws){S.showWs=v;save();render(true);return}
   else if(d.showpriv){S.showPriv=v;save();render(true);return}
   else if(d.ctry){S.country=v;if(S.example) S=exLocal(S,v==='jp');save();NOCAC.clear();renderGloss();render(true);trNode(document.body);return}
-  else if(d.lang){S.lang=v;save();document.documentElement.lang=v;render(true);trNode(document.body);return}
+  else if(d.lang){S.lang=v;save();document.documentElement.lang=v;render(true);trNode(document.body);for(const a of document.querySelectorAll('#whyLink,#formatsLink')) a.href=pageUrl(a.id==='whyLink'?'why':'formats');return}
   else if(d.lbk){const L=lbState(); if(d.lbn==='1'){if(v) delete L.off[d.lbk]; else L.off[d.lbk]=true} else {if(v) L.on[d.lbk]=true; else delete L.on[d.lbk]}; rr=true}
   else if(d.eluse){S.elUse=S.elUse||{}; if(v===spElDef(d.eluse)) delete S.elUse[d.eluse]; else S.elUse[d.eluse]=v; rr=true}
   else if(d.lbfrom){const L=lbState(); if(v===d.f0) delete L.from[d.lbfrom]; else L.from[d.lbfrom]=v; rr=true}
@@ -2949,10 +2949,12 @@ async function listProjects(){if(!NET.db) return; try{const q=await NET.db.colle
 async function names(ids){ids=[...new Set(ids.filter(Boolean))]; if(!ids.length||!NET.user) return; try{const ps=await NET.user.profiles(ids); ids.forEach(id=>NET.names[id]=(ps[id]||{}).name||'')}catch(e){}}
 function who(id){return id&&NET.me&&id===NET.me.id?'you':(NET.names[id]||'someone')}
 // The Why page sits next to the app on openbep.com and on self-hosted copies; elsewhere (an embedded copy) the public page is used.
-function whyUrl(){const l={fr:'fr/',ja:'ja/'}[S.lang]||''; return (location.pathname.includes('/app/')?'../why/':'https://openbep.com/why/')+l}
-document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#whyLink'); if(a) a.href=whyUrl()},true);
+// The site pages (why/, formats/) have one copy per language: link the one in the builder's current language.
+function pageUrl(page){const l={fr:'fr/',ja:'ja/'}[S.lang]||''; return (location.pathname.includes('/app/')?'../'+page+'/':'https://openbep.com/'+page+'/')+l}
+function whyUrl(){return pageUrl('why')}
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#whyLink,#formatsLink'); if(a) a.href=pageUrl(a.id==='whyLink'?'why':'formats')},true);
 function renderOnline(){const el=$('#online'); if(!el) return; el.hidden=false;
-  if(!NET.db){el.innerHTML=`<span>Your work is saved in this browser only. To work as a team, save the project file in your team's shared folder and open it here. For real projects, which hold private information, run your own copy.</span> <button class="btn small" type="button" id="onSaveFile">Save project file</button><label class="btn small" for="onOpenFile">Open project file</label><input type="file" id="onOpenFile" accept=".json" hidden> <a href="${whyUrl()}" id="whyLink" target="_blank" rel="noopener">Why OpenBEP</a> · <a href="${location.pathname.includes('/app/')?'../formats/':'https://openbep.com/formats/'}" target="_blank" rel="noopener">Why a file format won't fix it</a> · <a href="https://github.com/SamuelAB/openbep/blob/main/docs/self-hosting.md" target="_blank" rel="noopener">How to run your own copy</a><span id="onStat" class="note" aria-live="polite">${esc(NET.status||'')}</span>`;return}
+  if(!NET.db){el.innerHTML=`<span>Your work is saved in this browser only. To work as a team, save the project file in your team's shared folder and open it here. For real projects, which hold private information, run your own copy.</span> <button class="btn small" type="button" id="onSaveFile">Save project file</button><label class="btn small" for="onOpenFile">Open project file</label><input type="file" id="onOpenFile" accept=".json" hidden> <a href="${whyUrl()}" id="whyLink" target="_blank" rel="noopener">Why OpenBEP</a> · <a href="${pageUrl('formats')}" id="formatsLink" target="_blank" rel="noopener">Why a file format won't fix it</a> · <a href="https://github.com/SamuelAB/openbep/blob/main/docs/self-hosting.md" target="_blank" rel="noopener">How to run your own copy</a><span id="onStat" class="note" aria-live="polite">${esc(NET.status||'')}</span>`;return}
   const cur=NET.pid&&(NET.list||[]).find(p=>p.id===NET.pid);
   el.innerHTML=`<span class="on-dot ${NET.pid?'on':'off'}"></span>${NET.pid?`<span>Shared project <b>${esc(cur?cur.name:S.project.name)}</b>. Changes save for everyone with access.</span> <button class="btn small" type="button" id="onLeave">Work offline</button>`:`<span>Not shared.</span>${NET.canWrite===false?'':' <button class="btn small primary" type="button" id="onShare">Share this plan with the team</button>'}`}
   ${(NET.list||[]).length?`<label for="onPick" class="sr">Shared projects</label><select id="onPick"><option value="">Open a shared project…</option>${NET.list.map(p=>`<option value="${esc(p.id)}" ${p.id===NET.pid?'selected':''}>${esc(p.name)}</option>`).join('')}</select>`:''}
