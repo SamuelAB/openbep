@@ -416,8 +416,9 @@ namespace OpenBepSync
             }
             if (f.IfcExportAs != "IfcPump" && f.IfcExportAs != "IfcFan" && f.CategoryId != "OST_ElectricalEquipment") return;
             d.Regenerate();
-            var ext = new FilteredElementCollector(d).OfClass(typeof(Extrusion)).FirstElement();
-            var face = ext == null ? null : Faces(ext).FirstOrDefault(x => x.FaceNormal.IsAlmostEqualTo(XYZ.BasisX));
+            // The newest extrusion is the box drawn above; a face-based template's own host extrusion comes first and gives no face reference.
+            var ext = new FilteredElementCollector(d).OfClass(typeof(Extrusion)).OrderByDescending(x => x.Id.IntegerValue).FirstOrDefault();
+            var face = ext == null ? null : Faces(ext).FirstOrDefault(x => x.FaceNormal.IsAlmostEqualTo(XYZ.BasisX) && x.Reference != null);
             if (face == null) { notes.Add("no face for a connector"); return; }
             if (f.IfcExportAs == "IfcPump")
             {
