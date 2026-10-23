@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Architecture;
+using Autodesk.Revit.DB.Mechanical;
+using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.DB.Events;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Events;
@@ -202,6 +205,8 @@ namespace OpenBepSync
                             if (d is ExternalDefinition ed) defs[ed.GUID] = ed;
                 }
                 finally { app.SharedParametersFilename = previous; }
+                warnings.AddRange(BindingList.Check(required, SharedParameterFile.Parse(File.ReadAllText(txt), out _, out var fileWarnings)));
+                warnings.AddRange(fileWarnings);
                 var plan = Plan.Build(doc, required, defs, warnings);
                 Log($"SYNC dry run ({version}): {plan.Summary().Replace("\n", " | ")}");
                 using (var t = new Transaction(doc, "OpenBEP: sync parameters"))
@@ -218,7 +223,12 @@ namespace OpenBepSync
 
         // Every empty OB_ parameter on the OpenBEP instances and their types gets a value, so the IFC export writes it.
         // Built-in text parameters the BEP Builder's IDS asks for that the generic families leave empty
-        static readonly HashSet<string> TestBuiltIns = new HashSet<string> { "Type Mark", "Mark", "Manufacturer", "Model", "Description" };
+        static readonly HashSet<string> TestBuiltIns = new HashSet<string> { "Type Mark", "Mark", "Manufacturer", "Model", "Description", "MCB Rating", "Mounting" };
+        // Built-in numbers the IDS asks for that Revit creates as zero
+        static readonly HashSet<string> TestNumbers = new HashSet<string> { "Mains", "MCB Rating", "Max #1 Pole Breakers", "Short Circuit Rating", "Number of Poles", "Voltage", "Flow" };
+        // Logged for every element that has them, to show which ones Revit lets the test write
+        static readonly string[] Watch = { "Light Source", "Initial Color", "Visual Light Transmittance", "Define Thermal Properties by", "Assembly Code", "Part Type",
+            "Mains", "MCB Rating", "Mounting", "Max #1 Pole Breakers", "Short Circuit Rating", "Number of Poles", "Voltage", "Flow", "System Name" };
 
         static void FillTestValues(Document doc)
         {
@@ -228,27 +238,82 @@ namespace OpenBepSync
                 var notes = new List<string>();
                 Quiet.On(t, notes);   // a duplicate-Mark warning dialog would otherwise roll the whole fill back
                 t.Start();
+                Topography(doc);
+                Systems(doc);
                 var insts = new FilteredElementCollector(doc).OfClass(typeof(FamilyInstance)).Cast<FamilyInstance>()
                     .Where(i => i.Symbol.Family.Name.StartsWith("OpenBEP_")).ToList();
-                var elems = insts.Cast<Element>().Concat(insts.Select(i => (Element)i.Symbol).Distinct(new IdEq()));
+                var walls = new FilteredElementCollector(doc).OfClass(typeof(Wall)).Cast<Wall>().ToList();
+                // Walls get a UniFormat code the way an office standard's wall types would carry one.
+                foreach (var wt in walls.Select(w => w.WallType).Distinct(new IdEq()))
+                {
+                    var ac = wt.get_Parameter(BuiltInParameter.UNIFORMAT_CODE);
+                    if (ac != null && !ac.IsReadOnly && string.IsNullOrEmpty(ac.AsString())) { try { ac.Set("B2010"); n++; } catch (Exception ex) { Log("Assembly Code on " + wt.Name + ": " + ex.Message); } }
+                }
+                var elems = insts.Cast<Element>().Concat(insts.Select(i => (Element)i.Symbol))
+                    .Concat(walls).Concat(walls.Select(w => (Element)w.WallType))
+                    .Concat(new FilteredElementCollector(doc).OfClass(typeof(TopographySurface)).ToElements())
+                    .Concat(new[] { (Element)doc.ProjectInformation }).Distinct(new IdEq()).ToList();
                 foreach (var e in elems)
+                {
+                    var seen = Watch.Select(w => e.LookupParameter(w)).Where(p => p != null).ToList();
+                    if (seen.Count > 0) Log($"  WATCH {Describe(e)}: " + string.Join("; ", seen.Select(p =>
+                        $"{p.Definition.Name} {p.StorageType}{(p.IsReadOnly ? " read-only" : "")} = {(p.HasValue ? p.AsValueString() ?? p.AsString() : "(none)")}")));
                     foreach (Parameter p in e.Parameters)
                     {
-                        if (p.IsReadOnly || p.HasValue && (p.StorageType != StorageType.String || p.AsString() != "")) continue;
-                        if (!(p.IsShared && (p.Definition.Name.StartsWith("OB_") || p.Definition.Name.StartsWith("CA_"))) && !(p.StorageType == StorageType.String && TestBuiltIns.Contains(p.Definition.Name))) continue;
+                        if (p.IsReadOnly) continue;
+                        string name = p.Definition.Name;
+                        bool number = TestNumbers.Contains(name) && (p.StorageType == StorageType.Double && p.AsDouble() == 0 || p.StorageType == StorageType.Integer && p.AsInteger() == 0);
+                        if (!number && p.HasValue && (p.StorageType != StorageType.String || p.AsString() != "")) continue;
+                        if (!number && !(p.IsShared && OpenBepNames.IsOpenBep(name)) && !(p.StorageType == StorageType.String && TestBuiltIns.Contains(name))) continue;
                         try
                         {
-                            if (p.StorageType == StorageType.String) p.Set("test " + p.Definition.Name + " " + e.Id.IntegerValue);   // unique, so no duplicate-mark warning
+                            if (p.StorageType == StorageType.String) p.Set("test " + name + " " + e.Id.IntegerValue);   // unique, so no duplicate-mark warning
                             else if (p.StorageType == StorageType.Integer) p.Set(1);
                             else if (p.StorageType == StorageType.Double) p.Set(1.0);
                             else continue;
                             n++;
                         }
-                        catch { }
+                        catch (Exception ex) { if (number) Log($"  could not set {name} on {Describe(e)}: {ex.Message}"); }
                     }
+                }
                 var r = t.Commit();
-                Log($"TEST VALUES: {n} empty OpenBEP and built-in text parameters filled, {r}" + string.Concat(notes.Select(x => "; " + x)));
+                Log($"TEST VALUES: {n} empty OpenBEP and built-in parameters filled, {r}" + string.Concat(notes.Select(x => "; " + x)));
             }
+        }
+
+        static string Describe(Element e) => e is FamilyInstance fi ? fi.Symbol.FamilyName + " / " + fi.Symbol.Name : e is ElementType et ? "type " + et.Name : e.GetType().Name + " " + e.Name;
+
+        // The exporter writes the first toposurface as the IfcSite, with its parameters, so the site's OpenBEP parameters need one.
+        static void Topography(Document doc)
+        {
+            if (new FilteredElementCollector(doc).OfClass(typeof(TopographySurface)).Any()) return;
+            try
+            {
+                double m = UnitUtils.ConvertToInternalUnits(1, UnitTypeId.Meters);
+                var pts = new List<XYZ> { new XYZ(-60 * m, -60 * m, -m), new XYZ(60 * m, -60 * m, -m), new XYZ(60 * m, 60 * m, -m), new XYZ(-60 * m, 60 * m, -m), new XYZ(0, 70 * m, -m) };
+                Log("TOPOGRAPHY created " + TopographySurface.Create(doc, pts).Id);
+            }
+            catch (Exception ex) { Log("TOPOGRAPHY failed: " + ex.Message); }
+        }
+
+        // Pumps and fans join a piping or duct system, so they get a System Name.
+        static void Systems(Document doc)
+        {
+            var eq = new FilteredElementCollector(doc).OfClass(typeof(FamilyInstance)).Cast<FamilyInstance>()
+                .Where(i => i.Symbol.Family.Name.StartsWith("OpenBEP_") && i.MEPModel?.ConnectorManager != null).ToList();
+            foreach (var i in eq)
+                foreach (Connector c in i.MEPModel.ConnectorManager.Connectors)
+                {
+                    if (c.MEPSystem != null) continue;
+                    var set = new ConnectorSet(); set.Insert(c);
+                    try
+                    {
+                        MEPSystem s = c.Domain == Domain.DomainHvac ? (MEPSystem)doc.Create.NewMechanicalSystem(null, set, DuctSystemType.SupplyAir)
+                            : c.Domain == Domain.DomainPiping ? doc.Create.NewPipingSystem(null, set, PipeSystemType.SupplyHydronic) : null;
+                        if (s != null) Log($"SYSTEM {s.Name} for {Describe(i)}");
+                    }
+                    catch (Exception ex) { Log($"SYSTEM for {Describe(i)} failed: {ex.Message}"); }
+                }
         }
 
         class IdEq : IEqualityComparer<Element>

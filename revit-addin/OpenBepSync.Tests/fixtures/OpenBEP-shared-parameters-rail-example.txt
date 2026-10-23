@@ -1,0 +1,137 @@
+# This is a Revit shared parameter file.
+# Do not edit manually.
+# OpenBEP plan fingerprint 9558EEAB0438, not a released version
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	OpenBEP 01 Identity and asset
+GROUP	2	OpenBEP 02 Architecture
+GROUP	3	OpenBEP 03 Structure
+GROUP	6	OpenBEP 06 Electrical and communications
+GROUP	7	OpenBEP 07 Site and civil
+GROUP	8	OpenBEP 08 Rail, bridges and tunnels
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE
+PARAM	93a71903-5b8d-5f70-9e56-11483977b131	OB_EnergySourceFuel	TEXT		1	1	Energy source / fuel. Fuel or energy source used by the equipment.	1
+PARAM	8865cf1b-81e7-502f-a627-478cf20f3508	OB_GrossWeight_kg	NUMBER		1	1	Gross weight (kg). Shipping / operating weight used for structure, rigging and prefab logistics.	1
+PARAM	d39a36f7-38c6-5545-ae7a-0cb680643510	OB_MountingType	TEXT		1	1	Mounting type. How the luminaire is mounted.	1
+PARAM	b112bce4-20a8-5737-9319-51c3f16e05dd	OB_PositionalAccuracy	LENGTH		1	1	Positional accuracy (as-built) (mm). Stated accuracy of the recorded position at LOD 500 (see USIBD LOA).	1
+PARAM	2772f4e1-c7a5-5534-acfd-12cac31cb5ec	OB_StationChainageRange	LENGTH		1	1	Station / chainage range (m). Start and end stations along the reference alignment.	1
+PARAM	783c7406-f04c-5678-99c4-1c7190c1de23	OB_AcousticRating	TEXT		2	1	Acoustic rating (STC / ASTC). Sound transmission class of the assembly.	1
+PARAM	3e9e7f2b-992a-5f0e-822f-a121424eb597	OB_CoatingCorrosionProtection	TEXT		3	1	Coating / corrosion protection. Surface treatment of steel members.	1
+PARAM	1fca5d77-2a21-5e17-9fb1-fea6e92270d8	OB_ConcreteCover	LENGTH		3	1	Concrete cover (mm). Nominal concrete cover to reinforcement.	1
+PARAM	fe94060a-4d36-5faf-8a21-5989a403643d	OB_ConcreteExposureClass	TEXT		3	1	Concrete exposure class. Exposure class (CSA A23.1 in Canada).	1
+PARAM	5de5af45-2dc9-5ef6-9964-f3893b5b0bfc	OB_DelegatedDesign	YESNO		3	1	Delegated (supplier) design. Element is designed by the supplier's engineer (joists, trusses, connections, precast).	1
+PARAM	d7c0cd8c-315b-5f11-84f7-4955272d0471	OB_DesignAxialResistance_kN	NUMBER		3	1	Design axial resistance (kN). Factored axial resistance per pile.	1
+PARAM	1ab8b906-9922-5e61-89be-f4a84f587a01	OB_DesignBearingResistance_kPa	NUMBER		3	1	Design bearing resistance (kPa). Soil bearing value from the geotechnical report.	1
+PARAM	03b6f9a2-176f-5ec2-ae58-dfc9f9144a4e	OB_DesignLiveLoad_kPa	NUMBER		3	1	Design live load (kPa). Specified live load used in design (NBC Part 4). Owner property set.	1
+PARAM	cc1f2cd3-2e4f-5b8d-a750-f1648c442d5c	OB_DiameterSection	TEXT		3	1	Diameter / section. Pile diameter or section size.	1
+PARAM	97d9e3d4-3cec-548a-9032-afcd28c95300	OB_DrainageProvisions	MULTILINETEXT		3	1	Drainage provisions. Drainage behind the wall.	1
+PARAM	c3533fc8-a506-5e8a-9fe3-879ef8d3799b	OB_FireProtection	TEXT		3	1	Fire protection. Applied fire protection (spray, board, intumescent) and rating.	1
+PARAM	5d9fd607-f83c-528a-836c-66c4ab77a011	OB_FrostProtectionDepth	LENGTH		3	1	Frost protection depth (mm). Minimum soil cover or insulation for frost protection. Owner property set.	1
+PARAM	43c350e1-7b60-5569-b8db-3f4d2e642e46	OB_ReinforcementRatio_kgm3	NUMBER		3	1	Reinforcement ratio (kg/m3). Reinforcement mass per concrete volume (for cost before detailing).	1
+PARAM	82f59833-01b7-5c30-a602-dc5676f2f269	OB_Span	LENGTH		3	1	Span (mm). Clear or design span between supports.	1
+PARAM	2bae5797-bbc2-544c-8196-f9e3a186c193	OB_WallSystem	TEXT		3	1	Wall system. Retaining system (cantilever, MSE, gabion, soldier pile ...).	1
+PARAM	b33a8479-fe6b-5ba7-b45a-f52c3511e66f	OB_CatalogueArticleNumber	TEXT		6	1	Catalogue / article number. Full ordering code of the product.	1
+PARAM	2cf25718-52b9-549b-8993-8195061770bc	OB_ColourRenderingIndex	INTEGER		6	1	Colour rendering index. CRI (Ra) of the light source.	1
+PARAM	f7bf608d-5c6d-54f3-95d5-35f9a3df21bd	OB_CSAConfiguration	TEXT		6	1	CSA configuration. Receptacle configuration (CSA C22.2 No. 42).	1
+PARAM	af0d7b05-3b1e-5736-895b-72c4868da022	OB_DetectionSetPoint	TEXT		6	1	Detection set point. Set point of heat, smoke or fire detection.	1
+PARAM	cde9005b-6d19-59ea-87b0-894ccf55abcd	OB_FuelTankCapacity_L	NUMBER		6	1	Fuel tank capacity (L). Base or day tank capacity.	1
+PARAM	fe99153b-66b1-5b73-9f00-92b6a3f34c3a	OB_HasCover	YESNO		6	1	Has cover. Tray is fitted with a cover.	1
+PARAM	b48ae904-c9d7-5e5e-a81e-2a86c2aa898f	OB_Impedance	TEXT		6	1	Impedance (%). Short-circuit impedance.	1
+PARAM	6de83961-5206-5b1d-8324-cec7f103b281	OB_LampLightSourceType	TEXT		6	1	Lamp / light source type. Light-emitting technology of the source.	1
+PARAM	0537e0fd-675a-5554-8ae8-79c7f0830005	OB_MainBoard	YESNO		6	1	Main board. Board is the main (service entrance) board.	1
+PARAM	3ad776c8-5adc-5428-8093-03827ffd2ad6	OB_NumberOfGangs	NUMBER		6	1	Number of gangs. Number of gangs.	1
+PARAM	0137d767-d4eb-582f-9513-235f0e5c5099	OB_NumberOfSockets	NUMBER		6	1	Number of sockets. Number of sockets of the receptacle.	1
+PARAM	fe104e4d-70e4-554e-b596-afeea8ebfd04	OB_Placing	TEXT		6	1	Placing (ceiling / wall / floor ...). Where the luminaire is placed.	1
+PARAM	d05f6ea2-5e2e-524f-bb23-ef01f5f93c44	OB_PowerSource	TEXT		6	1	Power source. PoE, 24 V or line voltage.	1
+PARAM	cc8f359d-b8af-5416-842a-c2319d5acabe	OB_PrimaryVoltage_V	NUMBER		6	1	Primary voltage (V). Primary voltage.	1
+PARAM	c967ff19-707a-5aac-8ebc-2153db381ac1	OB_RatedOutput_kW	NUMBER		6	1	Rated output (kW). Standby (or prime) rated output.	1
+PARAM	752f0555-9312-557f-b9e6-1496ea9c326f	OB_RatedPower_kVA	NUMBER		6	1	Rated power (kVA). Rated apparent power.	1
+PARAM	76ada84a-83d0-5ff2-b4bc-7c67c3e3ccb0	OB_SecondaryVoltage_V	NUMBER		6	1	Secondary voltage (V). Secondary voltage.	1
+PARAM	4f2e244a-91aa-58d0-afca-c8a5b7b3eaa2	OB_SecurityZone	TEXT		6	1	Security zone. Security zone the device controls or monitors. Owner property set.	1
+PARAM	51ba43d1-70c1-52df-93e9-9f102a6048d8	OB_SwitchFunction	TEXT		6	1	Switch function. On/off, two-way, dimmer ...	1
+PARAM	a6c8a51e-c02f-5331-8462-eea906494bd9	OB_TrayConduitType	TEXT		6	1	Tray / conduit type. Ladder, ventilated tray, EMT, RMC, PVC ...	1
+PARAM	7b74fc42-5d12-58de-8bc9-604233b32122	OB_Type	TEXT		6	1	Type (dry / liquid-filled). Insulation medium and temperature rise. No common IFC property.	1
+PARAM	235cc176-c2e5-52f2-8df2-e63e890ffffd	OB_VectorGroup	TEXT		6	1	Vector group. Winding connection and phase shift.	1
+PARAM	f02b870d-5d2d-5609-bc52-148a02f50673	OB_VideoResolution	TEXT		6	1	Video resolution. Camera resolution.	1
+PARAM	af65a49a-afde-5b20-9fd2-cbd991fb448c	OB_BarrierSystemTestLevel	TEXT		7	1	Barrier system / test level. Barrier system and crash test level.	1
+PARAM	1bf01e2b-0e11-5c1b-9834-22bbb87f8a96	OB_BeddingClass	TEXT		7	1	Bedding class. Bedding and embedment.	1
+PARAM	91db36d0-40e1-51c8-93f7-9877216a1a27	OB_ChamberSize	TEXT		7	1	Chamber size (mm). Chamber diameter or length x width.	1
+PARAM	cc961b22-6179-5a1c-a992-702eb48240cb	OB_CoordinateReferenceSystem	TEXT		7	1	Coordinate reference system. Horizontal datum and projection, and vertical datum.	1
+PARAM	03bc3ca7-001f-56e0-884e-ee9ce64f84ac	OB_CoverFrame	TEXT		7	1	Cover / frame. Cover material and load rating.	1
+PARAM	0854613c-e882-573b-952a-76ae311bf893	OB_CrossSlope_pct	NUMBER		7	1	Cross slope (%). Cross slope for drainage.	1
+PARAM	4265a600-5010-558a-bac6-66508dc24e18	OB_CulvertOpening	TEXT		7	1	Culvert opening (mm). Internal width and clear depth of a culvert.	1
+PARAM	3603e3f5-adca-57bc-9f19-748f3b17a6f7	OB_CurbType	TEXT		7	1	Curb type. Curb profile, upstand and mountability.	1
+PARAM	8db7bbb6-3076-5b03-9d3d-df5ba1e64e51	OB_CutFillVolumes	VOLUME		7	1	Cut / fill volumes (m3). Earthworks quantities.	1
+PARAM	948a50cd-76f9-5c2f-a607-9a9b6932ec5b	OB_Depth	LENGTH		7	1	Depth (m). Rim to invert depth.	1
+PARAM	c0b770e1-db00-5c40-9836-54a111b63ebe	OB_DepthOfCover	LENGTH		7	1	Depth of cover (mm). Minimum cover over the crown.	1
+PARAM	c229d5fa-5fe9-584f-ab9a-10092d5b3810	OB_DesignSpeed_kmh	NUMBER		7	1	Design speed (km/h). Design speed of the road segment.	1
+PARAM	5a52b401-ac2a-528d-b25c-c14c62950f96	OB_DropStructure	YESNO		7	1	Drop structure. Chamber includes a backdrop / drop pipe.	1
+PARAM	d1a0f61c-00b8-536c-ba1f-4edb5166e2b3	OB_EndTerminal	TEXT		7	1	End terminal. Terminal type (if element is a terminal).	1
+PARAM	77dade24-dfc8-5159-877f-51f4a828386a	OB_FromToStructure	TEXT		7	1	From / to structure. Upstream and downstream structures (network topology).	1
+PARAM	7dec07f4-9a15-54ad-b37b-56a623e6d2c4	OB_GeotechnicalReport	TEXT		7	1	Geotechnical report. Reference of the geotechnical report and boreholes.	1
+PARAM	00b8a3c6-59a1-5ceb-89d3-a36d2f78f4bd	OB_InvertElevation	LENGTH		7	1	Invert elevation(s) (m). Invert of the chamber and of each connected pipe.	1
+PARAM	d1de3aa4-d766-5e14-bb83-93c2364cac80	OB_LaneWidth	LENGTH		7	1	Lane width (m). Through-lane width.	1
+PARAM	a31f1055-bacf-5f05-9479-c4cfe6264478	OB_LayerFunction	TEXT		7	1	Layer function. Surface, binder, base, subbase or subgrade layer.	1
+PARAM	f5b29f37-b125-5d01-bb74-e7494ccbdaeb	OB_LayerMass_t	NUMBER		7	1	Layer mass (t). Mass of the layer (asphalt tonnage).	1
+PARAM	de5d3e52-618d-535d-b8a7-fc4c9e95b7f4	OB_LayerThickness	LENGTH		7	1	Layer thickness (mm). Nominal thickness of the layer.	1
+PARAM	38ada2e5-9e52-52be-824e-4268c9f8c417	OB_LayerVolume	VOLUME		7	1	Layer volume (m3). Volume of the layer for take-off.	1
+PARAM	73bda9dc-da6b-501c-a80f-e697abfb6376	OB_MixMaterialSpecification	TEXT		7	1	Mix / material specification. Mix type, binder grade or aggregate gradation.	1
+PARAM	ced68b47-e1df-5601-9ca7-edc930987af0	OB_MoveableTemporary	YESNO		7	1	Moveable / temporary. Barrier is moveable or temporary.	1
+PARAM	fe5921fd-06e5-5de0-930a-93410833381b	OB_ParkingStalls	NUMBER		7	1	Parking stalls. Number of stalls.	1
+PARAM	2c1a4baa-183c-5dea-8516-b797b9f37553	OB_PavementMarking	TEXT		7	1	Pavement marking. Marking material, colour and width.	1
+PARAM	9ed66df2-21c2-5a86-9637-d85f47d09d07	OB_PavementThickness	LENGTH		7	1	Pavement thickness (mm). Total pavement structure thickness.	1
+PARAM	4f1185af-24b4-56d2-87f2-7669e59dbbd5	OB_PavementType	TEXT		7	1	Pavement type. Flexible, rigid or unit pavers.	1
+PARAM	958209e2-fad2-52f6-8e98-7c9c4062f48e	OB_PipeClass	TEXT		7	1	Pipe class. Pipe class, DR / SDR or strength class.	1
+PARAM	8eb95d71-d0bc-5f46-8468-178b766fc0c0	OB_PostSpacing	LENGTH		7	1	Post spacing (mm). Post spacing.	1
+PARAM	b0bbe208-c5e8-5638-ade7-896b3b2b9aa1	OB_RimCoverElevation	LENGTH		7	1	Rim / cover elevation (m). Elevation of the cover or grate.	1
+PARAM	e69631c3-fe17-57cd-9da0-d4eea7b88a83	OB_SiteArea	AREA		7	1	Site area (m2). Total site area.	1
+PARAM	7d7beddf-eb63-56bd-97cc-636f7891b101	OB_SurveySourceAndDate	TEXT		7	1	Survey source and date. Source and date of the topographic data.	1
+PARAM	ca53ac2c-5dd3-5d33-b542-ca85fd951888	OB_TransitionSection	YESNO		7	1	Transition section. Element is a transition between barrier systems.	1
+PARAM	70116548-10e4-5c5c-b22f-2d1f2930baa4	OB_UtilityService	TEXT		7	1	Utility service. Storm, sanitary, combined, water, gas, electrical duct bank ...	1
+PARAM	f8fa217d-d1ac-54be-80c3-0022afa5a350	OB_ApproachSpeed_kmh	NUMBER		8	1	Approach speed (km/h). Approach speed used for sighting and braking.	1
+PARAM	2b363b92-fc51-5632-b78e-196558e0234e	OB_BallastDepth	LENGTH		8	1	Ballast depth (mm). Ballast depth below the tie.	1
+PARAM	48dff494-d3cb-5aae-aa05-cf8eb7c8c406	OB_BallastedTrack	YESNO		8	1	Ballasted track. Ballasted (true) or slab / embedded track (false).	1
+PARAM	49097711-ebf9-57f8-b2a3-e57f73b9a8db	OB_Cant	LENGTH		8	1	Cant (superelevation) (mm). Applied cant on curves (from the cant alignment).	1
+PARAM	c5fd7195-4641-5fc4-9954-63d2cdb6dbf3	OB_ContactWireHeight	LENGTH		8	1	Contact wire height (mm). Nominal contact wire height above top of rail.	1
+PARAM	bc2f7199-cd10-53dc-8807-850eae7db354	OB_ContinuousWeldedRail	YESNO		8	1	Continuous welded rail. Track uses continuous welded rail.	1
+PARAM	88df1f47-eb32-5364-8a98-edf4a963eb15	OB_DesignCodeAndLiveLoad	TEXT		8	1	Design code and live load. Design code edition and live-load model.	1
+PARAM	ddcfe105-f96d-5a54-8df1-33acf7027dbe	OB_DesignMovementRange	TEXT		8	1	Design movement range (mm). Longitudinal and transverse movement range.	1
+PARAM	f0d18794-bda0-5b99-aa15-7eb484d81612	OB_DisplacementAccommodated	YESNO		8	1	Displacement accommodated. Bearing allows translation.	1
+PARAM	572fafe0-1704-56f9-9dcf-16fa998abaf3	OB_DivergingRadius	LENGTH		8	1	Diverging radius (m). Radius of the diverging route.	1
+PARAM	d0873dc4-df06-5ab9-8be5-07f8dcc8f2b9	OB_DivergingSpeed_kmh	NUMBER		8	1	Diverging speed (km/h). Maximum speed on the diverging route.	1
+PARAM	ef93f530-b735-5e07-bebf-fffaf3b2e0f0	OB_EdgeOffsetFromTrack	LENGTH		8	1	Edge offset from track (mm). Horizontal distance from track centreline to platform edge. Owner property set.	1
+PARAM	274cc9f5-dd0d-560b-9528-b8e0b398a076	OB_ElectricalClearance	LENGTH		8	1	Electrical clearance (mm). Minimum electrical clearance to structures.	1
+PARAM	0a888ead-7e76-5888-95e6-38a5f6d18fc6	OB_FasteningSystem	TEXT		8	1	Fastening system. Rail fastening system.	1
+PARAM	1eb78d4e-0f91-58fe-a08b-3f61c653518f	OB_GasketWaterproofing	TEXT		8	1	Gasket / waterproofing. Sealing system between segments.	1
+PARAM	1ee76d2c-1088-5547-9445-3d1eca27451a	OB_Hand	TEXT		8	1	Hand. Left or right hand.	1
+PARAM	025e91b7-e1f5-5e62-b111-cb2778cdfa88	OB_InternalDiameter	LENGTH		8	1	Internal diameter (mm). Internal diameter of the lining.	1
+PARAM	245963fb-8155-50a9-b53c-264485bab79d	OB_LineSpeed_kmh	NUMBER		8	1	Line speed (km/h). Design or permitted speed. Owner property set.	1
+PARAM	983c2f72-5116-50b5-a110-3bb279763b98	OB_LiningThickness	LENGTH		8	1	Lining thickness (mm). Segment or lining thickness.	1
+PARAM	1f39a7eb-2af1-59a0-9a3c-324d972b299f	OB_NumberOfLampsAspects	NUMBER		8	1	Number of lamps / aspects. Number of lamps.	1
+PARAM	0283bc8b-4e93-5ab4-bd58-1ae973622da0	OB_PlatformHeightAboveRail	LENGTH		8	1	Platform height above rail (mm). Height of the platform edge above top of rail. Owner property set.	1
+PARAM	123b4e63-cd66-55a0-a774-a75e13bf70a6	OB_PlatformLength	LENGTH		8	1	Platform length (m). Usable platform length.	1
+PARAM	04ef9cac-9fca-57fa-96e5-bfc60b0e60b1	OB_PointMachines	NUMBER		8	1	Point machines. Number of point machines.	1
+PARAM	e67b5843-aca4-5e77-a663-1aeb153cb5f3	OB_PoleHeight	LENGTH		8	1	Pole height (m). Nominal pole height.	1
+PARAM	b1dd2b48-52e7-513c-9dd5-366fe01064b1	OB_PoleStrength	TEXT		8	1	Pole strength. Bending, torsional and wind rating.	1
+PARAM	8b88a052-e171-561d-98ae-8629ec706603	OB_Prestressing	TEXT		8	1	Prestressing. Prestressing method, strand and jacking stress.	1
+PARAM	983152be-b726-5167-a42b-236f39c0701f	OB_RailSection	TEXT		8	1	Rail section. Rail profile designation.	1
+PARAM	57c90d7b-4f7d-5d95-892a-b446ec10c93f	OB_ReferenceAlignment	TEXT		8	1	Reference alignment. Name of the alignment the element is positioned along.	1
+PARAM	ff6e8196-f8d0-5ae9-b093-196b648aec47	OB_RequiredSightingDistance	LENGTH		8	1	Required sighting distance (m). Distance from which the aspect must be visible.	1
+PARAM	871e1351-24f2-56fc-abd7-ea7065eaec28	OB_RingSegmentType	TEXT		8	1	Ring / segment type. Ring layout and segment designation.	1
+PARAM	9149a6a4-04ae-5402-91de-19afba4936ba	OB_RotationAccommodated	YESNO		8	1	Rotation accommodated. Bearing allows rotation.	1
+PARAM	b353d336-87a9-5331-b5dd-89ff6ff2e12b	OB_ScourProtection	TEXT		8	1	Scour protection. Scour countermeasure and design scour depth.	1
+PARAM	0636bdcf-3858-50a1-96a3-e60b3e7242e9	OB_SignalType	TEXT		8	1	Signal type. Signal function and indicator type.	1
+PARAM	30d28b31-9d30-5a63-bc13-b22edad7d267	OB_SpanLength	LENGTH		8	1	Span length (m). Span to the next support.	1
+PARAM	aac359e6-2c60-5db9-abb6-76b77cd2ccc4	OB_Stagger	LENGTH		8	1	Stagger (mm). Lateral offset of the contact wire at the support.	1
+PARAM	188e85a1-04cc-500b-824d-3ef83cedfcd9	OB_StructureNumber	TEXT		8	1	Structure number. Owner structure inventory number.	1
+PARAM	1365dc69-10ab-56eb-827b-93425bc038b8	OB_SupportType	TEXT		8	1	Support type. Pole, portal, head-span, wall bracket ...	1
+PARAM	2bc29ce4-f72b-5211-b9a4-7b6445f2fe45	OB_SwitchHeater	TEXT		8	1	Switch heater. Switch heater type (snow and ice).	1
+PARAM	3eb2a3e0-0dd8-5dfc-b2f0-7798916487b7	OB_SystemHeight	LENGTH		8	1	System height (mm). Distance between messenger and contact wire at the support.	1
+PARAM	2ac8cf45-a4eb-57dc-bf7a-1bbbef1f4210	OB_TieSleeperType	TEXT		8	1	Tie / sleeper type. Tie type.	1
+PARAM	5f9f453b-bd16-596a-9a1c-8aabeeab961d	OB_TieSpacing	LENGTH		8	1	Tie spacing (mm). Centre-to-centre tie spacing.	1
+PARAM	c43473a3-c52f-5c96-a0ab-ffd0883da08a	OB_TrackGauge	LENGTH		8	1	Track gauge (mm). Nominal gauge.	1
+PARAM	740fde81-5e64-51dd-9ade-fa2656a00e5c	OB_TrackIdentifier	TEXT		8	1	Track identifier. Track number or ID used by operations.	1
+PARAM	dac3e981-c200-5819-86a5-bd6403cb5b5f	OB_TurnoutType	TEXT		8	1	Turnout type. Turnout designation.	1
+PARAM	79dbd273-c20f-5520-9aa2-00a48d5da067	OB_VerticalLoadCapacity_kN	NUMBER		8	1	Vertical load capacity (kN). Factored vertical capacity of the bearing.	1
+PARAM	bf946e13-9c2f-5167-a50e-cc05abeb128e	OB_WearingSurfaceWaterproofing	TEXT		8	1	Wearing surface / waterproofing. Deck protection system.	1

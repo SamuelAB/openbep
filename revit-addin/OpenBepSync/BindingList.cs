@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace OpenBepSync
 {
@@ -15,16 +16,24 @@ namespace OpenBepSync
         public bool ScopeConflict;   // some rows say Instance, others Type
         public HashSet<string> CategoryIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         public HashSet<string> ElementTypes = new HashSet<string>();
+        public int? FromLod;         // lowest "Required from LOD" across its rows; null when the list has none
     }
 
     /// <summary>Reads the binding list (CSV) exported by the OpenBEP Builder.</summary>
     public static class BindingList
     {
-        public static List<RequiredParameter> Read(string path, out string listVersion, out List<string> warnings)
+        public static List<RequiredParameter> Read(string path, out string listVersion, out List<string> warnings) =>
+            ReadText(File.ReadAllText(path, Encoding.UTF8), out listVersion, out warnings);
+
+        /// <summary>
+        /// Reads the CSV text. Columns are found by name, so added columns (a project's own "LOD 351" column, say) are ignored.
+        /// Levels are project-chosen: "Required from LOD" may hold 350, "LOD 351", "450 (custom)" or nothing.
+        /// </summary>
+        public static List<RequiredParameter> ReadText(string text, out string listVersion, out List<string> warnings)
         {
             warnings = new List<string>();
             listVersion = "";
-            var rows = ParseCsv(File.ReadAllText(path, Encoding.UTF8));
+            var rows = ParseCsv(text);
             if (rows.Count < 2) throw new InvalidDataException("The binding list is empty.");
             var head = rows[0].Select(h => h.Trim().TrimStart('﻿')).ToList();
             int Col(string name)
@@ -36,6 +45,7 @@ namespace OpenBepSync
             int cName = Col("Revit parameter"), cGuid = Col("GUID"), cKind = Col("Shared or built-in"),
                 cScope = Col("Instance or type"), cEl = Col("Element type"), cCat = Col("Revit category ids");
             int cVer = head.FindIndex(h => h == "OpenBEP list version" || h == "CANBIM list version");
+            int cLod = head.FindIndex(h => h.StartsWith("Required from LOD", StringComparison.OrdinalIgnoreCase));
 
             var byGuid = new Dictionary<Guid, RequiredParameter>();
             for (int r = 1; r < rows.Count; r++)
@@ -59,10 +69,45 @@ namespace OpenBepSync
                 foreach (var id in row[cCat].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                     p.CategoryIds.Add(id.Trim());
                 p.ElementTypes.Add(row[cEl]);
+                var lod = cLod >= 0 && row.Count > cLod ? Lod(row[cLod]) : null;
+                if (lod != null && (p.FromLod == null || lod < p.FromLod)) p.FromLod = lod;
             }
             foreach (var p in byGuid.Values.Where(x => x.ScopeConflict))
                 warnings.Add($"{p.Name}: instance on some elements and type on others; bound as instance.");
             return byGuid.Values.OrderBy(p => p.Name).ToList();
+        }
+
+        /// <summary>The level in a "Required from LOD" cell: the first three-digit number ("LOD 351" -> 351), or null.</summary>
+        public static int? Lod(string cell)
+        {
+            var m = Regex.Match(cell ?? "", @"(?<!\d)\d{3}(?!\d)");
+            return m.Success ? int.Parse(m.Value) : (int?)null;
+        }
+
+        /// <summary>
+        /// Checks the binding list against the shared parameter file before anything is bound:
+        /// every required GUID must be in the file under the same name, and OpenBEP parameters (OB_, CA_) must keep their fixed GUID.
+        /// Owner additions have other names and their own GUIDs, so the GUID rule leaves them alone.
+        /// </summary>
+        public static List<string> Check(IEnumerable<RequiredParameter> required, IEnumerable<SharedParameterEntry> file)
+        {
+            var warnings = new List<string>();
+            var byGuid = new Dictionary<Guid, SharedParameterEntry>();
+            foreach (var e in file)
+            {
+                if (byGuid.ContainsKey(e.Guid)) warnings.Add($"{e.Name}: GUID {e.Guid} appears twice in the shared parameter file");
+                else byGuid[e.Guid] = e;
+                if (OpenBepNames.IsOpenBep(e.Name) && e.Guid != OpenBepNames.Expected(e.Name))
+                    warnings.Add($"{e.Name}: GUID {e.Guid} in the shared parameter file is not the fixed OpenBEP GUID {OpenBepNames.Expected(e.Name)}");
+            }
+            foreach (var p in required)
+            {
+                if (!byGuid.TryGetValue(p.Guid, out var e)) warnings.Add($"{p.Name}: GUID {p.Guid} is not in the shared parameter file");
+                else if (e.Name != p.Name) warnings.Add($"{p.Name}: the shared parameter file names GUID {p.Guid} {e.Name}");
+                if (OpenBepNames.IsOpenBep(p.Name) && p.Guid != OpenBepNames.Expected(p.Name))
+                    warnings.Add($"{p.Name}: GUID {p.Guid} in the binding list is not the fixed OpenBEP GUID {OpenBepNames.Expected(p.Name)}");
+            }
+            return warnings;
         }
 
         /// <summary>RFC 4180 CSV parser (quoted fields, doubled quotes, line breaks inside quotes).</summary>

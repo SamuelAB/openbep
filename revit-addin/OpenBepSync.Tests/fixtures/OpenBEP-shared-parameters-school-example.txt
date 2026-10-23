@@ -1,0 +1,143 @@
+# This is a Revit shared parameter file.
+# Do not edit manually.
+# OpenBEP plan fingerprint 08B4C7C1DD62, not a released version
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	OpenBEP 01 Identity and asset
+GROUP	2	OpenBEP 02 Architecture
+GROUP	3	OpenBEP 03 Structure
+GROUP	4	OpenBEP 04 Mechanical
+GROUP	5	OpenBEP 05 Plumbing and fire protection
+GROUP	6	OpenBEP 06 Electrical and communications
+GROUP	7	OpenBEP 07 Site and civil
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE
+PARAM	93a71903-5b8d-5f70-9e56-11483977b131	OB_EnergySourceFuel	TEXT		1	1	Energy source / fuel. Fuel or energy source used by the equipment.	1
+PARAM	21706a78-61a3-591f-a97a-1a5cf6f3573e	OB_FinishColour	TEXT		1	1	Finish colour. Visible finish colour.	1
+PARAM	d39a36f7-38c6-5545-ae7a-0cb680643510	OB_MountingType	TEXT		1	1	Mounting type. How the luminaire is mounted.	1
+PARAM	b112bce4-20a8-5737-9319-51c3f16e05dd	OB_PositionalAccuracy	LENGTH		1	1	Positional accuracy (as-built) (mm). Stated accuracy of the recorded position at LOD 500 (see USIBD LOA).	1
+PARAM	9de341f9-dcfc-5921-ba65-82e5ee7025da	OB_AccessibleCeiling	YESNO		2	1	Accessible (demountable) ceiling. Ceiling allows access to the plenum (lay-in tiles or access panels).	1
+PARAM	783c7406-f04c-5678-99c4-1c7190c1de23	OB_AcousticRating	TEXT		2	1	Acoustic rating (STC). Sound transmission class of the door assembly.	1
+PARAM	257502ba-a35d-5cc1-8d44-1767ddfc361b	OB_BirdFriendlyGlazing	YESNO		2	1	Bird-friendly glazing. Glazing treated to reduce bird collisions (CSA A460). Owner property set.	1
+PARAM	3ca1e9af-c985-51f3-a09d-816c7e0aef41	OB_CarInsideDimensions	TEXT		2	1	Car inside dimensions (mm). Clear width x depth x height of the car.	1
+PARAM	9ac0e317-e51c-5a35-888e-0efa17d7d0c6	OB_CeilingSystem	TEXT		2	1	Ceiling system. Ceiling system, tile and suspension type.	1
+PARAM	9ebf5765-6427-5136-87ea-ea412dc34fb3	OB_CurtainWallSystem	TEXT		2	1	Curtain wall system. Framing system type and depth.	1
+PARAM	f90e8ef0-cc3e-55df-9e74-b79609d62fa6	OB_DesignLoad_kNm	NUMBER		2	1	Design load (kN/m). Horizontal design load on the guard. Owner property set.	1
+PARAM	ef5df88b-15ca-587f-8f45-1dfab1b9564b	OB_ExtendsToStructure	YESNO		2	1	Extends to structure. Wall runs to the underside of the structure above.	1
+PARAM	a137b84c-9b01-5582-98ba-3eb3a060c88a	OB_Finish	MULTILINETEXT		2	1	Finish. Visible finish of the ceiling.	1
+PARAM	fcedcd18-9d58-5920-a5bd-c2612a8e7ef9	OB_FrameMaterial	TEXT		2	1	Frame material. Material of the frame.	1
+PARAM	27e8f099-c062-55ec-b2d5-f6d8986fb157	OB_GlazingMakeUp	TEXT		2	1	Glazing make-up. Glass layers, coatings, gas fill and treatment.	1
+PARAM	9164580f-95dd-5822-ba6a-aa945cceb29b	OB_HardwareSet	TEXT		2	1	Hardware set. Reference to the hardware schedule group.	1
+PARAM	0f5e80d1-99d2-573e-b5cd-5558f1580c97	OB_InfillType	TEXT		2	1	Infill type. Infill between posts (pickets, glass, mesh).	1
+PARAM	e3dfe32b-c351-5418-b1a2-235584a893ca	OB_LeafMaterial	TEXT		2	1	Leaf material. Material of the door leaf.	1
+PARAM	21d184ec-8a94-529f-840f-6f81b3f00a9a	OB_NominalDimensions	TEXT		2	1	Nominal dimensions (mm). Length x depth x height.	1
+PARAM	4b04b51f-b5ac-58e5-949d-d8fb2c935ae8	OB_OperationPartitioning	TEXT		2	1	Operation / partitioning. Panel arrangement and operation (fixed, casement, awning ...).	1
+PARAM	dea5b738-1317-5850-b57b-86f311b0bf71	OB_OperationType	TEXT		2	1	Operation type. Swing / sliding / folding operation.	1
+PARAM	b65f95f1-116b-55f6-ae79-f8e57388ea91	OB_PerformanceClass	TEXT		2	1	Performance class (NAFS). Performance class and grade (wind, water, structural) under NAFS and the Canadian supplement.	1
+PARAM	bcfb99e9-e769-55b2-8051-6361695294b2	OB_ProgramArea	AREA		2	1	Program area (m2). Area required by the functional program.	1
+PARAM	dc6846d4-2891-5bfc-a4ab-6d74eccd996a	OB_RatedLoad_kg	NUMBER		2	1	Rated load (kg). Rated load of the car.	1
+PARAM	8d688d71-ce91-5c2c-ba65-7f37ff120b43	OB_RatedPassengers	NUMBER		2	1	Rated passengers. Rated number of passengers.	1
+PARAM	7cecdf0a-dcfc-5e44-8346-d299ead2c367	OB_RatedSpeed_ms	NUMBER		2	1	Rated speed (m/s). Rated car or step speed.	1
+PARAM	608f875f-b8f8-5f32-b5c5-e5a6f9286b25	OB_RoofingMembraneSystem	TEXT		2	1	Roofing membrane system. Membrane type of the roof assembly.	1
+PARAM	656134f0-d579-54e1-9d5c-fa46d156c190	OB_SignCategory	TEXT		2	1	Sign category. Regulatory, warning, guide, wayfinding, room ID ...	1
+PARAM	fc61624e-3647-51ed-b4b8-55af84de0182	OB_SolarReflectanceIndex	NUMBER		2	1	Solar reflectance index (SRI). Initial SRI of the roof surface (heat-island credits). Owner property set.	1
+PARAM	8c2b725d-e9ba-5fcb-91b8-4060b1a228eb	OB_SoundAbsorption	TEXT		2	1	Sound absorption (NRC). Sound absorption of the ceiling finish.	1
+PARAM	0e095709-5db5-5cf5-8fbb-207019ebfc09	OB_StopsOpenings	TEXT		2	1	Stops / openings. Number of stops and opening arrangement.	1
+PARAM	50832367-e4e9-5f59-a50e-9ce7dbe8dc95	OB_SupplyInstallResponsibility	TEXT		2	1	Supply / install responsibility. Who supplies and who installs the item (owner / contractor). Owner property set.	1
+PARAM	5cdc5a6e-898c-54d2-8171-15c962d4d2f7	OB_ZoneType	TEXT		2	1	Zone type. Fire, HVAC, security, lighting, tenancy ...	1
+PARAM	3e9e7f2b-992a-5f0e-822f-a121424eb597	OB_CoatingCorrosionProtection	TEXT		3	1	Coating / corrosion protection. Surface treatment of steel members.	1
+PARAM	1fca5d77-2a21-5e17-9fb1-fea6e92270d8	OB_ConcreteCover	LENGTH		3	1	Concrete cover (mm). Nominal concrete cover to reinforcement.	1
+PARAM	fe94060a-4d36-5faf-8a21-5989a403643d	OB_ConcreteExposureClass	TEXT		3	1	Concrete exposure class. Exposure class (CSA A23.1 in Canada).	1
+PARAM	5de5af45-2dc9-5ef6-9964-f3893b5b0bfc	OB_DelegatedDesign	YESNO		3	1	Delegated (supplier) design. Element is designed by the supplier's engineer (joists, trusses, connections, precast).	1
+PARAM	d7c0cd8c-315b-5f11-84f7-4955272d0471	OB_DesignAxialResistance_kN	NUMBER		3	1	Design axial resistance (kN). Factored axial resistance per pile.	1
+PARAM	1ab8b906-9922-5e61-89be-f4a84f587a01	OB_DesignBearingResistance_kPa	NUMBER		3	1	Design bearing resistance (kPa). Soil bearing value from the geotechnical report.	1
+PARAM	03b6f9a2-176f-5ec2-ae58-dfc9f9144a4e	OB_DesignLiveLoad_kPa	NUMBER		3	1	Design live load (kPa). Specified live load used in design (NBC Part 4). Owner property set.	1
+PARAM	cc1f2cd3-2e4f-5b8d-a750-f1648c442d5c	OB_DiameterSection	TEXT		3	1	Diameter / section. Pile diameter or section size.	1
+PARAM	97d9e3d4-3cec-548a-9032-afcd28c95300	OB_DrainageProvisions	MULTILINETEXT		3	1	Drainage provisions. Drainage behind the wall.	1
+PARAM	c3533fc8-a506-5e8a-9fe3-879ef8d3799b	OB_FireProtection	TEXT		3	1	Fire protection. Applied fire protection (spray, board, intumescent) and rating.	1
+PARAM	5d9fd607-f83c-528a-836c-66c4ab77a011	OB_FrostProtectionDepth	LENGTH		3	1	Frost protection depth (mm). Minimum soil cover or insulation for frost protection. Owner property set.	1
+PARAM	43c350e1-7b60-5569-b8db-3f4d2e642e46	OB_ReinforcementRatio_kgm3	NUMBER		3	1	Reinforcement ratio (kg/m3). Reinforcement mass per concrete volume (for cost before detailing).	1
+PARAM	82f59833-01b7-5c30-a602-dc5676f2f269	OB_Span	LENGTH		3	1	Span (mm). Clear or design span between supports.	1
+PARAM	2bae5797-bbc2-544c-8196-f9e3a186c193	OB_WallSystem	TEXT		3	1	Wall system. Retaining system (cantilever, MSE, gabion, soldier pile ...).	1
+PARAM	28e22e34-d9ec-5e8f-8af8-06bf248c5793	OB_CircuitType	TEXT		4	1	Circuit type. Open or closed circuit.	1
+PARAM	e406de54-15d6-505b-a214-3421c8583550	OB_Construction	TEXT		4	1	Construction (factory / site-built). Factory-built or constructed on site.	1
+PARAM	44201596-9941-5298-9935-137558b0c7e4	OB_CoolingCapacity_kW	NUMBER		4	1	Cooling capacity (kW). Rated cooling capacity.	1
+PARAM	5fe0cccc-7554-5302-8bf2-2e450847463c	OB_CrossSectionShape	TEXT		4	1	Cross-section shape. Round, rectangular or flat-oval.	1
+PARAM	3eb5d3fe-0a32-56e6-ac33-1ebb8fe4f687	OB_DesignSupplyAirflow_Ls	NUMBER		4	1	Design supply airflow (L/s). Design supply airflow. IFC has no AHU-level airflow property; use owner pset or the supply fan (Pset_FanTypeCommon.NominalAirFlowRate).	1
+PARAM	9ebff48b-2f44-596d-a66d-49a1a4fa380e	OB_DriveType	TEXT		4	1	Drive type. Traction, MRL, hydraulic ...	1
+PARAM	9a49326b-fb8c-5413-95d7-5099316e4de0	OB_FaceType	TEXT		4	1	Face type. Diffuser / grille face type.	1
+PARAM	45b04f3d-fd46-5113-b75a-25b3ec629455	OB_FanArrangement	TEXT		4	1	Fan arrangement. Blow-through or draw-through.	1
+PARAM	94f71443-392e-5642-83e4-ef313ecb83bc	OB_FanMotorPower_kW	NUMBER		4	1	Fan motor power (kW). Nameplate motor power of supply fan(s).	1
+PARAM	576bf4fe-557d-5111-afce-c4a0e8fddfdd	OB_FilterRating	TEXT		4	1	Filter rating (MERV). Final filter efficiency.	1
+PARAM	b799de3d-cedf-5759-bad3-3e8da60fe0be	OB_FlowArrangement	TEXT		4	1	Flow arrangement. Counter, cross or parallel flow.	1
+PARAM	a7395f72-f06a-53d5-a053-525616b7b056	OB_HeatingOutput_kW	NUMBER		4	1	Heating output (kW). Rated heating output. No common IFC property.	1
+PARAM	a9e5867d-915b-5fa2-b0f0-6da4f3a79039	OB_HeatRejectionCapacity_kW	NUMBER		4	1	Heat rejection capacity (kW). Nominal capacity of the tower.	1
+PARAM	636a6e6e-39dd-535c-bc10-9b99b9bff5fb	OB_HeatTransferCapacity_kW	NUMBER		4	1	Heat transfer capacity (kW). Design heat transfer rate. No common IFC property.	1
+PARAM	6d54be01-068d-51c9-b8fb-e5a5cd10c8e0	OB_InletSize	LENGTH		4	1	Inlet size (mm). Nominal inlet / damper diameter.	1
+PARAM	45f08c9d-d447-58ae-9e7b-391f705a705e	OB_InputPower_kW	NUMBER		4	1	Input power (kW). Nominal electrical input.	1
+PARAM	8af2ce5a-e2b1-5550-868a-e672ae0895b3	OB_MakeUpWaterRequirement_Ls	NUMBER		4	1	Make-up water requirement (L/s). Make-up water flow.	1
+PARAM	c522b3fc-16fc-5796-9e01-90383cc4e2c0	OB_NoiseCriterionAtDesignFlow	TEXT		4	1	Noise criterion (NC) at design flow. Manufacturer NC at design airflow. No IFC standard property - owner property set.	1
+PARAM	7ffd681a-57b4-512b-a05f-da746eb4215e	OB_NumberOfCells	NUMBER		4	1	Number of cells. Number of cells.	1
+PARAM	de3092ff-b4ef-5f16-9616-7e535f2d424f	OB_PressureClass_Pa	NUMBER		4	1	Pressure class (Pa). Construction pressure class.	1
+PARAM	feff18a3-4751-5471-b4ca-cf0018a7c426	OB_PressureRating_kPa	NUMBER		4	1	Pressure rating (kPa). Maximum allowable working pressure.	1
+PARAM	6825e8e3-2d7f-5f3c-9ac9-2742c37097cb	OB_Refrigerant	TEXT		4	1	Refrigerant. Refrigerant type and charge (owner property set).	1
+PARAM	dd95fb12-f6f3-5dba-a1f1-f0d0efecb7ac	OB_Shape	TEXT		4	1	Shape. Face shape.	1
+PARAM	c85c2b7d-831b-54c4-a98c-768bdae5b970	OB_ThrowLength	LENGTH		4	1	Throw length (m). Throw at the design terminal velocity.	1
+PARAM	98f1b834-21bf-57bf-a0c7-7186d596a887	OB_BaseDriveArrangement	TEXT		5	1	Base / drive arrangement. Base type and drive connection.	1
+PARAM	8c9070ea-a722-59a3-be4b-6537d81698c4	OB_ConnectionSize	LENGTH		5	1	Connection size (mm). Suction / discharge connection size.	1
+PARAM	4ae2c484-1ae6-50d1-b21b-ebb35d2716c4	OB_DesignHead_kPa	NUMBER		5	1	Design head (kPa). Total dynamic head at design flow. No common IFC property.	1
+PARAM	30483a46-3925-5388-b668-4a54527d5149	OB_HazardClassification	TEXT		5	1	Hazard classification. Occupancy hazard used for design (NFPA 13 as referenced by the NBC). Owner property set.	1
+PARAM	6d0f3718-bb83-5c66-97e5-b82a4feef9c8	OB_JointType	TEXT		5	1	Joint type. Jointing method (welded, grooved, soldered, push-on ...).	1
+PARAM	0637c71c-0f62-5165-b8d0-6306102a6733	OB_KFactor	NUMBER		5	1	K-factor. Discharge coefficient of the sprinkler.	1
+PARAM	669db385-9557-5c09-8b2c-f968e908caa2	OB_MotorNameplatePower_kW	NUMBER		5	1	Motor nameplate power (kW). Nameplate power of the driving motor.	1
+PARAM	8ff84c9e-83f1-5990-b4ef-9f3d145cb049	OB_NominalLength	LENGTH		5	1	Nominal length (mm). Nominal length.	1
+PARAM	0ef0bba7-62fa-5fa9-a699-d0cdc06f5e07	OB_NominalWidth	LENGTH		5	1	Nominal width (mm). Nominal width.	1
+PARAM	14db58f9-bc85-5cc6-9cc1-ec706d064806	OB_RecoveryRate_Lh	NUMBER		5	1	Recovery rate (L/h). Recovery at the design temperature rise. No common IFC property.	1
+PARAM	af9b1f8c-d4ea-562b-8101-4e1c5f333e21	OB_SprinklerType	TEXT		5	1	Sprinkler type. Pendent, upright, sidewall, concealed ...	1
+PARAM	f600730a-fb5f-56e5-a305-ab7329527b65	OB_StorageCapacity_L	NUMBER		5	1	Storage capacity (L). Stored water volume.	1
+PARAM	0ac19865-4245-55c7-b3f3-87d9b0ce07ba	OB_ValveMechanism	TEXT		5	1	Valve mechanism. Ball, butterfly, gate, globe, check ...	1
+PARAM	55a21ab7-a531-5e97-9a45-ccf26a1d695d	OB_WorkingPressureRating_kPa	NUMBER		5	1	Working pressure rating (kPa). Rated working pressure of pipe and fittings.	1
+PARAM	0202c9d2-c9a5-5e5a-9dbb-f78d5934f3e9	OB_WorkingTestPressure_kPa	NUMBER		5	1	Working / test pressure (kPa). Rated working and test pressure.	1
+PARAM	2cf25718-52b9-549b-8993-8195061770bc	OB_ColourRenderingIndex	INTEGER		6	1	Colour rendering index. CRI (Ra) of the light source.	1
+PARAM	f7bf608d-5c6d-54f3-95d5-35f9a3df21bd	OB_CSAConfiguration	TEXT		6	1	CSA configuration. Receptacle configuration (CSA C22.2 No. 42).	1
+PARAM	cde9005b-6d19-59ea-87b0-894ccf55abcd	OB_FuelTankCapacity_L	NUMBER		6	1	Fuel tank capacity (L). Base or day tank capacity.	1
+PARAM	fe99153b-66b1-5b73-9f00-92b6a3f34c3a	OB_HasCover	YESNO		6	1	Has cover. Tray is fitted with a cover.	1
+PARAM	b48ae904-c9d7-5e5e-a81e-2a86c2aa898f	OB_Impedance	TEXT		6	1	Impedance (%). Short-circuit impedance.	1
+PARAM	0537e0fd-675a-5554-8ae8-79c7f0830005	OB_MainBoard	YESNO		6	1	Main board. Board is the main (service entrance) board.	1
+PARAM	3ad776c8-5adc-5428-8093-03827ffd2ad6	OB_NumberOfGangs	NUMBER		6	1	Number of gangs. Number of gangs.	1
+PARAM	0137d767-d4eb-582f-9513-235f0e5c5099	OB_NumberOfSockets	NUMBER		6	1	Number of sockets. Number of sockets of the receptacle.	1
+PARAM	fe104e4d-70e4-554e-b596-afeea8ebfd04	OB_Placing	TEXT		6	1	Placing (ceiling / wall / floor ...). Where the luminaire is placed.	1
+PARAM	d05f6ea2-5e2e-524f-bb23-ef01f5f93c44	OB_PowerSource	TEXT		6	1	Power source. PoE, 24 V or line voltage.	1
+PARAM	cc8f359d-b8af-5416-842a-c2319d5acabe	OB_PrimaryVoltage_V	NUMBER		6	1	Primary voltage (V). Primary voltage.	1
+PARAM	c967ff19-707a-5aac-8ebc-2153db381ac1	OB_RatedOutput_kW	NUMBER		6	1	Rated output (kW). Standby (or prime) rated output.	1
+PARAM	752f0555-9312-557f-b9e6-1496ea9c326f	OB_RatedPower_kVA	NUMBER		6	1	Rated power (kVA). Rated apparent power.	1
+PARAM	76ada84a-83d0-5ff2-b4bc-7c67c3e3ccb0	OB_SecondaryVoltage_V	NUMBER		6	1	Secondary voltage (V). Secondary voltage.	1
+PARAM	4f2e244a-91aa-58d0-afca-c8a5b7b3eaa2	OB_SecurityZone	TEXT		6	1	Security zone. Security zone the device controls or monitors. Owner property set.	1
+PARAM	51ba43d1-70c1-52df-93e9-9f102a6048d8	OB_SwitchFunction	TEXT		6	1	Switch function. On/off, two-way, dimmer ...	1
+PARAM	a6c8a51e-c02f-5331-8462-eea906494bd9	OB_TrayConduitType	TEXT		6	1	Tray / conduit type. Ladder, ventilated tray, EMT, RMC, PVC ...	1
+PARAM	7b74fc42-5d12-58de-8bc9-604233b32122	OB_Type	TEXT		6	1	Type (dry / liquid-filled). Insulation medium and temperature rise. No common IFC property.	1
+PARAM	235cc176-c2e5-52f2-8df2-e63e890ffffd	OB_VectorGroup	TEXT		6	1	Vector group. Winding connection and phase shift.	1
+PARAM	f02b870d-5d2d-5609-bc52-148a02f50673	OB_VideoResolution	TEXT		6	1	Video resolution. Camera resolution.	1
+PARAM	1bf01e2b-0e11-5c1b-9834-22bbb87f8a96	OB_BeddingClass	TEXT		7	1	Bedding class. Bedding and embedment.	1
+PARAM	91db36d0-40e1-51c8-93f7-9877216a1a27	OB_ChamberSize	TEXT		7	1	Chamber size (mm). Chamber diameter or length x width.	1
+PARAM	cc961b22-6179-5a1c-a992-702eb48240cb	OB_CoordinateReferenceSystem	TEXT		7	1	Coordinate reference system. Horizontal datum and projection, and vertical datum.	1
+PARAM	03bc3ca7-001f-56e0-884e-ee9ce64f84ac	OB_CoverFrame	TEXT		7	1	Cover / frame. Cover material and load rating.	1
+PARAM	0854613c-e882-573b-952a-76ae311bf893	OB_CrossSlope_pct	NUMBER		7	1	Cross slope (%). Cross slope for drainage.	1
+PARAM	4265a600-5010-558a-bac6-66508dc24e18	OB_CulvertOpening	TEXT		7	1	Culvert opening (mm). Internal width and clear depth of a culvert.	1
+PARAM	3603e3f5-adca-57bc-9f19-748f3b17a6f7	OB_CurbType	TEXT		7	1	Curb type. Curb profile, upstand and mountability.	1
+PARAM	8db7bbb6-3076-5b03-9d3d-df5ba1e64e51	OB_CutFillVolumes	VOLUME		7	1	Cut / fill volumes (m3). Earthworks quantities.	1
+PARAM	948a50cd-76f9-5c2f-a607-9a9b6932ec5b	OB_Depth	LENGTH		7	1	Depth (m). Rim to invert depth.	1
+PARAM	c0b770e1-db00-5c40-9836-54a111b63ebe	OB_DepthOfCover	LENGTH		7	1	Depth of cover (mm). Minimum cover over the crown.	1
+PARAM	5a52b401-ac2a-528d-b25c-c14c62950f96	OB_DropStructure	YESNO		7	1	Drop structure. Chamber includes a backdrop / drop pipe.	1
+PARAM	77dade24-dfc8-5159-877f-51f4a828386a	OB_FromToStructure	TEXT		7	1	From / to structure. Upstream and downstream structures (network topology).	1
+PARAM	7dec07f4-9a15-54ad-b37b-56a623e6d2c4	OB_GeotechnicalReport	TEXT		7	1	Geotechnical report. Reference of the geotechnical report and boreholes.	1
+PARAM	00b8a3c6-59a1-5ceb-89d3-a36d2f78f4bd	OB_InvertElevation	LENGTH		7	1	Invert elevation(s) (m). Invert of the chamber and of each connected pipe.	1
+PARAM	fe5921fd-06e5-5de0-930a-93410833381b	OB_ParkingStalls	NUMBER		7	1	Parking stalls. Number of stalls.	1
+PARAM	2c1a4baa-183c-5dea-8516-b797b9f37553	OB_PavementMarking	TEXT		7	1	Pavement marking. Marking material, colour and width.	1
+PARAM	9ed66df2-21c2-5a86-9637-d85f47d09d07	OB_PavementThickness	LENGTH		7	1	Pavement thickness (mm). Total pavement structure thickness.	1
+PARAM	4f1185af-24b4-56d2-87f2-7669e59dbbd5	OB_PavementType	TEXT		7	1	Pavement type. Flexible, rigid or unit pavers.	1
+PARAM	958209e2-fad2-52f6-8e98-7c9c4062f48e	OB_PipeClass	TEXT		7	1	Pipe class. Pipe class, DR / SDR or strength class.	1
+PARAM	b0bbe208-c5e8-5638-ade7-896b3b2b9aa1	OB_RimCoverElevation	LENGTH		7	1	Rim / cover elevation (m). Elevation of the cover or grate.	1
+PARAM	e69631c3-fe17-57cd-9da0-d4eea7b88a83	OB_SiteArea	AREA		7	1	Site area (m2). Total site area.	1
+PARAM	7d7beddf-eb63-56bd-97cc-636f7891b101	OB_SurveySourceAndDate	TEXT		7	1	Survey source and date. Source and date of the topographic data.	1
+PARAM	70116548-10e4-5c5c-b22f-2d1f2930baa4	OB_UtilityService	TEXT		7	1	Utility service. Storm, sanitary, combined, water, gas, electrical duct bank ...	1

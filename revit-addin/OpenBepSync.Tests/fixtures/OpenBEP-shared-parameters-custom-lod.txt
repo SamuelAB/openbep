@@ -1,0 +1,14 @@
+# This is a Revit shared parameter file.
+# Do not edit manually.
+# Hand-made test file: custom levels and owner additions
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	OpenBEP 01 Identity and asset
+GROUP	2	OpenBEP 02 Architecture
+GROUP	9	Owner additions
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE
+PARAM	783c7406-f04c-5678-99c4-1c7190c1de23	OB_AcousticRating	TEXT		2	1	Acoustic rating (STC).	1
+PARAM	df6a6e8d-c787-58d3-bc75-fda37239a312	CA_FireRating	TEXT		2	1	Fire-resistance rating.	1
+PARAM	f2c96c94-3cfa-57e2-a7b6-57901298395a	Owner keying zone	TEXT		9	1		1
+PARAM	3a0a0f8c-8736-5232-a0bd-b758fa32670a	Numéro d’actif	TEXT		9	1		1

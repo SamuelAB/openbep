@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Offline tests of the add-in's file reading: no Revit needed. Run with: dotnet test revit-addin/OpenBepSync.Tests -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Only the pure C# parsing code; everything else in the add-in needs RevitAPI. -->
+    <Compile Include="..\OpenBepSync\BindingList.cs" Link="Linked\BindingList.cs" />
+    <Compile Include="..\OpenBepSync\SharedParameterFile.cs" Link="Linked\SharedParameterFile.cs" />
+    <None Include="fixtures\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+</Project>

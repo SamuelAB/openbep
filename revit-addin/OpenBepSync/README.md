@@ -14,6 +14,9 @@ This add-in adds an **OpenBEP** tab to Revit with two buttons: **Sync parameters
    - **Name conflicts**: a parameter with the same name but a different GUID. This is the classic duplicate that makes data unreadable.
    - **Scope mismatches**: a parameter bound as instance in the model when the plan says type, or the reverse. These are left as they are.
    - **Leftovers**: OpenBEP parameters (`OB_` prefix, or `CA_` from before October 2026) in the model that are no longer in the plan.
+   - **File mismatches**: before Revit opens the .txt, the add-in checks it against the binding list. It flags a GUID the list needs that the file lacks, a GUID the file gives another name, and an `OB_`/`CA_` parameter whose GUID isn't the fixed OpenBEP one.
+
+   The binding list can come from any Builder version with project-chosen levels: columns can be in any order, extra columns are ignored, and "Required from LOD" can hold any level ("LOD 351", "450 (custom)") or be blank.
 4. **It writes a report** (`OpenBEP-sync-report-<date>.csv`) next to the binding list.
 5. **You choose** one of two options:
    - add and bind the missing parameters;
@@ -35,6 +38,14 @@ dotnet build -c Release -p:RevitVersion=2025
 - Built for Revit 2022 (`-p:RevitVersion=2022`) on 2026-10-20 with the .NET SDK 9: no source changes, 0 warnings.
 - `RevitAPI.dll` and `RevitAPIUI.dll` are referenced from `C:\Program Files\Autodesk\Revit <version>`.
 
+### Offline tests (no Revit needed)
+
+The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule and the fixed-GUID rule are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
+
+```
+dotnet test revit-addin/OpenBepSync.Tests
+```
+
 ## Install (per user, no admin rights)
 
 1. Copy `OpenBepSync.addin` to `%APPDATA%\Autodesk\Revit\Addins\<version>\`.
@@ -50,6 +61,7 @@ dotnet build -c Release -p:RevitVersion=2025
 | `AutoTest.cs` | Developer test, off unless `%AppData%\OpenBEP\autotest.json` exists (see below). |
 | `SyncCommand.cs` | Dry run, report, choice, then one transaction that adds, binds or deletes. |
 | `BindingList.cs` | Reads the BEP Builder's binding list and merges rows by GUID. |
+| `SharedParameterFile.cs` | Reads a shared parameter file without Revit; the OpenBEP prefix and GUID rules. |
 | `OpenBepSync.csproj` | Build file; set `RevitVersion`. |
 | `OpenBepSync.addin` | Revit manifest. |
 

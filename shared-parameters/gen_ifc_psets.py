@@ -19,6 +19,18 @@ TPL = ifcopenshell.util.pset.get_template('IFC4')
 REVIT = {'TEXT': 'Label', 'MULTILINETEXT': 'Text', 'YESNO': 'Boolean', 'INTEGER': 'Integer', 'NUMBER': 'Real',
          'LENGTH': 'Length', 'AREA': 'Area', 'VOLUME': 'Volume'}
 
+# Corrections to manifest rows, kept here because the manifest is generated.
+# The Revit name the exporter reads, where the manifest's name carries a note.
+REVIT_NAME = {'Visual Light Transmittance - analytical properties': 'Visual Light Transmittance',
+              # The "Voltage" type parameter that panel, device and light families tie to their electrical connector.
+              # The panel's own Distribution System is an element id, not a number the exporter can write.
+              'Voltage / Distribution System': 'Voltage', 'Voltage (connector)': 'Voltage'}
+# Built-in parameters with a Revit unit: the exporter writes a measure and converts from Revit's internal units.
+# Shared NUMBER parameters stay Real: they hold the plain number, and the exporter would rescale it.
+REVIT_UNIT = {'V': 'ElectricVoltage', 'A': 'ElectricCurrent'}
+# IFC targets missing from a manifest row, keyed (Revit name, element type).
+IFC_TARGET = {('Flow', 'Fans'): 'Pset_FanTypeCommon.NominalAirFlowRate'}
+
 
 def entity_ok(name):
     try: SCHEMA.declaration_by_name(name); return True
@@ -54,13 +66,17 @@ def classes(ents, scope):
 def main():
     # Shared parameters, plus built-in Revit parameters whose manifest name is a plain Revit name (Type Name, Mark, Width...);
     # rows like "Size / Diameter" or "Room / Space (calculated, read-only)" describe several parameters and are left out.
-    rows = [r for r in csv.DictReader(open(os.path.join(HERE, f'OpenBEP_Parameters_Manifest_v{VER}.csv'), encoding='utf-8-sig'))
-            if r['Shared or built-in'] == 'Shared' or re.fullmatch(r'[\w #]+', r['Parameter (Revit name)'])]
+    rows = []
+    for r in csv.DictReader(open(os.path.join(HERE, f'OpenBEP_Parameters_Manifest_v{VER}.csv'), encoding='utf-8-sig')):
+        r['Parameter (Revit name)'] = REVIT_NAME.get(r['Parameter (Revit name)'], r['Parameter (Revit name)'])
+        r['IFC target'] = r['IFC target'] or IFC_TARGET.get((r['Parameter (Revit name)'], r['Element type']), '')
+        if r['Shared or built-in'] == 'Shared' or re.fullmatch(r'[\w #]+', r['Parameter (Revit name)']): rows.append(r)
     own = {'instance': {}, 'type': {}}
     std = collections.OrderedDict()   # (pset, I/T, classes) -> {prop: (type, revit name)}
     mapped = set()
     for r in rows:
         n, sc, dt = r['Parameter (Revit name)'], r['Instance or type'].strip().lower(), REVIT.get(r['Data type'], 'Label')
+        if r['Shared or built-in'] != 'Shared' and dt == 'Real': dt = REVIT_UNIT.get(r['Unit'], dt)
         sc = 'type' if sc == 'type' else 'instance'
         own[sc][n] = dt
         for ps, prop, _, ents in standard(r['IFC target']):

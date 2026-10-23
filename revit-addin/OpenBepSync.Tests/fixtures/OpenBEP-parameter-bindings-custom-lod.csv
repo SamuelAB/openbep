@@ -1,0 +1,8 @@
+﻿"Element type","Revit parameter","Instance or type","Shared or built-in","GUID","Required from LOD","LOD 351","Revit category ids","Project note","OpenBEP list version"
+"Doors","OB_AcousticRating","Type","Shared","783c7406-f04c-5678-99c4-1c7190c1de23","LOD 351","x","OST_Doors","","0.1-custom"
+"Interior walls / partitions","OB_AcousticRating","Type","Shared","783c7406-f04c-5678-99c4-1c7190c1de23","450 (custom)","","OST_Walls","","0.1-custom"
+"Floors and structural slabs","OB_AcousticRating","Instance","Shared","783c7406-f04c-5678-99c4-1c7190c1de23","350","","OST_Floors; OST_StructuralFoundation","","0.1-custom"
+"Doors","CA_FireRating","Type","Shared","df6a6e8d-c787-58d3-bc75-fda37239a312","200","","OST_Doors","legacy prefix, models made before the rename","0.1-custom"
+"Doors","Owner keying zone","Instance","Shared","f2c96c94-3cfa-57e2-a7b6-57901298395a","","x","OST_Doors","owner addition, ""quoted"", with comma","0.1-custom"
+"Doors","Numéro d’actif","Instance","Shared","3a0a0f8c-8736-5232-a0bd-b758fa32670a","LOD 500","","OST_Doors","","0.1-custom"
+"Doors","Mark","Instance","Built-in","","100","","OST_Doors","","0.1-custom"

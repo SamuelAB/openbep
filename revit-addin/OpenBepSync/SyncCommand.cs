@@ -45,6 +45,8 @@ namespace OpenBepSync
             string listVersion;
             try { required = BindingList.Read(csvPath, out listVersion, out warnings); }
             catch (Exception ex) { TaskDialog.Show("OpenBEP", "Could not read the binding list: " + ex.Message); return Result.Failed; }
+            try { warnings.AddRange(BindingList.Check(required, SharedParameterFile.Parse(File.ReadAllText(txtPath), out _, out var fileWarnings))); warnings.AddRange(fileWarnings); }
+            catch (IOException ex) { warnings.Add("Could not check the shared parameter file: " + ex.Message); }
 
             // 2. Load definitions from the shared parameter file, restoring the user's file afterwards.
             var previousFile = app.SharedParametersFilename;
@@ -155,7 +157,7 @@ namespace OpenBepSync
                 it.Action = missing.Count > 0 ? "extend" : "ok";
                 if (missing.Count > 0) it.Note += "adds " + string.Join(", ", missing.Select(c => c.Name)) + "; ";
             }
-            plan.Extras = inModel.Where(s => (s.Name.StartsWith("OB_", StringComparison.Ordinal) || s.Name.StartsWith("CA_", StringComparison.Ordinal)) && !wanted.Contains(s.GuidValue)).ToList();
+            plan.Extras = inModel.Where(s => OpenBepNames.IsOpenBep(s.Name) && !wanted.Contains(s.GuidValue)).ToList();
             return plan;
         }
 

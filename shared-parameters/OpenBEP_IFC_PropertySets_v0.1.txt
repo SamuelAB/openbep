@@ -13,6 +13,36 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Area	Area
 	Assembly Code	Label
 	Bar Diameter	Label
+	Camber Size	Length
+	Connector diameter	Length
+	Cost	Real
+	Default Thickness	Length
+	Department	Label
+	Description	Text
+	Elevation at Bottom	Length
+	Elevation at Top	Length
+	Elevation from Level	Length
+	Enclosure	Label
+	Fire Rating	Label
+	Flow	Real
+	Fluid Type	Label
+	Foundation Thickness	Length
+	Height	Length
+	Height Offset From Level	Length
+	Initial Color	Real
+	Invert Elevation	Length
+	Length	Length
+	Light Loss Factor	Real
+	MCB Rating	Label
+	Mains	ElectricCurrent
+	Manufacturer	Label
+	Mark	Label
+	Max #1 Pole Breakers	Real
+	Model	Label
+	Mounting	Label
+	Name	Label
+	Number	Label
+	Number of Poles	Real
 	OB_AccessDoorProvided	Boolean
 	OB_AccessibleCeiling	Boolean
 	OB_AcousticRating	Label
@@ -313,36 +343,6 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	OB_WorkingTestPressure_kPa	Real
 	OB_ZoneArea	Area
 	OB_ZoneType	Label
-	Camber Size	Length
-	Connector diameter	Length
-	Cost	Real
-	Default Thickness	Length
-	Department	Label
-	Description	Text
-	Elevation at Bottom	Length
-	Elevation at Top	Length
-	Elevation from Level	Length
-	Enclosure	Label
-	Fire Rating	Label
-	Flow	Real
-	Fluid Type	Label
-	Foundation Thickness	Length
-	Height	Length
-	Height Offset From Level	Length
-	Initial Color	Real
-	Invert Elevation	Length
-	Length	Length
-	Light Loss Factor	Real
-	MCB Rating	Label
-	Mains	Real
-	Manufacturer	Label
-	Mark	Label
-	Max #1 Pole Breakers	Real
-	Model	Label
-	Mounting	Label
-	Name	Label
-	Number	Label
-	Number of Poles	Real
 	Quantity	Real
 	Railing Height	Length
 	Service Type	Label
@@ -357,6 +357,8 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Type Name	Label
 	Unbounded Height	Length
 	Unconnected Height	Length
+	Visual Light Transmittance	Real
+	Voltage	ElectricVoltage
 	Volume	Volume
 	Width	Length
 PropertySet:	Pset_BoilerTypeCommon	T	IfcBoilerType
@@ -421,6 +423,7 @@ PropertySet:	Pset_DoorWindowGlazingType	T	IfcDoorType,IfcWindowType
 	IsCoated	Label	OB_GlazingMakeUp
 	IsLaminated	Label	OB_GlazingMakeUp
 	IsTempered	Label	OB_GlazingMakeUp
+	VisibleLightTransmittance	Real	Visual Light Transmittance
 PropertySet:	Pset_RailingCommon	T	IfcRailingType
 	Diameter	Length	OB_HandrailDiameter
 	Height	Length	Railing Height
@@ -490,6 +493,8 @@ PropertySet:	Pset_DuctSegmentTypeCommon	T	IfcDuctSegmentType
 	WorkingPressure	Real	OB_PressureClass_Pa
 PropertySet:	Pset_DuctFittingTypeCommon	T	IfcDuctFittingType
 	PressureClass	Real	OB_PressureClass_Pa
+PropertySet:	Pset_FanTypeCommon	I	IfcFan
+	NominalAirFlowRate	Real	Flow
 PropertySet:	Pset_AirTerminalBoxTypeCommon	I	IfcAirTerminalBox
 	NominalAirFlowRate	Real	Flow
 PropertySet:	Pset_CableCarrierSegmentTypeConduitSegment	I	IfcCableCarrierSegment
@@ -563,7 +568,8 @@ PropertySet:	Pset_AudioVisualApplianceTypeCamera	T	IfcAudioVisualApplianceType
 PropertySet:	Pset_ElectricalDeviceCommon	T	IfcDistributionElementType
 	IP_Code	Label	Enclosure
 	NumberOfPoles	Real	Number of Poles
-	RatedCurrent	Real	Mains
+	RatedCurrent	ElectricCurrent	Mains
+	RatedVoltage	ElectricVoltage	Voltage
 PropertySet:	Pset_DistributionChamberElementTypeInspectionChamber	T	IfcDistributionChamberElementType
 	ChamberLengthOrRadius	Label	OB_ChamberSize
 	ChamberWidth	Label	OB_ChamberSize
