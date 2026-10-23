@@ -24,7 +24,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Elevation from Level	Length
 	Enclosure	Label
 	Fire Rating	Label
-	Flow	Real
+	Flow	VolumetricFlowRate
 	Fluid Type	Label
 	Foundation Thickness	Length
 	Height	Length
@@ -33,7 +33,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Invert Elevation	Length
 	Length	Length
 	Light Loss Factor	Real
-	MCB Rating	Label
+	MCB Rating	ElectricCurrent
 	Mains	ElectricCurrent
 	Manufacturer	Label
 	Mark	Label
@@ -346,7 +346,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Quantity	Real
 	Railing Height	Length
 	Service Type	Label
-	Short Circuit Rating	Real
+	Short Circuit Rating	Label
 	Sill Height	Length
 	Size	Length
 	Slope	Real
@@ -361,26 +361,28 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Voltage	ElectricVoltage
 	Volume	Volume
 	Width	Length
-PropertySet:	Pset_BoilerTypeCommon	T	IfcBoilerType
+PropertySet:	Pset_BoilerTypeCommon	I	IfcBoiler
 	EnergySource	Label	OB_EnergySourceFuel
 	NominalEnergyConsumption	Real	OB_InputRating_kW
 	OperatingMode	Label	OB_FiringOperatingMode
 	OutletTemperatureRange	Real	OB_DesignSupplyTemperature_C
 	PressureRating	Real	OB_PressureRating_kPa
 	WaterStorageCapacity	Real	OB_StorageCapacity_L
-PropertySet:	Pset_EngineTypeCommon	T	IfcEngineType
+PropertySet:	Pset_EngineTypeCommon	I	IfcEngine
 	EnergySource	Label	OB_EnergySourceFuel
-PropertySet:	Pset_DamperTypeFireDamper	T	IfcDamperType
+PropertySet:	Pset_DamperTypeFireDamper	I	IfcDamper
 	ActuationType	Label	OB_ActuationOperation
 	ClosureRatingEnum	Label	OB_DynamicStaticRating
 	FireResistanceRating	Label	OB_FireResistanceRating
 	FusibleLinkTemperature	Real	OB_ReleaseTemperature_C
-PropertySet:	Pset_DamperTypeFireSmokeDamper	T	IfcDamperType
+PropertySet:	Pset_DamperTypeFireSmokeDamper	I	IfcDamper
 	ClosureRatingEnum	Label	OB_DynamicStaticRating
 	FireResistanceRating	Label	OB_FireResistanceRating
 	FusibleLinkTemperature	Real	OB_ReleaseTemperature_C
 PropertySet:	Pset_StairCommon	I	IfcStair
 	FireExit	Boolean	OB_PartOfAnExit
+	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
+	HasNonSkidSurface	Boolean	OB_NonSlipSurface
 	NumberOfRiser	Real	Actual Number of Risers
 	RequiredHeadroom	Length	OB_Headroom
 	RiserHeight	Length	Actual Riser Height
@@ -390,33 +392,34 @@ PropertySet:	Pset_StairFlightCommon	I	IfcStairFlight
 	NumberOfRiser	Real	Actual Number of Risers
 	RiserHeight	Length	Actual Riser Height
 	TreadLength	Length	Actual Tread Depth
-PropertySet:	Pset_WindowCommon	T	IfcWindowType
+PropertySet:	Pset_WindowCommon	I	IfcWindow
 	Infiltration	Real	OB_AirLeakageRate_Lsm2
 	MechanicalLoadRating	Label	OB_PerformanceClass
 	WaterTightnessRating	Label	OB_PerformanceClass
 	WindLoadRating	Label	OB_PerformanceClass
-PropertySet:	Pset_StairCommon	T	IfcStairType
+PropertySet:	Pset_RampCommon	I	IfcRamp
+	FireExit	Boolean	OB_PartOfAnExit
 	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
 	HasNonSkidSurface	Boolean	OB_NonSlipSurface
-PropertySet:	Pset_RampCommon	T	IfcRampType
+	RequiredHeadroom	Length	OB_Headroom
+PropertySet:	Pset_SpaceCommon	I	IfcSpace
+	GrossPlannedArea	Area	OB_ProgramArea
 	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
-	HasNonSkidSurface	Boolean	OB_NonSlipSurface
-PropertySet:	Pset_SpaceCommon	T	IfcSpaceType
-	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
-PropertySet:	Pset_FurnitureTypeCommon	T	IfcFurnitureType
+	NetPlannedArea	Area	OB_ProgramArea
+PropertySet:	Pset_FurnitureTypeCommon	I	IfcFurniture
 	IsBuiltIn	Boolean	OB_BuiltIn
 	NominalDepth	Label	OB_NominalDimensions
 	NominalHeight	Label	OB_NominalDimensions
 	NominalLength	Label	OB_NominalDimensions
-PropertySet:	Pset_TransportElementElevator	T	IfcTransportElementType
+PropertySet:	Pset_TransportElementElevator	I	IfcTransportElement
 	ClearDepth	Label	OB_CarInsideDimensions
 	ClearHeight	Label	OB_CarInsideDimensions
 	ClearWidth	Label	OB_CarInsideDimensions
 	FireFightingLift	Boolean	OB_FirefightersElevator
-PropertySet:	Pset_CoveringCommon	T	IfcCoveringType
+PropertySet:	Pset_CoveringCommon	I	IfcCovering
 	AcousticRating	Label	OB_SoundAbsorption
 	Finish	Text	OB_Finish
-PropertySet:	Pset_DoorWindowGlazingType	T	IfcDoorType,IfcWindowType
+PropertySet:	Pset_DoorWindowGlazingType	I	IfcDoor,IfcWindow
 	FillGas	Label	OB_GlazingMakeUp
 	GlassLayers	Label	OB_GlazingMakeUp
 	GlassThickness1	Label	OB_GlazingMakeUp
@@ -424,24 +427,18 @@ PropertySet:	Pset_DoorWindowGlazingType	T	IfcDoorType,IfcWindowType
 	IsLaminated	Label	OB_GlazingMakeUp
 	IsTempered	Label	OB_GlazingMakeUp
 	VisibleLightTransmittance	Real	Visual Light Transmittance
-PropertySet:	Pset_RailingCommon	T	IfcRailingType
+PropertySet:	Pset_RailingCommon	I	IfcRailing
 	Diameter	Length	OB_HandrailDiameter
 	Height	Length	Railing Height
-PropertySet:	Pset_RampCommon	I	IfcRamp
-	FireExit	Boolean	OB_PartOfAnExit
-	RequiredHeadroom	Length	OB_Headroom
 PropertySet:	Pset_RampFlightCommon	I	IfcRampFlight
 	Headroom	Length	OB_Headroom
 PropertySet:	Pset_SpaceOccupancyRequirements	I	IfcSpace,IfcSpatialZone,IfcZone
 	AreaPerOccupant	Real	OB_OccupantLoad
 	OccupancyNumber	Real	OB_OccupantLoad
 	OccupancyType	Label	OB_MajorOccupancy
-PropertySet:	Pset_CoveringFlooring	T	IfcCoveringType
+PropertySet:	Pset_CoveringFlooring	I	IfcCovering
 	HasNonSkidSurface	Boolean	OB_NonSlipSurface
-PropertySet:	Pset_SpaceCommon	I	IfcSpace
-	GrossPlannedArea	Area	OB_ProgramArea
-	NetPlannedArea	Area	OB_ProgramArea
-PropertySet:	Pset_TransportElementCommon	T	IfcTransportElementType
+PropertySet:	Pset_TransportElementCommon	I	IfcTransportElement
 	CapacityPeople	Real	OB_RatedPassengers
 	CapacityWeight	Real	OB_RatedLoad_kg
 PropertySet:	Pset_SpaceFireSafetyRequirements	I	IfcSpace,IfcSpatialZone,IfcZone
@@ -452,9 +449,9 @@ PropertySet:	Pset_ZoneCommon	I	IfcZone
 	NetPlannedArea	Area	OB_ZoneArea
 PropertySet:	Pset_SlabCommon	I	IfcSlab
 	PitchAngle	Real	Slope
-PropertySet:	Pset_ElementComponentCommon	T	IfcElementComponentType
+PropertySet:	Pset_ElementComponentCommon	I	IfcElementComponent
 	CorrosionTreatment	Label	OB_CoatingCorrosionProtection
-PropertySet:	Pset_ConcreteElementGeneral	T	IfcBeamType,IfcBuildingElementProxyType,IfcChimneyType,IfcColumnType,IfcFootingType,IfcMemberType,IfcPileType,IfcPlateType,IfcRailingType,IfcRampType,IfcRampFlightType,IfcRoofType,IfcSlabType,IfcStairType,IfcStairFlightType,IfcWallType,IfcCivilElementType
+PropertySet:	Pset_ConcreteElementGeneral	I	IfcBeam,IfcBuildingElementProxy,IfcChimney,IfcColumn,IfcFooting,IfcMember,IfcPile,IfcPlate,IfcRailing,IfcRamp,IfcRampFlight,IfcRoof,IfcSlab,IfcStair,IfcStairFlight,IfcWall,IfcCivilElement
 	ReinforcementStrengthClass	Label	OB_ReinforcementGrade
 PropertySet:	Pset_BeamCommon	I	IfcBeam
 	Span	Length	OB_Span
@@ -462,89 +459,93 @@ PropertySet:	Pset_MemberCommon	I	IfcMember
 	Span	Length	OB_Span
 PropertySet:	Pset_PrecastConcreteElementGeneral	I	IfcBeam,IfcBuildingElementProxy,IfcChimney,IfcColumn,IfcFooting,IfcMember,IfcPile,IfcPlate,IfcRamp,IfcRampFlight,IfcRoof,IfcSlab,IfcStair,IfcStairFlight,IfcWall,IfcCivilElement
 	CamberAtMidspan	Length	Camber Size
-PropertySet:	Pset_DamperTypeCommon	T	IfcDamperType
+	InitialTension	Label	OB_Prestressing
+	TendonRelaxation	Label	OB_Prestressing
+PropertySet:	Pset_DamperTypeCommon	I	IfcDamper
 	LeakageFullyClosed	Real	OB_LeakageWhenClosed_Ls
 	NominalAirFlowRate	Real	OB_NominalAirflow_Ls
 	Operation	Label	OB_ActuationOperation
-PropertySet:	Pset_FanTypeCommon	T	IfcFanType
+PropertySet:	Pset_FanTypeCommon	I	IfcFan
 	CapacityControlType	Label	OB_CapacityControl
+	NominalAirFlowRate	VolumetricFlowRate	Flow
 	NominalRotationSpeed	Real	OB_NominalSpeed_rpm
 	NominalStaticPressure	Real	OB_StaticPressure_Pa
 	NominalTotalPressure	Real	OB_StaticPressure_Pa
-PropertySet:	Pset_CoolingTowerTypeCommon	T	IfcCoolingTowerType
+PropertySet:	Pset_CoolingTowerTypeCommon	I	IfcCoolingTower
 	AmbientDesignWetBulbTemperature	Real	OB_DesignWetBulbTemperature_C
 	CircuitType	Label	OB_CircuitType
 	FlowArrangement	Label	OB_CircuitType
 	NominalCapacity	Real	OB_HeatRejectionCapacity_kW
 	NumberOfCells	Real	OB_NumberOfCells
 	WaterRequirement	Real	OB_MakeUpWaterRequirement_Ls
-PropertySet:	Pset_AirTerminalBoxTypeCommon	T	IfcAirTerminalBoxType
+PropertySet:	Pset_AirTerminalBoxTypeCommon	I	IfcAirTerminalBox
 	ArrangementType	Boolean	OB_FanPowered
 	HasFan	Boolean	OB_FanPowered
+	NominalAirFlowRate	VolumetricFlowRate	Flow
 	NominalDamperDiameter	Length	OB_InletSize
 	ReheatType	Label	OB_ReheatType
-PropertySet:	Pset_ChillerTypeCommon	T	IfcChillerType
+PropertySet:	Pset_ChillerTypeCommon	I	IfcChiller
 	NominalEfficiency	Real	OB_FullLoadEfficiency
 	NominalHeatRejectionRate	Real	OB_HeatRejectionRate_kW
 	NominalPowerConsumption	Real	OB_InputPower_kW
-PropertySet:	Pset_HeatExchangerTypePlate	T	IfcHeatExchangerType
+PropertySet:	Pset_HeatExchangerTypePlate	I	IfcHeatExchanger
 	NumberOfPlates	Real	OB_NumberOfPlates
-PropertySet:	Pset_DuctSegmentTypeCommon	T	IfcDuctSegmentType
+PropertySet:	Pset_DuctSegmentTypeCommon	I	IfcDuctSegment
 	WorkingPressure	Real	OB_PressureClass_Pa
-PropertySet:	Pset_DuctFittingTypeCommon	T	IfcDuctFittingType
+PropertySet:	Pset_DuctFittingTypeCommon	I	IfcDuctFitting
 	PressureClass	Real	OB_PressureClass_Pa
-PropertySet:	Pset_FanTypeCommon	I	IfcFan
-	NominalAirFlowRate	Real	Flow
-PropertySet:	Pset_AirTerminalBoxTypeCommon	I	IfcAirTerminalBox
-	NominalAirFlowRate	Real	Flow
+PropertySet:	Pset_DistributionSystemTypeVentilation	I	IfcDistributionSystem
+	LeakageClass	Label	OB_SealLeakageClass
+	PressureClass	Real	OB_PressureClass_Pa
 PropertySet:	Pset_CableCarrierSegmentTypeConduitSegment	I	IfcCableCarrierSegment
+	ConduitShapeType	Label	OB_TrayConduitType
+	IsRigid	Label	OB_TrayConduitType
 	NominalHeight	Label	Size
 	NominalWidth	Label	Size
 PropertySet:	Pset_PumpOccurrence	I	IfcPump
 	BaseType	Label	OB_BaseDriveArrangement
 	DriveConnectionType	Label	OB_BaseDriveArrangement
-PropertySet:	Pset_PumpTypeCommon	T	IfcPumpType
+PropertySet:	Pset_PumpTypeCommon	I	IfcPump
 	ConnectionSize	Length	OB_ConnectionSize
-PropertySet:	Pset_SensorTypeSmokeSensor	T	IfcSensorType
+PropertySet:	Pset_SensorTypeSmokeSensor	I	IfcSensor
 	CoverageArea	Area	OB_CoverageArea
 	SetPointConcentration	Label	OB_DetectionSetPoint
-PropertySet:	Pset_SensorTypeHeatSensor	T	IfcSensorType
+PropertySet:	Pset_SensorTypeHeatSensor	I	IfcSensor
 	CoverageArea	Area	OB_CoverageArea
 	RateOfTemperatureRise	Label	OB_DetectionSetPoint
 	SetPointTemperature	Label	OB_DetectionSetPoint
-PropertySet:	Pset_ValveTypeCommon	T	IfcValveType
+PropertySet:	Pset_ValveTypeCommon	I	IfcValve
 	FlowCoefficient	Real	OB_FlowCoefficient
+	Size	Length	Size
 	TestPressure	Real	OB_WorkingTestPressure_kPa
 	ValveMechanism	Label	OB_ValveMechanism
 	ValveOperation	Label	OB_Operation
 	ValvePattern	Label	OB_ValveMechanism
 	WorkingPressure	Real	OB_WorkingTestPressure_kPa
-PropertySet:	Pset_FireSuppressionTerminalTypeSprinkler	T	IfcFireSuppressionTerminalType
+PropertySet:	Pset_FireSuppressionTerminalTypeSprinkler	I	IfcFireSuppressionTerminal
 	ActivationTemperature	Real	OB_TemperatureRating_C
 	DischargeCoefficient	Real	OB_KFactor
 	Response	Label	OB_Response
 	SprinklerType	Label	OB_SprinklerType
-PropertySet:	Pset_ElectricMotorTypeCommon	T	IfcElectricMotorType
+PropertySet:	Pset_ElectricMotorTypeCommon	I	IfcElectricMotor
 	MaximumPowerOutput	Real	OB_MotorNameplatePower_kW
 PropertySet:	Pset_ValveTypeIsolating	I	IfcValve
 	IsNormallyOpen	Boolean	OB_NormallyOpen
-PropertySet:	Pset_PipeSegmentTypeCommon	T	IfcPipeSegmentType
+PropertySet:	Pset_PipeSegmentTypeCommon	I	IfcPipeSegment
 	WorkingPressure	Real	OB_WorkingPressureRating_kPa
-PropertySet:	Pset_PipeFittingTypeCommon	T	IfcPipeFittingType
+PropertySet:	Pset_PipeFittingTypeCommon	I	IfcPipeFitting
 	PressureClass	Real	OB_WorkingPressureRating_kPa
-PropertySet:	Pset_ValveTypeCommon	I	IfcValve
-	Size	Length	Size
 PropertySet:	Pset_PipeSegmentOccurrence	I	IfcPipeSegment
 	Gradient	Real	Slope
 	InvertElevation	Length	Invert Elevation
-PropertySet:	Pset_SensorTypeFireSensor	T	IfcSensorType
+PropertySet:	Pset_SensorTypeFireSensor	I	IfcSensor
 	FireSensorSetPoint	Label	OB_DetectionSetPoint
-PropertySet:	Pset_ElectricGeneratorTypeCommon	T	IfcElectricGeneratorType
+PropertySet:	Pset_ElectricGeneratorTypeCommon	I	IfcElectricGenerator
 	ElectricGeneratorEfficiency	Real	OB_GeneratorEfficiency_pct
 	MaximumPowerOutput	Real	OB_RatedOutput_kW
-PropertySet:	Pset_CableCarrierSegmentTypeCableTraySegment	T	IfcCableCarrierSegmentType
+PropertySet:	Pset_CableCarrierSegmentTypeCableTraySegment	I	IfcCableCarrierSegment
 	HasCover	Boolean	OB_HasCover
-PropertySet:	Pset_TransformerTypeCommon	T	IfcTransformerType
+PropertySet:	Pset_TransformerTypeCommon	I	IfcTransformer
 	MaximumApparentPower	Real	OB_RatedPower_kVA
 	PrimaryApparentPower	Real	OB_RatedPower_kVA
 	PrimaryVoltage	Real	OB_PrimaryVoltage_V
@@ -552,45 +553,38 @@ PropertySet:	Pset_TransformerTypeCommon	T	IfcTransformerType
 	SecondaryVoltage	Real	OB_SecondaryVoltage_V
 	ShortCircuitVoltage	Label	OB_Impedance
 	TransformerVectorGroup	Label	OB_VectorGroup
-PropertySet:	Pset_SwitchingDeviceTypeCommon	T	IfcSwitchingDeviceType
+PropertySet:	Pset_SwitchingDeviceTypeCommon	I	IfcSwitchingDevice
 	NumberOfGangs	Real	OB_NumberOfGangs
 	SwitchFunction	Label	OB_SwitchFunction
-PropertySet:	Pset_JunctionBoxTypeCommon	T	IfcJunctionBoxType
+PropertySet:	Pset_JunctionBoxTypeCommon	I	IfcJunctionBox
 	NumberOfGangs	Real	OB_NumberOfGangs
-PropertySet:	Pset_OutletTypeCommon	T	IfcOutletType
+PropertySet:	Pset_OutletTypeCommon	I	IfcOutlet
 	NumberOfSockets	Real	OB_NumberOfSockets
-PropertySet:	Pset_CableCarrierSegmentTypeConduitSegment	T	IfcCableCarrierSegmentType
-	ConduitShapeType	Label	OB_TrayConduitType
-	IsRigid	Label	OB_TrayConduitType
-PropertySet:	Pset_AudioVisualApplianceTypeCamera	T	IfcAudioVisualApplianceType
+PropertySet:	Pset_AudioVisualApplianceTypeCamera	I	IfcAudioVisualAppliance
 	VideoResolutionHeight	Label	OB_VideoResolution
 	VideoResolutionWidth	Label	OB_VideoResolution
-PropertySet:	Pset_ElectricalDeviceCommon	T	IfcDistributionElementType
+PropertySet:	Pset_ElectricalDeviceCommon	I	IfcDistributionElement
 	IP_Code	Label	Enclosure
 	NumberOfPoles	Real	Number of Poles
 	RatedCurrent	ElectricCurrent	Mains
 	RatedVoltage	ElectricVoltage	Voltage
-PropertySet:	Pset_DistributionChamberElementTypeInspectionChamber	T	IfcDistributionChamberElementType
+PropertySet:	Pset_DistributionChamberElementTypeInspectionChamber	I	IfcDistributionChamberElement
 	ChamberLengthOrRadius	Label	OB_ChamberSize
 	ChamberWidth	Label	OB_ChamberSize
-PropertySet:	Pset_DistributionChamberElementTypeValveChamber	T	IfcDistributionChamberElementType
+PropertySet:	Pset_DistributionChamberElementTypeValveChamber	I	IfcDistributionChamberElement
 	ChamberLengthOrRadius	Label	OB_ChamberSize
-PropertySet:	Pset_DistributionChamberElementTypeManhole	T	IfcDistributionChamberElementType
+PropertySet:	Pset_DistributionChamberElementTypeManhole	I	IfcDistributionChamberElement
 	AccessCoverLoadRating	Label	OB_CoverFrame
 	AccessCoverMaterial	Label	OB_CoverFrame
 	AccessLengthOrRadius	Label	OB_CoverFrame
 	HasSteps	Boolean	OB_HasStepsLadder
-PropertySet:	Pset_PipeSegmentTypeCulvert	T	IfcPipeSegmentType
-	ClearDepth	Label	OB_CulvertOpening
-	InternalWidth	Label	OB_CulvertOpening
-PropertySet:	Pset_DistributionChamberElementTypeManhole	I	IfcDistributionChamberElement
 	InvertLevel	Length	OB_InvertElevation
 	WithBackdrop	Boolean	OB_DropStructure
+PropertySet:	Pset_PipeSegmentTypeCulvert	I	IfcPipeSegment
+	ClearDepth	Label	OB_CulvertOpening
+	InternalWidth	Label	OB_CulvertOpening
 PropertySet:	Pset_SpaceParking	I	IfcSpace
 	ParkingUnits	Real	OB_ParkingStalls
 	ParkingUse	Label	OB_ParkingUse
 PropertySet:	Pset_SiteCommon	I	IfcSite
 	TotalArea	Area	OB_SiteArea
-PropertySet:	Pset_PrecastConcreteElementGeneral	T	IfcBeamType,IfcBuildingElementProxyType,IfcChimneyType,IfcColumnType,IfcFootingType,IfcMemberType,IfcPileType,IfcPlateType,IfcRampType,IfcRampFlightType,IfcRoofType,IfcSlabType,IfcStairType,IfcStairFlightType,IfcWallType,IfcCivilElementType
-	InitialTension	Label	OB_Prestressing
-	TendonRelaxation	Label	OB_Prestressing
