@@ -14,17 +14,19 @@
 <header class="top">
   <div class="wrap">
     <a class="brand" href="../">OpenBEP</a>
-    <nav class="top-links">
-      <a href="../why/">Why OpenBEP</a>
-      <a href="../app/bep-builder.html?lang=en">Open the BEP Builder</a>
+    <nav class="top-links" aria-label="OpenBEP pages">
+      <a href="../app/bep-builder.html?lang=en">BEP Builder</a>
+      <a href="../lod/">LOD specification</a>
+      <a href="./" aria-current="page"><strong>Owner training</strong></a>
+      <a href="../app/scorecard.html">Project scorecard</a>
     </nav>
   </div>
 </header>
 <main class="wrap">
   <h1>Owner training</h1>
-  <p>This page prepares the owner's project manager and the owner's BIM representative for the readiness test in the OpenBEP Builder. Each section covers one topic: what it is, why it matters to an owner, what to require, and a common mistake. Each section lists the test questions it prepares for. The examples are Canadian and general; Quebec is used where language or local practice changes the answer.</p>
-<p>Questions marked (rep) are asked only of the BIM representative.</p>
-  <p>When you are ready, take the owner readiness test in the Builder, step 1 (Project). Answers are written in your own words. The answer key only shows after you commit your answers.</p>
+  <p>This page prepares the owner's project manager and the owner's BIM representative for the readiness test in the BEP Builder. Each section covers one topic: what it is, why it matters to an owner, what to require, and a common mistake. Each section lists the test questions it prepares for. The examples are Canadian and general; Quebec is used where language or local practice changes the answer.</p>
+<p>Questions marked <em>(BIM representative only)</em> are asked only of the BIM representative.</p>
+  <p>When you are ready, <a href="../app/bep-builder.html?lang=en#owner-readiness">take the owner readiness test</a> (BEP Builder, step 2 <em>Owner</em>, section <em>Owner readiness</em>). Answers are written in your own words. The answer key only shows after you commit your answers.</p>
   <div class="box key">
     <h2>Contents</h2>
     <ol><li><a href="#t1">The purpose of BIM and BIM uses</a></li><li><a href="#t2">EIR and BEP</a></li><li><a href="#t3">Levels of development and information</a></li><li><a href="#t4">Deliverables per milestone</a></li><li><a href="#t5">Accepting and checking models</a></li><li><a href="#t6">File formats: native, IFC, COBie, IDS, BCF</a></li><li><a href="#t7">Common data environment and approvals</a></li><li><a href="#t8">Roles: BIM manager and coordinator</a></li><li><a href="#t9">Team capacity and key people</a></li><li><a href="#t10">Existing conditions</a></li><li><a href="#t11">As-built and handover data</a></li><li><a href="#t12">Contract order of precedence</a></li><li><a href="#t13">Payment tied to accepted milestones</a></li><li><a href="#t14">Change orders</a></li><li><a href="#t15">Procurement and abnormally low bids</a></li><li><a href="#t16">Ownership and intellectual property</a></li><li><a href="#t17">AI and security</a></li><li><a href="#t18">Owner time and capacity</a></li><li><a href="#t19">Small projects</a></li><li><a href="#t20">Language</a></li></ol>
@@ -66,6 +68,7 @@
 </ul>
 <p>Door data for a facility team is a worked case: element (door), parameters (fire rating, hardware set, location), allowed values, due at the end of design development, checked by counting filled fields per door type.</p>
 <p>LOD 500 means elements verified in the field after construction. It is not a more detailed model. If the owner wants it, the owner says for which elements, how they are verified and to what tolerance (survey, scan or inspection), who records changes, who updates the model, and who signs the verification. It is extra scope and must be scheduled and paid for.</p>
+<p>The <a href="../lod/">OpenBEP LOD specification</a> does this for 63 element types: for each level, what must be drawn in 3D, which Revit parameters the element must carry, and which BIM uses need them. Start from it instead of a single number.</p>
 <p><strong>Common mistake.</strong> Writing a single LOD number for the whole project and assuming it covers the data.</p>
 <h2 id="t4">4. Deliverables per milestone</h2>
 <details class="note"><summary>Test questions on this topic</summary><ul><li>You are writing what the design team must deliver at the end of schematic design. Name four things the owner should require, besides drawings.</li></ul></details>
@@ -91,7 +94,7 @@
 <li>The check run by the owner or a party independent of the firm being checked.</li>
 <li>Acceptance tied to the result of the check.</li>
 </ul>
-<p>A plan or a plan-writing tool states the requirements. It does not verify models. Other tools do that: schedule exports from the authoring software, scripts, or rule-checking software reading IDS files.</p>
+<p>A plan or a plan-writing tool states the requirements. It does not verify models. Other tools do that: schedule exports from the authoring software, scripts, or rule-checking software reading IDS files. The <a href="../lod/">LOD specification</a> lists, for each element type, the parameters such a check counts at each level.</p>
 <p><strong>Common mistake.</strong> Accepting a "compliant" statement from the firm as proof.</p>
 <h2 id="t6">6. File formats: native, IFC, COBie, IDS, BCF</h2>
 <details class="note"><summary>Test questions on this topic</summary><ul><li>A firm proposes to deliver only IFC files at handover and keep its Revit files. How should the owner respond?</li><li>Give two cases where an owner has a good reason to require IFC, and one case where it does not. <em>(BIM representative only)</em></li><li>The facility manager asks for COBie at handover. What do you ask before agreeing? <em>(BIM representative only)</em></li><li>Describe what IDS and BCF are and what an owner uses each one for. <em>(BIM representative only)</em></li></ul></details>
@@ -136,6 +139,7 @@
 <li>A replacement of equal, proven skill (CV, test, references).</li>
 <li>The committed hours written into the contract, with the right to refuse a reduction.</li>
 </ul>
+<p>The <a href="../app/scorecard.html">Project scorecard</a> tracks each party's BEP commitments month by month, the hours delivered included, so a team that is thinning out shows up early.</p>
 <p><strong>Common mistake.</strong> Reading the team list in the bid and never asking for hours.</p>
 <h2 id="t10">10. Existing conditions</h2>
 <details class="note"><summary>Test questions on this topic</summary><ul><li>A renovation has no reliable drawings. The owner orders a laser scan and the design firm models from it. Later the site shows the walls are 80 mm off. Who carries the risk, and how should it have been settled?</li></ul></details>
@@ -234,6 +238,7 @@
 <li>Training for owner staff before the start.</li>
 <li>Response times written into the plan and the schedule, matching the time the owner can really give.</li>
 </ul>
+<p>The <a href="../app/scorecard.html">Project scorecard</a> checks the owner's own commitments too: review times and decisions made by the agreed date.</p>
 <p><strong>Common mistake.</strong> Writing a ten-day response time into the plan with no one assigned to meet it.</p>
 <h2 id="t19">19. Small projects</h2>
 <details class="note"><summary>Test questions on this topic</summary><ul><li>A school board plans a $3 million renovation with a small local firm. What BIM requirements are reasonable?</li></ul></details>

@@ -6,8 +6,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-.sitenav{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 10px;font-size:13px}
-.sitenav a{color:inherit}
+.sitenav{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0;padding-top:8px;font-size:13.5px}
+.sitenav a{color:inherit}.sitenav a[aria-current]{font-weight:600;text-decoration:none}
+.home{font-family:var(--f-display);font-size:22px;font-weight:700;color:var(--ink);text-decoration:none}.home:hover{text-decoration:underline}
+.home+h1:before{content:'/';margin-right:10px;color:var(--muted);font-weight:400}.brand h1{font-weight:600}
 /* Layout: a monthly site-meeting sheet. Summary strip, then one card per party, then the commitments ledger and the decision log that feeds it. Same palette as the BEP Builder. */
 :root{
   --bg:#F3F5F2; --surface:#FFFFFF; --sunk:#E9EDE8; --ink:#14201D; --muted:#5A6662; --line:#D5DBD5;
@@ -101,7 +103,39 @@ svg.spark .dot.ok{fill:var(--good)} svg.spark .dot.warn{fill:var(--warn)} svg.sp
 .addf .f input,.addf .f select{color:var(--ink);font-size:14px}
 .empty{color:var(--muted);font-size:13px;padding:10px}
 #msg{font-size:13px;color:var(--muted)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px 8px;align-items:center;padding-top:14px}
+.toolbar .sep{width:1px;align-self:stretch;background:var(--line);margin:0 4px}
+.rules{margin:4px 0 16px;padding-left:18px;font-size:13px;color:var(--muted);max-width:80ch}.rules li{margin:2px 0}.rules b{color:var(--ink)}
+.step a{color:inherit}
+.tile .v.cause{font-size:17px;line-height:1.25}
+.kedit{margin-top:3px;font-size:12px}.kedit>summary{cursor:pointer;color:var(--muted);display:inline-block}.kedit[open]>summary{color:var(--ink)}
+.kedit .ke{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px}
+.ml,.mtog{display:none}
+.toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;gap:12px;align-items:center;background:var(--ink);color:var(--bg);border-radius:var(--r);padding:8px 10px 8px 14px;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.25);max-width:calc(100vw - 32px)}
+.toast[hidden]{display:none}.toast .btn{background:var(--bg);color:var(--ink)}
+.foot{margin-top:30px;border-top:1px solid var(--line);padding-top:10px}
 @media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ladder{grid-template-columns:1fr}.verdict{grid-template-columns:1fr}}
+/* Phones: each commitment and each submission is a card; this month's value comes right after the target. */
+@media (max-width:700px){
+  .tw{overflow:visible}
+  .tw table,.tw tbody{display:block}.tw thead{display:none}
+  .tw tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 12px;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .tw tr.grp{display:block;padding:7px 12px;background:var(--sunk)}
+  .tw td{display:block;border:0;padding:0;text-align:left!important}.tw tr.grp td{background:none}
+  .tw td[colspan]{grid-column:1/-1}
+  .ml{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:2px}
+  #kRows td.kn{grid-column:1/-1;order:0;font-weight:600;font-size:14px}
+  #kRows td.kt{order:1}#kRows td.kv{order:2}#kRows td.ks{order:3}#kRows td.ko{order:4}
+  #kRows td.kx{order:5;grid-column:1/-1}#kRows td.kg{order:6}#kRows td.ke{order:7}
+  #kRows td input.n{width:100%;font-size:18px;padding:8px 10px;text-align:left}
+  #kRows td.ke select{width:100%}
+  #logRows td.li{grid-column:1/-1;order:0}#logRows td.li input{width:100%;min-width:0!important}
+  #logRows td.ld{order:1}#logRows td.lo{order:2}#logRows td.lx{order:3}
+  #logRows tr:not(.open) td.lx{display:none}
+  #logRows select,#logRows input[type=date]{width:100%;min-width:0}
+  .mtog{display:inline-block;margin-top:6px}
+  .toolbar .sep{display:none}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <script src="../translations/strings.js"></script>
@@ -109,30 +143,41 @@ svg.spark .dot.ok{fill:var(--good)} svg.spark .dot.warn{fill:var(--warn)} svg.sp
 
 <div class="wrap">
 <header class="top">
-  <div class="brand"><h1>OpenBEP Project Scorecard</h1><span class="tag">prototype v0.1 · companion to the BEP Builder</span></div>
+  <div class="brand"><a class="home" href="../" data-notr title="OpenBEP home">OpenBEP</a><h1>Project scorecard</h1><span class="tag">Track each party's BEP commitments month by month</span></div>
   <div class="bar">
-    <label class="btn" for="fileIn">Open a BEP or scorecard file</label><input type="file" id="fileIn" accept=".json" hidden>
-    <button class="btn" type="button" id="saveBtn">Save scorecard file</button>
-    <button class="btn primary" type="button" id="reportBtn">Monthly report</button>
     <select class="btn" data-i18n-lang data-notr aria-label="Language"></select>
   </div>
 </header>
-<nav class="sitenav">
-  <a href="bep-builder.html">OpenBEP Builder</a>
-  <a href="../why/">Why OpenBEP</a>
-  <a href="../formats/">Why a file format won't fix it</a>
+<nav class="sitenav" aria-label="OpenBEP pages">
+  <a href="../">Home</a>
+  <a href="bep-builder.html">BEP Builder</a>
   <a href="../lod/">LOD specification</a>
+  <a href="../training/">Owner training</a>
+  <a href="scorecard.html" aria-current="page">Project scorecard</a>
 </nav>
+<div class="toolbar" role="toolbar" aria-label="Scorecard file">
+  <label class="btn" for="fileIn">Open a BEP or scorecard file</label><input type="file" id="fileIn" accept=".json" hidden>
+  <button class="btn" type="button" id="saveBtn">Save scorecard file</button>
+  <span class="sep" aria-hidden="true"></span>
+  <button class="btn" type="button" id="exBtn">Load example</button>
+  <button class="btn" type="button" id="blankBtn">Start empty</button>
+  <span class="sep" aria-hidden="true"></span>
+  <button class="btn primary" type="button" id="reportBtn">Monthly report</button>
+  <span id="msg" aria-live="polite"></span>
+</div>
 <div class="ctx">
   <span><label>Project</label><b id="pName"></b></span>
   <span><label for="monthSel">Month</label><select id="monthSel"></select></span>
   <button class="btn small" type="button" id="addMonth">Add next month</button>
   <span id="srcNote" class="banner"></span>
-  <button class="btn small" type="button" id="exBtn">Load example</button>
-  <button class="btn small" type="button" id="blankBtn">Start empty</button>
-  <span id="msg" aria-live="polite"></span>
 </div>
-<p class="note">Every commitment in the BIM Execution Plan becomes a number checked each month, the owner's included. Firms slipping show up months before handover, and so does an owner who is slowing the work. Values within 10% of target are marked as slipping. Three slipping months in a row count as one month off target.</p>
+<p class="note">Each month, every commitment in the BEP, the owner's included, gets a number. Firms that slip show up months before handover, and so does an owner who is slowing the work.</p>
+<ul class="rules">
+  <li><b>On target:</b> <span>Meets the target.</span></li>
+  <li><b>Slipping:</b> <span>Misses the target by 10% or less.</span></li>
+  <li><b>Off target:</b> <span>Misses the target by more than 10%.</span> <span>Three slipping months in a row also count as one month off target.</span></li>
+  <li><b>Steps:</b> <span>Each month off target in a row moves the party one step up the escalation ladder.</span> <a href="#escalation">See the steps</a></li>
+</ul>
 
 <div class="tiles" id="tiles"></div>
 
@@ -141,17 +186,19 @@ svg.spark .dot.ok{fill:var(--good)} svg.spark .dot.warn{fill:var(--warn)} svg.sp
 <section><div class="sh"><h2>What is holding the project back?</h2><span class="note">Computed from the decision log below, for the selected month and the two before it.</span></div><div id="verdict"></div></section>
 
 <section><div class="sh"><h2>Commitments</h2><span class="note">Enter this month's value. Values marked "from the decision log" are computed over the selected month and the two before it.</span></div>
-<div class="tw"><table><thead><tr><th>Commitment</th><th class="num">Target</th><th>Trend</th><th class="num">This month</th><th>Status</th><th class="num">Months off</th><th>Next step</th><th>Evidence</th></tr></thead><tbody id="kRows"></tbody></table></div>
+<div class="tw"><table id="kTable"><thead><tr><th>Commitment</th><th class="num">Target</th><th>Trend</th><th class="num">This month</th><th>Status</th><th class="num">Months off</th><th>Next step</th><th>Evidence</th></tr></thead><tbody id="kRows"></tbody></table></div>
 <form class="addf" id="kForm"><div class="f"><label for="kN">New commitment</label><input id="kN" placeholder="e.g. Model warnings below 500" required></div><div class="f"><label for="kT">Target</label><input id="kT" type="number" step="any" required style="width:90px"></div><div class="f"><label for="kU">Unit</label><input id="kU" placeholder="%" style="width:80px"></div><div class="f"><label for="kH">Good when</label><select id="kH"><option value="1">At or above target</option><option value="0">At or below target</option></select></div><div class="f"><label for="kP">Party</label><select id="kP"></select></div><button class="btn" type="submit">Add</button></form>
 </section>
 
 <section><div class="sh"><h2>Decision log</h2><span class="note">Every design submission and the owner's response. It shows whether delays come from the design or from decisions.</span></div>
-<div class="tw"><table><thead><tr><th>Submitted</th><th>Item</th><th>From</th><th>Owner responded</th><th>Outcome</th><th>Revision caused by</th><th></th></tr></thead><tbody id="logRows"></tbody></table></div>
+<div class="tw"><table id="lTable"><thead><tr><th>Submitted</th><th>Item</th><th>From</th><th>Owner responded</th><th>Outcome</th><th>Revision caused by</th><th></th></tr></thead><tbody id="logRows"></tbody></table></div>
 <button class="btn" type="button" id="addLog" style="margin-top:10px">Add submission</button>
 </section>
 
-<section><div class="sh"><h2>Escalation</h2><span class="note">Counted in consecutive months off target. Contract wording to be reviewed with counsel.</span></div>
+<section id="escalation"><div class="sh"><h2>Escalation</h2><span class="note">Counted in consecutive months off target. Contract wording to be reviewed with counsel.</span></div>
 <div class="ladder"><div class="box"><h3>Delivery team</h3><ol id="ladF"></ol></div><div class="box"><h3>Owner</h3><ol id="ladO"></ol></div></div></section>
+<p class="note foot">prototype v0.1 · companion to the BEP Builder</p>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 </div>
 
 <script>
@@ -167,7 +214,7 @@ const SRC={'':'Not stated',cde:'CDE report',clash:'Clash report',act:'Model acti
 const AUTO={acc:'Design submissions accepted at first review',ownrev:'Revisions caused by owner changes, of all revisions',resp:'Owner: review comments returned on time'};
 
 function mAdd(m,n){const [y,mo]=m.split('-').map(Number);const d=new Date(y,mo-1+n,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
-function mLabel(m){const [y,mo]=m.split('-').map(Number);return new Date(y,mo-1,1).toLocaleDateString('en-CA',{month:'short',year:'2-digit'})}
+function mLabel(m){const [y,mo]=m.split('-').map(Number);return new Date(y,mo-1,1).toLocaleDateString('en-CA',{month:'short',year:'numeric'})}
 function thisMonth(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
 function uid(){return Math.random().toString(36).slice(2,8)}
 
@@ -222,36 +269,40 @@ function spark(k){const ms=D.months, vs=ms.map(m=>val(k,m)), pts=vs.map((v,i)=>[
   const line=pts.map(([i,v])=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
   return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(k.t)}: ${pts.map(q=>q[1]).join(', ')}; target ${k.target}"><polygon class="ar" points="${x(pts[0][0]).toFixed(1)},${h-p} ${line} ${x(last[0]).toFixed(1)},${h-p}"/><line class="tgt" x1="${p}" x2="${w-p}" y1="${y(k.target).toFixed(1)}" y2="${y(k.target).toFixed(1)}"/><polyline class="ln" points="${line}"/><circle class="dot ${st(k,last[1])||''}" cx="${x(last[0]).toFixed(1)}" cy="${y(last[1]).toFixed(1)}" r="3.4"/></svg>`}
 function verdict(m){const i=D.months.indexOf(m), win=D.months.slice(Math.max(0,i-2),i+1), s=logStats(win), dec=D.kpis.find(k=>k.t.startsWith('Owner: decisions')), dv=dec?val(dec,m):null;
-  if(!s.n) return {cls:'',short:'No data',html:`<div class="verdict"><div><b>No submissions logged for ${win.map(mLabel).join(', ')}.</b><div class="note">Log each design submission and the owner's response below. The comparison appears as soon as there is data.</div></div></div>`};
+  if(!s.n) return {cls:'',short:'No data',shortHtml:'<span>No data</span>',html:`<div class="verdict"><div><b>No submissions logged for ${win.map(mLabel).join(', ')}.</b><div class="note">Log each design submission and the owner's response below. The comparison appears as soon as there is data.</div></div></div>`};
   const designIssue=s.acc!=null&&s.acc<70&&s.des>0, ownerIssue=(s.ownrev!=null&&s.ownrev>30)||(s.resp!=null&&s.resp<90)||(dv!=null&&dv<90);
   const cls=designIssue&&ownerIssue?'both':designIssue?'design':ownerIssue?'owner':'';
-  const short={both:'Both sides',design:'Design',owner:'Owner decisions','':'No pattern'}[cls];
+  // The tile names the measured causes, worst first (at most two): how far each measure is past its threshold.
+  // When both sides contribute, the worst owner cause stands next to the design cause.
+  const own=[[s.ownrev!=null&&s.ownrev>30,'Owner changes to requirements',(s.ownrev-30)/70],[s.resp!=null&&s.resp<90,'Late owner reviews',(90-s.resp)/90],[dv!=null&&dv<90,'Late owner decisions',(90-dv)/90]].filter(c=>c[0]).sort((a,b)=>b[2]-a[2]), des=designIssue?[[1,'Rejected design submissions',(70-s.acc)/70]]:[];
+  const causes=(designIssue&&ownerIssue?[own[0],des[0]].sort((a,b)=>b[2]-a[2]):designIssue?des:own.slice(0,2)).map(c=>c[1]);
+  const short=causes.length?causes.join(' + '):'No pattern', shortHtml=causes.length?causes.map(c=>`<span>${c}</span>`).join(' + '):'<span>No pattern</span>';
   const text={both:'Both sides are contributing. Design submissions are often rejected for not meeting the brief, and owner reviews or decisions are late or changing.',design:'The design is the main cause. Submissions are often rejected for not meeting the brief, while owner reviews and decisions are on time.',owner:'Owner reviews and decisions are the main cause. Most revisions come from changed requirements or late responses, while the design is usually accepted.','':'Neither side shows a pattern in this period.'}[cls];
-  return {cls,short,html:`<div class="verdict ${cls}"><div><b>${text}</b><div class="facts"><span>Submissions <b>${s.n}</b></span><span>Accepted at first review <b>${s.acc??'–'}%</b></span><span>Revisions <b>${s.revs}</b>: design <b>${s.des}</b>, owner <b>${s.own}</b></span><span>Owner reviews on time (≤ ${esc(D.commit.review)} working days) <b>${s.resp??'–'}%</b></span><span>Average review <b>${s.avg??'–'}</b> working days</span>${s.late?`<span>Overdue now <b>${s.late}</b></span>`:''}${dv!=null?`<span>Owner decisions on time <b>${dv}%</b></span>`:''}</div></div><div class="note" style="max-width:34ch">When the parties dispute this reading, an independent peer review of the design at the next milestone settles it.</div></div>`}}
+  return {cls,short,shortHtml,html:`<div class="verdict ${cls}"><div><b>${text}</b><div class="facts"><span>Submissions <b>${s.n}</b></span><span>Accepted at first review <b>${s.acc??'–'}%</b></span><span>Revisions <b>${s.revs}</b>: design <b>${s.des}</b>, owner <b>${s.own}</b></span><span>Owner reviews on time (≤ ${esc(D.commit.review)} working days) <b>${s.resp??'–'}%</b></span><span>Average review <b>${s.avg??'–'}</b> working days</span>${s.late?`<span>Overdue now <b>${s.late}</b></span>`:''}${dv!=null?`<span>Owner decisions on time <b>${dv}%</b></span>`:''}</div></div><div class="note" style="max-width:34ch">When the parties dispute this reading, an independent peer review of the design at the next milestone settles it.</div></div>`}}
 function render(){
   const m=D.cur, ms=D.months;
   $('#pName').textContent=D.project.name||'Untitled project';
   $('#monthSel').innerHTML=ms.map(x=>`<option value="${x}" ${x===m?'selected':''}>${mLabel(x)}</option>`).join('');
   $('#srcNote').textContent=D.example?'Example data, invented to show how slipping becomes visible.':D.fromBep?'Commitments imported from the BEP. Stored in this browser only.':'Stored in this browser only. Save a scorecard file to share it.';
   const K=D.kpis, sts=K.map(k=>st(k,val(k,m))), on=sts.filter(x=>x==='ok').length, measured=sts.filter(Boolean).length, off=sts.filter(x=>x==='bad').length, worst=Math.max(0,...K.map(k=>streak(k,m))), V=verdict(m);
-  $('#tiles').innerHTML=`<div class="tile"><div class="v ${measured&&on===measured?'good':''}">${on}<small> / ${measured}</small></div><div class="t">Commitments on target</div></div><div class="tile"><div class="v ${off?'bad':''}">${off}</div><div class="t">Off target in ${mLabel(m)}</div></div><div class="tile"><div class="v ${worst>=2?'bad':worst?'warn':''}">${worst}</div><div class="t">Longest run of months off target</div></div><div class="tile"><div class="v ${V.cls?'bad':''}" style="font-size:22px">${V.short}</div><div class="t">Main cause of delay</div></div>`;
+  $('#tiles').innerHTML=`<div class="tile"><div class="v ${measured&&on===measured?'good':''}">${on}<small> / ${measured}</small></div><div class="t">Commitments on target</div></div><div class="tile"><div class="v ${off?'bad':''}">${off}</div><div class="t">Off target in ${mLabel(m)}</div></div><div class="tile"><div class="v ${worst>=2?'bad':worst?'warn':''}">${worst}</div><div class="t">Longest run of months off target</div></div><div class="tile"><div class="v cause ${V.cls?'bad':''}">${V.shortHtml}</div><div class="t">Main cause of delay</div></div>`;
   const last6=ms.slice(Math.max(0,ms.indexOf(m)-5),ms.indexOf(m)+1);
   $('#parties').innerHTML=D.parties.map(p=>{const sc=pScore(p.id,m), ks=K.filter(k=>k.party===p.id), lvl=Math.min(3,Math.max(0,...ks.map(k=>streak(k,m)))), lad=p.kind==='owner'?OLAD:FLAD;
     return `<div class="party ${sc?sc.cls:''}"><div><div class="kind">${p.kind==='owner'?'Owner':'Delivery team'}</div><h3>${esc(p.n)}</h3></div>
     <div class="score"><b>${sc?Math.round(sc.ok/sc.n*100)+'%':'–'}</b><span class="note">${sc?`${sc.ok} of ${sc.n} on target`:ks.length?'No values this month':'No commitments assigned'}</span></div>
     <div><div class="strip">${last6.map(x=>{const s=pScore(p.id,x);return `<span class="${s?s.cls:''}" title="${mLabel(x)}: ${s?s.ok+' of '+s.n+' on target':'no data'}"></span>`}).join('')}</div><div class="strip-l"><span>${mLabel(last6[0])}</span><span>${mLabel(m)}</span></div></div>
-    <div class="step s${lvl}">${lvl?`Step ${lvl}: `:''}${esc(lad[lvl])}</div>
+    <div class="step s${lvl}">${lvl?`<a href="#escalation">Step ${lvl}</a>: `:''}${esc(lad[lvl])}</div>
     <label class="rl" for="rp-${p.id}">Reply from ${esc(p.n)} for ${mLabel(m)}</label><textarea id="rp-${p.id}" data-reply="${p.id}" placeholder="The party's own explanation, kept with the record">${esc(((D.replies||{})[p.id]||{})[m])}</textarea></div>`}).join('');
   $('#verdict').innerHTML=V.html;
   const pOpts=sel=>D.parties.map(p=>`<option value="${p.id}" ${p.id===sel?'selected':''}>${esc(p.n)}</option>`).join('');
   $('#kRows').innerHTML=K.length?D.parties.map(p=>{const ks=K.filter(k=>k.party===p.id); if(!ks.length) return ''; return `<tr class="grp"><td colspan="8">${esc(p.n)}</td></tr>`+ks.map(k=>{const v=val(k,m), s=st(k,v), sk=streak(k,m), lad=p.kind==='owner'?OLAD:FLAD;
-    return `<tr><td>${esc(k.t)}<div><select class="mini" data-kparty="${k.id}" aria-label="Party responsible">${pOpts(k.party)}</select> <button class="btn small" type="button" data-kdel="${k.id}" aria-label="Remove ${esc(k.t)}">Remove</button></div></td><td class="num">${k.hi?'≥':'≤'} ${esc(k.target)} ${esc(k.u)}</td><td>${spark(k)}</td>
-    <td class="num">${k.auto?`<span class="mono">${v??'–'}</span><div class="auto">from the decision log</div>`:`<input class="n" type="number" step="any" data-kval="${k.id}" value="${v??''}" aria-label="${esc(k.t)}, ${mLabel(m)}">`}</td>
-    <td>${s?`<span class="pill ${s}">${{ok:'On target',warn:'Slipping',bad:'Off target'}[s]}</span>`:'<span class="pill na">No value</span>'}</td><td class="num">${sk||''}</td><td>${s==='bad'||(s==='warn'&&sk)?esc(lad[Math.min(3,sk)]):s==='warn'?'Ask for an explanation':s?'None':'Enter this month\'s value'}</td>
-    <td><select data-ksrc="${k.id}" aria-label="Evidence">${Object.entries(SRC).map(([a,b])=>`<option value="${a}" ${k.src===a?'selected':''}>${b}</option>`).join('')}</select></td></tr>`}).join('')}).join('')+((()=>{const un=K.filter(k=>!D.parties.some(p=>p.id===k.party));return un.length?`<tr class="grp"><td colspan="8">Unassigned</td></tr>`+un.map(k=>`<tr><td colspan="8">${esc(k.t)} <select data-kparty="${k.id}" aria-label="Party responsible"><option value="">Choose a party</option>${pOpts('')}</select></td></tr>`).join(''):''})()):`<tr><td colspan="8" class="empty">No commitments yet. Open a BEP project file to import its commitments, or add one below.</td></tr>`;
+    return `<tr><td class="kn">${esc(k.t)}<details class="kedit"><summary>Edit</summary><div class="ke"><select class="mini" data-kparty="${k.id}" aria-label="Party responsible">${pOpts(k.party)}</select> <button class="btn small danger" type="button" data-kdel="${k.id}" aria-label="Remove ${esc(k.t)}">Remove</button></div></details></td><td class="num kt"><span class="ml">Target</span>${k.hi?'≥':'≤'} ${esc(k.target)} ${esc(k.u)}</td><td class="kg"><span class="ml">Trend</span>${spark(k)}</td>
+    <td class="num kv"><label class="ml" ${k.auto?'':`for="kv-${k.id}"`}>This month</label>${k.auto?`<span class="mono">${v??'–'}</span><div class="auto">from the decision log</div>`:`<input class="n" id="kv-${k.id}" type="number" step="any" inputmode="decimal" data-kval="${k.id}" value="${v??''}" aria-label="${esc(k.t)}, ${mLabel(m)}">`}</td>
+    <td class="ks"><span class="ml">Status</span>${s?`<span class="pill ${s}">${{ok:'On target',warn:'Slipping',bad:'Off target'}[s]}</span>`:'<span class="pill na">No value</span>'}</td><td class="num ko"><span class="ml">Months off</span>${sk||''}</td><td class="kx"><span class="ml">Next step</span>${s==='bad'||(s==='warn'&&sk)?esc(lad[Math.min(3,sk)]):s==='warn'?'Ask for an explanation':s?'None':'Enter this month\'s value'}</td>
+    <td class="ke"><span class="ml">Evidence</span><select data-ksrc="${k.id}" aria-label="Evidence">${Object.entries(SRC).map(([a,b])=>`<option value="${a}" ${k.src===a?'selected':''}>${b}</option>`).join('')}</select></td></tr>`}).join('')}).join('')+((()=>{const un=K.filter(k=>!D.parties.some(p=>p.id===k.party));return un.length?`<tr class="grp"><td colspan="8">Unassigned</td></tr>`+un.map(k=>`<tr><td colspan="8">${esc(k.t)} <select data-kparty="${k.id}" aria-label="Party responsible"><option value="">Choose a party</option>${pOpts('')}</select></td></tr>`).join(''):''})()):`<tr><td colspan="8" class="empty">No commitments yet. Open a BEP project file to import its commitments, or add one below.</td></tr>`;
   $('#kP').innerHTML=pOpts(D.parties[1]?D.parties[1].id:'owner');
   const fOpts=sel=>D.parties.filter(p=>p.kind!=='owner').map(p=>`<option value="${p.id}" ${p.id===sel?'selected':''}>${esc(p.n)}</option>`).join('');
-  $('#logRows').innerHTML=D.log.length?D.log.slice().sort((a,b)=>(b.d||'').localeCompare(a.d||'')).map(x=>`<tr><td><input type="date" data-log="${x.id}" data-k="d" value="${esc(x.d)}" aria-label="Submitted"></td><td><input data-log="${x.id}" data-k="item" value="${esc(x.item)}" aria-label="Item" style="min-width:200px"></td><td><select data-log="${x.id}" data-k="from" aria-label="From">${fOpts(x.from)}</select></td><td><input type="date" data-log="${x.id}" data-k="resp" value="${esc(x.resp)}" aria-label="Owner responded">${x.d&&x.resp?`<div class="auto">${bizDays(x.d,x.resp)} working days</div>`:x.d?'<div class="auto">Waiting</div>':''}</td><td><select data-log="${x.id}" data-k="out" aria-label="Outcome">${Object.entries(OUT).map(([a,b])=>`<option value="${a}" ${x.out===a?'selected':''}>${b}</option>`).join('')}</select></td><td><select data-log="${x.id}" data-k="cause" aria-label="Revision caused by">${Object.entries(CAUSE).map(([a,b])=>`<option value="${a}" ${x.cause===a?'selected':''}>${b}</option>`).join('')}</select></td><td><button class="btn small" type="button" data-logdel="${x.id}" aria-label="Remove submission">Remove</button></td></tr>`).join(''):`<tr><td colspan="7" class="empty">No submissions logged yet.</td></tr>`;
+  $('#logRows').innerHTML=D.log.length?D.log.slice().sort((a,b)=>(b.d||'').localeCompare(a.d||'')).map(x=>`<tr class="${LOGOPEN.has(x.id)?'open':''}"><td class="ld"><span class="ml">Submitted</span><input type="date" data-log="${x.id}" data-k="d" value="${esc(x.d)}" aria-label="Submitted"></td><td class="li"><span class="ml">Item</span><input data-log="${x.id}" data-k="item" value="${esc(x.item)}" aria-label="Item" style="min-width:200px"><button class="btn small mtog" type="button" data-logmore="${x.id}" aria-expanded="${LOGOPEN.has(x.id)}">${LOGOPEN.has(x.id)?'Fewer details':'More details'}</button></td><td class="lx"><span class="ml">From</span><select data-log="${x.id}" data-k="from" aria-label="From">${fOpts(x.from)}</select></td><td class="lx"><span class="ml">Owner responded</span><input type="date" data-log="${x.id}" data-k="resp" value="${esc(x.resp)}" aria-label="Owner responded">${x.d&&x.resp?`<div class="auto">${bizDays(x.d,x.resp)} working days</div>`:x.d?'<div class="auto">Waiting</div>':''}</td><td class="lo"><span class="ml">Outcome</span><select data-log="${x.id}" data-k="out" aria-label="Outcome">${Object.entries(OUT).map(([a,b])=>`<option value="${a}" ${x.out===a?'selected':''}>${b}</option>`).join('')}</select></td><td class="lx"><span class="ml">Revision caused by</span><select data-log="${x.id}" data-k="cause" aria-label="Revision caused by">${Object.entries(CAUSE).map(([a,b])=>`<option value="${a}" ${x.cause===a?'selected':''}>${b}</option>`).join('')}</select></td><td class="lx"><button class="btn small danger" type="button" data-logdel="${x.id}" aria-label="Remove submission">Remove</button></td></tr>`).join(''):`<tr><td colspan="7" class="empty">No submissions logged yet.</td></tr>`;
   $('#ladF').innerHTML=FLAD.slice(1).map((a,i)=>`<li><b>${i+1} month${i?'s':''} off target:</b> ${a}.</li>`).join('');
   $('#ladO').innerHTML=OLAD.slice(1).map((a,i)=>`<li><b>${i+1} month${i?'s':''} off target:</b> ${a}.</li>`).join('');
 }
@@ -268,7 +319,7 @@ async function saveFile(name,data){try{const dl=window.claude&&window.claude.use
   catch(e){$('#msg').textContent='Saving is not available in this view.'}}
 function report(){const m=D.cur, V=verdict(m), L=[], add=(...x)=>L.push(...x), slug=(D.project.name||'project').replace(/[^\w-]+/g,'-');
   add(`# BIM scorecard: ${D.project.name}`,`Month: ${mLabel(m)} · Generated ${new Date().toISOString().slice(0,10)} with the OpenBEP Project Scorecard`,'');
-  add('## Summary',`${D.kpis.filter(k=>st(k,val(k,m))==='ok').length} of ${D.kpis.filter(k=>st(k,val(k,m))).length} measured commitments on target. Main cause of delay: ${V.short.toLowerCase()}.`,'');
+  add('## Summary',`${D.kpis.filter(k=>st(k,val(k,m))==='ok').length} of ${D.kpis.filter(k=>st(k,val(k,m))).length} measured commitments on target. Main cause of delay: ${V.short}.`,'');
   add('## Parties','| Party | On target | Escalation step | Reply |','|---|---|---|---|');
   D.parties.forEach(p=>{const sc=pScore(p.id,m), ks=D.kpis.filter(k=>k.party===p.id), lvl=Math.min(3,Math.max(0,...ks.map(k=>streak(k,m))));add(`| ${p.n} | ${sc?sc.ok+' of '+sc.n:'–'} | ${(p.kind==='owner'?OLAD:FLAD)[lvl]} | ${(((D.replies||{})[p.id]||{})[m]||'–').replace(/\n/g,' ')} |`)});
   add('','## Commitments','| Party | Commitment | Target | Value | Status | Months off target | Evidence |','|---|---|---|---|---|---|---|');
@@ -286,7 +337,10 @@ document.addEventListener('change',e=>{const t=e.target, d=t.dataset;
   if(d.kval!==undefined){const k=D.kpis.find(x=>x.id===d.kval);k.vals=k.vals||{};k.vals[D.cur]=t.value===''?'':+t.value;save();render();return}
 });
 document.addEventListener('input',e=>{const d=e.target.dataset; if(d.reply){D.replies=D.replies||{};(D.replies[d.reply]=D.replies[d.reply]||{})[D.cur]=e.target.value;save()}});
-let pending=null;
+let pending=null, undo=null; const LOGOPEN=new Set();
+// Remove takes effect at once and offers Undo for 10 seconds.
+function toast(msg,fn){const t=$('#toast'), d0=D; if(undo) clearTimeout(undo.tm); undo={fn:()=>{if(D===d0) fn()},tm:setTimeout(()=>{t.hidden=true; undo=null},10000)};
+  t.innerHTML=`<span>${msg}</span><button class="btn small" type="button" id="undoBtn">Undo</button>`; t.hidden=false}
 document.addEventListener('click',e=>{const t=e.target;
   if(t.id==='addMonth'){const nx=mAdd(D.months[D.months.length-1],1);D.months.push(nx);D.cur=nx;save();render();return}
   if(t.id==='exBtn'||t.id==='blankBtn'){if(pending!==t){pending=t;const l=t.textContent;t.dataset.l=l;t.textContent='Replace this scorecard? Click again';t.classList.add('danger');setTimeout(()=>{if(pending===t){pending=null;t.textContent=l;t.classList.remove('danger')}},4000);return}
@@ -294,8 +348,10 @@ document.addEventListener('click',e=>{const t=e.target;
   if(t.id==='saveBtn'){saveFile(`scorecard-${(D.project.name||'project').replace(/[^\w-]+/g,'-')}.json`,JSON.stringify(D,null,1));return}
   if(t.id==='reportBtn'){const r=report();saveFile(r.name,r.text);return}
   if(t.id==='addLog'){D.log.push({id:uid(),d:new Date().toISOString().slice(0,10),item:'',from:(D.parties.find(p=>p.kind!=='owner')||{}).id||'',resp:'',out:'',cause:''});save();render();return}
-  if(t.dataset.logdel){D.log=D.log.filter(x=>x.id!==t.dataset.logdel);save();render();return}
-  if(t.dataset.kdel){D.kpis=D.kpis.filter(x=>x.id!==t.dataset.kdel);save();render();return}
+  if(t.id==='undoBtn'&&undo){clearTimeout(undo.tm); undo.fn(); undo=null; $('#toast').hidden=true; save(); render(); return}
+  if(t.dataset.logmore){const id=t.dataset.logmore; LOGOPEN.has(id)?LOGOPEN.delete(id):LOGOPEN.add(id); render(); return}
+  if(t.dataset.logdel){const i=D.log.findIndex(x=>x.id===t.dataset.logdel); if(i<0) return; const x=D.log[i], L=D.log; L.splice(i,1); save(); render(); toast('Submission removed.',()=>L.splice(i,0,x)); return}
+  if(t.dataset.kdel){const i=D.kpis.findIndex(x=>x.id===t.dataset.kdel); if(i<0) return; const k=D.kpis[i], K=D.kpis; K.splice(i,1); save(); render(); toast('Commitment removed.',()=>K.splice(i,0,k)); return}
 });
 $('#kForm').addEventListener('submit',e=>{e.preventDefault();D.kpis.push({id:uid(),t:$('#kN').value.trim(),u:$('#kU').value.trim(),target:+$('#kT').value,hi:$('#kH').value==='1',party:$('#kP').value,src:'',auto:'',vals:{}});e.target.reset();save();render()});
 render();
