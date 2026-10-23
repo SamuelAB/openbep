@@ -1,6 +1,6 @@
 # This is a Revit shared parameter file.
 # Do not edit manually.
-# OpenBEP plan fingerprint 08B4C7C1DD62, not a released version
+# OpenBEP plan fingerprint C417DBD9D092, not a released version
 *META	VERSION	MINVERSION
 META	2	1
 *GROUP	ID	NAME

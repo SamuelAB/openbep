@@ -3310,9 +3310,9 @@
   "el_short_circuit": {
    "l": "Short-circuit rating",
    "lf": "Pouvoir de coupure / tenue aux courts-circuits",
-   "t": "IfcElectricCurrentMeasure",
-   "u": "kA",
-   "ex": "42",
+   "t": "IfcLabel",
+   "u": null,
+   "ex": "42 kA",
    "d": "Short-circuit current rating of the assembly. No common IFC property at board level.",
    "ifc": null,
    "rv": [
@@ -7797,9 +7797,9 @@
   "pnl_main_device": {
    "l": "Main device",
    "lf": "Dispositif principal",
-   "t": "IfcLabel",
-   "u": null,
-   "ex": "Main breaker 225 A",
+   "t": "IfcElectricCurrentMeasure",
+   "u": "A",
+   "ex": "225",
    "d": "Main breaker rating or main lugs only.",
    "ifc": null,
    "rv": [
