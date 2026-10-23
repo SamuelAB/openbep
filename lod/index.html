@@ -67,9 +67,9 @@ p.edit{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}p.ed
 .sum>div.dim{opacity:.45}
 .sum .chip{margin-bottom:4px}
 .chip.v2D{background:#F1EEE6;color:#555}.l2d{border-style:dashed!important}
-.tw{overflow:auto;max-height:calc(100vh - 24px);border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 .tw thead th{position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--line)}
-/* Wide screens: no inner scroller, so the header row sticks to the top of the window while the page scrolls. Phones keep the scroller for wide tables. */
+/* Wide screens: no inner scroller, so the header row sticks to the top of the window while the page scrolls. Never a vertical scroller inside the page. Phones get one card per requirement instead of the table. */
 @media (min-width:900px){.tw{overflow:visible;max-height:none}}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -104,7 +104,22 @@ td.sc{white-space:nowrap;font-size:12.5px}
 .proj{background:var(--accent-soft);border-radius:var(--r);padding:8px 12px;margin:0 0 14px;font-size:14px}
 .proj .chip{margin:0 2px}
 .filters label.chk{display:flex;gap:6px;align-items:center;font-size:14px;text-transform:none;letter-spacing:0;color:var(--ink)}.chk input{width:auto}
-@media print{.side,.filters,.top .bar,.actions,.intro .legend{display:none}.layout{display:block}body{background:#fff}.tw{overflow:visible;max-height:none}}
+.mcards{display:none}
+.mk{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:14px 0 6px}
+.mc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:9px 11px;margin:0 0 8px;font-size:14px}
+.mc small{display:block;color:var(--muted);font-size:12.5px}
+.mc .ml{font-size:13px;margin:5px 0 3px}.mc .ml .chip{margin-right:4px}.mc .ml .dropt{color:var(--muted)}
+.mc .mr{font-size:13px;margin:3px 0}.mc .mr code{font-family:var(--f-mono);font-size:12px;word-break:break-word}
+@media (max-width:760px){.tw,.tnote{display:none}.mcards{display:block}}
+@media (max-width:560px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}.sum>div{font-size:12.5px;padding:6px 8px}}
+.home{font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--ink);text-decoration:none}.home:hover{text-decoration:underline}
+.sitenav{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;padding-top:8px}.sitenav a{color:inherit}.sitenav a[aria-current]{font-weight:600;text-decoration:none}
+.jump{margin:10px 0 0;font-size:14px}
+details.lvls,details.caveat{margin:12px 0}
+details.lvls>summary,details.caveat>summary{cursor:pointer;font-weight:600}
+details.lvls>summary{font-family:var(--f-display);font-size:16px}
+details.caveat>summary h3{display:inline;margin:0}
+@media print{.side,.filters,.top .bar,.actions,.intro .legend,.sitenav,.jump{display:none}.mcards{display:none!important}.tw{display:block!important}details.lvls,details.caveat{display:block}.layout{display:block}body{background:#fff}.tw{overflow:visible;max-height:none}}
 </style>
 <script src="../translations/strings.js"></script>
 <script src="../translations/i18n.js"></script>
@@ -113,26 +128,28 @@ td.sc{white-space:nowrap;font-size:12.5px}
 <body>
 <div class="wrap">
 <header class="top">
-  <div class="brand"><b data-notr>OpenBEP</b><span class="tag">LOD specification</span></div>
+  <div class="brand"><a class="home" href="../" data-notr title="OpenBEP home">OpenBEP</a><span class="tag">LOD specification</span></div>
   <div class="bar">
     <a class="btn" href="../app/bep-builder.html">Open the BEP Builder</a>
     <select class="btn" data-i18n-lang data-notr aria-label="Language"></select>
   </div>
 </header>
+<nav class="sitenav" aria-label="OpenBEP pages"><a href="../">Home</a><a href="../app/bep-builder.html">BEP Builder</a><a href="./" aria-current="page">LOD specification</a><a href="../training/">Owner training</a><a href="../app/scorecard.html">Project scorecard</a></nav>
 
 <section class="intro">
   <h1>Level of development, element by element</h1>
   <p class="lead">"LOD 300" alone says almost nothing. For each kind of element, this page lists what must be drawn in 3D and which Revit parameters it must carry at each level, and which BIM uses need it. A BEP or contract can point to these rows, and a model checker can test them.</p>
   <p>The BEP Builder's LOD matrix sets the level of each element type at each stage. This page is what each of those cells means. Each level adds to the one before; geometry and data are listed separately because they mature at different speeds.</p>
-  <div class="legend" id="legend"></div>
-  <div class="caveat"><h3>LOD 500 is not "more of everything"</h3>
+  <p class="jump"><a href="#elements">Jump to the element list</a></p>
+  <details class="lvls" id="lvls" open><summary>What each level means</summary><div class="legend" id="legend"></div></details>
+  <details class="caveat" id="cav" open><summary><h3>LOD 500 is not "more of everything"</h3></summary>
   <p>LOD 500 means the model was checked in the field after construction, to a stated accuracy. It is not a step above LOD 400, and it is never assumed: the owner asks for it, pays for it and says who surveys.</p>
   <p>It should usually carry less than LOD 400, not more. Facility management needs the right elements, where they are and the data to run them; it does not need fabrication detail or design-stage parameters nobody will read again. Read as the top of a scale, LOD 500 has led teams to model and fill in far more than the owner ever used.</p>
   <p>So at LOD 500 this specification keeps a parameter only if an operations use needs it (handover, maintenance, asset register, space management, commissioning, existing conditions), if it identifies the element, or if it is first asked for at LOD 500. Connections, supports and fabrication parts from LOD 350 and 400 are dropped. A dash in the LOD 500 column marks what is left out.</p>
-  <p class="note">The idea is explained in LOD Planner's <a href="https://www.lodplanner.com/lod-500-explained/" target="_blank" rel="noopener">LOD 500 explained</a>. The BIMForum LOD Specification leaves LOD 500 out because it is field verification, not more geometry or information.</p></div>
+  <p class="note">The idea is explained in LOD Planner's <a href="https://www.lodplanner.com/lod-500-explained/" target="_blank" rel="noopener">LOD 500 explained</a>. The BIMForum LOD Specification leaves LOD 500 out because it is field verification, not more geometry or information.</p></details>
 </section>
 
-<div class="layout">
+<div class="layout" id="elements">
   <nav class="side" aria-label="Element types">
     <label class="note" for="grp">Group by</label>
     <select id="grp"></select>
@@ -223,6 +240,12 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   const gRows=KIND.map(([k,n])=>{const its=gShow.filter(x=>x.k===k).sort((a,b)=>+a.f-+b.f); if(!its.length) return '';
     return `<tr class="k"><td colspan="${LV.length+2}">${esc(n)}</td></tr>`+its.map(x=>`<tr><td class="req">${esc(x.t)}</td>${cells(x.f,g500(x))}<td>${tags(x.u||[])}</td></tr>`).join('')}).join('');
   const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${exOf(r,c)?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(exOf(r,c))}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</td></tr>`;
+  // Phones: the same rows as cards. "From LOD 200 · kept at LOD 500" replaces the level columns.
+  const lodLine=(f,k5)=>`<div class="ml"><span class="chip v${f}">${f}</span><span>${f==='500'?'Only at LOD 500':`From LOD ${f}`}</span>${f!=='500'&&up>=500?(k5?' · <span>kept at LOD 500</span>':' · <span class="dropt">left out at LOD 500</span>'):''}</div>`;
+  const gCards=KIND.map(([k,n])=>{const its=gShow.filter(x=>x.k===k).sort((a,b)=>+a.f-+b.f); if(!its.length) return '';
+    return `<div class="mk">${esc(n)}</div>`+its.map(x=>`<div class="mc"><div>${esc(x.t)}</div>${lodLine(x.f,g500(x))}${tags(x.u||[])}</div>`).join('')}).join('');
+  const pCard=r=>`<div class="mc"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${lodLine(r.f,p500(c,r.id))}<div class="mr"><span>Revit parameter:</span> ${rvCell(r.p)}<small>${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</div>${tags(r.u)}</div>`;
+  const pCards=(idRows.length?`<div class="mk">Identification and classification</div>${idRows.map(pCard).join('')}`:'')+(other.length?`<div class="mk">Data, by the level it is first needed</div>${other.map(pCard).join('')}`:'');
   const pRows=(idRows.length?`<tr class="k"><td colspan="${nCol}">Identification and classification</td></tr>${idRows.map(pRow).join('')}`:'')+(other.length?`<tr class="k"><td colspan="${nCol}">Data, by the level it is first needed</td></tr>${other.map(pRow).join('')}`:'');
   $('#el').innerHTML=`<h2>${esc(c.n)}</h2>
   <p class="meta"><span>Revit categories:</span> <span data-notr>${esc((c.rc||[]).join(', '))}</span></p>
@@ -233,13 +256,12 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   <div class="sum">${LV.map(v=>`<div class="${+v>up?'dim':''}"><span class="chip v${v}">LOD ${v}</span>${ik?ILL.svg(ik,v):''}<div>${esc(c.g[v]||'–')}</div></div>`).join('')}</div>
   ${ik&&!['door','duct','ahu'].includes(c.id)?'<p class="note">Sketches show a typical element of this kind, not this exact element type.</p>':''}
   <h3>Geometry: what must be drawn in 3D</h3>
-  <p class="note">✓ marks the level where a requirement starts; the shaded band shows it stays required at every higher level.</p>
-  ${gRows?`<div class="tw"><table><thead><tr><th>Requirement</th>${lvHead()}<th>Needed for</th></tr></thead><tbody>${gRows}</tbody></table></div>`:'<p class="note">No geometry requirement matches these filters.</p>'}
+  ${gRows?`<p class="note tnote">✓ marks the level where a requirement starts; the shaded band shows it stays required at every higher level.</p>${up>=500?'<p class="note tnote">A dash (–) at LOD 500 means the requirement is left out there: it is not needed to run the asset.</p>':''}<div class="tw"><table><thead><tr><th>Requirement</th>${lvHead()}<th>Needed for</th></tr></thead><tbody>${gRows}</tbody></table></div><div class="mcards">${gCards}</div>`:'<p class="note">No geometry requirement matches these filters.</p>'}
   ${gHidden?`<p class="hidden-note">${gHidden} geometry requirements hidden by the filters.</p>`:''}
   <h3>Data: Revit parameters the element must carry</h3>
   <div class="kinds"><div><span class="rk builtin">Revit built-in</span> Comes with Revit in every model. Nothing to add: fill it.</div><div><span class="rk shared">OpenBEP shared</span> Load it from the OpenBEP shared parameter file and add it as a project parameter on the listed categories. Its fixed GUID lets data from different projects and firms be combined, and it can be tagged and scheduled.</div><div><span class="rk family">Family parameter</span> Defined inside the family by its author; check the family before accepting it.</div></div>
   <p class="note">Plain project parameters, made without a shared parameter file, are not used: they cannot be tagged and do not keep the same identity from one project to the next.</p>
-  ${pRows?`<div class="tw"><table><thead><tr><th>Parameter</th>${lvHead()}<th>Needed for</th><th>${st.ifc?'Revit parameter and IFC export':'Revit parameter'}</th></tr></thead><tbody>${pRows}</tbody></table></div>`:'<p class="note">No parameter matches these filters.</p>'}
+  ${pRows?`<p class="note tnote">✓ marks the level where a requirement starts; the shaded band shows it stays required at every higher level.</p>${up>=500?'<p class="note tnote">A dash (–) at LOD 500 means the requirement is left out there: it is not needed to run the asset.</p>':''}<div class="tw"><table><thead><tr><th>Parameter</th>${lvHead()}<th>Needed for</th><th>${st.ifc?'Revit parameter and IFC export':'Revit parameter'}</th></tr></thead><tbody>${pRows}</tbody></table></div><div class="mcards">${pCards}</div>`:'<p class="note">No parameter matches these filters.</p>'}
   ${rHidden?`<p class="hidden-note">${rHidden} parameters hidden by the filters.</p>`:''}
   ${(c.nx||[]).length?`<h3>Not expected in the model</h3><ul class="nx">${c.nx.map(x=>`<li>${esc(x.t)}</li>`).join('')}</ul>`:''}
   ${(c.notes||[]).length?`<h3>Notes</h3><ul class="nx">${c.notes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
@@ -274,7 +296,13 @@ document.addEventListener('change',e=>{if(e.target.matches('select[data-i18n-lan
 ['click','auxclick','contextmenu','focusin'].forEach(t=>document.addEventListener(t,e=>{const a=e.target.closest&&e.target.closest('a[href]'); if(!a) return; const h=a.getAttribute('href')||'', l=lang(), f={fr:'fr/',ja:'ja/'}[l]||'';
   let m=/^(.*bep-builder\.html)(?:\?[^#]*)?(#.*)?$/.exec(h); if(m){a.href=m[1]+'?lang='+l+(m[2]||''); return}
   m=/^(.*\/(?:formats|why)\/)(?:(?:fr|ja)\/)?(#.*)?$/.exec(h); if(m) a.href=m[1]+f+(m[2]||'')},true));
-window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(byId[h]){st.el=h; render()}});
+// Links to one element (#wall_exterior, from the BEP Builder) open the page at that element.
+const goEl=()=>$('#el').scrollIntoView({block:'start'});
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(byId[h]){st.el=h; render(); goEl()}});
+// Phones: the level legend and the LOD 500 note start closed, so the element list is not pushed several screens down.
+if(matchMedia('(max-width:820px)').matches){$('#lvls').open=false; $('#cav').open=false}
 projBanner(); render();
+if(byId[location.hash.slice(1)]){let moved=false; ['wheel','touchstart','keydown'].forEach(t=>addEventListener(t,()=>{moved=true},{once:true,passive:true}));
+  goEl(); requestAnimationFrame(goEl); addEventListener('load',()=>{if(!moved) goEl()})}
 </script>
 </body>
