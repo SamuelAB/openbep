@@ -110,7 +110,6 @@ Revit's own phase names, each with a short code that starts every view name. A p
 | `PRES` | PRESENTATION | Views for the client, committees or the city; one set each (`PRES-CLIENT`, `PRES-CITY`) | Présentation |
 | `QC` | QUALITY CONTROL | Views that isolate each phase, workset and floor | Contrôle de la qualité |
 | `W` | WORK | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
-| `Z-TUTORIAL` | Z-TUTORIAL | Views that teach the team how the model works | Tutoriel |
 | `Z-USER-<NAME>` | Z-USER-SAM | One person's views | Vues personnelles |
 | `Z-WIP` | Z-WIP | Unfinished views, Revit's default `{3D}` | Travail en cours |
 
@@ -152,6 +151,7 @@ Sets starting with `Z-` sort last. A browser filter on `OB_ViewSet` not beginnin
 | `210-SECT-DET` | Section detail | Coupe de détail |
 | `300-ELEV` | Elevation | Élévation |
 | `400-DET` | Detail | Détail |
+| `410-LEGEND` | Legend drawn as a drafting view | Légende (vue de dessin) |
 | `500-3D` | Camera view | Vue caméra |
 
 ### View names
@@ -163,11 +163,12 @@ Example: `N-CON-PLAN-EGRESS-L02` is the new construction, construction set, egre
 - A view with no level ends with what tells it apart: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
 - Design options end with `-OPT1`, `-OPT2`: `P1-W-PLAN-L01-OPT2`.
 - A person's own views go in their own set: `N-Z-USER-SAM-PLAN-L02`.
+- Drafting views have no phase, so `DRAFT` takes the phase's place: `DRAFT-CON-DET-PARAPET`, `DRAFT-CON-LEGEND-WALLTYPES`. With `OB_ViewSet` and `OB_ViewType` filled, they still sort into set and type folders under `???`. (Proposal: drafting views have no agreed logic yet.)
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
 
 ### Project browser
 
-Grouped from view parameters, not by reading the name, so a misspelt name still lands in the right folder. A view whose parameter is blank shows under `???`, which is how unfiled views stand out.
+Grouped from view parameters, not by reading the name, so a misspelt name still lands in the right folder. `???` shows where a parameter is blank. At the top, it holds the drafting views: they have no phase, so Revit can't put them anywhere else, but their set and type folders still sort them. Inside a phase, it holds views nobody filed, which is how they stand out.
 
 | Browser level | Revit parameter | Set by |
 | --- | --- | --- |
@@ -193,10 +194,19 @@ Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows 
 ### Example project browser
 
 - Views (Phase-Set-Type-Family)
+  - ???
+    - CONSTRUCTION
+      - 400-DET
+        - Drafting Views
+          - DRAFT-CON-DET-PARAPET
+      - 410-LEGEND
+        - Drafting Views
+          - DRAFT-CON-LEGEND-WALLTYPES
   - New Construction
     - ???
-      - Sections (Building Section)
-        - Section 1
+      - ???
+        - Sections (Building Section)
+          - Section 1
     - BIM MANAGEMENT
       - 002-PLAN-GRID
         - Floor Plans

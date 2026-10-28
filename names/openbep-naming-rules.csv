@@ -45,7 +45,6 @@ Drawing set code,PERMIT,PERMIT: Views placed on the permit set,,Permis
 Drawing set code,PRES,"PRESENTATION: Views for the client, committees or the city; one set each (PRES-CLIENT, PRES-CITY)",,Présentation
 Drawing set code,QC,"QUALITY CONTROL: Views that isolate each phase, workset and floor",,Contrôle de la qualité
 Drawing set code,W,"WORK: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
-Drawing set code,Z-TUTORIAL,Z-TUTORIAL: Views that teach the team how the model works,,Tutoriel
 Drawing set code,Z-USER-<NAME>,Z-USER-SAM: One person's views,,Vues personnelles
 Drawing set code,Z-WIP,"Z-WIP: Unfinished views, Revit's default {3D}",,Travail en cours
 View type code,000-AXO,Axonometric views,,Vues axonométriques
@@ -78,6 +77,7 @@ View type code,200-SECT,Section,,Coupe
 View type code,210-SECT-DET,Section detail,,Coupe de détail
 View type code,300-ELEV,Elevation,,Élévation
 View type code,400-DET,Detail,,Détail
+View type code,410-LEGEND,Legend drawn as a drafting view,,Légende (vue de dessin)
 View type code,500-3D,Camera view,,Vue caméra
 Built-in parameter,Type Mark,The tag code of a type (Window type A),,Code d'étiquette du type
 Built-in parameter,Mark,"The unique id of one element; never two the same in one category (Window 101, 102)",,Identifiant unique de l'élément
