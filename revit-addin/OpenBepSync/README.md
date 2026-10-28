@@ -1,6 +1,6 @@
 # OpenBEP Sync: Revit add-in (v0.1, built for Revit 2022, first run in Revit pending)
 
-This add-in adds an **OpenBEP** tab to Revit with two buttons: **Sync parameters** and **Build family library** (see [`library/`](../../library/)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
+This add-in adds an **OpenBEP** tab to Revit with three buttons: **Sync parameters**, **Build family library** (see [`library/`](../../library/)) and **Replace materials** (see [below](#replace-materials)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
 
 ## What it does
 
@@ -26,6 +26,46 @@ This add-in adds an **OpenBEP** tab to Revit with two buttons: **Sync parameters
 
 The user's own shared parameter file setting is restored afterwards.
 
+## Replace materials
+
+A free rebuild of Polynine Studio's *Find and Replace Materials for Revit* (2017 to 2020, no longer sold), using its archived product page and screenshots as the model. It works in a project and in the Family Editor, and brings a model's materials to the OpenBEP names (`OB_<Class>_<Material>_<Detail>`, see [`docs/graphics-and-materials-standard.md`](../../docs/graphics-and-materials-standard.md)).
+
+The window has the same three columns as Polynine's, with the replace list under them:
+
+1. **Tick what to replace** (left). Each material shows how many places use it. Names that aren't OpenBEP names are in dark red. *Show unused* adds the materials nothing uses.
+2. **Pick the new material** (middle), or **type a name that doesn't exist yet**: the old material is then renamed, so nothing has to be reassigned. `<By Category>` removes the material, so elements fall back to their category's.
+3. **Add to list.** The replace list (bottom) can also be typed in like a spreadsheet, imported or exported as CSV (`Old name,New name`; Polynine's `Existing material,New material` files are read too). An AI or a BIM manager can write the list; a person checks it here before running it.
+4. **Elements affected** (right) shows every element, type, object style or family type each line touches. Untick one to leave it alone.
+5. **Replace** runs the whole list in one transaction: one Undo reverses it.
+
+The list is checked before anything changes, and each line says what will happen:
+
+- **Replace**: the new name exists; every use moves to it.
+- **Rename**: the new name doesn't exist; the old material is renamed. When several old names go to the same new name, the most used one is renamed and the others merge into it.
+- **Remove**: the new name is `<By Category>`.
+- **Skip**: the old name isn't in the model, a line goes from a name to itself, or an earlier line already moves the same name. Chains are followed (A to B, then B to C, sends A straight to C); a loop skips every line in it.
+- A note flags a new name that doesn't follow the OpenBEP rule.
+
+Where it finds and changes materials:
+
+- material parameters of every element and type: built-in (Material, Structural Material), shared and family parameters;
+- layers of walls, floors, roofs, ceilings and building pads;
+- painted faces (walls, floors and other host elements, parts, and family solids in the Family Editor);
+- object styles (a category's or subcategory's material);
+- in the Family Editor, the material parameters of every family type.
+
+The same window replaces **appearance, physical and thermal assets** (the *Replace* menu at the top): every material using the old asset is switched to the new one.
+
+*Delete replaced materials left unused* (off by default) deletes each old material that no longer has a use the tool can see.
+
+Not done yet:
+
+- **Materials set directly inside a loaded family's geometry**, without a family parameter, can't be reached from the project (Revit doesn't expose them there). Open the family and run the tool in the Family Editor. Nested families aren't walked yet.
+- **Integral wall sweeps** in a wall type's structure are listed but not changed; change them in Edit Structure.
+- **Railings' own structure** materials aren't reachable through the Revit API.
+- Polynine's "Force integral wall sweeps", eyedropper and paint bucket aren't rebuilt.
+- As with any material change in Revit, dimensions hosted on a material's surface pattern can disappear when the new material has a different pattern.
+
 ## Build
 
 Requires Windows, Revit 2022 or later, and the .NET SDK 8 or later.
@@ -40,7 +80,7 @@ dotnet build -c Release -p:RevitVersion=2025
 
 ### Offline tests (no Revit needed)
 
-The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule and the fixed-GUID rule are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
+The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule, the fixed-GUID rule and the replace list rules (replace, rename, merge, chains, loops, OpenBEP names) are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
 
 ```
 dotnet test revit-addin/OpenBepSync.Tests
@@ -56,12 +96,16 @@ dotnet test revit-addin/OpenBepSync.Tests
 
 | File | Role |
 |---|---|
-| `App.cs` | Adds the ribbon tab and button. |
+| `App.cs` | Adds the ribbon tab and its three buttons. |
 | `LibraryCommand.cs` | Builds the families in `library/families.csv` from Revit's metric templates, with types and OpenBEP shared parameters. |
 | `AutoTest.cs` | Developer test, off unless `%AppData%\OpenBEP\autotest.json` exists (see below). |
 | `SyncCommand.cs` | Dry run, report, choice, then one transaction that adds, binds or deletes. |
 | `BindingList.cs` | Reads the BEP Builder's binding list and merges rows by GUID. |
 | `SharedParameterFile.cs` | Reads a shared parameter file without Revit; the OpenBEP prefix and GUID rules. |
+| `MaterialsCommand.cs` | Opens the Replace materials window. |
+| `MaterialsWindow.cs` | The window: three lists, the replace list, import, export and the run. |
+| `MaterialIndex.cs` | Finds every use of each material (or asset) and changes them; the same walk does both, so the preview is what changes. |
+| `MaterialRules.cs` | Reads and writes replace lists and decides what each line does; no Revit needed. |
 | `OpenBepSync.csproj` | Build file; set `RevitVersion`. |
 | `OpenBepSync.addin` | Revit manifest. |
 
