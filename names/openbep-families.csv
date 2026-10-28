@@ -1,0 +1,12 @@
+﻿Family,Family (FR),Element type,Template,Types
+OpenBEP_Door_Single-Flush,Porte simple à âme pleine,Doors,Metric Door.rft,0815 x 2134; 0865 x 2134; 0915 x 2134; 1015 x 2134
+OpenBEP_Window_Fixed,Fenêtre fixe,Windows and skylights,Metric Window.rft,0600 x 1200; 0900 x 1200; 1200 x 1500; 1800 x 1500
+OpenBEP_PlumbingFixture_Generic,Appareil de plomberie générique,Plumbing fixtures,Metric Generic Model face based.rft,Water closet 380 x 700; Lavatory 500 x 450; Sink 600 x 500
+OpenBEP_LightFixture_Generic,Appareil d'éclairage générique,Light fixtures,Metric Generic Model face based.rft,Troffer 600 x 600; Troffer 600 x 1200; Linear 1200
+OpenBEP_Furniture_Generic,Mobilier générique,Furniture and casework,Metric Generic Model face based.rft,Desk 1500 x 750; Table 1800 x 900; Chair 500 x 550
+OpenBEP_Casework_Generic,Ébénisterie générique,Furniture and casework,Metric Generic Model face based.rft,Base cabinet 900 x 600; Upper cabinet 900 x 350
+OpenBEP_AHU_Generic,Unité de traitement d'air générique,Mechanical equipment - air handling unit,Metric Generic Model face based.rft,AHU 2400 x 1500; AHU 3600 x 1800
+OpenBEP_Pump_Generic,Pompe générique,Pumps,Metric Generic Model face based.rft,Inline 400 x 400; Base-mounted 1200 x 500
+OpenBEP_Fan_Generic,Ventilateur générique,Fans,Metric Generic Model face based.rft,Fan 900 x 900
+OpenBEP_Panelboard_Generic,Panneau de distribution générique,Switchboards and panelboards,Metric Generic Model face based.rft,Panelboard 500 x 150; Switchboard 900 x 600
+OpenBEP_SpecialtyEquipment_Generic,Équipement spécialisé générique,Specialty and owner equipment,Metric Generic Model face based.rft,Equipment 1000 x 600

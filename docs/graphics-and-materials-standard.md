@@ -4,6 +4,8 @@ Oct 17, 2026 · @Samuel Arsenault-Brassard
 
 One set of line types, text styles and materials for every Revit project in Canada, named like the parameters: English names, French labels, no duplicates.
 
+All the names below, with the parameters and families, are listed and downloadable on [openbep.com/names](https://openbep.com/names/). The general rules every name follows are in [naming rules](naming-rules.md).
+
 ## Why one standard
 
 Today every firm ships its own template, so a project with four firms has four sets of line weights, four "Dash" patterns and four names for the same concrete. Linked models print with mixed weights, materials can't be totalled by type, and the owner inherits the mess.
