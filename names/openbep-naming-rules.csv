@@ -1,6 +1,6 @@
 ﻿List,Code or rule,Meaning or example,Not,Label (FR)
 Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Red-Matte,OB_Mat07,Littéral : compris par quelqu'un hors du projet
-Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-C-L02-RCP,New - Construction - Level 2 - Reflected Ceiling Plan,Aussi court que possible tout en restant compris
+Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-CON-L02-RCP,New - Construction - Level 2 - Reflected Ceiling Plan,Aussi court que possible tout en restant compris
 Rule for every name,"General to specific: major, then medium, then minor",Glass_Laminated_Clear,Clear_Laminated_Glass,Du général au particulier
 Rule for every name,No spaces around separators,Line-Xhatch,Line - Xhatch,Pas d'espaces autour des séparateurs
 Rule for every name,Read the list sorted: values that belong together must sort together and in a sensible order,"Light, Medium, Wide","Light, Medium, Heavy",Vérifier la liste triée par ordre alphabétique
@@ -14,12 +14,18 @@ Discipline code,ELECT,Electrical,,Électricité
 Discipline code,PLUMB,Plumbing,,Plomberie
 Discipline code,FIRE,Fire protection and sprinklers,,Protection incendie et gicleurs
 Discipline code,REFRIG,Refrigeration,,Réfrigération
+Discipline code,LIGHT,Lighting,,Éclairage
+Discipline code,COMM,"Communications, data and audiovisual",,"Télécommunications, données et audiovisuel"
+Discipline code,SECUR,Security and access control,,Sécurité et contrôle d'accès
+Discipline code,BAS,Building automation and controls,,Automatisation et régulation du bâtiment
+Discipline code,INT,Interiors,,Aménagement intérieur
+Discipline code,LAND,Landscape,,Architecture de paysage
 Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
 Discipline code,CIVIL,Civil engineering,,Génie civil
 Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
 Discipline code,CON,Contractor's construction model,,Modèle de construction de l'entrepreneur
-View name,<PHASE>-<SET>-<Level>-<TYPE>-<purpose>,N-C-L02-PLAN-EGRESS,,
-View template name,<Discipline>-<TYPE>-<Set>-<scale>,ARCH-PLAN-C-100,,
+View name,<PHASE>-<SET>-<Level>-<TYPE>-<purpose>,N-CON-L02-PLAN-EGRESS,,
+View template name,<Discipline>-<TYPE>-<Set>-<scale>,ARCH-PLAN-CON-100,,
 Level code,B2,Second basement (Building Story: Yes),,Deuxième sous-sol
 Level code,B1,First basement (Building Story: Yes),,Premier sous-sol
 Level code,L01,Ground floor (Building Story: Yes),,Rez-de-chaussée
@@ -31,12 +37,13 @@ Phase code,EX,Existing,,Existant
 Phase code,N,New Construction,,Nouvelle construction
 Drawing set code,AN,"Analysis: Daylight, code, areas, departments, egress",,Analyse
 Drawing set code,BIM,"BIM management: Shared coordinates, copy-monitor of grids and levels, scope boxes",,Gestion BIM
-Drawing set code,C,Construction: Views placed on the construction set,,Construction
-Drawing set code,EXP,"Export: Views exported to other software (IFC, Navisworks, viewers)",,Exportation
-Drawing set code,P,"Presentation: Views for the client, committees or the city; one set each (P-CLIENT, P-CITY)",,Présentation
-Drawing set code,PE,Permit: Views placed on the permit set,,Permis
+Drawing set code,CON,Construction: Views placed on the construction set,,Construction
+Drawing set code,EXPORT,"Export: Views exported to other software (IFC, Navisworks, viewers)",,Exportation
+Drawing set code,PERMIT,Permit: Views placed on the permit set,,Permis
+Drawing set code,PRES,"Presentation: Views for the client, committees or the city; one set each (PRES-CLIENT, PRES-CITY)",,Présentation
 Drawing set code,QC,"Quality control: Views that isolate each phase, workset and floor",,Contrôle de la qualité
-Drawing set code,W,"Work: Working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+Drawing set code,W,"Work: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+Drawing set code,Z-USER-<NAME>,"One person's views: Personal views of one team member, such as Z-USER-SAM; sorts last and is filtered out of the browser, exports and handover",,Vues personnelles
 View type code,3D,Camera view,,Vue caméra
 View type code,AXO,Axonometric view,,Vue axonométrique
 View type code,PLAN,Plan,,Plan
