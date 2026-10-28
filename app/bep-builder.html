@@ -1627,6 +1627,12 @@ const IDSPSET='OpenBEP';
 // Revit storage type -> [IDS data type, Revit IFC exporter data type]
 // Built-in Revit numbers with a Revit unit: the exporter writes a measure and converts from Revit's internal units (feet, cfs).
 const IDSBU={A:['IFCELECTRICCURRENTMEASURE','ElectricCurrent'],V:['IFCELECTRICVOLTAGEMEASURE','ElectricVoltage'],'L/s':['IFCVOLUMETRICFLOWRATEMEASURE','VolumetricFlowRate']};
+// Revit names behind manifest rows that carry a note (as in shared-parameters/gen_ifc_psets.py)
+// IFC class names as the Revit property set file writes them
+const IFCCASE={IFCDUCTFITTING:'DuctFitting',IFCJUNCTIONBOX:'JunctionBox',IFCSWITCHINGDEVICE:'SwitchingDevice',IFCPIPEFITTING:'PipeFitting',IFCAIRTERMINAL:'AirTerminal',IFCAIRTERMINALBOX:'AirTerminalBox',IFCALARM:'Alarm',IFCBEAM:'Beam',IFCBEARING:'Bearing',IFCBOILER:'Boiler',IFCBUILDINGELEMENTPROXY:'BuildingElementProxy',IFCCABLECARRIERSEGMENT:'CableCarrierSegment',IFCCHILLER:'Chiller',IFCCOLUMN:'Column',IFCCOMMUNICATIONSAPPLIANCE:'CommunicationsAppliance',IFCCOOLINGTOWER:'CoolingTower',IFCCOVERING:'Covering',IFCCURTAINWALL:'CurtainWall',IFCDAMPER:'Damper',IFCDISTRIBUTIONCHAMBERELEMENT:'DistributionChamberElement',IFCDOOR:'Door',IFCDUCTSEGMENT:'DuctSegment',IFCELECTRICAPPLIANCE:'ElectricAppliance',IFCELECTRICDISTRIBUTIONBOARD:'ElectricDistributionBoard',IFCELECTRICGENERATOR:'ElectricGenerator',IFCELEMENTASSEMBLY:'ElementAssembly',IFCENERGYCONVERSIONDEVICE:'EnergyConversionDevice',IFCFAN:'Fan',IFCFIRESUPPRESSIONTERMINAL:'FireSuppressionTerminal',IFCFLOWTERMINAL:'FlowTerminal',IFCFOOTING:'Footing',IFCFURNITURE:'Furniture',IFCHEATEXCHANGER:'HeatExchanger',IFCIMPACTPROTECTIONDEVICE:'ImpactProtectionDevice',IFCLIGHTFIXTURE:'LightFixture',IFCMEMBER:'Member',IFCOUTLET:'Outlet',IFCPAVEMENT:'Pavement',IFCPILE:'Pile',IFCPIPESEGMENT:'PipeSegment',IFCPUMP:'Pump',IFCRAIL:'Rail',IFCRAILING:'Railing',IFCRAMP:'Ramp',IFCREINFORCINGBAR:'ReinforcingBar',IFCROOF:'Roof',IFCSANITARYTERMINAL:'SanitaryTerminal',IFCSENSOR:'Sensor',IFCSIGN:'Sign',IFCSIGNAL:'Signal',IFCSITE:'Site',IFCSLAB:'Slab',IFCSPACE:'Space',IFCSTAIR:'Stair',IFCTRANSFORMER:'Transformer',IFCTRANSPORTELEMENT:'TransportElement',IFCUNITARYEQUIPMENT:'UnitaryEquipment',IFCVALVE:'Valve',IFCWALL:'Wall',IFCWINDOW:'Window',IFCZONE:'Zone'};
+// Revit parameters left out of standard properties: Size is a formatted text such as "300x200", not one number
+const IDSNOMAP=new Set(['Size']);
+const IDSRN={'Visual Light Transmittance - analytical properties':'Visual Light Transmittance','Voltage / Distribution System':'Voltage','Voltage (connector)':'Voltage'};
 const IDSDT={TEXT:['IFCLABEL','Label'],MULTILINETEXT:['IFCTEXT','Text'],NUMBER:['IFCREAL','Real'],INTEGER:['IFCINTEGER','Integer'],LENGTH:['IFCLENGTHMEASURE','Length'],AREA:['IFCAREAMEASURE','Area'],VOLUME:['IFCVOLUMEMEASURE','Volume'],YESNO:['IFCBOOLEAN','Boolean']};
 const xe=s=>esc(String(s??'').replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,''));
 const idsV=v=>Array.isArray(v)?`<xs:restriction base="xs:string">${v.map(x=>`<xs:enumeration value="${xe(x)}"/>`).join('')}</xs:restriction>`:`<simpleValue>${xe(v)}</simpleValue>`;
@@ -1640,7 +1646,10 @@ function idsFacet(x,x4){const p=x.p, rv=p.rv||[], m=x.m;
   if(/^IfcMaterial/.test(p.t)) return {k:'m'};
   const a=/^Ifc(?:Space|Zone)\.(Name|LongName)$/.exec(p.ifc||''); if(a) return {k:'a',n:a[1]};
   const alt=(p.ifc||'').split(' / ').map(s=>/^((?:Pset|Qto)_\w+)\.(\w+)$/.exec(s.trim())), one=a=>a.length===1?a[0]:a;
-  if(p.ifc&&alt.every(Boolean)&&(!x4||alt.some(r=>!IDSX3P.has(r[0])))){const ok=alt.filter(r=>!x4||!IDSX3P.has(r[0])); return {k:'p',ps:one([...new Set(ok.map(r=>r[1]))]),n:one([...new Set(ok.map(r=>r[2]))])}}
+  if(p.ifc&&alt.every(Boolean)&&(!x4||alt.some(r=>!IDSX3P.has(r[0])))){const ok=alt.filter(r=>!x4||!IDSX3P.has(r[0])), rn=IDSRN[rv[1]]||rv[1]||'', d=(m[2]==='NUMBER'&&IDSBU[p.u])||IDSDT[m[2]]||IDSDT.TEXT;
+    // The Revit parameter the exporter copies into each standard property, when Revit does not fill it by itself
+    const src=/^[\w #-]+$/.test(rn)&&!IDSNOMAP.has(rn)?ok.filter(r=>r[1].startsWith('Pset_')).map(r=>[r[1],r[2],d[1],rn]):[];
+    return {k:'p',ps:one([...new Set(ok.map(r=>r[1]))]),n:one([...new Set(ok.map(r=>r[2]))]),src}}
   if(/^[\w #-]+$/.test(rv[1]||'')){const d=(m[2]==='NUMBER'&&IDSBU[p.u])||IDSDT[m[2]]||IDSDT.TEXT; return {k:'p',ps:IDSPSET,n:rv[1],dt:d[0],rt:d[1],sc:p.sc}}
   return null}
 function idsSpecs(){const {out,cus}=spProject(), by={};
@@ -1678,11 +1687,15 @@ function idsXml(){const specs=idsSpecs(), A=[...lbUses()].map(u=>xt(USEN[u]||u))
 function idsPsetTxt(){const I=new Map();
   // One OpenBEP set, on occurrences, type parameters included: the exporter reads a type parameter through the instance.
   // A second set of the same name on types makes IDS checkers read only one of the two.
-  idsSpecs().forEach(s=>s.req.filter(r=>r.k==='p'&&r.ps===IDSPSET).forEach(r=>I.set(r.n,[r.n,r.rt||'Text'])));
-  const blk=(m,it,cls)=>m.size?[`PropertySet:\t${IDSPSET}\t${it}\t${cls}`,...[...m.values()].sort((a,b)=>a[0].localeCompare(b[0])).map(([n,t])=>`\t${n}\t${t}`)]:[];
+  // Standard Pset_* properties the IDS checks get the Revit parameter mapped in, on the element type's IFC classes (occurrences only, as above)
+  const P=new Map(), cap=e=>IFCCASE[e]?'Ifc'+IFCCASE[e]:e;
+  idsSpecs().forEach(s=>s.req.filter(r=>r.k==='p').forEach(r=>{if(r.ps===IDSPSET){I.set(r.n,[r.n,r.rt||'Text']);return}
+    (r.src||[]).forEach(([ps,n,t,rn])=>{const cl=IDSE[s.c.id].flatMap(e=>[].concat(e[0])).map(cap);
+      const o=P.get(ps)||{cls:new Set(),m:new Map()}; cl.forEach(c=>o.cls.add(c)); o.m.set(n,[n,t,rn]); P.set(ps,o)})}));
+  const blk=(m,it,cls,ps=IDSPSET)=>m.size?[`PropertySet:\t${ps}\t${it}\t${cls}`,...[...m.values()].sort((a,b)=>a[0].localeCompare(b[0])).map(([n,t,rn])=>`\t${n}\t${t}`+(rn?`\t${rn}`:''))]:[];
   return ['#','# OpenBEP user-defined property sets for the Revit IFC exporter.','# Use: IFC export > Modify setup > Property Sets > Export user defined property sets, and pick this file.',
    '# Also turn on "Export IFC common property sets" and "Export base quantities".','# Property names are the Revit parameter names (English Revit). Generated by the OpenBEP Builder for the matching IDS file.','#',
-   ...blk(I,'I','IfcElement,IfcSpatialElement,IfcZone')].join('\r\n')+'\r\n'}
+   ...blk(I,'I','IfcElement,IfcSpatialElement,IfcZone'),...[...P].sort((a,b)=>a[0].localeCompare(b[0])).flatMap(([ps,o])=>blk(o.m,'I',[...o.cls].sort().join(','),ps))].join('\r\n')+'\r\n'}
 function spBox(){const {out,cus}=spProject(), sh=new Set(out.filter(x=>!x.bi).map(x=>x.m[1])).size, bi=new Set(out.filter(x=>x.bi).map(x=>x.p.rv[1])).size, el=new Set(out.map(x=>x.c.id)).size;
   return `<div class="sec" id="spSec"><h3>Revit parameters for this project</h3><p class="sub">Every owner should ask for fire rating, airflow or asset tag the same way. This project's parameters come from the OpenBEP list v${SP.v}: one name and one fixed GUID per parameter, the same on every project, so data from different projects and firms can be combined. Revit's own built-in parameters are used wherever they exist.</p>
   <div class="stats"><span><b>${sh}</b> shared parameters to add</span><span><b>${bi}</b> Revit built-in parameters to fill</span><span><b>${el}</b> element types</span>${cus.length?`<span><b>${cus.length}</b> owner additions (not in the list)</span>`:''}</div>
