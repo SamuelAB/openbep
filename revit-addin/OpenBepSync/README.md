@@ -1,6 +1,6 @@
 # OpenBEP Sync: Revit add-in (v0.1, built for Revit 2022, first run in Revit pending)
 
-This add-in adds an **OpenBEP** tab to Revit with three buttons: **Sync parameters**, **Build family library** (see [`library/`](../../library/)) and **Replace materials** (see [below](#replace-materials)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
+This add-in adds an **OpenBEP** tab to Revit with four buttons: **Sync parameters**, **Build family library** (see [`library/`](../../library/)), **Replace materials** (see [below](#replace-materials)) and **Create views** (see [below](#create-views)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
 
 ## What it does
 
@@ -66,6 +66,28 @@ Not done yet:
 - Polynine's "Force integral wall sweeps", eyedropper and paint bucket aren't rebuilt.
 - As with any material change in Revit, dimensions hosted on a material's surface pattern can disappear when the new material has a different pattern.
 
+## Create views
+
+A batch view creator in the spirit of Ideate ViewCreator, built around the OpenBEP view rule ([`docs/naming-rules.md`](../../docs/naming-rules.md#views)). Names are never typed: they come from the rule, so every firm using it names views the same way. One window, no wizard:
+
+1. **Top bar:** phase, drawing set (`CON`, `PERMIT`, `W`, your own `Z-USER-<NAME>`…), design option, discipline (for templates) and the Title on Sheet language.
+2. **Grid:** one row per level (top floor first), one column per plan type (`010-PLAN`, `020-PLAN-EGRESS`, `030-RCP`…). Tick a cell, or click a level or a type to tick its whole row or column. Views that already exist show as grey ticks, so the grid is also a map of what the project has. Levels not named by the OpenBEP rule are in red.
+3. **Dependents per scope box:** tick scope boxes named `SB-A`, `SB-B`…; each ticked plan gets a dependent per zone (`N-CON-PLAN-L02-A`) cropped to its scope box.
+4. **Preview:** every view the run makes, with its name, template, Title on Sheet and status (new, exists, or what stops it). Change a template or a title there, or untick a line.
+5. **Create** makes them all in one transaction: one Undo reverses it.
+
+Each new view gets:
+
+- its name, `<PHASE>-<SET>-<TYPE>-<Level>[-OPTn][-Zone]`;
+- `OB_ViewSet` and `OB_ViewType`, so it lands in its browser folder at once (run Sync parameters first so the model has them);
+- the template `<Discipline>-<TYPE>-<Set>-<scale>` when the model has one (the largest scale when there are several);
+- its phase, and when the template doesn't set one, the phase filter from the rule (`Show Previous + Demo` for demolition plans, `Show Complete` in the existing phase, `Show Previous + New` otherwise);
+- Title on Sheet in words from the level and type (`Level 2 - Egress plan`, `Niveau 2 - Plan d'évacuation`), so the codes never reach the drawings.
+
+**Save plan** writes the ticks as a view plan (CSV: `Phase,Set,Type,Level,Option,Zone`); **Load plan** reads one back, in the next project or written by an AI. Nothing is made until a person presses Create.
+
+Not done yet: sections, elevations, 3D views per level, drafting views, room and element views, copying a whole set to another phase or set, renaming existing views to the rule (planned for the Set up project audit), placing views on sheets, and setting a design option's visibility (Revit doesn't let add-ins set it; the `-OPTn` name is added, the option is picked by hand).
+
 ## Build
 
 Requires Windows, Revit 2022 or later, and the .NET SDK 8 or later.
@@ -80,7 +102,7 @@ dotnet build -c Release -p:RevitVersion=2025
 
 ### Offline tests (no Revit needed)
 
-The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule, the fixed-GUID rule and the replace list rules (replace, rename, merge, chains, loops, OpenBEP names) are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
+The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule, the fixed-GUID rule and the replace list rules (replace, rename, merge, chains, loops, OpenBEP names) and the view naming rules (names, phase codes, templates, titles, the view plan file, and that the view types and drawing sets match `docs/naming-rules.md`) are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
 
 ```
 dotnet test revit-addin/OpenBepSync.Tests
@@ -96,7 +118,7 @@ dotnet test revit-addin/OpenBepSync.Tests
 
 | File | Role |
 |---|---|
-| `App.cs` | Adds the ribbon tab and its three buttons. |
+| `App.cs` | Adds the ribbon tab and its four buttons. |
 | `LibraryCommand.cs` | Builds the families in `library/families.csv` from Revit's metric templates, with types and OpenBEP shared parameters. |
 | `AutoTest.cs` | Developer test, off unless `%AppData%\OpenBEP\autotest.json` exists (see below). |
 | `SyncCommand.cs` | Dry run, report, choice, then one transaction that adds, binds or deletes. |
@@ -106,6 +128,10 @@ dotnet test revit-addin/OpenBepSync.Tests
 | `MaterialsWindow.cs` | The window: three lists, the replace list, import, export and the run. |
 | `MaterialIndex.cs` | Finds every use of each material (or asset) and changes them; the same walk does both, so the preview is what changes. |
 | `MaterialRules.cs` | Reads and writes replace lists and decides what each line does; no Revit needed. |
+| `CreateViewsCommand.cs` | Opens the Create views window. |
+| `CreateViewsWindow.cs` | The window: the level × view type grid, scope boxes, the preview, view plan files and the run. |
+| `ViewCreator.cs` | Previews and makes the views: name, phase, template, phase filter, browser parameters, title, dependents. |
+| `ViewNaming.cs` | The OpenBEP view rule in code: sets, types, names, templates, titles, the view plan file; no Revit needed. |
 | `OpenBepSync.csproj` | Build file; set `RevitVersion`. |
 | `OpenBepSync.addin` | Revit manifest. |
 
@@ -117,7 +143,9 @@ For developers only; nothing happens unless `%AppData%\OpenBEP\autotest.json` ex
 2. creates a project from `DefaultMetric.rte` (or `template`), saves it in `out`, places the showroom and exports PNGs of the 3D view and the plan;
 3. runs Sync parameters on `bindings` (dry run, apply, second dry run);
 4. if `ifcPsets` is set: fills empty OpenBEP `OB_` parameters, and empty Type Mark, Mark, Manufacturer, Model and Description, with unique test values (warnings deleted, so a duplicate-mark warning cannot roll the fill back) and exports `OpenBEP-autotest.ifc` (IFC4, base quantities, common property sets, plus the user-defined property set file from [`shared-parameters/`](../../shared-parameters/)); check it with `test/check_ifc.py model.ifc plan.ids` (ifcopenshell and ifctester) against the IDS downloaded from the BEP Builder;
-5. saves the project, writes `autotest.log` and `autotest-done.txt` in `out`, and closes Revit (unless `"exit": "no"`).
+5. makes plans, egress plans and ceiling plans for every storey with Create views (and dependents if the model has scope boxes), logs each view's phase, phase filter, browser parameters and title, and checks a second preview finds them all;
+6. tests Replace materials without its window: renames the most used material to `OB_Test_Renamed`, merges the second into the third, logs the use counts before and after, rolls it all back, lists the assets and round-trips a replace list CSV;
+7. saves the project, writes `autotest.log` and `autotest-done.txt` in `out`, and closes Revit (unless `"exit": "no"`).
 
 Every Revit dialog is answered automatically ("save?" questions with No) and logged.
 

@@ -141,8 +141,82 @@ namespace OpenBepSync
             var psets = Get("ifcPsets");
             if (psets != null) { FillTestValues(doc); ExportIfc(doc, psets); }
 
+            // 8. Create views and Replace materials, without their windows.
+            CreateViews(doc);
+            ReplaceMaterials(doc);
+
             doc.Save();
             Log("SAVED " + rvt);
+        }
+
+        static void CreateViews(Document doc)
+        {
+            try
+            {
+                var vc = new ViewCreator(doc);
+                var phase = ViewNaming.PhaseCode(vc.Phases.Last().Name);
+                var plan = (from l in vc.Levels where vc.IsStorey(l)
+                            from t in new[] { "010-PLAN", "020-PLAN-EGRESS", "030-RCP" }
+                            select new PlannedView(phase, "CON", t, l.Name)).ToList();
+                plan.AddRange(vc.ScopeBoxes.Keys.Select(z => new PlannedView(phase, "CON", "010-PLAN", vc.Levels.First(vc.IsStorey).Name, "", z)));
+                var lines = vc.Preview(plan, "ARCH", true, false);
+                foreach (var l in lines) Log($"  view {l.Name}: {l.Status}; template '{l.Template}'; title '{l.Title}'; {l.Note}");
+                var failures = new List<string>();
+                using (var t = new Transaction(doc, "OpenBEP: create views"))
+                {
+                    t.Start();
+                    var made = vc.Create(lines, failures);
+                    Log($"VIEWS made {made.Count} of {lines.Count(l => l.Ok)}: {t.Commit()}");
+                    foreach (var v in made)
+                        Log($"  made {v.Name}: {v.ViewType}, level {(v as ViewPlan)?.GenLevel?.Name}, phase {doc.GetElement(v.get_Parameter(BuiltInParameter.VIEW_PHASE)?.AsElementId() ?? ElementId.InvalidElementId)?.Name}, " +
+                            $"phase filter {doc.GetElement(v.get_Parameter(BuiltInParameter.VIEW_PHASE_FILTER)?.AsElementId() ?? ElementId.InvalidElementId)?.Name}, " +
+                            $"OB_ViewSet {v.LookupParameter("OB_ViewSet")?.AsString()}, OB_ViewType {v.LookupParameter("OB_ViewType")?.AsString()}, title {v.get_Parameter(BuiltInParameter.VIEW_DESCRIPTION)?.AsString()}");
+                }
+                foreach (var f in failures) Log("  note " + f);
+                var again = new ViewCreator(doc).Preview(plan, "ARCH", true, false);
+                Log($"VIEWS second preview: {again.Count(l => l.Status == "exists")} of {again.Count} exist, {again.Count(l => l.Ok)} still to make");
+            }
+            catch (Exception ex) { Log("VIEWS failed: " + ex); }
+        }
+
+        /// <summary>Renames one used material and merges a second into a third, checks, then rolls back so the saved project is unchanged.</summary>
+        static void ReplaceMaterials(Document doc)
+        {
+            try
+            {
+                var ix = MaterialIndex.Build(doc, ReplaceKind.Materials);
+                var used = ix.Names.Where(kv => ix.Uses[kv.Key].Count > 0).OrderByDescending(kv => ix.Uses[kv.Key].Count).ToList();
+                Log($"MATERIALS {ix.Names.Count} materials, {used.Count} used, {ix.Uses.Sum(kv => kv.Value.Count)} uses");
+                foreach (var kv in used.Take(8)) Log($"  material {kv.Value}: {ix.Uses[kv.Key].Count} uses, e.g. {ix.Uses[kv.Key][0].OwnerLabel} ({ix.Uses[kv.Key][0].Where})");
+                if (used.Count < 3) { Log("MATERIALS fewer than 3 used materials, test skipped"); return; }
+                var (a, b, c) = (used[0].Value, used[1].Value, used[2].Value);
+                var rules = MaterialRules.Resolve(new[] { new MaterialRule(a, "OB_Test_Renamed"), new MaterialRule(b, c) }, ix.Names.Values.ToList(), ix.UseCount);
+                foreach (var r in rules) Log($"  rule {r.Rule.Old} > {r.Rule.New}: {r.Action} {r.Note}");
+                int usesB = ix.UseCount(b), usesC = ix.UseCount(c);
+                using (var t = new Transaction(doc, "OpenBEP: replace materials (test)"))
+                {
+                    t.Start();
+                    doc.GetElement(ix.IdOf(a)).Name = "OB_Test_Renamed";
+                    var failures = new List<string>();
+                    int changed = ix.Apply(new Dictionary<ElementId, ElementId> { [ix.IdOf(b)] = ix.IdOf(c) }, new HashSet<ElementId>(), failures);
+                    doc.Regenerate();
+                    var after = MaterialIndex.Build(doc, ReplaceKind.Materials);
+                    Log($"MATERIALS changed {changed} uses; {b} now {after.UseCount(b)} uses (was {usesB}, locked {ix.Uses[ix.IdOf(b)].Count(u => u.Locked)}); " +
+                        $"{c} now {after.UseCount(c)} (was {usesC}); OB_Test_Renamed {after.UseCount("OB_Test_Renamed")} uses (was {a} {ix.UseCount(a)})");
+                    foreach (var f in failures) Log("  could not change " + f);
+                    t.RollBack();
+                }
+                Log($"MATERIALS rolled back: {a} back with {MaterialIndex.Build(doc, ReplaceKind.Materials).UseCount(a)} uses");
+                foreach (var k in new[] { ReplaceKind.AppearanceAssets, ReplaceKind.PhysicalAssets, ReplaceKind.ThermalAssets })
+                {
+                    var ax = MaterialIndex.Build(doc, k);
+                    Log($"MATERIALS {k}: {ax.Names.Count} assets, {ax.Uses.Count(kv => kv.Value.Count > 0)} in use");
+                }
+                var csv = Path.Combine(outDir, "replace-list-test.csv");
+                MaterialRules.Write(csv, rules.Select(r => r.Rule));
+                Log($"MATERIALS list round trip: {MaterialRules.Read(csv, out var w).Count} lines back, {w.Count} warnings");
+            }
+            catch (Exception ex) { Log("MATERIALS failed: " + ex); }
         }
 
         static void Inspect(Application app, LibFamily f, string path)
