@@ -159,3 +159,21 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Type Name	Label
 	Volume	Volume
 	Width	Length
+PropertySet:	Pset_AirTerminalBoxTypeCommon	I	IfcAirTerminalBox
+	NominalAirFlowRate	VolumetricFlowRate	Flow
+PropertySet:	Pset_DoorWindowGlazingType	I	IfcCurtainWall,IfcWindow
+	VisibleLightTransmittance	Real	Visual Light Transmittance
+PropertySet:	Pset_ElectricalDeviceCommon	I	IfcElectricDistributionBoard,IfcElectricGenerator,IfcJunctionBox,IfcOutlet,IfcSwitchingDevice
+	IP_Code	Label	Enclosure
+	NumberOfPoles	Real	Number of Poles
+	RatedCurrent	ElectricCurrent	Mains
+	RatedVoltage	ElectricVoltage	Voltage
+PropertySet:	Pset_FanTypeCommon	I	IfcFan
+	NominalAirFlowRate	VolumetricFlowRate	Flow
+PropertySet:	Pset_PipeSegmentOccurrence	I	IfcPipeFitting,IfcPipeSegment
+	Gradient	Real	Slope
+	InvertElevation	Length	Invert Elevation
+PropertySet:	Pset_RailingCommon	I	IfcRailing
+	Height	Length	Railing Height
+PropertySet:	Pset_SlabCommon	I	IfcRoof
+	PitchAngle	Real	Slope
