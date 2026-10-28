@@ -1,28 +1,37 @@
-﻿List,Name,Class,Label (FR)
-Class,Concrete,Concrete,
-Class,Masonry,Masonry,
-Class,Metal,Metal,
-Class,Wood,Wood,
-Class,Gypsum,Gypsum,
-Class,Insulation,Insulation,
-Class,Membrane,Membrane,
-Class,Glass,Glass,
-Class,Finish,Finish,
-Class,Plastic,Plastic,
-Class,Earth,Earth,
-Class,Generic,Generic,
-Example material,OB_Concrete_CastInPlace_35MPa,Concrete,Béton coulé en place 35 MPa
-Example material,OB_Concrete_Precast_50MPa,Concrete,Béton préfabriqué 50 MPa
-Example material,OB_Masonry_ConcreteBlock_Normal,Masonry,Bloc de béton
-Example material,OB_Masonry_Brick_Clay,Masonry,Brique d'argile
-Example material,OB_Metal_Steel_350W,Metal,Acier 350W
-Example material,OB_Metal_Aluminium_Anodized,Metal,Aluminium anodisé
-Example material,OB_Wood_Lumber_SPF,Wood,Bois d'œuvre É-P-S
-Example material,OB_Wood_CLT,Wood,Bois lamellé-croisé
-Example material,OB_Gypsum_Board_TypeX,Gypsum,Gypse type X
-Example material,OB_Insulation_MineralWool_Batt,Insulation,Laine minérale en matelas
-Example material,OB_Insulation_XPS_Board,Insulation,Polystyrène extrudé
-Example material,OB_Membrane_AirVapour_SelfAdhered,Membrane,Pare-air/vapeur autocollant
-Example material,OB_Glass_Laminated_Clear,Glass,Verre feuilleté clair
-Example material,OB_Finish_Paint_Latex,Finish,Peinture latex
-Example material,OB_Earth_Gravel_Granular_A,Earth,Gravier granulaire A
+﻿List,Name,Class,Counted in take-offs,Label (FR)
+Class,Concrete,Concrete,,
+Class,Masonry,Masonry,,
+Class,Metal,Metal,,
+Class,Wood,Wood,,
+Class,Gypsum,Gypsum,,
+Class,Insulation,Insulation,,
+Class,Membrane,Membrane,,
+Class,Glass,Glass,,
+Class,Finish,Finish,,
+Class,Plastic,Plastic,,
+Class,Earth,Earth,,
+Class,Generic,Generic,,
+Example material,OB_Concrete_CastInPlace_35MPa,Concrete,Yes,Béton coulé en place 35 MPa
+Example material,OB_Concrete_Precast_50MPa,Concrete,Yes,Béton préfabriqué 50 MPa
+Example material,OB_Concrete_Generic,Concrete,Yes,Béton (à préciser)
+Example material,OB_Masonry_ConcreteBlock_Normal,Masonry,Yes,Bloc de béton
+Example material,OB_Masonry_Brick_Red-Matte,Masonry,Yes,Brique rouge mate
+Example material,OB_Masonry_Brick_Red-Paver,Masonry,Yes,Pavé de brique rouge
+Example material,OB_Metal_Steel_350W,Metal,Yes,Acier 350W
+Example material,OB_Metal_Aluminium_Anodized,Metal,Yes,Aluminium anodisé
+Example material,OB_Wood_Lumber_SPF,Wood,Yes,Bois d'œuvre É-P-S
+Example material,OB_Wood_CLT,Wood,Yes,Bois lamellé-croisé
+Example material,OB_Wood_Oak_Flooring,Wood,Yes,Plancher de chêne
+Example material,OB_Wood_Oak_CeilingSlat,Wood,Yes,Lattes de plafond en chêne
+Example material,OB_Gypsum_Board_TypeX,Gypsum,Yes,Gypse type X
+Example material,OB_Insulation_MineralWool_Batt,Insulation,Yes,Laine minérale en matelas
+Example material,OB_Insulation_XPS_Board,Insulation,Yes,Polystyrène extrudé
+Example material,OB_Membrane_AirVapour_SelfAdhered,Membrane,Yes,Pare-air/vapeur autocollant
+Example material,OB_Glass_Laminated_Clear,Glass,Yes,Verre feuilleté clair
+Example material,OB_Finish_Paint_Latex-Eggshell,Finish,Yes,Peinture latex coquille d'œuf
+Example material,OB_Earth_Gravel_Granular-A,Earth,Yes,Gravier granulaire A
+Example material,OB_Generic_Metal,Generic,No,Métal générique
+Example material,OB_Generic_Plastic,Generic,No,Plastique générique
+Example material,OB_Generic_Wood,Generic,No,Bois générique
+Example material,OB_Generic_Glass,Generic,No,Verre générique
+Example material,OB_Generic_Fabric,Generic,No,Tissu générique

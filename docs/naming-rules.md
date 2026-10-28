@@ -8,8 +8,8 @@ How OpenBEP names things in a Revit project: the rules every list follows, model
 
 | Rule | Write | Not | Règle (FR) |
 | --- | --- | --- | --- |
-| Literal: anyone outside the project understands it | `OB_Masonry_Brick_Clay` | `OB_Mat07` | Littéral : compris par quelqu'un hors du projet |
-| As short as it can be and still be understood; abbreviate when the short form is common | `L02-RCP` | `Level 2 - Reflected Ceiling Plan` | Aussi court que possible tout en restant compris |
+| Literal: anyone outside the project understands it | `OB_Masonry_Brick_Red-Matte` | `OB_Mat07` | Littéral : compris par quelqu'un hors du projet |
+| As short as it can be and still be understood; abbreviate when the short form is common | `N-C-L02-RCP` | `New - Construction - Level 2 - Reflected Ceiling Plan` | Aussi court que possible tout en restant compris |
 | General to specific: major, then medium, then minor | `Glass_Laminated_Clear` | `Clear_Laminated_Glass` | Du général au particulier |
 | No spaces around separators | `Line-Xhatch` | `Line - Xhatch` | Pas d'espaces autour des séparateurs |
 | Read the list sorted: values that belong together must sort together and in a sensible order | `Light`, `Medium`, `Wide` | `Light`, `Medium`, `Heavy` | Vérifier la liste triée par ordre alphabétique |
@@ -77,26 +77,7 @@ The level name is a short code that sorts the way the building stacks. No elevat
 
 ## Views
 
-A view name reads `<Level>-<TYPE>-<purpose>`, level first, so a floor's views list together and the name says what the view is: `L02-PLAN-EGRESS`. A view with no level drops that part: `SECT-STAIR-01`, `3D-COORD`. A working view ends with the user's initials: `L02-PLAN-WORK-JD`.
-
-Revit needs a view name to be unique among views of the same kind (all floor plans, for example). Construction views of the new building carry no prefix, since they are most of the model. When the same view exists in another phase or another drawing set, that code goes in front: `EX-L01-PLAN` (existing), `P-L02-PLAN` (presentation). The printed title comes from Title on Sheet, so prefixes never reach the drawings.
-
-The project browser does the grouping, from view parameters rather than from the name: phase, then drawing set, then view type, sorted by level. Everyone sees which phase they are drawing in, and each drawing set keeps its own tags and sections without disturbing the others.
-
-| Browser level | Revit parameter | Set by |
-| --- | --- | --- |
-| 1 | Phase (built-in) | The view, when it is created |
-| 2 | `OB_ViewSet` (OpenBEP shared parameter) | The view template |
-| 3 | Family and Type (built-in) | Revit |
-| Sort | Associated Level, then View Name | Revit |
-
-### View parameters
-
-| Name | Type | Label (EN) | Label (FR) | Holds |
-| --- | --- | --- | --- | --- |
-| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set code, such as `C` |
-
-A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
+Every view name starts with its phase and drawing set, then the level, the view type and the purpose. Names stay consistent, and a view copied into another phase or set never needs renaming later. The project browser groups the same way: phase, then drawing set, then view type.
 
 ### Phases
 
@@ -105,7 +86,7 @@ A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
 | `EX` | Existing | Existant |
 | `N` | New Construction | Nouvelle construction |
 
-Revit's own phase names, with a short code used only as a view name prefix (`EX-`). New Construction views need no prefix. A project with more phases names them in the plan.
+Revit's own phase names, each with a short code that starts every view name. A project with more phases names them in the plan and keeps the codes short.
 
 ### Drawing sets
 
@@ -136,34 +117,63 @@ Revit's own phase names, with a short code used only as a view name prefix (`EX-
 
 The type is followed by the purpose: `PLAN-EGRESS`, `PLAN-DEPT`, `PLAN-ROOF`, `PLAN-FURN`, `PLAN-LRG-STAIR`.
 
+### View names
+
+`<PHASE>-<SET>-<Level>-<TYPE>-<purpose>`
+
+Example: `N-C-L02-PLAN-EGRESS` is the new construction, construction set, level 2 egress plan.
+
+- A view with no level drops that part: `N-C-SECT-STAIR-01`, `N-P-3D-LOBBY`.
+- A working view ends with the user's initials: `N-W-L02-PLAN-JD`.
+- The printed title comes from Title on Sheet, so the codes never reach the drawings.
+
+### Project browser
+
+Grouped from view parameters, not by reading the name, so a misspelt name still lands in the right folder.
+
+| Browser level | Revit parameter | Set by |
+| --- | --- | --- |
+| 1 | Phase (built-in) | The view, when it is created |
+| 2 | `OB_ViewSet` (OpenBEP shared parameter) | The view template |
+| 3 | Family and Type (built-in) | Revit |
+| Sort | Associated Level, then View Name | Revit |
+
+### View parameters
+
+| Name | Type | Label (EN) | Label (FR) | Holds |
+| --- | --- | --- | --- | --- |
+| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set code, such as `C` |
+
+A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
+
 ### View templates
 
-`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-C-100` or `MECH-RCP-C-50`. Each template sets the phase and `OB_ViewSet`, so a new view files itself.
+`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-C-100` or `MECH-RCP-C-50`. Each template sets `OB_ViewSet`, so a new view files itself.
 
 ### Example project browser
 
 - New Construction
   - C - Construction
     - Floor Plan
-      - L01-PLAN
-      - L02-PLAN
-      - L02-PLAN-EGRESS
+      - N-C-L01-PLAN
+      - N-C-L02-PLAN
+      - N-C-L02-PLAN-EGRESS
     - Ceiling Plan
-      - L02-RCP
+      - N-C-L02-RCP
     - Section
-      - SECT-STAIR-01
+      - N-C-SECT-STAIR-01
   - P - Presentation
     - Floor Plan
-      - P-L02-PLAN
+      - N-P-L02-PLAN
     - 3D View
-      - 3D-LOBBY
+      - N-P-3D-LOBBY
   - W - Work
     - Floor Plan
-      - L02-PLAN-WORK-JD
+      - N-W-L02-PLAN-JD
 - Existing
   - C - Construction
     - Floor Plan
-      - EX-L01-PLAN
+      - EX-C-L01-PLAN
 
 ## Built-in parameters with a fixed job
 
