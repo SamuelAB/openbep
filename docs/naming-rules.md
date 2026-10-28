@@ -35,6 +35,12 @@ When the plan uses ISO 19650 file naming fields instead, the discipline codes be
 | `PLUMB` | Plumbing | Plomberie |
 | `FIRE` | Fire protection and sprinklers | Protection incendie et gicleurs |
 | `REFRIG` | Refrigeration | Réfrigération |
+| `LIGHT` | Lighting | Éclairage |
+| `COMM` | Communications, data and audiovisual | Télécommunications, données et audiovisuel |
+| `SECUR` | Security and access control | Sécurité et contrôle d'accès |
+| `BAS` | Building automation and controls | Automatisation et régulation du bâtiment |
+| `INT` | Interiors | Aménagement intérieur |
+| `LAND` | Landscape | Architecture de paysage |
 | `SITE` | Site and landscaping | Aménagement du site et paysage |
 | `CIVIL` | Civil engineering | Génie civil |
 | `LOCATION` | Grids, levels and shared coordinates only | Grilles, niveaux et coordonnées partagées seulement |
@@ -99,7 +105,8 @@ Revit's own phase names, each with a short code that starts every view name. A p
 | `P` | Presentation | Views for the client, committees or the city; one set each (`P-CLIENT`, `P-CITY`) | Présentation |
 | `PE` | Permit | Views placed on the permit set | Permis |
 | `QC` | Quality control | Views that isolate each phase, workset and floor | Contrôle de la qualité |
-| `W` | Work | Working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
+| `W` | Work | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
+| `Z-USER-<NAME>` | One person's views | Personal views of one team member, such as `Z-USER-SAM`; sorts last and is filtered out of the browser, exports and handover | Vues personnelles |
 
 ### View types
 
@@ -124,7 +131,7 @@ The type is followed by the purpose: `PLAN-EGRESS`, `PLAN-DEPT`, `PLAN-ROOF`, `P
 Example: `N-C-L02-PLAN-EGRESS` is the new construction, construction set, level 2 egress plan.
 
 - A view with no level drops that part: `N-C-SECT-STAIR-01`, `N-P-3D-LOBBY`.
-- A working view ends with the user's initials: `N-W-L02-PLAN-JD`.
+- A person's own views go in their own set: `N-Z-USER-SAM-L02-PLAN`. The `Z` sorts them after every shared set, and a browser filter on `OB_ViewSet` not beginning with `Z-` hides them all at once. They are deleted or left out at handover.
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
 
 ### Project browser
@@ -169,7 +176,10 @@ A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
       - N-P-3D-LOBBY
   - W - Work
     - Floor Plan
-      - N-W-L02-PLAN-JD
+      - N-W-L02-PLAN-ROOMS
+  - Z-USER-SAM - Sam's views
+    - Floor Plan
+      - N-Z-USER-SAM-L02-PLAN
 - Existing
   - C - Construction
     - Floor Plan

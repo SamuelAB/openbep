@@ -14,6 +14,12 @@ Discipline code,ELECT,Electrical,,Électricité
 Discipline code,PLUMB,Plumbing,,Plomberie
 Discipline code,FIRE,Fire protection and sprinklers,,Protection incendie et gicleurs
 Discipline code,REFRIG,Refrigeration,,Réfrigération
+Discipline code,LIGHT,Lighting,,Éclairage
+Discipline code,COMM,"Communications, data and audiovisual",,"Télécommunications, données et audiovisuel"
+Discipline code,SECUR,Security and access control,,Sécurité et contrôle d'accès
+Discipline code,BAS,Building automation and controls,,Automatisation et régulation du bâtiment
+Discipline code,INT,Interiors,,Aménagement intérieur
+Discipline code,LAND,Landscape,,Architecture de paysage
 Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
 Discipline code,CIVIL,Civil engineering,,Génie civil
 Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
@@ -36,7 +42,8 @@ Drawing set code,EXP,"Export: Views exported to other software (IFC, Navisworks,
 Drawing set code,P,"Presentation: Views for the client, committees or the city; one set each (P-CLIENT, P-CITY)",,Présentation
 Drawing set code,PE,Permit: Views placed on the permit set,,Permis
 Drawing set code,QC,"Quality control: Views that isolate each phase, workset and floor",,Contrôle de la qualité
-Drawing set code,W,"Work: Working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+Drawing set code,W,"Work: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+Drawing set code,Z-USER-<NAME>,"One person's views: Personal views of one team member, such as Z-USER-SAM; sorts last and is filtered out of the browser, exports and handover",,Vues personnelles
 View type code,3D,Camera view,,Vue caméra
 View type code,AXO,Axonometric view,,Vue axonométrique
 View type code,PLAN,Plan,,Plan
