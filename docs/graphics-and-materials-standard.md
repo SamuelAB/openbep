@@ -158,27 +158,43 @@ A material is named for what it is, not for who made it or how thick it is. The 
 
 ### Name pattern
 
-`OB_<Class>_<Type>_<Differentiator>`, following the Open BIM Object Standard pattern.
+`OB_<Class>_<Material>_<Detail>`: the class first, so all the wood lists together, then the material, then what sets it apart (grade, finish, colour, or the use when the use changes the material). Following the Open BIM Object Standard and the Dutch Revit standards, which also put the material before the use.
 
-| Example | Class | Matériau (FR) |
-| --- | --- | --- |
-| `OB_Concrete_CastInPlace_35MPa` | Concrete | Béton coulé en place 35 MPa |
-| `OB_Concrete_Precast_50MPa` | Concrete | Béton préfabriqué 50 MPa |
-| `OB_Masonry_ConcreteBlock_Normal` | Masonry | Bloc de béton |
-| `OB_Masonry_Brick_Clay` | Masonry | Brique d'argile |
-| `OB_Metal_Steel_350W` | Metal | Acier 350W |
-| `OB_Metal_Aluminium_Anodized` | Metal | Aluminium anodisé |
-| `OB_Wood_Lumber_SPF` | Wood | Bois d'œuvre É-P-S |
-| `OB_Wood_CLT` | Wood | Bois lamellé-croisé |
-| `OB_Gypsum_Board_TypeX` | Gypsum | Gypse type X |
-| `OB_Insulation_MineralWool_Batt` | Insulation | Laine minérale en matelas |
-| `OB_Insulation_XPS_Board` | Insulation | Polystyrène extrudé |
-| `OB_Membrane_AirVapour_SelfAdhered` | Membrane | Pare-air/vapeur autocollant |
-| `OB_Glass_Laminated_Clear` | Glass | Verre feuilleté clair |
-| `OB_Finish_Paint_Latex` | Finish | Peinture latex |
-| `OB_Earth_Gravel_Granular_A` | Earth | Gravier granulaire A |
+Add the use only when it changes the finish, grade or cost. Oak flooring and oak ceiling slats are two materials; the same concrete in walls, floors and columns is one, so its quantity totals in one line.
 
-Classes are fixed: Concrete, Masonry, Metal, Wood, Gypsum, Insulation, Membrane, Glass, Finish, Plastic, Earth, Generic. `OB_Generic_<Class>` is only for LOD 100 and 200, before the material is known.
+| Example | Class | Counted | Matériau (FR) |
+| --- | --- | --- | --- |
+| `OB_Concrete_CastInPlace_35MPa` | Concrete | Yes | Béton coulé en place 35 MPa |
+| `OB_Concrete_Precast_50MPa` | Concrete | Yes | Béton préfabriqué 50 MPa |
+| `OB_Concrete_Generic` | Concrete | Yes | Béton (à préciser) |
+| `OB_Masonry_ConcreteBlock_Normal` | Masonry | Yes | Bloc de béton |
+| `OB_Masonry_Brick_Red-Matte` | Masonry | Yes | Brique rouge mate |
+| `OB_Masonry_Brick_Red-Paver` | Masonry | Yes | Pavé de brique rouge |
+| `OB_Metal_Steel_350W` | Metal | Yes | Acier 350W |
+| `OB_Metal_Aluminium_Anodized` | Metal | Yes | Aluminium anodisé |
+| `OB_Wood_Lumber_SPF` | Wood | Yes | Bois d'œuvre É-P-S |
+| `OB_Wood_CLT` | Wood | Yes | Bois lamellé-croisé |
+| `OB_Wood_Oak_Flooring` | Wood | Yes | Plancher de chêne |
+| `OB_Wood_Oak_CeilingSlat` | Wood | Yes | Lattes de plafond en chêne |
+| `OB_Gypsum_Board_TypeX` | Gypsum | Yes | Gypse type X |
+| `OB_Insulation_MineralWool_Batt` | Insulation | Yes | Laine minérale en matelas |
+| `OB_Insulation_XPS_Board` | Insulation | Yes | Polystyrène extrudé |
+| `OB_Membrane_AirVapour_SelfAdhered` | Membrane | Yes | Pare-air/vapeur autocollant |
+| `OB_Glass_Laminated_Clear` | Glass | Yes | Verre feuilleté clair |
+| `OB_Finish_Paint_Latex-Eggshell` | Finish | Yes | Peinture latex coquille d'œuf |
+| `OB_Earth_Gravel_Granular-A` | Earth | Yes | Gravier granulaire A |
+| `OB_Generic_Metal` | Generic | No | Métal générique |
+| `OB_Generic_Plastic` | Generic | No | Plastique générique |
+| `OB_Generic_Wood` | Generic | No | Bois générique |
+| `OB_Generic_Glass` | Generic | No | Verre générique |
+| `OB_Generic_Fabric` | Generic | No | Tissu générique |
+
+Classes are fixed: Concrete, Masonry, Metal, Wood, Gypsum, Insulation, Membrane, Glass, Finish, Plastic, Earth, Generic. The class goes in Revit's material Class field too.
+
+Two kinds of generic:
+
+- **`OB_<Class>_Generic`** (`OB_Concrete_Generic`, `OB_Masonry_Generic`): the class is known, the exact material isn't yet. Allowed at LOD 100 and 200, and counted, since early estimates need it.
+- **`OB_Generic_<Kind>`** (`OB_Generic_Metal`, `OB_Generic_Plastic`): materials nobody counts. Furniture, equipment, appliances and fixtures use these, so the thirty plastics of a loaded toaster become one `OB_Generic_Plastic`. Quantity take-offs skip every material starting with `OB_Generic_`. A project whose uses need those materials (visualisation, a furniture inventory) lists the exceptions in the plan.
 
 ### Data each material must carry
 
@@ -198,7 +214,7 @@ Each material also carries `OB_UniclassMa`, its code from the free [Uniclass Mat
 
 - **Cut and surface patterns** come from the material, not from overrides, so every view agrees. Each class has one cut pattern, such as `OB_Concrete`, `OB_Insulation_Batt` or `OB_Earth`, drawn with pen 1.
 - **Appearance:** one appearance asset per material, Revit's own library or a plain colour. No imported textures unless the visualisation use is chosen, since they bloat the model.
-- **No duplicates:** Revit copies a material on every family load. The OpenBEP Sync add-in should flag any material not starting with `OB_` at each milestone.
+- **No duplicates:** Revit copies a material on every family load. At each milestone, a check lists every material not in the project's list with its element count. A batch tool then renames them, inside loaded families too, to a listed name (a toaster's thirty plastics to `OB_Generic_Plastic`), after a person approves the old-to-new list. Such tools have existed as Revit add-ins; OpenBEP plans one.
 
 ### What counts as no material
 

@@ -1,6 +1,6 @@
 ﻿List,Code or rule,Meaning or example,Not,Label (FR)
-Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Clay,OB_Mat07,Littéral : compris par quelqu'un hors du projet
-Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,L02-RCP,Level 2 - Reflected Ceiling Plan,Aussi court que possible tout en restant compris
+Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Red-Matte,OB_Mat07,Littéral : compris par quelqu'un hors du projet
+Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-C-L02-RCP,New - Construction - Level 2 - Reflected Ceiling Plan,Aussi court que possible tout en restant compris
 Rule for every name,"General to specific: major, then medium, then minor",Glass_Laminated_Clear,Clear_Laminated_Glass,Du général au particulier
 Rule for every name,No spaces around separators,Line-Xhatch,Line - Xhatch,Pas d'espaces autour des séparateurs
 Rule for every name,Read the list sorted: values that belong together must sort together and in a sensible order,"Light, Medium, Wide","Light, Medium, Heavy",Vérifier la liste triée par ordre alphabétique
@@ -18,7 +18,7 @@ Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
 Discipline code,CIVIL,Civil engineering,,Génie civil
 Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
 Discipline code,CON,Contractor's construction model,,Modèle de construction de l'entrepreneur
-View name,<Level>-<TYPE>-<purpose>,L02-PLAN-EGRESS,,
+View name,<PHASE>-<SET>-<Level>-<TYPE>-<purpose>,N-C-L02-PLAN-EGRESS,,
 View template name,<Discipline>-<TYPE>-<Set>-<scale>,ARCH-PLAN-C-100,,
 Level code,B2,Second basement (Building Story: Yes),,Deuxième sous-sol
 Level code,B1,First basement (Building Story: Yes),,Premier sous-sol

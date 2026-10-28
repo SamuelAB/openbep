@@ -102,7 +102,8 @@ def clean(s):
 def graphics():
     md = DOC.read_text(encoding='utf-8')
     classes = re.search(r'Classes are fixed: ([^.]+)\.', md).group(1).split(', ')
-    mats = [{'name': r['Example'], 'cls': r['Class'], 'fr': r['Matériau (FR)']} for r in tables_after(md, '### Name pattern')]
+    mats = [{'name': r['Example'], 'cls': r['Class'], 'cnt': r['Counted'], 'fr': r['Matériau (FR)']}
+            for r in tables_after(md, '### Name pattern')]
     patterns = [{'name': r['Name'], 'dash': r['Dashes and gaps (mm)'], 'use': r['Used for'], 'fr': r['Nom (FR)']}
                 for r in tables_after(md, '### Line patterns (lengths on paper)')]
     pens = [{'pen': r['Pen'], 'w': [r[k] for k in ('1:10', '1:20', '1:50', '1:100', '1:200', '1:500')],
@@ -132,14 +133,14 @@ def naming():
             for r in tables_after(md, '### Drawing sets')]
     vtypes = [{'code': r['Code'], 'en': r['View'], 'fr': r['Vue (FR)']} for r in tables_after(md, '### View types')]
     vsec = md.split('## Views', 1)[1]
-    view_pattern = re.search(r'`(<Level>[^`]+)`', vsec).group(1)
-    view_example = re.search(r'level first[^`]*`([^`]+)`', vsec).group(1)
+    view_pattern = re.search(r'`(<PHASE>[^`]+)`', vsec).group(1)
+    view_example = re.search(r'Example: `([^`]+)`', vsec).group(1)
     levels = [{'code': r['Code'], 'en': r['Level'], 'story': r['Building Story'], 'fr': r['Niveau (FR)']}
               for r in tables_after(md, '## Levels')]
     building = [{'code': r['Code'], 'z': float(r['Elevation (m)']), 'story': r['Building Story'] == 'Yes'}
                 for r in tables_after(md, '### Example building')]
     browser_params = [{'n': r['Browser level'], 'p': r['Revit parameter'], 'by': r['Set by']}
-                      for r in tables_after(md, '## Views')]
+                      for r in tables_after(md, '### Project browser')]
     templ = re.search(r'### View templates\n\n`([^`]+)`, for example `([^`]+)`', md)
     tree = []
     for line in md.split('### Example project browser', 1)[1].split('\n## ', 1)[0].splitlines():
@@ -200,9 +201,9 @@ def build():
             [[p['name'], p['kind'], p['guid'], p['type'], p['unit'], p['scope'], p['group'], p['en'], p['fr'],
               '; '.join(p['els']), p['lod'], p['ex'], p['desc']] for p in P]),
         'openbep-materials.csv': csv_text(
-            ['List', 'Name', 'Class', 'Label (FR)'],
-            [['Class', c, c, ''] for c in G['classes']] +
-            [['Example material', m['name'], m['cls'], m['fr']] for m in G['materials']]),
+            ['List', 'Name', 'Class', 'Counted in take-offs', 'Label (FR)'],
+            [['Class', c, c, '', ''] for c in G['classes']] +
+            [['Example material', m['name'], m['cls'], m['cnt'], m['fr']] for m in G['materials']]),
         'openbep-lines.csv': csv_text(
             ['List', 'Name', 'Dashes and gaps (mm) or pen', 'Used for', 'Label (FR)'],
             [['Line pattern', x['name'], x['dash'], x['use'], x['fr']] for x in G['patterns']] +
