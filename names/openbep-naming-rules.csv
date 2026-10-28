@@ -1,6 +1,6 @@
 ﻿List,Code or rule,Meaning or example,Not,Label (FR)
 Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Red-Matte,OB_Mat07,Littéral : compris par quelqu'un hors du projet
-Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-CON-L02-RCP,New - Construction - Level 2 - Reflected Ceiling Plan,Aussi court que possible tout en restant compris
+Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-CON-RCP-L02,New - Construction - Reflected Ceiling Plan - Level 2,Aussi court que possible tout en restant compris
 Rule for every name,"General to specific: major, then medium, then minor",Glass_Laminated_Clear,Clear_Laminated_Glass,Du général au particulier
 Rule for every name,No spaces around separators,Line-Xhatch,Line - Xhatch,Pas d'espaces autour des séparateurs
 Rule for every name,Read the list sorted: values that belong together must sort together and in a sensible order,"Light, Medium, Wide","Light, Medium, Heavy",Vérifier la liste triée par ordre alphabétique
@@ -24,7 +24,7 @@ Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
 Discipline code,CIVIL,Civil engineering,,Génie civil
 Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
 Discipline code,CON,Contractor's construction model,,Modèle de construction de l'entrepreneur
-View name,<PHASE>-<SET>-<Level>-<TYPE>-<purpose>,N-CON-L02-PLAN-EGRESS,,
+View name,<PHASE>-<SET>-<TYPE>-<Level>,N-CON-PLAN-EGRESS-L02,,
 View template name,<Discipline>-<TYPE>-<Set>-<scale>,ARCH-PLAN-CON-100,,
 Level code,B2,Second basement (Building Story: Yes),,Deuxième sous-sol
 Level code,B1,First basement (Building Story: Yes),,Premier sous-sol
@@ -35,24 +35,50 @@ Level code,RF,Roof (Building Story: Yes),,Toit
 Level code,L02_TOS,Top of steel under level 2 (a reference level) (Building Story: No),,Dessus de l'acier sous le niveau 2
 Phase code,EX,Existing,,Existant
 Phase code,N,New Construction,,Nouvelle construction
-Drawing set code,AN,"Analysis: Daylight, code, areas, departments, egress",,Analyse
-Drawing set code,BIM,"BIM management: Shared coordinates, copy-monitor of grids and levels, scope boxes",,Gestion BIM
-Drawing set code,CON,Construction: Views placed on the construction set,,Construction
-Drawing set code,EXPORT,"Export: Views exported to other software (IFC, Navisworks, viewers)",,Exportation
-Drawing set code,PERMIT,Permit: Views placed on the permit set,,Permis
-Drawing set code,PRES,"Presentation: Views for the client, committees or the city; one set each (PRES-CLIENT, PRES-CITY)",,Présentation
-Drawing set code,QC,"Quality control: Views that isolate each phase, workset and floor",,Contrôle de la qualité
-Drawing set code,W,"Work: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
-Drawing set code,Z-USER-<NAME>,"One person's views: Personal views of one team member, such as Z-USER-SAM; sorts last and is filtered out of the browser, exports and handover",,Vues personnelles
-View type code,3D,Camera view,,Vue caméra
-View type code,AXO,Axonometric view,,Vue axonométrique
-View type code,PLAN,Plan,,Plan
-View type code,PLAN-LRG,Enlarged plan,,Plan agrandi
-View type code,RCP,Reflected ceiling plan,,Plan de plafond réfléchi
-View type code,SECT,Section,,Coupe
-View type code,SECT-DET,Section detail,,Coupe de détail
-View type code,ELEV,Elevation,,Élévation
-View type code,DET,Detail,,Détail
+Phase code,P1,Phase 1,,Phase 1
+Phase code,P2,Phase 2,,Phase 2
+Drawing set code,AN,"ANALYSIS: Daylight, code, areas, departments, egress",,Analyse
+Drawing set code,BIM,"BIM MANAGEMENT: Georeferencing, grids and levels copy-monitor, scope boxes, export views for viewers",,Gestion BIM
+Drawing set code,CON,CONSTRUCTION: Views placed on the construction set,,Construction
+Drawing set code,EXPORT,"EXPORT: Views exported to other software (IFC, Navisworks, viewers)",,Exportation
+Drawing set code,PERMIT,PERMIT: Views placed on the permit set,,Permis
+Drawing set code,PRES,"PRESENTATION: Views for the client, committees or the city; one set each (PRES-CLIENT, PRES-CITY)",,Présentation
+Drawing set code,QC,"QUALITY CONTROL: Views that isolate each phase, workset and floor",,Contrôle de la qualité
+Drawing set code,W,"WORK: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+Drawing set code,Z-USER-<NAME>,Z-USER-SAM: One person's views,,Vues personnelles
+Drawing set code,Z-WIP,"Z-WIP: Unfinished views, Revit's default {3D}",,Travail en cours
+View type code,000-AXO,Axonometric views,,Vues axonométriques
+View type code,001-PLAN-GEOREF,Georeferencing and shared coordinates,,Géoréférencement et coordonnées partagées
+View type code,002-PLAN-GRID,Grids and levels,,Grilles et niveaux
+View type code,003-PLAN-SCOPE,Scope boxes,,Zones de définition
+View type code,004-AXO-EXPORT,3D views for viewers and exports,,Vues 3D pour visionneuses et exportations
+View type code,005-PLAN-SITE,Site plan,,Plan d'implantation
+View type code,006-PLAN-CIVIL,Civil plan,,Plan de génie civil
+View type code,007-PLAN-BPAD,Building pad,,Plateforme du bâtiment
+View type code,009-PLAN-DEMO,Demolition plan,,Plan de démolition
+View type code,010-PLAN,Floor plan,,Plan d'étage
+View type code,011-PLAN-ROOF,Roof plan,,Plan de toiture
+View type code,012-PLAN-CAD,Plan for tracing old CAD drawings,,Plan de calque d'anciens dessins DAO
+View type code,013-PLAN-ROOM,Room plan,,Plan des locaux
+View type code,014-PLAN-FIRE,Fire separation plan,,Plan des séparations coupe-feu
+View type code,015-PLAN-DOOR,Door plan,,Plan des portes
+View type code,016-PLAN-WALL,Wall type plan,,Plan des types de murs
+View type code,017-RCP-LIGHT,Lighting ceiling plan,,"Plan de plafond, éclairage"
+View type code,018-PLAN-MASSING,Massing plan,,Plan de volumétrie
+View type code,019-PLAN-PANEL,Panel layout plan,,Plan de calepinage des panneaux
+View type code,020-PLAN-EGRESS,Egress plan,,Plan d'évacuation
+View type code,021-PLAN-DEPT,Department plan,,Plan des services
+View type code,023-PLAN-LIGHT,Lighting plan,,Plan d'éclairage
+View type code,030-RCP,Reflected ceiling plan,,Plan de plafond réfléchi
+View type code,050-PLAN-FURN,Furniture plan,,Plan du mobilier
+View type code,070-PLAN-STAIR,Enlarged stair plan,,Plan agrandi d'escalier
+View type code,100-PLAN-DETL,Detail plan,,Plan de détail
+View type code,200-SECT,Section,,Coupe
+View type code,210-SECT-DET,Section detail,,Coupe de détail
+View type code,300-ELEV,Elevation,,Élévation
+View type code,400-DET,Detail,,Détail
+View type code,410-LEGEND,Legend drawn as a drafting view,,Légende (vue de dessin)
+View type code,500-3D,Camera view,,Vue caméra
 Built-in parameter,Type Mark,The tag code of a type (Window type A),,Code d'étiquette du type
 Built-in parameter,Mark,"The unique id of one element; never two the same in one category (Window 101, 102)",,Identifiant unique de l'élément
 Built-in parameter,Type Comments,Drawing notes only,,Notes de dessin seulement

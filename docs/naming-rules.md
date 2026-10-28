@@ -9,7 +9,7 @@ How OpenBEP names things in a Revit project: the rules every list follows, model
 | Rule | Write | Not | Règle (FR) |
 | --- | --- | --- | --- |
 | Literal: anyone outside the project understands it | `OB_Masonry_Brick_Red-Matte` | `OB_Mat07` | Littéral : compris par quelqu'un hors du projet |
-| As short as it can be and still be understood; abbreviate when the short form is common | `N-CON-L02-RCP` | `New - Construction - Level 2 - Reflected Ceiling Plan` | Aussi court que possible tout en restant compris |
+| As short as it can be and still be understood; abbreviate when the short form is common | `N-CON-RCP-L02` | `New - Construction - Reflected Ceiling Plan - Level 2` | Aussi court que possible tout en restant compris |
 | General to specific: major, then medium, then minor | `Glass_Laminated_Clear` | `Clear_Laminated_Glass` | Du général au particulier |
 | No spaces around separators | `Line-Xhatch` | `Line - Xhatch` | Pas d'espaces autour des séparateurs |
 | Read the list sorted: values that belong together must sort together and in a sensible order | `Light`, `Medium`, `Wide` | `Light`, `Medium`, `Heavy` | Vérifier la liste triée par ordre alphabétique |
@@ -83,7 +83,7 @@ The level name is a short code that sorts the way the building stacks. No elevat
 
 ## Views
 
-Every view name starts with its phase and drawing set, then the level, the view type and the purpose. Names stay consistent, and a view copied into another phase or set never needs renaming later. The project browser groups the same way: phase, then drawing set, then view type.
+The project browser groups views in four levels: phase, drawing set, view type, then Revit's own view family (Floor Plans, 3D Views). Every view name repeats the phase, set and type, then ends with the level. Names stay consistent, and a view copied into another phase or set never needs renaming later.
 
 ### Phases
 
@@ -91,99 +91,158 @@ Every view name starts with its phase and drawing set, then the level, the view 
 | --- | --- | --- |
 | `EX` | Existing | Existant |
 | `N` | New Construction | Nouvelle construction |
+| `P1` | Phase 1 | Phase 1 |
+| `P2` | Phase 2 | Phase 2 |
 
-Revit's own phase names, each with a short code that starts every view name. A project with more phases names them in the plan and keeps the codes short.
+Revit's own phase names, each with a short code that starts every view name. A project with one new phase uses `N`; a phased project numbers them `P1`, `P2` and the plan lists them.
 
 ### Drawing sets
 
-| Code | Set | Holds | Ensemble (FR) |
+`OB_ViewSet` holds the folder name in full words; the view name carries the short code.
+
+| Code | Folder | Holds | Ensemble (FR) |
 | --- | --- | --- | --- |
-| `AN` | Analysis | Daylight, code, areas, departments, egress | Analyse |
-| `BIM` | BIM management | Shared coordinates, copy-monitor of grids and levels, scope boxes | Gestion BIM |
-| `CON` | Construction | Views placed on the construction set | Construction |
-| `EXPORT` | Export | Views exported to other software (IFC, Navisworks, viewers) | Exportation |
-| `PERMIT` | Permit | Views placed on the permit set | Permis |
-| `PRES` | Presentation | Views for the client, committees or the city; one set each (`PRES-CLIENT`, `PRES-CITY`) | Présentation |
-| `QC` | Quality control | Views that isolate each phase, workset and floor | Contrôle de la qualité |
-| `W` | Work | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
-| `Z-USER-<NAME>` | One person's views | Personal views of one team member, such as `Z-USER-SAM`; sorts last and is filtered out of the browser, exports and handover | Vues personnelles |
+| `AN` | ANALYSIS | Daylight, code, areas, departments, egress | Analyse |
+| `BIM` | BIM MANAGEMENT | Georeferencing, grids and levels copy-monitor, scope boxes, export views for viewers | Gestion BIM |
+| `CON` | CONSTRUCTION | Views placed on the construction set | Construction |
+| `EXPORT` | EXPORT | Views exported to other software (IFC, Navisworks, viewers) | Exportation |
+| `PERMIT` | PERMIT | Views placed on the permit set | Permis |
+| `PRES` | PRESENTATION | Views for the client, committees or the city; one set each (`PRES-CLIENT`, `PRES-CITY`) | Présentation |
+| `QC` | QUALITY CONTROL | Views that isolate each phase, workset and floor | Contrôle de la qualité |
+| `W` | WORK | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
+| `Z-USER-<NAME>` | Z-USER-SAM | One person's views | Vues personnelles |
+| `Z-WIP` | Z-WIP | Unfinished views, Revit's default `{3D}` | Travail en cours |
+
+Sets starting with `Z-` sort last. A browser filter on `OB_ViewSet` not beginning with `Z-` hides them all, and they are deleted or left out at handover.
 
 ### View types
 
-| Code | View | Vue (FR) |
-| --- | --- | --- |
-| `3D` | Camera view | Vue caméra |
-| `AXO` | Axonometric view | Vue axonométrique |
-| `PLAN` | Plan | Plan |
-| `PLAN-LRG` | Enlarged plan | Plan agrandi |
-| `RCP` | Reflected ceiling plan | Plan de plafond réfléchi |
-| `SECT` | Section | Coupe |
-| `SECT-DET` | Section detail | Coupe de détail |
-| `ELEV` | Elevation | Élévation |
-| `DET` | Detail | Détail |
+`OB_ViewType` holds the type with a three-digit number in front, so the folders sort in a fixed order: 3D first, then site, then floor plans, ceilings, sections, elevations and details. The numbers leave gaps; a project adds its own types in the gaps and lists them in the plan. The view name carries the type without its number.
 
-The type is followed by the purpose: `PLAN-EGRESS`, `PLAN-DEPT`, `PLAN-ROOF`, `PLAN-FURN`, `PLAN-LRG-STAIR`.
+| Type | View | Vue (FR) |
+| --- | --- | --- |
+| `000-AXO` | Axonometric views | Vues axonométriques |
+| `001-PLAN-GEOREF` | Georeferencing and shared coordinates | Géoréférencement et coordonnées partagées |
+| `002-PLAN-GRID` | Grids and levels | Grilles et niveaux |
+| `003-PLAN-SCOPE` | Scope boxes | Zones de définition |
+| `004-AXO-EXPORT` | 3D views for viewers and exports | Vues 3D pour visionneuses et exportations |
+| `005-PLAN-SITE` | Site plan | Plan d'implantation |
+| `006-PLAN-CIVIL` | Civil plan | Plan de génie civil |
+| `007-PLAN-BPAD` | Building pad | Plateforme du bâtiment |
+| `009-PLAN-DEMO` | Demolition plan | Plan de démolition |
+| `010-PLAN` | Floor plan | Plan d'étage |
+| `011-PLAN-ROOF` | Roof plan | Plan de toiture |
+| `012-PLAN-CAD` | Plan for tracing old CAD drawings | Plan de calque d'anciens dessins DAO |
+| `013-PLAN-ROOM` | Room plan | Plan des locaux |
+| `014-PLAN-FIRE` | Fire separation plan | Plan des séparations coupe-feu |
+| `015-PLAN-DOOR` | Door plan | Plan des portes |
+| `016-PLAN-WALL` | Wall type plan | Plan des types de murs |
+| `017-RCP-LIGHT` | Lighting ceiling plan | Plan de plafond, éclairage |
+| `018-PLAN-MASSING` | Massing plan | Plan de volumétrie |
+| `019-PLAN-PANEL` | Panel layout plan | Plan de calepinage des panneaux |
+| `020-PLAN-EGRESS` | Egress plan | Plan d'évacuation |
+| `021-PLAN-DEPT` | Department plan | Plan des services |
+| `023-PLAN-LIGHT` | Lighting plan | Plan d'éclairage |
+| `030-RCP` | Reflected ceiling plan | Plan de plafond réfléchi |
+| `050-PLAN-FURN` | Furniture plan | Plan du mobilier |
+| `070-PLAN-STAIR` | Enlarged stair plan | Plan agrandi d'escalier |
+| `100-PLAN-DETL` | Detail plan | Plan de détail |
+| `200-SECT` | Section | Coupe |
+| `210-SECT-DET` | Section detail | Coupe de détail |
+| `300-ELEV` | Elevation | Élévation |
+| `400-DET` | Detail | Détail |
+| `410-LEGEND` | Legend drawn as a drafting view | Légende (vue de dessin) |
+| `500-3D` | Camera view | Vue caméra |
 
 ### View names
 
-`<PHASE>-<SET>-<Level>-<TYPE>-<purpose>`
+`<PHASE>-<SET>-<TYPE>-<Level>`
 
-Example: `N-CON-L02-PLAN-EGRESS` is the new construction, construction set, level 2 egress plan.
+Example: `N-CON-PLAN-EGRESS-L02` is the new construction, construction set, egress plan of level 2.
 
-- A view with no level drops that part: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
-- A person's own views go in their own set: `N-Z-USER-SAM-L02-PLAN`. The `Z` sorts them after every shared set, and a browser filter on `OB_ViewSet` not beginning with `Z-` hides them all at once. They are deleted or left out at handover.
+- A view with no level ends with what tells it apart: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
+- Design options end with `-OPT1`, `-OPT2`: `P1-W-PLAN-L01-OPT2`.
+- A person's own views go in their own set: `N-Z-USER-SAM-PLAN-L02`.
+- Drafting views have no phase, so `DRAFT` takes the phase's place: `DRAFT-CON-DET-PARAPET`, `DRAFT-CON-LEGEND-WALLTYPES`. With `OB_ViewSet` and `OB_ViewType` filled, they still sort into set and type folders under `???`. (Proposal: drafting views have no agreed logic yet.)
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
 
 ### Project browser
 
-Grouped from view parameters, not by reading the name, so a misspelt name still lands in the right folder.
+Grouped from view parameters, not by reading the name, so a misspelt name still lands in the right folder. `???` shows where a parameter is blank. At the top, it holds the drafting views: they have no phase, so Revit can't put them anywhere else, but their set and type folders still sort them. Inside a phase, it holds views nobody filed, which is how they stand out.
 
 | Browser level | Revit parameter | Set by |
 | --- | --- | --- |
 | 1 | Phase (built-in) | The view, when it is created |
 | 2 | `OB_ViewSet` (OpenBEP shared parameter) | The view template |
-| 3 | Family and Type (built-in) | Revit |
+| 3 | `OB_ViewType` (OpenBEP shared parameter) | The view template |
+| 4 | Family (built-in: Floor Plans, 3D Views) | Revit |
 | Sort | Associated Level, then View Name | Revit |
+
+Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows which one is on.
 
 ### View parameters
 
 | Name | Type | Label (EN) | Label (FR) | Holds |
 | --- | --- | --- | --- | --- |
-| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set code, such as `CON` |
-
-A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
+| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set folder, such as `CONSTRUCTION` |
+| `OB_ViewType` | TEXT | View type | Type de vue | The view's numbered type, such as `010-PLAN` |
 
 ### View templates
 
-`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-CON-100` or `MECH-RCP-CON-50`. Each template sets `OB_ViewSet`, so a new view files itself.
+`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-CON-100` or `MECH-RCP-CON-50`. Each template sets `OB_ViewSet` and `OB_ViewType`, so a new view files itself.
 
 ### Example project browser
 
-- New Construction
-  - CON - Construction
-    - Floor Plan
-      - N-CON-L01-PLAN
-      - N-CON-L02-PLAN
-      - N-CON-L02-PLAN-EGRESS
-    - Ceiling Plan
-      - N-CON-L02-RCP
-    - Section
-      - N-CON-SECT-STAIR-01
-  - PRES - Presentation
-    - Floor Plan
-      - N-PRES-L02-PLAN
-    - 3D View
-      - N-PRES-3D-LOBBY
-  - W - Work
-    - Floor Plan
-      - N-W-L02-PLAN-ROOMS
-  - Z-USER-SAM - Sam's views
-    - Floor Plan
-      - N-Z-USER-SAM-L02-PLAN
-- Existing
-  - CON - Construction
-    - Floor Plan
-      - EX-CON-L01-PLAN
+- Views (Phase-Set-Type-Family)
+  - ???
+    - CONSTRUCTION
+      - 400-DET
+        - Drafting Views
+          - DRAFT-CON-DET-PARAPET
+      - 410-LEGEND
+        - Drafting Views
+          - DRAFT-CON-LEGEND-WALLTYPES
+  - New Construction
+    - ???
+      - ???
+        - Sections (Building Section)
+          - Section 1
+    - BIM MANAGEMENT
+      - 002-PLAN-GRID
+        - Floor Plans
+          - N-BIM-PLAN-GRID-L01
+    - CONSTRUCTION
+      - 010-PLAN
+        - Floor Plans
+          - N-CON-PLAN-L01
+          - N-CON-PLAN-L02
+      - 020-PLAN-EGRESS
+        - Floor Plans
+          - N-CON-PLAN-EGRESS-L02
+      - 200-SECT
+        - Sections (Building Section)
+          - N-CON-SECT-STAIR-01
+    - WORK
+      - 000-AXO
+        - 3D Views
+          - N-W-AXO-OPT1
+          - N-W-AXO-OPT2
+      - 013-PLAN-ROOM
+        - Floor Plans
+          - N-W-PLAN-ROOM-L01
+    - Z-USER-SAM
+      - 010-PLAN
+        - Floor Plans
+          - N-Z-USER-SAM-PLAN-L02
+    - Z-WIP
+      - 000-AXO
+        - 3D Views
+          - {3D}
+  - Existing
+    - CONSTRUCTION
+      - 010-PLAN
+        - Floor Plans
+          - EX-CON-PLAN-L01
 
 ## Built-in parameters with a fixed job
 
