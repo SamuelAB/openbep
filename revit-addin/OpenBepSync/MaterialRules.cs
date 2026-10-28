@@ -139,7 +139,7 @@ namespace OpenBepSync
             }
 
             foreach (var r in result.Where(r => r.Action != RuleAction.Skip && r.Action != RuleAction.Remove && !IsOpenBepMaterialName(r.Target)))
-                r.Note = Join(r.Note, "new name does not follow OB_<Class>_<Material>_<Detail>");
+                r.Note = Join(r.Note, r.Action == RuleAction.Rename ? "new name does not follow OB_<Class>_<Material>_<Detail>" : "the material it goes to does not follow OB_<Class>_<Material>_<Detail>");
             return result;
         }
 

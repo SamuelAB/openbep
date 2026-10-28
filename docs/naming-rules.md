@@ -96,6 +96,23 @@ The project browser groups views in four levels: phase, drawing set, view type, 
 
 Revit's own phase names, each with a short code that starts every view name. A project with one new phase uses `N`; a phased project numbers them `P1`, `P2` and the plan lists them.
 
+### Phase filters
+
+Revit's own names, which every firm knows. Two of Revit's seven are deleted because no drawing needs them, and one is added.
+
+| Filter | Shows | Use it for | Keep |
+| --- | --- | --- | --- |
+| `Show All` | New, existing, demolished and temporary elements | Working and checking views | Yes |
+| `Show Complete` | The building as it stands at the end of the view's phase | Existing conditions (view phase `EX`), the finished building | Yes |
+| `Show New` | Only what is built in the view's phase | Schedules and quantities of new work | Yes |
+| `Show Previous + Demo` | Existing and demolished elements | Demolition plans (`009-PLAN-DEMO`) | Yes |
+| `Show Previous + New` | What stays, and what is new | Plans of a renovation; the default for every other view | Yes |
+| `Show Existing` | Existing elements that stay, without demolished or new ones | Existing-to-remain plans for coordination and the owner's records | Added |
+| `Show Demo + New` | Demolished and new, without what stays | Nothing: a plan without the walls that stay reads wrong | Deleted |
+| `Show Previous Phase` | Elements of the phase before the view's | Nothing: shows nothing in the first phase, and `Show Complete` in a view of the earlier phase does the job | Deleted |
+
+Each view template sets the phase filter, so a view's filter never has to be picked by hand. Demolition is a status of an element (Phase Demolished), not a phase: there is no `D` phase.
+
 ### Drawing sets
 
 `OB_ViewSet` holds the folder name in full words; the view name carries the short code.
@@ -165,6 +182,9 @@ Example: `N-CON-PLAN-EGRESS-L02` is the new construction, construction set, egre
 - A person's own views go in their own set: `N-Z-USER-SAM-PLAN-L02`.
 - Drafting views have no phase, so `DRAFT` takes the phase's place: `DRAFT-CON-DET-PARAPET`, `DRAFT-CON-LEGEND-WALLTYPES`. With `OB_ViewSet` and `OB_ViewType` filled, they still sort into set and type folders under `???`. (Proposal: drafting views have no agreed logic yet.)
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
+- Dependent views end with the zone of their scope box: `N-CON-PLAN-L02-A`. Scope boxes are named `SB-<Zone>`: `SB-A`, `SB-NORTH`.
+
+The OpenBEP add-in's **Create views** button makes plans and ceiling plans this way for many levels at once, with `OB_ViewSet`, `OB_ViewType`, the template, the phase filter, Title on Sheet and the dependents per scope box ([add-in guide](../revit-addin/OpenBepSync/README.md#create-views)).
 
 ### Project browser
 
@@ -243,6 +263,46 @@ Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows 
       - 010-PLAN
         - Floor Plans
           - EX-CON-PLAN-L01
+
+## Sheets
+
+`<Letter>-<Series><Sequence>`, for example `A-101`. One letter for the discipline, as title blocks and drawing lists expect, then three digits.
+
+| Letter | Discipline | Discipline (FR) |
+| --- | --- | --- |
+| `G` | General (cover, drawing list, code analysis) | Général |
+| `C` | Civil engineering | Génie civil |
+| `L` | Landscape | Architecture de paysage |
+| `A` | Architecture | Architecture |
+| `I` | Interiors | Aménagement intérieur |
+| `S` | Structure | Structure |
+| `M` | Mechanical | Mécanique |
+| `P` | Plumbing | Plomberie |
+| `F` | Fire protection | Protection incendie |
+| `E` | Electrical | Électricité |
+
+### Sheet series
+
+| Series | Holds | Série (FR) |
+| --- | --- | --- |
+| `0` | General notes, legends, wall types | Notes générales, légendes, types de murs |
+| `1` | Plans | Plans |
+| `2` | Elevations | Élévations |
+| `3` | Sections | Coupes |
+| `4` | Enlarged plans and interior elevations | Plans agrandis et élévations intérieures |
+| `5` | Details | Détails |
+| `6` | Schedules | Nomenclatures |
+| `9` | 3D views and presentation | Vues 3D et présentation |
+
+Plans number from the lowest level up (`A-101` for B1, `A-102` for L01), so the set reads the way the building stacks. The sheet name is plain words, the same as the Title on Sheet of its main view. (Proposal: the series are to confirm.)
+
+## Rooms
+
+The storey number, then three digits: `2015` is room 15 on level 2 (`L02`), `1003` is room 3 on the ground floor (`L01`). Numbers run clockwise from the main entrance and leave gaps for rooms added later (proposal).
+
+- Two-digit storeys keep both digits: `12015` on `L12`.
+- Basements start with `B`: `B1015` on `B1`. Mezzanines add `M`: `1M015` on `L01M`. The roof is `R001`. (Proposal: basement, mezzanine and roof numbers are to confirm.)
+- The room number goes in Revit's built-in `Number`.
 
 ## Built-in parameters with a fixed job
 

@@ -79,6 +79,34 @@ View type code,300-ELEV,Elevation,,Élévation
 View type code,400-DET,Detail,,Détail
 View type code,410-LEGEND,Legend drawn as a drafting view,,Légende (vue de dessin)
 View type code,500-3D,Camera view,,Vue caméra
+Phase filter,Show All,"New, existing, demolished and temporary elements: Working and checking views",,
+Phase filter,Show Complete,"The building as it stands at the end of the view's phase: Existing conditions (view phase EX), the finished building",,
+Phase filter,Show New,Only what is built in the view's phase: Schedules and quantities of new work,,
+Phase filter,Show Previous + Demo,Existing and demolished elements: Demolition plans (009-PLAN-DEMO),,
+Phase filter,Show Previous + New,"What stays, and what is new: Plans of a renovation; the default for every other view",,
+Phase filter,Show Existing,"Existing elements that stay, without demolished or new ones: Existing-to-remain plans for coordination and the owner's records",,
+Phase filter,Show Demo + New,"Demolished and new, without what stays: Nothing: a plan without the walls that stay reads wrong",Deleted,
+Phase filter,Show Previous Phase,"Elements of the phase before the view's: Nothing: shows nothing in the first phase, and Show Complete in a view of the earlier phase does the job",Deleted,
+Sheet number,<Letter>-<Series><Sequence>,A-101,,
+Sheet discipline letter,G,"General (cover, drawing list, code analysis)",,Général
+Sheet discipline letter,C,Civil engineering,,Génie civil
+Sheet discipline letter,L,Landscape,,Architecture de paysage
+Sheet discipline letter,A,Architecture,,Architecture
+Sheet discipline letter,I,Interiors,,Aménagement intérieur
+Sheet discipline letter,S,Structure,,Structure
+Sheet discipline letter,M,Mechanical,,Mécanique
+Sheet discipline letter,P,Plumbing,,Plomberie
+Sheet discipline letter,F,Fire protection,,Protection incendie
+Sheet discipline letter,E,Electrical,,Électricité
+Sheet series,0,"General notes, legends, wall types",,"Notes générales, légendes, types de murs"
+Sheet series,1,Plans,,Plans
+Sheet series,2,Elevations,,Élévations
+Sheet series,3,Sections,,Coupes
+Sheet series,4,Enlarged plans and interior elevations,,Plans agrandis et élévations intérieures
+Sheet series,5,Details,,Détails
+Sheet series,6,Schedules,,Nomenclatures
+Sheet series,9,3D views and presentation,,Vues 3D et présentation
+Room number,Storey number + three digits,"The storey number, then three digits: 2015 is room 15 on level 2 (L02), 1003 is room 3 on the ground floor (L01). Numbers run clockwise from the main entrance and leave gaps for rooms added later (proposal).",,
 Built-in parameter,Type Mark,The tag code of a type (Window type A),,Code d'étiquette du type
 Built-in parameter,Mark,"The unique id of one element; never two the same in one category (Window 101, 102)",,Identifiant unique de l'élément
 Built-in parameter,Type Comments,Drawing notes only,,Notes de dessin seulement

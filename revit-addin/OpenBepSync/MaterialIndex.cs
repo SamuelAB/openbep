@@ -85,8 +85,11 @@ namespace OpenBepSync
         {
             if (Kind != ReplaceKind.Materials) { WalkAssets(found); return; }
             var isMaterial = new HashSet<ElementId>(Names.Keys);
-            var instances = new FilteredElementCollector(Doc).WhereElementIsNotElementType().ToElements();
-            var types = new FilteredElementCollector(Doc).WhereElementIsElementType().ToElements();
+            // Model elements and types only: Revit's internal elements (no category) can hold parameters whose
+            // definition is not valid, and reading those crashed Revit 2022 with an access violation.
+            bool Model(Element e) => Try(() => e.Category != null && e.Category.CategoryType == CategoryType.Model);
+            var instances = new FilteredElementCollector(Doc).WhereElementIsNotElementType().Where(Model).ToList();
+            var types = new FilteredElementCollector(Doc).WhereElementIsElementType().Where(Model).ToList();
 
             // 1. Painted faces first: they read the geometry, which the layer changes below would regenerate.
             foreach (var e in instances.Where(e => e is HostObject || e is Part || e is GenericForm))
@@ -112,7 +115,7 @@ namespace OpenBepSync
                 if (e is Material) continue;
                 foreach (Parameter p in e.Parameters)
                 {
-                    if (p.StorageType != StorageType.ElementId) continue;
+                    if (p?.Definition == null || p.StorageType != StorageType.ElementId) continue;
                     var id = p.AsElementId();
                     if (!isMaterial.Contains(id)) continue;
                     var prm = p;
