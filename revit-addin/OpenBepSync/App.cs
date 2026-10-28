@@ -3,7 +3,7 @@ using Autodesk.Revit.UI;
 
 namespace OpenBepSync
 {
-    /// <summary>Adds an OpenBEP tab with two buttons: Sync parameters and Build family library.</summary>
+    /// <summary>Adds an OpenBEP tab with three buttons: Sync parameters, Build family library and Replace materials.</summary>
     public class App : IExternalApplication
     {
         public Result OnStartup(UIControlledApplication app)
@@ -21,6 +21,11 @@ namespace OpenBepSync
             {
                 ToolTip = "Build the OpenBEP families listed in library/families.csv from Revit's metric templates, with their types and OpenBEP shared parameters. Works with no project open.",
                 AvailabilityClassName = typeof(AlwaysAvailable).FullName
+            });
+            var mats = app.CreateRibbonPanel(tab, "Materials");
+            mats.AddItem(new PushButtonData("OpenBepMaterials", "Replace\nmaterials", Assembly.GetExecutingAssembly().Location, typeof(MaterialsCommand).FullName)
+            {
+                ToolTip = "Find where each material is used and replace, merge, rename or remove materials (and appearance, physical and thermal assets) from a replace list. Shows every element affected first; one Undo reverses the run."
             });
             AutoTest.Hook(app);   // developer test; does nothing unless %AppData%\OpenBEP\autotest.json exists
             return Result.Succeeded;

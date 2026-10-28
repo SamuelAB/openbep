@@ -234,7 +234,7 @@ code{font-family:var(--f-mono);font-size:.9em;overflow-wrap:anywhere}
   <ul class="rules">
     <li><code>OB_&lt;Class&gt;_Generic</code> (<code>OB_Concrete_Generic</code>) when the class is known but not the exact material, at LOD 100 and 200. Counted.</li>
     <li><code>OB_Generic_&lt;Kind&gt;</code> (<code>OB_Generic_Plastic</code>) for materials nobody counts: furniture, equipment, appliances and fixtures. The thirty plastics of a loaded toaster become one. Take-offs skip them.</li>
-    <li>Materials brought in by loaded families are renamed to a listed name, inside the families too, after a person approves the old-to-new list.</li>
+    <li>Materials brought in by loaded families are merged into or renamed to a listed name, from an old-to-new list a person checks first. The <a href="https://github.com/SamuelAB/openbep/tree/main/revit-addin/OpenBepSync#replace-materials">Replace materials</a> button of the OpenBEP Revit add-in does it.</li>
     <li>A project's own additions use <code>OB_X_</code> and are reported at handover.</li>
     <li><code>Default</code>, <code>&lt;By Category&gt;</code> or a Revit default name counts as no material from LOD 300 on.</li>
   </ul>

@@ -214,7 +214,7 @@ Each material also carries `OB_UniclassMa`, its code from the free [Uniclass Mat
 
 - **Cut and surface patterns** come from the material, not from overrides, so every view agrees. Each class has one cut pattern, such as `OB_Concrete`, `OB_Insulation_Batt` or `OB_Earth`, drawn with pen 1.
 - **Appearance:** one appearance asset per material, Revit's own library or a plain colour. No imported textures unless the visualisation use is chosen, since they bloat the model.
-- **No duplicates:** Revit copies a material on every family load. At each milestone, a check lists every material not in the project's list with its element count. A batch tool then renames them, inside loaded families too, to a listed name (a toaster's thirty plastics to `OB_Generic_Plastic`), after a person approves the old-to-new list. Such tools have existed as Revit add-ins; OpenBEP plans one.
+- **No duplicates:** Revit copies a material on every family load. At each milestone, a check lists every material not in the project's list with its element count. The **Replace materials** button of the OpenBEP Revit add-in ([`revit-addin/OpenBepSync`](../revit-addin/OpenBepSync/README.md#replace-materials)) then merges or renames them to a listed name (a toaster's thirty plastics to `OB_Generic_Plastic`) from an old-to-new list that a person checks before it runs. Materials set inside a loaded family's own geometry are changed by running it on the family.
 
 ### What counts as no material
 
