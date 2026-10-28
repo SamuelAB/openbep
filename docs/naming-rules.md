@@ -1,6 +1,6 @@
 # OpenBEP naming rules v0.1
 
-How OpenBEP names things in a Revit project: the rules every list follows, model files, views, and the few built-in parameters whose job is fixed. The lists themselves (parameters, materials, lines, text, families) are on [openbep.com/names](https://openbep.com/names/), built from this file, the [graphics and materials standard](graphics-and-materials-standard.md) and the [shared parameter files](../shared-parameters/).
+How OpenBEP names things in a Revit project: the rules every list follows, model files, levels, views, and the few built-in parameters whose job is fixed. The lists themselves (parameters, materials, lines, text, families) are on [openbep.com/names](https://openbep.com/names/), built from this file, the [graphics and materials standard](graphics-and-materials-standard.md) and the [shared parameter files](../shared-parameters/).
 
 *Règles de nommage : des noms littéraux et courts, du général au particulier, qui se classent seuls par ordre alphabétique. Les noms restent en anglais et sans accents; l'étiquette française accompagne chaque nom.*
 
@@ -9,7 +9,7 @@ How OpenBEP names things in a Revit project: the rules every list follows, model
 | Rule | Write | Not | Règle (FR) |
 | --- | --- | --- | --- |
 | Literal: anyone outside the project understands it | `OB_Masonry_Brick_Clay` | `OB_Mat07` | Littéral : compris par quelqu'un hors du projet |
-| As short as it can be and still be understood; abbreviate when the short form is common | `PLAN-RCP` | `Plan-ReflectedCeilingPlan` | Aussi court que possible tout en restant compris |
+| As short as it can be and still be understood; abbreviate when the short form is common | `L02-RCP` | `Level 2 - Reflected Ceiling Plan` | Aussi court que possible tout en restant compris |
 | General to specific: major, then medium, then minor | `Glass_Laminated_Clear` | `Clear_Laminated_Glass` | Du général au particulier |
 | No spaces around separators | `Line-Xhatch` | `Line - Xhatch` | Pas d'espaces autour des séparateurs |
 | Read the list sorted: values that belong together must sort together and in a sensible order | `Light`, `Medium`, `Wide` | `Light`, `Medium`, `Heavy` | Vérifier la liste triée par ordre alphabétique |
@@ -42,20 +42,70 @@ When the plan uses ISO 19650 file naming fields instead, the discipline codes be
 
 Any other discipline follows the same logic and is listed in the plan.
 
+## Levels
+
+One set of levels for the whole project, owned by the `LOCATION` model (or the architect's model when there is none). Every other model copy-monitors them and keeps the same names.
+
+The level name is a short code that sorts the way the building stacks. No elevation in the name: elevations change and the name would lie. The words (Ground floor, Rez-de-chaussée) go in each plan's Title on Sheet, not in the level name.
+
+| Code | Level | Building Story | Niveau (FR) |
+| --- | --- | --- | --- |
+| `B2` | Second basement | Yes | Deuxième sous-sol |
+| `B1` | First basement | Yes | Premier sous-sol |
+| `L01` | Ground floor | Yes | Rez-de-chaussée |
+| `L01M` | Mezzanine above level 1 | Yes, when it is a storey for code or areas | Mezzanine au-dessus du niveau 1 |
+| `L02` | Level 2 | Yes | Niveau 2 |
+| `RF` | Roof | Yes | Toit |
+| `L02_TOS` | Top of steel under level 2 (a reference level) | No | Dessus de l'acier sous le niveau 2 |
+
+- **Two digits** after `L`, so `L10` sorts after `L09`. The ground floor is `L01`, as Canadian codes number it.
+- **Building Story** is ticked only for real storeys: each becomes one IfcBuildingStorey in an IFC export. A reference level (top of steel, underside of deck, top of parapet) has Building Story off and its storey's code first, `L02_TOS`; elements hosted on it export with the storey below.
+- **Mezzanine:** `L01M` when it counts as a storey for the building code or areas; otherwise a reference level. The plan says which.
+- **Disciplines don't make their own storey levels.** Structure and MEP copy-monitor the storeys and add only the reference levels they need.
+
+### Example building
+
+| Code | Elevation (m) | Building Story |
+| --- | --- | --- |
+| `B1` | -4.200 | Yes |
+| `L01` | 0.000 | Yes |
+| `L01M` | 2.700 | Yes |
+| `L02` | 4.500 | Yes |
+| `L02_TOS` | 4.150 | No |
+| `L03` | 8.700 | Yes |
+| `RF` | 12.900 | Yes |
+
 ## Views
 
-A view name reads `<PHASE>-<SET>-<TYPE>-<purpose>` and the project browser is sorted in the same order: phase, then drawing set, then view type. Everyone sees which phase they are drawing in, and each drawing set keeps its own tags and sections without disturbing the others.
+A view name reads `<Level>-<TYPE>-<purpose>`, level first, so a floor's views list together and the name says what the view is: `L02-PLAN-EGRESS`. A view with no level drops that part: `SECT-STAIR-01`, `3D-COORD`. A working view ends with the user's initials: `L02-PLAN-WORK-JD`.
 
-Example: `N-C-PLAN-EGRESS-L02` is the new construction, construction set, level 2 egress plan.
+Revit needs a view name to be unique among views of the same kind (all floor plans, for example). Construction views of the new building carry no prefix, since they are most of the model. When the same view exists in another phase or another drawing set, that code goes in front: `EX-L01-PLAN` (existing), `P-L02-PLAN` (presentation). The printed title comes from Title on Sheet, so prefixes never reach the drawings.
+
+The project browser does the grouping, from view parameters rather than from the name: phase, then drawing set, then view type, sorted by level. Everyone sees which phase they are drawing in, and each drawing set keeps its own tags and sections without disturbing the others.
+
+| Browser level | Revit parameter | Set by |
+| --- | --- | --- |
+| 1 | Phase (built-in) | The view, when it is created |
+| 2 | `OB_ViewSet` (OpenBEP shared parameter) | The view template |
+| 3 | Family and Type (built-in) | Revit |
+| Sort | Associated Level, then View Name | Revit |
+
+### View parameters
+
+| Name | Type | Label (EN) | Label (FR) | Holds |
+| --- | --- | --- | --- | --- |
+| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set code, such as `C` |
+
+A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
 
 ### Phases
 
 | Code | Phase | Phase (FR) |
 | --- | --- | --- |
 | `EX` | Existing | Existant |
-| `N` | New construction | Nouvelle construction |
+| `N` | New Construction | Nouvelle construction |
 
-A project with more phases names them in the plan and keeps codes short.
+Revit's own phase names, with a short code used only as a view name prefix (`EX-`). New Construction views need no prefix. A project with more phases names them in the plan.
 
 ### Drawing sets
 
@@ -85,6 +135,35 @@ A project with more phases names them in the plan and keeps codes short.
 | `DET` | Detail | Détail |
 
 The type is followed by the purpose: `PLAN-EGRESS`, `PLAN-DEPT`, `PLAN-ROOF`, `PLAN-FURN`, `PLAN-LRG-STAIR`.
+
+### View templates
+
+`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-C-100` or `MECH-RCP-C-50`. Each template sets the phase and `OB_ViewSet`, so a new view files itself.
+
+### Example project browser
+
+- New Construction
+  - C - Construction
+    - Floor Plan
+      - L01-PLAN
+      - L02-PLAN
+      - L02-PLAN-EGRESS
+    - Ceiling Plan
+      - L02-RCP
+    - Section
+      - SECT-STAIR-01
+  - P - Presentation
+    - Floor Plan
+      - P-L02-PLAN
+    - 3D View
+      - 3D-LOBBY
+  - W - Work
+    - Floor Plan
+      - L02-PLAN-WORK-JD
+- Existing
+  - C - Construction
+    - Floor Plan
+      - EX-L01-PLAN
 
 ## Built-in parameters with a fixed job
 

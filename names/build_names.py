@@ -7,7 +7,7 @@ Sources, never edited here:
 - lod/spec.json                                          (labels of shared parameters not yet in the manifest)
 - docs/graphics-and-materials-standard.md                (materials, line, text and dimension tables)
 - library/families.csv                                   (family names)
-- docs/naming-rules.md                                   (rules for every name, model files, views)
+- docs/naming-rules.md                                   (rules for every name, model files, levels, views)
 
 Writes:
 - the block between /*NAMES*/ and /*/NAMES*/ in names/index.html
@@ -63,13 +63,14 @@ def parameters():
             for v in o:
                 walk(v)
     walk(spec)
+    by_rn.update(view_parameters())
     for n, s in shared.items():
         p = rows.get(n)
         if p is None:
             src = by_rn.get(n, {})
             p = rows[n] = {'name': n, 'kind': 'Shared', 'guid': s['guid'], 'type': s['type'], 'unit': src.get('u') or '',
                            'scope': src.get('sc') or '', 'group': groups[s['group']], 'en': src.get('l', ''),
-                           'fr': src.get('lf', ''), 'els': [], 'lod': '', 'ex': src.get('ex') or '', 'desc': src.get('d', '')}
+                           'fr': src.get('lf', ''), 'els': list(src.get('els', [])), 'lod': '', 'ex': src.get('ex') or '', 'desc': src.get('d', '')}
         else:
             p['guid'], p['type'], p['group'] = s['guid'], s['type'], groups[s['group']]
     missing = [n for n, p in rows.items() if p['kind'] == 'Shared' and n not in shared]
@@ -131,12 +132,32 @@ def naming():
             for r in tables_after(md, '### Drawing sets')]
     vtypes = [{'code': r['Code'], 'en': r['View'], 'fr': r['Vue (FR)']} for r in tables_after(md, '### View types')]
     vsec = md.split('## Views', 1)[1]
-    view_pattern = re.search(r'`(<PHASE>[^`]+)`', vsec).group(1)
-    view_example = re.search(r'Example: `([^`]+)`', vsec).group(1)
+    view_pattern = re.search(r'`(<Level>[^`]+)`', vsec).group(1)
+    view_example = re.search(r'level first[^`]*`([^`]+)`', vsec).group(1)
+    levels = [{'code': r['Code'], 'en': r['Level'], 'story': r['Building Story'], 'fr': r['Niveau (FR)']}
+              for r in tables_after(md, '## Levels')]
+    building = [{'code': r['Code'], 'z': float(r['Elevation (m)']), 'story': r['Building Story'] == 'Yes'}
+                for r in tables_after(md, '### Example building')]
+    browser_params = [{'n': r['Browser level'], 'p': r['Revit parameter'], 'by': r['Set by']}
+                      for r in tables_after(md, '## Views')]
+    templ = re.search(r'### View templates\n\n`([^`]+)`, for example `([^`]+)`', md)
+    tree = []
+    for line in md.split('### Example project browser', 1)[1].split('\n## ', 1)[0].splitlines():
+        m = re.match(r'( *)- (.+)', line)
+        if m:
+            tree.append([len(m.group(1)) // 2, m.group(2).strip()])
     builtins = [{'name': r['Parameter'], 'job': r['Job'], 'ex': r['Example'], 'fr': r['Rôle (FR)']}
                 for r in tables_after(md, '## Built-in parameters with a fixed job')]
     return {'rules': rules, 'file': pattern, 'fileEx': example, 'disc': disc, 'phases': phases, 'sets': sets,
-            'vtypes': vtypes, 'view': view_pattern, 'viewEx': view_example, 'builtins': builtins}
+            'vtypes': vtypes, 'view': view_pattern, 'viewEx': view_example, 'builtins': builtins,
+            'levels': levels, 'building': building, 'browser': browser_params, 'tree': tree,
+            'template': templ.group(1), 'templateEx': templ.group(2)}
+
+
+def view_parameters():
+    md = (ROOT / 'docs' / 'naming-rules.md').read_text(encoding='utf-8')
+    return {r['Name']: {'l': r['Label (EN)'], 'lf': r['Label (FR)'], 'd': r['Holds'], 'sc': 'instance', 'els': ['Views']}
+            for r in tables_after(md, '### View parameters')}
 
 
 def families():
@@ -166,6 +187,8 @@ def build():
             [['Model file name', N['file'], N['fileEx'], '', '']] +
             [['Discipline code', d['code'], d['en'], '', d['fr']] for d in N['disc']] +
             [['View name', N['view'], N['viewEx'], '', '']] +
+            [['View template name', N['template'], N['templateEx'], '', '']] +
+            [['Level code', x['code'], x['en'] + ' (Building Story: ' + x['story'] + ')', '', x['fr']] for x in N['levels']] +
             [['Phase code', x['code'], x['en'], '', x['fr']] for x in N['phases']] +
             [['Drawing set code', x['code'], x['en'] + ': ' + x['holds'], '', x['fr']] for x in N['sets']] +
             [['View type code', x['code'], x['en'], '', x['fr']] for x in N['vtypes']] +
