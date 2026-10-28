@@ -129,9 +129,9 @@ def naming():
     example = re.search(r'Example: `([^`]+\.rvt)`', md).group(1)
     disc = [{'code': r['Code'], 'en': r['Model'], 'fr': r['Modèle (FR)']} for r in tables_after(md, '## Model files')]
     phases = [{'code': r['Code'], 'en': r['Phase'], 'fr': r['Phase (FR)']} for r in tables_after(md, '### Phases')]
-    sets = [{'code': r['Code'], 'en': r['Set'], 'holds': r['Holds'], 'fr': r['Ensemble (FR)']}
+    sets = [{'code': r['Code'], 'en': r['Folder'], 'holds': r['Holds'], 'fr': r['Ensemble (FR)']}
             for r in tables_after(md, '### Drawing sets')]
-    vtypes = [{'code': r['Code'], 'en': r['View'], 'fr': r['Vue (FR)']} for r in tables_after(md, '### View types')]
+    vtypes = [{'code': r['Type'], 'en': r['View'], 'fr': r['Vue (FR)']} for r in tables_after(md, '### View types')]
     vsec = md.split('## Views', 1)[1]
     view_pattern = re.search(r'`(<PHASE>[^`]+)`', vsec).group(1)
     view_example = re.search(r'Example: `([^`]+)`', vsec).group(1)
