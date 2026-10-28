@@ -9,7 +9,7 @@ How OpenBEP names things in a Revit project: the rules every list follows, model
 | Rule | Write | Not | Règle (FR) |
 | --- | --- | --- | --- |
 | Literal: anyone outside the project understands it | `OB_Masonry_Brick_Red-Matte` | `OB_Mat07` | Littéral : compris par quelqu'un hors du projet |
-| As short as it can be and still be understood; abbreviate when the short form is common | `N-C-L02-RCP` | `New - Construction - Level 2 - Reflected Ceiling Plan` | Aussi court que possible tout en restant compris |
+| As short as it can be and still be understood; abbreviate when the short form is common | `N-CON-L02-RCP` | `New - Construction - Level 2 - Reflected Ceiling Plan` | Aussi court que possible tout en restant compris |
 | General to specific: major, then medium, then minor | `Glass_Laminated_Clear` | `Clear_Laminated_Glass` | Du général au particulier |
 | No spaces around separators | `Line-Xhatch` | `Line - Xhatch` | Pas d'espaces autour des séparateurs |
 | Read the list sorted: values that belong together must sort together and in a sensible order | `Light`, `Medium`, `Wide` | `Light`, `Medium`, `Heavy` | Vérifier la liste triée par ordre alphabétique |
@@ -100,10 +100,10 @@ Revit's own phase names, each with a short code that starts every view name. A p
 | --- | --- | --- | --- |
 | `AN` | Analysis | Daylight, code, areas, departments, egress | Analyse |
 | `BIM` | BIM management | Shared coordinates, copy-monitor of grids and levels, scope boxes | Gestion BIM |
-| `C` | Construction | Views placed on the construction set | Construction |
-| `EXP` | Export | Views exported to other software (IFC, Navisworks, viewers) | Exportation |
-| `P` | Presentation | Views for the client, committees or the city; one set each (`P-CLIENT`, `P-CITY`) | Présentation |
-| `PE` | Permit | Views placed on the permit set | Permis |
+| `CON` | Construction | Views placed on the construction set | Construction |
+| `EXPORT` | Export | Views exported to other software (IFC, Navisworks, viewers) | Exportation |
+| `PERMIT` | Permit | Views placed on the permit set | Permis |
+| `PRES` | Presentation | Views for the client, committees or the city; one set each (`PRES-CLIENT`, `PRES-CITY`) | Présentation |
 | `QC` | Quality control | Views that isolate each phase, workset and floor | Contrôle de la qualité |
 | `W` | Work | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
 | `Z-USER-<NAME>` | One person's views | Personal views of one team member, such as `Z-USER-SAM`; sorts last and is filtered out of the browser, exports and handover | Vues personnelles |
@@ -128,9 +128,9 @@ The type is followed by the purpose: `PLAN-EGRESS`, `PLAN-DEPT`, `PLAN-ROOF`, `P
 
 `<PHASE>-<SET>-<Level>-<TYPE>-<purpose>`
 
-Example: `N-C-L02-PLAN-EGRESS` is the new construction, construction set, level 2 egress plan.
+Example: `N-CON-L02-PLAN-EGRESS` is the new construction, construction set, level 2 egress plan.
 
-- A view with no level drops that part: `N-C-SECT-STAIR-01`, `N-P-3D-LOBBY`.
+- A view with no level drops that part: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
 - A person's own views go in their own set: `N-Z-USER-SAM-L02-PLAN`. The `Z` sorts them after every shared set, and a browser filter on `OB_ViewSet` not beginning with `Z-` hides them all at once. They are deleted or left out at handover.
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
 
@@ -149,31 +149,31 @@ Grouped from view parameters, not by reading the name, so a misspelt name still 
 
 | Name | Type | Label (EN) | Label (FR) | Holds |
 | --- | --- | --- | --- | --- |
-| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set code, such as `C` |
+| `OB_ViewSet` | TEXT | Drawing set | Ensemble de dessins | The view's drawing set code, such as `CON` |
 
 A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
 
 ### View templates
 
-`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-C-100` or `MECH-RCP-C-50`. Each template sets `OB_ViewSet`, so a new view files itself.
+`<Discipline>-<TYPE>-<Set>-<scale>`, for example `ARCH-PLAN-CON-100` or `MECH-RCP-CON-50`. Each template sets `OB_ViewSet`, so a new view files itself.
 
 ### Example project browser
 
 - New Construction
-  - C - Construction
+  - CON - Construction
     - Floor Plan
-      - N-C-L01-PLAN
-      - N-C-L02-PLAN
-      - N-C-L02-PLAN-EGRESS
+      - N-CON-L01-PLAN
+      - N-CON-L02-PLAN
+      - N-CON-L02-PLAN-EGRESS
     - Ceiling Plan
-      - N-C-L02-RCP
+      - N-CON-L02-RCP
     - Section
-      - N-C-SECT-STAIR-01
-  - P - Presentation
+      - N-CON-SECT-STAIR-01
+  - PRES - Presentation
     - Floor Plan
-      - N-P-L02-PLAN
+      - N-PRES-L02-PLAN
     - 3D View
-      - N-P-3D-LOBBY
+      - N-PRES-3D-LOBBY
   - W - Work
     - Floor Plan
       - N-W-L02-PLAN-ROOMS
@@ -181,9 +181,9 @@ A view schedule filtered on a blank `OB_ViewSet` finds the views nobody filed.
     - Floor Plan
       - N-Z-USER-SAM-L02-PLAN
 - Existing
-  - C - Construction
+  - CON - Construction
     - Floor Plan
-      - EX-C-L01-PLAN
+      - EX-CON-L01-PLAN
 
 ## Built-in parameters with a fixed job
 
