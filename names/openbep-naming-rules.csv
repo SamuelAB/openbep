@@ -1,0 +1,44 @@
+﻿List,Code or rule,Meaning or example,Not,Label (FR)
+Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Clay,OB_Mat07,Littéral : compris par quelqu'un hors du projet
+Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,PLAN-RCP,Plan-ReflectedCeilingPlan,Aussi court que possible tout en restant compris
+Rule for every name,"General to specific: major, then medium, then minor",Glass_Laminated_Clear,Clear_Laminated_Glass,Du général au particulier
+Rule for every name,No spaces around separators,Line-Xhatch,Line - Xhatch,Pas d'espaces autour des séparateurs
+Rule for every name,Read the list sorted: values that belong together must sort together and in a sensible order,"Light, Medium, Wide","Light, Medium, Heavy",Vérifier la liste triée par ordre alphabétique
+Rule for every name,"English, no accents, no brand; the French label sits beside the name",OB_Finish_Paint_Latex,OB_Peinture_AcmeLatex,"Anglais, sans accents ni marque"
+Model file name,<Project number>_<Place>_<Project>_<Discipline>_R<year>.rvt,24017_Laval_EcoleDesPins_ARCH_R24.rvt,,
+Discipline code,ARCH,Architecture,,Architecture
+Discipline code,STRUCT,Structure,,Structure
+Discipline code,MEP,"Mechanical, electrical and plumbing in one model",,"Mécanique, électricité et plomberie en un modèle"
+Discipline code,MECH,Mechanical (HVAC),,Mécanique (CVCA)
+Discipline code,ELECT,Electrical,,Électricité
+Discipline code,PLUMB,Plumbing,,Plomberie
+Discipline code,FIRE,Fire protection and sprinklers,,Protection incendie et gicleurs
+Discipline code,REFRIG,Refrigeration,,Réfrigération
+Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
+Discipline code,CIVIL,Civil engineering,,Génie civil
+Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
+Discipline code,CON,Contractor's construction model,,Modèle de construction de l'entrepreneur
+View name,<PHASE>-<SET>-<TYPE>-<purpose>,N-C-PLAN-EGRESS-L02,,
+Phase code,EX,Existing,,Existant
+Phase code,N,New construction,,Nouvelle construction
+Drawing set code,AN,"Analysis: Daylight, code, areas, departments, egress",,Analyse
+Drawing set code,BIM,"BIM management: Shared coordinates, copy-monitor of grids and levels, scope boxes",,Gestion BIM
+Drawing set code,C,Construction: Views placed on the construction set,,Construction
+Drawing set code,EXP,"Export: Views exported to other software (IFC, Navisworks, viewers)",,Exportation
+Drawing set code,P,"Presentation: Views for the client, committees or the city; one set each (P-CLIENT, P-CITY)",,Présentation
+Drawing set code,PE,Permit: Views placed on the permit set,,Permis
+Drawing set code,QC,"Quality control: Views that isolate each phase, workset and floor",,Contrôle de la qualité
+Drawing set code,W,"Work: Working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+View type code,3D,Camera view,,Vue caméra
+View type code,AXO,Axonometric view,,Vue axonométrique
+View type code,PLAN,Plan,,Plan
+View type code,PLAN-LRG,Enlarged plan,,Plan agrandi
+View type code,RCP,Reflected ceiling plan,,Plan de plafond réfléchi
+View type code,SECT,Section,,Coupe
+View type code,SECT-DET,Section detail,,Coupe de détail
+View type code,ELEV,Elevation,,Élévation
+View type code,DET,Detail,,Détail
+Built-in parameter,Type Mark,The tag code of a type (Window type A),,Code d'étiquette du type
+Built-in parameter,Mark,"The unique id of one element; never two the same in one category (Window 101, 102)",,Identifiant unique de l'élément
+Built-in parameter,Type Comments,Drawing notes only,,Notes de dessin seulement
+Built-in parameter,Description,Schedule descriptions only,,Descriptions de nomenclature seulement

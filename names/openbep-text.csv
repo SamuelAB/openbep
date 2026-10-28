@@ -1,0 +1,14 @@
+﻿List,Name,Font or units,Height (mm) or text type,Used for,Label (FR)
+Text type,OB_Text_2.5,Arial Narrow,2.5,"Notes, tags, schedules","Notes, étiquettes"
+Text type,OB_Text_2.5_Bold,Arial Narrow,2.5,Note headings,Titres de notes
+Text type,OB_Text_3.5,Arial Narrow,3.5,"Room names, sub-headings",Noms de locaux
+Text type,OB_Text_5_Bold,Arial,5,View titles,Titres de vues
+Text type,OB_Text_7_Bold,Arial,7,Sheet titles,Titres de feuilles
+Dimension type,OB_Dim_Linear_mm,"mm, no decimals",OB_Text_2.5,Buildings,
+Dimension type,OB_Dim_Linear_m,"m, 3 decimals",OB_Text_2.5,"Site, civil, rail",
+Dimension type,OB_Dim_Angular,"degrees, 1 decimal",OB_Text_2.5,All,
+Dimension type,OB_Dim_Radial,mm,OB_Text_2.5,All,
+Dimension type,OB_Spot_Elevation_m,"m, 3 decimals",OB_Text_2.5,"Levels, grading",
+Dimension type,OB_Spot_Slope_Percent,"%, 1 decimal",OB_Text_2.5,"Ramps, roofs, site",
+Arrowhead,OB_Arrow_Filled_15,,,,
+Arrowhead,OB_Tick_Diagonal,,,,
