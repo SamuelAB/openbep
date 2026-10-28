@@ -13,7 +13,7 @@ namespace OpenBepSync.Tests
             for (var d = new DirectoryInfo(AppContext.BaseDirectory); d != null; d = d.Parent)
             {
                 var p = Path.Combine(d.FullName, "docs", "naming-rules.md");
-                if (File.Exists(p)) return File.ReadAllText(p);
+                if (File.Exists(p)) return File.ReadAllText(p).Replace("\r\n", "\n");   // Windows checkouts may have CRLF
             }
             throw new FileNotFoundException("docs/naming-rules.md");
         }
