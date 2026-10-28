@@ -332,3 +332,4 @@ PARAM	c026a502-cf9f-54d1-9c89-25654a43804f	OB_ExtendedLength	LENGTH		9	1	Extende
 PARAM	fda9ff10-ea98-540e-9827-dc5cdf571ae3	OB_CabFloorHeightRange	TEXT		9	1	Cab floor height range. Lowest and highest cab floor height, which sets the aircraft door sills the bridge can reach.	1
 PARAM	bee30006-db9d-5526-b32c-acd1d2ca1d2c	OB_PreconditionedAirUnit	YESNO		9	1	Pre-conditioned air unit. Bridge carries a pre-conditioned air unit for the parked aircraft.	1
 PARAM	37fed21b-4ca2-5cdd-b9a1-56e2a013ce8a	OB_GroundPower400Hz	YESNO		9	1	400 Hz ground power unit. Bridge carries a 400 Hz ground power unit for the parked aircraft.	1
+PARAM	0dd897f0-3c01-53b1-b180-af2b8754b7ec	OB_ViewSet	TEXT		1	1	Drawing set. Drawing set code of a view (C, P, W...), used to group the project browser (OpenBEP addition).	1

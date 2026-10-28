@@ -1,6 +1,6 @@
 ﻿List,Code or rule,Meaning or example,Not,Label (FR)
 Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Clay,OB_Mat07,Littéral : compris par quelqu'un hors du projet
-Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,PLAN-RCP,Plan-ReflectedCeilingPlan,Aussi court que possible tout en restant compris
+Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,L02-RCP,Level 2 - Reflected Ceiling Plan,Aussi court que possible tout en restant compris
 Rule for every name,"General to specific: major, then medium, then minor",Glass_Laminated_Clear,Clear_Laminated_Glass,Du général au particulier
 Rule for every name,No spaces around separators,Line-Xhatch,Line - Xhatch,Pas d'espaces autour des séparateurs
 Rule for every name,Read the list sorted: values that belong together must sort together and in a sensible order,"Light, Medium, Wide","Light, Medium, Heavy",Vérifier la liste triée par ordre alphabétique
@@ -18,9 +18,17 @@ Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
 Discipline code,CIVIL,Civil engineering,,Génie civil
 Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
 Discipline code,CON,Contractor's construction model,,Modèle de construction de l'entrepreneur
-View name,<PHASE>-<SET>-<TYPE>-<purpose>,N-C-PLAN-EGRESS-L02,,
+View name,<Level>-<TYPE>-<purpose>,L02-PLAN-EGRESS,,
+View template name,<Discipline>-<TYPE>-<Set>-<scale>,ARCH-PLAN-C-100,,
+Level code,B2,Second basement (Building Story: Yes),,Deuxième sous-sol
+Level code,B1,First basement (Building Story: Yes),,Premier sous-sol
+Level code,L01,Ground floor (Building Story: Yes),,Rez-de-chaussée
+Level code,L01M,"Mezzanine above level 1 (Building Story: Yes, when it is a storey for code or areas)",,Mezzanine au-dessus du niveau 1
+Level code,L02,Level 2 (Building Story: Yes),,Niveau 2
+Level code,RF,Roof (Building Story: Yes),,Toit
+Level code,L02_TOS,Top of steel under level 2 (a reference level) (Building Story: No),,Dessus de l'acier sous le niveau 2
 Phase code,EX,Existing,,Existant
-Phase code,N,New construction,,Nouvelle construction
+Phase code,N,New Construction,,Nouvelle construction
 Drawing set code,AN,"Analysis: Daylight, code, areas, departments, egress",,Analyse
 Drawing set code,BIM,"BIM management: Shared coordinates, copy-monitor of grids and levels, scope boxes",,Gestion BIM
 Drawing set code,C,Construction: Views placed on the construction set,,Construction
