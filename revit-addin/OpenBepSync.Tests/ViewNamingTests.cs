@@ -66,10 +66,10 @@ namespace OpenBepSync.Tests
         [Fact]
         public void Names_FollowPhaseSetTypeLevel()
         {
-            Assert.Equal("N-CON-PLAN-EGRESS-L02", ViewNaming.Name(new PlannedView("N", "CON", "020-PLAN-EGRESS", "L02")));
-            Assert.Equal("P1-WORK-PLAN-L01-OPT2", ViewNaming.Name(new PlannedView("P1", "WORK", "010-PLAN", "L01", "OPT2")));
-            Assert.Equal("N-CON-PLAN-L02-A", ViewNaming.Name(new PlannedView("N", "CON", "PLAN", "L02", "", "A")));
-            Assert.Equal("N-Z-USER-SAM-RCP-L02", ViewNaming.Name(new PlannedView("N", "Z-USER-SAM", "030-RCP", "L02")));
+            Assert.Equal("N-CON-PLAN-EGRESS-2ND-FLR", ViewNaming.Name(new PlannedView("N", "CON", "020-PLAN-EGRESS", "2ND-FLR")));
+            Assert.Equal("P1-WORK-PLAN-1ST-FLR-OPT2", ViewNaming.Name(new PlannedView("P1", "WORK", "010-PLAN", "1ST-FLR", "OPT2")));
+            Assert.Equal("N-CON-PLAN-2ND-FLR-A", ViewNaming.Name(new PlannedView("N", "CON", "PLAN", "2ND-FLR", "", "A")));
+            Assert.Equal("N-Z-USER-SAM-RCP-2ND-FLR", ViewNaming.Name(new PlannedView("N", "Z-USER-SAM", "030-RCP", "2ND-FLR")));
         }
 
         [Fact]
@@ -93,23 +93,37 @@ namespace OpenBepSync.Tests
         }
 
         [Theory]
-        [InlineData("L01", true)]
-        [InlineData("L01M", true)]
-        [InlineData("L12", true)]
-        [InlineData("B1", true)]
-        [InlineData("RF", true)]
-        [InlineData("L02_TOS", true)]
+        [InlineData("1ST-FLR", true)]
+        [InlineData("2ND-FLR", true)]
+        [InlineData("3RD-FLR", true)]
+        [InlineData("11TH-FLR", true)]
+        [InlineData("21ST-FLR", true)]
+        [InlineData("4-ROOF", true)]
+        [InlineData("BSMNT-1", true)]
+        [InlineData("1.5-STAIR-LANDING", true)]
+        [InlineData("1.9-US-2ND-FLR", true)]
+        [InlineData("1.5-MEZZ", true)]
+        [InlineData("3.2-MECH-PLATFORM", true)]
+        [InlineData("BSMNT-1.5-LANDING", true)]
+        [InlineData("2TH-FLR", false)]
+        [InlineData("11ST-FLR", false)]
+        [InlineData("ROOF", false)]
+        [InlineData("1.5", false)]
+        [InlineData("0-ROOF", false)]
         [InlineData("Level 1", false)]
-        [InlineData("L1", false)]
-        [InlineData("l02", false)]
+        [InlineData("2nd-flr", false)]
         public void LevelNames(string name, bool ok) => Assert.Equal(ok, ViewNaming.IsLevelName(name));
 
         [Fact]
         public void TitleOnSheet_UsesWordsNotCodes()
         {
-            Assert.Equal("Level 2 - Egress plan", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "020-PLAN-EGRESS", "L02"), false));
-            Assert.Equal("Rez-de-chaussée - Plan d'étage", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "010-PLAN", "L01"), true));
-            Assert.Equal("First basement - Reflected ceiling plan - area A", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "030-RCP", "B1", "", "A"), false));
+            Assert.Equal("2nd floor - Egress plan", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "020-PLAN-EGRESS", "2ND-FLR"), false));
+            Assert.Equal("Rez-de-chaussée - Plan d'étage", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "010-PLAN", "1ST-FLR"), true));
+            Assert.Equal("First basement - Reflected ceiling plan - area A", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "030-RCP", "BSMNT-1", "", "A"), false));
+            Assert.Equal("2e étage", ViewNaming.LevelTitle("2ND-FLR", true));
+            Assert.Equal("Roof", ViewNaming.LevelTitle("4-ROOF", false));
+            Assert.Equal("Mezzanine 1.5", ViewNaming.LevelTitle("1.5-MEZZ", false));
+            Assert.Equal("Niveau 1,5", ViewNaming.LevelTitle("1.5-STAIR-LANDING", true));
             Assert.Equal("Floor plan", ViewNaming.TitleOnSheet(new PlannedView("N", "CON", "010-PLAN", "Level 1"), false));
         }
 
@@ -142,13 +156,13 @@ namespace OpenBepSync.Tests
         [Fact]
         public void PlanFile_RoundTrips_AndFlagsBadLines()
         {
-            var views = new[] { new PlannedView("N", "CON", "010-PLAN", "L01"), new PlannedView("N", "CON", "010-PLAN", "L01", "", "A"), new PlannedView("EX", "WORK", "030-RCP", "L02", "OPT1") };
+            var views = new[] { new PlannedView("N", "CON", "010-PLAN", "1ST-FLR"), new PlannedView("N", "CON", "010-PLAN", "1ST-FLR", "", "A"), new PlannedView("EX", "WORK", "030-RCP", "2ND-FLR", "OPT1") };
             var back = ViewNaming.ReadPlanText(ViewNaming.WritePlanText(views), out var w);
             Assert.Empty(w);
             Assert.Equal(views, back);
 
-            var odd = ViewNaming.ReadPlanText("Level,Type,Set,Phase\nL02,PLAN-EGRESS,CON,N\nL02,PLAN-NOPE,CON,N\n,PLAN,CON,N\nL02,PLAN-EGRESS,CON,N\n", out var w2);
-            Assert.Equal(new[] { new PlannedView("N", "CON", "020-PLAN-EGRESS", "L02") }, odd);
+            var odd = ViewNaming.ReadPlanText("Level,Type,Set,Phase\n2ND-FLR,PLAN-EGRESS,CON,N\n2ND-FLR,PLAN-NOPE,CON,N\n,PLAN,CON,N\n2ND-FLR,PLAN-EGRESS,CON,N\n", out var w2);
+            Assert.Equal(new[] { new PlannedView("N", "CON", "020-PLAN-EGRESS", "2ND-FLR") }, odd);
             Assert.Equal(2, w2.Count);
         }
     }

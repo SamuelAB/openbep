@@ -39,27 +39,32 @@ namespace OpenBepSync
 
         void Add(SetupLine l, Element e) { if (e != null) { l.Element = e.Id.ToString(); byId[l.Element] = e; } Lines.Add(l); }
 
-        // ---- Levels: storeys to B1, L01, L01M, RF; reference levels flagged
+        // ---- Levels: storeys to 1ST-FLR, 2ND-FLR, BSMNT-1 and n-ROOF; levels in between flagged for a person
+
+        const string LevelRule = "Levels: 1ST-FLR, 2ND-FLR, 4-ROOF, BSMNT-1, 1.5-STAIR-LANDING";
 
         Dictionary<ElementId, string> Levels()
         {
             var levels = new FilteredElementCollector(Doc).OfClass(typeof(Level)).Cast<Level>().OrderBy(l => l.Elevation).ToList();
             var after = levels.ToDictionary(l => l.Id, l => l.Name);
             var taken = new HashSet<string>(levels.Where(l => ViewNaming.IsLevelName(l.Name)).Select(l => l.Name));
+            bool Storey(Level l) => l.get_Parameter(BuiltInParameter.LEVEL_IS_BUILDING_STORY)?.AsInteger() != 0;
+            // The roof takes the number after the top floor.
+            int top = levels.Where(Storey).Select(l => ViewNaming.FloorNumber(SetupRules.ProposeLevel(l.Name))).DefaultIfEmpty(0).Max();
             int ok = 0;
             foreach (var l in levels)
             {
-                bool storey = l.get_Parameter(BuiltInParameter.LEVEL_IS_BUILDING_STORY)?.AsInteger() != 0;
+                bool storey = Storey(l);
                 if (ViewNaming.IsLevelName(l.Name)) { ok++; continue; }
-                var code = storey ? SetupRules.ProposeLevel(l.Name) : null;
+                var code = storey ? SetupRules.ProposeLevel(l.Name, top + 1) : null;
                 if (code != null && !taken.Contains(code))
                 {
                     taken.Add(code); after[l.Id] = code;
-                    Add(new SetupLine(KLevel, SetupAction.Rename, "", l.Name, code, "Levels: B1, L01, L01M, L02, RF"), l);
+                    Add(new SetupLine(KLevel, SetupAction.Rename, "", l.Name, code, LevelRule), l);
                 }
                 else
-                    Add(new SetupLine(KLevel, SetupAction.Rename, "", l.Name, "", "Levels: B1, L01, L01M, L02, RF",
-                        !storey ? "reference level: name it after its storey, such as L02_TOS" : code != null ? $"{code} is already used; type the name" : "type the name: the current one doesn't say which storey") { Apply = false }, l);
+                    Add(new SetupLine(KLevel, SetupAction.Rename, "", l.Name, "", LevelRule,
+                        !storey ? "level between storeys: the number below, a decimal, then words, such as 1.9-US-2ND-FLR" : code != null ? $"{code} is already used; type the name" : "type the name: the current one doesn't say which storey") { Apply = false }, l);
             }
             Score[KLevel] = (ok, levels.Count);
             return after;
@@ -124,7 +129,12 @@ namespace OpenBepSync
 
             var stay = views.Where(v => !renames.Any(r => r.v.Id == v.Id)).Select(v => v.Name).ToList();
             SetupRules.MakeUnique(renames.Select(r => r.line).ToList(), stay);
-            foreach (var (line, v) in renames) Add(line, v);
+            foreach (var (line, v) in renames)
+            {
+                // A second plan of the same level already carries the -2 the rule gives it: nothing to do.
+                if (line.New == line.Current) { if (!fills.Any(f => f.v.Id == v.Id)) ok++; continue; }
+                Add(line, v);
+            }
             foreach (var (line, v) in fills) Add(line, v);
             Score[KView] = (ok, views.Count);
         }
@@ -237,7 +247,7 @@ namespace OpenBepSync
             var go = lines.Where(l => l.Apply && l.Action != SetupAction.Check).ToList();
             int done = 0;
 
-            // Renames in two passes, so names can swap (Level 2 to L01 while Level 1 becomes L00) without a clash.
+            // Renames in two passes, so names can swap (Level 2 to 1ST-FLR while Level 1 becomes BSMNT-1) without a clash.
             var renames = go.Where(l => l.Action == SetupAction.Rename && l.New != "").Select(l => (l, e: Find(l))).ToList();
             foreach (var (l, e) in renames.Where(r => r.e == null)) failures.Add($"{l.Kind} {l.Current}: not found");
             var live = renames.Where(r => r.e != null).ToList();

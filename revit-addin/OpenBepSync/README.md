@@ -72,7 +72,7 @@ A batch view creator in the spirit of Ideate ViewCreator, built around the OpenB
 
 1. **Top bar:** phase, drawing set (`CON`, `PERMIT`, `WORK`, your own `Z-USER-<NAME>`…), design option, discipline (for templates) and the Title on Sheet language.
 2. **Grid:** one row per level (top floor first), one column per plan type (`010-PLAN`, `020-PLAN-EGRESS`, `030-RCP`…). Tick a cell, or click a level or a type to tick its whole row or column. Views that already exist show as grey ticks, so the grid is also a map of what the project has. Levels not named by the OpenBEP rule are in red.
-3. **Dependents per scope box:** tick scope boxes named `SB-A`, `SB-B`…; each ticked plan gets a dependent per zone (`N-CON-PLAN-L02-A`) cropped to its scope box.
+3. **Dependents per scope box:** tick scope boxes named `SB-A`, `SB-B`…; each ticked plan gets a dependent per zone (`N-CON-PLAN-2ND-FLR-A`) cropped to its scope box.
 4. **Preview:** every view the run makes, with its name, template, Title on Sheet and status (new, exists, or what stops it). Change a template or a title there, or untick a line.
 5. **Create** makes them all in one transaction: one Undo reverses it.
 
@@ -96,7 +96,7 @@ At the top, a score per kind: how many levels, views, view templates, phase filt
 
 | Kind | What the plan proposes |
 | --- | --- |
-| Levels | Storeys renamed from their current name: Level 1 or Ground floor to `L01`, Level 2 to `L02`, Roof to `RF`, Basement 1 to `B1`. When the name doesn't say, or for a reference level (`L02_TOS`), the line is left for a person to type. |
+| Levels | Storeys renamed from their current name: Level 1 or Ground floor to `1ST-FLR`, Level 2 to `2ND-FLR`, Basement 1 to `BSMNT-1`, and the roof to the number after the top floor (`4-ROOF` over a `3RD-FLR`). Old OpenBEP codes (`L02`, `B1`, `RF`) move over the same way. When the name doesn't say, or for a level in between (`1.9-US-2ND-FLR`), the line is left for a person to type. |
 | Views | Plans, ceiling plans, sections, callouts, elevations, 3D and drafting views renamed `<PHASE>-<SET>-<TYPE>-<Level>` with the new level names, and `OB_ViewSet` and `OB_ViewType` filled. The set comes from `OB_ViewSet` if filled, otherwise `CON` for a view placed on a sheet and `WORK` for the rest (Revit's `{3D}` goes to `Z-WIP`); the note says when it was guessed. Dependents take their parent's new name and their scope box zone. A name taken twice gets `-2`. |
 | View templates | Names that don't follow `<Discipline>-<TYPE>-<Set>-<scale>` are listed for a person to rename. |
 | Phase filters | `Show Demo + New` and `Show Previous Phase` deleted (views using them move to `Show Previous + New`), `Show Existing` added. |

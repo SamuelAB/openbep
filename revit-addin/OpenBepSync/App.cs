@@ -30,7 +30,7 @@ namespace OpenBepSync
             var views = app.CreateRibbonPanel(tab, "Views");
             views.AddItem(new PushButtonData("OpenBepViews", "Create\nviews", Assembly.GetExecutingAssembly().Location, typeof(CreateViewsCommand).FullName)
             {
-                ToolTip = "Make plans and ceiling plans for many levels at once, named by the OpenBEP rule (N-CON-PLAN-EGRESS-L02), filed in the browser, with their templates, Title on Sheet and dependents per scope box. Shows every view first; one Undo reverses the run."
+                ToolTip = "Make plans and ceiling plans for many levels at once, named by the OpenBEP rule (N-CON-PLAN-EGRESS-2ND-FLR), filed in the browser, with their templates, Title on Sheet and dependents per scope box. Shows every view first; one Undo reverses the run."
             });
             views.AddItem(new PushButtonData("OpenBepSetup", "Set up\nproject", Assembly.GetExecutingAssembly().Location, typeof(SetupCommand).FullName)
             {

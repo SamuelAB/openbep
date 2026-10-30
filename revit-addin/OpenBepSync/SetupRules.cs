@@ -47,29 +47,32 @@ namespace OpenBepSync
         // ---- Levels
 
         static readonly Regex Ground = new Regex(@"^(ground|ground floor|rdc|rez[- ]de[- ]chauss[ée]e|main floor|first floor)$", RegexOptions.IgnoreCase);
-        static readonly Regex Roof = new Regex(@"^(roof|toit|toiture|roof level|niveau toit)$", RegexOptions.IgnoreCase);
-        static readonly Regex Basement = new Regex(@"^(?:basement|sous[- ]sol|ss|b|p|parking|cellar)\s*-?\s*0*(\d+)$", RegexOptions.IgnoreCase);
+        static readonly Regex Roof = new Regex(@"^(roof|toit|toiture|roof level|niveau toit|rf)$", RegexOptions.IgnoreCase);
+        static readonly Regex Basement = new Regex(@"^(?:basement|bsmnt|sous[- ]sol|ss|b|p|parking|cellar)\s*-?\s*0*(\d+)$", RegexOptions.IgnoreCase);
         static readonly Regex Numbered = new Regex(@"^(?:level|niveau|floor|[ée]tage|storey|story|l|n|lvl)\s*-?\s*0*(\d+)\s*(m|mezz|mezzanine)?$", RegexOptions.IgnoreCase);
+        static readonly Regex Ordinal = new Regex(@"^0*(\d+)\s*(?:st|nd|rd|th|e|er|re|ème)\s*-?\s*(?:floor|flr|fl|étage|etage)$", RegexOptions.IgnoreCase);
 
         /// <summary>
-        /// The OpenBEP code for a storey level from its current name: Level 1 or Ground floor gives L01, Level 2 gives L02,
-        /// Roof gives RF, Basement 1 gives B1. Null when the name doesn't say (the window then asks a person).
-        /// Revit's own default "Level 1" is the ground floor, so Level n is Ln.
+        /// The OpenBEP code for a storey level from its current name: Level 1 or Ground floor gives 1ST-FLR, Level 2 gives 2ND-FLR,
+        /// Basement 1 gives BSMNT-1, Level 1 Mezzanine gives 1.5-MEZZ, and the old codes (L02, B1, L01M) move over too.
+        /// The roof takes the number after the top floor (4-ROOF over a 3rd floor), so it needs <paramref name="roofNumber"/>.
+        /// Null when the name doesn't say (the window then asks a person). Revit's own default "Level 1" is the ground floor.
         /// </summary>
-        public static string ProposeLevel(string name)
+        public static string ProposeLevel(string name, int roofNumber = 0)
         {
             var n = Regex.Replace((name ?? "").Trim(), @"\s+", " ");
             if (ViewNaming.IsLevelName(n)) return n;
-            if (Ground.IsMatch(n)) return "L01";
-            if (Roof.IsMatch(n)) return "RF";
+            if (Ground.IsMatch(n)) return ViewNaming.FloorCode(1);
+            if (Roof.IsMatch(n)) return roofNumber >= 2 ? roofNumber + "-ROOF" : null;
             var m = Basement.Match(n);
-            if (m.Success) return "B" + int.Parse(m.Groups[1].Value);
+            if (m.Success) return int.Parse(m.Groups[1].Value) >= 1 ? "BSMNT-" + int.Parse(m.Groups[1].Value) : null;
             m = Numbered.Match(n);
+            if (!m.Success) m = Ordinal.Match(n);
             if (m.Success)
             {
                 int k = int.Parse(m.Groups[1].Value);
-                if (k < 1 || k > 99) return null;
-                return "L" + k.ToString("00") + (m.Groups[2].Success ? "M" : "");
+                if (k < 1 || k > 199) return null;
+                return m.Groups.Count > 2 && m.Groups[2].Success ? k + ".5-MEZZ" : ViewNaming.FloorCode(k);
             }
             return null;
         }
@@ -159,6 +162,7 @@ namespace OpenBepSync
                 why = v.Name.StartsWith("{") ? "Revit's own view: unfinished views set" : v.OnSheet ? "set guessed: placed on a sheet" : "set guessed: not on a sheet";
             }
             else why = "";
+            if (type == null && v.Kind == ViewKind.FloorPlan && SiteWords.IsMatch(v.Name)) type = "005-PLAN-SITE";
             type = type ?? DefaultType(v.Kind, v.Perspective);
 
             string name;
@@ -175,6 +179,8 @@ namespace OpenBepSync
             }
             return (name, set, type, why);
         }
+
+        static readonly Regex SiteWords = new Regex(@"\b(site|implantation)\b", RegexOptions.IgnoreCase);
 
         /// <summary>Makes every proposed name unique among themselves and the names that stay: the second N-WORK-SECT-01 becomes N-WORK-SECT-01-2.</summary>
         public static void MakeUnique(IList<SetupLine> renames, ICollection<string> namesThatStay)
@@ -261,8 +267,10 @@ namespace OpenBepSync
                 if (!Enum.TryParse(Cell(1), true, out SetupAction action)) { warnings.Add($"Line {r + 1}: unknown action {Cell(1)}"); continue; }
                 var l = new SetupLine(Cell(0), action, Cell(2), Cell(3), Cell(4), Cell(5), Cell(6));
                 if (l.Kind == "") { warnings.Add($"Line {r + 1}: needs a kind"); continue; }
-                if (action != SetupAction.Create && l.Element == "" && l.Current == "") { warnings.Add($"Line {r + 1}: needs an element id or its current name"); continue; }
-                if ((action == SetupAction.Rename || action == SetupAction.Create) && l.New == "") { warnings.Add($"Line {r + 1}: needs a new name"); continue; }
+                if (action != SetupAction.Create && action != SetupAction.Check && l.Element == "" && l.Current == "") { warnings.Add($"Line {r + 1}: needs an element id or its current name"); continue; }
+                if (action == SetupAction.Create && l.New == "") { warnings.Add($"Line {r + 1}: needs a new name"); continue; }
+                // A rename with no new name is one left for a person to type: it comes back unticked.
+                if (action == SetupAction.Check || (action == SetupAction.Rename && l.New == "")) l.Apply = false;
                 result.Add(l);
             }
             return result;

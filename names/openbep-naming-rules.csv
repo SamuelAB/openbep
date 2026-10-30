@@ -1,6 +1,6 @@
 ﻿List,Code or rule,Meaning or example,Not,Label (FR)
 Rule for every name,Literal: anyone outside the project understands it,OB_Masonry_Brick_Red-Matte,OB_Mat07,Littéral : compris par quelqu'un hors du projet
-Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-CON-RCP-L02,New - Construction - Reflected Ceiling Plan - Level 2,Aussi court que possible tout en restant compris
+Rule for every name,As short as it can be and still be understood; abbreviate when the short form is common,N-CON-RCP-2ND-FLR,New - Construction - Reflected Ceiling Plan - Second Floor,Aussi court que possible tout en restant compris
 Rule for every name,"General to specific: major, then medium, then minor",Glass_Laminated_Clear,Clear_Laminated_Glass,Du général au particulier
 Rule for every name,No spaces around separators,Line-Xhatch,Line - Xhatch,Pas d'espaces autour des séparateurs
 Rule for every name,Read the list sorted: values that belong together must sort together and in a sensible order,"Light, Medium, Wide","Light, Medium, Heavy",Vérifier la liste triée par ordre alphabétique
@@ -24,15 +24,17 @@ Discipline code,SITE,Site and landscaping,,Aménagement du site et paysage
 Discipline code,CIVIL,Civil engineering,,Génie civil
 Discipline code,LOCATION,"Grids, levels and shared coordinates only",,"Grilles, niveaux et coordonnées partagées seulement"
 Discipline code,CON,Contractor's construction model,,Modèle de construction de l'entrepreneur
-View name,<PHASE>-<SET>-<TYPE>-<Level>,N-CON-PLAN-EGRESS-L02,,
+View name,<PHASE>-<SET>-<TYPE>-<Level>,N-CON-PLAN-EGRESS-2ND-FLR,,
 View template name,<Discipline>-<TYPE>-<Set>-<scale>,ARCH-PLAN-CON-100,,
-Level code,B2,Second basement (Building Story: Yes),,Deuxième sous-sol
-Level code,B1,First basement (Building Story: Yes),,Premier sous-sol
-Level code,L01,Ground floor (Building Story: Yes),,Rez-de-chaussée
-Level code,L01M,"Mezzanine above level 1 (Building Story: Yes, when it is a storey for code or areas)",,Mezzanine au-dessus du niveau 1
-Level code,L02,Level 2 (Building Story: Yes),,Niveau 2
-Level code,RF,Roof (Building Story: Yes),,Toit
-Level code,L02_TOS,Top of steel under level 2 (a reference level) (Building Story: No),,Dessus de l'acier sous le niveau 2
+Level code,BSMNT-2,Second basement (Building Story: Yes),,Deuxième sous-sol
+Level code,BSMNT-1.5-LANDING,Stair landing between the basements (Building Story: No),,Palier entre les sous-sols
+Level code,BSMNT-1,First basement (Building Story: Yes),,Premier sous-sol
+Level code,1ST-FLR,First floor (ground floor) (Building Story: Yes),,Rez-de-chaussée
+Level code,1.5-STAIR-LANDING,Stair landing above the first floor (Building Story: No),,Palier au-dessus du rez-de-chaussée
+Level code,1.5-MEZZ,"Mezzanine above the first floor (Building Story: Yes, when it is a storey for code or areas)",,Mezzanine au-dessus du rez-de-chaussée
+Level code,1.9-US-2ND-FLR,Underside of the 2nd floor structure (Building Story: No),,Dessous de la structure du 2e étage
+Level code,2ND-FLR,Second floor (Building Story: Yes),,2e étage
+Level code,4-ROOF,"Roof, over a 3rd floor (Building Story: Yes)",,Toit
 Phase code,EX,Existing,,Existant
 Phase code,N,New Construction,,Nouvelle construction
 Phase code,P1,Phase 1,,Phase 1
@@ -110,7 +112,7 @@ Sheet series,4,Enlarged plans and interior elevations,,Plans agrandis et éléva
 Sheet series,5,Details,,Détails
 Sheet series,6,Schedules,,Nomenclatures
 Sheet series,9,3D views and presentation,,Vues 3D et présentation
-Room number,Storey number + three digits,"The storey number, then three digits: 2015 is room 15 on level 2 (L02), 1003 is room 3 on the ground floor (L01). Numbers run clockwise from the main entrance and leave gaps for rooms added later (proposal).",,
+Room number,Storey number + three digits,"The storey number, then three digits: 2015 is room 15 on the 2nd floor (2ND-FLR), 1003 is room 3 on the ground floor (1ST-FLR). Numbers run clockwise from the main entrance and leave gaps for rooms added later (proposal).",,
 Built-in parameter,Type Mark,The tag code of a type (Window type A),,Code d'étiquette du type
 Built-in parameter,Mark,"The unique id of one element; never two the same in one category (Window 101, 102)",,Identifiant unique de l'élément
 Built-in parameter,Type Comments,Drawing notes only,,Notes de dessin seulement

@@ -82,7 +82,7 @@ namespace OpenBepSync
                     line.Ok = true;
                     line.Status = p.Zone == "" ? "new" : "new dependent";
                     var notes = new List<string>();
-                    if (!ViewNaming.IsLevelName(p.Level)) notes.Add("level not named by the OpenBEP rule (L02, B1, RF)");
+                    if (!ViewNaming.IsLevelName(p.Level)) notes.Add("level not named by the OpenBEP rule (2ND-FLR, BSMNT-1, 4-ROOF)");
                     if (p.Zone == "" && line.Template == "") notes.Add($"no template {discipline}-{t.Code}-{p.Set}-<scale>");
                     line.Note = string.Join("; ", notes);
                 }
