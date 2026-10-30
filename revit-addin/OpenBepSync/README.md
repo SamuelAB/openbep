@@ -1,6 +1,6 @@
 # OpenBEP Sync: Revit add-in (v0.1, built for Revit 2022, first run in Revit pending)
 
-This add-in adds an **OpenBEP** tab to Revit with four buttons: **Sync parameters**, **Build family library** (see [`library/`](../../library/)), **Replace materials** (see [below](#replace-materials)) and **Create views** (see [below](#create-views)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
+This add-in adds an **OpenBEP** tab to Revit with five buttons: **Sync parameters**, **Build family library** (see [`library/`](../../library/)), **Replace materials** (see [below](#replace-materials)), **Create views** (see [below](#create-views)) and **Set up project** (see [below](#set-up-project)). Sync parameters makes a model's shared parameters match the plan written in the BEP Builder.
 
 ## What it does
 
@@ -88,6 +88,26 @@ Each new view gets:
 
 Not done yet: sections, elevations, 3D views per level, drafting views, room and element views, copying a whole set to another phase or set, renaming existing views to the rule (planned for the Set up project audit), placing views on sheets, and setting a design option's visibility (Revit doesn't let add-ins set it; the `-OPTn` name is added, the option is picked by hand).
 
+## Set up project
+
+Checks an existing model's names against the OpenBEP rules ([`docs/naming-rules.md`](../../docs/naming-rules.md)) and proposes a **setup plan**: every rename, browser parameter, deletion or addition that brings the model to the rules. Nothing changes until a person runs it.
+
+At the top, a score per kind: how many levels, views, view templates, phase filters and materials already follow the rules. Below, the plan, one line per change, which can be filtered by kind, edited, unticked, exported to CSV and imported back.
+
+| Kind | What the plan proposes |
+| --- | --- |
+| Levels | Storeys renamed from their current name: Level 1 or Ground floor to `L01`, Level 2 to `L02`, Roof to `RF`, Basement 1 to `B1`. When the name doesn't say, or for a reference level (`L02_TOS`), the line is left for a person to type. |
+| Views | Plans, ceiling plans, sections, callouts, elevations, 3D and drafting views renamed `<PHASE>-<SET>-<TYPE>-<Level>` with the new level names, and `OB_ViewSet` and `OB_ViewType` filled. The set comes from `OB_ViewSet` if filled, otherwise `CON` for a view placed on a sheet and `W` for the rest (Revit's `{3D}` goes to `Z-WIP`); the note says when it was guessed. Dependents take their parent's new name and their scope box zone. A name taken twice gets `-2`. |
+| View templates | Names that don't follow `<Discipline>-<TYPE>-<Set>-<scale>` are listed for a person to rename. |
+| Phase filters | `Show Demo + New` and `Show Previous Phase` deleted (views using them move to `Show Previous + New`), `Show Existing` added. |
+| Materials | Counted; fixed with Replace materials, which shows every element each change touches. |
+
+**Run** applies the ticked lines in one transaction (renames in two passes, so names can swap): one Undo reverses it.
+
+The plan file (`Kind,Action,Element,Current name,New name,Rule,Note`; actions Rename, Fill, Create, Delete, Check) is the one an AI or MCP writes: it reads the model, writes the plan, and a person reviews it here. A line finds its element by id, or by kind and current name when the id is empty or from another model.
+
+Not done yet: writing the OpenBEP setup into a new project or a firm's template (phases, browser organization, the `Z-` filter, closed lists of lines and text), sheets, worksets, view filters, scope boxes, rooms, and a `.rte` template file.
+
 ## Build
 
 Requires Windows, Revit 2022 or later, and the .NET SDK 8 or later.
@@ -102,7 +122,7 @@ dotnet build -c Release -p:RevitVersion=2025
 
 ### Offline tests (no Revit needed)
 
-The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule, the fixed-GUID rule and the replace list rules (replace, rename, merge, chains, loops, OpenBEP names) and the view naming rules (names, phase codes, templates, titles, the view plan file, and that the view types and drawing sets match `docs/naming-rules.md`) are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
+The binding list and shared parameter file reading, the `OB_`/`CA_` prefix rule, the fixed-GUID rule and the replace list rules (replace, rename, merge, chains, loops, OpenBEP names) the setup rules (level and view names proposed from current ones, rule names parsed, unique names, the setup plan file) and the view naming rules (names, phase codes, templates, titles, the view plan file, and that the view types and drawing sets match `docs/naming-rules.md`) are tested without Revit, against Builder v0.37 exports (school, rail, a project with custom levels) and a hand-made list with loose LOD values, in `OpenBepSync.Tests/fixtures`. From the repository root:
 
 ```
 dotnet test revit-addin/OpenBepSync.Tests
@@ -118,7 +138,7 @@ dotnet test revit-addin/OpenBepSync.Tests
 
 | File | Role |
 |---|---|
-| `App.cs` | Adds the ribbon tab and its four buttons. |
+| `App.cs` | Adds the ribbon tab and its five buttons. |
 | `LibraryCommand.cs` | Builds the families in `library/families.csv` from Revit's metric templates, with types and OpenBEP shared parameters. |
 | `AutoTest.cs` | Developer test, off unless `%AppData%\OpenBEP\autotest.json` exists (see below). |
 | `SyncCommand.cs` | Dry run, report, choice, then one transaction that adds, binds or deletes. |
@@ -131,6 +151,10 @@ dotnet test revit-addin/OpenBepSync.Tests
 | `CreateViewsCommand.cs` | Opens the Create views window. |
 | `CreateViewsWindow.cs` | The window: the level × view type grid, scope boxes, the preview, view plan files and the run. |
 | `ViewCreator.cs` | Previews and makes the views: name, phase, template, phase filter, browser parameters, title, dependents. |
+| `SetupCommand.cs` | Opens the Set up project window. |
+| `SetupWindow.cs` | The window: scores, the plan to review, import, export and the run. |
+| `ProjectAudit.cs` | Checks levels, views, templates, phase filters and materials and applies the plan. |
+| `SetupRules.cs` | Proposes level and view names, reads and writes the setup plan; no Revit needed. |
 | `ViewNaming.cs` | The OpenBEP view rule in code: sets, types, names, templates, titles, the view plan file; no Revit needed. |
 | `OpenBepSync.csproj` | Build file; set `RevitVersion`. |
 | `OpenBepSync.addin` | Revit manifest. |
@@ -145,7 +169,8 @@ For developers only; nothing happens unless `%AppData%\OpenBEP\autotest.json` ex
 4. if `ifcPsets` is set: fills empty OpenBEP `OB_` parameters, and empty Type Mark, Mark, Manufacturer, Model and Description, with unique test values (warnings deleted, so a duplicate-mark warning cannot roll the fill back) and exports `OpenBEP-autotest.ifc` (IFC4, base quantities, common property sets, plus the user-defined property set file from [`shared-parameters/`](../../shared-parameters/)); check it with `test/check_ifc.py model.ifc plan.ids` (ifcopenshell and ifctester) against the IDS downloaded from the BEP Builder;
 5. makes plans, egress plans and ceiling plans for every storey with Create views (and dependents if the model has scope boxes), logs each view's phase, phase filter, browser parameters and title, and checks a second preview finds them all;
 6. tests Replace materials without its window: renames the most used material to `OB_Test_Renamed`, merges the second into the third, logs the use counts before and after, rolls it all back, lists the assets and round-trips a replace list CSV;
-7. saves the project, writes `autotest.log` and `autotest-done.txt` in `out`, and closes Revit (unless `"exit": "no"`).
+7. runs Set up project: audits, applies the whole plan, logs each line, and audits again to show what is left;
+8. saves the project, writes `autotest.log` and `autotest-done.txt` in `out`, and closes Revit (unless `"exit": "no"`).
 
 Every Revit dialog is answered automatically ("save?" questions with No) and logged.
 

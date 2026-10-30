@@ -11,6 +11,7 @@
     <Compile Include="..\OpenBepSync\SharedParameterFile.cs" Link="Linked\SharedParameterFile.cs" />
     <Compile Include="..\OpenBepSync\MaterialRules.cs" Link="Linked\MaterialRules.cs" />
     <Compile Include="..\OpenBepSync\ViewNaming.cs" Link="Linked\ViewNaming.cs" />
+    <Compile Include="..\OpenBepSync\SetupRules.cs" Link="Linked\SetupRules.cs" />
     <None Include="fixtures\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
