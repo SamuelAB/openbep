@@ -32,7 +32,7 @@ Level code,BSMNT-1,First basement (Building Story: Yes),,Premier sous-sol
 Level code,1ST-FLR,First floor (ground floor) (Building Story: Yes),,Rez-de-chaussée
 Level code,1.5-STAIR-LANDING,Stair landing above the first floor (Building Story: No),,Palier au-dessus du rez-de-chaussée
 Level code,1.5-MEZZ,"Mezzanine above the first floor (Building Story: Yes, when it is a storey for code or areas)",,Mezzanine au-dessus du rez-de-chaussée
-Level code,1.9-US-2ND-FLR,Underside of the 2nd floor structure (Building Story: No),,Dessous de la structure du 2e étage
+Level code,1.9-US,Underside of the 2nd floor structure (Building Story: No),,Dessous de la structure du 2e étage
 Level code,2ND-FLR,Second floor (Building Story: Yes),,2e étage
 Level code,4-ROOF,"Roof, over a 3rd floor (Building Story: Yes)",,Toit
 Phase code,EX,Existing,,Existant

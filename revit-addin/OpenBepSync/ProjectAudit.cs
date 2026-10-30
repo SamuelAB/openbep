@@ -64,7 +64,7 @@ namespace OpenBepSync
                 }
                 else
                     Add(new SetupLine(KLevel, SetupAction.Rename, "", l.Name, "", LevelRule,
-                        !storey ? "level between storeys: the number below, a decimal, then words, such as 1.9-US-2ND-FLR" : code != null ? $"{code} is already used; type the name" : "type the name: the current one doesn't say which storey") { Apply = false }, l);
+                        !storey ? "level between storeys: the number below, a decimal, then words, such as 1.9-US" : code != null ? $"{code} is already used; type the name" : "type the name: the current one doesn't say which storey") { Apply = false }, l);
             }
             Score[KLevel] = (ok, levels.Count);
             return after;

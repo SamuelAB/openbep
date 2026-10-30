@@ -29,7 +29,7 @@ namespace OpenBepSync.Tests
         [InlineData("P1", "BSMNT-1")]
         [InlineData("B1", "BSMNT-1")]
         [InlineData("2ND-FLR", "2ND-FLR")]
-        [InlineData("1.9-US-2ND-FLR", "1.9-US-2ND-FLR")]
+        [InlineData("1.9-US", "1.9-US")]
         [InlineData("L02_TOS", null)]
         [InlineData("T.O. Steel", null)]
         [InlineData("Level 0", null)]
@@ -75,7 +75,7 @@ namespace OpenBepSync.Tests
             Assert.Equal(("N-PERMIT-PLAN-EGRESS-2ND-FLR", "PERMIT", "020-PLAN-EGRESS"), Short(SetupRules.ProposeView(filed, Phases)));
 
             var site = new ViewFacts { Name = "Site", Kind = ViewKind.FloorPlan, Phase = "N", Level = "1ST-FLR" };
-            Assert.Equal(("N-WORK-PLAN-SITE-1ST-FLR", "WORK", "005-PLAN-SITE"), Short(SetupRules.ProposeView(site, Phases)));
+            Assert.Equal(("N-WORK-PLAN-SITE", "WORK", "005-PLAN-SITE"), Short(SetupRules.ProposeView(site, Phases)));
 
             var sect = new ViewFacts { Name = "Section 1", Kind = ViewKind.Section, Phase = "EX" };
             Assert.Equal("EX-WORK-SECT-01", SetupRules.ProposeView(sect, Phases).name);

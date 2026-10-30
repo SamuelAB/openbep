@@ -101,7 +101,7 @@ namespace OpenBepSync.Tests
         [InlineData("4-ROOF", true)]
         [InlineData("BSMNT-1", true)]
         [InlineData("1.5-STAIR-LANDING", true)]
-        [InlineData("1.9-US-2ND-FLR", true)]
+        [InlineData("1.9-US", true)]
         [InlineData("1.5-MEZZ", true)]
         [InlineData("3.2-MECH-PLATFORM", true)]
         [InlineData("BSMNT-1.5-LANDING", true)]

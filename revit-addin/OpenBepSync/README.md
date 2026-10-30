@@ -96,7 +96,7 @@ At the top, a score per kind: how many levels, views, view templates, phase filt
 
 | Kind | What the plan proposes |
 | --- | --- |
-| Levels | Storeys renamed from their current name: Level 1 or Ground floor to `1ST-FLR`, Level 2 to `2ND-FLR`, Basement 1 to `BSMNT-1`, and the roof to the number after the top floor (`4-ROOF` over a `3RD-FLR`). Old OpenBEP codes (`L02`, `B1`, `RF`) move over the same way. When the name doesn't say, or for a level in between (`1.9-US-2ND-FLR`), the line is left for a person to type. |
+| Levels | Storeys renamed from their current name: Level 1 or Ground floor to `1ST-FLR`, Level 2 to `2ND-FLR`, Basement 1 to `BSMNT-1`, and the roof to the number after the top floor (`4-ROOF` over a `3RD-FLR`). Old OpenBEP codes (`L02`, `B1`, `RF`) move over the same way. When the name doesn't say, or for a level in between (`1.9-US`), the line is left for a person to type. |
 | Views | Plans, ceiling plans, sections, callouts, elevations, 3D and drafting views renamed `<PHASE>-<SET>-<TYPE>-<Level>` with the new level names, and `OB_ViewSet` and `OB_ViewType` filled. The set comes from `OB_ViewSet` if filled, otherwise `CON` for a view placed on a sheet and `WORK` for the rest (Revit's `{3D}` goes to `Z-WIP`); the note says when it was guessed. Dependents take their parent's new name and their scope box zone. A name taken twice gets `-2`. |
 | View templates | Names that don't follow `<Discipline>-<TYPE>-<Set>-<scale>` are listed for a person to rename. |
 | Phase filters | `Show Demo + New` and `Show Previous Phase` deleted (views using them move to `Show Previous + New`), `Show Existing` added. |
