@@ -28,6 +28,8 @@ namespace OpenBepSync
             Code.StartsWith("SECT") ? ViewKind.Section : Code.StartsWith("ELEV") ? ViewKind.Elevation : Code == "3D" ? ViewKind.Camera : ViewKind.Drafting;
         /// <summary>Plans and ceiling plans: one view per level, the ones Create views makes.</summary>
         public bool PerLevel => Kind == ViewKind.FloorPlan || Kind == ViewKind.CeilingPlan;
+        /// <summary>A site plan sits on a level but covers the whole site, so its name has no level: N-CON-PLAN-SITE.</summary>
+        public bool LevelInName => Code != "PLAN-SITE";
     }
 
     /// <summary>One line of a view plan: a view to make. Zone is empty for a parent view, or the scope box zone of a dependent.</summary>
@@ -137,13 +139,13 @@ namespace OpenBepSync
         /// <summary>&lt;PHASE&gt;-&lt;SET&gt;-&lt;TYPE&gt;-&lt;Level&gt;[-OPTn][-Zone], for example N-CON-PLAN-EGRESS-2ND-FLR or N-CON-PLAN-2ND-FLR-A.</summary>
         public static string Name(PlannedView v)
         {
-            var type = Type(v.Type)?.Code ?? v.Type;
-            var parts = new List<string> { v.Phase, v.Set, type, v.Level, v.Option, v.Zone };
+            var t = Type(v.Type);
+            var parts = new List<string> { v.Phase, v.Set, t?.Code ?? v.Type, t?.LevelInName == false ? "" : v.Level, v.Option, v.Zone };
             return string.Join("-", parts.Where(p => !string.IsNullOrWhiteSpace(p)).Select(p => p.Trim()));
         }
 
         // Storeys 1ST-FLR, 2ND-FLR, 12TH-FLR; the roof takes the next number, 4-ROOF; basements BSMNT-1, BSMNT-2.
-        // Levels in between: the number below, a decimal, then words: 1.5-STAIR-LANDING, 1.9-US-2ND-FLR, BSMNT-1.5-LANDING.
+        // Levels in between: the number below, a decimal, then words: 1.5-STAIR-LANDING, 1.9-US, BSMNT-1.5-LANDING.
         static readonly Regex Floor = new Regex(@"^(\d+)(ST|ND|RD|TH)-FLR$");
         static readonly Regex RoofLevel = new Regex(@"^(\d+)-ROOF$");
         static readonly Regex Basement = new Regex(@"^BSMNT-(\d+)$");
@@ -205,7 +207,7 @@ namespace OpenBepSync
         {
             var t = Type(v.Type);
             var what = t == null ? "" : french ? t.LabelFr : t.Label;
-            var level = LevelTitle(v.Level, french);
+            var level = t?.LevelInName == false ? "" : LevelTitle(v.Level, french);
             var title = level == "" ? what : what == "" ? level : level + " - " + what;
             return v.Zone == "" ? title : title + (french ? " - zone " : " - area ") + v.Zone;
         }

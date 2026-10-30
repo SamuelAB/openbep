@@ -35,6 +35,8 @@ python3 translations/build_i18n.py
 
 **Change a BIM term everywhere.** Change the approved word in `glossary.csv`, run `python3 translations/check_i18n.py`: it lists every row that still uses the old word. Fix those rows, then build.
 
+**The naming lists page** (`names/`) is built by `python3 names/build_names.py`, not by `build_pages.py`: it writes `names/fr/` from the English master with the same dictionary, plus the French for the text inside the lists (descriptions, groups, element types). Strings with no French are listed, and CI fails on them. No Japanese yet.
+
 **Find text with no translation.** Run `node translations/tools/crawl_app.js` (it opens the BEP Builder and the Scorecard in a headless browser, walks every step of both examples, and lists the dictionary rows they need), then `python3 translations/check_i18n.py --app`. Add the missing rows with their French and build. Open the app with `?translate=1` (for example `app/bep-builder.html?translate=1`) to get a "Strings to translate (CSV)" button in the Glossary: it exports the same list from your own browser.
 
 **Add a language** (Japanese, Spanish...). Add a column to `canbim_strings.csv` named with the language code (`es`), add a line to `languages.csv` with `show` set to `no`, and add `es` and `es_avoid` columns to `glossary.csv`. Fill the glossary first, then the dictionary. Set `show` to `yes` and build when it is ready. Nothing else changes: no new pages.

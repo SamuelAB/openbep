@@ -62,14 +62,14 @@ Storeys are named the way people say them: `1ST-FLR`, `2ND-FLR`. No elevation in
 | `1ST-FLR` | First floor (ground floor) | Yes | Rez-de-chaussée |
 | `1.5-STAIR-LANDING` | Stair landing above the first floor | No | Palier au-dessus du rez-de-chaussée |
 | `1.5-MEZZ` | Mezzanine above the first floor | Yes, when it is a storey for code or areas | Mezzanine au-dessus du rez-de-chaussée |
-| `1.9-US-2ND-FLR` | Underside of the 2nd floor structure | No | Dessous de la structure du 2e étage |
+| `1.9-US` | Underside of the 2nd floor structure | No | Dessous de la structure du 2e étage |
 | `2ND-FLR` | Second floor | Yes | 2e étage |
 | `4-ROOF` | Roof, over a 3rd floor | Yes | Toit |
 
 - **Storeys:** the ordinal and `FLR`: `1ST-FLR`, `2ND-FLR`, `3RD-FLR`, `11TH-FLR`, `21ST-FLR`. The ground floor is `1ST-FLR`, as Canadian codes number it.
 - **Roof:** it takes the number after the top floor, then `ROOF`: `4-ROOF` over a `3RD-FLR`.
 - **Basements:** `BSMNT-1`, `BSMNT-2`, counting down.
-- **Levels in between:** the number of the storey below, a decimal for how far up the storey it sits, then words. Halfway up is `.5`, just under the next floor is `.9`: `1.5-STAIR-LANDING`, `1.9-US-2ND-FLR`, and a level about a metre up a 4.5 m storey is `.2`. Between basements, the same after `BSMNT-`: `BSMNT-1.5-LANDING`. The decimal is a rough fraction of a storey height, not a measure; Revit lists levels by elevation.
+- **Levels in between:** the number of the storey below, a decimal for how far up the storey it sits, then words that say what it is; the number already says which floor. Halfway up is `.5`, just under the next floor is `.9`: `1.5-STAIR-LANDING`, `1.9-US`, and a level about a metre up a 4.5 m storey is `.2`. Between basements, the same after `BSMNT-`: `BSMNT-1.5-LANDING`. The decimal is a rough fraction of a storey height, not a measure; Revit lists levels by elevation.
 - **Building Story** is ticked only for real storeys: each becomes one IfcBuildingStorey in an IFC export. Levels in between (top of steel, underside of deck, landing) have it off; elements hosted on them export with the storey below.
 - **No parapet level** in most cases: it is easier to give the parapet walls a constant offset from the roof level.
 - **Mezzanine:** `1.5-MEZZ`, with Building Story on when it counts as a storey for the building code or areas. The plan says which.
@@ -82,7 +82,7 @@ Storeys are named the way people say them: `1ST-FLR`, `2ND-FLR`. No elevation in
 | `BSMNT-1` | -4.200 | Yes |
 | `1ST-FLR` | 0.000 | Yes |
 | `1.5-MEZZ` | 2.250 | Yes |
-| `1.9-US-2ND-FLR` | 4.150 | No |
+| `1.9-US` | 4.150 | No |
 | `2ND-FLR` | 4.500 | Yes |
 | `3RD-FLR` | 8.700 | Yes |
 | `4-ROOF` | 12.900 | Yes |
@@ -196,7 +196,7 @@ Sets starting with `Z-` sort last. A browser filter on `OB_ViewSet` not beginnin
 
 Example: `N-CON-PLAN-EGRESS-2ND-FLR` is the new construction, construction set, egress plan of the 2nd floor.
 
-- A view with no level ends with what tells it apart: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
+- A view with no level ends with what tells it apart: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`. A site plan covers the whole site, so it has no level either: `N-CON-PLAN-SITE`.
 - Design options end with `-OPT1`, `-OPT2`: `P1-WORK-PLAN-1ST-FLR-OPT2`.
 - A person's own views go in their own set: `N-Z-USER-SAM-PLAN-2ND-FLR`.
 - Drafting views have no phase, so `DRAFT` takes the phase's place: `DRAFT-CON-DET-PARAPET`, `DRAFT-CON-LEGEND-WALLTYPES`. With `OB_ViewSet` and `OB_ViewType` filled, they still sort into set and type folders under `???`. (Proposal: drafting views have no agreed logic yet.)

@@ -10,13 +10,19 @@ Sources, never edited here:
 - docs/naming-rules.md                                   (rules for every name, model files, levels, views)
 
 Writes:
-- the block between /*NAMES*/ and /*/NAMES*/ in names/index.html
+- the block between /*NAMES*/ and /*/NAMES*/ in names/index.html (the English master)
+- names/fr/index.html: the French page, built from the master with translations/build_pages.py, plus the French
+  for the English text in the lists (block /*T*/), all from translations/canbim_strings.csv. A string with no
+  French is listed, and --check fails on it.
 - names/openbep-naming-rules.csv, openbep-parameters.csv, openbep-materials.csv, openbep-lines.csv, openbep-text.csv, openbep-families.csv
 
 Run `python3 names/build_names.py` after changing a source, or `--check` (CI) to fail when out of date.
 """
 import csv, io, json, re, sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'translations'))
+import build_pages  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'names'
@@ -190,6 +196,44 @@ def csv_text(head, rows):
     return '﻿' + b.getvalue()
 
 
+def shown_in_english(P, G, F, N, page):
+    """Every English text the page shows from the lists (it goes through t() in the page script), plus the
+    page script's own t('...') strings."""
+    out = []
+    for p in P:
+        out += [p['kind'], p['scope'], p['desc'], p['group']] + p['els']
+    out += [x['story'] for x in N['levels']] + [x['by'] for x in N['browser']] + [N['room'], 'Deleted']
+    for x in N['pfilters']:
+        out += [x['shows'], x['use'], x['keep']] + x['st']
+    for x in N['poverrides']:
+        out += [x['status'], x['lines'], x['half'], x['fill']]
+    out += [x['holds'] for x in N['sets']] + [m['cnt'] for m in G['materials']] + [x['use'] for x in G['patterns']]
+    out += [x['cat'] for x in G['objects']] + [d['use'] for d in G['dims']] + [f['el'] for f in F]
+    script = page[page.index('/*/NAMES*/'):]
+    out += [m.replace("\\'", "'") for m in re.findall(r"\bt\('((?:[^'\\]|\\.)*)'", script)]
+    return [x for x in dict.fromkeys(out) if x and re.search(r'[a-z]', x)]
+
+
+def french(P, G, F, N, page):
+    """The French page and the strings it still lacks."""
+    with open(ROOT / 'translations' / 'canbim_strings.csv', encoding='utf-8-sig', newline='') as fh:
+        rows = list(csv.DictReader(fh))
+    table = {build_pages.norm(r['en']): r['fr'] for r in rows if r.get('fr')}
+    missing = set()
+    T = {}
+    for en in shown_in_english(P, G, F, N, page):
+        fr = table.get(build_pages.norm(en))
+        if fr:
+            T[en] = fr
+        else:
+            missing.add(en)
+    out = build_pages.translate(page, 'fr', table, missing)
+    a, b = '/*T*/', '/*/T*/'
+    i, j = out.index(a) + len(a), out.index(b)
+    out = out[:i] + json.dumps(T, ensure_ascii=False, separators=(',', ':'), sort_keys=True) + out[j:]
+    return out, sorted(missing)
+
+
 def build():
     P, G, F, N = parameters(), graphics(), families(), naming()
     files = {
@@ -245,22 +289,29 @@ def build():
     a, b = '/*NAMES*/', '/*/NAMES*/'
     i, j = page.index(a) + len(a), page.index(b)
     files['index.html'] = page[:i] + 'const D=' + data + ';' + page[j:]
-    return files
+    files['fr/index.html'], missing = french(P, G, F, N, files['index.html'])
+    return files, missing
 
 
 def main():
     check = '--check' in sys.argv
     stale = []
-    for name, text in build().items():
+    files, missing = build()
+    for name, text in files.items():
         path = OUT / name
+        path.parent.mkdir(exist_ok=True)
         old = path.read_bytes().decode('utf-8') if path.exists() else None
         if old != text:
             stale.append(name)
             if not check:
                 path.write_text(text, encoding='utf-8', newline='')
+    for m in missing:
+        print('  no French in translations/canbim_strings.csv: ' + m[:120])
     if check and stale:
         sys.exit('names/ is out of date, run python3 names/build_names.py: ' + ', '.join(stale))
-    print(('Up to date' if not stale else 'Wrote ' + ', '.join(stale)))
+    if check and missing:
+        sys.exit('%d strings of the naming lists have no French (add them to translations/canbim_strings.csv)' % len(missing))
+    print(('Up to date' if not stale else 'Wrote ' + ', '.join(stale)) + ('' if not missing else ', %d strings with no French' % len(missing)))
 
 
 if __name__ == '__main__':

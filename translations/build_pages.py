@@ -24,10 +24,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 TABLE = os.path.join(HERE, 'canbim_strings.csv')  # the one dictionary, shared with the app
 # English masters (relative to the repository root) and the where label of their rows
-PAGES = {'why/index.html': 'Why OpenBEP', 'formats/index.html': 'Formats page'}
+PAGES = {'why/index.html': 'Why OpenBEP', 'formats/index.html': 'Formats page', 'names/index.html': 'Names page'}
+# Pages whose language copies another script writes (it adds the French for the lists' data): names/build_names.py
+BUILT_ELSEWHERE = {'names/index.html'}
 
 UNIT = re.compile(r'<(?P<tag>[a-z0-9]+)(?P<attrs>[^>]*\bdata-i18n(?![-\w])[^>]*)>(?P<body>.*?)</(?P=tag)>', re.S)
-ATTR = re.compile(r'(?P<name>content|alt|aria-label|title)="(?P<val>[^"]*)"')
+ATTR = re.compile(r'(?P<name>content|alt|aria-label|title|placeholder)="(?P<val>[^"]*)"')
 URL = re.compile(r'\b(?P<name>href|src|data-root)="(?P<val>[^"#][^"]*)"')
 
 
@@ -130,6 +132,8 @@ def main():
         print('added %d new strings to %s' % (added, os.path.basename(TABLE)))
         return
     for p in PAGES:
+        if p in BUILT_ELSEWHERE:
+            continue
         master = open(os.path.join(ROOT, p), encoding='utf-8').read()
         for lang in langs:
             table = {norm(r['en']): r[lang] for r in rows if r.get(lang)}

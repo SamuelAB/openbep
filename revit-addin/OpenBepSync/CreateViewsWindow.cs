@@ -57,7 +57,7 @@ namespace OpenBepSync
 
         readonly ComboBox phase = Combo(170), set = Combo(150, editable: true), option = Combo(80), discipline = Combo(90, editable: true), titles = Combo(150);
         readonly CheckBox showRef = new CheckBox { Content = "Show reference levels", VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 16, 0),
-            ToolTip = "Levels with Building Story off, such as 1.9-US-2ND-FLR. They rarely get their own plans." };
+            ToolTip = "Levels with Building Story off, such as 1.9-US. They rarely get their own plans." };
         readonly Grid cells = new Grid();
         readonly StackPanel zoneList = new StackPanel();
         readonly ObservableCollection<PreviewRow> rows = new ObservableCollection<PreviewRow>();
