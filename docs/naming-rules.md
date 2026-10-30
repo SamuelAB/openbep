@@ -9,7 +9,7 @@ How OpenBEP names things in a Revit project: the rules every list follows, model
 | Rule | Write | Not | Règle (FR) |
 | --- | --- | --- | --- |
 | Literal: anyone outside the project understands it | `OB_Masonry_Brick_Red-Matte` | `OB_Mat07` | Littéral : compris par quelqu'un hors du projet |
-| As short as it can be and still be understood; abbreviate when the short form is common | `N-CON-RCP-L02` | `New - Construction - Reflected Ceiling Plan - Level 2` | Aussi court que possible tout en restant compris |
+| As short as it can be and still be understood; abbreviate when the short form is common | `N-CON-RCP-2ND-FLR` | `New - Construction - Reflected Ceiling Plan - Second Floor` | Aussi court que possible tout en restant compris |
 | General to specific: major, then medium, then minor | `Glass_Laminated_Clear` | `Clear_Laminated_Glass` | Du général au particulier |
 | No spaces around separators | `Line-Xhatch` | `Line - Xhatch` | Pas d'espaces autour des séparateurs |
 | Read the list sorted: values that belong together must sort together and in a sensible order | `Light`, `Medium`, `Wide` | `Light`, `Medium`, `Heavy` | Vérifier la liste triée par ordre alphabétique |
@@ -52,34 +52,40 @@ Any other discipline follows the same logic and is listed in the plan.
 
 One set of levels for the whole project, owned by the `LOCATION` model (or the architect's model when there is none). Every other model copy-monitors them and keeps the same names.
 
-The level name is a short code that sorts the way the building stacks. No elevation in the name: elevations change and the name would lie. The words (Ground floor, Rez-de-chaussée) go in each plan's Title on Sheet, not in the level name.
+Storeys are named the way people say them: `1ST-FLR`, `2ND-FLR`. No elevation in the name: elevations change and the name would lie. The words for drawings (Ground floor, Rez-de-chaussée) go in each plan's Title on Sheet.
 
 | Code | Level | Building Story | Niveau (FR) |
 | --- | --- | --- | --- |
-| `B2` | Second basement | Yes | Deuxième sous-sol |
-| `B1` | First basement | Yes | Premier sous-sol |
-| `L01` | Ground floor | Yes | Rez-de-chaussée |
-| `L01M` | Mezzanine above level 1 | Yes, when it is a storey for code or areas | Mezzanine au-dessus du niveau 1 |
-| `L02` | Level 2 | Yes | Niveau 2 |
-| `RF` | Roof | Yes | Toit |
-| `L02_TOS` | Top of steel under level 2 (a reference level) | No | Dessus de l'acier sous le niveau 2 |
+| `BSMNT-2` | Second basement | Yes | Deuxième sous-sol |
+| `BSMNT-1.5-LANDING` | Stair landing between the basements | No | Palier entre les sous-sols |
+| `BSMNT-1` | First basement | Yes | Premier sous-sol |
+| `1ST-FLR` | First floor (ground floor) | Yes | Rez-de-chaussée |
+| `1.5-STAIR-LANDING` | Stair landing above the first floor | No | Palier au-dessus du rez-de-chaussée |
+| `1.5-MEZZ` | Mezzanine above the first floor | Yes, when it is a storey for code or areas | Mezzanine au-dessus du rez-de-chaussée |
+| `1.9-US-2ND-FLR` | Underside of the 2nd floor structure | No | Dessous de la structure du 2e étage |
+| `2ND-FLR` | Second floor | Yes | 2e étage |
+| `4-ROOF` | Roof, over a 3rd floor | Yes | Toit |
 
-- **Two digits** after `L`, so `L10` sorts after `L09`. The ground floor is `L01`, as Canadian codes number it.
-- **Building Story** is ticked only for real storeys: each becomes one IfcBuildingStorey in an IFC export. A reference level (top of steel, underside of deck, top of parapet) has Building Story off and its storey's code first, `L02_TOS`; elements hosted on it export with the storey below.
-- **Mezzanine:** `L01M` when it counts as a storey for the building code or areas; otherwise a reference level. The plan says which.
-- **Disciplines don't make their own storey levels.** Structure and MEP copy-monitor the storeys and add only the reference levels they need.
+- **Storeys:** the ordinal and `FLR`: `1ST-FLR`, `2ND-FLR`, `3RD-FLR`, `11TH-FLR`, `21ST-FLR`. The ground floor is `1ST-FLR`, as Canadian codes number it.
+- **Roof:** it takes the number after the top floor, then `ROOF`: `4-ROOF` over a `3RD-FLR`.
+- **Basements:** `BSMNT-1`, `BSMNT-2`, counting down.
+- **Levels in between:** the number of the storey below, a decimal for how far up the storey it sits, then words. Halfway up is `.5`, just under the next floor is `.9`: `1.5-STAIR-LANDING`, `1.9-US-2ND-FLR`, and a level about a metre up a 4.5 m storey is `.2`. Between basements, the same after `BSMNT-`: `BSMNT-1.5-LANDING`. The decimal is a rough fraction of a storey height, not a measure; Revit lists levels by elevation.
+- **Building Story** is ticked only for real storeys: each becomes one IfcBuildingStorey in an IFC export. Levels in between (top of steel, underside of deck, landing) have it off; elements hosted on them export with the storey below.
+- **No parapet level** in most cases: it is easier to give the parapet walls a constant offset from the roof level.
+- **Mezzanine:** `1.5-MEZZ`, with Building Story on when it counts as a storey for the building code or areas. The plan says which.
+- **Disciplines don't make their own storey levels.** Structure and MEP copy-monitor the storeys and add only the in-between levels they need.
 
 ### Example building
 
 | Code | Elevation (m) | Building Story |
 | --- | --- | --- |
-| `B1` | -4.200 | Yes |
-| `L01` | 0.000 | Yes |
-| `L01M` | 2.700 | Yes |
-| `L02` | 4.500 | Yes |
-| `L02_TOS` | 4.150 | No |
-| `L03` | 8.700 | Yes |
-| `RF` | 12.900 | Yes |
+| `BSMNT-1` | -4.200 | Yes |
+| `1ST-FLR` | 0.000 | Yes |
+| `1.5-MEZZ` | 2.250 | Yes |
+| `1.9-US-2ND-FLR` | 4.150 | No |
+| `2ND-FLR` | 4.500 | Yes |
+| `3RD-FLR` | 8.700 | Yes |
+| `4-ROOF` | 12.900 | Yes |
 
 ## Views
 
@@ -100,16 +106,29 @@ Revit's own phase names, each with a short code that starts every view name. A p
 
 Revit's own names, which every firm knows. Two of Revit's seven are deleted because no drawing needs them, and one is added.
 
-| Filter | Shows | Use it for | Keep |
-| --- | --- | --- | --- |
-| `Show All` | New, existing, demolished and temporary elements | Working and checking views | Yes |
-| `Show Complete` | The building as it stands at the end of the view's phase | Existing conditions (view phase `EX`), the finished building | Yes |
-| `Show New` | Only what is built in the view's phase | Schedules and quantities of new work | Yes |
-| `Show Previous + Demo` | Existing and demolished elements | Demolition plans (`009-PLAN-DEMO`) | Yes |
-| `Show Previous + New` | What stays, and what is new | Plans of a renovation; the default for every other view | Yes |
-| `Show Existing` | Existing elements that stay, without demolished or new ones | Existing-to-remain plans for coordination and the owner's records | Added |
-| `Show Demo + New` | Demolished and new, without what stays | Nothing: a plan without the walls that stay reads wrong | Deleted |
-| `Show Previous Phase` | Elements of the phase before the view's | Nothing: shows nothing in the first phase, and `Show Complete` in a view of the earlier phase does the job | Deleted |
+| Filter | Shows | Use it for | Keep | New | Existing | Demolished | Temporary |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `Show All` | New, existing, demolished and temporary elements | Working and checking views | Yes | By category | Overridden | Overridden | Overridden |
+| `Show Complete` | The building as it stands at the end of the view's phase | Existing conditions (view phase `EX`), the finished building | Yes | By category | By category | Not displayed | Not displayed |
+| `Show New` | Only what is built in the view's phase | Schedules and quantities of new work | Yes | By category | Not displayed | Not displayed | Not displayed |
+| `Show Previous + Demo` | Existing and demolished elements | Demolition plans (`009-PLAN-DEMO`) | Yes | Not displayed | Overridden | Overridden | Not displayed |
+| `Show Previous + New` | What stays, and what is new | Plans of a renovation; the default for every other view | Yes | By category | Overridden | Not displayed | Not displayed |
+| `Show Existing` | Existing elements that stay, without demolished or new ones | Existing-to-remain plans for coordination and the owner's records | Added | Not displayed | By category | Not displayed | Not displayed |
+| `Show Demo + New` | Demolished and new, without what stays | Nothing: a plan without the walls that stay reads wrong | Deleted | | | | |
+| `Show Previous Phase` | Elements of the phase before the view's | Nothing: shows nothing in the first phase, and `Show Complete` in a view of the earlier phase does the job | Deleted | | | | |
+
+The last four columns say how each filter shows elements by their status: by category (as drawn normally), overridden (with the graphic overrides below), or not displayed.
+
+### Phase graphic overrides
+
+Set once in the template (Manage › Phasing › Graphic Overrides), so existing work reads lighter than new work and demolition reads at a glance in black and white.
+
+| Status | Projection and cut lines | Pattern | Halftone | Cut and surface patterns |
+| --- | --- | --- | --- | --- |
+| Existing | Black, by category weight | `OB_Solid` | Yes | By category |
+| Demolished | Black, by category weight | `OB_Demolish` | No | None |
+| New | By category | By category | No | By category |
+| Temporary | Black, by category weight | `OB_Hidden` | Yes | None |
 
 Each view template sets the phase filter, so a view's filter never has to be picked by hand. Demolition is a status of an element (Phase Demolished), not a phase: there is no `D` phase.
 
@@ -126,7 +145,7 @@ Each view template sets the phase filter, so a view's filter never has to be pic
 | `PERMIT` | PERMIT | Views placed on the permit set | Permis |
 | `PRES` | PRESENTATION | Views for the client, committees or the city; one set each (`PRES-CLIENT`, `PRES-CITY`) | Présentation |
 | `QC` | QUALITY CONTROL | Views that isolate each phase, workset and floor | Contrôle de la qualité |
-| `W` | WORK | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
+| `WORK` | WORK | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
 | `Z-USER-<NAME>` | Z-USER-SAM | One person's views | Vues personnelles |
 | `Z-WIP` | Z-WIP | Unfinished views, Revit's default `{3D}` | Travail en cours |
 
@@ -175,14 +194,14 @@ Sets starting with `Z-` sort last. A browser filter on `OB_ViewSet` not beginnin
 
 `<PHASE>-<SET>-<TYPE>-<Level>`
 
-Example: `N-CON-PLAN-EGRESS-L02` is the new construction, construction set, egress plan of level 2.
+Example: `N-CON-PLAN-EGRESS-2ND-FLR` is the new construction, construction set, egress plan of the 2nd floor.
 
 - A view with no level ends with what tells it apart: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
-- Design options end with `-OPT1`, `-OPT2`: `P1-W-PLAN-L01-OPT2`.
-- A person's own views go in their own set: `N-Z-USER-SAM-PLAN-L02`.
+- Design options end with `-OPT1`, `-OPT2`: `P1-WORK-PLAN-1ST-FLR-OPT2`.
+- A person's own views go in their own set: `N-Z-USER-SAM-PLAN-2ND-FLR`.
 - Drafting views have no phase, so `DRAFT` takes the phase's place: `DRAFT-CON-DET-PARAPET`, `DRAFT-CON-LEGEND-WALLTYPES`. With `OB_ViewSet` and `OB_ViewType` filled, they still sort into set and type folders under `???`. (Proposal: drafting views have no agreed logic yet.)
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
-- Dependent views end with the zone of their scope box: `N-CON-PLAN-L02-A`. Scope boxes are named `SB-<Zone>`: `SB-A`, `SB-NORTH`.
+- Dependent views end with the zone of their scope box: `N-CON-PLAN-2ND-FLR-A`. Scope boxes are named `SB-<Zone>`: `SB-A`, `SB-NORTH`.
 
 The OpenBEP add-in's **Create views** button makes plans and ceiling plans this way for many levels at once, with `OB_ViewSet`, `OB_ViewType`, the template, the phase filter, Title on Sheet and the dependents per scope box ([add-in guide](../revit-addin/OpenBepSync/README.md#create-views)).
 
@@ -230,30 +249,30 @@ Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows 
     - BIM MANAGEMENT
       - 002-PLAN-GRID
         - Floor Plans
-          - N-BIM-PLAN-GRID-L01
+          - N-BIM-PLAN-GRID-1ST-FLR
     - CONSTRUCTION
       - 010-PLAN
         - Floor Plans
-          - N-CON-PLAN-L01
-          - N-CON-PLAN-L02
+          - N-CON-PLAN-1ST-FLR
+          - N-CON-PLAN-2ND-FLR
       - 020-PLAN-EGRESS
         - Floor Plans
-          - N-CON-PLAN-EGRESS-L02
+          - N-CON-PLAN-EGRESS-2ND-FLR
       - 200-SECT
         - Sections (Building Section)
           - N-CON-SECT-STAIR-01
     - WORK
       - 000-AXO
         - 3D Views
-          - N-W-AXO-OPT1
-          - N-W-AXO-OPT2
+          - N-WORK-AXO-OPT1
+          - N-WORK-AXO-OPT2
       - 013-PLAN-ROOM
         - Floor Plans
-          - N-W-PLAN-ROOM-L01
+          - N-WORK-PLAN-ROOM-1ST-FLR
     - Z-USER-SAM
       - 010-PLAN
         - Floor Plans
-          - N-Z-USER-SAM-PLAN-L02
+          - N-Z-USER-SAM-PLAN-2ND-FLR
     - Z-WIP
       - 000-AXO
         - 3D Views
@@ -262,7 +281,7 @@ Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows 
     - CONSTRUCTION
       - 010-PLAN
         - Floor Plans
-          - EX-CON-PLAN-L01
+          - EX-CON-PLAN-1ST-FLR
 
 ## Sheets
 
@@ -294,14 +313,14 @@ Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows 
 | `6` | Schedules | Nomenclatures |
 | `9` | 3D views and presentation | Vues 3D et présentation |
 
-Plans number from the lowest level up (`A-101` for B1, `A-102` for L01), so the set reads the way the building stacks. The sheet name is plain words, the same as the Title on Sheet of its main view. (Proposal: the series are to confirm.)
+Plans number from the lowest level up (`A-101` for `BSMNT-1`, `A-102` for `1ST-FLR`), so the set reads the way the building stacks. The sheet name is plain words, the same as the Title on Sheet of its main view. (Proposal: the series are to confirm.)
 
 ## Rooms
 
-The storey number, then three digits: `2015` is room 15 on level 2 (`L02`), `1003` is room 3 on the ground floor (`L01`). Numbers run clockwise from the main entrance and leave gaps for rooms added later (proposal).
+The storey number, then three digits: `2015` is room 15 on the 2nd floor (`2ND-FLR`), `1003` is room 3 on the ground floor (`1ST-FLR`). Numbers run clockwise from the main entrance and leave gaps for rooms added later (proposal).
 
-- Two-digit storeys keep both digits: `12015` on `L12`.
-- Basements start with `B`: `B1015` on `B1`. Mezzanines add `M`: `1M015` on `L01M`. The roof is `R001`. (Proposal: basement, mezzanine and roof numbers are to confirm.)
+- Two-digit storeys keep both digits: `12015` on `12TH-FLR`.
+- Basements start with `B`: `B1015` on `BSMNT-1`. Mezzanines add `M`: `1M015` on `1.5-MEZZ`. The roof uses its number: `4001` on `4-ROOF`. (Proposal: basement, mezzanine and roof numbers are to confirm.)
 - The room number goes in Revit's built-in `Number`.
 
 ## Built-in parameters with a fixed job

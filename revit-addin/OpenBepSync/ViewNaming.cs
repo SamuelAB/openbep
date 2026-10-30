@@ -59,7 +59,7 @@ namespace OpenBepSync
             new ViewSetDef("PERMIT", "PERMIT", "Permis"),
             new ViewSetDef("PRES", "PRESENTATION", "Présentation"),
             new ViewSetDef("QC", "QUALITY CONTROL", "Contrôle de la qualité"),
-            new ViewSetDef("W", "WORK", "Travail"),
+            new ViewSetDef("WORK", "WORK", "Travail"),
             new ViewSetDef("Z-WIP", "Z-WIP", "Travail en cours"),
         };
 
@@ -134,7 +134,7 @@ namespace OpenBepSync
             return initials == "" ? "X" : initials;
         }
 
-        /// <summary>&lt;PHASE&gt;-&lt;SET&gt;-&lt;TYPE&gt;-&lt;Level&gt;[-OPTn][-Zone], for example N-CON-PLAN-EGRESS-L02 or N-CON-PLAN-L02-A.</summary>
+        /// <summary>&lt;PHASE&gt;-&lt;SET&gt;-&lt;TYPE&gt;-&lt;Level&gt;[-OPTn][-Zone], for example N-CON-PLAN-EGRESS-2ND-FLR or N-CON-PLAN-2ND-FLR-A.</summary>
         public static string Name(PlannedView v)
         {
             var type = Type(v.Type)?.Code ?? v.Type;
@@ -142,31 +142,65 @@ namespace OpenBepSync
             return string.Join("-", parts.Where(p => !string.IsNullOrWhiteSpace(p)).Select(p => p.Trim()));
         }
 
-        // B1, B2, L01, L01M, L12, RF, and reference levels after an underscore: L02_TOS
-        static readonly Regex LevelRule = new Regex(@"^(B\d|L\d{2}M?|RF)(_[A-Z0-9]+)?$");
+        // Storeys 1ST-FLR, 2ND-FLR, 12TH-FLR; the roof takes the next number, 4-ROOF; basements BSMNT-1, BSMNT-2.
+        // Levels in between: the number below, a decimal, then words: 1.5-STAIR-LANDING, 1.9-US-2ND-FLR, BSMNT-1.5-LANDING.
+        static readonly Regex Floor = new Regex(@"^(\d+)(ST|ND|RD|TH)-FLR$");
+        static readonly Regex RoofLevel = new Regex(@"^(\d+)-ROOF$");
+        static readonly Regex Basement = new Regex(@"^BSMNT-(\d+)$");
+        static readonly Regex Between = new Regex(@"^(BSMNT-)?(\d+)\.(\d+)-([A-Z0-9]+(?:-[A-Z0-9]+)*)$");
+
+        /// <summary>1ST, 2ND, 3RD, 4TH, 11TH, 21ST.</summary>
+        public static string Ordinal(int n)
+        {
+            var end = n % 100 >= 11 && n % 100 <= 13 ? "TH" : (n % 10) switch { 1 => "ST", 2 => "ND", 3 => "RD", _ => "TH" };
+            return n + end;
+        }
+
+        /// <summary>The storey code for a floor number: 2 gives 2ND-FLR.</summary>
+        public static string FloorCode(int n) => Ordinal(n) + "-FLR";
+
+        /// <summary>The floor number of a storey code (2ND-FLR gives 2), or 0.</summary>
+        public static int FloorNumber(string level)
+        {
+            var m = Floor.Match(level ?? "");
+            return m.Success && level == FloorCode(int.Parse(m.Groups[1].Value)) ? int.Parse(m.Groups[1].Value) : 0;
+        }
 
         /// <summary>True for level names that follow the OpenBEP level rule.</summary>
-        public static bool IsLevelName(string name) => name != null && LevelRule.IsMatch(name);
+        public static bool IsLevelName(string name)
+        {
+            if (name == null) return false;
+            if (FloorNumber(name) > 0) return true;
+            var m = RoofLevel.Match(name);
+            if (m.Success) return int.Parse(m.Groups[1].Value) >= 2 && !name.StartsWith("0");
+            m = Basement.Match(name);
+            if (m.Success) return int.Parse(m.Groups[1].Value) >= 1 && m.Groups[1].Value[0] != '0';
+            m = Between.Match(name);
+            return m.Success && int.Parse(m.Groups[2].Value) >= 1 && m.Groups[2].Value[0] != '0';
+        }
 
-        /// <summary>The words for a level code, for Title on Sheet: L02 is Level 2, L01 Ground floor. Empty when the name is not a level code.</summary>
+        /// <summary>The words for a level code, for Title on Sheet: 2ND-FLR is 2nd floor (2e étage), 1ST-FLR is Ground floor (Rez-de-chaussée). Empty when the name is not a level code.</summary>
         public static string LevelTitle(string level, bool french)
         {
-            var m = LevelRule.Match(level ?? "");
-            if (!m.Success || m.Groups[2].Success) return "";
-            var c = m.Groups[1].Value;
-            if (c == "RF") return french ? "Toit" : "Roof";
-            if (c == "L01") return french ? "Rez-de-chaussée" : "Ground floor";
-            if (c[0] == 'B')
+            if (!IsLevelName(level)) return "";
+            int f = FloorNumber(level);
+            if (f == 1) return french ? "Rez-de-chaussée" : "Ground floor";
+            if (f > 1) return french ? $"{f}e étage" : $"{Ordinal(f).ToLowerInvariant()} floor";
+            if (RoofLevel.IsMatch(level)) return french ? "Toit" : "Roof";
+            var m = Basement.Match(level);
+            if (m.Success)
             {
-                int b = c[1] - '0';
+                int b = int.Parse(m.Groups[1].Value);
                 string[] en = { "", "First basement", "Second basement", "Third basement" }, fr = { "", "Premier sous-sol", "Deuxième sous-sol", "Troisième sous-sol" };
                 return b < en.Length ? (french ? fr[b] : en[b]) : (french ? $"Sous-sol {b}" : $"Basement {b}");
             }
-            int n = int.Parse(c.Substring(1, 2));
-            return c.EndsWith("M") ? (french ? $"Mezzanine au-dessus du niveau {n}" : $"Mezzanine above level {n}") : (french ? $"Niveau {n}" : $"Level {n}");
+            m = Between.Match(level);
+            var number = (m.Groups[1].Success ? (french ? "sous-sol " : "basement ") : "") + m.Groups[2].Value + (french ? "," : ".") + m.Groups[3].Value;
+            if (m.Groups[4].Value == "MEZZ") return "Mezzanine " + number;
+            return (french ? "Niveau " : "Level ") + number;
         }
 
-        /// <summary>Title on Sheet: the level's words and the view type's words, so the codes never reach the drawings. "Level 2 - Egress plan".</summary>
+        /// <summary>Title on Sheet: the level's words and the view type's words, so the codes never reach the drawings. "2nd floor - Egress plan".</summary>
         public static string TitleOnSheet(PlannedView v, bool french)
         {
             var t = Type(v.Type);

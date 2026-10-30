@@ -57,7 +57,7 @@ namespace OpenBepSync
 
         readonly ComboBox phase = Combo(170), set = Combo(150, editable: true), option = Combo(80), discipline = Combo(90, editable: true), titles = Combo(150);
         readonly CheckBox showRef = new CheckBox { Content = "Show reference levels", VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 16, 0),
-            ToolTip = "Levels with Building Story off, such as L02_TOS. They rarely get their own plans." };
+            ToolTip = "Levels with Building Story off, such as 1.9-US-2ND-FLR. They rarely get their own plans." };
         readonly Grid cells = new Grid();
         readonly StackPanel zoneList = new StackPanel();
         readonly ObservableCollection<PreviewRow> rows = new ObservableCollection<PreviewRow>();
@@ -183,7 +183,7 @@ namespace OpenBepSync
             zoneList.Children.Clear();
             if (vc.ScopeBoxes.Count == 0)
             {
-                zoneList.Children.Add(new TextBlock { Text = "This model has no scope boxes. Name them SB-A, SB-B… and each ticked plan gets a dependent view per zone (N-CON-PLAN-L02-A).", TextWrapping = TextWrapping.Wrap, Foreground = Brushes.Gray });
+                zoneList.Children.Add(new TextBlock { Text = "This model has no scope boxes. Name them SB-A, SB-B… and each ticked plan gets a dependent view per zone (N-CON-PLAN-2ND-FLR-A).", TextWrapping = TextWrapping.Wrap, Foreground = Brushes.Gray });
                 return;
             }
             foreach (var kv in vc.ScopeBoxes.OrderBy(kv => kv.Key))
@@ -220,7 +220,7 @@ namespace OpenBepSync
                 bool rule = ViewNaming.IsLevelName(l.Name);
                 var head = new Button { Content = l.Name, HorizontalContentAlignment = HorizontalAlignment.Left, Padding = new Thickness(4, 1, 8, 1), Margin = new Thickness(1),
                     Background = Brushes.Transparent, BorderThickness = new Thickness(0), Foreground = rule ? Brushes.Black : Brushes.DarkRed,
-                    ToolTip = (rule ? "" : "Not named by the OpenBEP level rule (L02, B1, RF). Views still get made with this name.\n") + "Click to tick or untick the whole row." };
+                    ToolTip = (rule ? "" : "Not named by the OpenBEP level rule (2ND-FLR, BSMNT-1, 4-ROOF). Views still get made with this name.\n") + "Click to tick or untick the whole row." };
                 head.Click += (s, e) => Toggle(types.Select(t => Cell(l, t)));
                 Put(cells, head, r + 1, 0);
                 for (int c = 0; c < types.Count; c++)

@@ -144,6 +144,7 @@ namespace OpenBepSync
             // 8. Create views and Replace materials, without their windows.
             CreateViews(doc);
             ReplaceMaterials(doc);
+            SetUpProject(doc);
 
             doc.Save();
             Log("SAVED " + rvt);
@@ -177,6 +178,32 @@ namespace OpenBepSync
                 Log($"VIEWS second preview: {again.Count(l => l.Status == "exists")} of {again.Count} exist, {again.Count(l => l.Ok)} still to make");
             }
             catch (Exception ex) { Log("VIEWS failed: " + ex); }
+        }
+
+        /// <summary>Audits the project, applies the plan (rolled back if it fails), and audits again.</summary>
+        static void SetUpProject(Document doc)
+        {
+            try
+            {
+                var a = ProjectAudit.Run(doc);
+                Log("SETUP before: " + a.Summary());
+                foreach (var l in a.Lines) Log($"  plan {l.Kind} {l.Action} '{l.Current}' > '{l.New}' {(l.Apply ? "" : "(not ticked) ")}{l.Note}");
+                var csv = Path.Combine(outDir, "setup-plan-test.csv");
+                SetupRules.WritePlan(csv, a.Lines);
+                Log($"SETUP plan round trip: {SetupRules.ReadPlan(csv, out var w).Count} of {a.Lines.Count} lines back, {w.Count} warnings");
+                var failures = new List<string>();
+                using (var t = new Transaction(doc, "OpenBEP: set up project"))
+                {
+                    t.Start();
+                    int done = a.Apply(a.Lines, failures);
+                    Log($"SETUP applied {done}: {t.Commit()}");
+                }
+                foreach (var f in failures) Log("  could not " + f);
+                var b = ProjectAudit.Run(doc);
+                Log("SETUP after: " + b.Summary() + $"; {b.Lines.Count(l => l.Apply && l.Action != SetupAction.Check)} changes still proposed");
+                foreach (var l in b.Lines.Where(l => l.Apply && l.Action != SetupAction.Check)) Log($"  left {l.Kind} {l.Action} '{l.Current}' > '{l.New}' {l.Note}");
+            }
+            catch (Exception ex) { Log("SETUP failed: " + ex); }
         }
 
         /// <summary>Renames one used material and merges a second into a third, checks, then rolls back so the saved project is unchanged.</summary>
