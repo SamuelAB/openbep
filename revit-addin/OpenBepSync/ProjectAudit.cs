@@ -172,10 +172,29 @@ namespace OpenBepSync
             if (!filters.Any(f => f.Name == SetupRules.PhaseFilterToAdd))
             {
                 bad++;
-                Lines.Add(new SetupLine(KPhaseFilter, SetupAction.Create, "", "", SetupRules.PhaseFilterToAdd, "Phase filters: existing elements that stay", "existing by category; new, demolished and temporary hidden"));
+                Lines.Add(new SetupLine(KPhaseFilter, SetupAction.Create, "", "", SetupRules.PhaseFilterToAdd, "Phase filters: existing elements that stay",
+                    SetupRules.ShowsText(SetupRules.PhaseFilterShows[SetupRules.PhaseFilterToAdd]).Substring(6)));
+            }
+            foreach (var f in filters.Where(f => SetupRules.PhaseFilterShows.ContainsKey(f.Name)))
+            {
+                var want = SetupRules.PhaseFilterShows[f.Name];
+                var now = Statuses.Select(st => Text(f.GetPhaseStatusPresentation(st))).ToArray();
+                if (now.SequenceEqual(want)) continue;
+                bad++;
+                Add(new SetupLine(KPhaseFilter, SetupAction.Fill, "", f.Name, SetupRules.ShowsText(want), "Phase filters: how each status shows",
+                    "now " + SetupRules.ShowsText(now).Substring(6)), f);
             }
             int total = filters.Count + (filters.Any(f => f.Name == SetupRules.PhaseFilterToAdd) ? 0 : 1);
             Score[KPhaseFilter] = (total - bad, total);
+        }
+
+        static readonly ElementOnPhaseStatus[] Statuses = { ElementOnPhaseStatus.New, ElementOnPhaseStatus.Existing, ElementOnPhaseStatus.Demolished, ElementOnPhaseStatus.Temporary };
+        static string Text(PhaseStatusPresentation p) => p == PhaseStatusPresentation.ShowByCategory ? "By category" : p == PhaseStatusPresentation.ShowOverriden ? "Overridden" : "Not displayed";
+        static PhaseStatusPresentation Presentation(string s) => s == "By category" ? PhaseStatusPresentation.ShowByCategory : s == "Overridden" ? PhaseStatusPresentation.ShowOverriden : PhaseStatusPresentation.DontShow;
+
+        static void SetShows(PhaseFilter f, string[] shows)
+        {
+            for (int i = 0; i < Statuses.Length; i++) f.SetPhaseStatusPresentation(Statuses[i], Presentation(shows[i]));
         }
 
         // ---- Materials: counted here, fixed with Replace materials
@@ -231,6 +250,7 @@ namespace OpenBepSync
             foreach (var l in go.Where(l => l.Action == SetupAction.Fill))
             {
                 var e = Find(l);
+                if (e is PhaseFilter pf && SetupRules.ParseShows(l.New) is string[] shows) { SetShows(pf, shows); done++; continue; }
                 var eq = l.New.IndexOf('=');
                 if (e == null || eq < 1) { failures.Add($"{l.Kind} {l.Current}: not found or no Parameter=value"); continue; }
                 var p = e.LookupParameter(l.New.Substring(0, eq));
@@ -266,10 +286,7 @@ namespace OpenBepSync
                 {
                     if (l.Kind != KPhaseFilter) { failures.Add($"{l.Kind} {l.New}: only phase filters can be created here"); continue; }
                     var f = PhaseFilter.Create(Doc, l.New);
-                    f.SetPhaseStatusPresentation(ElementOnPhaseStatus.Existing, PhaseStatusPresentation.ShowByCategory);
-                    f.SetPhaseStatusPresentation(ElementOnPhaseStatus.New, PhaseStatusPresentation.DontShow);
-                    f.SetPhaseStatusPresentation(ElementOnPhaseStatus.Demolished, PhaseStatusPresentation.DontShow);
-                    f.SetPhaseStatusPresentation(ElementOnPhaseStatus.Temporary, PhaseStatusPresentation.DontShow);
+                    SetShows(f, SetupRules.ParseShows("Shows=" + l.Note) ?? (SetupRules.PhaseFilterShows.TryGetValue(l.New, out var s) ? s : SetupRules.PhaseFilterShows["Show All"]));
                     done++;
                 }
                 catch (Exception ex) { failures.Add($"{l.Kind} {l.New}: {ex.Message}"); }

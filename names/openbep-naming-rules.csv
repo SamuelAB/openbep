@@ -44,7 +44,7 @@ Drawing set code,EXPORT,"EXPORT: Views exported to other software (IFC, Naviswor
 Drawing set code,PERMIT,PERMIT: Views placed on the permit set,,Permis
 Drawing set code,PRES,"PRESENTATION: Views for the client, committees or the city; one set each (PRES-CLIENT, PRES-CITY)",,Présentation
 Drawing set code,QC,"QUALITY CONTROL: Views that isolate each phase, workset and floor",,Contrôle de la qualité
-Drawing set code,W,"WORK: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
+Drawing set code,WORK,"WORK: Shared working views, including views for one task (rooms, doors, tracing an old drawing)",,Travail
 Drawing set code,Z-USER-<NAME>,Z-USER-SAM: One person's views,,Vues personnelles
 Drawing set code,Z-WIP,"Z-WIP: Unfinished views, Revit's default {3D}",,Travail en cours
 View type code,000-AXO,Axonometric views,,Vues axonométriques
@@ -79,14 +79,18 @@ View type code,300-ELEV,Elevation,,Élévation
 View type code,400-DET,Detail,,Détail
 View type code,410-LEGEND,Legend drawn as a drafting view,,Légende (vue de dessin)
 View type code,500-3D,Camera view,,Vue caméra
-Phase filter,Show All,"New, existing, demolished and temporary elements: Working and checking views",,
-Phase filter,Show Complete,"The building as it stands at the end of the view's phase: Existing conditions (view phase EX), the finished building",,
-Phase filter,Show New,Only what is built in the view's phase: Schedules and quantities of new work,,
-Phase filter,Show Previous + Demo,Existing and demolished elements: Demolition plans (009-PLAN-DEMO),,
-Phase filter,Show Previous + New,"What stays, and what is new: Plans of a renovation; the default for every other view",,
-Phase filter,Show Existing,"Existing elements that stay, without demolished or new ones: Existing-to-remain plans for coordination and the owner's records",,
+Phase filter,Show All,"New, existing, demolished and temporary elements: Working and checking views (new By category, existing Overridden, demolished Overridden, temporary Overridden)",,
+Phase filter,Show Complete,"The building as it stands at the end of the view's phase: Existing conditions (view phase EX), the finished building (new By category, existing By category, demolished Not displayed, temporary Not displayed)",,
+Phase filter,Show New,"Only what is built in the view's phase: Schedules and quantities of new work (new By category, existing Not displayed, demolished Not displayed, temporary Not displayed)",,
+Phase filter,Show Previous + Demo,"Existing and demolished elements: Demolition plans (009-PLAN-DEMO) (new Not displayed, existing Overridden, demolished Overridden, temporary Not displayed)",,
+Phase filter,Show Previous + New,"What stays, and what is new: Plans of a renovation; the default for every other view (new By category, existing Overridden, demolished Not displayed, temporary Not displayed)",,
+Phase filter,Show Existing,"Existing elements that stay, without demolished or new ones: Existing-to-remain plans for coordination and the owner's records (new Not displayed, existing By category, demolished Not displayed, temporary Not displayed)",,
 Phase filter,Show Demo + New,"Demolished and new, without what stays: Nothing: a plan without the walls that stay reads wrong",Deleted,
 Phase filter,Show Previous Phase,"Elements of the phase before the view's: Nothing: shows nothing in the first phase, and Show Complete in a view of the earlier phase does the job",Deleted,
+Phase graphic override,Existing,"Black, by category weight, pattern OB_Solid, halftone Yes, cut and surface patterns By category",,
+Phase graphic override,Demolished,"Black, by category weight, pattern OB_Demolish, halftone No, cut and surface patterns None",,
+Phase graphic override,New,"By category, pattern By category, halftone No, cut and surface patterns By category",,
+Phase graphic override,Temporary,"Black, by category weight, pattern OB_Hidden, halftone Yes, cut and surface patterns None",,
 Sheet number,<Letter>-<Series><Sequence>,A-101,,
 Sheet discipline letter,G,"General (cover, drawing list, code analysis)",,Général
 Sheet discipline letter,C,Civil engineering,,Génie civil

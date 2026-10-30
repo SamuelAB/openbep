@@ -140,7 +140,7 @@ namespace OpenBepSync
 
         /// <summary>
         /// The name and browser values a view should have. The set comes from OB_ViewSet when filled, otherwise
-        /// CON for a view on a sheet and W for the rest; Revit's own {3D} goes to Z-WIP. The type comes from OB_ViewType
+        /// CON for a view on a sheet and WORK for the rest; Revit's own {3D} goes to Z-WIP. The type comes from OB_ViewType
         /// when filled, otherwise from what Revit made. A name that already follows the rule keeps its set, type and ending.
         /// </summary>
         public static (string name, string set, string type, string why) ProposeView(ViewFacts v, ICollection<string> phaseCodes)
@@ -155,7 +155,7 @@ namespace OpenBepSync
             }
             if (set == "")
             {
-                set = v.Name.StartsWith("{") ? "Z-WIP" : v.OnSheet ? "CON" : "W";
+                set = v.Name.StartsWith("{") ? "Z-WIP" : v.OnSheet ? "CON" : "WORK";
                 why = v.Name.StartsWith("{") ? "Revit's own view: unfinished views set" : v.OnSheet ? "set guessed: placed on a sheet" : "set guessed: not on a sheet";
             }
             else why = "";
@@ -176,7 +176,7 @@ namespace OpenBepSync
             return (name, set, type, why);
         }
 
-        /// <summary>Makes every proposed name unique among themselves and the names that stay: the second N-W-SECT-01 becomes N-W-SECT-01-2.</summary>
+        /// <summary>Makes every proposed name unique among themselves and the names that stay: the second N-WORK-SECT-01 becomes N-WORK-SECT-01-2.</summary>
         public static void MakeUnique(IList<SetupLine> renames, ICollection<string> namesThatStay)
         {
             var taken = new HashSet<string>(namesThatStay, StringComparer.Ordinal);
@@ -195,6 +195,40 @@ namespace OpenBepSync
 
         public static readonly string[] PhaseFiltersToDelete = { "Show Demo + New", "Show Previous Phase" };
         public const string PhaseFilterToAdd = "Show Existing";
+
+        /// <summary>How each kept filter shows New, Existing, Demolished and Temporary elements.</summary>
+        public static readonly Dictionary<string, string[]> PhaseFilterShows = new Dictionary<string, string[]>
+        {
+            ["Show All"] = new[] { "By category", "Overridden", "Overridden", "Overridden" },
+            ["Show Complete"] = new[] { "By category", "By category", "Not displayed", "Not displayed" },
+            ["Show New"] = new[] { "By category", "Not displayed", "Not displayed", "Not displayed" },
+            ["Show Previous + Demo"] = new[] { "Not displayed", "Overridden", "Overridden", "Not displayed" },
+            ["Show Previous + New"] = new[] { "By category", "Overridden", "Not displayed", "Not displayed" },
+            ["Show Existing"] = new[] { "Not displayed", "By category", "Not displayed", "Not displayed" },
+        };
+
+        public static readonly string[] PhaseStatuses = { "New", "Existing", "Demolished", "Temporary" };
+        public static readonly string[] Presentations = { "By category", "Overridden", "Not displayed" };
+
+        /// <summary>"Shows=New: By category, Existing: Overridden, …", the value of a Fill line for a phase filter.</summary>
+        public static string ShowsText(string[] shows) => "Shows=" + string.Join(", ", PhaseStatuses.Select((st, i) => st + ": " + shows[i]));
+
+        /// <summary>Reads a ShowsText value back; null when it isn't one.</summary>
+        public static string[] ParseShows(string text)
+        {
+            if (text == null || !text.StartsWith("Shows=")) return null;
+            var result = new string[4];
+            foreach (var part in text.Substring(6).Split(','))
+            {
+                var kv = part.Split(':');
+                if (kv.Length != 2) return null;
+                int i = Array.FindIndex(PhaseStatuses, st => string.Equals(st, kv[0].Trim(), StringComparison.OrdinalIgnoreCase));
+                var how = Presentations.FirstOrDefault(pr => string.Equals(pr, kv[1].Trim(), StringComparison.OrdinalIgnoreCase));
+                if (i < 0 || how == null) return null;
+                result[i] = how;
+            }
+            return result.All(r => r != null) ? result : null;
+        }
 
         // ---- The setup plan file: Kind, Action, Element, Current name, New name, Rule, Note
 

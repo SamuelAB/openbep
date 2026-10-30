@@ -42,6 +42,17 @@ namespace OpenBepSync.Tests
             Assert.Equal(rows.Select(r => (r[0], r[1], r[3])), ViewNaming.Sets.Select(s => (s.Code, s.Folder, s.FolderFr)));
         }
 
+        [Fact]
+        public void PhaseFilterSettings_MatchTheNamingRules()
+        {
+            var rows = Table(NamingRules(), "### Phase filters").Where(r => r[3] != "Deleted").ToArray();
+            Assert.Equal(rows.Select(r => r[0]), SetupRules.PhaseFilterShows.Keys);
+            foreach (var r in rows) Assert.Equal(r.Skip(4).Take(4), SetupRules.PhaseFilterShows[r[0]]);
+            var shows = SetupRules.PhaseFilterShows["Show Previous + Demo"];
+            Assert.Equal(shows, SetupRules.ParseShows(SetupRules.ShowsText(shows)));
+            Assert.Null(SetupRules.ParseShows("Shows=New: maybe"));
+        }
+
         [Theory]
         [InlineData("Existing", "EX")]
         [InlineData("New Construction", "N")]
@@ -56,7 +67,7 @@ namespace OpenBepSync.Tests
         public void Names_FollowPhaseSetTypeLevel()
         {
             Assert.Equal("N-CON-PLAN-EGRESS-L02", ViewNaming.Name(new PlannedView("N", "CON", "020-PLAN-EGRESS", "L02")));
-            Assert.Equal("P1-W-PLAN-L01-OPT2", ViewNaming.Name(new PlannedView("P1", "W", "010-PLAN", "L01", "OPT2")));
+            Assert.Equal("P1-WORK-PLAN-L01-OPT2", ViewNaming.Name(new PlannedView("P1", "WORK", "010-PLAN", "L01", "OPT2")));
             Assert.Equal("N-CON-PLAN-L02-A", ViewNaming.Name(new PlannedView("N", "CON", "PLAN", "L02", "", "A")));
             Assert.Equal("N-Z-USER-SAM-RCP-L02", ViewNaming.Name(new PlannedView("N", "Z-USER-SAM", "030-RCP", "L02")));
         }
@@ -131,7 +142,7 @@ namespace OpenBepSync.Tests
         [Fact]
         public void PlanFile_RoundTrips_AndFlagsBadLines()
         {
-            var views = new[] { new PlannedView("N", "CON", "010-PLAN", "L01"), new PlannedView("N", "CON", "010-PLAN", "L01", "", "A"), new PlannedView("EX", "W", "030-RCP", "L02", "OPT1") };
+            var views = new[] { new PlannedView("N", "CON", "010-PLAN", "L01"), new PlannedView("N", "CON", "010-PLAN", "L01", "", "A"), new PlannedView("EX", "WORK", "030-RCP", "L02", "OPT1") };
             var back = ViewNaming.ReadPlanText(ViewNaming.WritePlanText(views), out var w);
             Assert.Empty(w);
             Assert.Equal(views, back);

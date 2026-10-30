@@ -59,7 +59,7 @@ namespace OpenBepSync
             new ViewSetDef("PERMIT", "PERMIT", "Permis"),
             new ViewSetDef("PRES", "PRESENTATION", "Présentation"),
             new ViewSetDef("QC", "QUALITY CONTROL", "Contrôle de la qualité"),
-            new ViewSetDef("W", "WORK", "Travail"),
+            new ViewSetDef("WORK", "WORK", "Travail"),
             new ViewSetDef("Z-WIP", "Z-WIP", "Travail en cours"),
         };
 

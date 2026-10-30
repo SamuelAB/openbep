@@ -149,13 +149,17 @@ def naming():
             tree.append([len(m.group(1)) // 2, m.group(2).strip()])
     builtins = [{'name': r['Parameter'], 'job': r['Job'], 'ex': r['Example'], 'fr': r['Rôle (FR)']}
                 for r in tables_after(md, '## Built-in parameters with a fixed job')]
-    pfilters = [{'name': r['Filter'], 'shows': r['Shows'], 'use': r['Use it for'], 'keep': r['Keep']}
+    pfilters = [{'name': r['Filter'], 'shows': r['Shows'], 'use': r['Use it for'], 'keep': r['Keep'],
+                 'st': [r['New'], r['Existing'], r['Demolished'], r['Temporary']]}
                 for r in tables_after(md, '### Phase filters')]
+    poverrides = [{'status': r['Status'], 'lines': r['Projection and cut lines'], 'pattern': r['Pattern'],
+                   'half': r['Halftone'], 'fill': r['Cut and surface patterns']}
+                  for r in tables_after(md, '### Phase graphic overrides')]
     sheet = re.search(r'## Sheets\n\n`([^`]+)`, for example `([^`]+)`', md)
     letters = [{'code': r['Letter'], 'en': r['Discipline'], 'fr': r['Discipline (FR)']} for r in tables_after(md, '## Sheets')]
     series = [{'code': r['Series'], 'en': r['Holds'], 'fr': r['Série (FR)']} for r in tables_after(md, '### Sheet series')]
     room = re.search(r'## Rooms\n\n(.+?)\n', md).group(1)
-    return {'pfilters': pfilters, 'sheet': sheet.group(1), 'sheetEx': sheet.group(2), 'letters': letters, 'series': series,
+    return {'pfilters': pfilters, 'poverrides': poverrides, 'sheet': sheet.group(1), 'sheetEx': sheet.group(2), 'letters': letters, 'series': series,
             'room': clean(room), 'rules': rules, 'file': pattern, 'fileEx': example, 'disc': disc, 'phases': phases, 'sets': sets,
             'vtypes': vtypes, 'view': view_pattern, 'viewEx': view_example, 'builtins': builtins,
             'levels': levels, 'building': building, 'browser': browser_params, 'tree': tree,
@@ -200,8 +204,12 @@ def build():
             [['Phase code', x['code'], x['en'], '', x['fr']] for x in N['phases']] +
             [['Drawing set code', x['code'], x['en'] + ': ' + x['holds'], '', x['fr']] for x in N['sets']] +
             [['View type code', x['code'], x['en'], '', x['fr']] for x in N['vtypes']] +
-            [['Phase filter', x['name'], x['shows'] + ': ' + x['use'], 'Deleted' if x['keep'] == 'Deleted' else '', '']
+            [['Phase filter', x['name'], x['shows'] + ': ' + x['use'] + ('' if x['keep'] == 'Deleted' else
+              ' (new ' + x['st'][0] + ', existing ' + x['st'][1] + ', demolished ' + x['st'][2] + ', temporary ' + x['st'][3] + ')'),
+              'Deleted' if x['keep'] == 'Deleted' else '', '']
              for x in N['pfilters']] +
+            [['Phase graphic override', x['status'], x['lines'] + ', pattern ' + x['pattern'] + ', halftone ' + x['half'] +
+              ', cut and surface patterns ' + x['fill'], '', ''] for x in N['poverrides']] +
             [['Sheet number', N['sheet'], N['sheetEx'], '', '']] +
             [['Sheet discipline letter', x['code'], x['en'], '', x['fr']] for x in N['letters']] +
             [['Sheet series', x['code'], x['en'], '', x['fr']] for x in N['series']] +

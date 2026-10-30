@@ -44,7 +44,7 @@ namespace OpenBepSync.Tests
             Assert.Equal(new[] { "N", "CON", "020-PLAN-EGRESS", "L02" }, SetupRules.Parse("N-CON-PLAN-EGRESS-L02", Phases));
             Assert.Equal(new[] { "N", "Z-USER-SAM", "010-PLAN", "L02" }, SetupRules.Parse("N-Z-USER-SAM-PLAN-L02", Phases));
             Assert.Equal(new[] { "DRAFT", "CON", "400-DET", "PARAPET" }, SetupRules.Parse("DRAFT-CON-DET-PARAPET", Phases));
-            Assert.Equal(new[] { "EX", "W", "200-SECT", "" }, SetupRules.Parse("EX-W-SECT", Phases));
+            Assert.Equal(new[] { "EX", "WORK", "200-SECT", "" }, SetupRules.Parse("EX-WORK-SECT", Phases));
             Assert.Null(SetupRules.Parse("Level 1", Phases));
             Assert.Null(SetupRules.Parse("N-CON-NOPE-L02", Phases));
             Assert.Null(SetupRules.Parse("P1-CON-PLAN-L02", Phases));   // P1 is not a phase of this model
@@ -57,13 +57,13 @@ namespace OpenBepSync.Tests
             Assert.Equal(("N-CON-PLAN-L01", "CON", "010-PLAN"), Short(SetupRules.ProposeView(plan, Phases)));
 
             var rcp = new ViewFacts { Name = "Level 2", Kind = ViewKind.CeilingPlan, Phase = "N", Level = "L02" };
-            Assert.Equal(("N-W-RCP-L02", "W", "030-RCP"), Short(SetupRules.ProposeView(rcp, Phases)));
+            Assert.Equal(("N-WORK-RCP-L02", "WORK", "030-RCP"), Short(SetupRules.ProposeView(rcp, Phases)));
 
             var filed = new ViewFacts { Name = "Level 2 egress", Kind = ViewKind.FloorPlan, Phase = "N", Level = "L02", ViewSet = "PERMIT", ViewType = "020-PLAN-EGRESS" };
             Assert.Equal(("N-PERMIT-PLAN-EGRESS-L02", "PERMIT", "020-PLAN-EGRESS"), Short(SetupRules.ProposeView(filed, Phases)));
 
             var sect = new ViewFacts { Name = "Section 1", Kind = ViewKind.Section, Phase = "EX" };
-            Assert.Equal("EX-W-SECT-01", SetupRules.ProposeView(sect, Phases).name);
+            Assert.Equal("EX-WORK-SECT-01", SetupRules.ProposeView(sect, Phases).name);
 
             var three = new ViewFacts { Name = "{3D}", Kind = ViewKind.Axo, Phase = "N" };
             Assert.Equal(("N-Z-WIP-AXO", "Z-WIP", "000-AXO"), Short(SetupRules.ProposeView(three, Phases)));
@@ -97,11 +97,11 @@ namespace OpenBepSync.Tests
         public void MakesNamesUnique()
         {
             var lines = new List<SetupLine> {
-                new SetupLine("View", SetupAction.Rename, "1", "Section 1", "N-W-SECT-01", "views"),
-                new SetupLine("View", SetupAction.Rename, "2", "Section 1 copy", "N-W-SECT-01", "views"),
-                new SetupLine("View", SetupAction.Rename, "3", "x", "N-W-SECT-02", "views") };
-            SetupRules.MakeUnique(lines, new[] { "N-W-SECT-02" });
-            Assert.Equal(new[] { "N-W-SECT-01", "N-W-SECT-01-2", "N-W-SECT-02-2" }, lines.Select(l => l.New));
+                new SetupLine("View", SetupAction.Rename, "1", "Section 1", "N-WORK-SECT-01", "views"),
+                new SetupLine("View", SetupAction.Rename, "2", "Section 1 copy", "N-WORK-SECT-01", "views"),
+                new SetupLine("View", SetupAction.Rename, "3", "x", "N-WORK-SECT-02", "views") };
+            SetupRules.MakeUnique(lines, new[] { "N-WORK-SECT-02" });
+            Assert.Equal(new[] { "N-WORK-SECT-01", "N-WORK-SECT-01-2", "N-WORK-SECT-02-2" }, lines.Select(l => l.New));
             Assert.Contains("taken", lines[1].Note);
         }
 

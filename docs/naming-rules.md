@@ -100,16 +100,29 @@ Revit's own phase names, each with a short code that starts every view name. A p
 
 Revit's own names, which every firm knows. Two of Revit's seven are deleted because no drawing needs them, and one is added.
 
-| Filter | Shows | Use it for | Keep |
-| --- | --- | --- | --- |
-| `Show All` | New, existing, demolished and temporary elements | Working and checking views | Yes |
-| `Show Complete` | The building as it stands at the end of the view's phase | Existing conditions (view phase `EX`), the finished building | Yes |
-| `Show New` | Only what is built in the view's phase | Schedules and quantities of new work | Yes |
-| `Show Previous + Demo` | Existing and demolished elements | Demolition plans (`009-PLAN-DEMO`) | Yes |
-| `Show Previous + New` | What stays, and what is new | Plans of a renovation; the default for every other view | Yes |
-| `Show Existing` | Existing elements that stay, without demolished or new ones | Existing-to-remain plans for coordination and the owner's records | Added |
-| `Show Demo + New` | Demolished and new, without what stays | Nothing: a plan without the walls that stay reads wrong | Deleted |
-| `Show Previous Phase` | Elements of the phase before the view's | Nothing: shows nothing in the first phase, and `Show Complete` in a view of the earlier phase does the job | Deleted |
+| Filter | Shows | Use it for | Keep | New | Existing | Demolished | Temporary |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `Show All` | New, existing, demolished and temporary elements | Working and checking views | Yes | By category | Overridden | Overridden | Overridden |
+| `Show Complete` | The building as it stands at the end of the view's phase | Existing conditions (view phase `EX`), the finished building | Yes | By category | By category | Not displayed | Not displayed |
+| `Show New` | Only what is built in the view's phase | Schedules and quantities of new work | Yes | By category | Not displayed | Not displayed | Not displayed |
+| `Show Previous + Demo` | Existing and demolished elements | Demolition plans (`009-PLAN-DEMO`) | Yes | Not displayed | Overridden | Overridden | Not displayed |
+| `Show Previous + New` | What stays, and what is new | Plans of a renovation; the default for every other view | Yes | By category | Overridden | Not displayed | Not displayed |
+| `Show Existing` | Existing elements that stay, without demolished or new ones | Existing-to-remain plans for coordination and the owner's records | Added | Not displayed | By category | Not displayed | Not displayed |
+| `Show Demo + New` | Demolished and new, without what stays | Nothing: a plan without the walls that stay reads wrong | Deleted | | | | |
+| `Show Previous Phase` | Elements of the phase before the view's | Nothing: shows nothing in the first phase, and `Show Complete` in a view of the earlier phase does the job | Deleted | | | | |
+
+The last four columns say how each filter shows elements by their status: by category (as drawn normally), overridden (with the graphic overrides below), or not displayed.
+
+### Phase graphic overrides
+
+Set once in the template (Manage › Phasing › Graphic Overrides), so existing work reads lighter than new work and demolition reads at a glance in black and white.
+
+| Status | Projection and cut lines | Pattern | Halftone | Cut and surface patterns |
+| --- | --- | --- | --- | --- |
+| Existing | Black, by category weight | `OB_Solid` | Yes | By category |
+| Demolished | Black, by category weight | `OB_Demolish` | No | None |
+| New | By category | By category | No | By category |
+| Temporary | Black, by category weight | `OB_Hidden` | Yes | None |
 
 Each view template sets the phase filter, so a view's filter never has to be picked by hand. Demolition is a status of an element (Phase Demolished), not a phase: there is no `D` phase.
 
@@ -126,7 +139,7 @@ Each view template sets the phase filter, so a view's filter never has to be pic
 | `PERMIT` | PERMIT | Views placed on the permit set | Permis |
 | `PRES` | PRESENTATION | Views for the client, committees or the city; one set each (`PRES-CLIENT`, `PRES-CITY`) | Présentation |
 | `QC` | QUALITY CONTROL | Views that isolate each phase, workset and floor | Contrôle de la qualité |
-| `W` | WORK | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
+| `WORK` | WORK | Shared working views, including views for one task (rooms, doors, tracing an old drawing) | Travail |
 | `Z-USER-<NAME>` | Z-USER-SAM | One person's views | Vues personnelles |
 | `Z-WIP` | Z-WIP | Unfinished views, Revit's default `{3D}` | Travail en cours |
 
@@ -178,7 +191,7 @@ Sets starting with `Z-` sort last. A browser filter on `OB_ViewSet` not beginnin
 Example: `N-CON-PLAN-EGRESS-L02` is the new construction, construction set, egress plan of level 2.
 
 - A view with no level ends with what tells it apart: `N-CON-SECT-STAIR-01`, `N-PRES-3D-LOBBY`.
-- Design options end with `-OPT1`, `-OPT2`: `P1-W-PLAN-L01-OPT2`.
+- Design options end with `-OPT1`, `-OPT2`: `P1-WORK-PLAN-L01-OPT2`.
 - A person's own views go in their own set: `N-Z-USER-SAM-PLAN-L02`.
 - Drafting views have no phase, so `DRAFT` takes the phase's place: `DRAFT-CON-DET-PARAPET`, `DRAFT-CON-LEGEND-WALLTYPES`. With `OB_ViewSet` and `OB_ViewType` filled, they still sort into set and type folders under `???`. (Proposal: drafting views have no agreed logic yet.)
 - The printed title comes from Title on Sheet, so the codes never reach the drawings.
@@ -245,11 +258,11 @@ Name the browser organization `Views (Phase-Set-Type-Family)` so everyone knows 
     - WORK
       - 000-AXO
         - 3D Views
-          - N-W-AXO-OPT1
-          - N-W-AXO-OPT2
+          - N-WORK-AXO-OPT1
+          - N-WORK-AXO-OPT2
       - 013-PLAN-ROOM
         - Floor Plans
-          - N-W-PLAN-ROOM-L01
+          - N-WORK-PLAN-ROOM-L01
     - Z-USER-SAM
       - 010-PLAN
         - Floor Plans
