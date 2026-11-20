@@ -5,9 +5,16 @@
 //   (b) the small evaluator below, which reads only the JSON file and the same table.
 // Per element type: element count, score, pass, and each requirement's present % and real-value % must be equal.
 // The same is done again after adding an owner parameter to Doors, which must appear in the file as an owner addition.
-// Usage: node translations/tools/reqfile_parity.js [--break] [--write]
+// Walls: the table has Function, Family and Structural Usage columns. Wall rows are placed by revitWhere (exterior, foundation,
+// retaining, core-shaft, curtain, stacked); soffit, blank-Function and in-place walls are "not covered". The comparison runs three times
+// per milestone: the full table, without the Family column, and without Function and Family (the old path).
+// Usage: node translations/tools/reqfile_parity.js [--break] [--write] [--no-function-column [--head <older bep-builder.html>]]
 //   --break  removes one Doors requirement from the JSON in memory; the test must then FAIL (negative control).
 //   --write  also writes revit-addin/OpenBepSync/test/OpenBEP-requirements-school-example.json (the school example as loaded).
+//   --no-function-column  only the old path: the table without Function and Family columns must give exactly the result saved in
+//            revit-addin/OpenBepSync/test/reqfile-parity-fallback-expected.json (made from the Builder before wall kinds, v0.44),
+//            and the same as the file. --head <path> runs that older Builder live instead; with --write it saves its result.
+//            --write alone refreshes the saved result from this Builder (after a legitimate change to the requirements).
 // Needs Playwright + Chromium, like crawl_app.js. CHROMIUM=/path/to/chrome uses a browser already installed;
 // PW_CHANNEL=msedge uses the installed Microsoft Edge.
 let pw; try { pw = require('playwright'); } catch (e) { pw = require('playwright-core'); }
@@ -18,7 +25,8 @@ const assert = require('node:assert');
 
 const root = path.resolve(__dirname, '..', '..');
 const testDir = path.join(root, 'revit-addin', 'OpenBepSync', 'test');
-const BREAK = process.argv.includes('--break'), WRITE = process.argv.includes('--write');
+const BREAK = process.argv.includes('--break'), WRITE = process.argv.includes('--write'), NOFN = process.argv.includes('--no-function-column');
+const HEAD = process.argv.includes('--head') ? process.argv[process.argv.indexOf('--head') + 1] : null;
 const OWNER = 'Access control zone';
 
 // ---- The evaluator: reads only the requirement file and the model table. ----
@@ -39,19 +47,39 @@ function readTable(txt) {
 }
 // tableRule.normalize in the file.
 const norm = x => String(x || '').toLowerCase().replace(/[\s_\-]/g, '').replace(/\(.*$/, '');
+// A copy of a table without some columns (by normalized header).
+const dropCols = (T, names) => { const keep = T.head.map((h, i) => names.includes(norm(h)) ? -1 : i).filter(i => i >= 0);
+  return { head: keep.map(i => T.head[i]), rows: T.rows.map(r => keep.map(i => r[i] ?? '')) }; };
+const toCsv = T => [T.head, ...T.rows].map(r => r.map(c => /[",]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c).join(',')).join('\n') + '\n';
+// One revitWhere condition on one table row: true, false, or null when the table has no column for it (tableRule.split).
+function holds(sp, T, q, r) {
+  const col = names => T.head.findIndex(h => (names || []).includes(norm(h)));
+  if (q.wallKind) { const i = col(sp.columns.wallKind); if (i < 0) return null; const v = norm(r[i]);
+    return [].concat(q.wallKind).includes(sp.wallKindValues[v] || (v ? sp.wallKindOther : '')); }
+  const i = col(sp.columns[q.parameter]); if (i < 0) return null; const v = norm(r[i]);
+  return v !== '' && q.in.some(x => norm(x) === v);
+}
 function evaluate(F, T, mid) {
   const ms = F.milestones.find(m => m.id === mid), always = new RegExp(F.placeholders.always, F.placeholders.flags);
   const ci = T.head.findIndex(h => norm(h) === F.tableRule.categoryColumn);
   assert.ok(ci >= 0, 'the model table needs a Category column');
   const typeOf = v => { const n = norm(v); return F.elementTypes.find(t => t.categoryNames.includes(n)); };
+  // Rows of a split category (Walls) are placed by revitWhere when the table has the trigger column (Function).
+  const sp = (F.tableRule.split || [])[0], on = !!sp && T.head.some(h => sp.columns.Function.includes(norm(h)));
+  const all = (w, r) => { const h = w.all.map(q => holds(sp, T, q, r)).filter(x => x !== null); return h.length > 0 && h.every(Boolean); };
+  const place = r => F.elementTypes.find(t => t.revitWhere && t.revitWhere.all && t.revitWhere.revitCategory === sp.revitCategory && all(t.revitWhere, r));
+  const walls = { n: 0, split: on, kind: on && T.head.some(h => sp.columns.wallKind.includes(norm(h))), out: 0 }, why = {};
   const by = new Map();
-  T.rows.forEach(r => { const t = typeOf(r[ci]); if (!t) return; if (!by.has(t.id)) by.set(t.id, { t, els: [] }); by.get(t.id).els.push(r); });
+  T.rows.forEach(r => { let t = typeOf(r[ci]);
+    if (t && sp && sp.cells.includes(norm(r[ci]))) { walls.n++;
+      if (on) { t = place(r); if (!t) { walls.out++; const u = (F.uncovered || []).find(u => u.revitCategory === sp.revitCategory && all(u.where, r)); const k = u ? u.note : 'matches no element type'; why[k] = (why[k] || 0) + 1; return; } } }
+    if (!t) return; if (!by.has(t.id)) by.set(t.id, { t, els: [] }); by.get(t.id).els.push(r); });
   const real = (q, v) => {
     if (v == null) return false; const s = v.trim();
     if (s === '' || q.placeholders.map(x => String(x).toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return false;
     return new RegExp(q.valueRule.pattern, 'i').test(s);
   };
-  return [...by.values()].map(({ t, els }) => {
+  const cats = [...by.values()].map(({ t, els }) => {
     const reqs = new Map(t.requirements.map(q => [q.id, q]));
     const rows = t.requiredAt[mid].map(id => {
       const q = reqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h)));
@@ -62,6 +90,7 @@ function evaluate(F, T, mid) {
     const fill = rows.length ? Math.round(rows.reduce((s, r) => s + r.ok, 0) / rows.length) : 100;
     return { id: t.id, lod: t.lod[mid], n: els.length, fill, pass: fill >= ms.targetPercent, rows };
   });
+  return { cats, walls, why };
 }
 
 // ---- The run. ----
@@ -89,6 +118,42 @@ function evaluate(F, T, mid) {
 
     const school = await exportFile();
     assert.strictEqual(school.format, 'openbep-requirements');
+    assert.strictEqual(school.formatVersion, '1.1');
+    const sortId = a => [...a].sort((x, y) => x.id.localeCompare(y.id));
+    const same = (a, b, where) => { assert.deepStrictEqual(b.map(x => x.id), a.map(x => x.id), where + ': element types found');
+      a.forEach((x, i) => { const y = b[i], w = `${where}, ${x.id}`; assert.strictEqual(y.lod, x.lod, w + ': level'); assert.strictEqual(y.n, x.n, w + ': elements');
+        assert.deepStrictEqual(y.rows, x.rows, w + ': requirement rows'); assert.strictEqual(y.fill, x.fill, w + ': score'); assert.strictEqual(y.pass, x.pass, w + ': pass'); }); };
+
+    // --no-function-column: the old path. Without a Function column the Builder must give exactly what the previous Builder gave.
+    if (NOFN) {
+      const T0 = dropCols(T, ['function', 'family']), csv0 = toCsv(T0), exp = path.join(testDir, 'reqfile-parity-fallback-expected.json');
+      let expected;
+      if (HEAD) { // the previous Builder (a copy of app/bep-builder.html from before this change), on the same table
+        const hp = await (await browser.newContext()).newPage(); hp.on('pageerror', e => errors.push('previous Builder: ' + e));
+        await hp.goto(pathToFileURL(path.resolve(HEAD)).href); await hp.evaluate(() => localStorage.clear()); await hp.reload();
+        await hp.locator('[data-ex="school"]').first().click(); await hp.waitForTimeout(200);
+        expected = {}; for (const m of school.milestones) expected[m.id] = sortId(await hp.evaluate(([t, mid]) => window.__ckTable(t, mid), [csv0, m.id]));
+        if (WRITE) { fs.writeFileSync(exp, JSON.stringify(expected, null, 1) + '\n'); console.log('wrote ' + path.relative(root, exp)); }
+      } else if (WRITE) { // a legitimate change to the requirements (lod/spec.json, the school example): refresh from this Builder
+        expected = {}; for (const m of school.milestones) expected[m.id] = sortId(await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [csv0, m.id]));
+        fs.writeFileSync(exp, JSON.stringify(expected, null, 1) + '\n'); console.log('wrote ' + path.relative(root, exp) + ' from this Builder');
+      } else expected = JSON.parse(fs.readFileSync(exp, 'utf8'));
+      let n = 0;
+      for (const m of school.milestones) {
+        const now = sortId(await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [csv0, m.id]));
+        assert.deepStrictEqual(now, expected[m.id], `${m.id}: the Builder without a Function column differs from the previous Builder`);
+        const mine = evaluate(school, T0, m.id); same(now, sortId(mine.cats), `no Function column, ${m.id}`);
+        const W = await page.evaluate(([t, mid]) => window.__ckWalls(t, mid), [csv0, m.id]);
+        assert.deepStrictEqual(W.walls, mine.walls, m.id + ': wall counts');
+        assert.ok(!W.walls.split && W.walls.n === 11 && W.walls.out === 0, m.id + ': walls ' + JSON.stringify(W.walls));
+        assert.strictEqual(W.html.split('Walls could not be told apart without a Function column').length - 1, 1, m.id + ': the note must show once');
+        assert.strictEqual(now.find(x => x.id === 'wall_interior').n, 13, m.id + ': every wall row goes to interior walls (11 Walls + 2 named rows)');
+        n += now.length;
+      }
+      if (errors.length) throw new Error('Page errors: ' + errors.join(' | '));
+      console.log(`NO-FUNCTION-COLUMN OK milestones=${school.milestones.length} types=${n / school.milestones.length}: same as the previous Builder${HEAD ? ' (run live)' : WRITE ? ' (only just refreshed from this Builder: not a comparison)' : ' (saved result)'} and as the file; the note shows once`);
+      return;
+    }
     if (WRITE) {
       const out = path.join(testDir, 'OpenBEP-requirements-school-example.json');
       fs.writeFileSync(out, JSON.stringify(school, null, 2) + '\n');
@@ -118,33 +183,41 @@ function evaluate(F, T, mid) {
     }
 
     // Parity, per milestone, for the school example and again with the owner addition.
-    let types = 0, rowsCompared = 0, partial = 0;
+    let types = 0, rowsCompared = 0, partial = 0, wallsChecked = 0;
+    const variants = [['full table', T], ['no Family column', dropCols(T, ['family'])], ['no Function column', dropCols(T, ['function', 'family'])]];
     for (const [label, F, withOwner] of [['with owner addition', owned, true], ['school example', school, false]]) {
       if (withOwner) { /* the Builder state now carries the owner addition, as in F */ }
       else { // put the Builder back to the plain school example for its own check
         await page.evaluate(() => localStorage.clear()); await page.reload();
         await page.locator('[data-ex="school"]').first().click(); await page.waitForTimeout(200);
       }
-      for (const m of F.milestones) {
-        const builder = await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [table, m.id]);
-        const mine = evaluate(F, T, m.id);
-        const key = x => x.id;
-        const a = [...builder].sort((x, y) => key(x).localeCompare(key(y))), b = [...mine].sort((x, y) => key(x).localeCompare(key(y)));
+      for (const m of F.milestones) for (const [tl, TT] of variants) {
+        const csv = toCsv(TT);
+        const a = sortId(await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [csv, m.id]));
+        const mine = evaluate(F, TT, m.id), b = sortId(mine.cats);
+        const W = await page.evaluate(([t, mid]) => window.__ckWalls(t, mid), [csv, m.id]);
         try {
-          assert.deepStrictEqual(b.map(key), a.map(key), 'element types found');
-          a.forEach((x, i) => {
-            const y = b[i], where = `${label}, ${m.id}, ${x.id}`;
-            assert.strictEqual(y.lod, x.lod, where + ': level');
-            assert.strictEqual(y.n, x.n, where + ': elements');
-            assert.deepStrictEqual(y.rows, x.rows, where + ': requirement rows');
-            assert.strictEqual(y.fill, x.fill, where + ': score');
-            assert.strictEqual(y.pass, x.pass, where + ': pass');
-            rowsCompared += x.rows.length; partial += x.rows.filter(r => r.ok > 0 && r.ok < 100).length;
-          });
-        } catch (e) { failed++; console.error('MISMATCH ' + e.message.split('\n')[0] + ` (Builder: ${a.map(key)}; file: ${b.map(key)})`); if (failed > 5) throw new Error('too many mismatches'); continue; }
-        if (withOwner) {
+          same(a, b, `${label}, ${tl}, ${m.id}`);
+          assert.deepStrictEqual(W.walls, mine.walls, `${label}, ${tl}, ${m.id}: wall counts`);
+          a.forEach(x => { rowsCompared += x.rows.length; partial += x.rows.filter(r => r.ok > 0 && r.ok < 100).length; });
+        } catch (e) { failed++; console.error('MISMATCH ' + e.message.split('\n')[0] + ` (Builder: ${a.map(x => x.id)}; file: ${b.map(x => x.id)})`); if (failed > 5) throw new Error('too many mismatches'); continue; }
+        if (withOwner && tl === 'full table') {
           types = a.length;
           if (m.id !== 'prelim100') assert.ok(a.find(x => x.id === 'door').rows.some(r => r.n === OWNER), 'Builder check has no owner row');
+          // Hand-counted placement of the 11 Walls rows (see the CSV): interior 3002 (+2 named rows), exterior 3003 3004 3010 (stacked),
+          // retaining 3001 3008, curtain 3007, core-shaft 3005 -> interior; not covered: 3006 soffit, 3009 blank Function, 3011 in place.
+          const nOf = id => (a.find(x => x.id === id) || {}).n;
+          assert.deepStrictEqual([nOf('wall_interior'), nOf('wall_exterior'), nOf('retaining_wall'), nOf('curtain_wall')], [4, 3, 2, 1], m.id + ': walls placed');
+          assert.deepStrictEqual(W.walls, { n: 11, split: true, kind: true, out: 3 }, m.id + ': wall counts');
+          assert.deepStrictEqual(mine.why, { 'Soffit walls: no element type of this plan covers them.': 1, 'matches no element type': 1, 'Wall modelled in place; has no wall type Function.': 1 }, m.id + ': not covered');
+          assert.ok(W.html.includes('Not covered by the plan: 3 walls') && !W.html.includes('without a Function column') && !W.html.includes('without a Family column'), m.id + ': wall notes');
+          wallsChecked++;
+        }
+        if (withOwner && tl === 'no Family column' && m.id === 'final90') {
+          // Without the wall kind, the curtain wall (Function Exterior) goes to exterior walls and in-place walls cannot be seen.
+          const nOf = id => (a.find(x => x.id === id) || {}).n;
+          assert.deepStrictEqual([nOf('wall_exterior'), nOf('curtain_wall')], [4, undefined], 'no Family column: placement');
+          assert.ok(W.html.includes('Curtain walls could not be told apart without a Family column'), 'no Family column: note');
         }
       }
     }
@@ -152,6 +225,49 @@ function evaluate(F, T, mid) {
     if (failed) throw new Error(`${failed} milestone comparisons failed`);
     assert.ok(types >= 4 && rowsCompared > 100 && partial > 10, `test table too thin: ${types} types, ${rowsCompared} rows, ${partial} partly filled`);
     console.log(`${rowsCompared} requirement rows compared, ${partial} partly filled`);
+    assert.strictEqual(wallsChecked, school.milestones.length, 'wall placement checked at every milestone');
+
+    // The file's wall data (format 1.1).
+    const ET = id => school.elementTypes.find(t => t.id === id);
+    const nullIds = school.elementTypes.flatMap(t => t.revitCategories.filter(r => !r.id).map(r => t.id + ': ' + r.name));
+    assert.deepStrictEqual(nullIds, [], 'revitCategories with no OST id');
+    assert.deepStrictEqual(ET('wall_exterior').categoryNotes, ['Curtain walls are separate (B2020)'], 'the note is a categoryNote');
+    const wallTypes = school.elementTypes.filter(t => t.revitCategories.some(r => r.id === 'OST_Walls'));
+    const noRule = wallTypes.filter(t => !(t.revitWhere && t.revitWhere.revitCategory === 'OST_Walls'));
+    for (const t of noRule) assert.ok(school.unresolvedSplits.some(u => u.id === t.id && /OST_Walls/.test(u.reason)), t.id + ': Walls type with no revitWhere and no stated reason');
+    assert.ok(school.unresolvedSplits.every(u => u.id && Array.isArray(u.sharesCategoryWith) && u.reason), 'unresolvedSplits entries need id, sharesCategoryWith, reason');
+    // No wall kind and Function value lands in two places (element types plus the uncovered list).
+    const sp = school.tableRule.split[0], fns = school.wallKinds.function.values, wkinds = school.wallKinds.kind.values;
+    const famOf = { Basic: 'Basic Wall', Curtain: 'Curtain Wall', Stacked: 'Stacked Wall', InPlace: 'Stair wrap' };
+    const T1 = { head: ['Family', 'Function'], rows: [] };
+    for (const k of wkinds) for (const f of [...fns, '']) {
+      const r = [famOf[k], f], ok = w => w.all.every(q => holds(sp, T1, q, r));
+      const hits = [...wallTypes.filter(t => t.revitWhere && ok(t.revitWhere)).map(t => t.id), ...school.uncovered.filter(u => ok(u.where)).map(u => 'uncovered: ' + u.note)];
+      assert.ok(hits.length <= 1, `${k} wall with Function ${f || '(blank)'} lands in ${hits.join(' and ')}`);
+    }
+    console.log(`WALLS OK: ${wallTypes.length} element types in Walls (${wallTypes.filter(t => t.revitWhere).map(t => t.id).join(', ')} placed by revitWhere; ${noRule.map(t => t.id).join(', ') || 'none'} with a stated reason); no wall lands twice; no null category id; unresolvedSplits=${school.unresolvedSplits.length}`);
+
+    // Owner ruling: exterior walls carry a fire rating. The list asks it from LOD 300 for code checking; the school example as loaded
+    // has no code checking, so switch that BIM use on and the file must require Fire rating on exterior walls from LOD 300.
+    console.log(`school example as loaded: exterior walls require fire_rating at ${school.milestones.filter(m => ET('wall_exterior').requiredAt[m.id].includes('fire_rating')).map(m => m.id).join(', ') || 'no milestone (no code checking BIM use)'}`);
+    for (let i = 1; i <= 13; i++) { await page.locator(`#steps [data-step="${i}"]`).click(); await page.waitForTimeout(100); if (await page.locator('[data-opt="code.plans"]').count()) break; }
+    await page.evaluate(() => { const b = document.querySelector('[data-opt="code.plans"]'); if (!b.checked) b.click(); }); await page.waitForTimeout(200);
+    assert.ok(await page.evaluate(() => document.querySelector('[data-opt="code.plans"]').checked), 'code checking BIM use did not switch on');
+    const coded = await exportFile(), ex = coded.elementTypes.find(t => t.id === 'wall_exterior'), fr = ex.requirements.find(q => q.id === 'fire_rating');
+    assert.ok(fr, 'exterior walls: no fire_rating requirement with code checking on');
+    assert.strictEqual(fr.fromLod, '300');
+    for (const m of coded.milestones) assert.strictEqual(ex.requiredAt[m.id].includes('fire_rating'), +ex.lod[m.id] >= 300, 'fire_rating at ' + m.id);
+    const fb = (await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [table, 'final90'])).find(x => x.id === 'wall_exterior');
+    const fe = evaluate(coded, T, 'final90').cats.find(x => x.id === 'wall_exterior');
+    const frRow = fb.rows.find(r => r.n === fr.label);
+    assert.deepStrictEqual(frRow, { n: fr.label, has: 100, ok: 67 }, 'Builder: exterior walls fire rating row (2 hr, TBD, 2 hr)');
+    assert.deepStrictEqual(fe.rows.find(r => r.n === fr.label), frRow, 'file: exterior walls fire rating row');
+    console.log(`FIRE-RATING OK: with code checking on, exterior walls require "${fr.label}" from LOD 300 (at ${coded.milestones.filter(m => ex.requiredAt[m.id].includes('fire_rating')).map(m => m.id).join(', ')}); the Builder and the file both score it ${frRow.ok}%`);
+    for (const L of ['fr', 'ja']) for (const t of ['Walls could not be told apart without a Function column, so every wall was checked as an interior wall. Add the wall type\'s Function to the schedule to check exterior, foundation and curtain walls against their own requirements.',
+      'Curtain walls could not be told apart without a Family column, so walls were placed by their Function alone.',
+      'Not covered by the plan: 3 walls whose Function no element type of this plan covers (for example Soffit), is left empty, or that are modelled in place. They were not checked.'])
+      assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [t, L]), `no ${L} translation: ${t}`);
+    console.log('wall notes: French and Japanese present');
 
     // Model rules (step "Information and software"): stated in the draft and carried in the file, nothing evaluated.
     const go = async i => { await page.locator(`#steps [data-step="${i}"]`).click(); await page.waitForTimeout(150); await openAll(); };

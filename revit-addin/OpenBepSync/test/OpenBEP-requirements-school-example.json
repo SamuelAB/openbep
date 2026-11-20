@@ -1,13 +1,13 @@
 {
   "format": "openbep-requirements",
-  "formatVersion": "1.0",
+  "formatVersion": "1.1",
   "plan": {
     "name": "Example: Primary school renovation and extension",
     "fingerprint": "9C37B605B3A9",
     "version": null,
     "listVersion": "0.1",
-    "builderVersion": "0.44",
-    "generated": "2026-11-20T17:08:01.543Z"
+    "builderVersion": "0.45",
+    "generated": "2026-11-20T17:53:55.647Z"
   },
   "scoreRule": {
     "perElementType": "mean of each required parameter real-value percentage",
@@ -23,7 +23,33 @@
   "tableRule": {
     "categoryColumn": "category",
     "normalize": "lowercase; remove spaces, underscores and hyphens; drop everything from the first \"(\"",
-    "category": "a row belongs to the first element type, in file order, whose categoryNames include the normalized Category cell; rows that match none are ignored",
+    "category": "a row belongs to the first element type, in file order, whose categoryNames include the normalized Category cell; rows that match none are ignored. Exception: see split",
+    "split": [
+      {
+        "revitCategory": "OST_Walls",
+        "cells": [
+          "walls"
+        ],
+        "columns": {
+          "Function": [
+            "function"
+          ],
+          "wallKind": [
+            "family"
+          ],
+          "structural": [
+            "structuralusage"
+          ]
+        },
+        "wallKindValues": {
+          "basicwall": "Basic",
+          "curtainwall": "Curtain",
+          "stackedwall": "Stacked"
+        },
+        "wallKindOther": "InPlace",
+        "rule": "Applies only when the table has a column named in columns.Function. A row whose normalized Category cell is in cells is placed by revitWhere: it takes the first element type, in file order, whose revitWhere.revitCategory is this category and whose conditions all hold. A condition reads the column named for it (wallKind: the normalized cell turned into a kind through wallKindValues, any other non-blank family is wallKindOther); a condition whose column the table lacks is skipped, and a type whose conditions are all skipped takes no rows. A cell is normalized and compared with the normalized in values; a blank or unknown cell does not hold. A row that takes no element type is not covered by the plan: it is counted, not scored. With no Function column every such row follows the category rule."
+      }
+    ],
     "column": "a requirement reads the first column whose normalized header is in its columnNames; with no such column every element fails it"
   },
   "milestones": [
@@ -69,6 +95,7 @@
           "id": "OST_LightingFixtures"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "lightingfixtures",
         "lightfixtures"
@@ -821,6 +848,7 @@
           "id": "OST_Doors"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "doors"
       ],
@@ -1525,6 +1553,7 @@
           "id": "OST_Walls"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "walls",
         "interiorwalls/partitions"
@@ -1542,9 +1571,23 @@
         }
       ],
       "revitWhere": {
-        "parameter": "Function",
-        "scope": "type",
-        "equals": "Interior"
+        "revitCategory": "OST_Walls",
+        "all": [
+          {
+            "wallKind": [
+              "Basic",
+              "Stacked"
+            ]
+          },
+          {
+            "parameter": "Function",
+            "scope": "type",
+            "in": [
+              "Interior",
+              "Core-shaft"
+            ]
+          }
+        ]
       },
       "lod": {
         "prelim100": "200",
@@ -2190,11 +2233,10 @@
         {
           "name": "Walls - Function = Exterior",
           "id": "OST_Walls"
-        },
-        {
-          "name": "Curtain walls are separate",
-          "id": null
         }
+      ],
+      "categoryNotes": [
+        "Curtain walls are separate (B2020)"
       ],
       "categoryNames": [
         "walls",
@@ -2214,9 +2256,22 @@
         }
       ],
       "revitWhere": {
-        "parameter": "Function",
-        "scope": "type",
-        "equals": "Exterior"
+        "revitCategory": "OST_Walls",
+        "all": [
+          {
+            "wallKind": [
+              "Basic",
+              "Stacked"
+            ]
+          },
+          {
+            "parameter": "Function",
+            "scope": "type",
+            "in": [
+              "Exterior"
+            ]
+          }
+        ]
       },
       "lod": {
         "prelim100": "200",
@@ -2775,6 +2830,7 @@
           "id": "OST_DuctTerminal"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "airterminals"
       ],
@@ -3518,6 +3574,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "mechanicalequipmentairhandlingunit"
@@ -4268,6 +4325,7 @@
           "id": "OST_StructuralColumns"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralcolumns"
       ],
@@ -4930,6 +4988,7 @@
           "id": "OST_PlumbingFixtures"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "plumbingfixtures"
       ],
@@ -5587,6 +5646,7 @@
           "id": "OST_StructuralFoundation"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralfoundations",
         "foundationsfootingsandpilecaps"
@@ -6521,6 +6581,7 @@
           "id": "OST_StructuralFoundation"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralfoundations",
         "foundationspilesandcaissons"
@@ -7272,6 +7333,7 @@
           "id": "OST_Walls"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "walls",
         "foundationandretainingwalls"
@@ -7284,7 +7346,25 @@
           "where": null
         }
       ],
-      "revitWhere": null,
+      "revitWhere": {
+        "revitCategory": "OST_Walls",
+        "all": [
+          {
+            "wallKind": [
+              "Basic",
+              "Stacked"
+            ]
+          },
+          {
+            "parameter": "Function",
+            "scope": "type",
+            "in": [
+              "Foundation",
+              "Retaining"
+            ]
+          }
+        ]
+      },
       "lod": {
         "prelim100": "200",
         "final50": "300",
@@ -8164,6 +8244,7 @@
           "id": "OST_StructuralFoundation"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "floors",
         "structuralfoundations",
@@ -9013,6 +9094,7 @@
           "id": "OST_Roofs"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "roofs"
       ],
@@ -9622,6 +9704,7 @@
           "id": "OST_StructuralFraming"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralframing",
         "beamsandgirders"
@@ -10370,6 +10453,7 @@
           "id": "OST_StructuralTruss"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralframing",
         "structuraltrusses",
@@ -11042,6 +11126,7 @@
           "id": "OST_FabricReinforcement"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralrebar",
         "structuralareareinforcement",
@@ -11146,6 +11231,7 @@
           "id": "OST_CurtainWallMullions"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "walls",
         "curtainpanels",
@@ -11160,7 +11246,16 @@
           "where": null
         }
       ],
-      "revitWhere": null,
+      "revitWhere": {
+        "revitCategory": "OST_Walls",
+        "all": [
+          {
+            "wallKind": [
+              "Curtain"
+            ]
+          }
+        ]
+      },
       "lod": {
         "prelim100": "200",
         "final50": "300",
@@ -11807,6 +11902,7 @@
           "id": "OST_Windows"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "windows",
         "windowsandskylights"
@@ -12648,6 +12744,7 @@
           "id": "OST_Ceilings"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "ceilings"
       ],
@@ -13263,6 +13360,7 @@
           "id": "OST_StairsLandings"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "stairs",
         "runs",
@@ -13741,6 +13839,7 @@
           "id": "OST_Ramps"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "ramps"
       ],
@@ -14171,6 +14270,7 @@
           "id": "OST_StairsRailing"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "railings",
         "railings,guardsandhandrails"
@@ -14787,6 +14887,7 @@
           "id": "OST_FurnitureSystems"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "furniture",
         "casework",
@@ -15096,6 +15197,7 @@
           "id": "OST_FoodServiceEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "specialtyequipment",
         "medicalequipment",
@@ -15350,6 +15452,7 @@
           "id": "OST_VerticalCirculation"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "specialtyequipment",
         "verticalcirculation",
@@ -16153,6 +16256,7 @@
           "id": "OST_DuctFitting"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "ducts",
         "flexducts",
@@ -16813,6 +16917,7 @@
           "id": "OST_DuctAccessory"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "ductaccessories",
         "dampers"
@@ -17252,6 +17357,7 @@
           "id": "OST_PipeFitting"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "pipes",
         "flexpipes",
@@ -17955,6 +18061,7 @@
           "id": "OST_PipeAccessory"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "pipeaccessories",
         "valvesandpipeaccessories"
@@ -18480,6 +18587,7 @@
           "id": "OST_PlumbingEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "plumbingequipment",
@@ -19281,6 +19389,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "boilers"
@@ -19989,6 +20098,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "chillers"
@@ -20697,6 +20807,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "coolingtowersandfluidcoolers"
@@ -21447,6 +21558,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "fans"
@@ -22159,6 +22271,7 @@
           "id": "OST_DuctAccessory"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "ductaccessories",
@@ -22776,6 +22889,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "mechanicalequipment",
         "heatexchangers"
@@ -23399,6 +23513,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "plumbingequipment",
         "mechanicalequipment",
@@ -24019,6 +24134,7 @@
           "id": "OST_Sprinklers"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "sprinklers"
       ],
@@ -24483,6 +24599,7 @@
           "id": "OST_FireAlarmDevices"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "firealarmdevices"
       ],
@@ -24821,6 +24938,7 @@
           "id": "OST_ElectricalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "electricalequipment",
         "switchboardsandpanelboards"
@@ -25655,6 +25773,7 @@
           "id": "OST_ElectricalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "electricalequipment",
         "transformers"
@@ -26398,6 +26517,7 @@
           "id": "OST_ElectricalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "electricalequipment",
         "generatorsandemergencypower"
@@ -27114,6 +27234,7 @@
           "id": "OST_ConduitFitting"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "cabletrays",
         "cabletrayfittings",
@@ -27634,6 +27755,7 @@
           "id": "OST_LightingDevices"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "electricalfixtures",
         "lightingdevices",
@@ -28227,6 +28349,7 @@
           "id": "OST_TelephoneDevices"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "communicationdevices",
         "datadevices",
@@ -28740,6 +28863,7 @@
           "id": "OST_Areas"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "rooms",
         "spaces",
@@ -29040,6 +29164,7 @@
           "id": "OST_Rooms"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "hvaczones",
         "areas",
@@ -29241,6 +29366,7 @@
           "id": "OST_Site"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "topography",
         "toposolid",
@@ -29674,6 +29800,7 @@
           "id": "OST_Parking"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "hardscape",
         "floors",
@@ -30286,6 +30413,7 @@
           "id": "OST_PipeCurves"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "pipes",
         "siteutilitiesstorm,sanitaryandwatermains"
@@ -31026,6 +31154,7 @@
           "id": "OST_GenericModel"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "plumbingequipment",
         "genericmodels",
@@ -31764,6 +31893,7 @@
       "name": "Road pavement structure and layers",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "roadpavementstructureandlayers"
       ],
@@ -32637,6 +32767,7 @@
       "name": "Road barriers and guardrails",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "roadbarriersandguardrails"
       ],
@@ -33280,6 +33411,7 @@
           "id": "OST_GenericModel"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "signage",
         "specialtyequipment",
@@ -33511,6 +33643,7 @@
       "name": "Railway track (rails, ties, ballast, track slab)",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "railwaytrack"
       ],
@@ -34371,6 +34504,7 @@
       "name": "Turnouts and switches",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "turnoutsandswitches"
       ],
@@ -35248,6 +35382,7 @@
       "name": "Railway signals",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "railwaysignals"
       ],
@@ -36036,6 +36171,7 @@
       "name": "Overhead contact system supports (poles, cantilevers)",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "overheadcontactsystemsupports"
       ],
@@ -36969,6 +37105,7 @@
           "id": "OST_StructuralFoundation"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "floors",
         "structuralfoundations",
@@ -37770,6 +37907,7 @@
           "id": "OST_Floors"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralframing",
         "floors",
@@ -38900,6 +39038,7 @@
           "id": "OST_StructuralFoundation"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralcolumns",
         "structuralframing",
@@ -39842,6 +39981,7 @@
           "id": "OST_GenericModel"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "structuralconnections",
         "genericmodels",
@@ -40526,6 +40666,7 @@
       "name": "Tunnel lining and segments",
       "on": false,
       "revitCategories": [],
+      "categoryNotes": [],
       "categoryNames": [
         "tunnelliningandsegments"
       ],
@@ -41173,6 +41314,7 @@
           "id": "OST_MechanicalEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "specialtyequipment",
         "mechanicalequipment",
@@ -41963,6 +42105,7 @@
           "id": "OST_SpecialityEquipment"
         }
       ],
+      "categoryNotes": [],
       "categoryNames": [
         "specialtyequipment",
         "passengerboardingbridges"
@@ -42832,43 +42975,474 @@
     }
   ],
   "unresolvedSplits": [
-    "ahu",
-    "structural_column",
-    "footing",
-    "pile",
-    "retaining_wall",
-    "slab",
-    "beam",
-    "structural_member",
-    "curtain_wall",
-    "specialty_equipment",
-    "elevator",
-    "damper",
-    "pipe",
-    "pump",
-    "boiler",
-    "chiller",
-    "cooling_tower",
-    "fan",
-    "vav_box",
-    "heat_exchanger",
-    "water_heater",
-    "distribution_board",
-    "transformer",
-    "generator",
-    "space",
-    "zone",
-    "paving_parking",
-    "utility_pipe",
-    "utility_structure",
-    "signage",
-    "rail_platform",
-    "bridge_superstructure",
-    "bridge_substructure",
-    "bridge_bearing",
-    "baggage_handling",
-    "boarding_bridge"
+    {
+      "id": "ahu",
+      "sharesCategoryWith": [
+        "pump",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with pump, boiler, chiller, cooling_tower, fan, vav_box, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "structural_column",
+      "sharesCategoryWith": [
+        "bridge_substructure"
+      ],
+      "reason": "Structural Columns (OST_StructuralColumns) is shared with bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "footing",
+      "sharesCategoryWith": [
+        "pile",
+        "slab",
+        "rail_platform",
+        "bridge_substructure"
+      ],
+      "reason": "Structural Foundations (OST_StructuralFoundation) is shared with pile, slab, rail_platform, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "pile",
+      "sharesCategoryWith": [
+        "footing",
+        "slab",
+        "rail_platform",
+        "bridge_substructure"
+      ],
+      "reason": "Structural Foundations (OST_StructuralFoundation) is shared with footing, slab, rail_platform, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "slab",
+      "sharesCategoryWith": [
+        "paving_parking",
+        "rail_platform",
+        "bridge_superstructure",
+        "footing",
+        "pile",
+        "bridge_substructure"
+      ],
+      "reason": "Floors (OST_Floors) is shared with paving_parking, rail_platform, bridge_superstructure; this plan states no Revit-side rule that tells which of these element types an element is. Structural Foundations (OST_StructuralFoundation) is shared with footing, pile, rail_platform, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "beam",
+      "sharesCategoryWith": [
+        "structural_member",
+        "bridge_superstructure",
+        "bridge_substructure"
+      ],
+      "reason": "Structural Framing (OST_StructuralFraming) is shared with structural_member, bridge_superstructure, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "structural_member",
+      "sharesCategoryWith": [
+        "beam",
+        "bridge_superstructure",
+        "bridge_substructure"
+      ],
+      "reason": "Structural Framing (OST_StructuralFraming) is shared with beam, bridge_superstructure, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "specialty_equipment",
+      "sharesCategoryWith": [
+        "elevator",
+        "signage",
+        "baggage_handling",
+        "boarding_bridge"
+      ],
+      "reason": "Specialty Equipment (OST_SpecialityEquipment) is shared with elevator, signage, baggage_handling, boarding_bridge; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "elevator",
+      "sharesCategoryWith": [
+        "specialty_equipment",
+        "signage",
+        "baggage_handling",
+        "boarding_bridge"
+      ],
+      "reason": "Specialty Equipment (OST_SpecialityEquipment) is shared with specialty_equipment, signage, baggage_handling, boarding_bridge; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "damper",
+      "sharesCategoryWith": [
+        "vav_box"
+      ],
+      "reason": "Duct Accessories (OST_DuctAccessory) is shared with vav_box; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "pipe",
+      "sharesCategoryWith": [
+        "utility_pipe"
+      ],
+      "reason": "Pipes (OST_PipeCurves) is shared with utility_pipe; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "pump",
+      "sharesCategoryWith": [
+        "ahu",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling",
+        "utility_structure"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, boiler, chiller, cooling_tower, fan, vav_box, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is. Plumbing Equipment (OST_PlumbingEquipment) is shared with water_heater, utility_structure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "boiler",
+      "sharesCategoryWith": [
+        "ahu",
+        "pump",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, chiller, cooling_tower, fan, vav_box, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "chiller",
+      "sharesCategoryWith": [
+        "ahu",
+        "pump",
+        "boiler",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, cooling_tower, fan, vav_box, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "cooling_tower",
+      "sharesCategoryWith": [
+        "ahu",
+        "pump",
+        "boiler",
+        "chiller",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, chiller, fan, vav_box, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "fan",
+      "sharesCategoryWith": [
+        "ahu",
+        "pump",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, chiller, cooling_tower, vav_box, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "vav_box",
+      "sharesCategoryWith": [
+        "ahu",
+        "pump",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "heat_exchanger",
+        "water_heater",
+        "baggage_handling",
+        "damper"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, chiller, cooling_tower, fan, heat_exchanger, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is. Duct Accessories (OST_DuctAccessory) is shared with damper; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "heat_exchanger",
+      "sharesCategoryWith": [
+        "ahu",
+        "pump",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "water_heater",
+        "baggage_handling"
+      ],
+      "reason": "Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, chiller, cooling_tower, fan, vav_box, water_heater, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "water_heater",
+      "sharesCategoryWith": [
+        "pump",
+        "utility_structure",
+        "ahu",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "baggage_handling"
+      ],
+      "reason": "Plumbing Equipment (OST_PlumbingEquipment) is shared with pump, utility_structure; this plan states no Revit-side rule that tells which of these element types an element is. Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, chiller, cooling_tower, fan, vav_box, heat_exchanger, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is. The IFC target IFCBOILER needs Pset_BoilerTypeCommon.IsWaterStorageHeater = true; this plan states no Revit equivalent."
+    },
+    {
+      "id": "distribution_board",
+      "sharesCategoryWith": [
+        "transformer",
+        "generator"
+      ],
+      "reason": "Electrical Equipment (OST_ElectricalEquipment) is shared with transformer, generator; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "transformer",
+      "sharesCategoryWith": [
+        "distribution_board",
+        "generator"
+      ],
+      "reason": "Electrical Equipment (OST_ElectricalEquipment) is shared with distribution_board, generator; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "generator",
+      "sharesCategoryWith": [
+        "distribution_board",
+        "transformer"
+      ],
+      "reason": "Electrical Equipment (OST_ElectricalEquipment) is shared with distribution_board, transformer; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "space",
+      "sharesCategoryWith": [
+        "zone"
+      ],
+      "reason": "Rooms (OST_Rooms) is shared with zone; this plan states no Revit-side rule that tells which of these element types an element is. Areas (OST_Areas) is shared with zone; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "zone",
+      "sharesCategoryWith": [
+        "space"
+      ],
+      "reason": "Areas (OST_Areas) is shared with space; this plan states no Revit-side rule that tells which of these element types an element is. Rooms (OST_Rooms) is shared with space; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "paving_parking",
+      "sharesCategoryWith": [
+        "slab",
+        "rail_platform",
+        "bridge_superstructure"
+      ],
+      "reason": "Floors (OST_Floors) is shared with slab, rail_platform, bridge_superstructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "utility_pipe",
+      "sharesCategoryWith": [
+        "pipe"
+      ],
+      "reason": "Pipes (OST_PipeCurves) is shared with pipe; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "utility_structure",
+      "sharesCategoryWith": [
+        "pump",
+        "water_heater",
+        "signage",
+        "bridge_bearing"
+      ],
+      "reason": "Plumbing Equipment (OST_PlumbingEquipment) is shared with pump, water_heater; this plan states no Revit-side rule that tells which of these element types an element is. Generic Models (OST_GenericModel) is shared with signage, bridge_bearing; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "signage",
+      "sharesCategoryWith": [
+        "specialty_equipment",
+        "elevator",
+        "baggage_handling",
+        "boarding_bridge",
+        "utility_structure",
+        "bridge_bearing"
+      ],
+      "reason": "Specialty Equipment (OST_SpecialityEquipment) is shared with specialty_equipment, elevator, baggage_handling, boarding_bridge; this plan states no Revit-side rule that tells which of these element types an element is. Generic Models (OST_GenericModel) is shared with utility_structure, bridge_bearing; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "rail_platform",
+      "sharesCategoryWith": [
+        "slab",
+        "paving_parking",
+        "bridge_superstructure",
+        "footing",
+        "pile",
+        "bridge_substructure"
+      ],
+      "reason": "Floors (OST_Floors) is shared with slab, paving_parking, bridge_superstructure; this plan states no Revit-side rule that tells which of these element types an element is. Structural Foundations (OST_StructuralFoundation) is shared with footing, pile, slab, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "bridge_superstructure",
+      "sharesCategoryWith": [
+        "beam",
+        "structural_member",
+        "bridge_substructure",
+        "slab",
+        "paving_parking",
+        "rail_platform"
+      ],
+      "reason": "Structural Framing (OST_StructuralFraming) is shared with beam, structural_member, bridge_substructure; this plan states no Revit-side rule that tells which of these element types an element is. Floors (OST_Floors) is shared with slab, paving_parking, rail_platform; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "bridge_substructure",
+      "sharesCategoryWith": [
+        "structural_column",
+        "beam",
+        "structural_member",
+        "bridge_superstructure",
+        "wall_interior",
+        "wall_exterior",
+        "retaining_wall",
+        "curtain_wall",
+        "footing",
+        "pile",
+        "slab",
+        "rail_platform"
+      ],
+      "reason": "Structural Columns (OST_StructuralColumns) is shared with structural_column; this plan states no Revit-side rule that tells which of these element types an element is. Structural Framing (OST_StructuralFraming) is shared with beam, structural_member, bridge_superstructure; this plan states no Revit-side rule that tells which of these element types an element is. Walls (OST_Walls) is split among wall_interior, wall_exterior, retaining_wall, curtain_wall by their revitWhere; no Revit-side rule places any of its elements in this type, so it takes none of them. Structural Foundations (OST_StructuralFoundation) is shared with footing, pile, slab, rail_platform; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "bridge_bearing",
+      "sharesCategoryWith": [
+        "utility_structure",
+        "signage"
+      ],
+      "reason": "Generic Models (OST_GenericModel) is shared with utility_structure, signage; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "baggage_handling",
+      "sharesCategoryWith": [
+        "specialty_equipment",
+        "elevator",
+        "signage",
+        "boarding_bridge",
+        "ahu",
+        "pump",
+        "boiler",
+        "chiller",
+        "cooling_tower",
+        "fan",
+        "vav_box",
+        "heat_exchanger",
+        "water_heater"
+      ],
+      "reason": "Specialty Equipment (OST_SpecialityEquipment) is shared with specialty_equipment, elevator, signage, boarding_bridge; this plan states no Revit-side rule that tells which of these element types an element is. Mechanical Equipment (OST_MechanicalEquipment) is shared with ahu, pump, boiler, chiller, cooling_tower, fan, vav_box, heat_exchanger, water_heater; this plan states no Revit-side rule that tells which of these element types an element is."
+    },
+    {
+      "id": "boarding_bridge",
+      "sharesCategoryWith": [
+        "specialty_equipment",
+        "elevator",
+        "signage",
+        "baggage_handling"
+      ],
+      "reason": "Specialty Equipment (OST_SpecialityEquipment) is shared with specialty_equipment, elevator, signage, baggage_handling; this plan states no Revit-side rule that tells which of these element types an element is."
+    }
   ],
+  "uncovered": [
+    {
+      "revitCategory": "OST_Walls",
+      "where": {
+        "all": [
+          {
+            "wallKind": [
+              "Basic",
+              "Stacked"
+            ]
+          },
+          {
+            "parameter": "Function",
+            "scope": "type",
+            "in": [
+              "Soffit"
+            ]
+          }
+        ]
+      },
+      "note": "Soffit walls: no element type of this plan covers them."
+    },
+    {
+      "revitCategory": "OST_Walls",
+      "where": {
+        "all": [
+          {
+            "wallKind": [
+              "InPlace"
+            ]
+          }
+        ]
+      },
+      "note": "Wall modelled in place; has no wall type Function."
+    }
+  ],
+  "wallKinds": {
+    "revitCategory": "OST_Walls",
+    "kind": {
+      "values": [
+        "Basic",
+        "Curtain",
+        "Stacked",
+        "InPlace"
+      ],
+      "from": "the wall's family name: Basic Wall, Curtain Wall, Stacked Wall; any other family is a wall modelled in place",
+      "familyNames": {
+        "Basic Wall": "Basic",
+        "Curtain Wall": "Curtain",
+        "Stacked Wall": "Stacked"
+      },
+      "otherFamily": "InPlace"
+    },
+    "function": {
+      "parameter": "Function",
+      "scope": "type",
+      "values": [
+        "Interior",
+        "Exterior",
+        "Foundation",
+        "Retaining",
+        "Soffit",
+        "Core-shaft"
+      ]
+    },
+    "structural": {
+      "parameter": "Structural Usage",
+      "scope": "instance",
+      "in": [
+        "Bearing",
+        "Shear",
+        "Structural combined"
+      ],
+      "fallback": {
+        "parameter": "Structural",
+        "scope": "instance",
+        "in": [
+          "Yes"
+        ]
+      },
+      "note": "A second axis, not a kind: report structural and non-structural walls as two counts inside interior and exterior walls. Read Structural Usage; only when the model has no Structural Usage value, read Structural. The score does not change: this plan has no structural walls requirements."
+    }
+  },
   "modelRules": [
     {
       "id": "unique-value",

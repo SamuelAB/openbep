@@ -14,5 +14,6 @@ For the IFC check, the same plan's IDS file and Revit IFC property set file are 
 The same plan's requirement file is here too:
 
 - `OpenBEP-requirements-school-example.json`: what the plan asks of every element type at each milestone, and its model rules (format in `shared-parameters/README.md`). Written by `node translations/tools/reqfile_parity.js --write`, which also checks it against `reqfile-parity-model.csv`, a small made-up model table.
+- `reqfile-parity-fallback-expected.json`: what the Builder before wall kinds (v0.44) gave on that table without its Function and Family columns; `reqfile_parity.js --no-function-column` checks the Builder still gives exactly that. After a legitimate change to the requirements (LOD list or school example), refresh it with `reqfile_parity.js --no-function-column --write`.
 
-To refresh them, export all four files again from the Builder (step "Element requirements") with the school example loaded. The files here come from app v0.43.
+To refresh them, export all four files again from the Builder (step "Element requirements") with the school example loaded. The files here come from app v0.43; v0.45 exports the same shared parameter, binding and IDS files byte for byte, and wrote the requirement file.

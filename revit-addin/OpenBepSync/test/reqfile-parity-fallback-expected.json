@@ -1,0 +1,1927 @@
+{
+ "prelim100": [
+  {
+   "id": "door",
+   "lod": "200",
+   "n": 5,
+   "fill": 72,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf / nominal width",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Nominal height",
+     "has": 100,
+     "ok": 80
+    }
+   ]
+  },
+  {
+   "id": "footing",
+   "lod": "200",
+   "n": 2,
+   "fill": 50,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Reinforcement ratio",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Thickness",
+     "has": 100,
+     "ok": 0
+    },
+    {
+     "n": "Width",
+     "has": 100,
+     "ok": 50
+    }
+   ]
+  },
+  {
+   "id": "light_fixture",
+   "lod": "200",
+   "n": 4,
+   "fill": 69,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Luminous flux (lumen output)",
+     "has": 0,
+     "ok": 0
+    }
+   ]
+  },
+  {
+   "id": "rail_platform",
+   "lod": "200",
+   "n": 1,
+   "fill": 63,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Clear width",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Platform length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reference alignment",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Station / chainage range",
+     "has": 0,
+     "ok": 0
+    }
+   ]
+  },
+  {
+   "id": "wall_interior",
+   "lod": "200",
+   "n": 13,
+   "fill": 82,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 85
+    },
+    {
+     "n": "Net side area",
+     "has": 100,
+     "ok": 69
+    },
+    {
+     "n": "Overall thickness",
+     "has": 100,
+     "ok": 77
+    }
+   ]
+  }
+ ],
+ "final50": [
+  {
+   "id": "door",
+   "lod": "300",
+   "n": 5,
+   "fill": 67,
+   "pass": true,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf / nominal width",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Nominal height",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Acoustic rating (STC)",
+     "has": 100,
+     "ok": 40
+    },
+    {
+     "n": "Frame material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Hardware set",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Operation type",
+     "has": 100,
+     "ok": 60
+    }
+   ]
+  },
+  {
+   "id": "footing",
+   "lod": "300",
+   "n": 2,
+   "fill": 39,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Reinforcement ratio",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Thickness",
+     "has": 100,
+     "ok": 0
+    },
+    {
+     "n": "Width",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Bottom elevation",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete cover",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete exposure class",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Design bearing resistance",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Frost protection depth",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "has": 0,
+     "ok": 0
+    }
+   ]
+  },
+  {
+   "id": "light_fixture",
+   "lod": "300",
+   "n": 4,
+   "fill": 60,
+   "pass": true,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Luminous flux (lumen output)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour rendering index",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour temperature (CCT)",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Manufacturer",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Model name / number",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Mounting type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Photometric file (IES / LDT)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Placing (ceiling / wall / floor ...)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Rated voltage",
+     "has": 100,
+     "ok": 50
+    }
+   ]
+  },
+  {
+   "id": "rail_platform",
+   "lod": "300",
+   "n": 1,
+   "fill": 56,
+   "pass": true,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Clear width",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Platform length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reference alignment",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Station / chainage range",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Edge offset from track",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Is external",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Platform height above rail",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 100
+    }
+   ]
+  },
+  {
+   "id": "wall_interior",
+   "lod": "300",
+   "n": 13,
+   "fill": 60,
+   "pass": true,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 62
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 85
+    },
+    {
+     "n": "Net side area",
+     "has": 100,
+     "ok": 69
+    },
+    {
+     "n": "Overall thickness",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Acoustic rating (STC / ASTC)",
+     "has": 100,
+     "ok": 23
+    },
+    {
+     "n": "Extends to structure",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Layer build-up",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Load bearing",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 62
+    }
+   ]
+  }
+ ],
+ "final90": [
+  {
+   "id": "door",
+   "lod": "300",
+   "n": 5,
+   "fill": 67,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf / nominal width",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Nominal height",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Acoustic rating (STC)",
+     "has": 100,
+     "ok": 40
+    },
+    {
+     "n": "Frame material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Hardware set",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Operation type",
+     "has": 100,
+     "ok": 60
+    }
+   ]
+  },
+  {
+   "id": "footing",
+   "lod": "300",
+   "n": 2,
+   "fill": 39,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Reinforcement ratio",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Thickness",
+     "has": 100,
+     "ok": 0
+    },
+    {
+     "n": "Width",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Bottom elevation",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete cover",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete exposure class",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Design bearing resistance",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Frost protection depth",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "has": 0,
+     "ok": 0
+    }
+   ]
+  },
+  {
+   "id": "light_fixture",
+   "lod": "300",
+   "n": 4,
+   "fill": 60,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Luminous flux (lumen output)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour rendering index",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour temperature (CCT)",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Manufacturer",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Model name / number",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Mounting type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Photometric file (IES / LDT)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Placing (ceiling / wall / floor ...)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Rated voltage",
+     "has": 100,
+     "ok": 50
+    }
+   ]
+  },
+  {
+   "id": "rail_platform",
+   "lod": "300",
+   "n": 1,
+   "fill": 56,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Clear width",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Platform length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reference alignment",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Station / chainage range",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Edge offset from track",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Is external",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Platform height above rail",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 100
+    }
+   ]
+  },
+  {
+   "id": "wall_interior",
+   "lod": "300",
+   "n": 13,
+   "fill": 60,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 62
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 85
+    },
+    {
+     "n": "Net side area",
+     "has": 100,
+     "ok": 69
+    },
+    {
+     "n": "Overall thickness",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Acoustic rating (STC / ASTC)",
+     "has": 100,
+     "ok": 23
+    },
+    {
+     "n": "Extends to structure",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Layer build-up",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Load bearing",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 62
+    }
+   ]
+  }
+ ],
+ "final100": [
+  {
+   "id": "door",
+   "lod": "300",
+   "n": 5,
+   "fill": 67,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf / nominal width",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Nominal height",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Acoustic rating (STC)",
+     "has": 100,
+     "ok": 40
+    },
+    {
+     "n": "Frame material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Hardware set",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Operation type",
+     "has": 100,
+     "ok": 60
+    }
+   ]
+  },
+  {
+   "id": "footing",
+   "lod": "300",
+   "n": 2,
+   "fill": 39,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Reinforcement ratio",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Thickness",
+     "has": 100,
+     "ok": 0
+    },
+    {
+     "n": "Width",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Bottom elevation",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete cover",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete exposure class",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Design bearing resistance",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Frost protection depth",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "has": 0,
+     "ok": 0
+    }
+   ]
+  },
+  {
+   "id": "light_fixture",
+   "lod": "300",
+   "n": 4,
+   "fill": 60,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Luminous flux (lumen output)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour rendering index",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour temperature (CCT)",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Manufacturer",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Model name / number",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Mounting type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Photometric file (IES / LDT)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Placing (ceiling / wall / floor ...)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Rated voltage",
+     "has": 100,
+     "ok": 50
+    }
+   ]
+  },
+  {
+   "id": "rail_platform",
+   "lod": "300",
+   "n": 1,
+   "fill": 56,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Clear width",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Platform length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reference alignment",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Station / chainage range",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Edge offset from track",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Is external",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Platform height above rail",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 100
+    }
+   ]
+  },
+  {
+   "id": "wall_interior",
+   "lod": "300",
+   "n": 13,
+   "fill": 60,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 62
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 85
+    },
+    {
+     "n": "Net side area",
+     "has": 100,
+     "ok": 69
+    },
+    {
+     "n": "Overall thickness",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Acoustic rating (STC / ASTC)",
+     "has": 100,
+     "ok": 23
+    },
+    {
+     "n": "Extends to structure",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Layer build-up",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Load bearing",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 62
+    }
+   ]
+  }
+ ],
+ "handover": [
+  {
+   "id": "door",
+   "lod": "300",
+   "n": 5,
+   "fill": 67,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf / nominal width",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Nominal height",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Acoustic rating (STC)",
+     "has": 100,
+     "ok": 40
+    },
+    {
+     "n": "Frame material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Hardware set",
+     "has": 100,
+     "ok": 80
+    },
+    {
+     "n": "Leaf material",
+     "has": 100,
+     "ok": 60
+    },
+    {
+     "n": "Operation type",
+     "has": 100,
+     "ok": 60
+    }
+   ]
+  },
+  {
+   "id": "footing",
+   "lod": "300",
+   "n": 2,
+   "fill": 39,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Reinforcement ratio",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Thickness",
+     "has": 100,
+     "ok": 0
+    },
+    {
+     "n": "Width",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Bottom elevation",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete cover",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Concrete exposure class",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Design bearing resistance",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Frost protection depth",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "has": 0,
+     "ok": 0
+    }
+   ]
+  },
+  {
+   "id": "light_fixture",
+   "lod": "300",
+   "n": 4,
+   "fill": 60,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Luminous flux (lumen output)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour rendering index",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Colour temperature (CCT)",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Manufacturer",
+     "has": 100,
+     "ok": 50
+    },
+    {
+     "n": "Model name / number",
+     "has": 100,
+     "ok": 75
+    },
+    {
+     "n": "Mounting type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Photometric file (IES / LDT)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Placing (ceiling / wall / floor ...)",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Rated voltage",
+     "has": 100,
+     "ok": 50
+    }
+   ]
+  },
+  {
+   "id": "rail_platform",
+   "lod": "300",
+   "n": 1,
+   "fill": 56,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Instance mark / tag",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Clear width",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Platform length",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reference alignment",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Station / chainage range",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Edge offset from track",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Is external",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Material grade / strength",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Platform height above rail",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 100
+    }
+   ]
+  },
+  {
+   "id": "wall_interior",
+   "lod": "300",
+   "n": 13,
+   "fill": 60,
+   "pass": false,
+   "rows": [
+    {
+     "n": "Type name",
+     "has": 100,
+     "ok": 100
+    },
+    {
+     "n": "Type mark / reference",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Description",
+     "has": 100,
+     "ok": 62
+    },
+    {
+     "n": "UniFormat II code",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "IFC class and predefined type",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Status (new / existing / demolish / temporary)",
+     "has": 100,
+     "ok": 85
+    },
+    {
+     "n": "Net side area",
+     "has": 100,
+     "ok": 69
+    },
+    {
+     "n": "Overall thickness",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Acoustic rating (STC / ASTC)",
+     "has": 100,
+     "ok": 23
+    },
+    {
+     "n": "Extends to structure",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Layer build-up",
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Load bearing",
+     "has": 100,
+     "ok": 77
+    },
+    {
+     "n": "Primary material",
+     "has": 100,
+     "ok": 62
+    }
+   ]
+  }
+ ]
+}
