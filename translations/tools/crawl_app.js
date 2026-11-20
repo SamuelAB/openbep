@@ -96,6 +96,23 @@ for (const lang of ['en']) {
   await page.locator('[data-lbsel="boarding_bridge"]').click(); await page.waitForTimeout(150); await openAll();
   for (const [k, w, fr] of await page.evaluate(() => window.__canbimStrings())) if (!seen.has(k) && !k.includes('Crawl element')) seen.set(k, [w, fr]);
 }
+// Model rules: every rule switched on, with each setting that changes its sentence, then the BEP draft that states them.
+{
+  await page.evaluate(() => { localStorage.clear(); }); await page.reload();
+  if (await page.locator('#ctrySel').count()) await page.selectOption('#ctrySel', 'ca');
+  await page.selectOption('#langSel', 'en');
+  await page.locator('[data-ex="school"]').first().click(); await page.waitForTimeout(200);
+  await page.locator('#steps [data-step="8"]').click(); await page.waitForTimeout(150); await openAll();
+  await page.evaluate(() => document.querySelectorAll('[data-mr][data-k="on"]').forEach(x => { if (!x.checked) x.click(); }));
+  await page.waitForTimeout(150); await openAll();
+  await page.locator('#steps [data-step="13"]').click(); await page.waitForTimeout(150); await openAll();
+  await page.locator('#steps [data-step="8"]').click(); await page.waitForTimeout(150); await openAll();
+  for (const [k, w, fr] of await page.evaluate(() => window.__canbimStrings())) if (!seen.has(k)) seen.set(k, [w, fr]);
+  const setv = (q, v) => page.evaluate(([q, v]) => { const x = document.querySelector(q); if (x) { x.value = v; x.dispatchEvent(new Event('change', { bubbles: true })); } }, [q, v]);
+  for (const [q, v] of [['[data-mr="unique-value"][data-k="p.categories"]', 'Doors'], ['[data-mr="export-view-present"][data-k="p.viewName"]', 'EXPORT'], ['[data-mr="no-in-place-families"][data-k="p.maxCount"]', '2'], ['[data-mr="views-named"][data-k="p.patterns"]', 'A-B-C']]) { await setv(q, v); await page.waitForTimeout(100); await openAll(); }
+  await page.locator('#steps [data-step="13"]').click(); await page.waitForTimeout(150); await openAll();
+  for (const [k, w, fr] of await page.evaluate(() => window.__canbimStrings())) if (!seen.has(k)) seen.set(k, [w, fr]);
+}
 // Other site pages use translations/i18n.js; record what they show too.
 const record = async (p2, rel) => {
   for (const k of await p2.evaluate(() => window.openbepStrings ? window.openbepStrings() : [])) {

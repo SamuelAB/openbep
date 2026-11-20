@@ -23,6 +23,56 @@ The same step also exports an IDS file (buildingSMART Information Delivery Speci
 - Items with no fixed place in IFC (phase status, circuit, connector sizes) are listed in each specification's instructions, to check in Revit.
 - Native Revit stays the contract master; the IDS only checks IFC copies. Not yet tested on a real Revit export.
 
+## Requirement file (JSON)
+
+The same step also exports `OpenBEP-requirements-<project>.json` (BEP Builder v0.44). It states, in one file, what the plan asks of every element type at each milestone of "Check a model now", and the rules a model must follow. It states requirements only: OpenBEP does not check models with it. A model checking tool reads it. The school example's file is in [`revit-addin/OpenBepSync/test/`](../revit-addin/OpenBepSync/test/).
+
+`node translations/tools/reqfile_parity.js` proves the file is enough on its own: a small checker that reads only the file gets the same result as the Builder's own check on a test model table, for every milestone, element type and requirement.
+
+Format `openbep-requirements`, version `1.0`:
+
+| Key | What it holds |
+|---|---|
+| `plan` | `name`, `fingerprint` (the plan fingerprint), `version` (the released version this plan matches, or null when it changed since), `listVersion` (OpenBEP parameter list), `builderVersion`, `generated` (ISO date and time). |
+| `scoreRule` | How an element type is scored: per requirement, `round(100 × elements with a real value / elements of the type)`; the score is the rounded mean of those; it passes when the score is at least the milestone's `targetPercent`. No requirement scores 100. |
+| `placeholders` | `always` (a regular expression, flags `i`): values that are never real, such as `x`, `-`, `tbc`, `n/a`. |
+| `tableRule` | How a model table (a Revit schedule export with a Category column) is read: header normalization, which element type a row belongs to, which column a requirement reads. |
+| `milestones` | `id`, `name`, `targetPercent`, `lodFrom`: `fixed:200` (always LOD 200), `final` (the element type's final design level) or `handover` (its handover level, else its final design level). |
+| `elementTypes` | Every element type of the list, in list order, switched on or not (`on`); the Builder's check reads every type it finds in a model. |
+| `unresolvedSplits` | Element types a Revit model cannot tell apart from another type on its own: they share a Revit category with no Revit-side rule (`revitWhere`) to separate them, or their IFC target needs a property value Revit has no certain equivalent for. |
+| `modelRules` | Model-wide rules from the plan's "Model rules" (see below). |
+
+Each element type has `id`, `name`, `on`, `revitCategories` (`name`, `id` as `OST_` name), `categoryNames` (the normalized names a Category cell must equal: each Revit category and the type's own name), `ifc` (`class`, `predefinedType`, `only4x3`, `where` as [property set, property, value]), `revitWhere` (`parameter`, `scope`, `equals`, only where certain: wall Function Interior or Exterior), `lod` (level per milestone; empty when the type has no numeric level), `requiredAt` (requirement ids per milestone, exactly what the Builder's check asks), and `requirements`.
+
+Each requirement has `id` (the OpenBEP parameter id, or `owner:<name>` for a parameter the owner added), `kind` (`parameter`, `material`, `classification`, `mark`, `description`, `typeName` or `ifcClass`: where an IFC checker finds the value; a table checker reads all kinds from a column), `label`, `revitParameter` (built-in name when built-in), `guid` (null for built-in), `shared`, `bindable` (in the shared parameter file or binding list), `scope`, `dataType`, `ifcType`, `fromLod`, `neededFor` (BIM uses), `placeholders` (values that count as empty, ignoring case), `valueRule`, `example`, `ifcTarget`, `ownerAddition`, and `columnNames` (normalized column headers that hold the value).
+
+A value is real when, trimmed, it is not empty, is not one of the requirement's `placeholders`, does not match `placeholders.always`, and matches `valueRule.pattern` (ignoring case, anywhere in the value). `valueRule.source` is `builder`: the same rule as the Builder's own check (`check` is `boolean`, `number`, `text` or `any`). The stricter patterns in `OpenBEP_Validation_Rules_v0.1.json` are not embedded; a later version may add them with `source: "validation-rules-file"`.
+
+### Model rules
+
+Step "Information and software", section "Model rules": the owner switches each rule on, sets its threshold, the milestone it applies from and its severity. Each rule switched on is one sentence in the BEP draft (section 6, "Model rules"). Every rule is one entry in `modelRules`, switched on or not: `id`, `kind`, `statement` (the English sentence as printed), `listed` (the names printed beside it), `on`, `params`, `appliesFrom` (a milestone id, or null for from the start) and `severity` (`critical`, `major` or `minor`). OpenBEP only states the rules; a model checking tool checks them.
+
+Rules start switched off, except those the plan already fixes elsewhere: one set of grids and one set of levels when background models are imported once and never re-exported, the export view when milestone exports come from a named export view, and the worksets when the plan names them. A project saved before v0.44 has no model rules and opens unchanged.
+
+| Kind | `params` | The rule |
+|---|---|---|
+| `unique-value` | `parameter` (default `Mark`), `scope` (`perCategory`), `categories` (empty: all) | No two elements of the same category share a value of the parameter. |
+| `warnings-max` | `total`, `bySeverity` (null: Revit gives warnings no severity) | The model has no more than `total` Revit warnings. |
+| `no-identical-instances` | none | No two identical instances sit in the same place. |
+| `one-grid-set` | none | One set of grids, no duplicates (a background model re-exported brings its grids back). |
+| `one-level-set` | none | One set of levels, no duplicates. |
+| `elements-on-level` | `minPercent` | At least that share of the model elements are associated with a level. |
+| `worksets-named` | `names` (default `Shared Levels and Grids`) | Every model uses the worksets listed. |
+| `export-view-present` | `viewName` (empty: any named view) | Every model has the 3D export view used for milestone exports. |
+| `no-in-place-families` | `maxCount` | No more than that many in-place families. |
+| `no-imported-cad` | none | CAD files are linked, never imported. |
+| `real-material` | `minPercent`, `notMaterial` (names that are no material, from [What counts as no material](../docs/graphics-and-materials-standard.md#what-counts-as-no-material)) | At least that share of the model elements carry a real material. Applies from Final design 50% by default (LOD 300). |
+| `category-owned-by-model` | `category`, `discipline` (a discipline id of the Builder, such as `elec`) | Elements of the category are modelled only in that discipline's model; other models show none. |
+| `views-named` | `patterns` (`all`: one pattern for every view type; empty: the plan's view naming rules) | Every view name follows the naming rules. |
+| `views-on-sheets` | `maxUnplacedPercent` | No more than that share of the views are left off sheets. |
+| `no-empty-parameters` | none | Every project parameter has a value on at least one element. |
+| `elements-near-levels` | `maxDistance` (mm) | No element sits further than that below the lowest level or above the highest level. |
+
 ## Rules used
 
 1. **Use Revit's built-in parameters wherever they exist.** For example, Fire Rating, Manufacturer, Model and Flow are built in. They are listed in the manifest as "Built-in" and never duplicated.

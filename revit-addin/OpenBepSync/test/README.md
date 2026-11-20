@@ -11,4 +11,8 @@ For the IFC check, the same plan's IDS file and Revit IFC property set file are 
 - `OpenBEP-school-example.ids`: the IDS file, used by `check_ifc.py model.ifc OpenBEP-school-example.ids`.
 - `OpenBEP-IFC-property-sets-school-example.txt`: pick it under IFC export › Modify setup › Property Sets › Export user defined property sets. Also turn on IFC common property sets and base quantities.
 
+The same plan's requirement file is here too:
+
+- `OpenBEP-requirements-school-example.json`: what the plan asks of every element type at each milestone, and its model rules (format in `shared-parameters/README.md`). Written by `node translations/tools/reqfile_parity.js --write`, which also checks it against `reqfile-parity-model.csv`, a small made-up model table.
+
 To refresh them, export all four files again from the Builder (step "Element requirements") with the school example loaded. The files here come from app v0.43.
