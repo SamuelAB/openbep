@@ -1,26 +1,28 @@
 {
   "format": "openbep-requirements",
-  "formatVersion": "1.3",
+  "formatVersion": "1.4",
   "plan": {
     "name": "Example: Primary school renovation and extension",
     "fingerprint": "9C37B605B3A9",
     "version": null,
     "listVersion": "0.1",
-    "builderVersion": "0.50",
-    "generated": "2026-11-20T20:40:19.238Z"
+    "builderVersion": "0.51",
+    "generated": "2026-11-20T21:32:03.316Z"
   },
   "scoreRule": {
     "perElementType": "mean of each required parameter real-value percentage",
     "passWhen": "score >= milestone targetPercent",
     "rowPercent": "round(100 * elements whose value is real / elements of the type)",
     "score": "round(mean of the row percentages); 100 when nothing is required",
-    "groups": "For an element type in a requirement group's appliesTo, the group's requirements in requiredAt[element type][milestone] are extra rows computed over the elements its where condition picks only (for example the structural walls): round(100 * those elements whose value is real / those elements). The element type's score is the mean over all its rows: its own rows over all its elements, the group rows over that subset. A group row with no element in the subset is left out of the mean. A parameter the element type already requires at that milestone is not repeated in the group (it is checked once, on every element).",
+    "groups": "For an element type in the appliesTo of a requirementGroups entry, the entry's requirements in requiredAt[element type][milestone] are extra rows computed over the elements its where condition picks only (for example the structural walls): round(100 * those elements whose value is real / those elements). The element type's score is the mean over all its rows: its own rows over all its elements, the extra rows over that subset. An extra row with no element in the subset is left out of the mean. A parameter the element type already requires at that milestone is not repeated as an extra row (it is checked once, on every element).",
+    "pairs": "A requirement with revitParameters (format 1.4) names several Revit parameters, all required: an element's value is real only when each of them is real (revitParameter is the first, for older readers).",
+    "derived": "derived (format 1.4) is a value a checker may report from the requirement's parameter; it does not change the score. derived.yesWhen: yes when the parameter's value is not one of notIn (Load bearing on walls: Structural Usage not Non-bearing).",
     "when": "A requirement with when (format 1.3) is asked only of the elements its condition picks, among the elements the row is computed over (the element type's, or the structural walls). when.structuralMaterialClass: the element's Structural Material (instance, else type) names a Revit material whose Class is one of the listed values (Revit's own English class names, compared ignoring case). The row is round(100 * those elements whose value is real / those elements); none picked = the row is left out of the mean; when the class of the structural material cannot be read, the row is not checked and is left out of the mean, never guessed from the material's name."
   },
   "placeholders": {
     "always": "^(?:[\\-–—_.*?x]+|xx+|tbc|tba|na|none|unknown|later|todo)$",
     "flags": "i",
-    "note": "A value is trimmed first. It is not real when it is empty, equals one of the requirement placeholders (ignoring case) or matches \"always\". Otherwise it must match valueRule.pattern (ignoring case, anywhere in the value)."
+    "note": "A value is trimmed first. It is not real when it is empty, equals one of the requirement placeholders (ignoring case) or matches \"always\". Otherwise it must match valueRule.pattern (ignoring case, anywhere in the value). valueRule.check \"enum\": allowed lists the values the pattern accepts (Structural Usage); \"format\": a pattern taken from shared-parameters/OpenBEP_Validation_Rules_v0.1.json (Assembly Code)."
   },
   "tableRule": {
     "categoryColumn": "category",
@@ -53,7 +55,8 @@
       }
     ],
     "column": "a requirement reads the first column whose normalized header is in its columnNames; with no such column every element fails it",
-    "groups": "A requirement group is checked only when the table has a column whose normalized header is the normalized where parameter (Structural Usage). An element is in the group when the normalized cell is one of the normalized in values. When no row placed in the group's element types has a value in that column and the table has the fallback column (Structural), the fallback condition is read instead. With no such column the group is not checked and the element types are scored on their own rows.",
+    "pairs": "A requirement with revitParameters reads one column per name (normalized header = the normalized name). With all of them, an element is real only when each cell is real; with some of them, on those alone (the checker names the missing column); with none, by the column rule above.",
+    "groups": "The extra rows of a requirementGroups entry are checked only when the table has a column whose normalized header is the normalized where parameter (Structural Usage). An element is picked when the normalized cell is one of the normalized in values. When no row placed in the entry's element types has a value in that column and the table has the fallback column (Structural), the fallback condition is read instead. With no such column the extra rows are not checked and the element types are scored on their own rows.",
     "when": "A schedule names the structural material, not its class. A requirement with when.structuralMaterialClass is checked only when the table has a column whose normalized header is structuralmaterialclass with a value on at least one of the row's elements; it is then computed over the elements whose normalized cell is one of the normalized listed classes. Otherwise it is not checked and left out of the mean."
   },
   "milestones": [
@@ -491,8 +494,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -1328,8 +1331,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -2012,8 +2015,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -2208,12 +2211,12 @@
           "id": "load_bearing",
           "kind": "parameter",
           "label": "Load bearing",
-          "revitParameter": "Structural (walls) / Structural Usage",
+          "revitParameter": "Structural Usage",
           "guid": null,
           "shared": false,
           "bindable": true,
-          "scope": "type",
-          "dataType": "YESNO",
+          "scope": "instance",
+          "dataType": "TEXT",
           "ifcType": "IfcBoolean",
           "fromLod": "300",
           "neededFor": [
@@ -2230,21 +2233,33 @@
           ],
           "valueRule": {
             "source": "builder",
-            "allowed": null,
+            "allowed": [
+              "Non-bearing",
+              "Bearing",
+              "Shear",
+              "Structural combined"
+            ],
             "min": null,
             "max": null,
-            "check": "boolean",
-            "pattern": "^(true|false|yes|no|oui|non|1|0|vrai|faux)$"
+            "check": "enum",
+            "pattern": "^(?:Non-bearing|Bearing|Shear|Structural combined)$"
           },
           "example": "true",
           "ifcTarget": null,
           "ownerAddition": false,
           "columnNames": [
-            "loadbearing",
-            "structural",
-            "walls",
             "structuralusage"
-          ]
+          ],
+          "derived": {
+            "value": "yes/no",
+            "yesWhen": {
+              "parameter": "Structural Usage",
+              "notIn": [
+                "Non-bearing"
+              ]
+            },
+            "note": "Load bearing is yes when Structural Usage is Bearing, Shear or Structural combined, no when it is Non-bearing."
+          }
         },
         {
           "id": "material",
@@ -2785,8 +2800,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -2898,12 +2913,12 @@
           "id": "load_bearing",
           "kind": "parameter",
           "label": "Load bearing",
-          "revitParameter": "Structural (walls) / Structural Usage",
+          "revitParameter": "Structural Usage",
           "guid": null,
           "shared": false,
           "bindable": true,
-          "scope": "type",
-          "dataType": "YESNO",
+          "scope": "instance",
+          "dataType": "TEXT",
           "ifcType": "IfcBoolean",
           "fromLod": "300",
           "neededFor": [
@@ -2920,21 +2935,33 @@
           ],
           "valueRule": {
             "source": "builder",
-            "allowed": null,
+            "allowed": [
+              "Non-bearing",
+              "Bearing",
+              "Shear",
+              "Structural combined"
+            ],
             "min": null,
             "max": null,
-            "check": "boolean",
-            "pattern": "^(true|false|yes|no|oui|non|1|0|vrai|faux)$"
+            "check": "enum",
+            "pattern": "^(?:Non-bearing|Bearing|Shear|Structural combined)$"
           },
           "example": "true",
           "ifcTarget": null,
           "ownerAddition": false,
           "columnNames": [
-            "loadbearing",
-            "structural",
-            "walls",
             "structuralusage"
-          ]
+          ],
+          "derived": {
+            "value": "yes/no",
+            "yesWhen": {
+              "parameter": "Structural Usage",
+              "notIn": [
+                "Non-bearing"
+              ]
+            },
+            "note": "Load bearing is yes when Structural Usage is Bearing, Shear or Structural combined, no when it is Non-bearing."
+          }
         },
         {
           "id": "material",
@@ -3377,8 +3404,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -4167,8 +4194,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -4950,8 +4977,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -5495,8 +5522,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -6429,8 +6456,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -7266,8 +7293,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -8089,8 +8116,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -8952,8 +8979,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -9786,8 +9813,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -10453,8 +10480,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -11114,8 +11141,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -11340,7 +11367,11 @@
           "id": "stl_connection",
           "kind": "parameter",
           "label": "End connection type",
-          "revitParameter": "Moment Connection Start / End",
+          "revitParameter": "Start Connection",
+          "revitParameters": [
+            "Start Connection",
+            "End Connection"
+          ],
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -11373,10 +11404,9 @@
           "ownerAddition": false,
           "columnNames": [
             "stlconnection",
-            "momentconnectionstart",
-            "momentconnectionend",
-            "endconnectiontype",
-            "end"
+            "startconnection",
+            "endconnection",
+            "endconnectiontype"
           ]
         }
       ]
@@ -11904,8 +11934,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -12715,8 +12745,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -13494,8 +13524,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -14100,8 +14130,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -14531,8 +14561,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -15017,8 +15047,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -16218,8 +16248,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -16973,8 +17003,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -17039,12 +17069,16 @@
           "id": "dct_liner",
           "kind": "parameter",
           "label": "Internal liner",
-          "revitParameter": "Lining Type / Lining Thickness",
+          "revitParameter": "Lining Type",
+          "revitParameters": [
+            "Lining Type",
+            "Lining Thickness"
+          ],
           "guid": null,
           "shared": false,
           "bindable": true,
           "scope": "instance",
-          "dataType": "YESNO",
+          "dataType": "TEXT",
           "ifcType": "IfcBoolean",
           "fromLod": "300",
           "neededFor": [
@@ -17061,8 +17095,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "boolean",
-            "pattern": "^(true|false|yes|no|oui|non|1|0|vrai|faux)$"
+            "check": "text",
+            "pattern": "[\\s\\S]{2}|\\d"
           },
           "example": "true",
           "ifcTarget": "Pset_DuctSegmentOccurrence.HasLiner",
@@ -17568,8 +17602,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -18039,8 +18073,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -18765,8 +18799,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -19404,8 +19438,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -20197,8 +20231,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -20864,8 +20898,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -21577,8 +21611,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -22325,8 +22359,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -23031,8 +23065,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -23652,8 +23686,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -24277,8 +24311,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -24782,8 +24816,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -25246,8 +25280,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -25760,8 +25794,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -26543,8 +26577,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -27325,8 +27359,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -27863,8 +27897,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -28361,8 +28395,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -29001,8 +29035,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -30469,8 +30503,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -31965,8 +31999,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -32746,8 +32780,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -33437,8 +33471,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -35410,8 +35444,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -36238,8 +36272,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -37045,8 +37079,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -38006,8 +38040,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -38961,8 +38995,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -39955,8 +39989,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -40746,8 +40780,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -42087,8 +42121,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -42925,8 +42959,8 @@
             "allowed": null,
             "min": null,
             "max": null,
-            "check": "text",
-            "pattern": "[\\s\\S]{2}|\\d"
+            "check": "format",
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -44103,7 +44137,7 @@
           "Yes"
         ]
       },
-      "note": "A second axis, not a kind: report structural and non-structural walls as two counts inside interior and exterior walls. Read Structural Usage; only when the model has no Structural Usage value, read Structural. Structural walls also meet the requirement group structural_walls (requirementGroups), when the plan asks anything of it."
+      "note": "A second axis, not a kind: report structural and non-structural walls as two counts inside interior and exterior walls. Read Structural Usage; only when the model has no Structural Usage value, read Structural. Structural walls also meet the extra rows of the requirementGroups entry structural_walls, when the plan asks any."
     }
   },
   "modelRules": [

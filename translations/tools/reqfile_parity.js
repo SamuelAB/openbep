@@ -23,6 +23,9 @@
 // group's rows, computed over those walls only; a Non-bearing wall is never counted in them. Also run without the Structural Usage column
 // (the group is not checked, one note) and with only a Structural column (the fallback).
 //   --break-group  removes requirementGroups from the JSON in memory; the test must then FAIL.
+// Round 7 (format 1.4): walls' Load bearing reads Structural Usage (--break-lb puts the yes/no rule back: FAIL); Assembly Code has the
+// Uniformat II format of the validation rules file (--break-fmt: FAIL); a requirement naming two Revit parameters needs both
+// (--break-pair removes revitParameters: FAIL); the verified Revit names reach the file and the IDS for Revit.
 // Needs Playwright + Chromium, like crawl_app.js. CHROMIUM=/path/to/chrome uses a browser already installed;
 // PW_CHANNEL=msedge uses the installed Microsoft Edge.
 let pw; try { pw = require('playwright'); } catch (e) { pw = require('playwright-core'); }
@@ -37,6 +40,7 @@ const BREAK_GROUP = process.argv.includes('--break-group');
 const BREAK = process.argv.includes('--break'), BREAK_RULE = process.argv.includes('--break-rule'), WRITE = process.argv.includes('--write'), NOFN = process.argv.includes('--no-function-column');
 const HEAD = process.argv.includes('--head') ? process.argv[process.argv.indexOf('--head') + 1] : null;
 const OWNER = 'Access control zone';
+const VRP = () => JSON.parse(fs.readFileSync(path.join(root, 'shared-parameters', 'OpenBEP_Validation_Rules_v0.1.json'), 'utf8'))['Assembly Code'].pattern;
 
 // ---- The evaluator: reads only the requirement file and the model table. ----
 // A plain CSV reader (comma, double quotes, cells trimmed); the header is the first row with two filled cells.
@@ -87,6 +91,9 @@ function evaluate(F, T, mid) {
     if (v == null) return false; const s = v.trim();
     if (s === '' || q.placeholders.map(x => String(x).toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return false;
     const w = q.valueRule, byPattern = new RegExp(w.pattern, 'i').test(s);
+    // check "enum" (format 1.4, Structural Usage): allowed is a list of words; the pattern must give the same answer.
+    if (w.check === 'enum') { const byList = w.allowed.some(a => String(a).toLowerCase() === s.toLowerCase());
+      assert.strictEqual(byPattern, byList, `${q.id}: valueRule.pattern and allowed disagree on "${s}"`); return byList; }
     if (!w.allowed && w.min == null && w.max == null) return byPattern;
     // A whole number in the allowed list, or within min and max. The pattern alone must give the same answer.
     const byRule = /^(0|[1-9]\d*)$/.test(s) && (w.allowed ? w.allowed.includes(+s) : (w.min == null || +s >= w.min) && (w.max == null || +s <= w.max));
@@ -101,16 +108,19 @@ function evaluate(F, T, mid) {
     return [g.id, new Set(els.filter(r => use.every(x => x.q.in.some(v => norm(v) === norm(r[x.i])))))]; }));
   // tableRule.when (format 1.3): a when.structuralMaterialClass row needs a Structural Material Class column with a value on one of
   // its elements; then it is computed over the elements whose class is listed (none = left out). Otherwise not checked.
+  const pairCols = q => { if (!Array.isArray(q.revitParameters) || q.revitParameters.length < 2) return null;
+    const on = q.revitParameters.map(n => T.head.findIndex(h => norm(h) === norm(n))).filter(i => i >= 0); return on.length ? on : null; };
   const wci = T.head.findIndex(h => norm(h) === 'structuralmaterialclass'); let whenOff = false;
   const wsub = (q, list) => { if (!q.when) return list; if (wci < 0 || !list.some(r => (r[wci] || '').trim())) { whenOff = true; return null; }
     return list.filter(r => q.when.structuralMaterialClass.some(v => norm(v) === norm(r[wci] || ''))); };
   const cats = [...by.values()].map(({ t, els }) => {
     const reqs = new Map(t.requirements.map(q => [q.id, q]));
     const rows = t.requiredAt[mid].map(id => {
-      const q = reqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h))), se = wsub(q, els);
+      // tableRule.pairs (format 1.4): one column per revitParameters name; real only when every column found is real.
+      const q = reqs.get(id), pc = pairCols(q), col = pc ? pc[0] : T.head.findIndex(h => q.columnNames.includes(norm(h))), se = wsub(q, els);
       if (!se || !se.length) return null;
       let has = 0, ok = 0;
-      se.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
+      se.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (pc ? pc.every(i => real(q, r[i] || '')) : real(q, v)) ok++; });
       return { n: q.label, ...(q.when ? { of: se.length } : {}), has: Math.round(100 * has / se.length), ok: Math.round(100 * ok / se.length) };
     }).filter(Boolean);
     // Requirement groups (scoreRule.groups): extra rows over the elements the group's where picks; none picked = rows left out.
@@ -153,7 +163,7 @@ function evaluate(F, T, mid) {
 
     const school = await exportFile();
     assert.strictEqual(school.format, 'openbep-requirements');
-    assert.strictEqual(school.formatVersion, '1.3');
+    assert.strictEqual(school.formatVersion, '1.4');
     const sortId = a => [...a].sort((x, y) => x.id.localeCompare(y.id));
     const same = (a, b, where) => { assert.deepStrictEqual(b.map(x => x.id), a.map(x => x.id), where + ': element types found');
       a.forEach((x, i) => { const y = b[i], w = `${where}, ${x.id}`; assert.strictEqual(y.lod, x.lod, w + ': level'); assert.strictEqual(y.n, x.n, w + ': elements');
@@ -520,6 +530,74 @@ function evaluate(F, T, mid) {
     await page.locator('#lbResetAll').click(); await page.waitForTimeout(200);
     assert.deepStrictEqual(await off(), [true, true], '"Back to the OpenBEP defaults" did not bring net volume back');
     console.log('STRUCTURAL SWITCHES OK: concrete cover only where the level is 350; net volume switched off on interior walls only, kept on reload, back with the defaults');
+
+    // ---- Round 7 (format 1.4). A fresh school example for each step. ----
+    const fresh = async () => { await page.evaluate(() => localStorage.clear()); await page.reload(); await page.locator('[data-ex="school"]').first().click(); await page.waitForTimeout(200); };
+    const both7 = async (F, TT, mid, what) => { const a = sortId(await page.evaluate(([t, m]) => window.__ckTable(t, m), [toCsv(TT), mid])), f = sortId(evaluate(F, TT, mid).cats);
+      assert.deepStrictEqual(f, a, what + ': the file differs from the Builder'); return a; };
+    const rowOf = (L, id, label) => ((L.find(x => x.id === id) || { rows: [] }).rows.filter(r => r.n === label && !r.grp));
+    await fresh();
+    {
+      const F = await exportFile(), lbW = F.elementTypes.find(t => t.id === 'wall_interior').requirements.find(q => q.id === 'load_bearing');
+      // LOAD BEARING: walls read Structural Usage (filled = one of its four values; yes/no derived as not Non-bearing).
+      assert.strictEqual(lbW.revitParameter, 'Structural Usage', 'walls: Load bearing must read Structural Usage');
+      assert.deepStrictEqual([lbW.columnNames, lbW.scope, lbW.dataType, lbW.valueRule.check, lbW.valueRule.allowed, lbW.derived && lbW.derived.yesWhen],
+        [['structuralusage'], 'instance', 'TEXT', 'enum', ['Non-bearing', 'Bearing', 'Shear', 'Structural combined'], { parameter: 'Structural Usage', notIn: ['Non-bearing'] }], 'walls: Load bearing rule');
+      const lbSlab = F.elementTypes.find(t => t.id === 'slab').requirements.find(q => q.id === 'load_bearing');
+      if (lbSlab) assert.deepStrictEqual([lbSlab.valueRule.check, lbSlab.derived], ['boolean', undefined], 'slabs: Load bearing must keep the yes/no rule');
+      if (process.argv.includes('--break-lb')) { F.elementTypes.forEach(t => t.requirements.forEach(q => { if (q.id === 'load_bearing') q.valueRule = { source: 'builder', allowed: null, min: null, max: null, check: 'boolean', pattern: '^(true|false|yes|no|oui|non|1|0|vrai|faux)$' }; })); console.log('--break-lb: walls\' Load bearing back to yes/no in the file'); }
+      const LB3 = { head: ['Category', 'Element ID', 'Family', 'Function', 'Structural Usage'], rows: [['Walls', '7001', 'Basic Wall', 'Interior', 'Bearing'], ['Walls', '7002', 'Basic Wall', 'Interior', 'Non-bearing'], ['Walls', '7003', 'Basic Wall', 'Interior', '']] };
+      const a = await both7(F, LB3, 'final90', 'load bearing');
+      assert.deepStrictEqual(rowOf(a, 'wall_interior', lbW.label), [{ n: lbW.label, has: 100, ok: 67 }], 'Bearing / Non-bearing / blank: 2 filled, 1 empty');
+      console.log(`LOAD BEARING OK: interior walls Bearing / Non-bearing / blank -> ${rowOf(a, 'wall_interior', lbW.label)[0].ok}% (2 of 3); file reads Structural Usage, 4 values, yes = not Non-bearing; slabs keep yes/no (${lbSlab ? 'present' : 'not in the school file'}); Builder = file = hand`);
+      // ASSEMBLY CODE: the Uniformat II format of the validation rules file, the only rule of that file wired.
+      const VR = JSON.parse(fs.readFileSync(path.join(root, 'shared-parameters', 'OpenBEP_Validation_Rules_v0.1.json'), 'utf8'))['Assembly Code'];
+      const ac = F.elementTypes.find(t => t.id === 'door').requirements.find(q => q.id === 'uniformat_code');
+      if (process.argv.includes('--break-fmt')) { F.elementTypes.forEach(t => t.requirements.forEach(q => { if (q.id === 'uniformat_code') q.valueRule.pattern = '[\\s\\S]{2}|\\d'; })); console.log('--break-fmt: Assembly Code back to any text in the file'); }
+      assert.deepStrictEqual([ac.valueRule.source, ac.valueRule.check, ac.revitParameter], ['builder', 'format', 'Assembly Code'], 'Assembly Code rule');
+      if (!process.argv.includes('--break-fmt')) assert.strictEqual(ac.valueRule.pattern, VR.pattern, 'Assembly Code: the pattern is not the validation rules file\'s');
+      const always = new RegExp(F.placeholders.always, F.placeholders.flags);
+      const state = (q, v) => { const s = v.trim(); if (s === '') return 'empty'; if (q.placeholders.map(x => x.toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return 'placeholder'; return new RegExp(q.valueRule.pattern, 'i').test(s) ? 'valid' : 'invalid'; };
+      const HAND = [['C1020', 'valid', 100], ['B2010.10', 'valid', 100], ['C-1020', 'invalid', 0], ['TBD', 'placeholder', 0], ['', 'empty', 0]];
+      for (const [v, st, ok] of HAND) {
+        const TT = { head: ['Category', 'Element ID', 'Assembly Code'], rows: [['Doors', '8001', v]] }, b = await both7(F, TT, 'final90', 'Assembly Code "' + v + '"');
+        assert.deepStrictEqual([state(ac, v), rowOf(b, 'door', ac.label)[0].ok], [st, ok], `Assembly Code "${v}": expected ${st}`);
+      }
+      console.log(`ASSEMBLY CODE OK: pattern = validation rules file; C1020 valid, B2010.10 valid, C-1020 invalid, TBD placeholder, blank empty; Builder = file = hand (${Object.keys(JSON.parse(fs.readFileSync(path.join(root, 'shared-parameters', 'OpenBEP_Validation_Rules_v0.1.json'), 'utf8'))).length} rules in that file, 1 wired)`);
+      // PAIRS: Insulation Type + Insulation Thickness on ducts: both must be real; with one column, checked on it alone + one note.
+      const ins = F.elementTypes.find(t => t.id === 'duct').requirements.find(q => q.id === 'mep_insulation');
+      if (process.argv.includes('--break-pair')) { F.elementTypes.forEach(t => t.requirements.forEach(q => { delete q.revitParameters; })); console.log('--break-pair: removed revitParameters from the file'); }
+      assert.deepStrictEqual([ins.revitParameter, ins.revitParameters], ['Insulation Type', process.argv.includes('--break-pair') ? undefined : ['Insulation Type', 'Insulation Thickness']], 'ducts: insulation names');
+      const P3 = { head: ['Category', 'Element ID', 'Insulation Type', 'Insulation Thickness'], rows: [['Ducts', '9001', 'Glass fibre', '25 mm'], ['Ducts', '9002', 'Glass fibre', ''], ['Ducts', '9003', '', '25 mm']] };
+      const p2 = await both7(F, P3, 'final90', 'pair'), p1T = dropCols(P3, ['insulationthickness']), p1 = await both7(F, p1T, 'final90', 'pair, one column');
+      assert.deepStrictEqual([rowOf(p2, 'duct', ins.label)[0].ok, rowOf(p1, 'duct', ins.label)[0].ok], [33, 67], 'pair: both columns 1 of 3, Type alone 2 of 3');
+      const PN = 'Checked on one column only: the schedule has no column for the other Revit parameter.';
+      const h1 = (await page.evaluate(([t, m]) => window.__ckWalls(t, m), [toCsv(p1T), 'final90'])).html, h2 = (await page.evaluate(([t, m]) => window.__ckWalls(t, m), [toCsv(P3), 'final90'])).html;
+      assert.ok(h1.includes(PN) && h1.includes('Insulation Thickness') && !h2.includes(PN), 'pair: the one-column note');
+      for (const L of ['fr', 'ja']) assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [PN, L]), `no ${L} translation: ${PN}`);
+      console.log('PAIRS OK: ducts Insulation Type + Insulation Thickness -> 33% (1 of 3: both filled); Type column alone -> 67% + note naming Insulation Thickness; Builder = file = hand');
+    }
+    // VERIFIED NAMES: switch on the rows the school example leaves off, then read the file and the IDS for Revit.
+    await fresh();
+    await page.locator('#steps [data-step="6"]').click(); await page.waitForTimeout(150);
+    for (const k of ['door|door_u_value', 'door|workset', 'door|design_option', 'wall_exterior|wall_u_value', 'window|glz_u_value', 'roof|roof_insulation_rsi']) {
+      await page.locator(`[data-lbsel="${k.split('|')[0]}"]`).first().click(); await page.waitForTimeout(150); await openAll();
+      await page.locator(`[data-lbk="${k}"]`).first().check(); await page.waitForTimeout(150); }
+    for (const [id, lod] of [['space', '300'], ['beam', '350']]) { await page.locator(`[data-lbsel="${id}"]`).first().click(); await page.waitForTimeout(150); await openAll();
+      const sels = page.locator(`[data-lodt^="${id}."]`); for (let i = 0; i < await sels.count(); i++) { await sels.nth(i).selectOption(lod); await page.waitForTimeout(150); } }
+    {
+      const F = await exportFile(), rq = (t, id) => (F.elementTypes.find(x => x.id === t) || { requirements: [] }).requirements.find(q => q.id === id) || {};
+      const NAMES = [['door', 'door_u_value', ['Thermal Transmittance (U)']], ['wall_exterior', 'wall_u_value', ['Thermal Transmittance (U)']], ['window', 'glz_u_value', ['Thermal Transmittance (U)']],
+        ['roof', 'roof_insulation_rsi', ['Thermal Resistance (R)']], ['ramp', 'rmp_slope', ['Ramp Max Slope (1/x)']], ['beam', 'stl_connection', ['Start Connection', 'End Connection']],
+        ['space', 'spc_finishes', ['Floor Finish', 'Wall Finish', 'Ceiling Finish', 'Base Finish']], ['duct', 'dct_liner', ['Lining Type', 'Lining Thickness']], ['door', 'workset', ['Workset']], ['door', 'design_option', ['Design Option']]];
+      for (const [t, id, ns] of NAMES) { const q = rq(t, id); assert.deepStrictEqual([q.revitParameter, q.revitParameters || [q.revitParameter]], [ns[0], ns], `${t} ${id}: names in the file`); }
+      const [, ids] = await Promise.all([page.waitForEvent('download'), page.locator('#idsRvBtn').click()]).then(async ([d]) => [d, fs.readFileSync(await d.path(), 'utf8')]);
+      for (const n of new Set(NAMES.flatMap(x => x[2]).concat(['Structural Usage']))) assert.ok(ids.includes(`<baseName><simpleValue>${n}</simpleValue></baseName>`), 'IDS for Revit lacks ' + n);
+      assert.ok(ids.includes('<xs:pattern value="' + VRP().replace(/^\^/, '').replace(/\$$/, '') + '"/>'), 'IDS for Revit: Assembly Code pattern');
+      for (const bad of ['Heat Transfer Coefficient', 'Load Bearing', 'Lumens', 'Moment Connection', 'Maximum Slope']) assert.ok(!ids.includes(bad) && !JSON.stringify(F).includes(bad), 'absent name present: ' + bad);
+      const LF = rq('light_fixture', 'lf_luminous_flux');
+      console.log(`VERIFIED NAMES OK: ${NAMES.length} requirements carry the Revit 2027 names in the file and the IDS for Revit; luminous flux left as "${LF.revitParameter}" (not in the IDS)`);
+    }
     if (errors.length) throw new Error('Page errors: ' + errors.join(' | '));
     console.log(`REQFILE-PARITY OK milestones=${school.milestones.length} types=${types}`);
   } catch (e) {

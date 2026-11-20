@@ -1489,7 +1489,7 @@
    "ifc": null,
    "rv": [
     "builtin",
-    "Heat Transfer Coefficient (U) - analytical properties"
+    "Thermal Transmittance (U) - analytical properties"
    ],
    "cb": null,
    "sc": "type",
@@ -1503,11 +1503,10 @@
    ],
    "ip": [
     "ThermalTransmittance",
-    "Heat Transfer Coefficient (U)"
+    "Thermal Transmittance (U)"
    ],
-   "rn": "Heat Transfer Coefficient",
-   "rk": "builtin",
-   "rnote": "U"
+   "rn": "Thermal Transmittance (U)",
+   "rk": "builtin"
   },
   "door_hardware_set": {
    "l": "Hardware set",
@@ -1831,7 +1830,7 @@
    "ifc": null,
    "rv": [
     "builtin",
-    "Heat Transfer Coefficient (U) - analytical properties"
+    "Thermal Transmittance (U) - analytical properties"
    ],
    "cb": null,
    "sc": "type",
@@ -1845,11 +1844,10 @@
    ],
    "ip": [
     "ThermalTransmittance",
-    "Heat Transfer Coefficient (U)"
+    "Thermal Transmittance (U)"
    ],
-   "rn": "Heat Transfer Coefficient",
-   "rk": "builtin",
-   "rnote": "U"
+   "rn": "Thermal Transmittance (U)",
+   "rk": "builtin"
   },
   "at_airflow_type": {
    "l": "Air flow type",
@@ -3734,9 +3732,8 @@
    "ip": [
     "Thermal Resistance (R)"
    ],
-   "rn": "Thermal Resistance",
-   "rk": "builtin",
-   "rnote": "R"
+   "rn": "Thermal Resistance (R)",
+   "rk": "builtin"
   },
   "roof_sri": {
    "l": "Solar reflectance index (SRI)",
@@ -4185,9 +4182,8 @@
     "RequiredSlope",
     "Ramp Max Slope (1/x)"
    ],
-   "rn": "Ramp Max Slope",
-   "rk": "builtin",
-   "rnote": "1/x"
+   "rn": "Ramp Max Slope (1/x)",
+   "rk": "builtin"
   },
   "rlg_height": {
    "l": "Guard / railing height",
@@ -4339,7 +4335,7 @@
    "ifc": "Pset_WindowCommon.ThermalTransmittance / Pset_CurtainWallCommon.ThermalTransmittance",
    "rv": [
     "builtin",
-    "Heat Transfer Coefficient (U) - analytical properties"
+    "Thermal Transmittance (U) - analytical properties"
    ],
    "cb": null,
    "sc": "type",
@@ -4353,11 +4349,10 @@
    ],
    "ip": [
     "ThermalTransmittance",
-    "Heat Transfer Coefficient (U)"
+    "Thermal Transmittance (U)"
    ],
-   "rn": "Heat Transfer Coefficient",
-   "rk": "builtin",
-   "rnote": "U"
+   "rn": "Thermal Transmittance (U)",
+   "rk": "builtin"
   },
   "glz_shgc": {
    "l": "Solar heat gain coefficient",
@@ -4829,7 +4824,7 @@
    "ifc": null,
    "rv": [
     "builtin",
-    "Moment Connection Start / End"
+    "Start Connection / End Connection"
    ],
    "cb": null,
    "sc": "instance",
@@ -4842,10 +4837,10 @@
     "Generic"
    ],
    "ip": [
-    "Moment Connection Start",
-    "Moment Connection End"
+    "Start Connection",
+    "End Connection"
    ],
-   "rn": "Moment Connection Start / End",
+   "rn": "Start Connection / End Connection",
    "rk": "builtin"
   },
   "stl_fire_protection": {
@@ -9283,7 +9278,7 @@
    "ifc": "Pset_SpaceCoveringRequirements.FloorCovering / Pset_SpaceCoveringRequirements.WallCovering / Pset_SpaceCoveringRequirements.CeilingCovering / Pset_SpaceCoveringRequirements.SkirtingBoard",
    "rv": [
     "builtin",
-    "Floor / Wall / Ceiling / Base Finish"
+    "Floor Finish / Wall Finish / Ceiling Finish / Base Finish"
    ],
    "cb": null,
    "sc": "instance",
@@ -9305,7 +9300,7 @@
     "Ceiling Finish",
     "Base Finish"
    ],
-   "rn": "Floor / Wall / Ceiling / Base Finish",
+   "rn": "Floor Finish / Wall Finish / Ceiling Finish / Base Finish",
    "rk": "builtin"
   },
   "spc_setpoints": {
@@ -13138,6 +13133,58 @@
      240
     ]
    }
+  },
+  "workset": {
+   "l": "Workset",
+   "lf": "Sous-projet",
+   "t": "IfcLabel",
+   "u": null,
+   "ex": "Interior",
+   "d": "Revit workset the element is on. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "builtin",
+    "Workset"
+   ],
+   "cb": null,
+   "sc": "instance",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default"
+   ],
+   "ip": [
+    "Workset"
+   ],
+   "rn": "Workset",
+   "rk": "builtin"
+  },
+  "design_option": {
+   "l": "Design option",
+   "lf": "Option de conception",
+   "t": "IfcLabel",
+   "u": null,
+   "ex": "Option 1",
+   "d": "Design option the element belongs to. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "builtin",
+    "Design Option"
+   ],
+   "cb": null,
+   "sc": "instance",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default"
+   ],
+   "ip": [
+    "Design Option"
+   ],
+   "rn": "Design Option",
+   "rk": "builtin"
   }
  },
  "C": [
@@ -13549,6 +13596,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -14081,6 +14140,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -14488,6 +14559,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -14921,6 +15004,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -15308,6 +15403,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -15805,6 +15912,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -16199,6 +16318,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -16648,6 +16779,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -17027,6 +17170,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -17418,6 +17573,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -17830,6 +17997,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -18304,6 +18483,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -18750,6 +18941,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -19159,6 +19362,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -19533,6 +19748,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -19816,6 +20043,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -20264,6 +20503,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -20777,6 +21028,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -21171,6 +21434,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -21553,6 +21828,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -21896,6 +22183,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -22222,6 +22521,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -22625,6 +22936,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -23057,6 +23380,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -23512,6 +23847,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -23882,6 +24229,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -24355,6 +24714,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -24719,6 +25090,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -25148,6 +25531,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -25640,6 +26035,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -26117,6 +26524,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -26589,6 +27008,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -27053,6 +27484,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -27531,6 +27974,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -27972,6 +28427,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -28388,6 +28855,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -28817,6 +29296,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -29158,6 +29649,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -29571,6 +30074,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -30021,6 +30536,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -30467,6 +30994,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -30937,6 +31476,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -31257,6 +31808,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -31592,6 +32155,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -32006,6 +32581,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -32391,6 +32978,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -32640,6 +33239,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -32880,6 +33491,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -33203,6 +33826,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -33586,6 +34221,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -33994,6 +34641,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -34393,6 +35052,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -34746,6 +35417,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -35056,6 +35739,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -35424,6 +36119,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -35860,6 +36567,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -36281,6 +37000,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -36731,6 +37462,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -37144,6 +37887,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -37621,6 +38376,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -38047,6 +38814,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -38457,6 +39236,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -38818,6 +39609,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -39239,6 +40042,18 @@
       "asset_reg"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -39649,6 +40464,18 @@
       "fm",
       "asset_reg"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],

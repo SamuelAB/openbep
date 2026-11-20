@@ -3385,7 +3385,7 @@
     "rule_fr": "Service : tout texte non vide; les valeurs fictives comme TBD, N/A, Default, <By Category> ou Generic sont refusées.",
     "source": "OpenBEP proposal"
   },
-  "Floor / Wall / Ceiling / Base Finish": {
+  "Floor Finish / Wall Finish / Ceiling Finish / Base Finish": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Built-in",
     "type": "text",
@@ -3414,7 +3414,7 @@
     "rule_fr": "Finis : codes du tableau des finis (lettres, trait d’union, numéro) séparés par « / », p. ex. RF-1 / PT-2 / ACT-1 / RB-1.",
     "source": "OpenBEP proposal"
   },
-  "Heat Transfer Coefficient (U) - analytical properties": {
+  "Thermal Transmittance (U) - analytical properties": {
     "revit_data_type": "NUMBER",
     "shared_or_builtin": "Built-in",
     "type": "number",
@@ -4544,7 +4544,7 @@
     "rule_fr": "Épaisseur : une longueur en mm supérieure à 0, saisie sans l’unité.",
     "source": "OpenBEP proposal"
   },
-  "Moment Connection Start / End": {
+  "Start Connection / End Connection": {
     "revit_data_type": "TEXT",
     "shared_or_builtin": "Built-in",
     "type": "text",
