@@ -6,8 +6,8 @@
     "fingerprint": "9C37B605B3A9",
     "version": null,
     "listVersion": "0.1",
-    "builderVersion": "0.47",
-    "generated": "2026-11-20T19:06:54.057Z"
+    "builderVersion": "0.48",
+    "generated": "2026-11-20T19:26:43.073Z"
   },
   "scoreRule": {
     "perElementType": "mean of each required parameter real-value percentage",
@@ -43311,7 +43311,9 @@
       },
       "requiredAt": {
         "wall_interior": {
-          "prelim100": [],
+          "prelim100": [
+            "material"
+          ],
           "final50": [
             "col_material_grade",
             "col_exposure_class",
@@ -43338,7 +43340,9 @@
           ]
         },
         "wall_exterior": {
-          "prelim100": [],
+          "prelim100": [
+            "material"
+          ],
           "final50": [
             "col_material_grade",
             "col_exposure_class",
@@ -43365,7 +43369,9 @@
           ]
         },
         "retaining_wall": {
-          "prelim100": [],
+          "prelim100": [
+            "material"
+          ],
           "final50": [],
           "final90": [],
           "final100": [],
@@ -43373,6 +43379,47 @@
         }
       },
       "requirements": [
+        {
+          "id": "material",
+          "kind": "material",
+          "label": "Primary material",
+          "revitParameter": "Material / Structural Material / compound structure",
+          "guid": null,
+          "shared": false,
+          "bindable": true,
+          "scope": "type",
+          "dataType": "TEXT",
+          "ifcType": "IfcMaterial",
+          "fromLod": "200",
+          "neededFor": [
+            "cost",
+            "quantities",
+            "energy"
+          ],
+          "placeholders": [
+            "",
+            "<By Category>",
+            "Default",
+            "Default Wall"
+          ],
+          "valueRule": {
+            "source": "builder",
+            "allowed": null,
+            "min": null,
+            "max": null,
+            "check": "text",
+            "pattern": "[\\s\\S]{2}|\\d"
+          },
+          "example": "Concrete 35 MPa",
+          "ifcTarget": "IfcRelAssociatesMaterial -> IfcMaterial / IfcMaterialLayerSet",
+          "ownerAddition": false,
+          "columnNames": [
+            "material",
+            "structuralmaterial",
+            "primarymaterial",
+            "compoundstructure"
+          ]
+        },
         {
           "id": "col_material_grade",
           "kind": "parameter",

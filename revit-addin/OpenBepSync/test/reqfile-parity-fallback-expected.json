@@ -165,7 +165,7 @@
    "id": "wall_interior",
    "lod": "200",
    "n": 16,
-   "fill": 85,
+   "fill": 88,
    "pass": false,
    "rows": [
     {
@@ -192,6 +192,13 @@
      "n": "Overall thickness",
      "has": 100,
      "ok": 81
+    },
+    {
+     "n": "Primary material",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 100,
+     "ok": 100
     }
    ]
   }

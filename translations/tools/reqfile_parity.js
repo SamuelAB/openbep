@@ -324,14 +324,35 @@ function evaluate(F, T, mid) {
     const G = school.requirementGroups.find(g => g.id === 'structural_walls');
     assert.ok(G && G.where.all[0].parameter === 'Structural Usage' && G.where.fallback, 'structural_walls group');
     assert.deepStrictEqual(G.appliesTo, ['wall_interior', 'wall_exterior', 'retaining_wall']);
-    for (const q of G.requirements) assert.strictEqual(q.fromLod, q.id === 'col_cover' ? '350' : '300', q.id + ': from LOD');
+    for (const q of G.requirements) assert.strictEqual(q.fromLod, q.id === 'col_cover' ? '350' : q.id === 'material' ? '200' : '300', q.id + ': from LOD');
     const gwant = ['col_material_grade', 'col_exposure_class', 'col_rebar_ratio', 'col_volume'];
     assert.deepStrictEqual(G.requiredAt.wall_interior.final90, gwant, 'interior walls group at final90');
-    assert.deepStrictEqual(G.requiredAt.wall_interior.prelim100, [], 'nothing structural at LOD 200');
+    // Owner ruling 2026-11-20 (v0.48): the structural material from LOD 200. At Preliminary design 100% (walls at LOD 200) the wall
+    // types do not ask a material yet, so the group asks it of the structural walls only; from LOD 300 the wall type asks it of every wall.
+    for (const id of G.appliesTo) {
+      assert.strictEqual(ET(id).lod.prelim100, '200', id + ': level at prelim100');
+      assert.ok(!ET(id).requiredAt.prelim100.includes('material'), id + ': the wall type asks a material at LOD 200');
+      assert.deepStrictEqual(G.requiredAt[id].prelim100, ['material'], id + ': structural material at LOD 200');
+      assert.ok(!G.requiredAt[id].final90.includes('material') && ET(id).requiredAt.final90.includes('material'), id + ': material at LOD 300 belongs to the wall type');
+    }
     assert.deepStrictEqual(G.requiredAt.retaining_wall.final90, [], 'retaining walls already ask the group parameters');
     const ckF = async (TT, mid) => sortId(await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [toCsv(TT), mid]));
     const a90 = await ckF(T, 'final90'), f90 = sortId(evaluate(school, T, 'final90').cats), lbl = id => G.requirements.find(q => q.id === id).label;
     const grpRows = (L, id) => L.find(x => x.id === id).rows.filter(r => r.grp);
+    {
+      // Hand-computed at prelim100: interior structural 3005 (Concrete block), 3012, 3013 (Concrete 35 MPa) -> 100% of 3.
+      // 3012 (Bearing) with "Default" -> 2 of 3 = 67%. 3014 (Non-bearing) with "Default" -> no change.
+      const mi = T.head.findIndex(h => norm(h) === 'material'), setMat = (ids, v) => ({ head: T.head, rows: T.rows.map(r => ids.includes(r[1]) ? r.map((c, i) => i === mi ? v : c) : r) });
+      const mrow = L => grpRows(L, 'wall_interior').filter(r => r.n === lbl('material'));
+      const want = ok => [{ n: lbl('material'), grp: 'structural_walls', of: 3, has: 100, ok }];
+      const p0 = await ckF(T, 'prelim100'), pB = await ckF(setMat(['3012'], 'Default'), 'prelim100'), pN = await ckF(setMat(['3014'], 'Default'), 'prelim100');
+      assert.deepStrictEqual(mrow(p0), want(100), 'Builder: interior structural material at prelim100');
+      assert.deepStrictEqual(mrow(pB), want(67), 'Builder: Bearing wall 3012 with material "Default" must fail the structural material row');
+      assert.deepStrictEqual(pN, p0, 'Builder: Non-bearing wall 3014 with material "Default" changed the result at prelim100');
+      for (const [TT, w] of [[T, 100], [setMat(['3012'], 'Default'), 67]]) assert.deepStrictEqual(mrow(sortId(evaluate(school, TT, 'prelim100').cats)), want(w), 'file: interior structural material at prelim100, ' + w);
+      assert.deepStrictEqual(sortId(evaluate(school, setMat(['3014'], 'Default'), 'prelim100').cats), sortId(evaluate(school, T, 'prelim100').cats), 'file: Non-bearing "Default" changed the result');
+      console.log('STRUCTURAL MATERIAL LOD 200 OK: prelim100 group asks material of interior, exterior, retaining walls; interior 100% of 3, Bearing 3012 "Default" -> 67%, Non-bearing 3014 "Default" -> unchanged; Builder = file = hand');
+    }
     const hand = (of, g) => gwant.map((id, i) => ({ n: lbl(id), grp: 'structural_walls', of, has: i === 0 ? 100 : 0, ok: i === 0 ? g : 0 }));
     assert.deepStrictEqual(grpRows(a90, 'wall_interior'), hand(3, 67), 'Builder: interior walls group rows');
     assert.deepStrictEqual(grpRows(a90, 'wall_exterior'), hand(2, 0), 'Builder: exterior walls group rows');
