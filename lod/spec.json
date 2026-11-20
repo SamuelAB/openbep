@@ -39822,7 +39822,8 @@
    "n": "Structural walls",
    "nf": "Murs structuraux",
    "h": "Also required when the wall is structural",
-   "d": "A wall whose Structural Usage is Bearing, Shear or Structural combined keeps the requirements of its own wall type and must also carry these. When the model has no Structural Usage value, Structural = Yes is read instead. A parameter the wall type already asks is checked once, on every wall.",
+   "m": "Structural walls only",
+   "d": "Rows marked Structural walls only apply to a wall whose Structural Usage is Bearing, Shear or Structural combined, on top of the requirements of its wall type. When the model has no Structural Usage value, Structural = Yes is read instead. A parameter the wall type already asks is checked once, on every wall.",
    "appliesTo": [
     "wall_interior",
     "wall_exterior",
@@ -39928,5 +39929,33 @@
     ]
    ]
   }
- ]
+ ],
+ "RW": {
+  "concrete": {
+   "m": "Concrete only",
+   "when": {
+    "structuralMaterialClass": [
+     "Concrete"
+    ]
+   },
+   "d": "Rows marked Concrete only are asked only of elements whose structural material is concrete: the Class of the Revit material named by the element's Structural Material is Concrete.",
+   "rows": {
+    "structural_column": [
+     "col_exposure_class",
+     "col_cover",
+     "col_rebar_ratio"
+    ],
+    "slab": [
+     "col_exposure_class",
+     "col_cover",
+     "col_rebar_ratio"
+    ],
+    "structural_walls": [
+     "col_exposure_class",
+     "col_cover",
+     "col_rebar_ratio"
+    ]
+   }
+  }
+ }
 }

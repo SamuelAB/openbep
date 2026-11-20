@@ -99,26 +99,33 @@ function evaluate(F, T, mid) {
     const m = g.where.all.map(q => ({ q, i: col(q) })); if (m.some(x => x.i < 0)) return [g.id, null];
     const fb = g.where.fallback && g.where.fallback.all.map(q => ({ q, i: col(q) })), use = !els.some(r => m.some(x => r[x.i])) && fb && fb.every(x => x.i >= 0) ? fb : m;
     return [g.id, new Set(els.filter(r => use.every(x => x.q.in.some(v => norm(v) === norm(r[x.i])))))]; }));
+  // tableRule.when (format 1.3): a when.structuralMaterialClass row needs a Structural Material Class column with a value on one of
+  // its elements; then it is computed over the elements whose class is listed (none = left out). Otherwise not checked.
+  const wci = T.head.findIndex(h => norm(h) === 'structuralmaterialclass'); let whenOff = false;
+  const wsub = (q, list) => { if (!q.when) return list; if (wci < 0 || !list.some(r => (r[wci] || '').trim())) { whenOff = true; return null; }
+    return list.filter(r => q.when.structuralMaterialClass.some(v => norm(v) === norm(r[wci] || ''))); };
   const cats = [...by.values()].map(({ t, els }) => {
     const reqs = new Map(t.requirements.map(q => [q.id, q]));
     const rows = t.requiredAt[mid].map(id => {
-      const q = reqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h)));
+      const q = reqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h))), se = wsub(q, els);
+      if (!se || !se.length) return null;
       let has = 0, ok = 0;
-      els.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
-      return { n: q.label, has: Math.round(100 * has / els.length), ok: Math.round(100 * ok / els.length) };
-    });
+      se.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
+      return { n: q.label, ...(q.when ? { of: se.length } : {}), has: Math.round(100 * has / se.length), ok: Math.round(100 * ok / se.length) };
+    }).filter(Boolean);
     // Requirement groups (scoreRule.groups): extra rows over the elements the group's where picks; none picked = rows left out.
     for (const g of F.requirementGroups || []) {
       if (!g.appliesTo.includes(t.id)) continue; const ids = g.requiredAt[t.id][mid], sub = grpSub.get(g.id); if (!ids.length || !sub) continue;
       const se = els.filter(r => sub.has(r)); if (!se.length) continue; const greqs = new Map(g.requirements.map(q => [q.id, q]));
-      for (const id of ids) { const q = greqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h))); let has = 0, ok = 0;
-        se.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
-        rows.push({ n: q.label, grp: g.id, of: se.length, has: Math.round(100 * has / se.length), ok: Math.round(100 * ok / se.length) }); }
+      for (const id of ids) { const q = greqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h))), sw = wsub(q, se); let has = 0, ok = 0;
+        if (!sw || !sw.length) continue;
+        sw.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
+        rows.push({ n: q.label, grp: g.id, of: sw.length, has: Math.round(100 * has / sw.length), ok: Math.round(100 * ok / sw.length) }); }
     }
     const fill = rows.length ? Math.round(rows.reduce((s, r) => s + r.ok, 0) / rows.length) : 100;
     return { id: t.id, lod: t.lod[mid], n: els.length, fill, pass: fill >= ms.targetPercent, rows };
   });
-  return { cats, walls, why };
+  return { cats, walls, why, whenOff };
 }
 
 // ---- The run. ----
@@ -146,7 +153,7 @@ function evaluate(F, T, mid) {
 
     const school = await exportFile();
     assert.strictEqual(school.format, 'openbep-requirements');
-    assert.strictEqual(school.formatVersion, '1.2');
+    assert.strictEqual(school.formatVersion, '1.3');
     const sortId = a => [...a].sort((x, y) => x.id.localeCompare(y.id));
     const same = (a, b, where) => { assert.deepStrictEqual(b.map(x => x.id), a.map(x => x.id), where + ': element types found');
       a.forEach((x, i) => { const y = b[i], w = `${where}, ${x.id}`; assert.strictEqual(y.lod, x.lod, w + ': level'); assert.strictEqual(y.n, x.n, w + ': elements');
@@ -353,7 +360,8 @@ function evaluate(F, T, mid) {
       assert.deepStrictEqual(sortId(evaluate(school, setMat(['3014'], 'Default'), 'prelim100').cats), sortId(evaluate(school, T, 'prelim100').cats), 'file: Non-bearing "Default" changed the result');
       console.log('STRUCTURAL MATERIAL LOD 200 OK: prelim100 group asks material of interior, exterior, retaining walls; interior 100% of 3, Bearing 3012 "Default" -> 67%, Non-bearing 3014 "Default" -> unchanged; Builder = file = hand');
     }
-    const hand = (of, g) => gwant.map((id, i) => ({ n: lbl(id), grp: 'structural_walls', of, has: i === 0 ? 100 : 0, ok: i === 0 ? g : 0 }));
+    // Concrete only (round 6): with no Structural Material Class column, exposure class and reinforcement ratio are not checked.
+    const hand = (of, g) => gwant.filter(id => !G.requirements.find(q => q.id === id).when).map((id, i) => ({ n: lbl(id), grp: 'structural_walls', of, has: i === 0 ? 100 : 0, ok: i === 0 ? g : 0 }));
     assert.deepStrictEqual(grpRows(a90, 'wall_interior'), hand(3, 67), 'Builder: interior walls group rows');
     assert.deepStrictEqual(grpRows(a90, 'wall_exterior'), hand(2, 0), 'Builder: exterior walls group rows');
     assert.deepStrictEqual(grpRows(f90, 'wall_interior'), hand(3, 67), 'file: interior walls group rows');
@@ -447,6 +455,59 @@ function evaluate(F, T, mid) {
     let SG = (await exportFile()).requirementGroups[0];
     assert.ok(SG.requiredAt.wall_interior.final90.includes('col_cover'), 'interior walls at LOD 350: no concrete cover in the group');
     assert.ok(!SG.requiredAt.wall_exterior.final90.includes('col_cover'), 'exterior walls at LOD 300 ask concrete cover');
+    // Round 6 (owner): no group a person can see. The structural-walls rows sit inline in the wall's own tables, in the normal
+    // order, each with its marks; no sub-list heading; the BEP draft lists them in the wall's table the same way.
+    await page.locator('[data-lbview="350"]').first().click(); await page.waitForTimeout(150); await openAll(); const ga = await page.evaluate(() => {
+      const trs = [...document.querySelectorAll('#main table.lb tbody tr')], mk = tr => [...tr.querySelectorAll('td:nth-child(2) .chip')].map(x => x.textContent.trim());
+      return { marked: trs.filter(tr => mk(tr).includes('Structural walls only')).length, both: trs.filter(tr => mk(tr).join('|') === 'Structural walls only|Concrete only').map(tr => tr.querySelector('td:nth-child(2) b').textContent),
+        heads: [...document.querySelectorAll('#main h3')].map(h => h.textContent).filter(t => /structural|group/i.test(t)) };
+    });
+    assert.ok(ga.marked >= 4, 'interior walls at LOD 350: structural-walls rows not shown inline with their mark (' + ga.marked + ')');
+    assert.deepStrictEqual(ga.heads, [], 'a structural sub-list heading is still shown');
+    assert.ok(['Concrete cover', 'Concrete exposure class', 'Reinforcement ratio'].every(n => ga.both.includes(n)), 'concrete rows lack "Concrete only": ' + ga.both.join(', '));
+    const drL = (await draft()).split('\n');
+    assert.ok(drL.some(l => /Concrete exposure class · Structural walls only · Concrete only/.test(l)), "draft: concrete exposure class not inline with its marks");
+    assert.ok(!drL.some(l => /Also required when the wall is structural/.test(l)), 'draft: structural sub-list heading still there');
+    assert.ok(!drL.some(l => /Structural walls only|Concrete only|Structural Usage/.test(l) && /group/i.test(l)), 'draft: "group" next to the structural rows');
+    for (const L of ['fr', 'ja']) for (const t of ['Structural walls only', 'Concrete only', SG.statement, 'Rows marked Concrete only are asked only of elements whose structural material is concrete: the Class of the Revit material named by the element\'s Structural Material is Concrete.'])
+      assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [t, L]), `no ${L} translation: ${t}`);
+    console.log(`NO GROUP ON SCREEN OK: ${ga.marked} rows marked "Structural walls only" inline on interior walls at LOD 350 (${ga.both.join(', ')} also "Concrete only"); no sub-list heading; the draft lists them inline; French and Japanese present`);
+    // Round 6 (owner): concrete cover, exposure class and reinforcement are asked only of elements whose structural material is
+    // concrete (when.structuralMaterialClass = Concrete). Interior walls and structural columns at LOD 350, on the table plus a
+    // Structural Material Class column and two columns. Hand: interior structural walls 3005 (block, Masonry), 3012 and 3013
+    // (Concrete) -> the concrete rows are over 3012 and 3013 only (of 2); columns 6001 (Concrete) and 6002 (Steel) -> over 6001 only.
+    await page.locator('#steps [data-step="6"]').click(); await page.waitForTimeout(150);
+    await page.locator('[data-lbsel="structural_column"]').first().click(); await page.waitForTimeout(150); await openAll();
+    await page.selectOption('[data-lodt="structural_column.final"]', '350'); await page.waitForTimeout(200);
+    {
+      const F350 = await exportFile();
+      if (process.argv.includes('--break-when')) { F350.elementTypes.concat(F350.requirementGroups).forEach(x => x.requirements.forEach(q => { delete q.when; })); console.log('--break-when: removed every when from the file'); }
+      const CL = { '3005': 'Masonry', '3012': 'Concrete', '3013': 'Concrete', '3003': 'Masonry', '3010': 'Masonry', '3008': 'Concrete', '3001': 'Concrete', '3002': 'Generic', '3014': 'Generic', '6001': 'Concrete', '6002': 'Metal' };
+      const SC = F350.elementTypes.find(t => t.id === 'structural_column'), cq = SC.requirements.find(q => q.id === 'col_cover');
+      assert.deepStrictEqual(cq && cq.when, process.argv.includes('--break-when') ? undefined : { structuralMaterialClass: ['Concrete'] }, 'structural columns: concrete cover has no when');
+      const coverH = cq.columnNames[0], base = { head: [...T.head, 'Structural Material Class', coverH], rows: [...T.rows.map(r => [...r, CL[r[1]] || '', '']),
+        ['Structural Columns', '6001', 'Concrete-Rectangular-Column: 400 x 400mm', ...T.head.slice(3).map(() => ''), 'Concrete', ''],
+        ['Structural Columns', '6002', 'W-Wide Flange-Column: W310X97', ...T.head.slice(3).map(() => ''), 'Metal', '']] };
+      const setCover = ids => ({ head: base.head, rows: base.rows.map(r => ids.includes(r[1]) ? [...r.slice(0, -1), '40'] : r) });
+      const coverRow = (L, id, grp) => (L.find(x => x.id === id) || { rows: [] }).rows.filter(r => r.n === cq.label && !!r.grp === !!grp);
+      const both = async TT => { const a = await ckF(TT, 'final90'), f = sortId(evaluate(F350, TT, 'final90').cats); assert.deepStrictEqual(f, a, 'concrete only: the file differs from the Builder'); return a; };
+      const b0 = await both(base), bW = await both(setCover(['3012', '3013', '6001'])), bB = await both(setCover(['3005', '6002']));
+      assert.deepStrictEqual(coverRow(b0, 'wall_interior', 1), [{ n: cq.label, grp: 'structural_walls', of: 2, has: 100, ok: 0 }], 'Bearing concrete wall 3012 without cover must fail (of 2)');
+      assert.deepStrictEqual(coverRow(bW, 'wall_interior', 1), [{ n: cq.label, grp: 'structural_walls', of: 2, has: 100, ok: 100 }], 'the block wall 3005 without cover is penalised');
+      assert.deepStrictEqual(coverRow(bB, 'wall_interior', 1), coverRow(b0, 'wall_interior', 1), 'a cover on the block wall changed the concrete row');
+      assert.deepStrictEqual(coverRow(b0, 'structural_column'), [{ n: cq.label, of: 1, has: 100, ok: 0 }], 'concrete column 6001 without cover must fail (of 1)');
+      assert.deepStrictEqual(coverRow(bW, 'structural_column'), [{ n: cq.label, of: 1, has: 100, ok: 100 }], 'the steel column 6002 without cover is penalised');
+      // A schedule with the material name only: the concrete rows are not checked, one note, never guessed from the name.
+      const TNm = dropCols(base, ['structuralmaterialclass']), bN = await both(TNm), WN = await page.evaluate(([t, mid]) => window.__ckWalls(t, mid), [toCsv(TNm), 'final90']);
+      assert.ok(bN.filter(x => ['wall_interior', 'structural_column'].includes(x.id)).every(x => !x.rows.some(r => r.n === cq.label)), 'no class column: concrete cover still checked');
+      const WNOTE = "Rows marked Concrete only were not checked: they need the class of each element's structural material, and this schedule names the material but has no Structural Material Class column.";
+      assert.strictEqual(WN.html.split(WNOTE).length - 1, 1, 'no class column: the note must show once');
+      assert.ok(evaluate(F350, TNm, 'final90').whenOff && !evaluate(F350, base, 'final90').whenOff, 'file: not checked without the class column only');
+      for (const L of ['fr', 'ja']) assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [WNOTE, L]), `no ${L} translation: ${WNOTE}`);
+      console.log(`CONCRETE ONLY OK: interior walls at LOD 350, cover over ${coverRow(b0, 'wall_interior', 1)[0].of} concrete structural walls (Bearing 3012 without cover fails, block 3005 not asked); columns over 1 of 2 (concrete 6001 fails without cover, steel 6002 not asked); material name only -> not checked + note; Builder = file = hand`);
+    }
+    await page.locator('#steps [data-step="6"]').click(); await page.waitForTimeout(150);
+    await page.locator('[data-lbsel="wall_interior"]').first().click(); await page.waitForTimeout(150); await openAll();
     const KEY = 'wall_interior|structural_walls:col_volume';
     await openAll(); await page.locator(`[data-lbk="${KEY}"]`).uncheck(); await page.waitForTimeout(200);
     const off = async () => { const g = (await exportFile()).requirementGroups[0];
@@ -462,7 +523,7 @@ function evaluate(F, T, mid) {
     if (errors.length) throw new Error('Page errors: ' + errors.join(' | '));
     console.log(`REQFILE-PARITY OK milestones=${school.milestones.length} types=${types}`);
   } catch (e) {
-    console.error('REQFILE-PARITY FAILED: ' + e.message.split('\n')[0]);
+    console.error('REQFILE-PARITY FAILED: ' + e.message.split('\n').filter(Boolean).slice(0, 8).join(' | '));
     process.exitCode = 1;
   } finally { await browser.close(); }
 })();

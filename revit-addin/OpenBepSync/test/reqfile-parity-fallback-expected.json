@@ -564,8 +564,8 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 16,
-   "fill": 49,
-   "pass": false,
+   "fill": 55,
+   "pass": true,
    "rows": [
     {
      "n": "Type name",
@@ -648,20 +648,6 @@
      "of": 7,
      "has": 100,
      "ok": 57
-    },
-    {
-     "n": "Concrete exposure class",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
-    },
-    {
-     "n": "Reinforcement ratio",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
     },
     {
      "n": "Net volume",
@@ -1034,7 +1020,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 16,
-   "fill": 49,
+   "fill": 55,
    "pass": false,
    "rows": [
     {
@@ -1118,20 +1104,6 @@
      "of": 7,
      "has": 100,
      "ok": 57
-    },
-    {
-     "n": "Concrete exposure class",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
-    },
-    {
-     "n": "Reinforcement ratio",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
     },
     {
      "n": "Net volume",
@@ -1504,7 +1476,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 16,
-   "fill": 49,
+   "fill": 55,
    "pass": false,
    "rows": [
     {
@@ -1588,20 +1560,6 @@
      "of": 7,
      "has": 100,
      "ok": 57
-    },
-    {
-     "n": "Concrete exposure class",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
-    },
-    {
-     "n": "Reinforcement ratio",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
     },
     {
      "n": "Net volume",
@@ -1974,7 +1932,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 16,
-   "fill": 49,
+   "fill": 55,
    "pass": false,
    "rows": [
     {
@@ -2058,20 +2016,6 @@
      "of": 7,
      "has": 100,
      "ok": 57
-    },
-    {
-     "n": "Concrete exposure class",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
-    },
-    {
-     "n": "Reinforcement ratio",
-     "grp": "structural_walls",
-     "of": 7,
-     "has": 0,
-     "ok": 0
     },
     {
      "n": "Net volume",
