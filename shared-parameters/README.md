@@ -36,11 +36,11 @@ The same step also exports an IDS file (buildingSMART Information Delivery Speci
 
 ## Requirement file (JSON)
 
-The same step also exports `OpenBEP-requirements-<project>.json` (BEP Builder v0.46). It states, in one file, what the plan asks of every element type at each milestone of "Check a model now", and the rules a model must follow. It states requirements only: OpenBEP does not check models with it. A model checking tool reads it. The school example's file is in [`revit-addin/OpenBepSync/test/`](../revit-addin/OpenBepSync/test/).
+The same step also exports `OpenBEP-requirements-<project>.json` (BEP Builder v0.47). It states, in one file, what the plan asks of every element type at each milestone of "Check a model now", and the rules a model must follow. It states requirements only: OpenBEP does not check models with it. A model checking tool reads it. The school example's file is in [`revit-addin/OpenBepSync/test/`](../revit-addin/OpenBepSync/test/).
 
 `node translations/tools/reqfile_parity.js` proves the file is enough on its own: a small checker that reads only the file gets the same result as the Builder's own check on a test model table, for every milestone, element type and requirement.
 
-Format `openbep-requirements`, version `1.1` (1.0 had `revitWhere` as `{parameter, scope, equals}`, a note could appear in `revitCategories` with a null `id`, and `unresolvedSplits` was a list of ids):
+Format `openbep-requirements`, version `1.2` (1.1 had no `requirementGroups`; 1.0 had `revitWhere` as `{parameter, scope, equals}`, a note could appear in `revitCategories` with a null `id`, and `unresolvedSplits` was a list of ids):
 
 | Key | What it holds |
 |---|---|
@@ -52,7 +52,8 @@ Format `openbep-requirements`, version `1.1` (1.0 had `revitWhere` as `{paramete
 | `elementTypes` | Every element type of the list, in list order, switched on or not (`on`); the Builder's check reads every type it finds in a model. |
 | `unresolvedSplits` | Element types a Revit model cannot tell apart from another type on its own, as `{ id, sharesCategoryWith, reason }`: they share a Revit category with no Revit-side rule (`revitWhere`) to separate them, or their IFC target needs a property value Revit has no certain equivalent for. `reason` says which. |
 | `uncovered` | Elements no element type covers, as `{ revitCategory, where, note }` (`where` has the same `all` shape as `revitWhere`). A checker lists them as "not covered by the plan" with their count instead of dropping them. |
-| `wallKinds` | How walls are told apart: `kind` (Basic, Curtain, Stacked from the wall's family name Basic Wall, Curtain Wall, Stacked Wall; any other family in Walls is a wall modelled in place, InPlace), `function` (the six values of the wall type's Function), `structural` (Structural Usage Bearing, Shear or Structural combined; Structural = Yes only when the model has no Structural Usage). Structural is a second axis inside interior and exterior walls; it changes no score. |
+| `wallKinds` | How walls are told apart: `kind` (Basic, Curtain, Stacked from the wall's family name Basic Wall, Curtain Wall, Stacked Wall; any other family in Walls is a wall modelled in place, InPlace), `function` (the six values of the wall type's Function), `structural` (Structural Usage Bearing, Shear or Structural combined; Structural = Yes only when the model has no Structural Usage). Structural is a second axis inside interior and exterior walls; structural walls also meet the group in `requirementGroups` (v0.47). |
+| `requirementGroups` | Extra requirements on some element types that apply only to the elements a Revit condition picks: today one group, structural walls (see below). |
 | `modelRules` | Model-wide rules from the plan's "Model rules" (see below). |
 
 Each element type has `id`, `name`, `on`, `revitCategories` (`name`, `id` as `OST_` name), `categoryNames` (the normalized names a Category cell must equal: each Revit category and the type's own name), `ifc` (`class`, `predefinedType`, `only4x3`, `where` as [property set, property, value]), `revitWhere` (see Walls below; null when no Revit-side rule is certain), `categoryNotes` (text from the list's category column that names no Revit category, such as "Curtain walls are separate (B2020)"), `lod` (level per milestone; empty when the type has no numeric level), `requiredAt` (requirement ids per milestone, exactly what the Builder's check asks), and `requirements`.
@@ -76,6 +77,31 @@ A value is real when, trimmed, it is not empty, is not one of the requirement's 
 Precedence: the conditions never overlap (a curtain wall is never a basic wall, and each Function value is in one list), so a wall lands in at most one element type. A wall that matches no element type and no `uncovered` entry (for example a blank Function) is not covered either. An element type that lists a category with no rule for it takes none of that category's elements when other types split it by `revitWhere` (`bridge_substructure` and Walls; see its `unresolvedSplits` reason). A value is compared after normalizing (lowercase; spaces, underscores and hyphens removed).
 
 The Builder's own table check reads the same rules: with a Function column, rows of category Walls go to the element type their Function (and, with a Family column, their wall kind) says; without a Family column a condition on wallKind is skipped and the result says so; without a Function column every Walls row stays with interior walls, as before v0.45, and the result says once that walls could not be told apart. French and Japanese Revit column names and values are not recognised yet.
+
+### Structural walls (requirement group, v0.47)
+
+Owner ruling (2026-11-20): a wall whose built-in Structural Usage is Bearing, Shear or Structural combined keeps the requirements of its wall type (interior, exterior, foundation and retaining walls) and must also meet the group `structural_walls`. When the model has no Structural Usage value, Structural = Yes is read instead (`where.fallback`). It is stated once in the LOD list (`lod/spec.json`, key `RG`) and shown on the LOD page, in the Builder's Element requirements of those three wall types ("Also required when the wall is structural", switched per requirement and per element type like any other row), in the BEP draft and in the file.
+
+| Requirement | From LOD | Note |
+|---|---|---|
+| Primary material (`material`) | 300 | |
+| Material grade / strength (`col_material_grade`) | 300 | |
+| Fire-resistance rating, minutes (`fire_resistance_min`) | 300 | |
+| UniFormat II code (`uniformat_code`) | 300 | |
+| Concrete exposure class (`col_exposure_class`) | 300 | Concrete only |
+| Concrete cover (`col_cover`) | 350 | Concrete only |
+| Reinforcement ratio (`col_rebar_ratio`) | 300 | Concrete only, before detailing |
+| Net volume (`col_volume`) | 300 | |
+
+Each row carries the BIM uses of the same row on structural columns, so a plan asks it only when it picks one of those uses. "Concrete only" is a note, as on columns and slabs: nothing in the list tells a concrete wall from a masonry or steel one, so a checker asks these rows of every structural wall.
+
+Each group has `id`, `name`, `label`, `statement`, `appliesTo` (element type ids), `where` (`{ all: [ {parameter, scope, in} ], fallback: { all: [...] } }`), `requiredAt` and `requirements` (the same shape as an element type's). `requiredAt` is per element type, then per milestone (`requiredAt.wall_interior.final90`), because each element type has its own level at each milestone and its own switches. A parameter the element type itself already requires at that milestone is left out of the group there: it is checked once, on every wall.
+
+Score (`scoreRule.groups`): for an element type in `appliesTo`, the group's requirements are extra rows computed over the elements `where` picks only: `round(100 × those elements with a real value / those elements)`. The element type's score is the mean over all its rows, its own rows over all its elements and the group rows over the structural ones. A group row with no structural wall is left out of the mean. A Non-bearing wall is never counted in a group row.
+
+Model table (`tableRule.groups`): the group is checked only when the table has a Structural Usage column (normalized header); with only blank Structural Usage cells in the group's element types and a Structural column, the Structural column is read. With no Structural Usage column the walls are scored on their own rows, as before v0.47, and the Builder says so once. The IFC path of the Builder's check does not read the group (IFC has no Structural Usage).
+
+IDS: no IFC property states Revit's Structural Usage, so the IDS cannot pick structural walls. The group's parameters are listed in the wall specifications' `instructions` ("Also required when the wall is structural (not checked in IFC: check in the Revit model)"); they are not IDS requirements.
 
 ### Model rules
 

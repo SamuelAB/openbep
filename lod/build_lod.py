@@ -7,6 +7,8 @@ Each element type carries
   nx  what is never expected in the model, and where that information lives instead,
   r   parameter requirements: [parameter id, required from LOD, BIM uses, note on a valid value],
   m   the LOD matrix row it follows in the BEP Builder (discipline.row).
+RG holds requirement groups: extra parameter rows (same shape as r) that apply on top of the listed element
+types (appliesTo) only to the elements a Revit condition picks (where), e.g. structural walls.
 
 Usage: python3 lod/build_lod.py [--check]
 - Writes lod/spec-data.js, which the LOD specification page loads.
@@ -35,6 +37,12 @@ def validate(d):
             errs += [f"{c['id']}: unknown use {u}" for u in x.get('u', []) if u not in d['uses']]
         errs += [f"{c['id']}: unknown parameter {r[0]}" for r in c['r'] if r[0] not in d['P']]
         errs += [f"{c['id']}: unknown use {u}" for r in c['r'] for u in r[2] if u not in d['uses']]
+    ids = {c['id'] for c in d['C']}
+    for g in d.get('RG', []):
+        errs += [f"group {g['id']}: unknown element type {x}" for x in g['appliesTo'] if x not in ids]
+        errs += [f"group {g['id']}: unknown parameter {r[0]}" for r in g['r'] if r[0] not in d['P']]
+        errs += [f"group {g['id']}: bad LOD {r[1]}" for r in g['r'] if r[1] not in LEVELS]
+        errs += [f"group {g['id']}: unknown use {u}" for r in g['r'] for u in r[2] if u not in d['uses']]
     return errs
 
 

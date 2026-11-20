@@ -39815,5 +39815,118 @@
    "conn",
    "part"
   ]
- }
+ },
+ "RG": [
+  {
+   "id": "structural_walls",
+   "n": "Structural walls",
+   "nf": "Murs structuraux",
+   "h": "Also required when the wall is structural",
+   "d": "A wall whose Structural Usage is Bearing, Shear or Structural combined keeps the requirements of its own wall type and must also carry these. When the model has no Structural Usage value, Structural = Yes is read instead. A parameter the wall type already asks is checked once, on every wall.",
+   "appliesTo": [
+    "wall_interior",
+    "wall_exterior",
+    "retaining_wall"
+   ],
+   "where": {
+    "all": [
+     {
+      "parameter": "Structural Usage",
+      "scope": "instance",
+      "in": [
+       "Bearing",
+       "Shear",
+       "Structural combined"
+      ]
+     }
+    ],
+    "fallback": {
+     "all": [
+      {
+       "parameter": "Structural",
+       "scope": "instance",
+       "in": [
+        "Yes"
+       ]
+      }
+     ]
+    }
+   },
+   "r": [
+    [
+     "material",
+     "300",
+     [
+      "cost",
+      "quantities",
+      "energy"
+     ],
+     ""
+    ],
+    [
+     "col_material_grade",
+     "300",
+     [
+      "cost",
+      "code_check"
+     ],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
+     [
+      "code_check"
+     ],
+     ""
+    ],
+    [
+     "uniformat_code",
+     "300",
+     [
+      "cost",
+      "quantities",
+      "asset_reg"
+     ],
+     ""
+    ],
+    [
+     "col_exposure_class",
+     "300",
+     [
+      "code_check",
+      "cost"
+     ],
+     "Concrete only"
+    ],
+    [
+     "col_cover",
+     "350",
+     [
+      "coordination",
+      "code_check"
+     ],
+     "Concrete only"
+    ],
+    [
+     "col_rebar_ratio",
+     "300",
+     [
+      "cost",
+      "quantities"
+     ],
+     "Concrete only, before detailing"
+    ],
+    [
+     "col_volume",
+     "300",
+     [
+      "quantities",
+      "cost"
+     ],
+     ""
+    ]
+   ]
+  }
+ ]
 }

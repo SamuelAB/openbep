@@ -44,7 +44,7 @@
 <property dataType="IFCINTEGER" instructions="Sound transmission class (STC). From LOD 300. Needed for: Design review / authoring."><propertySet><simpleValue>OpenBEP</simpleValue></propertySet><baseName><simpleValue>OB_STC</simpleValue></baseName><value><xs:restriction base="xs:integer"><xs:minInclusive value="20"/><xs:maxInclusive value="80"/></xs:restriction></value></property>
 </requirements>
 </specification>
-<specification name="Interior walls / partitions - LOD 300" ifcVersion="IFC4 IFC4X3_ADD2" identifier="wall_interior" description="Specific wall types at designed locations with overall thickness and principal layers, designed top condition (to structure or to ceiling) and openings." instructions="Also required but not checked in IFC (check in the Revit model): Status (new / existing / demolish / temporary); Load bearing">
+<specification name="Interior walls / partitions - LOD 300" ifcVersion="IFC4 IFC4X3_ADD2" identifier="wall_interior" description="Specific wall types at designed locations with overall thickness and principal layers, designed top condition (to structure or to ceiling) and openings." instructions="Also required but not checked in IFC (check in the Revit model): Status (new / existing / demolish / temporary); Load bearing. Also required when the wall is structural (not checked in IFC: check in the Revit model): Material grade / strength; Concrete exposure class; Reinforcement ratio; Net volume">
 <applicability minOccurs="0" maxOccurs="unbounded">
 <entity><name><simpleValue>IFCWALL</simpleValue></name></entity>
 <property dataType="IFCBOOLEAN"><propertySet><simpleValue>Pset_WallCommon</simpleValue></propertySet><baseName><simpleValue>IsExternal</simpleValue></baseName><value><simpleValue>false</simpleValue></value></property>
@@ -63,7 +63,7 @@
 <material instructions="Layer build-up / Primary material. From LOD 300. Needed for: Cost estimating; Quantity take-off; Visualisation and photometric rendering."/>
 </requirements>
 </specification>
-<specification name="Exterior walls - LOD 300" ifcVersion="IFC4 IFC4X3_ADD2" identifier="wall_exterior" description="Specific assemblies with layers (cladding, cavity, air/vapour barrier, insulation, sheathing, structure) and thicknesses at designed locations; openings and parapets sized." instructions="Also required but not checked in IFC (check in the Revit model): Status (new / existing / demolish / temporary); Load bearing">
+<specification name="Exterior walls - LOD 300" ifcVersion="IFC4 IFC4X3_ADD2" identifier="wall_exterior" description="Specific assemblies with layers (cladding, cavity, air/vapour barrier, insulation, sheathing, structure) and thicknesses at designed locations; openings and parapets sized." instructions="Also required but not checked in IFC (check in the Revit model): Status (new / existing / demolish / temporary); Load bearing. Also required when the wall is structural (not checked in IFC: check in the Revit model): Material grade / strength; Concrete exposure class; Reinforcement ratio; Net volume">
 <applicability minOccurs="0" maxOccurs="unbounded">
 <entity><name><simpleValue>IFCWALL</simpleValue></name></entity>
 <property dataType="IFCBOOLEAN"><propertySet><simpleValue>Pset_WallCommon</simpleValue></propertySet><baseName><simpleValue>IsExternal</simpleValue></baseName><value><simpleValue>true</simpleValue></value></property>

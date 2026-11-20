@@ -1,27 +1,30 @@
-Category,Element ID,Family and Type,Type Mark,Mark,Description,Assembly Code,Export to IFC As,Status,Width,Height,Acoustic Rating,Frame Material,Hardware Set,Leaf Material,Operation Type,Luminous Flux,Colour Temperature,Manufacturer,Model,Mounting Type,Rated Voltage,Load Bearing,Material,Area,Access control zone,Family,Function,Structural Usage,Fire Rating,OB_FireResistanceRating_min,OB_FireProtectionRating_min,OB_STC
-Doors,1001,Single Flush: 0915 x 2134mm,D1,D-1.001,Classroom door,C1020,IfcDoor,New,915,2134,STC 35,Hollow metal,HW-01,Solid core wood,SINGLE_SWING_LEFT,,,,,,,,,,Zone A,Single Flush,,,45 min,,60,60
-Doors,1002,Single Flush: 0915 x 2134mm,D1,D-1.002,Classroom door,C1020,IfcDoor,New,915,2134,TBD,Hollow metal,HW-01,Solid core wood,SINGLE_SWING_LEFT,,,,,,,,,,tbc,Single Flush,,,,,0,0
-Doors,1003,Double Flush: 1830 x 2134mm,D2,x,,C1020,<By Category>,Existing,wide,2134,,Default,HW-02,Default,DOUBLE_DOOR_SINGLE_SWING,,,,,,,,,,Zone B,Double Flush,,,TBD,,50,50
-Doors,1004,Default,,,-,TBA,,,0,0,N/A,,,,,,,,,,,,,,,,,,,,1HR,1HR
-Doors,1005,Single Flush: 0815 x 2134mm,D3,D-1.005,Storage,C1020,IfcDoor,Temporary,815,2134,STC 30,Aluminium,7,Glass,?,,,,,,,,,,Zone A,Single Flush,,,20 min,,,
-Lighting Fixtures,2001,Downlight: 150mm LED,L1,L-2.001,Corridor downlight,D5020,IfcLightFixture.POINTSOURCE,New,,,,,,,,1200,3500,Maker A,DL-150,Recessed,120,,,,,Downlight,,,,,,
-Lighting Fixtures,2002,Downlight: 150mm LED,L1,L-2.002,Corridor downlight,D5020,IfcLightFixture.POINTSOURCE,New,,,,,,,,1200 lm,4000 K,Generic,Model,Recessed,none,,,,,Downlight,,,,,,
-Lighting Fixtures,2003,Linear: 1200mm,L2,L-2.003,,D5020,,New,,,,,,,,unknown,,Unknown,LN-12,Surface,,,,,,Linear,,,,,,
-Lighting Fixtures,2004,Linear: 1200mm,L2,,Classroom linear,D5020,IfcLightFixture,Existing,,,,,,,,4500,3500,Maker A,LN-12,Pendant,277,,,,,Linear,,,,,,
-Walls,3001,Basic Wall: Foundation - 300mm Concrete,W9,,Foundation wall,A2010,IfcWall,New,300,,,,,,,,,,,,,Yes,Concrete 35 MPa,42.5,,Basic Wall,Foundation,Bearing,2 hr,120,,
-Walls,3002,Basic Wall: Generic - 200mm,,,,,,,0,,,,,,,,,,,,,maybe,Default Wall,,,Basic Wall,Interior,Non-bearing,,,,
-Walls,3003,Basic Wall: Exterior - Brick on Block,W2,,Brick veneer on block,B2010,IfcWall,New,350,,STC 50,,,,,,,,,,,Yes,Brick,64.0,,Basic Wall,Exterior,Bearing,2 hr,120,,50
-Walls,3004,Basic Wall: Exterior - Metal Panel,W3,,,B2010,IfcWall,New,250,,,,,,,,,,,,,No,Metal panel,31.2,,Basic Wall,Exterior,Non-bearing,TBD,50,,
-Walls,3005,Basic Wall: Shaft - 200mm Block,W4,,Stair shaft,C1010,IfcWall,New,200,,STC 45,,,,,,,,,,,Yes,Concrete block,22.8,,Basic Wall,Core-shaft,Shear,2 hr,120,,45
-Walls,3006,Basic Wall: Soffit - Gypsum,W5,,Soffit,C3030,IfcWall,New,16,,,,,,,,,,,,,No,Gypsum board,6.1,,Basic Wall,Soffit,Non-bearing,,,,
-Walls,3007,Curtain Wall: Storefront,CW1,,Entrance storefront,B2020,IfcCurtainWall,New,,,,,,,,,,,,,,No,,48.0,,Curtain Wall,Exterior,Non-bearing,1 hr,60,,35
-Walls,3008,Basic Wall: Retaining - 400mm Concrete,W8,RW-1,Site retaining wall,G2040,IfcWall.RETAININGWALL,New,400,,,,,,,,,,,,,Yes,Concrete 35 MPa,30.0,,Basic Wall,Retaining,Bearing,,,,
-Walls,3009,Basic Wall: Generic - 150mm,,,,,,,150,,,,,,,,,,,,,,,,,Basic Wall,,,,,,
-Walls,3010,Stacked Wall: Exterior - Brick over Block,W6,,Stacked base wall,B2010,IfcWall,New,400,,,,,,,,,,,,,Yes,Brick,20.0,,Stacked Wall,Exterior,Structural combined,2 hr,120,,
-Walls,3011,Stair wrap: Stair wrap,,,,,,New,,,,,,,,,,,,,,,,,,Stair wrap,,,,,,
-Interior walls / partitions,3101,Basic Wall: Interior - 138mm Partition,W1,,Classroom partition,C1010,IfcWall,New,138,,STC 45,,,,,,,,,,,No,Gypsum board on steel stud,18.2,,Basic Wall,Interior,Non-bearing,1 hr,60,,45
-Interior walls / partitions,3102,Basic Wall: Interior - 138mm Partition,W1,,,C1010,IfcWall,New,138,,later,,,,,,,,,,,false,<By Category>,0,,Basic Wall,Interior,Non-bearing,,0,,later
-Structural Foundations,4001,Footing-Rectangular: 1800 x 1800 x 450mm,F1,F-1,Column footing,A1010,IfcFooting,New,1800,,,,,,,,,,,,,,Concrete 25 MPa,3.24,,Footing-Rectangular,,,,,,
-Structural Foundations,4002,Footing-Rectangular: 1800 x 1800 x 450mm,F1,F-2,,A1010,IfcFooting,New,,,,,,,,,,,,,,,,,,Footing-Rectangular,,,,,,
-Station platforms,5001,Platform: Generic,P1,P-1,Platform edge,G2030,IfcSlab.PLATFORM,New,3000,,,,,,,,,,,,,,Concrete 35 MPa,120,,Platform,,,,,,
-Generic Annotations,9001,Tag: Room,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Category,Element ID,Family and Type,Type Mark,Mark,Description,Assembly Code,Export to IFC As,Status,Width,Height,Acoustic Rating,Frame Material,Hardware Set,Leaf Material,Operation Type,Luminous Flux,Colour Temperature,Manufacturer,Model,Mounting Type,Rated Voltage,Load Bearing,Material,Area,Access control zone,Family,Function,Structural Usage,Fire Rating,OB_FireResistanceRating_min,OB_FireProtectionRating_min,OB_STC,Strength Class
+Doors,1001,Single Flush: 0915 x 2134mm,D1,D-1.001,Classroom door,C1020,IfcDoor,New,915,2134,STC 35,Hollow metal,HW-01,Solid core wood,SINGLE_SWING_LEFT,,,,,,,,,,Zone A,Single Flush,,,45 min,,60,60,
+Doors,1002,Single Flush: 0915 x 2134mm,D1,D-1.002,Classroom door,C1020,IfcDoor,New,915,2134,TBD,Hollow metal,HW-01,Solid core wood,SINGLE_SWING_LEFT,,,,,,,,,,tbc,Single Flush,,,,,0,0,
+Doors,1003,Double Flush: 1830 x 2134mm,D2,x,,C1020,<By Category>,Existing,wide,2134,,Default,HW-02,Default,DOUBLE_DOOR_SINGLE_SWING,,,,,,,,,,Zone B,Double Flush,,,TBD,,50,50,
+Doors,1004,Default,,,-,TBA,,,0,0,N/A,,,,,,,,,,,,,,,,,,,,1HR,1HR,
+Doors,1005,Single Flush: 0815 x 2134mm,D3,D-1.005,Storage,C1020,IfcDoor,Temporary,815,2134,STC 30,Aluminium,7,Glass,?,,,,,,,,,,Zone A,Single Flush,,,20 min,,,,
+Lighting Fixtures,2001,Downlight: 150mm LED,L1,L-2.001,Corridor downlight,D5020,IfcLightFixture.POINTSOURCE,New,,,,,,,,1200,3500,Maker A,DL-150,Recessed,120,,,,,Downlight,,,,,,,
+Lighting Fixtures,2002,Downlight: 150mm LED,L1,L-2.002,Corridor downlight,D5020,IfcLightFixture.POINTSOURCE,New,,,,,,,,1200 lm,4000 K,Generic,Model,Recessed,none,,,,,Downlight,,,,,,,
+Lighting Fixtures,2003,Linear: 1200mm,L2,L-2.003,,D5020,,New,,,,,,,,unknown,,Unknown,LN-12,Surface,,,,,,Linear,,,,,,,
+Lighting Fixtures,2004,Linear: 1200mm,L2,,Classroom linear,D5020,IfcLightFixture,Existing,,,,,,,,4500,3500,Maker A,LN-12,Pendant,277,,,,,Linear,,,,,,,
+Walls,3001,Basic Wall: Foundation - 300mm Concrete,W9,,Foundation wall,A2010,IfcWall,New,300,,,,,,,,,,,,,Yes,Concrete 35 MPa,42.5,,Basic Wall,Foundation,Bearing,2 hr,120,,,35 MPa
+Walls,3002,Basic Wall: Generic - 200mm,,,,,,,0,,,,,,,,,,,,,maybe,Default Wall,,,Basic Wall,Interior,Non-bearing,,,,,
+Walls,3003,Basic Wall: Exterior - Brick on Block,W2,,Brick veneer on block,B2010,IfcWall,New,350,,STC 50,,,,,,,,,,,Yes,Brick,64.0,,Basic Wall,Exterior,Bearing,2 hr,120,,50,
+Walls,3004,Basic Wall: Exterior - Metal Panel,W3,,,B2010,IfcWall,New,250,,,,,,,,,,,,,No,Metal panel,31.2,,Basic Wall,Exterior,Non-bearing,TBD,50,,,
+Walls,3005,Basic Wall: Shaft - 200mm Block,W4,,Stair shaft,C1010,IfcWall,New,200,,STC 45,,,,,,,,,,,Yes,Concrete block,22.8,,Basic Wall,Core-shaft,Shear,2 hr,120,,45,20 MPa
+Walls,3006,Basic Wall: Soffit - Gypsum,W5,,Soffit,C3030,IfcWall,New,16,,,,,,,,,,,,,No,Gypsum board,6.1,,Basic Wall,Soffit,Non-bearing,,,,,
+Walls,3007,Curtain Wall: Storefront,CW1,,Entrance storefront,B2020,IfcCurtainWall,New,,,,,,,,,,,,,,No,,48.0,,Curtain Wall,Exterior,Non-bearing,1 hr,60,,35,
+Walls,3008,Basic Wall: Retaining - 400mm Concrete,W8,RW-1,Site retaining wall,G2040,IfcWall.RETAININGWALL,New,400,,,,,,,,,,,,,Yes,Concrete 35 MPa,30.0,,Basic Wall,Retaining,Bearing,,,,,35 MPa
+Walls,3009,Basic Wall: Generic - 150mm,,,,,,,150,,,,,,,,,,,,,,,,,Basic Wall,,,,,,,
+Walls,3010,Stacked Wall: Exterior - Brick over Block,W6,,Stacked base wall,B2010,IfcWall,New,400,,,,,,,,,,,,,Yes,Brick,20.0,,Stacked Wall,Exterior,Structural combined,2 hr,120,,,
+Walls,3011,Stair wrap: Stair wrap,,,,,,New,,,,,,,,,,,,,,,,,,Stair wrap,,,,,,,
+Walls,3012,Basic Wall: Interior - 200mm Concrete Bearing,W7,,Bearing wall,C1010,IfcWall,New,200,,,,,,,,,,,,,Yes,Concrete 35 MPa,18.0,,Basic Wall,Interior,Bearing,,,,,35 MPa
+Walls,3013,Basic Wall: Interior - 200mm Concrete Shear,W7,,Shear wall,C1010,IfcWall,New,200,,,,,,,,,,,,,Yes,Concrete 35 MPa,18.0,,Basic Wall,Interior,Shear,,,,,
+Walls,3014,Basic Wall: Interior - 138mm Partition,W7,,Partition,C1010,IfcWall,New,200,,,,,,,,,,,,,No,Gypsum board,18.0,,Basic Wall,Interior,Non-bearing,,,,,
+Interior walls / partitions,3101,Basic Wall: Interior - 138mm Partition,W1,,Classroom partition,C1010,IfcWall,New,138,,STC 45,,,,,,,,,,,No,Gypsum board on steel stud,18.2,,Basic Wall,Interior,Non-bearing,1 hr,60,,45,
+Interior walls / partitions,3102,Basic Wall: Interior - 138mm Partition,W1,,,C1010,IfcWall,New,138,,later,,,,,,,,,,,false,<By Category>,0,,Basic Wall,Interior,Non-bearing,,0,,later,
+Structural Foundations,4001,Footing-Rectangular: 1800 x 1800 x 450mm,F1,F-1,Column footing,A1010,IfcFooting,New,1800,,,,,,,,,,,,,,Concrete 25 MPa,3.24,,Footing-Rectangular,,,,,,,
+Structural Foundations,4002,Footing-Rectangular: 1800 x 1800 x 450mm,F1,F-2,,A1010,IfcFooting,New,,,,,,,,,,,,,,,,,,Footing-Rectangular,,,,,,,
+Station platforms,5001,Platform: Generic,P1,P-1,Platform edge,G2030,IfcSlab.PLATFORM,New,3000,,,,,,,,,,,,,,Concrete 35 MPa,120,,Platform,,,,,,,
+Generic Annotations,9001,Tag: Room,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

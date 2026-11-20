@@ -19,6 +19,10 @@
 //            revit-addin/OpenBepSync/test/reqfile-parity-fallback-expected.json (made from the Builder before wall kinds, v0.44),
 //            and the same as the file. --head <path> runs that older Builder live instead; with --write it saves its result.
 //            --write alone refreshes the saved result from this Builder (after a legitimate change to the requirements).
+// Structural walls (format 1.2, requirementGroups): a wall whose Structural Usage is Bearing, Shear or Structural combined also meets the
+// group's rows, computed over those walls only; a Non-bearing wall is never counted in them. Also run without the Structural Usage column
+// (the group is not checked, one note) and with only a Structural column (the fallback).
+//   --break-group  removes requirementGroups from the JSON in memory; the test must then FAIL.
 // Needs Playwright + Chromium, like crawl_app.js. CHROMIUM=/path/to/chrome uses a browser already installed;
 // PW_CHANNEL=msedge uses the installed Microsoft Edge.
 let pw; try { pw = require('playwright'); } catch (e) { pw = require('playwright-core'); }
@@ -29,6 +33,7 @@ const assert = require('node:assert');
 
 const root = path.resolve(__dirname, '..', '..');
 const testDir = path.join(root, 'revit-addin', 'OpenBepSync', 'test');
+const BREAK_GROUP = process.argv.includes('--break-group');
 const BREAK = process.argv.includes('--break'), BREAK_RULE = process.argv.includes('--break-rule'), WRITE = process.argv.includes('--write'), NOFN = process.argv.includes('--no-function-column');
 const HEAD = process.argv.includes('--head') ? process.argv[process.argv.indexOf('--head') + 1] : null;
 const OWNER = 'Access control zone';
@@ -88,6 +93,12 @@ function evaluate(F, T, mid) {
     assert.strictEqual(byPattern, byRule, `${q.id}: valueRule.pattern and allowed/min/max disagree on "${s}"`);
     return byRule;
   };
+  // tableRule.groups: the group is checked only when the table has its where column; the fallback column when no placed row has a value.
+  const grpSub = new Map((F.requirementGroups || []).map(g => {
+    const els = [...by.values()].filter(x => g.appliesTo.includes(x.t.id)).flatMap(x => x.els), col = q => T.head.findIndex(h => norm(h) === norm(q.parameter));
+    const m = g.where.all.map(q => ({ q, i: col(q) })); if (m.some(x => x.i < 0)) return [g.id, null];
+    const fb = g.where.fallback && g.where.fallback.all.map(q => ({ q, i: col(q) })), use = !els.some(r => m.some(x => r[x.i])) && fb && fb.every(x => x.i >= 0) ? fb : m;
+    return [g.id, new Set(els.filter(r => use.every(x => x.q.in.some(v => norm(v) === norm(r[x.i])))))]; }));
   const cats = [...by.values()].map(({ t, els }) => {
     const reqs = new Map(t.requirements.map(q => [q.id, q]));
     const rows = t.requiredAt[mid].map(id => {
@@ -96,6 +107,14 @@ function evaluate(F, T, mid) {
       els.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
       return { n: q.label, has: Math.round(100 * has / els.length), ok: Math.round(100 * ok / els.length) };
     });
+    // Requirement groups (scoreRule.groups): extra rows over the elements the group's where picks; none picked = rows left out.
+    for (const g of F.requirementGroups || []) {
+      if (!g.appliesTo.includes(t.id)) continue; const ids = g.requiredAt[t.id][mid], sub = grpSub.get(g.id); if (!ids.length || !sub) continue;
+      const se = els.filter(r => sub.has(r)); if (!se.length) continue; const greqs = new Map(g.requirements.map(q => [q.id, q]));
+      for (const id of ids) { const q = greqs.get(id), col = T.head.findIndex(h => q.columnNames.includes(norm(h))); let has = 0, ok = 0;
+        se.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
+        rows.push({ n: q.label, grp: g.id, of: se.length, has: Math.round(100 * has / se.length), ok: Math.round(100 * ok / se.length) }); }
+    }
     const fill = rows.length ? Math.round(rows.reduce((s, r) => s + r.ok, 0) / rows.length) : 100;
     return { id: t.id, lod: t.lod[mid], n: els.length, fill, pass: fill >= ms.targetPercent, rows };
   });
@@ -127,7 +146,7 @@ function evaluate(F, T, mid) {
 
     const school = await exportFile();
     assert.strictEqual(school.format, 'openbep-requirements');
-    assert.strictEqual(school.formatVersion, '1.1');
+    assert.strictEqual(school.formatVersion, '1.2');
     const sortId = a => [...a].sort((x, y) => x.id.localeCompare(y.id));
     const same = (a, b, where) => { assert.deepStrictEqual(b.map(x => x.id), a.map(x => x.id), where + ': element types found');
       a.forEach((x, i) => { const y = b[i], w = `${where}, ${x.id}`; assert.strictEqual(y.lod, x.lod, w + ': level'); assert.strictEqual(y.n, x.n, w + ': elements');
@@ -154,9 +173,9 @@ function evaluate(F, T, mid) {
         const mine = evaluate(school, T0, m.id); same(now, sortId(mine.cats), `no Function column, ${m.id}`);
         const W = await page.evaluate(([t, mid]) => window.__ckWalls(t, mid), [csv0, m.id]);
         assert.deepStrictEqual(W.walls, mine.walls, m.id + ': wall counts');
-        assert.ok(!W.walls.split && W.walls.n === 11 && W.walls.out === 0, m.id + ': walls ' + JSON.stringify(W.walls));
+        assert.ok(!W.walls.split && W.walls.n === 14 && W.walls.out === 0, m.id + ': walls ' + JSON.stringify(W.walls));
         assert.strictEqual(W.html.split('Walls could not be told apart without a Function column').length - 1, 1, m.id + ': the note must show once');
-        assert.strictEqual(now.find(x => x.id === 'wall_interior').n, 13, m.id + ': every wall row goes to interior walls (11 Walls + 2 named rows)');
+        assert.strictEqual(now.find(x => x.id === 'wall_interior').n, 16, m.id + ': every wall row goes to interior walls (14 Walls + 2 named rows)');
         n += now.length;
       }
       if (errors.length) throw new Error('Page errors: ' + errors.join(' | '));
@@ -190,6 +209,8 @@ function evaluate(F, T, mid) {
       Object.keys(d.requiredAt).forEach(m => { d.requiredAt[m] = d.requiredAt[m].filter(x => x !== gone); });
       console.log(`--break: removed ${gone} from Doors`);
     }
+    // Negative control for the structural walls group: the file loses requirementGroups, the Builder still checks them.
+    if (BREAK_GROUP) for (const F of [school, owned]) { delete F.requirementGroups; console.log('--break-group: removed requirementGroups'); }
     // Negative control for the whole-number rule: the exterior walls' fire minutes become "any number" in the file only.
     if (BREAK_RULE) for (const F of [school, owned]) {
       const q = F.elementTypes.find(t => t.id === 'wall_exterior').requirements.find(x => x.id === 'fire_resistance_min');
@@ -199,7 +220,10 @@ function evaluate(F, T, mid) {
 
     // Parity, per milestone, for the school example and again with the owner addition.
     let types = 0, rowsCompared = 0, partial = 0, wallsChecked = 0;
-    const variants = [['full table', T], ['no Family column', dropCols(T, ['family'])], ['no Function column', dropCols(T, ['function', 'family'])]];
+    const su = T.head.findIndex(h => norm(h) === 'structuralusage'), isSt = v => ['bearing', 'shear', 'structuralcombined'].includes(norm(v));
+    const TS = { head: [...T.head, 'Structural'], rows: T.rows.map(r => [...r.map((c, i) => i === su ? '' : c), isSt(r[su]) ? 'Yes' : (r[su] ? 'No' : '')]) };
+    const variants = [['full table', T], ['no Family column', dropCols(T, ['family'])], ['no Function column', dropCols(T, ['function', 'family'])],
+      ['no Structural Usage column', dropCols(T, ['structuralusage'])], ['Structural column only', TS]];
     for (const [label, F, withOwner] of [['with owner addition', owned, true], ['school example', school, false]]) {
       if (withOwner) { /* the Builder state now carries the owner addition, as in F */ }
       else { // put the Builder back to the plain school example for its own check
@@ -219,11 +243,11 @@ function evaluate(F, T, mid) {
         if (withOwner && tl === 'full table') {
           types = a.length;
           if (m.id !== 'prelim100') assert.ok(a.find(x => x.id === 'door').rows.some(r => r.n === OWNER), 'Builder check has no owner row');
-          // Hand-counted placement of the 11 Walls rows (see the CSV): interior 3002 (+2 named rows), exterior 3003 3004 3010 (stacked),
-          // retaining 3001 3008, curtain 3007, core-shaft 3005 -> interior; not covered: 3006 soffit, 3009 blank Function, 3011 in place.
+          // Hand-counted placement of the 14 Walls rows (see the CSV): interior 3002 (+2 named rows), exterior 3003 3004 3010 (stacked),
+          // retaining 3001 3008, curtain 3007, core-shaft 3005 and 3012 3013 3014 -> interior; not covered: 3006 soffit, 3009 blank Function, 3011 in place.
           const nOf = id => (a.find(x => x.id === id) || {}).n;
-          assert.deepStrictEqual([nOf('wall_interior'), nOf('wall_exterior'), nOf('retaining_wall'), nOf('curtain_wall')], [4, 3, 2, 1], m.id + ': walls placed');
-          assert.deepStrictEqual(W.walls, { n: 11, split: true, kind: true, out: 3 }, m.id + ': wall counts');
+          assert.deepStrictEqual([nOf('wall_interior'), nOf('wall_exterior'), nOf('retaining_wall'), nOf('curtain_wall')], [7, 3, 2, 1], m.id + ': walls placed');
+          assert.deepStrictEqual(W.walls, { n: 14, split: true, kind: true, out: 3 }, m.id + ': wall counts');
           assert.deepStrictEqual(mine.why, { 'Soffit walls: no element type of this plan covers them.': 1, 'matches no element type': 1, 'Wall modelled in place; has no wall type Function.': 1 }, m.id + ': not covered');
           assert.ok(W.html.includes('Not covered by the plan: 3 walls') && !W.html.includes('without a Function column') && !W.html.includes('without a Family column'), m.id + ': wall notes');
           wallsChecked++;
@@ -292,6 +316,43 @@ function evaluate(F, T, mid) {
     const dr = evaluate(school, T, 'final90').cats.find(x => x.id === 'door').rows.find(r => r.n === stc.label);
     assert.deepStrictEqual(dr, { n: stc.label, has: 100, ok: 40 }, 'doors STC row on the table (60, 0, 50, 1HR, blank)');
     console.log('VALUE-RULES OK: 60, 0, 50, "1HR", blank: fire minutes 100/100/0/0/0, STC 100/0/100/0/0, Builder = file; doors STC on the table 40%');
+    // Structural walls (owner ruling 2026-11-20): the group applies from LOD 300 (cover 350) to interior, exterior and foundation walls
+    // whose Structural Usage is Bearing, Shear or Structural combined. Hand-computed on the table at final90 (Strength Class = grade):
+    //   interior structural 3005 (Shear, 20 MPa), 3012 (Bearing, 35 MPa), 3013 (Shear, blank) -> grade 2 of 3 = 67%; 3002 3014 3101 3102 are Non-bearing.
+    //   exterior structural 3003 (Bearing, blank), 3010 (Structural combined, blank) -> grade 0%; 3004 Non-bearing, the curtain wall is not an exterior wall.
+    //   exposure class, reinforcement ratio, net volume: no column -> 0%. Retaining walls already ask all of them (no group rows).
+    const G = school.requirementGroups.find(g => g.id === 'structural_walls');
+    assert.ok(G && G.where.all[0].parameter === 'Structural Usage' && G.where.fallback, 'structural_walls group');
+    assert.deepStrictEqual(G.appliesTo, ['wall_interior', 'wall_exterior', 'retaining_wall']);
+    for (const q of G.requirements) assert.strictEqual(q.fromLod, q.id === 'col_cover' ? '350' : '300', q.id + ': from LOD');
+    const gwant = ['col_material_grade', 'col_exposure_class', 'col_rebar_ratio', 'col_volume'];
+    assert.deepStrictEqual(G.requiredAt.wall_interior.final90, gwant, 'interior walls group at final90');
+    assert.deepStrictEqual(G.requiredAt.wall_interior.prelim100, [], 'nothing structural at LOD 200');
+    assert.deepStrictEqual(G.requiredAt.retaining_wall.final90, [], 'retaining walls already ask the group parameters');
+    const ckF = async (TT, mid) => sortId(await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [toCsv(TT), mid]));
+    const a90 = await ckF(T, 'final90'), f90 = sortId(evaluate(school, T, 'final90').cats), lbl = id => G.requirements.find(q => q.id === id).label;
+    const grpRows = (L, id) => L.find(x => x.id === id).rows.filter(r => r.grp);
+    const hand = (of, g) => gwant.map((id, i) => ({ n: lbl(id), grp: 'structural_walls', of, has: i === 0 ? 100 : 0, ok: i === 0 ? g : 0 }));
+    assert.deepStrictEqual(grpRows(a90, 'wall_interior'), hand(3, 67), 'Builder: interior walls group rows');
+    assert.deepStrictEqual(grpRows(a90, 'wall_exterior'), hand(2, 0), 'Builder: exterior walls group rows');
+    assert.deepStrictEqual(grpRows(f90, 'wall_interior'), hand(3, 67), 'file: interior walls group rows');
+    assert.deepStrictEqual(grpRows(a90, 'retaining_wall'), [], 'retaining walls: no group rows');
+    for (const L of [a90, f90]) for (const x of L) assert.strictEqual(x.fill, Math.round(x.rows.reduce((s, r) => s + r.ok, 0) / x.rows.length), x.id + ': score = mean of all rows');
+    // A Non-bearing wall is never in the group: giving 3002 and 3014 a grade, or taking 3014 away, changes no group row.
+    const gi = T.head.findIndex(h => norm(h) === 'strengthclass'), TN = { head: T.head, rows: T.rows.map(r => ['3002', '3014'].includes(r[1]) ? r.map((c, i) => i === gi ? '35 MPa' : c) : r) };
+    assert.deepStrictEqual(await ckF(TN, 'final90'), a90, 'a Non-bearing wall with a grade changed the result');
+    const TX = { head: T.head, rows: T.rows.filter(r => r[1] !== '3014') }, ax = await ckF(TX, 'final90');
+    assert.deepStrictEqual(grpRows(ax, 'wall_interior'), grpRows(a90, 'wall_interior'), 'the Non-bearing wall 3014 counted in the group');
+    // Without the Structural Usage column: no group rows, one note; with only a Structural column: the same walls (fallback).
+    const T0s = dropCols(T, ['structuralusage']), a0 = await ckF(T0s, 'final90'), W0 = await page.evaluate(([t, mid]) => window.__ckWalls(t, mid), [toCsv(T0s), 'final90']);
+    assert.ok(a0.every(x => !x.rows.some(r => r.grp)), 'no Structural Usage column: group rows present');
+    const NOTE = "Structural walls were checked only against the requirements of their wall type: the schedule has no Structural Usage column. Add the wall's Structural Usage to the schedule to check their extra requirements.";
+    assert.strictEqual(W0.html.split(NOTE).length - 1, 1, 'no Structural Usage column: the note must show once');
+    assert.ok(!(await page.evaluate(([t, mid]) => window.__ckWalls(t, mid), [table, 'final90'])).html.includes(NOTE), 'the note shows with the column');
+    assert.deepStrictEqual(grpRows(await ckF(TS, 'final90'), 'wall_interior'), hand(3, 67), 'Structural column only (fallback): interior group rows');
+    for (const L of ['fr', 'ja']) for (const t of [NOTE, G.label, G.statement])
+      assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [t, L]), `no ${L} translation: ${t}`);
+    console.log(`STRUCTURAL OK: group ${G.id} on ${G.appliesTo.join(', ')}; final90 interior walls ${grpRows(a90, 'wall_interior').map(r => r.ok + '% of ' + r.of).join(' / ')}, exterior ${grpRows(a90, 'wall_exterior').map(r => r.ok + '% of ' + r.of).join(' / ')}; Builder = file = hand; Non-bearing walls not counted; no column -> not checked + note; Structural fallback same walls`);
     // Optional parameters: off in the school example; they enter the file only once the owner switches one on.
     const OPTS = ['fire_head_joint_min', 'fire_base_joint_min', 'fire_from_above_min', 'fire_from_below_min', 'fire_from_inside_min', 'fire_from_outside_min'];
     const inFile = F => F.elementTypes.flatMap(t => [...t.requirements.map(q => q.id), ...Object.values(t.requiredAt).flat()].filter(id => OPTS.includes(id)).map(id => t.id + ':' + id));
@@ -357,6 +418,26 @@ function evaluate(F, T, mid) {
     assert.strictEqual(cad.on, false, 'switched-off rule must be on:false');
     assert.ok(!text.includes(cad.statement), 'a switched-off rule is still in the draft');
     console.log(`MODEL-RULES OK kinds=${kinds.length}: each switched on is in the draft and the file, switched off is on:false and not in the draft, French and Japanese present`);
+    // Structural walls in the Builder: concrete cover only from LOD 350; a group row is switched per element type, kept on reload,
+    // and comes back with "Back to the OpenBEP defaults".
+    await page.locator('#steps [data-step="6"]').click(); await page.waitForTimeout(150);
+    await page.locator('[data-lbsel="wall_interior"]').first().click(); await page.waitForTimeout(150); await openAll();
+    await page.selectOption('[data-lodt="wall_interior.final"]', '350'); await page.waitForTimeout(200);
+    let SG = (await exportFile()).requirementGroups[0];
+    assert.ok(SG.requiredAt.wall_interior.final90.includes('col_cover'), 'interior walls at LOD 350: no concrete cover in the group');
+    assert.ok(!SG.requiredAt.wall_exterior.final90.includes('col_cover'), 'exterior walls at LOD 300 ask concrete cover');
+    const KEY = 'wall_interior|structural_walls:col_volume';
+    await openAll(); await page.locator(`[data-lbk="${KEY}"]`).uncheck(); await page.waitForTimeout(200);
+    const off = async () => { const g = (await exportFile()).requirementGroups[0];
+      return [g.requiredAt.wall_interior.final90.includes('col_volume'), g.requiredAt.wall_exterior.final90.includes('col_volume')]; };
+    assert.deepStrictEqual(await off(), [false, true], 'switching off net volume on interior walls');
+    await page.reload(); await page.waitForTimeout(300);
+    assert.deepStrictEqual(await off(), [false, true], 'the switch did not survive a reload');
+    await page.locator('#steps [data-step="6"]').click(); await page.waitForTimeout(150);
+    await page.locator('[data-lbsel="wall_interior"]').first().click(); await page.waitForTimeout(150); await openAll();
+    await page.locator('#lbResetAll').click(); await page.waitForTimeout(200);
+    assert.deepStrictEqual(await off(), [true, true], '"Back to the OpenBEP defaults" did not bring net volume back');
+    console.log('STRUCTURAL SWITCHES OK: concrete cover only where the level is 350; net volume switched off on interior walls only, kept on reload, back with the defaults');
     if (errors.length) throw new Error('Page errors: ' + errors.join(' | '));
     console.log(`REQFILE-PARITY OK milestones=${school.milestones.length} types=${types}`);
   } catch (e) {

@@ -1,19 +1,20 @@
 {
   "format": "openbep-requirements",
-  "formatVersion": "1.1",
+  "formatVersion": "1.2",
   "plan": {
     "name": "Example: Primary school renovation and extension",
     "fingerprint": "9C37B605B3A9",
     "version": null,
     "listVersion": "0.1",
-    "builderVersion": "0.46",
-    "generated": "2026-11-20T18:25:08.966Z"
+    "builderVersion": "0.47",
+    "generated": "2026-11-20T19:06:54.057Z"
   },
   "scoreRule": {
     "perElementType": "mean of each required parameter real-value percentage",
     "passWhen": "score >= milestone targetPercent",
     "rowPercent": "round(100 * elements whose value is real / elements of the type)",
-    "score": "round(mean of the row percentages); 100 when nothing is required"
+    "score": "round(mean of the row percentages); 100 when nothing is required",
+    "groups": "For an element type in a requirement group's appliesTo, the group's requirements in requiredAt[element type][milestone] are extra rows computed over the elements its where condition picks only (for example the structural walls): round(100 * those elements whose value is real / those elements). The element type's score is the mean over all its rows: its own rows over all its elements, the group rows over that subset. A group row with no element in the subset is left out of the mean. A parameter the element type already requires at that milestone is not repeated in the group (it is checked once, on every element)."
   },
   "placeholders": {
     "always": "^(?:[\\-–—_.*?x]+|xx+|tbc|tba|na|none|unknown|later|todo)$",
@@ -50,7 +51,8 @@
         "rule": "Applies only when the table has a column named in columns.Function. A row whose normalized Category cell is in cells is placed by revitWhere: it takes the first element type, in file order, whose revitWhere.revitCategory is this category and whose conditions all hold. A condition reads the column named for it (wallKind: the normalized cell turned into a kind through wallKindValues, any other non-blank family is wallKindOther); a condition whose column the table lacks is skipped, and a type whose conditions are all skipped takes no rows. A cell is normalized and compared with the normalized in values; a blank or unknown cell does not hold. A row that takes no element type is not covered by the plan: it is counted, not scored. With no Function column every such row follows the category rule."
       }
     ],
-    "column": "a requirement reads the first column whose normalized header is in its columnNames; with no such column every element fails it"
+    "column": "a requirement reads the first column whose normalized header is in its columnNames; with no such column every element fails it",
+    "groups": "A requirement group is checked only when the table has a column whose normalized header is the normalized where parameter (Structural Usage). An element is in the group when the normalized cell is one of the normalized in values. When no row placed in the group's element types has a value in that column and the table has the fallback column (Structural), the fallback condition is read instead. With no such column the group is not checked and the element types are scored on their own rows."
   },
   "milestones": [
     {
@@ -43272,6 +43274,277 @@
       ]
     }
   ],
+  "requirementGroups": [
+    {
+      "id": "structural_walls",
+      "name": "Structural walls",
+      "label": "Also required when the wall is structural",
+      "statement": "A wall whose Structural Usage is Bearing, Shear or Structural combined keeps the requirements of its own wall type and must also carry these. When the model has no Structural Usage value, Structural = Yes is read instead. A parameter the wall type already asks is checked once, on every wall.",
+      "appliesTo": [
+        "wall_interior",
+        "wall_exterior",
+        "retaining_wall"
+      ],
+      "where": {
+        "all": [
+          {
+            "parameter": "Structural Usage",
+            "scope": "instance",
+            "in": [
+              "Bearing",
+              "Shear",
+              "Structural combined"
+            ]
+          }
+        ],
+        "fallback": {
+          "all": [
+            {
+              "parameter": "Structural",
+              "scope": "instance",
+              "in": [
+                "Yes"
+              ]
+            }
+          ]
+        }
+      },
+      "requiredAt": {
+        "wall_interior": {
+          "prelim100": [],
+          "final50": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ],
+          "final90": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ],
+          "final100": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ],
+          "handover": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ]
+        },
+        "wall_exterior": {
+          "prelim100": [],
+          "final50": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ],
+          "final90": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ],
+          "final100": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ],
+          "handover": [
+            "col_material_grade",
+            "col_exposure_class",
+            "col_rebar_ratio",
+            "col_volume"
+          ]
+        },
+        "retaining_wall": {
+          "prelim100": [],
+          "final50": [],
+          "final90": [],
+          "final100": [],
+          "handover": []
+        }
+      },
+      "requirements": [
+        {
+          "id": "col_material_grade",
+          "kind": "parameter",
+          "label": "Material grade / strength",
+          "revitParameter": "Structural Material (material properties)",
+          "guid": null,
+          "shared": false,
+          "bindable": true,
+          "scope": "type",
+          "dataType": "TEXT",
+          "ifcType": "IfcLabel",
+          "fromLod": "300",
+          "neededFor": [
+            "cost",
+            "code_check"
+          ],
+          "placeholders": [
+            "",
+            "TBD",
+            "N/A",
+            "0",
+            "Default",
+            "<By Category>"
+          ],
+          "valueRule": {
+            "source": "builder",
+            "allowed": null,
+            "min": null,
+            "max": null,
+            "check": "text",
+            "pattern": "[\\s\\S]{2}|\\d"
+          },
+          "example": "CSA G40.21 350W / 35 MPa",
+          "ifcTarget": null,
+          "ownerAddition": false,
+          "columnNames": [
+            "colmaterialgrade",
+            "strengthclass",
+            "structuralgrade",
+            "compressivestrength",
+            "materialgrade/strength",
+            "structuralmaterial",
+            "materialproperties"
+          ]
+        },
+        {
+          "id": "col_exposure_class",
+          "kind": "parameter",
+          "label": "Concrete exposure class",
+          "revitParameter": "OB_ConcreteExposureClass",
+          "guid": "fe94060a-4d36-5faf-8a21-5989a403643d",
+          "shared": true,
+          "bindable": true,
+          "scope": "type",
+          "dataType": "TEXT",
+          "ifcType": "IfcLabel",
+          "fromLod": "300",
+          "neededFor": [
+            "code_check",
+            "cost"
+          ],
+          "placeholders": [
+            "",
+            "TBD",
+            "N/A",
+            "0",
+            "Default",
+            "<By Category>"
+          ],
+          "valueRule": {
+            "source": "builder",
+            "allowed": null,
+            "min": null,
+            "max": null,
+            "check": "text",
+            "pattern": "[\\s\\S]{2}|\\d"
+          },
+          "example": "Concrete only",
+          "ifcTarget": null,
+          "ownerAddition": false,
+          "columnNames": [
+            "colexposureclass",
+            "exposureclass",
+            "concreteexposureclass"
+          ]
+        },
+        {
+          "id": "col_rebar_ratio",
+          "kind": "parameter",
+          "label": "Reinforcement ratio",
+          "revitParameter": "OB_ReinforcementRatio_kgm3",
+          "guid": "43c350e1-7b60-5569-b8db-3f4d2e642e46",
+          "shared": true,
+          "bindable": true,
+          "scope": "type",
+          "dataType": "NUMBER",
+          "ifcType": "IfcMassDensityMeasure",
+          "fromLod": "300",
+          "neededFor": [
+            "cost",
+            "quantities"
+          ],
+          "placeholders": [
+            "",
+            "TBD",
+            "N/A",
+            "0",
+            "Default",
+            "<By Category>"
+          ],
+          "valueRule": {
+            "source": "builder",
+            "allowed": null,
+            "min": null,
+            "max": null,
+            "check": "number",
+            "pattern": "\\d"
+          },
+          "example": "Concrete only, before detailing",
+          "ifcTarget": null,
+          "ownerAddition": false,
+          "columnNames": [
+            "colrebarratio",
+            "reinforcementvolumeratio",
+            "reinforcementratio"
+          ]
+        },
+        {
+          "id": "col_volume",
+          "kind": "parameter",
+          "label": "Net volume",
+          "revitParameter": "Volume",
+          "guid": null,
+          "shared": false,
+          "bindable": true,
+          "scope": "instance",
+          "dataType": "VOLUME",
+          "ifcType": "IfcVolumeMeasure",
+          "fromLod": "300",
+          "neededFor": [
+            "quantities",
+            "cost"
+          ],
+          "placeholders": [
+            "",
+            "TBD",
+            "N/A",
+            "0",
+            "Default",
+            "<By Category>"
+          ],
+          "valueRule": {
+            "source": "builder",
+            "allowed": null,
+            "min": null,
+            "max": null,
+            "check": "number",
+            "pattern": "\\d"
+          },
+          "example": "0.67",
+          "ifcTarget": null,
+          "ownerAddition": false,
+          "columnNames": [
+            "colvolume",
+            "netvolume",
+            "grossvolume",
+            "volume"
+          ]
+        }
+      ]
+    }
+  ],
   "unresolvedSplits": [
     {
       "id": "ahu",
@@ -43738,7 +44011,7 @@
           "Yes"
         ]
       },
-      "note": "A second axis, not a kind: report structural and non-structural walls as two counts inside interior and exterior walls. Read Structural Usage; only when the model has no Structural Usage value, read Structural. The score does not change: this plan has no structural walls requirements."
+      "note": "A second axis, not a kind: report structural and non-structural walls as two counts inside interior and exterior walls. Read Structural Usage; only when the model has no Structural Usage value, read Structural. Structural walls also meet the requirement group structural_walls (requirementGroups), when the plan asks anything of it."
     }
   },
   "modelRules": [

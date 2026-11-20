@@ -164,8 +164,8 @@
   {
    "id": "wall_interior",
    "lod": "200",
-   "n": 13,
-   "fill": 82,
+   "n": 16,
+   "fill": 85,
    "pass": false,
    "rows": [
     {
@@ -176,22 +176,22 @@
     {
      "n": "IFC class and predefined type",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Status (new / existing / demolish / temporary)",
      "has": 100,
-     "ok": 85
+     "ok": 88
     },
     {
      "n": "Net side area",
      "has": 100,
-     "ok": 69
+     "ok": 75
     },
     {
      "n": "Overall thickness",
      "has": 100,
-     "ok": 77
+     "ok": 81
     }
    ]
   }
@@ -370,7 +370,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -538,7 +538,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -556,9 +556,9 @@
   {
    "id": "wall_interior",
    "lod": "300",
-   "n": 13,
-   "fill": 57,
-   "pass": true,
+   "n": 16,
+   "fill": 49,
+   "pass": false,
    "rows": [
     {
      "n": "Type name",
@@ -568,37 +568,37 @@
     {
      "n": "Type mark / reference",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Description",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "UniFormat II code",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "IFC class and predefined type",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Status (new / existing / demolish / temporary)",
      "has": 100,
-     "ok": 85
+     "ok": 88
     },
     {
      "n": "Net side area",
      "has": 100,
-     "ok": 69
+     "ok": 75
     },
     {
      "n": "Overall thickness",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Apparent sound transmission class (ASTC)",
@@ -613,7 +613,7 @@
     {
      "n": "Fire-resistance rating (min)",
      "has": 100,
-     "ok": 54
+     "ok": 44
     },
     {
      "n": "Layer build-up",
@@ -623,17 +623,45 @@
     {
      "n": "Load bearing",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Primary material",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "Sound transmission class (STC)",
      "has": 100,
-     "ok": 31
+     "ok": 25
+    },
+    {
+     "n": "Material grade / strength",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 100,
+     "ok": 57
+    },
+    {
+     "n": "Concrete exposure class",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reinforcement ratio",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
     }
    ]
   }
@@ -812,7 +840,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -980,7 +1008,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -998,8 +1026,8 @@
   {
    "id": "wall_interior",
    "lod": "300",
-   "n": 13,
-   "fill": 57,
+   "n": 16,
+   "fill": 49,
    "pass": false,
    "rows": [
     {
@@ -1010,37 +1038,37 @@
     {
      "n": "Type mark / reference",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Description",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "UniFormat II code",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "IFC class and predefined type",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Status (new / existing / demolish / temporary)",
      "has": 100,
-     "ok": 85
+     "ok": 88
     },
     {
      "n": "Net side area",
      "has": 100,
-     "ok": 69
+     "ok": 75
     },
     {
      "n": "Overall thickness",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Apparent sound transmission class (ASTC)",
@@ -1055,7 +1083,7 @@
     {
      "n": "Fire-resistance rating (min)",
      "has": 100,
-     "ok": 54
+     "ok": 44
     },
     {
      "n": "Layer build-up",
@@ -1065,17 +1093,45 @@
     {
      "n": "Load bearing",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Primary material",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "Sound transmission class (STC)",
      "has": 100,
-     "ok": 31
+     "ok": 25
+    },
+    {
+     "n": "Material grade / strength",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 100,
+     "ok": 57
+    },
+    {
+     "n": "Concrete exposure class",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reinforcement ratio",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
     }
    ]
   }
@@ -1254,7 +1310,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -1422,7 +1478,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -1440,8 +1496,8 @@
   {
    "id": "wall_interior",
    "lod": "300",
-   "n": 13,
-   "fill": 57,
+   "n": 16,
+   "fill": 49,
    "pass": false,
    "rows": [
     {
@@ -1452,37 +1508,37 @@
     {
      "n": "Type mark / reference",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Description",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "UniFormat II code",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "IFC class and predefined type",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Status (new / existing / demolish / temporary)",
      "has": 100,
-     "ok": 85
+     "ok": 88
     },
     {
      "n": "Net side area",
      "has": 100,
-     "ok": 69
+     "ok": 75
     },
     {
      "n": "Overall thickness",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Apparent sound transmission class (ASTC)",
@@ -1497,7 +1553,7 @@
     {
      "n": "Fire-resistance rating (min)",
      "has": 100,
-     "ok": 54
+     "ok": 44
     },
     {
      "n": "Layer build-up",
@@ -1507,17 +1563,45 @@
     {
      "n": "Load bearing",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Primary material",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "Sound transmission class (STC)",
      "has": 100,
-     "ok": 31
+     "ok": 25
+    },
+    {
+     "n": "Material grade / strength",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 100,
+     "ok": 57
+    },
+    {
+     "n": "Concrete exposure class",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reinforcement ratio",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
     }
    ]
   }
@@ -1696,7 +1780,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -1864,7 +1948,7 @@
     },
     {
      "n": "Material grade / strength",
-     "has": 0,
+     "has": 100,
      "ok": 0
     },
     {
@@ -1882,8 +1966,8 @@
   {
    "id": "wall_interior",
    "lod": "300",
-   "n": 13,
-   "fill": 57,
+   "n": 16,
+   "fill": 49,
    "pass": false,
    "rows": [
     {
@@ -1894,37 +1978,37 @@
     {
      "n": "Type mark / reference",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Description",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "UniFormat II code",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "IFC class and predefined type",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Status (new / existing / demolish / temporary)",
      "has": 100,
-     "ok": 85
+     "ok": 88
     },
     {
      "n": "Net side area",
      "has": 100,
-     "ok": 69
+     "ok": 75
     },
     {
      "n": "Overall thickness",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Apparent sound transmission class (ASTC)",
@@ -1939,7 +2023,7 @@
     {
      "n": "Fire-resistance rating (min)",
      "has": 100,
-     "ok": 54
+     "ok": 44
     },
     {
      "n": "Layer build-up",
@@ -1949,17 +2033,45 @@
     {
      "n": "Load bearing",
      "has": 100,
-     "ok": 77
+     "ok": 81
     },
     {
      "n": "Primary material",
      "has": 100,
-     "ok": 62
+     "ok": 69
     },
     {
      "n": "Sound transmission class (STC)",
      "has": 100,
-     "ok": 31
+     "ok": 25
+    },
+    {
+     "n": "Material grade / strength",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 100,
+     "ok": 57
+    },
+    {
+     "n": "Concrete exposure class",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Reinforcement ratio",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
+    },
+    {
+     "n": "Net volume",
+     "grp": "structural_walls",
+     "of": 7,
+     "has": 0,
+     "ok": 0
     }
    ]
   }
