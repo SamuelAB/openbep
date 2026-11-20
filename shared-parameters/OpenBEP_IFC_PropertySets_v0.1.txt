@@ -43,6 +43,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	Name	Label
 	Number	Label
 	Number of Poles	Real
+	OB_ASTC	Integer
 	OB_AccessDoorProvided	Boolean
 	OB_AccessibleCeiling	Boolean
 	OB_AcousticRating	Label
@@ -136,7 +137,15 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	OB_FireCompartmentBoundary	Boolean
 	OB_FireExit	Boolean
 	OB_FireProtection	Label
+	OB_FireProtectionRating_min	Integer
+	OB_FireRatingBaseJoint_min	Integer
+	OB_FireRatingFromAbove_min	Integer
+	OB_FireRatingFromBelow_min	Integer
+	OB_FireRatingFromInside_min	Integer
+	OB_FireRatingFromOutside_min	Integer
+	OB_FireRatingHeadJoint_min	Integer
 	OB_FireResistanceRating	Label
+	OB_FireResistanceRating_min	Integer
 	OB_FirefightersElevator	Boolean
 	OB_FiringOperatingMode	Label
 	OB_FlowArrangement	Label
@@ -170,6 +179,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	OB_HeatTransferCapacity_kW	Real
 	OB_HeatingCapacity_kW	Real
 	OB_HeatingOutput_kW	Real
+	OB_IIC	Integer
 	OB_IPRating	Label
 	OB_Impedance	Label
 	OB_InfillType	Label
@@ -275,6 +285,7 @@ PropertySet:	OpenBEP	I	IfcElement,IfcSpatialElement,IfcZone
 	OB_RoofingMembraneSystem	Label
 	OB_RotationAccommodated	Boolean
 	OB_RoughnessAtHandover_mkm	Real
+	OB_STC	Integer
 	OB_ScourProtection	Label
 	OB_SealLeakageClass	Label
 	OB_SecondaryVoltage_V	Real
@@ -379,20 +390,43 @@ PropertySet:	Pset_DamperTypeFireSmokeDamper	I	IfcDamper
 	ClosureRatingEnum	Label	OB_DynamicStaticRating
 	FireResistanceRating	Label	OB_FireResistanceRating
 	FusibleLinkTemperature	Real	OB_ReleaseTemperature_C
+PropertySet:	Pset_WallCommon	I	IfcWall
+	FireRating	Label	OB_FireResistanceRating_min
+PropertySet:	Pset_SlabCommon	I	IfcSlab
+	FireRating	Label	OB_FireResistanceRating_min
+	PitchAngle	Real	Slope
+PropertySet:	Pset_RoofCommon	I	IfcRoof
+	FireRating	Label	OB_FireResistanceRating_min
+PropertySet:	Pset_ColumnCommon	I	IfcColumn
+	FireRating	Label	OB_FireResistanceRating_min
+PropertySet:	Pset_BeamCommon	I	IfcBeam
+	FireRating	Label	OB_FireResistanceRating_min
+	Span	Length	OB_Span
+PropertySet:	Pset_MemberCommon	I	IfcMember
+	FireRating	Label	OB_FireResistanceRating_min
+	Span	Length	OB_Span
+PropertySet:	Pset_CoveringCommon	I	IfcCovering
+	AcousticRating	Label	OB_SoundAbsorption
+	Finish	Text	OB_Finish
+	FireRating	Label	OB_FireResistanceRating_min
 PropertySet:	Pset_StairCommon	I	IfcStair
 	FireExit	Boolean	OB_PartOfAnExit
+	FireRating	Label	OB_FireResistanceRating_min
 	HandicapAccessible	Boolean	OB_BarrierFreeFeatures
 	HasNonSkidSurface	Boolean	OB_NonSlipSurface
 	NumberOfRiser	Real	Actual Number of Risers
 	RequiredHeadroom	Length	OB_Headroom
 	RiserHeight	Length	Actual Riser Height
 	TreadLength	Length	Actual Tread Depth
+PropertySet:	Pset_CurtainWallCommon	I	IfcCurtainWall
+	FireRating	Label	OB_FireResistanceRating_min
 PropertySet:	Pset_StairFlightCommon	I	IfcStairFlight
 	Headroom	Length	OB_Headroom
 	NumberOfRiser	Real	Actual Number of Risers
 	RiserHeight	Length	Actual Riser Height
 	TreadLength	Length	Actual Tread Depth
 PropertySet:	Pset_WindowCommon	I	IfcWindow
+	FireRating	Label	OB_FireProtectionRating_min
 	Infiltration	Real	OB_AirLeakageRate_Lsm2
 	MechanicalLoadRating	Label	OB_PerformanceClass
 	WaterTightnessRating	Label	OB_PerformanceClass
@@ -416,9 +450,6 @@ PropertySet:	Pset_TransportElementElevator	I	IfcTransportElement
 	ClearHeight	Label	OB_CarInsideDimensions
 	ClearWidth	Label	OB_CarInsideDimensions
 	FireFightingLift	Boolean	OB_FirefightersElevator
-PropertySet:	Pset_CoveringCommon	I	IfcCovering
-	AcousticRating	Label	OB_SoundAbsorption
-	Finish	Text	OB_Finish
 PropertySet:	Pset_DoorWindowGlazingType	I	IfcDoor,IfcWindow
 	FillGas	Label	OB_GlazingMakeUp
 	GlassLayers	Label	OB_GlazingMakeUp
@@ -447,16 +478,12 @@ PropertySet:	Pset_SpaceFireSafetyRequirements	I	IfcSpace,IfcSpatialZone,IfcZone
 PropertySet:	Pset_ZoneCommon	I	IfcZone
 	GrossPlannedArea	Area	OB_ZoneArea
 	NetPlannedArea	Area	OB_ZoneArea
-PropertySet:	Pset_SlabCommon	I	IfcSlab
-	PitchAngle	Real	Slope
+PropertySet:	Pset_DoorCommon	I	IfcDoor
+	FireRating	Label	OB_FireProtectionRating_min
 PropertySet:	Pset_ElementComponentCommon	I	IfcElementComponent
 	CorrosionTreatment	Label	OB_CoatingCorrosionProtection
 PropertySet:	Pset_ConcreteElementGeneral	I	IfcBeam,IfcBuildingElementProxy,IfcChimney,IfcColumn,IfcFooting,IfcMember,IfcPile,IfcPlate,IfcRailing,IfcRamp,IfcRampFlight,IfcRoof,IfcSlab,IfcStair,IfcStairFlight,IfcWall,IfcCivilElement
 	ReinforcementStrengthClass	Label	OB_ReinforcementGrade
-PropertySet:	Pset_BeamCommon	I	IfcBeam
-	Span	Length	OB_Span
-PropertySet:	Pset_MemberCommon	I	IfcMember
-	Span	Length	OB_Span
 PropertySet:	Pset_PrecastConcreteElementGeneral	I	IfcBeam,IfcBuildingElementProxy,IfcChimney,IfcColumn,IfcFooting,IfcMember,IfcPile,IfcPlate,IfcRamp,IfcRampFlight,IfcRoof,IfcSlab,IfcStair,IfcStairFlight,IfcWall,IfcCivilElement
 	CamberAtMidspan	Length	Camber Size
 	InitialTension	Label	OB_Prestressing

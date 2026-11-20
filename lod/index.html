@@ -213,7 +213,8 @@ function list(){const q=st.q.toLowerCase();
     return `${h?`<div class="g">${Array.isArray(h)?`<span data-notr>${esc(h[0])}</span> <span>${esc(h[1])}</span>`:esc(h)}</div>`:''}<ul>${els.map(c=>`<li><button type="button" data-el="${c.id}" aria-current="${c.id===st.el}">${code(c)?`<span class="mono tag" data-notr>${esc(code(c))}</span> `:''}${esc(c.n)}</button></li>`).join('')}</ul>`}).join('')||'<p class="note">No element type matches.</p>'}
 
 const useOk=u=>!st.uses.size||u.some(x=>st.uses.has(x));
-const tags=u=>`<span class="tags">${u.map(x=>`<span class="${st.uses.has(x)?'hit':''}">${esc(D.uses[x]||x)}</span>`).join('')}</span>`;
+// A requirement no BIM use asks is optional: the owner switches it on in the BEP Builder.
+const tags=u=>!u.length?'<span class="tags"><span>Optional: asked only when the owner switches it on.</span></span>':`<span class="tags">${u.map(x=>`<span class="${st.uses.has(x)?'hit':''}">${esc(D.uses[x]||x)}</span>`).join('')}</span>`;
 // LOD 500 is lean: only what operations need stays (see the caveat above and spec.json lean500).
 const L5=D.lean500||{keep:[],dropKinds:[]};
 const g500=x=>x.f==='500'||!(L5.dropKinds.includes(x.k)&&+x.f>=350);

@@ -10,6 +10,10 @@
 // per milestone: the full table, without the Family column, and without Function and Family (the old path).
 // Usage: node translations/tools/reqfile_parity.js [--break] [--write] [--no-function-column [--head <older bep-builder.html>]]
 //   --break  removes one Doors requirement from the JSON in memory; the test must then FAIL (negative control).
+//   --break-rule  turns the fire-protection minutes rule in the JSON back into "any number" (no allowed list); the test must then FAIL.
+// Fire and acoustic ratings are whole numbers: valueRule.allowed (fire minutes, 0 = no rating required) or min/max (STC 20 to 80).
+// Doors carry 60, 0, 50, 1HR and a blank in both; each value is also checked alone, Builder against file, with hand-set answers.
+// Optional parameters (joints, fire exposure side) are off in the school example and enter the file only once switched on.
 //   --write  also writes revit-addin/OpenBepSync/test/OpenBEP-requirements-school-example.json (the school example as loaded).
 //   --no-function-column  only the old path: the table without Function and Family columns must give exactly the result saved in
 //            revit-addin/OpenBepSync/test/reqfile-parity-fallback-expected.json (made from the Builder before wall kinds, v0.44),
@@ -25,7 +29,7 @@ const assert = require('node:assert');
 
 const root = path.resolve(__dirname, '..', '..');
 const testDir = path.join(root, 'revit-addin', 'OpenBepSync', 'test');
-const BREAK = process.argv.includes('--break'), WRITE = process.argv.includes('--write'), NOFN = process.argv.includes('--no-function-column');
+const BREAK = process.argv.includes('--break'), BREAK_RULE = process.argv.includes('--break-rule'), WRITE = process.argv.includes('--write'), NOFN = process.argv.includes('--no-function-column');
 const HEAD = process.argv.includes('--head') ? process.argv[process.argv.indexOf('--head') + 1] : null;
 const OWNER = 'Access control zone';
 
@@ -77,7 +81,12 @@ function evaluate(F, T, mid) {
   const real = (q, v) => {
     if (v == null) return false; const s = v.trim();
     if (s === '' || q.placeholders.map(x => String(x).toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return false;
-    return new RegExp(q.valueRule.pattern, 'i').test(s);
+    const w = q.valueRule, byPattern = new RegExp(w.pattern, 'i').test(s);
+    if (!w.allowed && w.min == null && w.max == null) return byPattern;
+    // A whole number in the allowed list, or within min and max. The pattern alone must give the same answer.
+    const byRule = /^(0|[1-9]\d*)$/.test(s) && (w.allowed ? w.allowed.includes(+s) : (w.min == null || +s >= w.min) && (w.max == null || +s <= w.max));
+    assert.strictEqual(byPattern, byRule, `${q.id}: valueRule.pattern and allowed/min/max disagree on "${s}"`);
+    return byRule;
   };
   const cats = [...by.values()].map(({ t, els }) => {
     const reqs = new Map(t.requirements.map(q => [q.id, q]));
@@ -181,6 +190,12 @@ function evaluate(F, T, mid) {
       Object.keys(d.requiredAt).forEach(m => { d.requiredAt[m] = d.requiredAt[m].filter(x => x !== gone); });
       console.log(`--break: removed ${gone} from Doors`);
     }
+    // Negative control for the whole-number rule: the exterior walls' fire minutes become "any number" in the file only.
+    if (BREAK_RULE) for (const F of [school, owned]) {
+      const q = F.elementTypes.find(t => t.id === 'wall_exterior').requirements.find(x => x.id === 'fire_resistance_min');
+      q.valueRule = { ...q.valueRule, allowed: null, min: null, max: null, check: 'number', pattern: '\\d' };
+      console.log('--break-rule: exterior walls fire_resistance_min accepts any number in the file');
+    }
 
     // Parity, per milestone, for the school example and again with the owner addition.
     let types = 0, rowsCompared = 0, partial = 0, wallsChecked = 0;
@@ -247,22 +262,50 @@ function evaluate(F, T, mid) {
     }
     console.log(`WALLS OK: ${wallTypes.length} element types in Walls (${wallTypes.filter(t => t.revitWhere).map(t => t.id).join(', ')} placed by revitWhere; ${noRule.map(t => t.id).join(', ') || 'none'} with a stated reason); no wall lands twice; no null category id; unresolvedSplits=${school.unresolvedSplits.length}`);
 
-    // Owner ruling: exterior walls carry a fire rating. The list asks it from LOD 300 for code checking; the school example as loaded
-    // has no code checking, so switch that BIM use on and the file must require Fire rating on exterior walls from LOD 300.
-    console.log(`school example as loaded: exterior walls require fire_rating at ${school.milestones.filter(m => ET('wall_exterior').requiredAt[m.id].includes('fire_rating')).map(m => m.id).join(', ') || 'no milestone (no code checking BIM use)'}`);
-    for (let i = 1; i <= 13; i++) { await page.locator(`#steps [data-step="${i}"]`).click(); await page.waitForTimeout(100); if (await page.locator('[data-opt="code.plans"]').count()) break; }
-    await page.evaluate(() => { const b = document.querySelector('[data-opt="code.plans"]'); if (!b.checked) b.click(); }); await page.waitForTimeout(200);
-    assert.ok(await page.evaluate(() => document.querySelector('[data-opt="code.plans"]').checked), 'code checking BIM use did not switch on');
-    const coded = await exportFile(), ex = coded.elementTypes.find(t => t.id === 'wall_exterior'), fr = ex.requirements.find(q => q.id === 'fire_rating');
-    assert.ok(fr, 'exterior walls: no fire_rating requirement with code checking on');
-    assert.strictEqual(fr.fromLod, '300');
-    for (const m of coded.milestones) assert.strictEqual(ex.requiredAt[m.id].includes('fire_rating'), +ex.lod[m.id] >= 300, 'fire_rating at ' + m.id);
+    // Owner ruling 2026-11-20: exterior walls carry a fire rating, in minutes. Walls (interior, exterior, curtain) ask it for design
+    // review / authoring, a use every design-authoring project has, so the school example AS LOADED requires it from LOD 300.
+    const ex = ET('wall_exterior'), fr = ex.requirements.find(q => q.id === 'fire_resistance_min');
+    assert.ok(fr, 'exterior walls: no fire_resistance_min requirement in the school example as loaded');
+    assert.strictEqual(fr.fromLod, '300'); assert.ok(fr.neededFor.includes('design_review'), 'fire minutes not needed for design review');
+    assert.strictEqual(fr.revitParameter, 'OB_FireResistanceRating_min'); assert.strictEqual(fr.dataType, 'INTEGER');
+    assert.deepStrictEqual(fr.valueRule.allowed, [0, 20, 30, 45, 60, 90, 120, 180, 240]); assert.ok(!fr.placeholders.includes('0'), '0 must not be a placeholder for fire minutes');
+    for (const m of school.milestones) assert.strictEqual(ex.requiredAt[m.id].includes('fire_resistance_min'), +ex.lod[m.id] >= 300, 'fire_resistance_min at ' + m.id);
+    for (const id of ['wall_interior', 'curtain_wall']) assert.ok(ET(id).requiredAt.final90.includes('fire_resistance_min'), id + ': no fire minutes at final90');
+    assert.ok(!school.elementTypes.some(t => Object.values(t.requiredAt).some(a => a.includes('fire_rating'))), 'the built-in Fire Rating text is still required somewhere');
     const fb = (await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [table, 'final90'])).find(x => x.id === 'wall_exterior');
-    const fe = evaluate(coded, T, 'final90').cats.find(x => x.id === 'wall_exterior');
+    const fe = evaluate(school, T, 'final90').cats.find(x => x.id === 'wall_exterior');
     const frRow = fb.rows.find(r => r.n === fr.label);
-    assert.deepStrictEqual(frRow, { n: fr.label, has: 100, ok: 67 }, 'Builder: exterior walls fire rating row (2 hr, TBD, 2 hr)');
-    assert.deepStrictEqual(fe.rows.find(r => r.n === fr.label), frRow, 'file: exterior walls fire rating row');
-    console.log(`FIRE-RATING OK: with code checking on, exterior walls require "${fr.label}" from LOD 300 (at ${coded.milestones.filter(m => ex.requiredAt[m.id].includes('fire_rating')).map(m => m.id).join(', ')}); the Builder and the file both score it ${frRow.ok}%`);
+    assert.deepStrictEqual(frRow, { n: fr.label, has: 100, ok: 67 }, 'Builder: exterior walls fire minutes row (120, 50, 120)');
+    assert.deepStrictEqual(fe.rows.find(r => r.n === fr.label), frRow, 'file: exterior walls fire minutes row');
+    console.log(`FIRE-RATING OK: the school example as loaded requires "${fr.label}" (${fr.revitParameter}) on exterior walls from LOD 300 (at ${school.milestones.filter(m => ex.requiredAt[m.id].includes('fire_resistance_min')).map(m => m.id).join(', ')}); the Builder and the file both score it ${frRow.ok}%`);
+    // Each value alone, Builder against file: fire minutes on an exterior wall, STC on a door.
+    const stc = ET('door').requirements.find(q => q.id === 'stc');
+    assert.ok(stc && ET('door').requiredAt.final90.includes('stc'), 'doors: STC not required at final90');
+    const expect = { '60': [100, 100], '0': [100, 0], '50': [0, 100], '1HR': [0, 0], '': [0, 0] };
+    for (const [v, [wantFire, wantStc]] of Object.entries(expect)) {
+      const TV = { head: ['Category', 'OB_FireResistanceRating_min', 'OB_STC'], rows: [['Exterior walls', v, ''], ['Doors', '', v]] }, csv = toCsv(TV);
+      const a = await page.evaluate(([t, mid]) => window.__ckTable(t, mid), [csv, 'final90']), b = evaluate(school, TV, 'final90').cats;
+      const got = (L, id, lbl) => (L.find(x => x.id === id).rows.find(r => r.n === lbl) || {}).ok;
+      assert.deepStrictEqual([got(a, 'wall_exterior', fr.label), got(a, 'door', stc.label)], [wantFire, wantStc], `Builder on "${v}"`);
+      assert.deepStrictEqual([got(b, 'wall_exterior', fr.label), got(b, 'door', stc.label)], [wantFire, wantStc], `file on "${v}"`);
+    }
+    const dr = evaluate(school, T, 'final90').cats.find(x => x.id === 'door').rows.find(r => r.n === stc.label);
+    assert.deepStrictEqual(dr, { n: stc.label, has: 100, ok: 40 }, 'doors STC row on the table (60, 0, 50, 1HR, blank)');
+    console.log('VALUE-RULES OK: 60, 0, 50, "1HR", blank: fire minutes 100/100/0/0/0, STC 100/0/100/0/0, Builder = file; doors STC on the table 40%');
+    // Optional parameters: off in the school example; they enter the file only once the owner switches one on.
+    const OPTS = ['fire_head_joint_min', 'fire_base_joint_min', 'fire_from_above_min', 'fire_from_below_min', 'fire_from_inside_min', 'fire_from_outside_min'];
+    const inFile = F => F.elementTypes.flatMap(t => [...t.requirements.map(q => q.id), ...Object.values(t.requiredAt).flat()].filter(id => OPTS.includes(id)).map(id => t.id + ':' + id));
+    assert.deepStrictEqual(inFile(school), [], 'optional parameters in the school example as loaded');
+    await page.locator('#steps [data-step="6"]').click(); await page.waitForTimeout(150);
+    await page.locator('[data-lbsel="wall_exterior"]').first().click(); await page.waitForTimeout(150); await openAll();
+    const offered = await page.evaluate(() => [...document.querySelectorAll('#lbp-p optgroup')][0].querySelectorAll('option').length && [...[...document.querySelectorAll('#lbp-p optgroup')][0].querySelectorAll('option')].map(o => o.value));
+    assert.ok(offered && ['fire_from_outside_min', 'fire_head_joint_min'].every(x => offered.includes(x)), 'optional parameters not offered under "Suggested for this element type": ' + offered);
+    await page.selectOption('#lbp-p', 'fire_from_outside_min'); await page.selectOption('#lbp-f', '300'); await page.locator('#lbpAdd').click(); await page.waitForTimeout(150);
+    const opted = await exportFile(), oe = opted.elementTypes.find(t => t.id === 'wall_exterior'), oq = oe.requirements.find(q => q.id === 'fire_from_outside_min');
+    assert.deepStrictEqual(inFile(opted).filter((x, i, a) => a.indexOf(x) === i), ['wall_exterior:fire_from_outside_min'], 'only the one switched on');
+    assert.ok(oq && oq.fromLod === '300' && oq.revitParameter === 'OB_FireRatingFromOutside_min' && oq.valueRule.allowed.length === 9, 'switched-on optional parameter: ' + JSON.stringify(oq));
+    for (const m of opted.milestones) assert.strictEqual(oe.requiredAt[m.id].includes('fire_from_outside_min'), +oe.lod[m.id] >= 300, 'optional at ' + m.id);
+    console.log(`OPTIONAL OK: none of ${OPTS.length} optional parameters in the school example as loaded; switched on "Fire-resistance rating, fire from outside (min)" on exterior walls -> in the file from LOD 300, alone`);
     for (const L of ['fr', 'ja']) for (const t of ['Walls could not be told apart without a Function column, so every wall was checked as an interior wall. Add the wall type\'s Function to the schedule to check exterior, foundation and curtain walls against their own requirements.',
       'Curtain walls could not be told apart without a Family column, so walls were placed by their Function alone.',
       'Not covered by the plan: 3 walls whose Function no element type of this plan covers (for example Soffit), is left empty, or that are modelled in place. They were not checked.'])

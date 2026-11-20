@@ -250,11 +250,6 @@
      "ok": 80
     },
     {
-     "n": "Acoustic rating (STC)",
-     "has": 100,
-     "ok": 40
-    },
-    {
      "n": "Frame material",
      "has": 100,
      "ok": 60
@@ -273,6 +268,11 @@
      "n": "Operation type",
      "has": 100,
      "ok": 60
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 40
     }
    ]
   },
@@ -557,7 +557,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 13,
-   "fill": 60,
+   "fill": 57,
    "pass": true,
    "rows": [
     {
@@ -601,14 +601,19 @@
      "ok": 77
     },
     {
-     "n": "Acoustic rating (STC / ASTC)",
-     "has": 100,
-     "ok": 23
+     "n": "Apparent sound transmission class (ASTC)",
+     "has": 0,
+     "ok": 0
     },
     {
      "n": "Extends to structure",
      "has": 0,
      "ok": 0
+    },
+    {
+     "n": "Fire-resistance rating (min)",
+     "has": 100,
+     "ok": 54
     },
     {
      "n": "Layer build-up",
@@ -624,6 +629,11 @@
      "n": "Primary material",
      "has": 100,
      "ok": 62
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 31
     }
    ]
   }
@@ -682,11 +692,6 @@
      "ok": 80
     },
     {
-     "n": "Acoustic rating (STC)",
-     "has": 100,
-     "ok": 40
-    },
-    {
      "n": "Frame material",
      "has": 100,
      "ok": 60
@@ -705,6 +710,11 @@
      "n": "Operation type",
      "has": 100,
      "ok": 60
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 40
     }
    ]
   },
@@ -989,7 +999,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 13,
-   "fill": 60,
+   "fill": 57,
    "pass": false,
    "rows": [
     {
@@ -1033,14 +1043,19 @@
      "ok": 77
     },
     {
-     "n": "Acoustic rating (STC / ASTC)",
-     "has": 100,
-     "ok": 23
+     "n": "Apparent sound transmission class (ASTC)",
+     "has": 0,
+     "ok": 0
     },
     {
      "n": "Extends to structure",
      "has": 0,
      "ok": 0
+    },
+    {
+     "n": "Fire-resistance rating (min)",
+     "has": 100,
+     "ok": 54
     },
     {
      "n": "Layer build-up",
@@ -1056,6 +1071,11 @@
      "n": "Primary material",
      "has": 100,
      "ok": 62
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 31
     }
    ]
   }
@@ -1114,11 +1134,6 @@
      "ok": 80
     },
     {
-     "n": "Acoustic rating (STC)",
-     "has": 100,
-     "ok": 40
-    },
-    {
      "n": "Frame material",
      "has": 100,
      "ok": 60
@@ -1137,6 +1152,11 @@
      "n": "Operation type",
      "has": 100,
      "ok": 60
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 40
     }
    ]
   },
@@ -1421,7 +1441,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 13,
-   "fill": 60,
+   "fill": 57,
    "pass": false,
    "rows": [
     {
@@ -1465,14 +1485,19 @@
      "ok": 77
     },
     {
-     "n": "Acoustic rating (STC / ASTC)",
-     "has": 100,
-     "ok": 23
+     "n": "Apparent sound transmission class (ASTC)",
+     "has": 0,
+     "ok": 0
     },
     {
      "n": "Extends to structure",
      "has": 0,
      "ok": 0
+    },
+    {
+     "n": "Fire-resistance rating (min)",
+     "has": 100,
+     "ok": 54
     },
     {
      "n": "Layer build-up",
@@ -1488,6 +1513,11 @@
      "n": "Primary material",
      "has": 100,
      "ok": 62
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 31
     }
    ]
   }
@@ -1546,11 +1576,6 @@
      "ok": 80
     },
     {
-     "n": "Acoustic rating (STC)",
-     "has": 100,
-     "ok": 40
-    },
-    {
      "n": "Frame material",
      "has": 100,
      "ok": 60
@@ -1569,6 +1594,11 @@
      "n": "Operation type",
      "has": 100,
      "ok": 60
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 40
     }
    ]
   },
@@ -1853,7 +1883,7 @@
    "id": "wall_interior",
    "lod": "300",
    "n": 13,
-   "fill": 60,
+   "fill": 57,
    "pass": false,
    "rows": [
     {
@@ -1897,14 +1927,19 @@
      "ok": 77
     },
     {
-     "n": "Acoustic rating (STC / ASTC)",
-     "has": 100,
-     "ok": 23
+     "n": "Apparent sound transmission class (ASTC)",
+     "has": 0,
+     "ok": 0
     },
     {
      "n": "Extends to structure",
      "has": 0,
      "ok": 0
+    },
+    {
+     "n": "Fire-resistance rating (min)",
+     "has": 100,
+     "ok": 54
     },
     {
      "n": "Layer build-up",
@@ -1920,6 +1955,11 @@
      "n": "Primary material",
      "has": 100,
      "ok": 62
+    },
+    {
+     "n": "Sound transmission class (STC)",
+     "has": 100,
+     "ok": 31
     }
    ]
   }

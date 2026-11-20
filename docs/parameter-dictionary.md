@@ -11,11 +11,11 @@ This is what vague BIM looks like in practice. When the only instruction is "do 
 This dictionary fixes the list once for Canada:
 
 - **One name and one GUID per piece of information.** OB\_FireResistanceRating means the same thing on every project.
-- **Revit's own parameters first.** If Revit already has the field (Fire Rating, Mark, Assembly Code), we use it and add nothing.
+- **Revit's own parameters first.** If Revit already has the field (Mark, Assembly Code), we use it and add nothing. Fire ratings are the exception: Revit's Fire Rating is free text, so the requirement is a number of minutes on `OB_FireResistanceRating_min` or `OB_FireProtectionRating_min`.
 - **Each parameter is tied to a BIM use and an LOD.** The BEP Builder only asks for the ones the project's chosen uses need.
 - **Accepted values are written down.** A programmer could check every value automatically, and so can our model checker.
 
-Version 0.1 has 398 parameters: 300 OpenBEP shared parameters and 98 Revit built-ins, across 63 element types and 17 BIM uses. It has not yet been tested in Revit.
+Version 0.1 has 409 parameters: 311 OpenBEP shared parameters and 98 Revit built-ins, across 63 element types and 17 BIM uses. It has not yet been tested in Revit.
 
 ## Rules
 
@@ -26,12 +26,12 @@ Parameter names are code, not text for people. They stay in English everywhere i
 | Names start with `OB_`, then PascalCase English, no spaces or accents: `OB_FireResistanceRating` | Scripts, exports and IFC mapping break on accents, spaces and "FR \| EN" names | Les noms commencent par `OB_`, en anglais, sans espaces ni accents |
 | Numbers carry their unit in the name when Revit has no unit type: `OB_DesignFlow_Ls` | The value is unreadable without the unit | Le nom d'un nombre sans type d'unité Revit inclut l'unité |
 | Each parameter has a fixed GUID made from its name (UUID v5) and never changes | Same GUID = same data on every project | Chaque paramètre a un GUID fixe qui ne change jamais |
-| If Revit has a built-in parameter, use it (Fire Rating, Mark, Assembly Code) | Avoids two fields for the same fact | Si Revit a déjà le paramètre, on l'utilise |
+| If Revit has a built-in parameter, use it (Mark, Assembly Code; fire ratings are minutes on a shared parameter) | Avoids two fields for the same fact | Si Revit a déjà le paramètre, on l'utilise |
 | Every parameter has an English label and a French label | People read labels, scripts read names | Chaque paramètre a une étiquette anglaise et une étiquette française |
 | French schedules rename the column heading, not the parameter | Revit lets you change a schedule heading without touching the data | Les nomenclatures françaises changent l'en-tête de colonne, pas le paramètre |
 | Values from a list are stored as codes (`EI60`, `PASS`, `NA`), never as sentences | A code reads the same in both languages and can be checked | Les valeurs de liste sont des codes, pas des phrases |
 | Free text that must be bilingual uses two fields: `_EN` and `_FR` | One field with a vertical bar can't be sorted, checked or exported cleanly | Un texte libre bilingue utilise deux champs, `_EN` et `_FR` |
-| No placeholder values: "TBD", "?", "0" and "-" are rejected | A placeholder looks filled but carries no information | Aucune valeur bidon : « À venir », « ? », « 0 » et « - » sont refusés |
+| No placeholder values: "TBD", "?", "0" and "-" are rejected (a fire rating in minutes accepts 0: no rating required) | A placeholder looks filled but carries no information | Aucune valeur bidon : « À venir », « ? », « 0 » et « - » sont refusés (un degré de résistance au feu en minutes accepte 0 : aucun degré exigé) |
 
 We chose English names because a French-only list would split Canada in two, and "FR | EN" names double the length of every name and still break scripts. The cost is that every explanation must exist in French, which this document does.
 
@@ -43,19 +43,19 @@ Every parameter has one data type and one rule, so a value is either right or wr
 
 | Type | Revit data type | Count | What is accepted | Example | Type (FR) |
 | --- | --- | --- | --- | --- | --- |
-| Text | Text | 95 | Free text, or a fixed format where the rule gives one (fire rating: `20 min` to `4 h` only) | `1.5 h` | Texte |
+| Text | Text | 95 | Free text, or a fixed format where the rule gives one (text fire ratings, now optional: `20 min` to `4 h` only) | `1.5 h` | Texte |
 | Number | Number | 89 | A number in the unit named in the parameter, within min and max | 25 (L/s) | Nombre |
 | Length | Length | 62 | Greater than zero, in mm (47) or m (15) | 200 | Longueur |
 | Code list | Text | 48 | One code from a fixed list; anything else is wrong | `GAS`, `NOTDEFINED` | Liste de codes |
 | Yes/No | Yes/No | 41 | Yes or No; empty is not allowed once required | Yes | Oui/Non |
 | Identifier | Text | 17 | Text matching a pattern, no spaces | `C1020`, `AHU3.SAT` | Identifiant |
-| Integer | Integer | 15 | A whole number within min and max | 4 | Entier |
+| Integer | Integer | 26 | A whole number within min and max, or one of a fixed list (fire ratings in minutes: 0, 20, 30, 45, 60, 90, 120, 180, 240) | 60 | Entier |
 | Multiline text | Multiline text | 6 | Free text | Maintenance notes | Texte multiligne |
 | Area, volume | Area, Volume | 9 | Greater than zero, in m² or m³ | 12.5 | Surface, volume |
 | Duration | Text | 2 | ISO 8601 duration | `P25Y`, `P18M` | Durée |
 | Date | Text | 2 | ISO date, YYYY-MM-DD | 2026-10-17 | Date |
 
-Where the codes come from: 34 lists are IFC 4.3 property enumerations, 13 are OpenBEP proposals (such as NBC occupancy groups and CSA exposure classes), and 1 is Revit's own System Classification. Placeholder values ("TBD", "N/A", "0", "Default", "\<By Category>") always fail.
+Where the codes come from: 34 lists are IFC 4.3 property enumerations, 13 are OpenBEP proposals (such as NBC occupancy groups and CSA exposure classes), and 1 is Revit's own System Classification. Placeholder values ("TBD", "N/A", "0", "Default", "\<By Category>") always fail, except "0" in a fire rating in minutes, where 0 means "no rating required" (a blank cell means not filled in).
 
 Still to check: the fire-rating list, the Uniformat and OmniClass patterns, and the CSA class lists against current editions. Fields like voltage ("120/208") hold one number for now.
 
@@ -63,7 +63,7 @@ Still to check: the fire-rating list, the Uniformat and OmniClass patterns, and 
 
 1. **Pick the BIM uses and LODs in the BEP Builder.** The tool works out which parameters each element type needs, phase by phase.
 2. **Download two files** from the step "Element requirements": the OpenBEP shared parameter file (.txt) and the project's binding list (.csv).
-3. **Load the .txt in Revit** (Manage › Shared Parameters). It holds all 300 OpenBEP parameters in 8 groups, with their fixed GUIDs.
+3. **Load the .txt in Revit** (Manage › Shared Parameters). It holds all 311 OpenBEP parameters in 8 groups, with their fixed GUIDs.
 4. **Run OpenBEP › Sync parameters** (the Revit add-in). It reads the binding list, shows what it will add or bind and any duplicates with the same name but another GUID, writes a report, and changes nothing until you confirm.
 5. **Check the model** with the BEP Builder's model checker: export the schedules and it flags missing or wrong values against the rules below.
 
@@ -73,11 +73,11 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 
 ## The parameters
 
-386 parameter names in 8 groups. Revit built-ins come first in each group. "From LOD" is the lowest LOD at which any element needs the parameter. The full rule for each one, in English and French, is in the rules file; the per-element detail is in the manifest.
+397 parameter names in 8 groups. Revit built-ins come first in each group. "From LOD" is the lowest LOD at which any element needs the parameter. The full rule for each one, in English and French, is in the rules file; the per-element detail is in the manifest.
 
-*Les 386 paramètres, en 8 groupes. Chaque ligne donne l'étiquette française. La règle complète en français est dans le fichier de règles.*
+*Les 397 paramètres, en 8 groupes. Chaque ligne donne l'étiquette française. La règle complète en français est dans le fichier de règles.*
 
-### 01 Identity and asset (38)
+### 01 Identity and asset (39)
 
 | Parameter | Label EN / FR | Type | Accepted values | Revit categories | BIM uses | From LOD |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -85,7 +85,7 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `Default Thickness` (built-in) | Overall thickness / Épaisseur totale | Length, type | > 0 mm; e.g. 200 | Floors, Structural Foundations, Structural Framing | Cost estimating, Design review / authoring, Quantity take-off | 200 |
 | `Description` (built-in) | Description / Description | Multiline text, type | Free text; e.g. Recessed LED troffer 600x1200 | Air Terminals, Casework, Ceilings, Communication Devices, Curtain Panels, Curtain Wall Mullions +34 | Design review / authoring, Facility management / maintenance, Handover / record model | 300 |
 | `Export to IFC As / IFC Predefined Type (names vary by Revit version - verify)` (built-in) | IFC class and predefined type / Classe et type prédéfini IFC | Identifier (text), type | Pattern; e.g. `IfcLightFixture.POINTSOURCE`, `IfcWall` | Air Terminals, Areas, Cable Tray Fittings, Cable Trays, Casework, Ceilings +60 | 3D coordination / clash avoidance, Asset register, Code and accessibility compliance checking, Handover / record model +1 | 200 |
-| `Fire Rating` (built-in) | Fire-resistance rating / Degré de résistance au feu | Text, type | Pattern; e.g. `1.5 h`, `45 min` | Areas, Ceilings, Curtain Panels, Curtain Wall Mullions, Doors, Duct Accessories +13 | Code and accessibility compliance checking, Facility management / maintenance | 300 |
+| `Fire Rating` (built-in) | Fire-resistance rating / Degré de résistance au feu | Text, type | Pattern; e.g. `1.5 h`, `45 min` | Areas, Ceilings, Curtain Panels, Curtain Wall Mullions, Doors, Duct Accessories +13 | Optional (off unless the owner switches it on), for tags; the requirement is the minutes parameter | 300 |
 | `Function (walls) or shared` (built-in) | Is external / Est extérieur | Yes/No, type | `Yes`, `No` | Curtain Panels, Curtain Wall Mullions, Doors, Floors, Landings, Railings +8 | Code and accessibility compliance checking, Cost estimating, Design review / authoring, Energy and load analysis | 200 |
 | `Length` (built-in) | Length / Longueur | Length, instance | > 0 mm; e.g. 12.4 | Cable Tray Fittings, Cable Trays, Conduit Fittings, Conduits, Duct Fittings, Ducts +9 | Cost estimating, Quantity take-off | 200 |
 | `Manufacturer` (built-in) | Manufacturer / Fabricant | Text, type | Free text; e.g. Acme Lighting Inc. | Air Terminals, Casework, Ceilings, Communication Devices, Curtain Panels, Curtain Wall Mullions +27 | Asset register, Cost estimating, Design review / authoring, Facility management / maintenance +3 | 300 |
@@ -107,7 +107,8 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `OB_EnergySourceFuel` | Energy source / fuel / Source d'énergie | Code list (text), type | `COAL`, `COAL_PULVERIZED`, `ELECTRICITY`, `GAS`, `OIL`, `PROPANE`, `WOOD`, `WOOD_CHIP`, `WOOD_PELLET`, `WOOD_PULVERIZED`, `OTHER`, `NOTKNOWN` (+1 more) | Electrical Equipment, Mechanical Equipment, Plumbing Equipment | Code and accessibility compliance checking, Design review / authoring, Energy and load analysis | 200 |
 | `OB_ExpectedServiceLife` | Expected service life / Durée de vie utile | Duration, type | ISO 8601; e.g. `P20Y`, `P50Y` | Casework, Ceilings, Communication Devices, Curtain Panels, Curtain Wall Mullions, Data Devices +28 | Asset register, Facility management / maintenance | 500 |
 | `OB_FinishColour` | Finish colour / Couleur de finition | Text, type | Free text; e.g. White RAL 9010 | Air Terminals, Casework, Furniture, Furniture Systems, Plumbing Fixtures | Design review / authoring, Visualisation and photometric rendering | 300 |
-| `OB_FireResistanceRating` | Fire-resistance rating / Degré de résistance au feu | Text, type | Pattern; e.g. `1.5 h`, `1 h` | Duct Accessories | Code and accessibility compliance checking, Facility management / maintenance | 300 |
+| `OB_FireResistanceRating` | Fire-resistance rating / Degré de résistance au feu | Text, type | Pattern; e.g. `1.5 h`, `1 h` | Duct Accessories | Optional (off unless the owner switches it on), for tags; the requirement is the minutes parameter | 300 |
+| `OB_FireResistanceRating_min` | Fire-resistance rating (min) / Degré de résistance au feu (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Areas, Ceilings, Curtain Panels, Curtain Wall Mullions, Floors, HVAC Zones +10 | Code and accessibility compliance checking, Design review / authoring, Facility management / maintenance | 300 |
 | `OB_GrossWeight_kg` | Gross weight / Poids brut | Number, type | > 0 kg; e.g. 1850 | Electrical Equipment, Floors, Food Service Equipment, Lighting Fixtures, Mechanical Equipment, Medical Equipment +5 | 3D coordination / clash avoidance, Cost estimating, Design review / authoring, Prefabrication / digital fabrication | 350 |
 | `OB_InstallationDate` | Installation date / Date d'installation | Date (text), instance | YYYY-MM-DD; e.g. `2027-05-14` | Casework, Communication Devices, Curtain Panels, Curtain Wall Mullions, Data Devices, Doors +31 | Asset register, Facility management / maintenance, Handover / record model | 500 |
 | `OB_MountingType` | Mounting type / Type de montage | Code list (text), type | `CABLESPANNED`, `FREESTANDING`, `POLE_SIDE`, `POLE_TOP`, `RECESSED`, `SURFACE`, `SUSPENDED`, `TRACKMOUNTED`, `FLATFLUSH`, `LAYIN`, `BACKTOWALL`, `COUNTERTOP` (+15 more) | Air Terminals, Lighting Fixtures, Mechanical Equipment, Plumbing Fixtures | 3D coordination / clash avoidance, Cost estimating, Design review / authoring | 300 |
@@ -120,7 +121,7 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `OB_WarrantyDuration` | Warranty duration / Durée de garantie | Duration, type | ISO 8601; e.g. `P5Y`, `P18M` | Casework, Communication Devices, Curtain Panels, Curtain Wall Mullions, Data Devices, Doors +22 | Facility management / maintenance, Handover / record model | 500 |
 | `OB_WarrantyStartDate` | Warranty start date / Début de garantie | Date (text), instance | YYYY-MM-DD; e.g. `2027-06-01` | Casework, Communication Devices, Curtain Panels, Curtain Wall Mullions, Data Devices, Doors +22 | Facility management / maintenance, Handover / record model | 500 |
 
-### 02 Architecture (86)
+### 02 Architecture (95)
 
 | Parameter | Label EN / FR | Type | Accepted values | Revit categories | BIM uses | From LOD |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -148,8 +149,9 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `Visual Light Transmittance - analytical properties` (built-in) | Visible light transmittance / Transmission de la lumière visible | Number, type | > 0 and ≤ 1; e.g. 0.55 | Curtain Panels, Curtain Wall Mullions, Walls, Windows | Lighting / daylighting analysis, Visualisation and photometric rendering | 300 |
 | `Volume` (built-in) | Volume / Volume | Volume, instance | > 0 m³; e.g. 173 | Areas, Floors, Rooms, Spaces, Structural Columns, Structural Foundations +2 | Cost estimating, Energy and load analysis, Quantity take-off | 300 |
 | `OB_AccessibleCeiling` | Accessible (demountable) ceiling / Plafond démontable | Yes/No, type | `Yes`, `No` | Ceilings | 3D coordination / clash avoidance, Facility management / maintenance | 300 |
-| `OB_AcousticRating` | Acoustic rating (STC / ASTC) / Indice de transmission du son | Text, type | Pattern; e.g. `STC 50`, `STC 45` | Curtain Panels, Curtain Wall Mullions, Doors, Floors, Structural Foundations, Walls +1 | Code and accessibility compliance checking, Design review / authoring | 300 |
+| `OB_AcousticRating` | Acoustic rating (STC / ASTC) / Indice de transmission du son | Text, type | Pattern; e.g. `STC 50`, `STC 45` | Curtain Panels, Curtain Wall Mullions, Doors, Floors, Structural Foundations, Walls +1 | Optional (off unless the owner switches it on), for tags; the requirement is `OB_STC` | 300 |
 | `OB_AirLeakageRate_Lsm2` | Air leakage rate / Taux d'infiltration d'air | Number, type | > 0 L/(s·m²); e.g. 0.3 | Curtain Panels, Curtain Wall Mullions, Walls, Windows | Energy and load analysis | 300 |
+| `OB_ASTC` | Apparent sound transmission class (ASTC) / Indice de transmission du son apparent (ITSA) | Integer, type | Whole number 20 to 80; e.g. 47 | Floors, Structural Foundations, Walls | Code and accessibility compliance checking, Design review / authoring | 300 |
 | `OB_BarrierFree` | Barrier-free (accessible) / Sans obstacles | Yes/No, type | `Yes`, `No` | Doors | Code and accessibility compliance checking | 300 |
 | `OB_BarrierFreeFeatures` | Barrier-free features / Conception sans obstacles | Yes/No, type | `Yes`, `No` | Areas, Floors, Landings, Ramps, Rooms, Runs +3 | Code and accessibility compliance checking | 300 |
 | `OB_BirdFriendlyGlazing` | Bird-friendly glazing / Vitrage sécuritaire pour les oiseaux | Yes/No, type | `Yes`, `No` | Curtain Panels, Curtain Wall Mullions, Walls, Windows | Code and accessibility compliance checking, Design review / authoring | 300 |
@@ -165,6 +167,13 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `OB_FireCompartmentBoundary` | Fire compartment boundary / Séparation coupe-feu | Yes/No, type | `Yes`, `No` | Floors, Structural Foundations, Walls | Code and accessibility compliance checking, Facility management / maintenance | 300 |
 | `OB_FireExit` | Fire exit / Issue | Yes/No, instance | `Yes`, `No` | Doors | Code and accessibility compliance checking | 300 |
 | `OB_FirefightersElevator` | Firefighters' elevator / Ascenseur pour pompiers | Yes/No, type | `Yes`, `No` | Specialty Equipment, Vertical Circulation | Code and accessibility compliance checking | 300 |
+| `OB_FireProtectionRating_min` | Fire-protection rating (min) / Degré pare-flammes (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Doors, Duct Accessories, Windows | Code and accessibility compliance checking, Facility management / maintenance | 300 |
+| `OB_FireRatingBaseJoint_min` | Base joint fire rating (min) / Degré de résistance au feu du joint de pied (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Walls | Optional (off unless the owner switches it on) | 300 (optional) |
+| `OB_FireRatingFromAbove_min` | Fire-resistance rating, fire from above (min) / Degré de résistance au feu, feu par le dessus (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Ceilings, Floors, Roofs, Structural Foundations | Optional (off unless the owner switches it on) | 300 (optional) |
+| `OB_FireRatingFromBelow_min` | Fire-resistance rating, fire from below (min) / Degré de résistance au feu, feu par le dessous (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Ceilings, Floors, Roofs, Structural Foundations | Optional (off unless the owner switches it on) | 300 (optional) |
+| `OB_FireRatingFromInside_min` | Fire-resistance rating, fire from inside (min) / Degré de résistance au feu, feu de l’intérieur (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Curtain Panels, Curtain Wall Mullions, Walls | Optional (off unless the owner switches it on) | 300 (optional) |
+| `OB_FireRatingFromOutside_min` | Fire-resistance rating, fire from outside (min) / Degré de résistance au feu, feu de l’extérieur (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Curtain Panels, Curtain Wall Mullions, Walls | Optional (off unless the owner switches it on) | 300 (optional) |
+| `OB_FireRatingHeadJoint_min` | Head joint fire rating (min) / Degré de résistance au feu du joint de tête (min) | Integer, type | `0`, `20`, `30`, `45`, `60`, `90`, `120`, `180`, `240` (0 = no rating required) | Walls | Optional (off unless the owner switches it on) | 300 (optional) |
 | `OB_FrameMaterial` | Frame material / Matériau du cadre | Text, type | Free text; e.g. Hollow metal | Doors, Windows | Cost estimating, Visualisation and photometric rendering | 300 |
 | `OB_GlazingMakeUp` | Glazing make-up / Composition du vitrage | Text, type | Free text; e.g. 6 low-e / 13 argon / 6 clear | Curtain Panels, Curtain Wall Mullions, Walls, Windows | Cost estimating, Design review / authoring | 300 |
 | `OB_GrossFloorArea` | Gross floor area / Superficie brute | Area, instance | > 0 m²; e.g. 68.9 | Areas, Rooms, Spaces | Space management | 300 |
@@ -203,6 +212,7 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `OB_SpaceClassification` | Space classification / Classification du local | Identifier (text), instance | Pattern; e.g. `13-25 11 00`, `13-31 11 11` | Areas, Rooms, Spaces | Asset register, Space management | 300 |
 | `OB_Sprinklered` | Sprinklered / Protégé par gicleurs | Yes/No, instance | `Yes`, `No` | Areas, Rooms, Spaces | Code and accessibility compliance checking | 300 |
 | `OB_StandardSignCode` | Standard sign code / Code normalisé du panneau | Identifier (text), type | Pattern; e.g. `Ra-1`, `P-90-P` | Generic Models, Signage, Specialty Equipment | Code and accessibility compliance checking, Design review / authoring | 300 |
+| `OB_STC` | Sound transmission class (STC) / Indice de transmission du son (ITS) | Integer, type | Whole number 20 to 80; e.g. 50 | Curtain Panels, Curtain Wall Mullions, Doors, Floors, Structural Foundations, Walls +1 | Code and accessibility compliance checking, Design review / authoring | 300 |
 | `OB_StopsOpenings` | Stops / openings / Arrêts / ouvertures | Text, instance | Free text; e.g. 6 stops, front openings | Specialty Equipment, Vertical Circulation | Design review / authoring | 300 |
 | `OB_SupplyInstallResponsibility` | Supply / install responsibility / Responsabilité (fourni par / installé par) | Code list (text), type | `OFOI`, `OFCI`, `CFCI`, `CFOI` | Casework, Food Service Equipment, Furniture, Furniture Systems, Medical Equipment, Specialty Equipment | Cost estimating, Design review / authoring | 200 |
 | `OB_SurfaceFlameSpreadRating` | Surface flame-spread rating / Indice de propagation de la flamme | Text, type | Pattern; e.g. `FSR 25`, `FSR 150` | Ceilings, Walls | Code and accessibility compliance checking | 300 |
@@ -211,7 +221,7 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `OB_ZoneArea` | Zone area / Superficie de la zone | Area, instance | > 0 m²; e.g. 840 | Areas, HVAC Zones, Rooms | Code and accessibility compliance checking, Space management | 300 |
 | `OB_ZoneType` | Zone type / Type de zone | Code list (text), instance | `CONSTRUCTION`, `FIRESAFETY`, `LIGHTING`, `OCCUPANCY`, `SECURITY`, `THERMAL`, `TRANSPORT`, `VENTILATION`, `RESERVATION`, `INTERFERENCE`, `USERDEFINED`, `NOTDEFINED` | Areas, HVAC Zones, Rooms | Code and accessibility compliance checking, Design review / authoring | 200 |
 
-### 03 Structure (31)
+### 03 Structure (32)
 
 | Parameter | Label EN / FR | Type | Accepted values | Revit categories | BIM uses | From LOD |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -240,6 +250,7 @@ The add-in is written but not yet built or tested. A Revit MCP tool using the sa
 | `OB_DrainageProvisions` | Drainage provisions / Dispositif de drainage | Multiline text, type | Free text; e.g. Perforated drain and free-draining backfill | Walls | Design review / authoring, Facility management / maintenance | 300 |
 | `OB_FireProtection` | Fire protection / Protection incendie | Text, type | Free text; e.g. Intumescent, 1 h | Structural Framing | Code and accessibility compliance checking, Cost estimating | 300 |
 | `OB_FrostProtectionDepth` | Frost protection depth / Profondeur de protection contre le gel | Length, instance | > 0 mm; e.g. 1500 | Structural Foundations | Code and accessibility compliance checking, Design review / authoring | 300 |
+| `OB_IIC` | Impact insulation class (IIC) / Indice d’isolation aux bruits d’impact (IIC) | Integer, type | Whole number 20 to 80; e.g. 55 | Floors, Structural Foundations | Code and accessibility compliance checking, Design review / authoring | 300 |
 | `OB_InstallationRecord` | Installation record / Relevé de mise en place | Multiline text, instance | Free text; e.g. Driven 22.4 m, set 3 mm/blow | Structural Foundations | Existing conditions modelling / renovation, Handover / record model | 500 |
 | `OB_ReinforcementGrade` | Reinforcement grade / Nuance de l'armature | Text, type | Pattern; e.g. `CSA G30.18 400W`, `CSA G30.18 500W` | Structural Area Reinforcement, Structural Fabric Reinforcement, Structural Rebar | Cost estimating, Design review / authoring | 300 |
 | `OB_ReinforcementRatio_kgm3` | Reinforcement ratio / Taux d'armature | Number, type | > 0 kg/m³; e.g. 180 | Floors, Structural Area Reinforcement, Structural Columns, Structural Fabric Reinforcement, Structural Foundations, Structural Framing +2 | Cost estimating, Quantity take-off | 200 |

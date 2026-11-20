@@ -48,6 +48,7 @@ for key,ks in members.items():
     grp='01 Identity and asset' if len(grps)>=3 or not grps else grps.most_common(1)[0][0]
     nm='OB_'+pascal(p['l'])
     if dt=='NUMBER' and p.get('u') in UNIT: nm+='_'+UNIT[p['u']]
+    if p.get('vr') and p.get('rn'): nm=p['rn']   # whole-number ratings (v0.46) carry their fixed name, unit included: OB_FireResistanceRating_min
     if shared_needed:
         if nm in names: nm='OB_'+''.join(x[:1].upper()+x[1:] for x in re.findall(r'[A-Za-z0-9]+',ascii_(p['l'])))
         if nm in names: print('COLLIDE',nm,ks); nm+='_'+ck
@@ -81,7 +82,7 @@ for r in rows:
     for c,lod,us,k in (r['els'] or [(None,'','',r['id'])]):
         rv=P[k].get('rv') or ['shared',None]; isb=rv[0]=='builtin'
         w.writerow([rv[1] if isb else r['name'],'' if isb else r['guid'], 'Built-in' if isb else 'Shared',rv[1] if isb else '',r['dt'],r['unit'],r['scope'],r['group'],p['l'],p.get('lf',''),
-          c['n'] if c else '','; '.join(rc.split(' (')[0] for rc in c.get('rc',[])) if c else '',lod,'; '.join(USES.get(u,u) for u in us) if us else '',p.get('ifc') or '',p.get('ex') or '','; '.join(x for x in p.get('sus',[]) if x),p.get('d',''),r['merged']])
+          c['n'] if c else '','; '.join(rc.split(' (')[0] for rc in c.get('rc',[])) if c else '',lod,'; '.join(USES.get(u,u) for u in us) if us else ('Optional (off unless the owner switches it on)' if c else ''),p.get('ifc') or '',p.get('ex') or '','; '.join(x for x in p.get('sus',[]) if x),p.get('d',''),r['merged']])
 f.close()
 # app map
 json.dump({r['id']:[r['name'],r['guid'],r['dt'],r['group'],r['shared']] for r in rows for _ in [0]} | {k:[r['name'],r['guid'],r['dt'],r['group'],r['shared']] for r in rows for k in r['merged'].split(';')},open('sp_map.json','w'))
