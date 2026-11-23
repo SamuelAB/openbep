@@ -22,6 +22,8 @@ jobs:
         run: python3 names/build_names.py --check
       - name: Family library list
         run: python3 library/check_library.py
+      - name: Compliance example built from its script
+        run: python3 compliance/build_example.py --check
       - name: Lookup rules
         run: node translations/tools/test_i18n.js
       - name: Install a headless browser
@@ -30,5 +32,7 @@ jobs:
         run: node translations/tools/crawl_app.js
       - name: Requirement file gives the Builder's own check result
         run: node translations/tools/reqfile_parity.js && node translations/tools/reqfile_parity.js --no-function-column
+      - name: Compliance page shows any plan with no custom code
+        run: node compliance/test/test_page.js
       - name: Dictionary, glossary and coverage
         run: python3 translations/check_i18n.py --app --strict

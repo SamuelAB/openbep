@@ -1,0 +1,7679 @@
+{
+ "format": "openbep-compliance-series",
+ "formatVersion": "0.1",
+ "example": true,
+ "note": "SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.",
+ "plan": {
+  "name": "Example: Primary school renovation and extension",
+  "owner": "School service centre (example)",
+  "delivery": "Design-bid-build",
+  "goals": [
+   {
+    "id": "cost",
+    "name": "Control cost and budget",
+    "uses": [
+     "Quantities and cost estimate"
+    ]
+   },
+   {
+    "id": "change",
+    "name": "Reduce change orders",
+    "uses": [
+     "3D coordination (clash detection)",
+     "Design review in 3D",
+     "Drawings from the model"
+    ]
+   },
+   {
+    "id": "handover",
+    "name": "Better handover to maintenance",
+    "uses": [
+     "Asset handover to maintenance",
+     "Record, as-built and operations models"
+    ]
+   },
+   {
+    "id": "basics",
+    "name": "Basics every plan requires",
+    "uses": [
+     "Design in BIM, all disciplines"
+    ]
+   }
+  ],
+  "milestones": [
+   {
+    "id": "prelim100",
+    "name": "Preliminary design 100%",
+    "date": "2027-03-26",
+    "targetPercent": 70
+   },
+   {
+    "id": "final90",
+    "name": "Final design 90%",
+    "date": "2027-06-25",
+    "targetPercent": 85
+   },
+   {
+    "id": "ifc",
+    "name": "Issued for construction",
+    "date": "2027-09-10",
+    "targetPercent": 95
+   },
+   {
+    "id": "constr",
+    "name": "Construction, first coordination cycle",
+    "date": "2027-11-26",
+    "targetPercent": 95
+   }
+  ],
+  "holidays": [
+   {
+    "name": "Construction holiday (example)",
+    "from": "2027-07-18",
+    "to": "2027-07-31"
+   }
+  ],
+  "roles": [
+   {
+    "code": "ARCH",
+    "role": "Architect",
+    "firm": "Architect (example)",
+    "document": "SCH-ARCH.rvt",
+    "from": null
+   },
+   {
+    "code": "STRUCT",
+    "role": "Structural engineer",
+    "firm": "Structural engineer (example)",
+    "document": "SCH-STRUCT.rvt",
+    "from": null
+   },
+   {
+    "code": "MECH",
+    "role": "MEP engineer",
+    "firm": "MEP engineer (example)",
+    "document": "SCH-MECH.rvt",
+    "from": null
+   },
+   {
+    "code": "CON",
+    "role": "Contractor",
+    "firm": "Contractor (example, named at award)",
+    "document": "SCH-CON.rvt",
+    "from": "2027-09-24"
+   }
+  ]
+ },
+ "model": {
+  "server": "VIM Server (simulated)",
+  "project": "Primary school (example)",
+  "source": "SCH-FEDERATED.vim",
+  "schedule": "One version every Friday, built from the Revit models each firm uploaded that week."
+ },
+ "valueChecks": [
+  {
+   "id": "assembly-code",
+   "goal": "cost",
+   "label": "Assembly Code filled"
+  },
+  {
+   "id": "real-material",
+   "goal": "cost",
+   "label": "Elements with a real material"
+  },
+  {
+   "id": "lod-params",
+   "goal": "change",
+   "label": "Parameters required by the LOD matrix at this milestone"
+  },
+  {
+   "id": "fire-rating",
+   "goal": "change",
+   "label": "Fire rating on walls, doors and floors"
+  },
+  {
+   "id": "asset-data",
+   "goal": "handover",
+   "label": "Equipment asset data (OB_ asset parameters)"
+  },
+  {
+   "id": "rooms",
+   "goal": "handover",
+   "label": "Rooms numbered and named by the plan"
+  },
+  {
+   "id": "worksets",
+   "goal": "basics",
+   "label": "Elements on a named workset"
+  },
+  {
+   "id": "view-names",
+   "goal": "basics",
+   "label": "Views named by the naming rules"
+  }
+ ],
+ "rules": [
+  {
+   "id": "on-level",
+   "goal": "cost",
+   "label": "Elements on a level",
+   "limit": 95,
+   "unit": "%",
+   "limitText": "at least 95 %",
+   "direction": "higherIsBetter"
+  },
+  {
+   "id": "clashes",
+   "goal": "change",
+   "label": "Clashes open for more than one coordination cycle",
+   "limit": 25,
+   "unit": "",
+   "limitText": "at most 25",
+   "direction": "lowerIsBetter"
+  },
+  {
+   "id": "warnings",
+   "goal": "change",
+   "label": "Revit warnings",
+   "limit": 1500,
+   "unit": "",
+   "limitText": "at most 1,500",
+   "direction": "lowerIsBetter"
+  },
+  {
+   "id": "dup-mark",
+   "goal": "handover",
+   "label": "No duplicate Mark",
+   "limit": 0,
+   "unit": "",
+   "limitText": "limit 0",
+   "direction": "lowerIsBetter"
+  },
+  {
+   "id": "worksets-exist",
+   "goal": "basics",
+   "label": "The named worksets exist",
+   "limit": 0,
+   "unit": "",
+   "limitText": "limit 0 missing",
+   "direction": "lowerIsBetter"
+  },
+  {
+   "id": "dup-levels",
+   "goal": "basics",
+   "label": "Duplicate levels",
+   "limit": 0,
+   "unit": "",
+   "limitText": "limit 0",
+   "direction": "lowerIsBetter"
+  }
+ ],
+ "versions": [
+  {
+   "order": 1,
+   "label": "Version 1",
+   "tag": "v1",
+   "created": "2027-01-08T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 12001,
+   "byRole": {
+    "ARCH": {
+     "elements": 8199,
+     "required": 48211,
+     "met": 22231,
+     "uploaded": true,
+     "elementsAdded": 8199,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "STRUCT": {
+     "elements": 2905,
+     "required": 16994,
+     "met": 10161,
+     "uploaded": true,
+     "elementsAdded": 2905,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 897,
+     "required": 5068,
+     "met": 1305,
+     "uploaded": true,
+     "elementsAdded": 897,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      8199,
+      3758
+     ],
+     "STRUCT": [
+      2905,
+      1695
+     ],
+     "MECH": [
+      897,
+      226
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      8199,
+      3430
+     ],
+     "STRUCT": [
+      2905,
+      1695
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      18038,
+      8192
+     ],
+     "STRUCT": [
+      7553,
+      4338
+     ],
+     "MECH": [
+      1794,
+      541
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      2870,
+      1381
+     ],
+     "STRUCT": [
+      581,
+      338
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1230,
+      401
+     ],
+     "MECH": [
+      1435,
+      229
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      984,
+      504
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      8199,
+      4338
+     ],
+     "STRUCT": [
+      2905,
+      2012
+     ],
+     "MECH": [
+      897,
+      298
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      492,
+      227
+     ],
+     "STRUCT": [
+      145,
+      83
+     ],
+     "MECH": [
+      45,
+      11
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 621,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 2,
+     "pass": false
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 2,
+   "label": "Version 2",
+   "tag": "v2",
+   "created": "2027-01-15T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 12525,
+   "byRole": {
+    "ARCH": {
+     "elements": 8562,
+     "required": 50344,
+     "met": 24700,
+     "uploaded": true,
+     "elementsAdded": 363,
+     "valuesFixed": 2685,
+     "valuesBroken": 216
+    },
+    "STRUCT": {
+     "elements": 3066,
+     "required": 17936,
+     "met": 11281,
+     "uploaded": true,
+     "elementsAdded": 161,
+     "valuesFixed": 1151,
+     "valuesBroken": 31
+    },
+    "MECH": {
+     "elements": 897,
+     "required": 5068,
+     "met": 1305,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      8562,
+      4143
+     ],
+     "STRUCT": [
+      3066,
+      1852
+     ],
+     "MECH": [
+      897,
+      226
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      8562,
+      3767
+     ],
+     "STRUCT": [
+      3066,
+      1851
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      18836,
+      9233
+     ],
+     "STRUCT": [
+      7972,
+      4876
+     ],
+     "MECH": [
+      1794,
+      541
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      2997,
+      1522
+     ],
+     "STRUCT": [
+      613,
+      377
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1284,
+      438
+     ],
+     "MECH": [
+      1435,
+      229
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1027,
+      553
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      8562,
+      4791
+     ],
+     "STRUCT": [
+      3066,
+      2232
+     ],
+     "MECH": [
+      897,
+      298
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      514,
+      253
+     ],
+     "STRUCT": [
+      153,
+      93
+     ],
+     "MECH": [
+      45,
+      11
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 634,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 2,
+     "pass": false
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 3,
+   "label": "Version 3",
+   "tag": "v3",
+   "created": "2027-01-22T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 13431,
+   "byRole": {
+    "ARCH": {
+     "elements": 8999,
+     "required": 52915,
+     "met": 27642,
+     "uploaded": true,
+     "elementsAdded": 437,
+     "valuesFixed": 3166,
+     "valuesBroken": 224
+    },
+    "STRUCT": {
+     "elements": 3224,
+     "required": 18860,
+     "met": 12475,
+     "uploaded": true,
+     "elementsAdded": 158,
+     "valuesFixed": 1305,
+     "valuesBroken": 111
+    },
+    "MECH": {
+     "elements": 1208,
+     "required": 6825,
+     "met": 1997,
+     "uploaded": true,
+     "elementsAdded": 311,
+     "valuesFixed": 707,
+     "valuesBroken": 15
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      8999,
+      4663
+     ],
+     "STRUCT": [
+      3224,
+      2070
+     ],
+     "MECH": [
+      1208,
+      351
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      8999,
+      4249
+     ],
+     "STRUCT": [
+      3224,
+      2045
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      19798,
+      10231
+     ],
+     "STRUCT": [
+      8382,
+      5393
+     ],
+     "MECH": [
+      2416,
+      824
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3150,
+      1731
+     ],
+     "STRUCT": [
+      645,
+      413
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1350,
+      486
+     ],
+     "MECH": [
+      1933,
+      359
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1080,
+      620
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      8999,
+      5380
+     ],
+     "STRUCT": [
+      3224,
+      2452
+     ],
+     "MECH": [
+      1208,
+      447
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      540,
+      282
+     ],
+     "STRUCT": [
+      161,
+      102
+     ],
+     "MECH": [
+      60,
+      16
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 676,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 2,
+     "pass": false
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 4,
+   "label": "Version 4",
+   "tag": "v4",
+   "created": "2027-01-29T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 13966,
+   "byRole": {
+    "ARCH": {
+     "elements": 9358,
+     "required": 55025,
+     "met": 30292,
+     "uploaded": true,
+     "elementsAdded": 359,
+     "valuesFixed": 2976,
+     "valuesBroken": 326
+    },
+    "STRUCT": {
+     "elements": 3400,
+     "required": 19890,
+     "met": 13797,
+     "uploaded": true,
+     "elementsAdded": 176,
+     "valuesFixed": 1376,
+     "valuesBroken": 54
+    },
+    "MECH": {
+     "elements": 1208,
+     "required": 6825,
+     "met": 1997,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      9358,
+      5092
+     ],
+     "STRUCT": [
+      3400,
+      2275
+     ],
+     "MECH": [
+      1208,
+      351
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      9358,
+      4566
+     ],
+     "STRUCT": [
+      3400,
+      2287
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      20588,
+      11308
+     ],
+     "STRUCT": [
+      8840,
+      5949
+     ],
+     "MECH": [
+      2416,
+      824
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3275,
+      1874
+     ],
+     "STRUCT": [
+      680,
+      456
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1404,
+      544
+     ],
+     "MECH": [
+      1933,
+      359
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1123,
+      679
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      9358,
+      5925
+     ],
+     "STRUCT": [
+      3400,
+      2717
+     ],
+     "MECH": [
+      1208,
+      447
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      561,
+      304
+     ],
+     "STRUCT": [
+      170,
+      113
+     ],
+     "MECH": [
+      60,
+      16
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 709,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 2,
+     "pass": false
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 5,
+   "label": "Version 5",
+   "tag": "v5",
+   "created": "2027-02-05T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 14622,
+   "byRole": {
+    "ARCH": {
+     "elements": 9701,
+     "required": 57041,
+     "met": 33042,
+     "uploaded": true,
+     "elementsAdded": 343,
+     "valuesFixed": 3025,
+     "valuesBroken": 275
+    },
+    "STRUCT": {
+     "elements": 3400,
+     "required": 19890,
+     "met": 13797,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 1521,
+     "required": 8594,
+     "met": 2824,
+     "uploaded": true,
+     "elementsAdded": 313,
+     "valuesFixed": 841,
+     "valuesBroken": 14
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      9701,
+      5624
+     ],
+     "STRUCT": [
+      3400,
+      2275
+     ],
+     "MECH": [
+      1521,
+      500
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      9701,
+      5066
+     ],
+     "STRUCT": [
+      3400,
+      2287
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      21342,
+      12238
+     ],
+     "STRUCT": [
+      8840,
+      5949
+     ],
+     "MECH": [
+      3042,
+      1147
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3395,
+      2055
+     ],
+     "STRUCT": [
+      680,
+      456
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1455,
+      579
+     ],
+     "MECH": [
+      2434,
+      512
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1164,
+      732
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      9701,
+      6410
+     ],
+     "STRUCT": [
+      3400,
+      2717
+     ],
+     "MECH": [
+      1521,
+      642
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      582,
+      338
+     ],
+     "STRUCT": [
+      170,
+      113
+     ],
+     "MECH": [
+      76,
+      23
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 733,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 6,
+   "label": "Version 6",
+   "tag": "v6",
+   "created": "2027-02-12T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 15346,
+   "byRole": {
+    "ARCH": {
+     "elements": 10099,
+     "required": 59383,
+     "met": 36308,
+     "uploaded": true,
+     "elementsAdded": 398,
+     "valuesFixed": 3598,
+     "valuesBroken": 332
+    },
+    "STRUCT": {
+     "elements": 3726,
+     "required": 21797,
+     "met": 16342,
+     "uploaded": true,
+     "elementsAdded": 326,
+     "valuesFixed": 2671,
+     "valuesBroken": 126
+    },
+    "MECH": {
+     "elements": 1521,
+     "required": 8594,
+     "met": 2824,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      10099,
+      6159
+     ],
+     "STRUCT": [
+      3726,
+      2691
+     ],
+     "MECH": [
+      1521,
+      500
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      10099,
+      5476
+     ],
+     "STRUCT": [
+      3726,
+      2719
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      22218,
+      13548
+     ],
+     "STRUCT": [
+      9688,
+      7025
+     ],
+     "MECH": [
+      3042,
+      1147
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3535,
+      2264
+     ],
+     "STRUCT": [
+      745,
+      544
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1515,
+      639
+     ],
+     "MECH": [
+      2434,
+      512
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1212,
+      811
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      10099,
+      7044
+     ],
+     "STRUCT": [
+      3726,
+      3228
+     ],
+     "MECH": [
+      1521,
+      642
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      606,
+      367
+     ],
+     "STRUCT": [
+      186,
+      135
+     ],
+     "MECH": [
+      76,
+      23
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 790,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 7,
+   "label": "Version 7",
+   "tag": "v7",
+   "created": "2027-02-19T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 16221,
+   "byRole": {
+    "ARCH": {
+     "elements": 10507,
+     "required": 61780,
+     "met": 39503,
+     "uploaded": true,
+     "elementsAdded": 408,
+     "valuesFixed": 3532,
+     "valuesBroken": 337
+    },
+    "STRUCT": {
+     "elements": 3882,
+     "required": 22709,
+     "met": 17630,
+     "uploaded": true,
+     "elementsAdded": 156,
+     "valuesFixed": 1361,
+     "valuesBroken": 73
+    },
+    "MECH": {
+     "elements": 1832,
+     "required": 10351,
+     "met": 3745,
+     "uploaded": true,
+     "elementsAdded": 311,
+     "valuesFixed": 950,
+     "valuesBroken": 29
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      10507,
+      6720
+     ],
+     "STRUCT": [
+      3882,
+      2937
+     ],
+     "MECH": [
+      1832,
+      663
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      10507,
+      6049
+     ],
+     "STRUCT": [
+      3882,
+      2908
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      23115,
+      14621
+     ],
+     "STRUCT": [
+      10093,
+      7555
+     ],
+     "MECH": [
+      3664,
+      1521
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3677,
+      2436
+     ],
+     "STRUCT": [
+      776,
+      582
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1576,
+      705
+     ],
+     "MECH": [
+      2931,
+      692
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1261,
+      874
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      10507,
+      7700
+     ],
+     "STRUCT": [
+      3882,
+      3500
+     ],
+     "MECH": [
+      1832,
+      839
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      630,
+      398
+     ],
+     "STRUCT": [
+      194,
+      148
+     ],
+     "MECH": [
+      92,
+      30
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 808,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 8,
+   "label": "Version 8",
+   "tag": "v8",
+   "created": "2027-02-26T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 16774,
+   "byRole": {
+    "ARCH": {
+     "elements": 10890,
+     "required": 64033,
+     "met": 42756,
+     "uploaded": true,
+     "elementsAdded": 383,
+     "valuesFixed": 3392,
+     "valuesBroken": 139
+    },
+    "STRUCT": {
+     "elements": 4052,
+     "required": 23704,
+     "met": 19218,
+     "uploaded": true,
+     "elementsAdded": 170,
+     "valuesFixed": 1724,
+     "valuesBroken": 136
+    },
+    "MECH": {
+     "elements": 1832,
+     "required": 10351,
+     "met": 3745,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      10890,
+      7268
+     ],
+     "STRUCT": [
+      4052,
+      3186
+     ],
+     "MECH": [
+      1832,
+      663
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      10890,
+      6518
+     ],
+     "STRUCT": [
+      4052,
+      3195
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      23958,
+      15806
+     ],
+     "STRUCT": [
+      10535,
+      8259
+     ],
+     "MECH": [
+      3664,
+      1521
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3811,
+      2675
+     ],
+     "STRUCT": [
+      810,
+      632
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1634,
+      758
+     ],
+     "MECH": [
+      2931,
+      692
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1307,
+      950
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      10890,
+      8349
+     ],
+     "STRUCT": [
+      4052,
+      3788
+     ],
+     "MECH": [
+      1832,
+      839
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      653,
+      432
+     ],
+     "STRUCT": [
+      203,
+      158
+     ],
+     "MECH": [
+      92,
+      30
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 846,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 3,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 9,
+   "label": "Version 9",
+   "tag": "v9",
+   "created": "2027-03-05T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 17644,
+   "byRole": {
+    "ARCH": {
+     "elements": 11299,
+     "required": 66439,
+     "met": 46258,
+     "uploaded": true,
+     "elementsAdded": 409,
+     "valuesFixed": 3918,
+     "valuesBroken": 416
+    },
+    "STRUCT": {
+     "elements": 4217,
+     "required": 24669,
+     "met": 20766,
+     "uploaded": true,
+     "elementsAdded": 165,
+     "valuesFixed": 1663,
+     "valuesBroken": 115
+    },
+    "MECH": {
+     "elements": 2128,
+     "required": 12023,
+     "met": 4778,
+     "uploaded": true,
+     "elementsAdded": 296,
+     "valuesFixed": 1061,
+     "valuesBroken": 28
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      11299,
+      7763
+     ],
+     "STRUCT": [
+      4217,
+      3434
+     ],
+     "MECH": [
+      2128,
+      842
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      11299,
+      7001
+     ],
+     "STRUCT": [
+      4217,
+      3433
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      24858,
+      17283
+     ],
+     "STRUCT": [
+      10964,
+      8944
+     ],
+     "MECH": [
+      4256,
+      1973
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      3955,
+      2864
+     ],
+     "STRUCT": [
+      843,
+      681
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1695,
+      831
+     ],
+     "MECH": [
+      3405,
+      858
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1356,
+      1030
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      11299,
+      9019
+     ],
+     "STRUCT": [
+      4217,
+      4102
+     ],
+     "MECH": [
+      2128,
+      1066
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      678,
+      467
+     ],
+     "STRUCT": [
+      211,
+      172
+     ],
+     "MECH": [
+      106,
+      39
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 0,
+     "pass": true
+    },
+    "warnings": {
+     "value": 879,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 10,
+   "label": "Version 10",
+   "tag": "v10",
+   "created": "2027-03-12T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 18184,
+   "byRole": {
+    "ARCH": {
+     "elements": 11679,
+     "required": 68673,
+     "met": 50032,
+     "uploaded": true,
+     "elementsAdded": 380,
+     "valuesFixed": 4297,
+     "valuesBroken": 523
+    },
+    "STRUCT": {
+     "elements": 4377,
+     "required": 25605,
+     "met": 22272,
+     "uploaded": true,
+     "elementsAdded": 160,
+     "valuesFixed": 1685,
+     "valuesBroken": 179
+    },
+    "MECH": {
+     "elements": 2128,
+     "required": 12023,
+     "met": 4778,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      11679,
+      8473
+     ],
+     "STRUCT": [
+      4377,
+      3664
+     ],
+     "MECH": [
+      2128,
+      842
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      11679,
+      7540
+     ],
+     "STRUCT": [
+      4377,
+      3704
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      25694,
+      18678
+     ],
+     "STRUCT": [
+      11380,
+      9628
+     ],
+     "MECH": [
+      4256,
+      1973
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      4088,
+      3090
+     ],
+     "STRUCT": [
+      875,
+      736
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1752,
+      888
+     ],
+     "MECH": [
+      3405,
+      858
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1401,
+      1118
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      11679,
+      9743
+     ],
+     "STRUCT": [
+      4377,
+      4355
+     ],
+     "MECH": [
+      2128,
+      1066
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      701,
+      502
+     ],
+     "STRUCT": [
+      219,
+      185
+     ],
+     "MECH": [
+      106,
+      39
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.8,
+     "pass": true
+    },
+    "clashes": {
+     "value": 21,
+     "pass": true
+    },
+    "warnings": {
+     "value": 907,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 11,
+   "label": "Version 11",
+   "tag": "v11",
+   "created": "2027-03-19T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 19009,
+   "byRole": {
+    "ARCH": {
+     "elements": 12040,
+     "required": 70795,
+     "met": 53659,
+     "uploaded": true,
+     "elementsAdded": 361,
+     "valuesFixed": 3752,
+     "valuesBroken": 125
+    },
+    "STRUCT": {
+     "elements": 4523,
+     "required": 26460,
+     "met": 23683,
+     "uploaded": true,
+     "elementsAdded": 146,
+     "valuesFixed": 1576,
+     "valuesBroken": 165
+    },
+    "MECH": {
+     "elements": 2446,
+     "required": 13820,
+     "met": 5928,
+     "uploaded": true,
+     "elementsAdded": 318,
+     "valuesFixed": 1201,
+     "valuesBroken": 51
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      12040,
+      9061
+     ],
+     "STRUCT": [
+      4523,
+      3965
+     ],
+     "MECH": [
+      2446,
+      1044
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      12040,
+      8206
+     ],
+     "STRUCT": [
+      4523,
+      3952
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      26488,
+      19963
+     ],
+     "STRUCT": [
+      11760,
+      10283
+     ],
+     "MECH": [
+      4892,
+      2434
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      4214,
+      3331
+     ],
+     "STRUCT": [
+      905,
+      787
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1806,
+      940
+     ],
+     "MECH": [
+      3914,
+      1069
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1445,
+      1201
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      12040,
+      10414
+     ],
+     "STRUCT": [
+      4523,
+      4500
+     ],
+     "MECH": [
+      2446,
+      1332
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      722,
+      543
+     ],
+     "STRUCT": [
+      226,
+      196
+     ],
+     "MECH": [
+      122,
+      49
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 42,
+     "pass": false
+    },
+    "warnings": {
+     "value": 942,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 12,
+   "label": "Version 12",
+   "tag": "v12",
+   "created": "2027-03-26T16:00:00-05:00",
+   "milestone": "prelim100",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 19754,
+   "byRole": {
+    "ARCH": {
+     "elements": 12447,
+     "required": 73188,
+     "met": 57294,
+     "uploaded": true,
+     "elementsAdded": 407,
+     "valuesFixed": 4114,
+     "valuesBroken": 479
+    },
+    "STRUCT": {
+     "elements": 4717,
+     "required": 27594,
+     "met": 25227,
+     "uploaded": true,
+     "elementsAdded": 194,
+     "valuesFixed": 1635,
+     "valuesBroken": 91
+    },
+    "MECH": {
+     "elements": 2590,
+     "required": 14634,
+     "met": 6553,
+     "uploaded": true,
+     "elementsAdded": 144,
+     "valuesFixed": 648,
+     "valuesBroken": 23
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      12447,
+      9670
+     ],
+     "STRUCT": [
+      4717,
+      4255
+     ],
+     "MECH": [
+      2590,
+      1147
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      12447,
+      8795
+     ],
+     "STRUCT": [
+      4717,
+      4224
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      27383,
+      21206
+     ],
+     "STRUCT": [
+      12264,
+      10997
+     ],
+     "MECH": [
+      5180,
+      2688
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      4356,
+      3593
+     ],
+     "STRUCT": [
+      943,
+      845
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      1867,
+      1011
+     ],
+     "MECH": [
+      4144,
+      1180
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1494,
+      1283
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      12447,
+      11155
+     ],
+     "STRUCT": [
+      4717,
+      4693
+     ],
+     "MECH": [
+      2590,
+      1485
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      747,
+      581
+     ],
+     "STRUCT": [
+      236,
+      213
+     ],
+     "MECH": [
+      130,
+      53
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.9,
+     "pass": true
+    },
+    "clashes": {
+     "value": 62,
+     "pass": false
+    },
+    "warnings": {
+     "value": 982,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 13,
+   "label": "Version 13",
+   "tag": "v13",
+   "created": "2027-04-02T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 20691,
+   "byRole": {
+    "ARCH": {
+     "elements": 12835,
+     "required": 89054,
+     "met": 59214,
+     "uploaded": true,
+     "elementsAdded": 388,
+     "valuesFixed": 2240,
+     "valuesBroken": 320
+    },
+    "STRUCT": {
+     "elements": 4816,
+     "required": 33245,
+     "met": 27526,
+     "uploaded": true,
+     "elementsAdded": 99,
+     "valuesFixed": 2360,
+     "valuesBroken": 61
+    },
+    "MECH": {
+     "elements": 3040,
+     "required": 20267,
+     "met": 7184,
+     "uploaded": true,
+     "elementsAdded": 450,
+     "valuesFixed": 674,
+     "valuesBroken": 43
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      15145,
+      10042
+     ],
+     "STRUCT": [
+      5683,
+      4530
+     ],
+     "MECH": [
+      3587,
+      1231
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      15145,
+      8906
+     ],
+     "STRUCT": [
+      5683,
+      4558
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      33320,
+      22045
+     ],
+     "STRUCT": [
+      14775,
+      11840
+     ],
+     "MECH": [
+      7174,
+      2958
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      5301,
+      3682
+     ],
+     "STRUCT": [
+      1137,
+      905
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2272,
+      1052
+     ],
+     "MECH": [
+      5740,
+      1325
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1817,
+      1325
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      15145,
+      11565
+     ],
+     "STRUCT": [
+      5683,
+      5466
+     ],
+     "MECH": [
+      3587,
+      1611
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      909,
+      597
+     ],
+     "STRUCT": [
+      284,
+      227
+     ],
+     "MECH": [
+      179,
+      59
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.8,
+     "pass": true
+    },
+    "clashes": {
+     "value": 75,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1034,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 14,
+   "label": "Version 14",
+   "tag": "v14",
+   "created": "2027-04-09T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 21193,
+   "byRole": {
+    "ARCH": {
+     "elements": 13234,
+     "required": 91822,
+     "met": 62676,
+     "uploaded": true,
+     "elementsAdded": 399,
+     "valuesFixed": 3916,
+     "valuesBroken": 454
+    },
+    "STRUCT": {
+     "elements": 4919,
+     "required": 33954,
+     "met": 28449,
+     "uploaded": true,
+     "elementsAdded": 103,
+     "valuesFixed": 1106,
+     "valuesBroken": 183
+    },
+    "MECH": {
+     "elements": 3040,
+     "required": 20267,
+     "met": 7184,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      15616,
+      10631
+     ],
+     "STRUCT": [
+      5804,
+      4701
+     ],
+     "MECH": [
+      3587,
+      1231
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      15616,
+      9648
+     ],
+     "STRUCT": [
+      5804,
+      4701
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      34355,
+      23219
+     ],
+     "STRUCT": [
+      15091,
+      12195
+     ],
+     "MECH": [
+      7174,
+      2958
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      5466,
+      3876
+     ],
+     "STRUCT": [
+      1161,
+      943
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2342,
+      1107
+     ],
+     "MECH": [
+      5740,
+      1325
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1874,
+      1398
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      15616,
+      12163
+     ],
+     "STRUCT": [
+      5804,
+      5672
+     ],
+     "MECH": [
+      3587,
+      1611
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      937,
+      634
+     ],
+     "STRUCT": [
+      290,
+      237
+     ],
+     "MECH": [
+      179,
+      59
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.7,
+     "pass": true
+    },
+    "clashes": {
+     "value": 81,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1058,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 15,
+   "label": "Version 15",
+   "tag": "v15",
+   "created": "2027-04-16T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 22153,
+   "byRole": {
+    "ARCH": {
+     "elements": 13234,
+     "required": 91822,
+     "met": 62676,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "STRUCT": {
+     "elements": 5023,
+     "required": 34673,
+     "met": 29450,
+     "uploaded": true,
+     "elementsAdded": 104,
+     "valuesFixed": 1198,
+     "valuesBroken": 197
+    },
+    "MECH": {
+     "elements": 3896,
+     "required": 25975,
+     "met": 9846,
+     "uploaded": true,
+     "elementsAdded": 856,
+     "valuesFixed": 2686,
+     "valuesBroken": 24
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      15616,
+      10631
+     ],
+     "STRUCT": [
+      5927,
+      4872
+     ],
+     "MECH": [
+      4597,
+      1716
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      15616,
+      9648
+     ],
+     "STRUCT": [
+      5927,
+      4877
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      34355,
+      23219
+     ],
+     "STRUCT": [
+      15411,
+      12640
+     ],
+     "MECH": [
+      9195,
+      4041
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      5466,
+      3876
+     ],
+     "STRUCT": [
+      1185,
+      981
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2342,
+      1107
+     ],
+     "MECH": [
+      7356,
+      1788
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1874,
+      1398
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      15616,
+      12163
+     ],
+     "STRUCT": [
+      5927,
+      5835
+     ],
+     "MECH": [
+      4597,
+      2222
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      937,
+      634
+     ],
+     "STRUCT": [
+      296,
+      245
+     ],
+     "MECH": [
+      230,
+      79
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 94.2,
+     "pass": false
+    },
+    "clashes": {
+     "value": 89,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1111,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 1,
+     "pass": false
+    }
+   }
+  },
+  {
+   "order": 16,
+   "label": "Version 16",
+   "tag": "v16",
+   "created": "2027-04-23T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 23029,
+   "byRole": {
+    "ARCH": {
+     "elements": 14012,
+     "required": 97220,
+     "met": 67188,
+     "uploaded": true,
+     "elementsAdded": 778,
+     "valuesFixed": 4654,
+     "valuesBroken": 142
+    },
+    "STRUCT": {
+     "elements": 5121,
+     "required": 35351,
+     "met": 30608,
+     "uploaded": true,
+     "elementsAdded": 98,
+     "valuesFixed": 1353,
+     "valuesBroken": 195
+    },
+    "MECH": {
+     "elements": 3896,
+     "required": 25975,
+     "met": 9846,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      16534,
+      11267
+     ],
+     "STRUCT": [
+      6043,
+      5056
+     ],
+     "MECH": [
+      4597,
+      1716
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      16534,
+      10289
+     ],
+     "STRUCT": [
+      6043,
+      5075
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      36375,
+      25025
+     ],
+     "STRUCT": [
+      15711,
+      13202
+     ],
+     "MECH": [
+      9195,
+      4041
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      5787,
+      4148
+     ],
+     "STRUCT": [
+      1209,
+      1011
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2480,
+      1183
+     ],
+     "MECH": [
+      7356,
+      1788
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1984,
+      1505
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      16534,
+      13086
+     ],
+     "STRUCT": [
+      6043,
+      6013
+     ],
+     "MECH": [
+      4597,
+      2222
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      992,
+      685
+     ],
+     "STRUCT": [
+      302,
+      251
+     ],
+     "MECH": [
+      230,
+      79
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 94.2,
+     "pass": false
+    },
+    "clashes": {
+     "value": 103,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1157,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 1,
+     "pass": false
+    }
+   }
+  },
+  {
+   "order": 17,
+   "label": "Version 17",
+   "tag": "v17",
+   "created": "2027-04-30T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 24019,
+   "byRole": {
+    "ARCH": {
+     "elements": 14012,
+     "required": 97220,
+     "met": 67188,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "STRUCT": {
+     "elements": 5250,
+     "required": 36241,
+     "met": 31622,
+     "uploaded": true,
+     "elementsAdded": 129,
+     "valuesFixed": 1267,
+     "valuesBroken": 253
+    },
+    "MECH": {
+     "elements": 4757,
+     "required": 31715,
+     "met": 12539,
+     "uploaded": true,
+     "elementsAdded": 861,
+     "valuesFixed": 2811,
+     "valuesBroken": 118
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      16534,
+      11267
+     ],
+     "STRUCT": [
+      6195,
+      5292
+     ],
+     "MECH": [
+      5613,
+      2198
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      16534,
+      10289
+     ],
+     "STRUCT": [
+      6195,
+      5232
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      36375,
+      25025
+     ],
+     "STRUCT": [
+      16107,
+      13613
+     ],
+     "MECH": [
+      11227,
+      5204
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      5787,
+      4148
+     ],
+     "STRUCT": [
+      1239,
+      1058
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2480,
+      1183
+     ],
+     "MECH": [
+      8981,
+      2239
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1984,
+      1505
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      16534,
+      13086
+     ],
+     "STRUCT": [
+      6195,
+      6164
+     ],
+     "MECH": [
+      5613,
+      2796
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      992,
+      685
+     ],
+     "STRUCT": [
+      310,
+      263
+     ],
+     "MECH": [
+      281,
+      102
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 94.4,
+     "pass": false
+    },
+    "clashes": {
+     "value": 106,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1203,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 18,
+   "label": "Version 18",
+   "tag": "v18",
+   "created": "2027-05-07T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 24550,
+   "byRole": {
+    "ARCH": {
+     "elements": 14012,
+     "required": 97220,
+     "met": 67188,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "STRUCT": {
+     "elements": 5337,
+     "required": 36843,
+     "met": 32585,
+     "uploaded": true,
+     "elementsAdded": 87,
+     "valuesFixed": 1237,
+     "valuesBroken": 274
+    },
+    "MECH": {
+     "elements": 5201,
+     "required": 34674,
+     "met": 14131,
+     "uploaded": true,
+     "elementsAdded": 444,
+     "valuesFixed": 1741,
+     "valuesBroken": 149
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      16534,
+      11267
+     ],
+     "STRUCT": [
+      6298,
+      5411
+     ],
+     "MECH": [
+      6137,
+      2480
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      16534,
+      10289
+     ],
+     "STRUCT": [
+      6298,
+      5429
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      36375,
+      25025
+     ],
+     "STRUCT": [
+      16374,
+      14129
+     ],
+     "MECH": [
+      12274,
+      5807
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      5787,
+      4148
+     ],
+     "STRUCT": [
+      1260,
+      1079
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2480,
+      1183
+     ],
+     "MECH": [
+      9819,
+      2581
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      1984,
+      1505
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      16534,
+      13086
+     ],
+     "STRUCT": [
+      6298,
+      6267
+     ],
+     "MECH": [
+      6137,
+      3147
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      992,
+      685
+     ],
+     "STRUCT": [
+      315,
+      270
+     ],
+     "MECH": [
+      307,
+      116
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 94.4,
+     "pass": false
+    },
+    "clashes": {
+     "value": 119,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1242,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 19,
+   "label": "Version 19",
+   "tag": "v19",
+   "created": "2027-05-14T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "notChecked",
+   "reason": "The check did not finish. Run it again on this version."
+  },
+  {
+   "order": 20,
+   "label": "Version 20",
+   "tag": "v20",
+   "created": "2027-05-21T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 28180,
+   "byRole": {
+    "ARCH": {
+     "elements": 15705,
+     "required": 108968,
+     "met": 76846,
+     "uploaded": true,
+     "elementsAdded": 386,
+     "valuesFixed": 2308,
+     "valuesBroken": 244
+    },
+    "STRUCT": {
+     "elements": 5554,
+     "required": 38341,
+     "met": 34817,
+     "uploaded": true,
+     "elementsAdded": 95,
+     "valuesFixed": 1429,
+     "valuesBroken": 369
+    },
+    "MECH": {
+     "elements": 6921,
+     "required": 46143,
+     "met": 20304,
+     "uploaded": true,
+     "elementsAdded": 843,
+     "valuesFixed": 3341,
+     "valuesBroken": 103
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      18532,
+      12943
+     ],
+     "STRUCT": [
+      6554,
+      5821
+     ],
+     "MECH": [
+      8167,
+      3555
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      18532,
+      11692
+     ],
+     "STRUCT": [
+      6554,
+      5822
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      40770,
+      28671
+     ],
+     "STRUCT": [
+      17040,
+      15205
+     ],
+     "MECH": [
+      16334,
+      8425
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      6486,
+      4795
+     ],
+     "STRUCT": [
+      1311,
+      1157
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2780,
+      1377
+     ],
+     "MECH": [
+      13067,
+      3600
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2224,
+      1704
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      18532,
+      14885
+     ],
+     "STRUCT": [
+      6554,
+      6521
+     ],
+     "MECH": [
+      8167,
+      4556
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1112,
+      779
+     ],
+     "STRUCT": [
+      328,
+      291
+     ],
+     "MECH": [
+      408,
+      168
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 94.6,
+     "pass": false
+    },
+    "clashes": {
+     "value": 99,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1323,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 21,
+   "label": "Version 21",
+   "tag": "v21",
+   "created": "2027-05-28T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 29507,
+   "byRole": {
+    "ARCH": {
+     "elements": 16105,
+     "required": 111743,
+     "met": 82456,
+     "uploaded": true,
+     "elementsAdded": 400,
+     "valuesFixed": 6463,
+     "valuesBroken": 853
+    },
+    "STRUCT": {
+     "elements": 5651,
+     "required": 39008,
+     "met": 35854,
+     "uploaded": true,
+     "elementsAdded": 97,
+     "valuesFixed": 1309,
+     "valuesBroken": 272
+    },
+    "MECH": {
+     "elements": 7751,
+     "required": 51675,
+     "met": 23734,
+     "uploaded": true,
+     "elementsAdded": 830,
+     "valuesFixed": 3484,
+     "valuesBroken": 54
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      19004,
+      13801
+     ],
+     "STRUCT": [
+      6668,
+      5999
+     ],
+     "MECH": [
+      9146,
+      4168
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      19004,
+      12548
+     ],
+     "STRUCT": [
+      6668,
+      6034
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      41809,
+      30772
+     ],
+     "STRUCT": [
+      17337,
+      15679
+     ],
+     "MECH": [
+      18292,
+      9793
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      6651,
+      5127
+     ],
+     "STRUCT": [
+      1334,
+      1208
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2851,
+      1470
+     ],
+     "MECH": [
+      14634,
+      4235
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2280,
+      1825
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      19004,
+      16081
+     ],
+     "STRUCT": [
+      6668,
+      6635
+     ],
+     "MECH": [
+      9146,
+      5344
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1140,
+      832
+     ],
+     "STRUCT": [
+      333,
+      299
+     ],
+     "MECH": [
+      457,
+      194
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.8,
+     "pass": true
+    },
+    "clashes": {
+     "value": 88,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1378,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 22,
+   "label": "Version 22",
+   "tag": "v22",
+   "created": "2027-06-04T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 30978,
+   "byRole": {
+    "ARCH": {
+     "elements": 16584,
+     "required": 115065,
+     "met": 88274,
+     "uploaded": true,
+     "elementsAdded": 479,
+     "valuesFixed": 6557,
+     "valuesBroken": 739
+    },
+    "STRUCT": {
+     "elements": 5791,
+     "required": 39975,
+     "met": 37029,
+     "uploaded": true,
+     "elementsAdded": 140,
+     "valuesFixed": 1402,
+     "valuesBroken": 227
+    },
+    "MECH": {
+     "elements": 8603,
+     "required": 57357,
+     "met": 27301,
+     "uploaded": true,
+     "elementsAdded": 852,
+     "valuesFixed": 3830,
+     "valuesBroken": 263
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      19569,
+      15040
+     ],
+     "STRUCT": [
+      6833,
+      6215
+     ],
+     "MECH": [
+      10152,
+      4758
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      19569,
+      13402
+     ],
+     "STRUCT": [
+      6833,
+      6228
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      43052,
+      32707
+     ],
+     "STRUCT": [
+      17767,
+      16232
+     ],
+     "MECH": [
+      20303,
+      11249
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      6849,
+      5488
+     ],
+     "STRUCT": [
+      1367,
+      1242
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2935,
+      1571
+     ],
+     "MECH": [
+      16242,
+      4897
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2348,
+      1981
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      19569,
+      17195
+     ],
+     "STRUCT": [
+      6833,
+      6799
+     ],
+     "MECH": [
+      10152,
+      6173
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1174,
+      890
+     ],
+     "STRUCT": [
+      342,
+      313
+     ],
+     "MECH": [
+      508,
+      224
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 71,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1408,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 22,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 23,
+   "label": "Version 23",
+   "tag": "v23",
+   "created": "2027-06-11T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 32284,
+   "byRole": {
+    "ARCH": {
+     "elements": 16922,
+     "required": 117412,
+     "met": 94222,
+     "uploaded": true,
+     "elementsAdded": 338,
+     "valuesFixed": 6167,
+     "valuesBroken": 219
+    },
+    "STRUCT": {
+     "elements": 5886,
+     "required": 40629,
+     "met": 38001,
+     "uploaded": true,
+     "elementsAdded": 95,
+     "valuesFixed": 1233,
+     "valuesBroken": 261
+    },
+    "MECH": {
+     "elements": 9476,
+     "required": 63177,
+     "met": 33777,
+     "uploaded": true,
+     "elementsAdded": 873,
+     "valuesFixed": 6717,
+     "valuesBroken": 241
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      19968,
+      15787
+     ],
+     "STRUCT": [
+      6945,
+      6405
+     ],
+     "MECH": [
+      11182,
+      5904
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      19968,
+      14326
+     ],
+     "STRUCT": [
+      6945,
+      6395
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      43930,
+      35159
+     ],
+     "STRUCT": [
+      18058,
+      16689
+     ],
+     "MECH": [
+      22363,
+      13817
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      6989,
+      5870
+     ],
+     "STRUCT": [
+      1389,
+      1282
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      2995,
+      1683
+     ],
+     "MECH": [
+      17891,
+      6160
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2396,
+      2106
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      19968,
+      18341
+     ],
+     "STRUCT": [
+      6945,
+      6910
+     ],
+     "MECH": [
+      11182,
+      7615
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1198,
+      950
+     ],
+     "STRUCT": [
+      347,
+      320
+     ],
+     "MECH": [
+      559,
+      281
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 60,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1589,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 25,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 24,
+   "label": "Version 24",
+   "tag": "v24",
+   "created": "2027-06-18T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 33723,
+   "byRole": {
+    "ARCH": {
+     "elements": 17396,
+     "required": 120700,
+     "met": 100652,
+     "uploaded": true,
+     "elementsAdded": 474,
+     "valuesFixed": 7010,
+     "valuesBroken": 580
+    },
+    "STRUCT": {
+     "elements": 6014,
+     "required": 41516,
+     "met": 39283,
+     "uploaded": true,
+     "elementsAdded": 128,
+     "valuesFixed": 1379,
+     "valuesBroken": 97
+    },
+    "MECH": {
+     "elements": 10313,
+     "required": 68756,
+     "met": 41548,
+     "uploaded": true,
+     "elementsAdded": 837,
+     "valuesFixed": 7965,
+     "valuesBroken": 194
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      20527,
+      17010
+     ],
+     "STRUCT": [
+      7097,
+      6625
+     ],
+     "MECH": [
+      12169,
+      7271
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      20527,
+      15356
+     ],
+     "STRUCT": [
+      7097,
+      6619
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      45160,
+      37516
+     ],
+     "STRUCT": [
+      18451,
+      17310
+     ],
+     "MECH": [
+      24339,
+      17005
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      7185,
+      6240
+     ],
+     "STRUCT": [
+      1419,
+      1335
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3079,
+      1779
+     ],
+     "MECH": [
+      19471,
+      7576
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2463,
+      2256
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      20527,
+      19476
+     ],
+     "STRUCT": [
+      7097,
+      7062
+     ],
+     "MECH": [
+      12169,
+      9358
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1232,
+      1019
+     ],
+     "STRUCT": [
+      355,
+      332
+     ],
+     "MECH": [
+      608,
+      338
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 54,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1742,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 28,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 25,
+   "label": "Version 25",
+   "tag": "v25",
+   "created": "2027-06-25T16:00:00-05:00",
+   "milestone": "final90",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 35114,
+   "byRole": {
+    "ARCH": {
+     "elements": 17852,
+     "required": 123864,
+     "met": 107471,
+     "uploaded": true,
+     "elementsAdded": 456,
+     "valuesFixed": 7404,
+     "valuesBroken": 585
+    },
+    "STRUCT": {
+     "elements": 6082,
+     "required": 41985,
+     "met": 40190,
+     "uploaded": true,
+     "elementsAdded": 68,
+     "valuesFixed": 1306,
+     "valuesBroken": 399
+    },
+    "MECH": {
+     "elements": 11180,
+     "required": 74537,
+     "met": 49692,
+     "uploaded": true,
+     "elementsAdded": 867,
+     "valuesFixed": 8437,
+     "valuesBroken": 293
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      21065,
+      18023
+     ],
+     "STRUCT": [
+      7177,
+      6860
+     ],
+     "MECH": [
+      13192,
+      8678
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      21065,
+      16313
+     ],
+     "STRUCT": [
+      7177,
+      6787
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      46344,
+      40122
+     ],
+     "STRUCT": [
+      18660,
+      17703
+     ],
+     "MECH": [
+      26385,
+      20422
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      7373,
+      6677
+     ],
+     "STRUCT": [
+      1435,
+      1358
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3160,
+      1893
+     ],
+     "MECH": [
+      21108,
+      8986
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2528,
+      2402
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      21065,
+      20952
+     ],
+     "STRUCT": [
+      7177,
+      7141
+     ],
+     "MECH": [
+      13192,
+      11197
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1264,
+      1089
+     ],
+     "STRUCT": [
+      359,
+      341
+     ],
+     "MECH": [
+      660,
+      409
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 40,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1888,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 31,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 26,
+   "label": "Version 26",
+   "tag": "v26",
+   "created": "2027-07-02T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 35694,
+   "byRole": {
+    "ARCH": {
+     "elements": 18103,
+     "required": 138380,
+     "met": 109734,
+     "uploaded": true,
+     "elementsAdded": 251,
+     "valuesFixed": 2601,
+     "valuesBroken": 338
+    },
+    "STRUCT": {
+     "elements": 6111,
+     "required": 46473,
+     "met": 42587,
+     "uploaded": true,
+     "elementsAdded": 29,
+     "valuesFixed": 2680,
+     "valuesBroken": 283
+    },
+    "MECH": {
+     "elements": 11480,
+     "required": 84320,
+     "met": 49268,
+     "uploaded": true,
+     "elementsAdded": 300,
+     "valuesFixed": 0,
+     "valuesBroken": 230
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      23534,
+      18623
+     ],
+     "STRUCT": [
+      7944,
+      7145
+     ],
+     "MECH": [
+      14924,
+      8568
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      23534,
+      16617
+     ],
+     "STRUCT": [
+      7944,
+      7140
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      51775,
+      40760
+     ],
+     "STRUCT": [
+      20655,
+      18602
+     ],
+     "MECH": [
+      29848,
+      20349
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      8237,
+      6796
+     ],
+     "STRUCT": [
+      1589,
+      1439
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3530,
+      1967
+     ],
+     "MECH": [
+      23878,
+      8867
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2824,
+      2439
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      23534,
+      21408
+     ],
+     "STRUCT": [
+      7944,
+      7904
+     ],
+     "MECH": [
+      14924,
+      11080
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1412,
+      1124
+     ],
+     "STRUCT": [
+      397,
+      357
+     ],
+     "MECH": [
+      746,
+      404
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 44,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1883,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 23,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 27,
+   "label": "Version 27",
+   "tag": "v27",
+   "created": "2027-07-09T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 36086,
+   "byRole": {
+    "ARCH": {
+     "elements": 18282,
+     "required": 139749,
+     "met": 112890,
+     "uploaded": true,
+     "elementsAdded": 179,
+     "valuesFixed": 3891,
+     "valuesBroken": 735
+    },
+    "STRUCT": {
+     "elements": 6111,
+     "required": 46473,
+     "met": 42587,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 11693,
+     "required": 85885,
+     "met": 51075,
+     "uploaded": true,
+     "elementsAdded": 213,
+     "valuesFixed": 2347,
+     "valuesBroken": 540
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      23767,
+      19204
+     ],
+     "STRUCT": [
+      7944,
+      7145
+     ],
+     "MECH": [
+      15201,
+      8806
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      23767,
+      17104
+     ],
+     "STRUCT": [
+      7944,
+      7140
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      52287,
+      41907
+     ],
+     "STRUCT": [
+      20655,
+      18602
+     ],
+     "MECH": [
+      30402,
+      21060
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      8318,
+      6981
+     ],
+     "STRUCT": [
+      1589,
+      1439
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3565,
+      2002
+     ],
+     "MECH": [
+      24321,
+      9333
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2852,
+      2537
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      23767,
+      22013
+     ],
+     "STRUCT": [
+      7944,
+      7904
+     ],
+     "MECH": [
+      15201,
+      11461
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1426,
+      1142
+     ],
+     "STRUCT": [
+      397,
+      357
+     ],
+     "MECH": [
+      760,
+      415
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.0,
+     "pass": true
+    },
+    "clashes": {
+     "value": 48,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1848,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 14,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 28,
+   "label": "Version 28",
+   "tag": "v28",
+   "created": "2027-07-16T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 36561,
+   "byRole": {
+    "ARCH": {
+     "elements": 18496,
+     "required": 141385,
+     "met": 116835,
+     "uploaded": true,
+     "elementsAdded": 214,
+     "valuesFixed": 4243,
+     "valuesBroken": 298
+    },
+    "STRUCT": {
+     "elements": 6140,
+     "required": 46694,
+     "met": 43284,
+     "uploaded": true,
+     "elementsAdded": 29,
+     "valuesFixed": 1007,
+     "valuesBroken": 310
+    },
+    "MECH": {
+     "elements": 11925,
+     "required": 87588,
+     "met": 52499,
+     "uploaded": true,
+     "elementsAdded": 232,
+     "valuesFixed": 1713,
+     "valuesBroken": 289
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      24045,
+      19841
+     ],
+     "STRUCT": [
+      7982,
+      7304
+     ],
+     "MECH": [
+      15502,
+      9131
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      24045,
+      17656
+     ],
+     "STRUCT": [
+      7982,
+      7331
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      52899,
+      43445
+     ],
+     "STRUCT": [
+      20753,
+      18878
+     ],
+     "MECH": [
+      31005,
+      21522
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      8416,
+      7290
+     ],
+     "STRUCT": [
+      1596,
+      1464
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3607,
+      2085
+     ],
+     "MECH": [
+      24804,
+      9602
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      2885,
+      2616
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      24045,
+      22716
+     ],
+     "STRUCT": [
+      7982,
+      7942
+     ],
+     "MECH": [
+      15502,
+      11809
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1443,
+      1186
+     ],
+     "STRUCT": [
+      399,
+      365
+     ],
+     "MECH": [
+      775,
+      435
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 51,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1826,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 6,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 29,
+   "label": "Version 29",
+   "tag": "v29",
+   "created": "2027-08-06T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT"
+   ],
+   "state": "checked",
+   "elementCount": 37461,
+   "byRole": {
+    "ARCH": {
+     "elements": 19338,
+     "required": 147819,
+     "met": 123683,
+     "uploaded": true,
+     "elementsAdded": 842,
+     "valuesFixed": 7210,
+     "valuesBroken": 362
+    },
+    "STRUCT": {
+     "elements": 6198,
+     "required": 47134,
+     "met": 44705,
+     "uploaded": true,
+     "elementsAdded": 58,
+     "valuesFixed": 1757,
+     "valuesBroken": 336
+    },
+    "MECH": {
+     "elements": 11925,
+     "required": 87588,
+     "met": 52499,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      25139,
+      20906
+     ],
+     "STRUCT": [
+      8057,
+      7561
+     ],
+     "MECH": [
+      15502,
+      9131
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      25139,
+      18875
+     ],
+     "STRUCT": [
+      8057,
+      7515
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      55307,
+      46079
+     ],
+     "STRUCT": [
+      20949,
+      19725
+     ],
+     "MECH": [
+      31005,
+      21522
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      8799,
+      7676
+     ],
+     "STRUCT": [
+      1611,
+      1510
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3771,
+      2171
+     ],
+     "MECH": [
+      24804,
+      9602
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3017,
+      2763
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      25139,
+      23964
+     ],
+     "STRUCT": [
+      8057,
+      8017
+     ],
+     "MECH": [
+      15502,
+      11809
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1508,
+      1249
+     ],
+     "STRUCT": [
+      403,
+      377
+     ],
+     "MECH": [
+      775,
+      435
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.2,
+     "pass": true
+    },
+    "clashes": {
+     "value": 58,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1775,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 30,
+   "label": "Version 30",
+   "tag": "v30",
+   "created": "2027-08-13T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 38651,
+   "byRole": {
+    "ARCH": {
+     "elements": 19645,
+     "required": 150165,
+     "met": 128677,
+     "uploaded": true,
+     "elementsAdded": 307,
+     "valuesFixed": 5493,
+     "valuesBroken": 499
+    },
+    "STRUCT": {
+     "elements": 6198,
+     "required": 47134,
+     "met": 44705,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 12808,
+     "required": 94075,
+     "met": 61397,
+     "uploaded": true,
+     "elementsAdded": 883,
+     "valuesFixed": 9243,
+     "valuesBroken": 345
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      25538,
+      21700
+     ],
+     "STRUCT": [
+      8057,
+      7561
+     ],
+     "MECH": [
+      16650,
+      10737
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      25538,
+      19546
+     ],
+     "STRUCT": [
+      8057,
+      7515
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      56185,
+      47917
+     ],
+     "STRUCT": [
+      20949,
+      19725
+     ],
+     "MECH": [
+      33301,
+      25032
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      8938,
+      7969
+     ],
+     "STRUCT": [
+      1611,
+      1510
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3831,
+      2271
+     ],
+     "MECH": [
+      26641,
+      11186
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3065,
+      2895
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      25538,
+      25078
+     ],
+     "STRUCT": [
+      8057,
+      8017
+     ],
+     "MECH": [
+      16650,
+      13938
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1532,
+      1301
+     ],
+     "STRUCT": [
+      403,
+      377
+     ],
+     "MECH": [
+      833,
+      504
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.2,
+     "pass": true
+    },
+    "clashes": {
+     "value": 50,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1759,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 31,
+   "label": "Version 31",
+   "tag": "v31",
+   "created": "2027-08-20T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 39133,
+   "byRole": {
+    "ARCH": {
+     "elements": 19782,
+     "required": 151215,
+     "met": 133546,
+     "uploaded": true,
+     "elementsAdded": 137,
+     "valuesFixed": 6248,
+     "valuesBroken": 1379
+    },
+    "STRUCT": {
+     "elements": 6221,
+     "required": 47309,
+     "met": 45293,
+     "uploaded": true,
+     "elementsAdded": 23,
+     "valuesFixed": 774,
+     "valuesBroken": 186
+    },
+    "MECH": {
+     "elements": 13130,
+     "required": 96439,
+     "met": 65886,
+     "uploaded": true,
+     "elementsAdded": 322,
+     "valuesFixed": 4652,
+     "valuesBroken": 163
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      25717,
+      22620
+     ],
+     "STRUCT": [
+      8087,
+      7663
+     ],
+     "MECH": [
+      17069,
+      11445
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      25717,
+      20445
+     ],
+     "STRUCT": [
+      8087,
+      7656
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      56577,
+      49961
+     ],
+     "STRUCT": [
+      21027,
+      20009
+     ],
+     "MECH": [
+      34138,
+      27017
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9001,
+      8248
+     ],
+     "STRUCT": [
+      1617,
+      1531
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3857,
+      2361
+     ],
+     "MECH": [
+      27310,
+      12038
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3086,
+      2976
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      25717,
+      25588
+     ],
+     "STRUCT": [
+      8087,
+      8047
+     ],
+     "MECH": [
+      17069,
+      14843
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1543,
+      1347
+     ],
+     "STRUCT": [
+      404,
+      387
+     ],
+     "MECH": [
+      853,
+      543
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.3,
+     "pass": true
+    },
+    "clashes": {
+     "value": 41,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1659,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 32,
+   "label": "Version 32",
+   "tag": "v32",
+   "created": "2027-08-27T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 39534,
+   "byRole": {
+    "ARCH": {
+     "elements": 20025,
+     "required": 153070,
+     "met": 137663,
+     "uploaded": true,
+     "elementsAdded": 243,
+     "valuesFixed": 4856,
+     "valuesBroken": 739
+    },
+    "STRUCT": {
+     "elements": 6221,
+     "required": 47309,
+     "met": 45293,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 13288,
+     "required": 97600,
+     "met": 69463,
+     "uploaded": true,
+     "elementsAdded": 158,
+     "valuesFixed": 4011,
+     "valuesBroken": 434
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      26032,
+      23610
+     ],
+     "STRUCT": [
+      8087,
+      7663
+     ],
+     "MECH": [
+      17274,
+      12095
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      26032,
+      21014
+     ],
+     "STRUCT": [
+      8087,
+      7656
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      57272,
+      51485
+     ],
+     "STRUCT": [
+      21027,
+      20009
+     ],
+     "MECH": [
+      34549,
+      28644
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9111,
+      8680
+     ],
+     "STRUCT": [
+      1617,
+      1531
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3905,
+      2467
+     ],
+     "MECH": [
+      27639,
+      12508
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3124,
+      3101
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      26032,
+      25902
+     ],
+     "STRUCT": [
+      8087,
+      8047
+     ],
+     "MECH": [
+      17274,
+      15640
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1562,
+      1404
+     ],
+     "STRUCT": [
+      404,
+      387
+     ],
+     "MECH": [
+      864,
+      576
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.3,
+     "pass": true
+    },
+    "clashes": {
+     "value": 29,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1530,
+     "pass": false
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 33,
+   "label": "Version 33",
+   "tag": "v33",
+   "created": "2027-09-03T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 40062,
+   "byRole": {
+    "ARCH": {
+     "elements": 20266,
+     "required": 154914,
+     "met": 142350,
+     "uploaded": true,
+     "elementsAdded": 241,
+     "valuesFixed": 6034,
+     "valuesBroken": 1347
+    },
+    "STRUCT": {
+     "elements": 6271,
+     "required": 47690,
+     "met": 46361,
+     "uploaded": true,
+     "elementsAdded": 50,
+     "valuesFixed": 1493,
+     "valuesBroken": 425
+    },
+    "MECH": {
+     "elements": 13525,
+     "required": 99340,
+     "met": 74012,
+     "uploaded": true,
+     "elementsAdded": 237,
+     "valuesFixed": 4898,
+     "valuesBroken": 349
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      26346,
+      24242
+     ],
+     "STRUCT": [
+      8152,
+      7893
+     ],
+     "MECH": [
+      17582,
+      12928
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      26346,
+      21947
+     ],
+     "STRUCT": [
+      8152,
+      7935
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      57961,
+      53821
+     ],
+     "STRUCT": [
+      21196,
+      20450
+     ],
+     "MECH": [
+      35165,
+      30251
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9221,
+      8961
+     ],
+     "STRUCT": [
+      1630,
+      1578
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      3952,
+      2553
+     ],
+     "MECH": [
+      28132,
+      13453
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3161,
+      3145
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      26346,
+      26214
+     ],
+     "STRUCT": [
+      8152,
+      8111
+     ],
+     "MECH": [
+      17582,
+      16772
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1581,
+      1467
+     ],
+     "STRUCT": [
+      408,
+      394
+     ],
+     "MECH": [
+      879,
+      608
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.4,
+     "pass": true
+    },
+    "clashes": {
+     "value": 20,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1431,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 34,
+   "label": "Version 34",
+   "tag": "v34",
+   "created": "2027-09-10T16:00:00-05:00",
+   "milestone": "ifc",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 40663,
+   "byRole": {
+    "ARCH": {
+     "elements": 20632,
+     "required": 157713,
+     "met": 148119,
+     "uploaded": true,
+     "elementsAdded": 366,
+     "valuesFixed": 6742,
+     "valuesBroken": 973
+    },
+    "STRUCT": {
+     "elements": 6286,
+     "required": 47806,
+     "met": 46876,
+     "uploaded": true,
+     "elementsAdded": 15,
+     "valuesFixed": 987,
+     "valuesBroken": 472
+    },
+    "MECH": {
+     "elements": 13745,
+     "required": 100956,
+     "met": 78256,
+     "uploaded": true,
+     "elementsAdded": 220,
+     "valuesFixed": 4666,
+     "valuesBroken": 422
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      26822,
+      25401
+     ],
+     "STRUCT": [
+      8172,
+      7954
+     ],
+     "MECH": [
+      17868,
+      13722
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      26822,
+      22951
+     ],
+     "STRUCT": [
+      8172,
+      7990
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      59008,
+      56324
+     ],
+     "STRUCT": [
+      21247,
+      20804
+     ],
+     "MECH": [
+      35737,
+      32128
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9388,
+      9341
+     ],
+     "STRUCT": [
+      1634,
+      1598
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4023,
+      2691
+     ],
+     "MECH": [
+      28590,
+      14118
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3219,
+      3203
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      26822,
+      26688
+     ],
+     "STRUCT": [
+      8172,
+      8131
+     ],
+     "MECH": [
+      17868,
+      17643
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1609,
+      1520
+     ],
+     "STRUCT": [
+      409,
+      399
+     ],
+     "MECH": [
+      893,
+      645
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.3,
+     "pass": true
+    },
+    "clashes": {
+     "value": 9,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1322,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 35,
+   "label": "Version 35",
+   "tag": "v35",
+   "created": "2027-09-17T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 40870,
+   "byRole": {
+    "ARCH": {
+     "elements": 20699,
+     "required": 161875,
+     "met": 149001,
+     "uploaded": true,
+     "elementsAdded": 67,
+     "valuesFixed": 2040,
+     "valuesBroken": 1158
+    },
+    "STRUCT": {
+     "elements": 6339,
+     "required": 49321,
+     "met": 47494,
+     "uploaded": true,
+     "elementsAdded": 53,
+     "valuesFixed": 1112,
+     "valuesBroken": 494
+    },
+    "MECH": {
+     "elements": 13832,
+     "required": 103941,
+     "met": 76714,
+     "uploaded": true,
+     "elementsAdded": 87,
+     "valuesFixed": 0,
+     "valuesBroken": 701
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      27530,
+      25541
+     ],
+     "STRUCT": [
+      8431,
+      8047
+     ],
+     "MECH": [
+      18397,
+      13400
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      27530,
+      23019
+     ],
+     "STRUCT": [
+      8431,
+      8098
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      60565,
+      56138
+     ],
+     "STRUCT": [
+      21920,
+      20943
+     ],
+     "MECH": [
+      36793,
+      31466
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9635,
+      9410
+     ],
+     "STRUCT": [
+      1686,
+      1611
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4129,
+      2677
+     ],
+     "MECH": [
+      29434,
+      13751
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3304,
+      3287
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      27530,
+      27392
+     ],
+     "STRUCT": [
+      8431,
+      8389
+     ],
+     "MECH": [
+      18397,
+      17459
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1652,
+      1537
+     ],
+     "STRUCT": [
+      422,
+      406
+     ],
+     "MECH": [
+      920,
+      638
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.4,
+     "pass": true
+    },
+    "clashes": {
+     "value": 21,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1291,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 36,
+   "label": "Version 36",
+   "tag": "v36",
+   "created": "2027-09-24T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 41345,
+   "byRole": {
+    "ARCH": {
+     "elements": 20734,
+     "required": 162148,
+     "met": 149978,
+     "uploaded": true,
+     "elementsAdded": 35,
+     "valuesFixed": 1637,
+     "valuesBroken": 660
+    },
+    "STRUCT": {
+     "elements": 6340,
+     "required": 49328,
+     "met": 47697,
+     "uploaded": true,
+     "elementsAdded": 1,
+     "valuesFixed": 676,
+     "valuesBroken": 473
+    },
+    "MECH": {
+     "elements": 13971,
+     "required": 104984,
+     "met": 78663,
+     "uploaded": true,
+     "elementsAdded": 139,
+     "valuesFixed": 2209,
+     "valuesBroken": 260
+    },
+    "CON": {
+     "elements": 300,
+     "required": 1888,
+     "met": 602,
+     "uploaded": true,
+     "elementsAdded": 300,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      27576,
+      25762
+     ],
+     "STRUCT": [
+      8432,
+      8069
+     ],
+     "MECH": [
+      18581,
+      13802
+     ],
+     "CON": [
+      80,
+      28
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      27576,
+      23110
+     ],
+     "STRUCT": [
+      8432,
+      8098
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      60668,
+      56669
+     ],
+     "STRUCT": [
+      21924,
+      21107
+     ],
+     "MECH": [
+      37163,
+      32369
+     ],
+     "CON": [
+      200,
+      69
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9652,
+      9463
+     ],
+     "STRUCT": [
+      1686,
+      1628
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4136,
+      2693
+     ],
+     "MECH": [
+      29730,
+      14115
+     ],
+     "CON": [
+      1197,
+      334
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3309,
+      3292
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      27576,
+      27438
+     ],
+     "STRUCT": [
+      8432,
+      8390
+     ],
+     "MECH": [
+      18581,
+      17738
+     ],
+     "CON": [
+      399,
+      167
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1655,
+      1551
+     ],
+     "STRUCT": [
+      422,
+      405
+     ],
+     "MECH": [
+      929,
+      639
+     ],
+     "CON": [
+      12,
+      4
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.4,
+     "pass": true
+    },
+    "clashes": {
+     "value": 24,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1298,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 37,
+   "label": "Version 37",
+   "tag": "v37",
+   "created": "2027-10-01T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 41777,
+   "byRole": {
+    "ARCH": {
+     "elements": 20872,
+     "required": 163228,
+     "met": 151606,
+     "uploaded": true,
+     "elementsAdded": 138,
+     "valuesFixed": 3420,
+     "valuesBroken": 1792
+    },
+    "STRUCT": {
+     "elements": 6340,
+     "required": 49328,
+     "met": 47697,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 14033,
+     "required": 105451,
+     "met": 79347,
+     "uploaded": true,
+     "elementsAdded": 62,
+     "valuesFixed": 1021,
+     "valuesBroken": 337
+    },
+    "CON": {
+     "elements": 532,
+     "required": 3348,
+     "met": 1203,
+     "uploaded": true,
+     "elementsAdded": 232,
+     "valuesFixed": 606,
+     "valuesBroken": 5
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      27760,
+      26109
+     ],
+     "STRUCT": [
+      8432,
+      8069
+     ],
+     "MECH": [
+      18664,
+      13789
+     ],
+     "CON": [
+      142,
+      56
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      27760,
+      23365
+     ],
+     "STRUCT": [
+      8432,
+      8098
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61071,
+      57280
+     ],
+     "STRUCT": [
+      21924,
+      21107
+     ],
+     "MECH": [
+      37328,
+      32440
+     ],
+     "CON": [
+      354,
+      140
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9716,
+      9602
+     ],
+     "STRUCT": [
+      1686,
+      1628
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4164,
+      2746
+     ],
+     "MECH": [
+      29862,
+      14488
+     ],
+     "CON": [
+      2123,
+      663
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3331,
+      3314
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      27760,
+      27621
+     ],
+     "STRUCT": [
+      8432,
+      8390
+     ],
+     "MECH": [
+      18664,
+      17980
+     ],
+     "CON": [
+      708,
+      336
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1666,
+      1569
+     ],
+     "STRUCT": [
+      422,
+      405
+     ],
+     "MECH": [
+      933,
+      650
+     ],
+     "CON": [
+      21,
+      8
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 95.6,
+     "pass": true
+    },
+    "clashes": {
+     "value": 30,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1265,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 38,
+   "label": "Version 38",
+   "tag": "v38",
+   "created": "2027-10-08T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH"
+   ],
+   "state": "checked",
+   "elementCount": 41812,
+   "byRole": {
+    "ARCH": {
+     "elements": 20866,
+     "required": 163181,
+     "met": 151524,
+     "uploaded": true,
+     "elementsAdded": -6,
+     "valuesFixed": 814,
+     "valuesBroken": 896
+    },
+    "STRUCT": {
+     "elements": 6377,
+     "required": 49615,
+     "met": 48051,
+     "uploaded": true,
+     "elementsAdded": 37,
+     "valuesFixed": 691,
+     "valuesBroken": 337
+    },
+    "MECH": {
+     "elements": 14037,
+     "required": 105480,
+     "met": 79797,
+     "uploaded": true,
+     "elementsAdded": 4,
+     "valuesFixed": 1394,
+     "valuesBroken": 944
+    },
+    "CON": {
+     "elements": 532,
+     "required": 3348,
+     "met": 1203,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      27752,
+      26117
+     ],
+     "STRUCT": [
+      8481,
+      8205
+     ],
+     "MECH": [
+      18669,
+      13999
+     ],
+     "CON": [
+      142,
+      56
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      27752,
+      23504
+     ],
+     "STRUCT": [
+      8481,
+      8178
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61054,
+      57089
+     ],
+     "STRUCT": [
+      22052,
+      21181
+     ],
+     "MECH": [
+      37338,
+      32711
+     ],
+     "CON": [
+      354,
+      140
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9713,
+      9570
+     ],
+     "STRUCT": [
+      1696,
+      1636
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4163,
+      2743
+     ],
+     "MECH": [
+      29871,
+      14378
+     ],
+     "CON": [
+      2123,
+      663
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3330,
+      3313
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      27752,
+      27613
+     ],
+     "STRUCT": [
+      8481,
+      8439
+     ],
+     "MECH": [
+      18669,
+      18056
+     ],
+     "CON": [
+      708,
+      336
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1665,
+      1575
+     ],
+     "STRUCT": [
+      424,
+      412
+     ],
+     "MECH": [
+      933,
+      653
+     ],
+     "CON": [
+      21,
+      8
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 95.8,
+     "pass": true
+    },
+    "clashes": {
+     "value": 35,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1270,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 14,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 39,
+   "label": "Version 39",
+   "tag": "v39",
+   "created": "2027-10-15T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 42404,
+   "byRole": {
+    "ARCH": {
+     "elements": 20912,
+     "required": 163542,
+     "met": 152824,
+     "uploaded": true,
+     "elementsAdded": 46,
+     "valuesFixed": 2503,
+     "valuesBroken": 1203
+    },
+    "STRUCT": {
+     "elements": 6377,
+     "required": 49615,
+     "met": 48051,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 14116,
+     "required": 106075,
+     "met": 81443,
+     "uploaded": true,
+     "elementsAdded": 79,
+     "valuesFixed": 2009,
+     "valuesBroken": 363
+    },
+    "CON": {
+     "elements": 999,
+     "required": 6285,
+     "met": 2769,
+     "uploaded": true,
+     "elementsAdded": 467,
+     "valuesFixed": 1569,
+     "valuesBroken": 3
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      27813,
+      26408
+     ],
+     "STRUCT": [
+      8481,
+      8205
+     ],
+     "MECH": [
+      18774,
+      14200
+     ],
+     "CON": [
+      266,
+      127
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      27813,
+      23653
+     ],
+     "STRUCT": [
+      8481,
+      8178
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61189,
+      57783
+     ],
+     "STRUCT": [
+      22052,
+      21181
+     ],
+     "MECH": [
+      37549,
+      33427
+     ],
+     "CON": [
+      664,
+      315
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9735,
+      9642
+     ],
+     "STRUCT": [
+      1696,
+      1636
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4172,
+      2772
+     ],
+     "MECH": [
+      30039,
+      14781
+     ],
+     "CON": [
+      3986,
+      1545
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3338,
+      3321
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      27813,
+      27674
+     ],
+     "STRUCT": [
+      8481,
+      8439
+     ],
+     "MECH": [
+      18774,
+      18371
+     ],
+     "CON": [
+      1329,
+      763
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1669,
+      1571
+     ],
+     "STRUCT": [
+      424,
+      412
+     ],
+     "MECH": [
+      939,
+      664
+     ],
+     "CON": [
+      40,
+      19
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 95.9,
+     "pass": true
+    },
+    "clashes": {
+     "value": 34,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1257,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 11,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 40,
+   "label": "Version 40",
+   "tag": "v40",
+   "created": "2027-10-22T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 42946,
+   "byRole": {
+    "ARCH": {
+     "elements": 21047,
+     "required": 164598,
+     "met": 154170,
+     "uploaded": true,
+     "elementsAdded": 135,
+     "valuesFixed": 2189,
+     "valuesBroken": 843
+    },
+    "STRUCT": {
+     "elements": 6433,
+     "required": 50052,
+     "met": 48924,
+     "uploaded": true,
+     "elementsAdded": 56,
+     "valuesFixed": 1400,
+     "valuesBroken": 527
+    },
+    "MECH": {
+     "elements": 14228,
+     "required": 106915,
+     "met": 82288,
+     "uploaded": true,
+     "elementsAdded": 112,
+     "valuesFixed": 1723,
+     "valuesBroken": 878
+    },
+    "CON": {
+     "elements": 1238,
+     "required": 7788,
+     "met": 3683,
+     "uploaded": true,
+     "elementsAdded": 239,
+     "valuesFixed": 936,
+     "valuesBroken": 22
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      27993,
+      26625
+     ],
+     "STRUCT": [
+      8556,
+      8338
+     ],
+     "MECH": [
+      18923,
+      14286
+     ],
+     "CON": [
+      329,
+      171
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      27993,
+      23890
+     ],
+     "STRUCT": [
+      8556,
+      8332
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61584,
+      58327
+     ],
+     "STRUCT": [
+      22245,
+      21670
+     ],
+     "MECH": [
+      37846,
+      33703
+     ],
+     "CON": [
+      823,
+      432
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9797,
+      9748
+     ],
+     "STRUCT": [
+      1711,
+      1658
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4199,
+      2798
+     ],
+     "MECH": [
+      30277,
+      15003
+     ],
+     "CON": [
+      4940,
+      2036
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3359,
+      3342
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      27993,
+      27853
+     ],
+     "STRUCT": [
+      8556,
+      8513
+     ],
+     "MECH": [
+      18923,
+      18624
+     ],
+     "CON": [
+      1647,
+      1019
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1680,
+      1587
+     ],
+     "STRUCT": [
+      428,
+      413
+     ],
+     "MECH": [
+      946,
+      672
+     ],
+     "CON": [
+      49,
+      25
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.1,
+     "pass": true
+    },
+    "clashes": {
+     "value": 26,
+     "pass": false
+    },
+    "warnings": {
+     "value": 1234,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 8,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 41,
+   "label": "Version 41",
+   "tag": "v41",
+   "created": "2027-10-29T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 43254,
+   "byRole": {
+    "ARCH": {
+     "elements": 21122,
+     "required": 165182,
+     "met": 155137,
+     "uploaded": true,
+     "elementsAdded": 75,
+     "valuesFixed": 1495,
+     "valuesBroken": 528
+    },
+    "STRUCT": {
+     "elements": 6433,
+     "required": 50052,
+     "met": 48924,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 14229,
+     "required": 106924,
+     "met": 83101,
+     "uploaded": true,
+     "elementsAdded": 1,
+     "valuesFixed": 1746,
+     "valuesBroken": 933
+    },
+    "CON": {
+     "elements": 1470,
+     "required": 9248,
+     "met": 4890,
+     "uploaded": true,
+     "elementsAdded": 232,
+     "valuesFixed": 1243,
+     "valuesBroken": 36
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      28092,
+      26802
+     ],
+     "STRUCT": [
+      8556,
+      8338
+     ],
+     "MECH": [
+      18925,
+      14584
+     ],
+     "CON": [
+      391,
+      228
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      28092,
+      24030
+     ],
+     "STRUCT": [
+      8556,
+      8332
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61803,
+      58808
+     ],
+     "STRUCT": [
+      22245,
+      21670
+     ],
+     "MECH": [
+      37849,
+      34221
+     ],
+     "CON": [
+      978,
+      567
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9832,
+      9783
+     ],
+     "STRUCT": [
+      1711,
+      1658
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4214,
+      2800
+     ],
+     "MECH": [
+      30279,
+      14868
+     ],
+     "CON": [
+      5865,
+      2694
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3371,
+      3354
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      28092,
+      27952
+     ],
+     "STRUCT": [
+      8556,
+      8513
+     ],
+     "MECH": [
+      18925,
+      18743
+     ],
+     "CON": [
+      1955,
+      1367
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1686,
+      1608
+     ],
+     "STRUCT": [
+      428,
+      413
+     ],
+     "MECH": [
+      946,
+      685
+     ],
+     "CON": [
+      59,
+      34
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.3,
+     "pass": true
+    },
+    "clashes": {
+     "value": 22,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1217,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 5,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 42,
+   "label": "Version 42",
+   "tag": "v42",
+   "created": "2027-11-05T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 43554,
+   "byRole": {
+    "ARCH": {
+     "elements": 21095,
+     "required": 164970,
+     "met": 155530,
+     "uploaded": true,
+     "elementsAdded": -27,
+     "valuesFixed": 1738,
+     "valuesBroken": 1345
+    },
+    "STRUCT": {
+     "elements": 6463,
+     "required": 50286,
+     "met": 49210,
+     "uploaded": true,
+     "elementsAdded": 30,
+     "valuesFixed": 494,
+     "valuesBroken": 208
+    },
+    "MECH": {
+     "elements": 14291,
+     "required": 107389,
+     "met": 84119,
+     "uploaded": true,
+     "elementsAdded": 62,
+     "valuesFixed": 1413,
+     "valuesBroken": 395
+    },
+    "CON": {
+     "elements": 1705,
+     "required": 10727,
+     "met": 6266,
+     "uploaded": true,
+     "elementsAdded": 235,
+     "valuesFixed": 1389,
+     "valuesBroken": 13
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      28056,
+      26900
+     ],
+     "STRUCT": [
+      8596,
+      8363
+     ],
+     "MECH": [
+      19007,
+      14645
+     ],
+     "CON": [
+      454,
+      287
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      28056,
+      24163
+     ],
+     "STRUCT": [
+      8596,
+      8342
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61724,
+      59024
+     ],
+     "STRUCT": [
+      22349,
+      21858
+     ],
+     "MECH": [
+      38014,
+      34609
+     ],
+     "CON": [
+      1134,
+      717
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9820,
+      9771
+     ],
+     "STRUCT": [
+      1719,
+      1673
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4208,
+      2804
+     ],
+     "MECH": [
+      30411,
+      15264
+     ],
+     "CON": [
+      6803,
+      3500
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3367,
+      3350
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      28056,
+      27916
+     ],
+     "STRUCT": [
+      8596,
+      8553
+     ],
+     "MECH": [
+      19007,
+      18912
+     ],
+     "CON": [
+      2268,
+      1719
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1683,
+      1602
+     ],
+     "STRUCT": [
+      430,
+      421
+     ],
+     "MECH": [
+      950,
+      689
+     ],
+     "CON": [
+      68,
+      43
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.5,
+     "pass": true
+    },
+    "clashes": {
+     "value": 24,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1226,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 2,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 43,
+   "label": "Version 43",
+   "tag": "v43",
+   "created": "2027-11-12T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 43919,
+   "byRole": {
+    "ARCH": {
+     "elements": 21165,
+     "required": 165517,
+     "met": 156194,
+     "uploaded": true,
+     "elementsAdded": 70,
+     "valuesFixed": 1303,
+     "valuesBroken": 639
+    },
+    "STRUCT": {
+     "elements": 6463,
+     "required": 50286,
+     "met": 49210,
+     "uploaded": false,
+     "elementsAdded": 0,
+     "valuesFixed": 0,
+     "valuesBroken": 0
+    },
+    "MECH": {
+     "elements": 14359,
+     "required": 107900,
+     "met": 85095,
+     "uploaded": true,
+     "elementsAdded": 68,
+     "valuesFixed": 1467,
+     "valuesBroken": 491
+    },
+    "CON": {
+     "elements": 1932,
+     "required": 12155,
+     "met": 7752,
+     "uploaded": true,
+     "elementsAdded": 227,
+     "valuesFixed": 1508,
+     "valuesBroken": 22
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      28149,
+      26824
+     ],
+     "STRUCT": [
+      8596,
+      8363
+     ],
+     "MECH": [
+      19097,
+      14902
+     ],
+     "CON": [
+      514,
+      354
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      28149,
+      24102
+     ],
+     "STRUCT": [
+      8596,
+      8342
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      61929,
+      59650
+     ],
+     "STRUCT": [
+      22349,
+      21858
+     ],
+     "MECH": [
+      38195,
+      35081
+     ],
+     "CON": [
+      1285,
+      897
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9852,
+      9803
+     ],
+     "STRUCT": [
+      1719,
+      1673
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4222,
+      2823
+     ],
+     "MECH": [
+      30556,
+      15408
+     ],
+     "CON": [
+      7709,
+      4309
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3378,
+      3361
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      28149,
+      28008
+     ],
+     "STRUCT": [
+      8596,
+      8553
+     ],
+     "MECH": [
+      19097,
+      19002
+     ],
+     "CON": [
+      2570,
+      2138
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1689,
+      1623
+     ],
+     "STRUCT": [
+      430,
+      421
+     ],
+     "MECH": [
+      955,
+      702
+     ],
+     "CON": [
+      77,
+      54
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.7,
+     "pass": true
+    },
+    "clashes": {
+     "value": 14,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1206,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 1,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 44,
+   "label": "Version 44",
+   "tag": "v44",
+   "created": "2027-11-19T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 44332,
+   "byRole": {
+    "ARCH": {
+     "elements": 21290,
+     "required": 166497,
+     "met": 157545,
+     "uploaded": true,
+     "elementsAdded": 125,
+     "valuesFixed": 2369,
+     "valuesBroken": 1018
+    },
+    "STRUCT": {
+     "elements": 6485,
+     "required": 50456,
+     "met": 49524,
+     "uploaded": true,
+     "elementsAdded": 22,
+     "valuesFixed": 767,
+     "valuesBroken": 453
+    },
+    "MECH": {
+     "elements": 14385,
+     "required": 108096,
+     "met": 85417,
+     "uploaded": true,
+     "elementsAdded": 26,
+     "valuesFixed": 867,
+     "valuesBroken": 545
+    },
+    "CON": {
+     "elements": 2172,
+     "required": 13664,
+     "met": 9415,
+     "uploaded": true,
+     "elementsAdded": 240,
+     "valuesFixed": 1740,
+     "valuesBroken": 77
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      28316,
+      27132
+     ],
+     "STRUCT": [
+      8625,
+      8396
+     ],
+     "MECH": [
+      19132,
+      15070
+     ],
+     "CON": [
+      578,
+      435
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      28316,
+      24637
+     ],
+     "STRUCT": [
+      8625,
+      8483
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      62295,
+      59890
+     ],
+     "STRUCT": [
+      22425,
+      21948
+     ],
+     "MECH": [
+      38264,
+      35241
+     ],
+     "CON": [
+      1444,
+      1080
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9910,
+      9860
+     ],
+     "STRUCT": [
+      1725,
+      1695
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4247,
+      2843
+     ],
+     "MECH": [
+      30611,
+      15368
+     ],
+     "CON": [
+      8666,
+      5231
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3398,
+      3381
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      28316,
+      28174
+     ],
+     "STRUCT": [
+      8625,
+      8582
+     ],
+     "MECH": [
+      19132,
+      19036
+     ],
+     "CON": [
+      2889,
+      2603
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1699,
+      1628
+     ],
+     "STRUCT": [
+      431,
+      420
+     ],
+     "MECH": [
+      957,
+      702
+     ],
+     "CON": [
+      87,
+      66
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 96.9,
+     "pass": true
+    },
+    "clashes": {
+     "value": 13,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1202,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 1,
+     "pass": false
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  },
+  {
+   "order": 45,
+   "label": "Version 45",
+   "tag": "v45",
+   "created": "2027-11-26T16:00:00-05:00",
+   "milestone": "constr",
+   "uploadedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH",
+    "CON"
+   ],
+   "state": "checked",
+   "elementCount": 44777,
+   "byRole": {
+    "ARCH": {
+     "elements": 21361,
+     "required": 167052,
+     "met": 158287,
+     "uploaded": true,
+     "elementsAdded": 71,
+     "valuesFixed": 1535,
+     "valuesBroken": 793
+    },
+    "STRUCT": {
+     "elements": 6498,
+     "required": 50556,
+     "met": 49740,
+     "uploaded": true,
+     "elementsAdded": 13,
+     "valuesFixed": 709,
+     "valuesBroken": 493
+    },
+    "MECH": {
+     "elements": 14510,
+     "required": 109035,
+     "met": 86534,
+     "uploaded": true,
+     "elementsAdded": 125,
+     "valuesFixed": 1564,
+     "valuesBroken": 447
+    },
+    "CON": {
+     "elements": 2408,
+     "required": 15149,
+     "met": 11229,
+     "uploaded": true,
+     "elementsAdded": 236,
+     "valuesFixed": 1907,
+     "valuesBroken": 93
+    }
+   },
+   "valueChecks": {
+    "assembly-code": {
+     "ARCH": [
+      28410,
+      27391
+     ],
+     "STRUCT": [
+      8642,
+      8432
+     ],
+     "MECH": [
+      19298,
+      15177
+     ],
+     "CON": [
+      641,
+      519
+     ]
+    },
+    "real-material": {
+     "ARCH": [
+      28410,
+      24536
+     ],
+     "STRUCT": [
+      8642,
+      8498
+     ]
+    },
+    "lod-params": {
+     "ARCH": [
+      62502,
+      60260
+     ],
+     "STRUCT": [
+      22470,
+      22089
+     ],
+     "MECH": [
+      38597,
+      35730
+     ],
+     "CON": [
+      1601,
+      1300
+     ]
+    },
+    "fire-rating": {
+     "ARCH": [
+      9944,
+      9894
+     ],
+     "STRUCT": [
+      1728,
+      1700
+     ]
+    },
+    "asset-data": {
+     "ARCH": [
+      4262,
+      2901
+     ],
+     "MECH": [
+      30877,
+      15706
+     ],
+     "CON": [
+      9608,
+      6221
+     ]
+    },
+    "rooms": {
+     "ARCH": [
+      3409,
+      3392
+     ]
+    },
+    "worksets": {
+     "ARCH": [
+      28410,
+      28268
+     ],
+     "STRUCT": [
+      8642,
+      8599
+     ],
+     "MECH": [
+      19298,
+      19202
+     ],
+     "CON": [
+      3203,
+      3112
+     ]
+    },
+    "view-names": {
+     "ARCH": [
+      1705,
+      1645
+     ],
+     "STRUCT": [
+      432,
+      422
+     ],
+     "MECH": [
+      965,
+      719
+     ],
+     "CON": [
+      96,
+      77
+     ]
+    }
+   },
+   "rules": {
+    "on-level": {
+     "value": 97.2,
+     "pass": true
+    },
+    "clashes": {
+     "value": 6,
+     "pass": true
+    },
+    "warnings": {
+     "value": 1178,
+     "pass": true
+    },
+    "dup-mark": {
+     "value": 0,
+     "pass": true
+    },
+    "worksets-exist": {
+     "value": 0,
+     "pass": true
+    },
+    "dup-levels": {
+     "value": 0,
+     "pass": true
+    }
+   }
+  }
+ ]
+}

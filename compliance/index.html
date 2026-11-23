@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenBEP Compliance over time</title>
+<meta name="description" content="How far a model follows its BIM execution plan, version by version: overall compliance, each firm's pace, and each goal over time. Shown on simulated example data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Look: VIM's public style tokens (github.com/vimaec/vim-web, src/vim-web/react-viewers/style.css, MIT):
+   brand blue #0590cc, royal #284ea2, yellow #eca500, the gray scale, Roboto, 4/6 px radii, 32 px controls.
+   VIM publishes no web component library for dashboards; these tokens and VIM Flex's model-check screen
+   (docs/model-check-screen) are the reference. */
+:root{
+  --bar:#050c1a; --on-bar:#ffffff;
+  --bg:#f6f6f6; --surface:#ffffff; --sunk:#eef0f3; --ink:#212329; --muted:#56585f; --faint:#8a8d95; --line:#e3e3e3; --line2:#d1d3d8;
+  --accent:#0590cc; --accent-ink:#036c99; --accent-soft:#d9edf9; --royal:#284ea2;
+  --good:#1e7f3c; --good-soft:#e2f3e7; --bad:#c62828; --bad-soft:#fbe5e3; --warn:#9a6a00; --warn-soft:#fff8e5;
+  --s1:#284ea2; --s2:#d48f00; --s3:#0590cc; --s4:#b4407a; --s5:#56585f;
+  --seq1:#d9edf9; --seq2:#9fd0ec; --seq3:#5cb1de; --seq4:#0590cc; --seq5:#035f8a;
+  --hatch:#d1d3d8;
+  --font:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'Roboto Mono',ui-monospace,Menlo,Consolas,monospace;
+  --r-sm:4px; --r-md:6px; --ctl:32px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#050c1a; --surface:#0f1623; --sunk:#172030; --ink:#e8eaee; --muted:#a3a7b0; --faint:#7d818b; --line:#232c3b; --line2:#313b4c;
+  --accent:#2fb3ea; --accent-ink:#5cc4ef; --accent-soft:#0c2a3d; --royal:#8f7df5;
+  --good:#4cc26e; --good-soft:#0f2a1a; --bad:#f2675f; --bad-soft:#3a1615; --warn:#eca500; --warn-soft:#33270a;
+  --s1:#8f7df5; --s2:#b38400; --s3:#0c9fc9; --s4:#e2667a; --s5:#a3a7b0;
+  --seq1:#0c2a3d; --seq2:#0d4561; --seq3:#0b6a92; --seq4:#1597cc; --seq5:#5cc4ef; --hatch:#313b4c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#050c1a; --surface:#0f1623; --sunk:#172030; --ink:#e8eaee; --muted:#a3a7b0; --faint:#7d818b; --line:#232c3b; --line2:#313b4c;
+  --accent:#2fb3ea; --accent-ink:#5cc4ef; --accent-soft:#0c2a3d; --royal:#8f7df5;
+  --good:#4cc26e; --good-soft:#0f2a1a; --bad:#f2675f; --bad-soft:#3a1615; --warn:#eca500; --warn-soft:#33270a;
+  --s1:#8f7df5; --s2:#b38400; --s3:#0c9fc9; --s4:#e2667a; --s5:#a3a7b0;
+  --seq1:#0c2a3d; --seq2:#0d4561; --seq3:#0b6a92; --seq4:#1597cc; --seq5:#5cc4ef; --hatch:#313b4c; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.005em;text-wrap:balance}
+h2{font-size:17px} h3{font-size:14px}
+a{color:var(--accent-ink)}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.top{background:var(--bar);color:var(--on-bar)}
+.top .in{max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.top .home{color:var(--on-bar);font-weight:700;font-size:17px;text-decoration:none}
+.top h1{font-size:17px;font-weight:500}
+.top h1:before{content:'/';margin-right:10px;opacity:.5}
+.top nav{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;margin-left:auto}
+.top nav a{color:#c8e2f4;text-decoration:none}.top nav a:hover{text-decoration:underline}
+.top nav a[aria-current]{color:var(--on-bar);font-weight:500}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px 48px}
+.example{margin:14px 0 0;padding:10px 12px;border:1px solid var(--line2);border-left:4px solid #eca500;background:var(--warn-soft);border-radius:var(--r-md);font-size:13px}
+.example b{font-weight:700}
+.head{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:flex-end;justify-content:space-between;padding:16px 0 4px}
+.head .t{font-size:20px;font-weight:700}
+.head .sub{color:var(--muted);font-size:13px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctl label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-right:6px}
+select{height:var(--ctl);background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-sm);padding:0 8px;max-width:100%}
+.btn{height:var(--ctl);border:1px solid var(--line2);background:var(--surface);border-radius:var(--r-sm);padding:0 12px;cursor:pointer;font-weight:500;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+section{margin-top:26px}
+.sh{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.note{color:var(--muted);font-size:13px;max-width:90ch}
+section,.panel,.tile,.goal>*,.chg>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.tile .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.tile .v{font-size:30px;font-weight:700;line-height:1.15}
+.tile .v small{font-size:15px;font-weight:500;color:var(--muted)}
+.tile .d{font-size:13px;color:var(--muted)}
+.delta.better{color:var(--good)} .delta.worse{color:var(--bad)} .delta.same{color:var(--muted)}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:2px 8px;border-radius:12px;max-width:100%}
+.status.good{background:var(--good-soft);color:var(--good)} .status.bad{background:var(--bad-soft);color:var(--bad)} .status.warn{background:var(--warn-soft);color:var(--warn)} .status.na{background:var(--sunk);color:var(--muted)}
+.code{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:1px 7px 1px 5px;border:1px solid var(--line2);border-radius:var(--r-sm);background:var(--surface);white-space:nowrap}
+.code i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.chart{position:relative}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart .grid line{stroke:var(--line);stroke-width:1}
+.chart .axis text{fill:var(--muted);font-size:11px;font-family:var(--font)}
+.chart .tgt{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:4 4;opacity:.6}
+.chart .ms line{stroke:var(--line2);stroke-width:1}
+.chart .ms text{fill:var(--muted);font-size:11px}
+.chart .hol rect{fill:url(#hatch)}
+.chart .hol text{fill:var(--muted);font-size:11px}
+.chart .gap{fill:var(--surface);stroke:var(--faint);stroke-width:1.5}
+.chart .main{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linejoin:round}
+.chart .area{fill:var(--accent-soft);opacity:.7}
+.chart .firm{fill:none;stroke-width:2;stroke-linejoin:round}
+.chart .lbl{font-size:11px;font-weight:500;fill:var(--ink)}
+.chart .xh{stroke:var(--faint);stroke-width:1}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:8px 10px;font-size:12px;min-width:180px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.tip[hidden]{display:none}
+.tip .h{font-weight:700;margin-bottom:4px}
+.tip .r{display:flex;justify-content:space-between;gap:16px}
+.tip .r span:first-child{display:inline-flex;align-items:center;gap:6px}
+.tip i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:8px;align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:16px;height:0;border-top:2.4px solid var(--accent)}
+.legend .sw.t{border-top:1.5px dashed var(--ink);opacity:.7}
+.legend .sw.h{width:14px;height:12px;border:0;background:repeating-linear-gradient(135deg,var(--hatch) 0 2px,transparent 2px 5px)}
+.legend .sw.g{width:10px;height:10px;border:1.5px solid var(--faint);border-radius:50%}
+.legend .sq{width:12px;height:12px;border-radius:2px;display:inline-block}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:500;background:var(--sunk)}
+td.num,th.num{text-align:right}
+tr:last-child td{border-bottom:0}
+.firm-n{display:flex;flex-direction:column;gap:2px}
+.firm-n small{color:var(--muted);font-size:12px}
+.bar{position:relative;height:8px;background:var(--sunk);border-radius:2px;min-width:80px}
+.bar b{position:absolute;left:0;top:0;bottom:0;border-radius:2px}
+.bar .tk{position:absolute;top:-3px;bottom:-3px;width:0;border-left:1.5px solid var(--ink)}
+.strip{display:grid;gap:2px;align-items:center}
+.strip .rl{font-size:12px;padding-right:8px;white-space:nowrap}
+.strip .c{height:18px;border-radius:2px;background:var(--seq1);position:relative}
+.strip .c.l0{background:var(--seq1)}.strip .c.l1{background:var(--seq2)}.strip .c.l2{background:var(--seq3)}.strip .c.l3{background:var(--seq4)}.strip .c.l4{background:var(--seq5)}
+.strip .c.no{background:transparent;border:1.5px solid var(--line2)}
+.strip .c.hol{background:repeating-linear-gradient(135deg,var(--hatch) 0 2px,transparent 2px 5px)}
+.strip .c.off{background:transparent}
+.strip .c.nc{background:transparent;border:1.5px dashed var(--faint)}
+.strip .c.sel{outline:2px solid var(--ink);outline-offset:1px}
+.strip .xl{font-size:10px;color:var(--muted);white-space:nowrap;overflow:visible}
+.stripbox{overflow-x:auto;padding:4px 2px 2px}
+.goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.goal{display:flex;flex-direction:column;gap:10px}
+.goal .gh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.goal .gv{font-size:26px;font-weight:700;line-height:1.1;white-space:nowrap;text-align:right}
+.goal .gv small{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+.goal .uses{font-size:12px;color:var(--muted)}
+.goal .fr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 10px;align-items:center;font-size:12px}
+.goal ul{list-style:none;margin:0;padding:0;font-size:13px;display:flex;flex-direction:column;gap:4px}
+.goal li{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.goal li .lim{color:var(--muted);font-size:12px}
+.mx{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+.mx table{width:auto;border-collapse:separate;border-spacing:0}
+.mx th,.mx td{white-space:nowrap;padding:6px 8px}
+.mx thead th{position:sticky;top:0;z-index:2}
+.mx .rh{position:sticky;left:0;z-index:1;background:var(--surface);min-width:260px;max-width:320px;white-space:normal;border-right:1px solid var(--line)}
+.mx thead .rh{z-index:3;background:var(--sunk)}
+.mx .rh small{display:block;color:var(--muted);font-size:11px}
+.mx tr.grp td{background:var(--sunk);font-weight:700;font-size:12px;position:sticky;left:0}
+.mx td.v{position:relative;font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;cursor:pointer}
+.mx td.v.met{background:var(--good-soft)} .mx td.v.fail{background:var(--bad-soft)}
+.mx td.v .dt{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.mx td.v.met .dt{background:var(--good)} .mx td.v.fail .dt{background:var(--bad)}
+.mx td.v .ar{font-size:10px;margin-left:3px}
+.mx td.v .ar.better{color:var(--good)} .mx td.v .ar.worse{color:var(--bad)}
+.mx td.nc{color:var(--muted);font-size:11px;text-align:center;font-style:italic}
+.mx th.vc{text-align:right;cursor:pointer}
+.mx th.vc small{display:block;font-weight:400;text-transform:none;letter-spacing:0}
+.mx .on{box-shadow:inset 0 0 0 2px var(--ink)}
+.mx .base{box-shadow:inset 0 0 0 1px var(--faint)}
+.mx td.tr{min-width:96px}
+.chg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.chg ul{margin:6px 0 0;padding-left:18px}
+.chg li{margin:3px 0}
+.mslist{margin:8px 0 0;padding-left:22px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 22px}.mslist b{color:var(--ink);font-weight:500}
+.foot{margin-top:30px;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--muted)}
+.foot ul{padding-left:18px}
+.foot li{margin:4px 0}
+details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top:8px}
+.err{padding:14px;border:1px solid var(--bad);border-radius:var(--r-md);background:var(--bad-soft)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.goals,.chg{grid-template-columns:1fr}.top nav{margin-left:0}}
+@media (max-width:700px){
+  .pace thead{display:none}.pace table,.pace tbody{display:block}
+  .pace tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 12px;padding:12px;border-bottom:1px solid var(--line)}
+  .pace td{display:block;border:0;padding:0;text-align:left!important;min-width:0}
+  .pace td:first-child{grid-column:1/-1}
+  .pace td[data-l]:before{content:attr(data-l);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:2px}
+  .mx .rh{min-width:170px;max-width:200px}
+}
+@media (max-width:460px){.tiles{grid-template-columns:1fr}.tile .v{font-size:26px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top"><div class="in">
+  <a class="home" href="../" title="OpenBEP home">OpenBEP</a><h1>Compliance over time</h1>
+  <nav aria-label="OpenBEP pages">
+    <a href="../">Home</a>
+    <a href="../app/bep-builder.html">BEP Builder</a>
+    <a href="../lod/">LOD specification</a>
+    <a href="../names/">Naming lists</a>
+    <a href="../training/">Owner training</a>
+    <a href="../app/scorecard.html">Project scorecard</a>
+    <a href="./" aria-current="page">Compliance over time</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <p class="example" role="note"><b>Example data, simulated.</b> No real model, firm or VIM Server was measured. The numbers are invented for the example school plan to show what this screen must make visible: a firm that slows down, a plan that asks for more at each milestone, a holiday, a version that could not be checked, and a contractor who joins after award.</p>
+
+  <div class="head">
+    <div>
+      <div class="t" id="pName">Loading…</div>
+      <div class="sub" id="pSub"></div>
+    </div>
+    <div class="ctl">
+      <span><label for="selV">Version</label><select id="selV"></select></span>
+      <span><label for="cmpV">Compare with</label><select id="cmpV"></select></span>
+      <label class="btn" for="fileIn" style="display:inline-flex;align-items:center;text-transform:none;letter-spacing:0;color:var(--ink);font-size:13px;margin:0">Open a series file</label><input type="file" id="fileIn" accept=".json,application/json" hidden>
+      <button class="btn" type="button" id="exBtn">Load the example</button>
+    </div>
+  </div>
+
+  <div id="app">
+    <div class="tiles" id="tiles"></div>
+
+    <section aria-labelledby="h-overall">
+      <div class="sh"><h2 id="h-overall">Overall compliance</h2><span class="note">Share of the values the plan requires that are filled, in every element of every firm's model. The dashed line is the target of the milestone in force.</span></div>
+      <div class="panel">
+        <div class="ctl" style="margin-bottom:8px"><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
+        <div class="chart" id="chOverall"></div>
+        <div class="legend" id="lgOverall"></div>
+        <details><summary>Show the numbers as a table</summary><div class="tw" style="margin-top:8px" id="tblOverall"></div></details>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-pace">
+      <div class="sh"><h2 id="h-pace">Who contributes at what pace</h2><span class="note">Each firm's own elements. Pace is counted over the last four working weeks; holiday weeks are not counted.</span></div>
+      <div class="tw pace" id="paceTbl"></div>
+      <div class="panel" style="margin-top:12px">
+        <h3>Values fixed each week, by firm</h3>
+        <p class="note" style="margin:2px 0 8px">One square per week. A stronger colour means more required values filled that week. Select a square to open that version.</p>
+        <div class="stripbox"><div class="strip" id="strip"></div></div>
+        <div class="legend" id="lgStrip"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-goals">
+      <div class="sh"><h2 id="h-goals">Each goal over time</h2><span class="note">The owner's goals from the plan, measured through the BIM uses that serve them. Model rules are listed under the goal they protect.</span></div>
+      <div class="goals" id="goals"></div>
+    </section>
+
+    <section aria-labelledby="h-changed">
+      <div class="sh"><h2 id="h-changed" tabindex="-1">What changed</h2><span class="note" id="chgSub"></span></div>
+      <div class="chg" id="changed"></div>
+    </section>
+
+    <section aria-labelledby="h-matrix">
+      <div class="sh"><h2 id="h-matrix">Every check, every version</h2><span class="note">Green is met, red is failed. The arrow shows which way the value moved since the version before; its colour says whether that is better or worse. Select a column or a cell to open that version.</span></div>
+      <div class="mx" id="matrix"></div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <h3>How the numbers are worked out</h3>
+    <ul>
+      <li><b>Compliance</b> is the share of required values that are filled with a real value. The plan says which parameters each element type needs at each milestone (the LOD matrix), so the number of required values grows as firms model more and as each milestone asks for more. That is why compliance drops the week after a milestone even though nothing was lost.</li>
+      <li><b>Model rules</b> (warnings, clashes, duplicate Mark, worksets) are pass or fail against the limit written in the plan. They are shown beside the goal they protect and are not averaged into the percentage.</li>
+      <li><b>Pace</b> is the number of required values a firm filled in its last four working weeks, divided by four. Values that stopped meeting the plan (deleted, overwritten, copied with a duplicate Mark) are counted separately. A week with no upload counts as zero.</li>
+      <li><b>Needed pace</b> is what the firm must fill each working week to reach the milestone target on time, assuming it adds no more elements.</li>
+      <li><b>Holidays:</b> weeks inside the agreed holidays in the plan have no version and are left out of every count, as on the Scorecard. They never count as a slow week.</li>
+      <li><b>A gap is never a zero:</b> a version that could not be checked keeps its place with the reason, and the line breaks there.</li>
+      <li><b>Where the data would come from:</b> one version per week on VIM Server, each built from the Revit models the firms uploaded, checked against the requirement file the BEP Builder exports. The example file is <a href="example-school.json">example-school.json</a>, written by <span class="mono">compliance/build_example.py</span>.</li>
+      <li><b>Look:</b> colours, type and sizes follow VIM's public style tokens in its open-source web viewer (<a href="https://github.com/vimaec/vim-web">vimaec/vim-web</a>, MIT licence). VIM does not publish a component library for web dashboards, so the parts here are built to match that style. The layout follows the VIM Flex model-check screen design in this repository's docs/model-check-screen. The founder of OpenBEP works at VIM.</li>
+    </ul>
+  </footer>
+</main>
+
+<script src="series.js"></script>
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Math.round(n).toLocaleString('en-CA');
+const rv=(r,x)=>r.unit==='%'?x.toFixed(1)+' %':fmt(x)+(r.unit?' '+r.unit:'');
+const pct=(n,d=1)=>n==null||isNaN(n)?'–':n.toFixed(d)+' %';
+const dayOf=v=>v.created.slice(0,10);
+const dShort=iso=>new Date(iso+'T12:00:00').toLocaleDateString('en-CA',{month:'short',day:'numeric'});
+const dLong=iso=>new Date(iso+'T12:00:00').toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+// Colours follow each role's position in the file (validated for 4); a 5th role and beyond share a neutral gray and keep their code label.
+const fc=c=>`var(--s${Math.min(5,CODES.indexOf(c)+1)})`;
+
+let D, V, ROLES, CODES, MS, sel, cmp, showFirms=false;
+
+// Any file in the openbep-compliance-series format works: ?data=<relative or same-site URL>, or "Open a series file".
+const APP=$('#app').innerHTML;
+function load(url){fetch(url).then(r=>{if(!r.ok) throw new Error('HTTP '+r.status);return r.json()}).then(init).catch(e=>fail([`The data could not be loaded from ${url} (${e.message}). Open this page from openbep.com or a local web server, not straight from a file.`]))}
+function fail(list){$('#app').innerHTML=`<div class="err" role="alert"><b>This file cannot be shown.</b><ul>${list.slice(0,40).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${list.length>40?`<p>…and ${list.length-40} more.</p>`:''}<p>The format is described in <a href="https://github.com/SamuelAB/openbep/blob/main/compliance/FORMAT.md">compliance/FORMAT.md</a>.</p></div>`;$('#pName').textContent='No data';$('#pSub').textContent=''}
+$('#fileIn').onchange=e=>{const f=e.target.files[0];if(!f) return;f.text().then(t=>{let d;try{d=JSON.parse(t)}catch(x){return fail(['The file is not valid JSON: '+x.message])}init(d)});e.target.value=''};
+$('#exBtn').onclick=()=>{history.replaceState(null,'',location.pathname);load('example-school.json')};
+const q=new URLSearchParams(location.search).get('data');
+load(q&&!/^[a-z]+:/i.test(q)?q:'example-school.json');
+
+const checked=v=>v&&v.state==='checked';
+const tot=(v,f)=>Object.values(v.byRole).reduce((a,r)=>a+r[f],0);
+const overall=v=>checked(v)?100*tot(v,'met')/tot(v,'required'):null;
+const roleP=(v,c)=>checked(v)&&v.byRole[c]?100*v.byRole[c].met/v.byRole[c].required:null;
+function goalSum(v,g,c){let q=0,m=0;for(const vc of D.valueChecks){if(vc.goal!==g)continue;const x=v.valueChecks[vc.id]||{};for(const [rc,[qq,mm]] of Object.entries(x)){if(c&&rc!==c)continue;q+=qq;m+=mm}}return [q,m]}
+const goalP=(v,g,c)=>{if(!checked(v))return null;const [q,m]=goalSum(v,g,c);return q?100*m/q:null};
+function checkP(v,id){if(!checked(v))return null;let q=0,m=0;for(const [a,b] of Object.values(v.valueChecks[id]||{})){q+=a;m+=b}return q?100*m/q:null}
+const msOf=v=>MS.find(m=>m.id===v.milestone);
+const isHol=iso=>D.plan.holidays.some(h=>iso>=h.from&&iso<=h.to);
+const addDays=(iso,n)=>{const d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const CAD=()=>D.model.cadenceDays||7;
+function weeksAll(){const out=[];let d=dayOf(V[0]);const end=dayOf(V[V.length-1]);while(d<=end){out.push(d);d=addDays(d,CAD())}return out}
+function workingWeeks(a,b){let n=0;for(let d=addDays(a,CAD());d<=b;d=addDays(d,CAD())) if(!isHol(d)) n++;return n}
+function prevChecked(i){for(let j=i-1;j>=0;j--) if(checked(V[j])) return j;return -1}
+const better=(dir,d)=>d===0?'same':(dir==='lowerIsBetter'?d<0:d>0)?'better':'worse';
+const arrow=d=>d>0?'▲':d<0?'▼':'=';
+function deltaHtml(d,unit,dir='higherIsBetter',digits=1){
+  if(d==null||isNaN(d)) return '';
+  const r=Math.abs(d)<Math.pow(10,-digits)/2?0:d;
+  return `<span class="delta ${better(dir,r)}">${arrow(r)} ${r>0?'+':r<0?'−':''}${unit==='pt'?Math.abs(r).toFixed(digits)+' pt':fmt(Math.abs(r))}</span>`;
+}
+
+function init(data){
+  const problems=window.validateSeries(data);
+  if(problems.length) return fail(problems);
+  if($('#app').querySelector('.err')||!$('#tiles')) $('#app').innerHTML=APP;
+  $('.example').hidden=!data.example;
+  D=data;V=D.versions;ROLES=D.plan.roles;CODES=ROLES.map(r=>r.code);MS=D.plan.milestones;
+  $('#pName').textContent=D.plan.name;
+  $('#pSub').textContent=[D.model.server,D.model.source&&'model '+D.model.source,D.plan.delivery,D.model.schedule].filter(Boolean).join(' · ');
+  const opt=(v,i)=>`<option value="${i}">${esc(v.label)} · ${dShort(dayOf(v))}${checked(v)?'':' · not checked'}</option>`;
+  $('#selV').innerHTML=V.map(opt).join('');
+  sel=V.length-1; while(sel>0&&!checked(V[sel])) sel--; cmp=prevChecked(sel);
+  $('#selV').value=sel; fillCmp();
+  $('#selV').onchange=e=>{select(+e.target.value)};
+  showFirms=false;$('#firmsBtn').setAttribute('aria-pressed','false');$('#firmsBtn').textContent='Show each firm';
+  $('#cmpV').onchange=e=>{cmp=+e.target.value;render()};
+  $('#firmsBtn').onclick=e=>{showFirms=!showFirms;e.currentTarget.setAttribute('aria-pressed',showFirms);e.currentTarget.textContent=showFirms?'Hide each firm':'Show each firm';drawOverall()};
+  if(!window.__rz) window.__rz=1, addEventListener('resize',()=>{clearTimeout(window.__rt);window.__rt=setTimeout(()=>{if(D&&$('#chOverall')){drawOverall();drawGoalCharts()}},120)});
+  render();
+}
+function fillCmp(){
+  $('#cmpV').innerHTML=V.map((v,i)=>i<sel&&checked(v)?`<option value="${i}">${esc(v.label)} · ${dShort(dayOf(v))}</option>`:'').join('')||'<option value="-1">No earlier version</option>';
+  $('#cmpV').value=cmp;
+}
+function select(i,focusChanged){sel=i;cmp=prevChecked(i);$('#selV').value=i;fillCmp();render();if(focusChanged){const h=$('#h-changed');h.scrollIntoView({block:'start'});h.focus({preventScroll:true})}}
+
+function render(){tiles();drawOverall();overallTable();pace();strip();goals();changed();matrix()}
+
+/* ---------- tiles ---------- */
+function forecast(i){
+  // Working weeks to the milestone in force; net pace over the last four working weeks.
+  const v=V[i],m=msOf(v),left=workingWeeks(dayOf(v),m.date);
+  const j=back(i,4); if(j<0) return null;
+  const net=(tot(v,'met')-tot(V[j],'met'))/Math.max(1,workingWeeks(dayOf(V[j]),dayOf(v)));
+  return {m,left,net,proj:Math.min(100,100*(tot(v,'met')+net*left)/tot(v,'required'))};
+}
+function back(i,n){// the checked version at least n working weeks before version i
+  const d=dayOf(V[i]);for(let j=i-1;j>=0;j--) if(checked(V[j])&&workingWeeks(dayOf(V[j]),d)>=n) return j;return prevChecked(i);
+}
+function tiles(){
+  const v=V[sel],b=cmp>=0?V[cmp]:null,o=overall(v),m=msOf(v),rules=Object.values(v.rules),met=rules.filter(r=>r.pass).length;
+  const bm=b?Object.values(b.rules).filter(r=>r.pass).length:null;
+  const f=forecast(sel);
+  const nChecked=V.filter(checked).length, nNot=V.length-nChecked, hol=weeksAll().filter(isHol).length;
+  let fc='';
+  if(f){fc=f.left>0?`<div class="v">${pct(f.proj,0)} <small>by ${dShort(f.m.date)}</small></div><div class="d">Target ${f.m.targetPercent} % at ${esc(f.m.name)}, ${f.left} working week${f.left===1?'':'s'} away. ${f.proj>=f.m.targetPercent?'<span class="status good">✓ On pace</span>':'<span class="status bad">✕ Behind pace</span>'}</div>`
+    :`<div class="v">${pct(o,0)} <small>due now</small></div><div class="d">${esc(f.m.name)} is due this week, target ${f.m.targetPercent} %. ${o>=f.m.targetPercent?'<span class="status good">✓ Target met</span>':`<span class="status bad">✕ ${fmt(Math.ceil(f.m.targetPercent/100*tot(v,'required')-tot(v,'met')))} values short</span>`}</div>`}
+  $('#tiles').innerHTML=`
+  <div class="tile"><span class="k">Overall compliance</span><div class="v">${pct(o)}</div><div class="d">${b?deltaHtml(o-overall(b),'pt')+` since ${esc(b.label)}`:'First version'} · target ${m.targetPercent} %</div></div>
+  <div class="tile"><span class="k">Model rules met</span><div class="v">${met} <small>of ${rules.length}</small></div><div class="d">${b?deltaHtml(met-bm,'n','higherIsBetter',0).replace(/ \+?−?(\d)/,' $1')+` since ${esc(b.label)}`:''}</div></div>
+  <div class="tile"><span class="k">Forecast</span>${fc||'<div class="v">–</div><div class="d">Needs four working weeks of versions.</div>'}</div>
+  <div class="tile"><span class="k">Versions</span><div class="v">${nChecked} <small>checked</small></div><div class="d">${nNot} not checked · ${hol} holiday week${hol===1?'':'s'} skipped · ${dShort(dayOf(V[0]))} to ${dShort(dayOf(V[V.length-1]))}</div></div>`;
+}
+
+/* ---------- overall chart ---------- */
+let OV=null;
+function lineChart(el,{series,height,yMin,showMs=true,tipFn,compact=false}){
+  const W=Math.max(280,el.clientWidth||600), H=height, padL=compact?30:38, padR=compact?10:(showFirms?66:16), padT=compact?8:28, padB=compact?20:26;
+  const days=V.map(dayOf), t0=+new Date(days[0]), t1=+new Date(days[days.length-1]);
+  const x=iso=>padL+(W-padL-padR)*((+new Date(iso))-t0)/(t1-t0);
+  const y=p=>padT+(H-padT-padB)*(1-(p-yMin)/(100-yMin));
+  let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="${esc(el.dataset.label||'')}"><defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="${css('--hatch')}" stroke-width="2"/></pattern></defs>`;
+  s+='<g class="grid axis">';
+  const step=compact?((100-yMin)>=50?25:10):10;
+  for(let p=Math.ceil(yMin/step)*step;p<=100;p+=step) s+=`<line x1="${padL}" x2="${W-padR}" y1="${y(p)}" y2="${y(p)}"/><text x="${padL-6}" y="${y(p)+4}" text-anchor="end">${p}${compact?'':' %'}</text>`;
+  // month ticks
+  const months=[];{let d=new Date(days[0]);d.setDate(1);d.setMonth(d.getMonth()+1);while(+d<=t1){months.push(d.toISOString().slice(0,10));d.setMonth(d.getMonth()+1)}}
+  const every=W<520?3:W<800?2:1;
+  months.forEach((m,i)=>{if(i%every) return;s+=`<text x="${x(m)}" y="${H-6}" text-anchor="middle">${new Date(m+'T12:00:00').toLocaleDateString('en-CA',{month:'short'})}</text>`});
+  s+='</g>';
+  // holidays
+  s+='<g class="hol">';for(const h of D.plan.holidays){const a=x(h.from),b=x(h.to);s+=`<rect x="${a}" y="${padT}" width="${Math.max(2,b-a)}" height="${H-padT-padB}"/>`;if(!compact) s+=`<text x="${(a+b)/2}" y="${H-padB-6}" text-anchor="middle">Holiday</text>`}s+='</g>';
+  // milestones and stepped target
+  if(showMs){s+='<g class="ms">';let prev=days[0];let path='';MS.forEach((m,i)=>{const a=x(prev),b=x(m.date>days[days.length-1]?days[days.length-1]:m.date);path+=`${i?'L':'M'}${a},${y(m.targetPercent)}H${b}`;prev=m.date;
+    if(!compact&&m.date<=days[days.length-1]){s+=`<line x1="${b}" x2="${b}" y1="${padT-4}" y2="${H-padB}"/><circle cx="${b}" cy="${padT-12}" r="8" style="fill:var(--surface);stroke:var(--line2)"/><text x="${b}" y="${padT-8}" text-anchor="middle" style="fill:var(--ink);font-weight:500">${i+1}</text>`}});
+    s+=`</g><path class="tgt" d="${path}"/>`}
+  // series (break at not-checked versions)
+  const labels=[];
+  for(const se of series){
+    let d='',pen=false,area='',first=null,last=null;
+    V.forEach(v=>{const p=se.get(v);if(p==null){pen=false;return}const X=x(dayOf(v)),Y=y(Math.max(yMin,p));d+=(pen?'L':'M')+X.toFixed(1)+','+Y.toFixed(1);pen=true;if(!first)first=[X,Y];last=[X,Y,p]});
+    if(se.area&&first) {area=d.replace(/M/g,'L').replace(/^L/,'M')+`L${last[0]},${y(yMin)}L${first[0]},${y(yMin)}Z`;s+=`<path class="area" d="${area}"/>`}
+    s+=`<path class="${se.cls}" d="${d}" ${se.color?`stroke="${se.color}"`:''}/>`;
+    if(se.label&&last) labels.push({x:last[0]+6,y:last[1]+4,t:se.label});
+  }
+  labels.sort((a,b)=>a.y-b.y);for(let i=1;i<labels.length;i++) if(labels[i].y<labels[i-1].y+12) labels[i].y=labels[i-1].y+12;
+  for(const l of labels) s+=`<text class="lbl" x="${l.x}" y="${l.y}">${esc(l.t)}</text>`;
+  // not-checked markers
+  if(!compact) V.forEach(v=>{if(!checked(v)){const X=x(dayOf(v));s+=`<circle class="gap" cx="${X}" cy="${y(yMin)+0}" r="5"><title></title></circle><text x="${X}" y="${y(yMin)-9}" text-anchor="middle" style="fill:var(--muted);font-size:11px">not checked</text>`}});
+  // selected version marker
+  const sx=x(dayOf(V[sel]));s+=`<line class="xh" x1="${sx}" x2="${sx}" y1="${padT}" y2="${H-padB}" stroke-dasharray="2 3"/>`;
+  s+=`<g class="hover"></g></svg><div class="tip" hidden></div>`;
+  el.innerHTML=s;
+  const svg=el.querySelector('svg'),tip=el.querySelector('.tip'),hov=el.querySelector('.hover');
+  const near=ev=>{const r=svg.getBoundingClientRect();const px=(ev.clientX-r.left)*W/r.width;let bi=0,bd=1e9;V.forEach((v,i)=>{const dd=Math.abs(x(dayOf(v))-px);if(dd<bd){bd=dd;bi=i}});return bi};
+  svg.addEventListener('pointermove',ev=>{const i=near(ev),v=V[i],X=x(dayOf(v));
+    let h=`<line class="xh" x1="${X}" x2="${X}" y1="${padT}" y2="${H-padB}"/>`;
+    for(const se of series){const p=se.get(v);if(p!=null) h+=`<circle class="dot" cx="${X}" cy="${y(Math.max(yMin,p))}" r="4.5" fill="${se.color||css('--accent')}"/>`}
+    hov.innerHTML=h;tip.innerHTML=tipFn(v);tip.hidden=false;
+    const r=el.getBoundingClientRect(),tw=tip.offsetWidth;let lx=ev.clientX-r.left+14;if(lx+tw>r.width) lx=ev.clientX-r.left-tw-14;tip.style.left=Math.max(0,lx)+'px';tip.style.top=(compact?0:padT)+'px'});
+  svg.addEventListener('pointerleave',()=>{hov.innerHTML='';tip.hidden=true});
+  svg.addEventListener('click',ev=>select(near(ev)));
+  svg.style.cursor='pointer';
+}
+function tipOverall(v){
+  if(!checked(v)) return `<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div>Not checked. ${esc(v.reason||'')}</div>`;
+  const m=msOf(v);let h=`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div class="r"><span><i style="background:var(--accent)"></i>All firms</span><b class="num">${pct(overall(v))}</b></div>`;
+  if(showFirms) for(const c of CODES) if(v.byRole[c]) h+=`<div class="r"><span><i style="background:${fc(c)}"></i>${c}</span><span class="num">${pct(roleP(v,c))}</span></div>`;
+  return h+`<div class="r" style="color:var(--muted)"><span>Target, ${esc(m.name.split(',')[0])}</span><span class="num">${m.targetPercent} %</span></div>`;
+}
+function drawOverall(){
+  const el=$('#chOverall');el.dataset.label='Overall compliance by version, with the milestone targets';
+  const series=[{cls:'main',get:overall,area:!showFirms,label:showFirms?'All':''}];
+  if(showFirms) for(const c of CODES) series.push({cls:'firm',color:css('--s'+Math.min(5,CODES.indexOf(c)+1)),get:v=>roleP(v,c),label:c});
+  const lo=Math.min(...V.filter(checked).flatMap(v=>[overall(v),...(showFirms?CODES.map(c=>roleP(v,c)).filter(x=>x!=null):[])]),...MS.map(m=>m.targetPercent));
+  lineChart(el,{series,height:el.clientWidth<520?240:300,yMin:Math.max(0,Math.floor((lo-5)/10)*10),tipFn:tipOverall});
+  $('#lgOverall').innerHTML=`<span><i class="sw"></i>All firms</span>${showFirms?CODES.map(c=>`<span><i class="sq" style="background:${fc(c)}"></i>${c} · ${esc(ROLES.find(r=>r.code===c).role)}</span>`).join(''):''}<span><i class="sw t"></i>Milestone target</span><span><i class="sw h"></i>Agreed holiday, not counted</span><span><i class="sw g"></i>Version not checked</span></div><ol class="mslist">${MS.map(m=>`<li><b>${esc(m.name)}</b> · ${dShort(m.date)} · target ${m.targetPercent} %</li>`).join('')}</ol><div>`;
+}
+function overallTable(){
+  $('#tblOverall').innerHTML=`<table><thead><tr><th>Version</th><th>Date</th><th>Milestone in force</th><th class="num">All firms</th>${CODES.map(c=>`<th class="num">${c}</th>`).join('')}<th class="num">Target</th></tr></thead><tbody>${V.map(v=>`<tr><td>${esc(v.label)}</td><td>${dShort(dayOf(v))}</td><td>${esc(msOf(v).name)}</td>${checked(v)?`<td class="num">${pct(overall(v))}</td>${CODES.map(c=>`<td class="num">${v.byRole[c]?pct(roleP(v,c)):'–'}</td>`).join('')}`:`<td colspan="${CODES.length+1}">Not checked. ${esc(v.reason||'')}</td>`}<td class="num">${msOf(v).targetPercent} %</td></tr>`).join('')}</tbody></table>`;
+}
+
+/* ---------- pace ---------- */
+function paceOf(c,i){
+  const v=V[i],r=v.byRole[c];if(!r) return null;
+  const d=dayOf(v),from=addDays(d,-4*CAD());let fixed=0,broken=0,uploads=0,weeks=0;
+  for(let w=addDays(from,CAD());w<=d;w=addDays(w,CAD())){if(isHol(w)) continue;weeks++;const x=V.find(u=>dayOf(u)===w);if(x&&checked(x)&&x.byRole[c]){fixed+=x.byRole[c].valuesFixed;broken+=x.byRole[c].valuesBroken;if(x.byRole[c].uploaded) uploads++}else if(x&&!checked(x)) uploads+=x.uploadedBy.includes(c)?1:0}
+  const m=msOf(v),left=workingWeeks(d,m.date),gap=Math.max(0,Math.ceil(m.targetPercent/100*r.required-r.met));
+  return {fixed:fixed/Math.max(1,weeks),broken:broken/Math.max(1,weeks),uploads,weeks,left,gap,need:left>0?gap/left:null,m,r};
+}
+function pace(){
+  const v=V[sel],b=cmp>=0?V[cmp]:null;
+  const rows=ROLES.filter(r=>v.byRole[r.code]).map(ro=>{const c=ro.code,p=paceOf(c,sel),now=roleP(v,c),was=b?roleP(b,c):null,net=p.fixed-p.broken;
+    let st;if(p.gap===0) st='<span class="status good">✓ Target met</span>';else if(p.left===0) st=`<span class="status bad">✕ ${fmt(p.gap)} values short at the milestone</span>`;else if(net>=p.need) st='<span class="status good">✓ On pace</span>';else if(net>=p.need*.75) st='<span class="status warn">! Slightly behind</span>';else st='<span class="status bad">✕ Behind</span>';
+    const firstWeek=ro.from&&ro.from>addDays(dayOf(v),-4*CAD())?' (joined '+dShort(ro.from)+')':'';
+    return `<tr>
+      <td><div class="firm-n"><span><span class="code"><i style="background:${fc(c)}"></i>${c}</span> ${esc(ro.role)}</span><small>${esc(ro.firm)} · ${fmt(p.r.elements)} elements · ${esc(ro.document)}</small></div></td>
+      <td data-l="Compliance, own elements"><div style="display:flex;align-items:center;gap:10px"><div class="bar" style="flex:1"><b style="width:${now}%;background:${fc(c)}"></b><span class="tk" style="left:${p.m.targetPercent}%" title=""></span></div><span class="num">${pct(now)}</span></div><div style="font-size:12px">${was!=null?deltaHtml(now-was,'pt'):''}</div></td>
+      <td class="num" data-l="Values filled per week"><span class="num">${fmt(p.fixed)}</span></td>
+      <td class="num" data-l="Values broken per week"><span class="num">${fmt(p.broken)}</span></td>
+      <td class="num" data-l="Needed per week"><span class="num">${p.need==null?(p.gap?'due now':'–'):fmt(p.need)}</span><div style="font-size:12px;color:var(--muted)">${p.gap?fmt(p.gap)+' to go':''}</div></td>
+      <td data-l="Uploads, last 4 working weeks"><span class="num">${p.uploads} of ${p.weeks}</span>${firstWeek?`<div style="font-size:12px;color:var(--muted)">${esc(firstWeek.trim())}</div>`:''}</td>
+      <td data-l="Pace">${st}</td></tr>`}).join('');
+  $('#paceTbl').innerHTML=`<table><thead><tr><th>Firm</th><th>Compliance, own elements <span style="text-transform:none">(| = target ${msOf(v).targetPercent} %)</span></th><th class="num">Values filled per week</th><th class="num">Values broken per week</th><th class="num">Needed per week</th><th>Uploads, last 4 working weeks</th><th>Pace</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function strip(){
+  const W=weeksAll(),max=Math.max(...V.filter(checked).flatMap(v=>Object.values(v.byRole).map(r=>r.valuesFixed)));
+  const steps=[0,.2,.4,.6,.8].map(f=>Math.round(max*f));
+  const lv=n=>n<=0?0:n<max*.2?0:n<max*.4?1:n<max*.6?2:n<max*.8?3:4;
+  const el=$('#strip');el.style.gridTemplateColumns=`max-content repeat(${W.length},minmax(14px,1fr))`;
+  let h='';
+  for(const ro of ROLES){const c=ro.code;h+=`<div class="rl"><span class="code"><i style="background:${fc(c)}"></i>${c}</span></div>`;
+    for(const w of W){const v=V.find(u=>dayOf(u)===w),i=V.indexOf(v);let cls,t;
+      if(isHol(w)){cls='hol';t=`Week of ${dShort(w)}: agreed holiday, not counted`}
+      else if(!v){cls='off';t=''}
+      else if(ro.from&&w<ro.from){cls='off';t=`${c} not on the project yet`}
+      else if(!checked(v)){cls='nc';t=`${v.label}, ${dShort(w)}: not checked`}
+      else{const r=v.byRole[c];if(!r){cls='off';t=''}else if(!r.uploaded){cls='no';t=`${v.label}, ${dShort(w)}: ${c} uploaded nothing new`}else{cls='l'+lv(r.valuesFixed);t=`${v.label}, ${dShort(w)}: ${c} filled ${fmt(r.valuesFixed)} values, ${fmt(r.valuesBroken)} stopped meeting the plan, ${r.elementsAdded>=0?'+':'−'}${fmt(Math.abs(r.elementsAdded))} elements`}}
+      if(i===sel) cls+=' sel';
+      h+=v&&cls!=='off'&&!cls.startsWith('hol')?`<button type="button" class="c ${cls}" data-i="${i}" aria-label="${esc(t)}" title="${esc(t)}" style="border-width:${cls.startsWith('no')||cls.startsWith('nc')?'1.5px':'0'};padding:0;cursor:pointer"></button>`:`<div class="c ${cls}" ${t?`title="${esc(t)}"`:''}></div>`}}
+  h+='<div></div>'+W.map((w,k)=>{const d=new Date(w+'T12:00:00');const firstOfMonth=k===0||new Date(W[k-1]+'T12:00:00').getMonth()!==d.getMonth();return `<div class="xl">${firstOfMonth?d.toLocaleDateString('en-CA',{month:'short'}):''}</div>`}).join('');
+  el.innerHTML=h;
+  el.querySelectorAll('button.c').forEach(b=>b.onclick=()=>select(+b.dataset.i));
+  const sb=el.parentNode;if(!sb.dataset.init){sb.dataset.init=1;sb.scrollLeft=sb.scrollWidth}
+  $('#lgStrip').innerHTML=`<span>Values filled:</span>${[0,1,2,3,4].map(k=>`<span><i class="sq" style="background:var(--seq${k+1})"></i>${k===4?fmt(steps[4])+'+':fmt(steps[k])+'–'+fmt((steps[k+1]||max)-1)}</span>`).join('')}<span><i class="sq" style="border:1.5px solid var(--line2)"></i>No upload</span><span><i class="sq" style="border:1.5px dashed var(--faint)"></i>Not checked</span><span><i class="sq" style="background:repeating-linear-gradient(135deg,var(--hatch) 0 2px,transparent 2px 5px)"></i>Holiday</span>`;
+}
+
+/* ---------- goals ---------- */
+function goals(){
+  const v=V[sel],b=cmp>=0?V[cmp]:null,m=msOf(v);
+  $('#goals').innerHTML=D.plan.goals.map(g=>{
+    const p=goalP(v,g.id),was=b?goalP(b,g.id):null,[q,mm]=goalSum(v,g.id);
+    if(!q&&!D.rules.some(r=>r.goal===g.id)) return `<article class="panel goal"><h3>${esc(g.name)}</h3><p class="note">The plan sets no checkable requirement for this goal yet. Add parameters or model rules for its BIM uses in the BEP Builder.</p></article>`;
+    const firms=CODES.filter(c=>goalSum(v,g.id,c)[0]>0).map(c=>{const fp=goalP(v,g.id,c);return `<span class="code"><i style="background:${fc(c)}"></i>${c}</span><div class="bar"><b style="width:${fp}%;background:${fc(c)}"></b><span class="tk" style="left:${m.targetPercent}%"></span></div><span class="num">${pct(fp)}</span>`}).join('');
+    const checks=D.valueChecks.filter(x=>x.goal===g.id).map(x=>{const cp=checkP(v,x.id),bp=b?checkP(b,x.id):null;return `<li><span>${esc(x.label)}</span><span><span class="num">${pct(cp)}</span> ${bp!=null?deltaHtml(cp-bp,'pt'):''}</span></li>`}).join('');
+    const rules=D.rules.filter(r=>r.goal===g.id).map(r=>{const x=v.rules[r.id],bx=b?b.rules[r.id]:null;return `<li><span>${esc(r.label)} <span class="lim">${esc(r.limitText)}</span></span><span><span class="num">${rv(r,x.value)}</span> ${bx?deltaHtml(x.value-bx.value,r.unit==='%'?'pt':'n',r.direction,r.unit==='%'?1:0):''} ${x.pass?'<span class="status good">✓ Met</span>':'<span class="status bad">✕ Failed</span>'}</span></li>`}).join('');
+    return `<article class="panel goal"><div class="gh"><div><h3>${esc(g.name)}</h3><div class="uses">Through: ${g.uses.map(esc).join(' · ')}</div></div><div class="gv">${pct(p)}<small>${was!=null?deltaHtml(p-was,'pt'):''} · target ${m.targetPercent} %</small></div></div>
+      ${q?`<div class="chart gc" data-goal="${g.id}" data-label="${esc(g.name)}: compliance by version"></div>`:'<p class="note">No required values for this goal; only model rules.</p>'}
+      <div class="fr">${firms}</div>
+      <div><div class="note" style="margin-bottom:4px">${fmt(mm)} of ${fmt(q)} required values filled</div><ul>${checks}</ul></div>
+      ${rules?`<div><div class="note" style="margin-bottom:4px">Model rules</div><ul>${rules}</ul></div>`:''}</article>`}).join('');
+  drawGoalCharts();
+}
+function drawGoalCharts(){
+  document.querySelectorAll('.gc').forEach(el=>{const g=el.dataset.goal;
+    lineChart(el,{series:[{cls:'main',get:v=>goalP(v,g),area:true}],height:130,yMin:0,compact:true,tipFn:v=>checked(v)?`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div class="r"><span>Compliance</span><b class="num">${pct(goalP(v,g))}</b></div>${CODES.filter(c=>goalSum(v,g,c)[0]).map(c=>`<div class="r"><span><i style="background:${fc(c)}"></i>${c}</span><span class="num">${pct(goalP(v,g,c))}</span></div>`).join('')}<div class="r" style="color:var(--muted)"><span>Target</span><span class="num">${msOf(v).targetPercent} %</span></div>`:`<div class="h">${esc(v.label)}</div><div>Not checked</div>`});
+  });
+}
+
+/* ---------- what changed ---------- */
+function changed(){
+  const v=V[sel];
+  if(cmp<0){$('#chgSub').textContent='';$('#changed').innerHTML='<p class="note">This is the first version; there is nothing to compare with.</p>';return}
+  const b=V[cmp];
+  $('#chgSub').textContent=`${v.label} (${dLong(dayOf(v))}) compared with ${b.label} (${dLong(dayOf(b))}).`;
+  const msChange=v.milestone!==b.milestone?`<p class="status warn" style="white-space:normal;border-radius:var(--r-md);padding:6px 10px">! The plan moved to ${esc(msOf(v).name)} between these versions. It now asks for more values per element, so percentages can drop without anything being lost.</p>`:'';
+  // firm by firm, summed over the versions in between
+  const span=V.filter((u,i)=>i>cmp&&i<=sel&&checked(u));
+  const firm=ROLES.filter(r=>v.byRole[r.code]).map(ro=>{const c=ro.code;let f=0,br=0,ad=0,up=0;span.forEach(u=>{const r=u.byRole[c];if(r){f+=r.valuesFixed;br+=r.valuesBroken;ad+=r.elementsAdded;up+=r.uploaded?1:0}});
+    const now=roleP(v,c),was=roleP(b,c);
+    return `<tr><td><span class="code"><i style="background:${fc(c)}"></i>${c}</span></td><td class="num">${fmt(f)}</td><td class="num">${fmt(br)}</td><td class="num">${ad>=0?'+':'−'}${fmt(Math.abs(ad))}</td><td class="num">${was==null?'new':pct(was)} → ${pct(now)}</td><td>${up?'Yes':'<span class="status na">No upload</span>'}</td></tr>`}).join('');
+  const flips=[],moved=[];
+  for(const r of D.rules){const x=v.rules[r.id],y=b.rules[r.id];if(x.pass!==y.pass) flips.push(`<li>${x.pass?'<span class="status good">✓ Met again</span>':'<span class="status bad">✕ Now fails</span>'} ${esc(r.label)}: <span class="num">${rv(r,y.value)} → ${rv(r,x.value)}</span> <span class="note">${esc(r.limitText)}</span></li>`);else if(x.value!==y.value) moved.push(`<li>${esc(r.label)}: <span class="num">${rv(r,y.value)} → ${rv(r,x.value)}</span> ${deltaHtml(x.value-y.value,r.unit==='%'?'pt':'n',r.direction,r.unit==='%'?1:0)} <span class="note">${esc(r.limitText)}</span></li>`)}
+  const checks=D.valueChecks.map(x=>({x,a:checkP(b,x.id),c:checkP(v,x.id)})).filter(o=>o.a!=null&&Math.abs(o.c-o.a)>=1).sort((p,q)=>(p.c-p.a)-(q.c-q.a)).map(o=>`<li>${esc(o.x.label)}: <span class="num">${pct(o.a)} → ${pct(o.c)}</span> ${deltaHtml(o.c-o.a,'pt')}</li>`);
+  $('#changed').innerHTML=`<div class="panel" style="grid-column:1/-1">${msChange}<h3>Each firm since ${esc(b.label)}</h3><div class="tw" style="margin-top:8px"><table><thead><tr><th>Firm</th><th class="num">Values filled</th><th class="num">Values broken</th><th class="num">Elements</th><th class="num">Own compliance</th><th>Uploaded</th></tr></thead><tbody>${firm}</tbody></table></div></div>
+   <div class="panel"><h3>Model rules</h3>${flips.length||moved.length?`<ul>${flips.join('')}${moved.join('')}</ul>`:'<p class="note">No change.</p>'}</div>
+   <div class="panel"><h3>Required values that moved by 1 point or more</h3>${checks.length?`<ul>${checks.join('')}</ul>`:'<p class="note">No change of 1 point or more.</p>'}</div>`;
+}
+
+/* ---------- matrix ---------- */
+function matrix(){
+  const rows=[];
+  rows.push({grp:'All required values'});
+  rows.push({id:'all',label:'Overall compliance',lim:'target of the milestone',get:overall,unit:'%',dir:'higherIsBetter',pass:v=>overall(v)>=msOf(v).targetPercent});
+  for(const g of D.plan.goals){
+    rows.push({grp:g.name});
+    for(const x of D.valueChecks.filter(x=>x.goal===g.id)) rows.push({label:x.label,lim:'target of the milestone',get:v=>checkP(v,x.id),unit:'%',dir:'higherIsBetter',pass:v=>checkP(v,x.id)>=msOf(v).targetPercent});
+    for(const r of D.rules.filter(r=>r.goal===g.id)) rows.push({label:r.label,lim:r.limitText,get:v=>checked(v)?v.rules[r.id].value:null,unit:r.unit,dir:r.direction,pass:v=>v.rules[r.id].pass,rule:true});
+  }
+  const cell=(row,v,i)=>{if(!checked(v)) return `<td class="nc ${i===sel?'on':''}" title="${esc(v.reason||'')}">not checked</td>`;
+    const val=row.get(v);if(val==null) return `<td class="nc ${i===sel?'on':''}">–</td>`;
+    const pi=prevChecked(i),pv=pi>=0?row.get(V[pi]):null,d=pv==null?0:(row.unit==='%'?Math.round((val-pv)*10)/10:val-pv);
+    const ar=d?`<span class="ar ${better(row.dir,d)}" aria-label="${d>0?'up':'down'}, ${better(row.dir,d)}">${arrow(d)}</span>`:'';
+    return `<td class="v ${row.pass(v)?'met':'fail'} ${i===sel?'on':i===cmp?'base':''}" data-i="${i}"><span class="dt" aria-hidden="true"></span>${row.unit==='%'?val.toFixed(1)+' %':fmt(val)}${ar}<span class="sr">${row.pass(v)?'met':'failed'}</span></td>`};
+  const head=`<tr><th class="rh">Check <span style="text-transform:none">(limit)</span></th>${V.map((v,i)=>`<th class="vc ${i===sel?'on':i===cmp?'base':''}" data-i="${i}">${esc(v.label.replace('Version ','V'))}<small>${dShort(dayOf(v))}</small></th>`).join('')}<th>Trend</th><th class="num">Since ${esc(V[0].label)}</th></tr>`;
+  const body=rows.map(r=>{if(r.grp) return `<tr class="grp"><td class="rh" style="background:var(--sunk)">${esc(r.grp)}</td><td colspan="${V.length+2}" style="background:var(--sunk)"></td></tr>`;
+    const vals=V.filter(checked).map(r.get).filter(x=>x!=null),first=vals[0],last=r.get(V[sel]);
+    const ch=first==null||last==null?null:last-first;
+    return `<tr><td class="rh">${esc(r.label)}<small>${esc(r.lim)}</small></td>${V.map((v,i)=>cell(r,v,i)).join('')}<td class="tr">${spark(vals)}</td><td class="num">${deltaHtml(ch,r.unit==='%'?'pt':'n',r.dir,r.unit==='%'?1:0)}</td></tr>`}).join('');
+  const el=$('#matrix'),keep=el.scrollLeft;
+  el.innerHTML=`<table><thead>${head}</thead><tbody>${body}</tbody></table>`;
+  el.querySelectorAll('[data-i]').forEach(c=>c.onclick=()=>select(+c.dataset.i,true));
+  if(!el.dataset.init){el.dataset.init=1;el.scrollLeft=el.scrollWidth}else el.scrollLeft=keep;
+}
+function spark(vals){if(vals.length<2) return '';const w=90,h=22,mn=Math.min(...vals),mx=Math.max(...vals),r=mx-mn||1;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline fill="none" stroke="var(--accent)" stroke-width="1.5" points="${vals.map((v,i)=>`${(i*(w-2)/(vals.length-1)+1).toFixed(1)},${(h-2-(v-mn)/r*(h-4)).toFixed(1)}`).join(' ')}"/></svg>`}
+})();
+</script>
+</html>
