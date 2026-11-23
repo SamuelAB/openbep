@@ -28,5 +28,7 @@ jobs:
         run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
       - name: Open every page and list what it shows
         run: node translations/tools/crawl_app.js
+      - name: Requirement file gives the Builder's own check result
+        run: node translations/tools/reqfile_parity.js && node translations/tools/reqfile_parity.js --no-function-column
       - name: Dictionary, glossary and coverage
         run: python3 translations/check_i18n.py --app --strict

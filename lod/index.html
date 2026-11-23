@@ -213,7 +213,8 @@ function list(){const q=st.q.toLowerCase();
     return `${h?`<div class="g">${Array.isArray(h)?`<span data-notr>${esc(h[0])}</span> <span>${esc(h[1])}</span>`:esc(h)}</div>`:''}<ul>${els.map(c=>`<li><button type="button" data-el="${c.id}" aria-current="${c.id===st.el}">${code(c)?`<span class="mono tag" data-notr>${esc(code(c))}</span> `:''}${esc(c.n)}</button></li>`).join('')}</ul>`}).join('')||'<p class="note">No element type matches.</p>'}
 
 const useOk=u=>!st.uses.size||u.some(x=>st.uses.has(x));
-const tags=u=>`<span class="tags">${u.map(x=>`<span class="${st.uses.has(x)?'hit':''}">${esc(D.uses[x]||x)}</span>`).join('')}</span>`;
+// A requirement no BIM use asks is optional: the owner switches it on in the BEP Builder.
+const tags=u=>!u.length?'<span class="tags"><span>Optional: asked only when the owner switches it on.</span></span>':`<span class="tags">${u.map(x=>`<span class="${st.uses.has(x)?'hit':''}">${esc(D.uses[x]||x)}</span>`).join('')}</span>`;
 // LOD 500 is lean: only what operations need stays (see the caveat above and spec.json lean500).
 const L5=D.lean500||{keep:[],dropKinds:[]};
 const g500=x=>x.f==='500'||!(L5.dropKinds.includes(x.k)&&+x.f>=350);
@@ -233,19 +234,25 @@ const exOf=(r,c)=>{if(!r.p.ex) return ''; if(c.id==='light_fixture'||!['ifc_expo
   return r.id==='ifc_export_class'&&c.ifc?c.ifc.split(/[ (;,]/)[0]:''};
 function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   const gShow=(c.gx||[]).filter(x=>+x.f<=up&&useOk(x.u||[])), gHidden=(c.gx||[]).length-gShow.length;
-  const rows=c.r.filter(r=>D.P[r[0]]).map(r=>({p:D.P[r[0]],id:r[0],f:r[1],u:r[2],x:r[3]}));
+  // Rows that apply only to some elements (structural walls, concrete) sit among the element type's own rows, with their marks.
+  // A structural-walls row the element type already asks from the same level or earlier is not repeated.
+  const mkW=(o,id)=>{for(const w of Object.values(D.RW||{})) if(((w.rows||{})[o]||[]).includes(id)) return w.m; return null};
+  const own=c.r.filter(r=>D.P[r[0]]).map(r=>({p:D.P[r[0]],id:r[0],f:r[1],u:r[2],x:r[3],mk:[mkW(c.id,r[0])].filter(Boolean)}));
+  const grs=(D.RG||[]).filter(g=>g.appliesTo.includes(c.id));
+  const rows=own.concat(...grs.map(g=>g.r.filter(r=>D.P[r[0]]&&!own.some(o=>o.id===r[0]&&+o.f<=+r[1])).map(r=>({p:D.P[r[0]],id:r[0],f:r[1],u:r[2],x:r[3],mk:[g.m,mkW(g.id,r[0])].filter(Boolean),k5:r[1]==='500'||D.idp.includes(r[0])||r[2].some(u=>L5.keep.includes(u))}))));
   const rShow=rows.filter(r=>+r.f<=up&&useOk(r.u)), rHidden=rows.length-rShow.length;
   const idRows=D.idp.map(k=>rShow.find(r=>r.id===k)).filter(Boolean), other=rShow.filter(r=>!D.idp.includes(r.id)).sort((a,b)=>+a.f-+b.f||a.p.l.localeCompare(b.p.l));
   const nCol=LV.length+3;
   const gRows=KIND.map(([k,n])=>{const its=gShow.filter(x=>x.k===k).sort((a,b)=>+a.f-+b.f); if(!its.length) return '';
     return `<tr class="k"><td colspan="${LV.length+2}">${esc(n)}</td></tr>`+its.map(x=>`<tr><td class="req">${esc(x.t)}</td>${cells(x.f,g500(x))}<td>${tags(x.u||[])}</td></tr>`).join('')}).join('');
-  const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${exOf(r,c)?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(exOf(r,c))}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</td></tr>`;
+  const pRow=r=>`<tr><td class="req"><b>${esc(r.p.l)}</b>${(r.mk||[]).map(m=>` <span class="chip">${esc(m)}</span>`).join('')}${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${exOf(r,c)?`<small><span>Example:</span> ${r.p.exl?`<span>${esc(r.p.exl+' ('+r.p.ex+')')}</span>`:`<span data-notr>${esc(exOf(r,c))}${r.p.u?' '+esc(r.p.u):''}</span>`}</small>`:''}</td>${cells(r.f,r.k5??p500(c,r.id))}<td>${tags(r.u)}</td><td class="rv">${rvCell(r.p)}<small class="sc">${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</td></tr>`;
   // Phones: the same rows as cards. "From LOD 200 · kept at LOD 500" replaces the level columns.
   const lodLine=(f,k5)=>`<div class="ml"><span class="chip v${f}">${f}</span><span>${f==='500'?'Only at LOD 500':`From LOD ${f}`}</span>${f!=='500'&&up>=500?(k5?' · <span>kept at LOD 500</span>':' · <span class="dropt">left out at LOD 500</span>'):''}</div>`;
   const gCards=KIND.map(([k,n])=>{const its=gShow.filter(x=>x.k===k).sort((a,b)=>+a.f-+b.f); if(!its.length) return '';
     return `<div class="mk">${esc(n)}</div>`+its.map(x=>`<div class="mc"><div>${esc(x.t)}</div>${lodLine(x.f,g500(x))}${tags(x.u||[])}</div>`).join('')}).join('');
-  const pCard=r=>`<div class="mc"><b>${esc(r.p.l)}</b>${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${lodLine(r.f,p500(c,r.id))}<div class="mr"><span>Revit parameter:</span> ${rvCell(r.p)}<small>${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</div>${tags(r.u)}</div>`;
+  const pCard=r=>`<div class="mc"><b>${esc(r.p.l)}</b>${(r.mk||[]).map(m=>` <span class="chip">${esc(m)}</span>`).join('')}${r.p.d?`<small>${esc(r.p.d)}</small>`:''}${r.x?`<small>${esc(r.x)}</small>`:''}${lodLine(r.f,r.k5??p500(c,r.id))}<div class="mr"><span>Revit parameter:</span> ${rvCell(r.p)}<small>${r.p.sc==='type'?'Type parameter':'Instance parameter'}</small>${st.ifc?`<div class="ifc"><span class="rk ifck">IFC export</span> ${ifcCell(r.p)}</div>`:''}</div>${tags(r.u)}</div>`;
   const pCards=(idRows.length?`<div class="mk">Identification and classification</div>${idRows.map(pCard).join('')}`:'')+(other.length?`<div class="mk">Data, by the level it is first needed</div>${other.map(pCard).join('')}`:'');
+  const gSec=grs.map(g=>`<p class="note"><span class="chip">${esc(g.m)}</span> <span>${esc(g.d)}</span></p>`).join('')+Object.values(D.RW||{}).filter(w=>Object.keys(w.rows||{}).some(o=>o===c.id||grs.some(g=>g.id===o))).map(w=>`<p class="note"><span class="chip">${esc(w.m)}</span> <span>${esc(w.d)}</span></p>`).join('');
   const pRows=(idRows.length?`<tr class="k"><td colspan="${nCol}">Identification and classification</td></tr>${idRows.map(pRow).join('')}`:'')+(other.length?`<tr class="k"><td colspan="${nCol}">Data, by the level it is first needed</td></tr>${other.map(pRow).join('')}`:'');
   $('#el').innerHTML=`<h2>${esc(c.n)}</h2>
   <p class="meta"><span>Revit categories:</span> <span data-notr>${esc((c.rc||[]).join(', '))}</span></p>
@@ -263,6 +270,7 @@ function view(){const c=byId[st.el], up=+st.upto, ik=ILL.of(c.id);
   <p class="note">Plain project parameters, made without a shared parameter file, are not used: they cannot be tagged and do not keep the same identity from one project to the next.</p>
   ${pRows?`<p class="note tnote">✓ marks the level where a requirement starts; the shaded band shows it stays required at every higher level.</p>${up>=500?'<p class="note tnote">A dash (–) at LOD 500 means the requirement is left out there: it is not needed to run the asset.</p>':''}<div class="tw"><table><thead><tr><th>Parameter</th>${lvHead()}<th>Needed for</th><th>${st.ifc?'Revit parameter and IFC export':'Revit parameter'}</th></tr></thead><tbody>${pRows}</tbody></table></div><div class="mcards">${pCards}</div>`:'<p class="note">No parameter matches these filters.</p>'}
   ${rHidden?`<p class="hidden-note">${rHidden} parameters hidden by the filters.</p>`:''}
+  ${gSec}
   ${(c.nx||[]).length?`<h3>Not expected in the model</h3><ul class="nx">${c.nx.map(x=>`<li>${esc(x.t)}</li>`).join('')}</ul>`:''}
   ${(c.notes||[]).length?`<h3>Notes</h3><ul class="nx">${c.notes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
   <div class="actions"><button class="btn" type="button" id="csvEl">Download this element (CSV)</button><button class="btn" type="button" id="csvAll">Download the whole specification (CSV)</button><button class="btn" type="button" id="print">Print</button></div>`;
