@@ -96,6 +96,12 @@ LEVEL = {
 # Each milestone asks for more values per element than the one before (the LOD matrix steps up),
 # so the share filled drops the day after a milestone even though nothing was lost.
 GROWTH = {'prelim100': 1.0, 'final90': 1.18, 'ifc': 1.30, 'constr': 1.33}
+# Of the values that do not meet the plan, the share that holds something wrong (a placeholder, a value
+# outside the allowed list) rather than nothing. MECH fills many placeholders.
+WRONG = {'ARCH': .14, 'STRUCT': .08, 'MECH': .38, 'CON': .2}
+# Of the values required on elements added this week, the share that arrives filled. A firm that models
+# clean keeps this high; a firm that models first and fills later does not.
+CLEAN = {'ARCH': .82, 'STRUCT': .93, 'MECH': .44, 'CON': .66}
 # Weeks a role uploaded nothing new. The federated version keeps that role's previous model.
 NO_UPLOAD = {
     'ARCH': {'2027-04-16', '2027-04-30', '2027-05-07'},
@@ -129,12 +135,12 @@ for day in weeks:
         continue
     n += 1
     ms = next((m for m in MILESTONES if day <= D(m['date'])), MILESTONES[-1])
-    uploaded, fixed, broken, added = [], {}, {}, {}
+    uploaded, fixed, broken, added, newq, newm = [], {}, {}, {}, {}, {}
     for r in ROLES:
         c = r['code']
         if not active(c, day): continue
         if iso in NO_UPLOAD.get(c, ()) and state[c] is not None:
-            fixed[c] = broken[c] = added[c] = 0
+            fixed[c] = broken[c] = added[c] = newq[c] = newm[c] = 0
             st = state[c]
             if st['ms'] != ms['id']:   # same model, but the plan now asks for more values
                 g = GROWTH[ms['id']] / GROWTH[st['ms']]
@@ -157,7 +163,11 @@ for day in weeks:
         fixed[c] = max(0, met_new - met_old + b) if old else 0
         broken[c] = b if old else 0
         added[c] = el - old['elements'] if old else el
-        state[c] = {'elements': el, 'checks': checks, 'ms': ms['id']}
+        req_all = sum(x[0] for x in checks.values())
+        newq[c] = round(max(0, added[c]) * req_all / el) if old else 0
+        newm[c] = min(fixed[c], round(newq[c] * min(.99, CLEAN[c] + R.uniform(-.06, .06))))
+        wrong = round((req_all - met_new) * min(.95, WRONG[c] + R.uniform(-.03, .03)))
+        state[c] = {'elements': el, 'checks': checks, 'ms': ms['id'], 'wrong': wrong}
     v = {
         'order': n, 'label': f'Version {n}', 'tag': f'v{n}', 'created': iso + 'T16:00:00-05:00',
         'milestone': ms['id'], 'uploadedBy': uploaded,
@@ -168,7 +178,9 @@ for day in weeks:
     else:
         v['elementCount'] = sum(s['elements'] for s in state.values() if s)
         v['byRole'] = {c: {'elements': s['elements'], 'required': sum(x[0] for x in s['checks'].values()), 'met': sum(x[1] for x in s['checks'].values()),
-                           'uploaded': c in uploaded, 'elementsAdded': added[c], 'valuesFixed': fixed[c], 'valuesBroken': broken[c]}
+                           'wrong': s['wrong'],
+                           'uploaded': c in uploaded, 'elementsAdded': added[c], 'valuesFixed': fixed[c], 'valuesBroken': broken[c],
+                           'newRequired': newq[c], 'newMet': newm[c]}
                        for c, s in state.items() if s}
         v['valueChecks'] = {vc['id']: {c: s['checks'][vc['id']] for c, s in state.items() if s and vc['id'] in s['checks']} for vc in VALUE_CHECKS}
         rv = rule_values(day, n)
@@ -179,7 +191,7 @@ for day in weeks:
     versions.append(v)
 
 doc = {
-    'format': 'openbep-compliance-series', 'formatVersion': '0.1', 'example': True,
+    'format': 'openbep-compliance-series', 'formatVersion': '0.2', 'example': True,
     'note': 'SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.',
     'plan': {'name': 'Example: Primary school renovation and extension', 'owner': 'School service centre (example)', 'delivery': 'Design-bid-build',
              'goals': GOALS, 'milestones': MILESTONES, 'holidays': HOLIDAYS, 'roles': ROLES},

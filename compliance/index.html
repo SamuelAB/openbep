@@ -164,6 +164,26 @@ tr:last-child td{border-bottom:0}
 .chg ul{margin:6px 0 0;padding-left:18px}
 .chg li{margin:3px 0}
 .mslist{margin:8px 0 0;padding-left:22px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 22px}.mslist b{color:var(--ink);font-weight:500}
+.seg{display:inline-flex}.seg .btn{border-radius:0;margin-left:-1px}.seg .btn:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm);margin-left:0}.seg .btn:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0}
+.gate{margin-top:14px;padding:12px 16px;border:1px solid var(--line);border-left:5px solid var(--faint);border-radius:var(--r-md);background:var(--surface);display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.gate.pass{border-left-color:var(--good)}.gate.fail{border-left-color:var(--bad)}
+.gate .gt{font-size:16px;font-weight:700}
+.gate ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px}
+.gate li{display:inline-flex;gap:6px;align-items:baseline}
+.gate .ok{color:var(--good);font-weight:700}.gate .no{color:var(--bad);font-weight:700}
+.bar .w{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,var(--bad) 0 2px,transparent 2px 4px);opacity:.75}
+.chart .scope{fill:none;stroke:var(--ink);stroke-width:1.6;opacity:.75}
+tr.dim td{opacity:.45}
+@media print{
+  .top nav,.ctl,.example,details,#firmsBtn,.seg{display:none!important}
+  body{background:#fff;font-size:11px}.wrap{max-width:none;padding:0}
+  .top{background:none;color:#000}.top .home,.top h1{color:#000}
+  .panel,.tile,.gate,.tw{break-inside:avoid}
+  section{break-inside:avoid-page}
+  .mx,.tw,.stripbox{overflow:visible!important}
+  .mx table{font-size:8px}.mx th,.mx td{padding:2px 3px}.mx .rh{position:static;min-width:120px}
+  #printHead{display:block!important;font-size:12px;margin:6px 0}
+}
 .foot{margin-top:30px;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--muted)}
 .foot ul{padding-left:18px}
 .foot li{margin:4px 0}
@@ -207,18 +227,27 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
     <div class="ctl">
       <span><label for="selV">Version</label><select id="selV"></select></span>
       <span><label for="cmpV">Compare with</label><select id="cmpV"></select></span>
+      <span><label for="firmF">Firm</label><select id="firmF"></select></span>
       <label class="btn" for="fileIn" style="display:inline-flex;align-items:center;text-transform:none;letter-spacing:0;color:var(--ink);font-size:13px;margin:0">Open a series file</label><input type="file" id="fileIn" accept=".json,application/json" hidden>
       <button class="btn" type="button" id="exBtn">Load the example</button>
+      <button class="btn" type="button" id="printBtn">Print this version</button>
     </div>
   </div>
 
+  <p id="printHead" hidden></p>
   <div id="app">
+    <div id="gate"></div>
     <div class="tiles" id="tiles"></div>
+
+    <section aria-labelledby="h-gap">
+      <div class="sh"><h2 id="h-gap">Where the gap is</h2><span class="note">The largest shortfalls against the milestone target, by check and by firm. Closing these moves the overall number most.</span></div>
+      <div class="tw pace" id="gaps"></div>
+    </section>
 
     <section aria-labelledby="h-overall">
       <div class="sh"><h2 id="h-overall">Overall compliance</h2><span class="note">Share of the values the plan requires that are filled, in every element of every firm's model. The dashed line is the target of the milestone in force.</span></div>
       <div class="panel">
-        <div class="ctl" style="margin-bottom:8px"><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
+        <div class="ctl" style="margin-bottom:8px"><span role="group" aria-label="What the chart shows" class="seg"><button class="btn" type="button" id="modeP" aria-pressed="true">Percent</button><button class="btn" type="button" id="modeV" aria-pressed="false">Values: required and filled</button></span><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
         <div class="chart" id="chOverall"></div>
         <div class="legend" id="lgOverall"></div>
         <details><summary>Show the numbers as a table</summary><div class="tw" style="margin-top:8px" id="tblOverall"></div></details>
@@ -228,6 +257,7 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
     <section aria-labelledby="h-pace">
       <div class="sh"><h2 id="h-pace">Who contributes at what pace</h2><span class="note">Each firm's own elements. Pace is counted over the last four working weeks; holiday weeks are not counted.</span></div>
       <div class="tw pace" id="paceTbl"></div>
+      <div class="legend" id="lgPace"></div>
       <div class="panel" style="margin-top:12px">
         <h3>Values fixed each week, by firm</h3>
         <p class="note" style="margin:2px 0 8px">One square per week. A stronger colour means more required values filled that week. Select a square to open that version.</p>
@@ -259,10 +289,15 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
       <li><b>Model rules</b> (warnings, clashes, duplicate Mark, worksets) are pass or fail against the limit written in the plan. They are shown beside the goal they protect and are not averaged into the percentage.</li>
       <li><b>Pace</b> is the number of required values a firm filled in its last four working weeks, divided by four. Values that stopped meeting the plan (deleted, overwritten, copied with a duplicate Mark) are counted separately. A week with no upload counts as zero.</li>
       <li><b>Needed pace</b> is what the firm must fill each working week to reach the milestone target on time, assuming it adds no more elements.</li>
+      <li><b>The gate</b> at the top is one answer: would this version pass the milestone? It lists the plan's own conditions, the target and each model rule, and which ones fail.</li>
+      <li><b>Wrong or empty:</b> a required value that does not meet the plan is either empty or holds something that is not a real value (a placeholder such as "TBD", or a value outside the allowed list). The two need different fixes, so they are counted apart.</li>
+      <li><b>New elements arrive filled:</b> of the values required on elements a firm added in its last four working weeks, the share that was already filled. A firm that fills as it models stays high; a firm that models first and fills later does not, and its backlog grows.</li>
       <li><b>Holidays:</b> weeks inside the agreed holidays in the plan have no version and are left out of every count, as on the Scorecard. They never count as a slow week.</li>
       <li><b>A gap is never a zero:</b> a version that could not be checked keeps its place with the reason, and the line breaks there.</li>
       <li><b>Where the data would come from:</b> one version per week on VIM Server, each built from the Revit models the firms uploaded, checked against the requirement file the BEP Builder exports. The example file is <a href="example-school.json">example-school.json</a>, written by <span class="mono">compliance/build_example.py</span>.</li>
       <li><b>Look:</b> colours, type and sizes follow VIM's public style tokens in its open-source web viewer (<a href="https://github.com/vimaec/vim-web">vimaec/vim-web</a>, MIT licence). VIM does not publish a component library for web dashboards, so the parts here are built to match that style. The layout follows the VIM Flex model-check screen design in this repository's docs/model-check-screen. The founder of OpenBEP works at VIM.</li>
+      <li><b>What other dashboards do:</b> the second round of this page took ideas from model-checking and software-quality dashboards. The notes and sources are in <a href="https://github.com/SamuelAB/openbep/blob/main/compliance/RESEARCH.md">compliance/RESEARCH.md</a>.</li>
+      <li><b>Sharing:</b> the address of this page keeps the version and the firm you chose, so a link opens the same view. "Print this version" gives a paper or PDF copy.</li>
     </ul>
   </footer>
 </main>
@@ -283,7 +318,7 @@ const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim
 // Colours follow each role's position in the file (validated for 4); a 5th role and beyond share a neutral gray and keep their code label.
 const fc=c=>`var(--s${Math.min(5,CODES.indexOf(c)+1)})`;
 
-let D, V, ROLES, CODES, MS, sel, cmp, showFirms=false;
+let D, V, ROLES, CODES, MS, sel, cmp, showFirms=false, mode='p';
 
 // Any file in the openbep-compliance-series format works: ?data=<relative or same-site URL>, or "Open a series file".
 const APP=$('#app').innerHTML;
@@ -291,16 +326,18 @@ function load(url){fetch(url).then(r=>{if(!r.ok) throw new Error('HTTP '+r.statu
 function fail(list){$('#app').innerHTML=`<div class="err" role="alert"><b>This file cannot be shown.</b><ul>${list.slice(0,40).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${list.length>40?`<p>…and ${list.length-40} more.</p>`:''}<p>The format is described in <a href="https://github.com/SamuelAB/openbep/blob/main/compliance/FORMAT.md">compliance/FORMAT.md</a>.</p></div>`;$('#pName').textContent='No data';$('#pSub').textContent=''}
 $('#fileIn').onchange=e=>{const f=e.target.files[0];if(!f) return;f.text().then(t=>{let d;try{d=JSON.parse(t)}catch(x){return fail(['The file is not valid JSON: '+x.message])}init(d)});e.target.value=''};
 $('#exBtn').onclick=()=>{history.replaceState(null,'',location.pathname);load('example-school.json')};
+$('#fileIn').addEventListener('change',()=>history.replaceState(null,'',location.pathname));
 const q=new URLSearchParams(location.search).get('data');
 load(q&&!/^[a-z]+:/i.test(q)?q:'example-school.json');
 
 const checked=v=>v&&v.state==='checked';
-const tot=(v,f)=>Object.values(v.byRole).reduce((a,r)=>a+r[f],0);
-const overall=v=>checked(v)?100*tot(v,'met')/tot(v,'required'):null;
+let F=null; // one role code, or null for all firms
+const tot=(v,f)=>Object.entries(v.byRole).reduce((a,[c,r])=>a+(!F||c===F?(r[f]||0):0),0);
+const overall=v=>checked(v)&&tot(v,'required')?100*tot(v,'met')/tot(v,'required'):null;
 const roleP=(v,c)=>checked(v)&&v.byRole[c]?100*v.byRole[c].met/v.byRole[c].required:null;
-function goalSum(v,g,c){let q=0,m=0;for(const vc of D.valueChecks){if(vc.goal!==g)continue;const x=v.valueChecks[vc.id]||{};for(const [rc,[qq,mm]] of Object.entries(x)){if(c&&rc!==c)continue;q+=qq;m+=mm}}return [q,m]}
+function goalSum(v,g,c){let q=0,m=0;for(const vc of D.valueChecks){if(vc.goal!==g)continue;const x=v.valueChecks[vc.id]||{};for(const [rc,[qq,mm]] of Object.entries(x)){if((c||F)&&rc!==(c||F))continue;q+=qq;m+=mm}}return [q,m]}
 const goalP=(v,g,c)=>{if(!checked(v))return null;const [q,m]=goalSum(v,g,c);return q?100*m/q:null};
-function checkP(v,id){if(!checked(v))return null;let q=0,m=0;for(const [a,b] of Object.values(v.valueChecks[id]||{})){q+=a;m+=b}return q?100*m/q:null}
+function checkP(v,id){if(!checked(v))return null;let q=0,m=0;for(const [c,[a,b]] of Object.entries(v.valueChecks[id]||{})){if(F&&c!==F)continue;q+=a;m+=b}return q?100*m/q:null}
 const msOf=v=>MS.find(m=>m.id===v.milestone);
 const isHol=iso=>D.plan.holidays.some(h=>iso>=h.from&&iso<=h.to);
 const addDays=(iso,n)=>{const d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
@@ -329,6 +366,16 @@ function init(data){
   sel=V.length-1; while(sel>0&&!checked(V[sel])) sel--; cmp=prevChecked(sel);
   $('#selV').value=sel; fillCmp();
   $('#selV').onchange=e=>{select(+e.target.value)};
+  $('#firmF').innerHTML='<option value="">All firms</option>'+ROLES.map(r=>`<option value="${esc(r.code)}">${esc(r.code)} · ${esc(r.role)}</option>`).join('');
+  F=null;mode='p';
+  const u=new URLSearchParams(location.search),uv=V.findIndex(v=>String(v.order)===u.get('v')),uc=V.findIndex(v=>String(v.order)===u.get('cmp'));
+  if(uv>=0){sel=uv;cmp=uc>=0&&uc<uv&&checked(V[uc])?uc:prevChecked(uv);$('#selV').value=sel;fillCmp()}
+  if(CODES.includes(u.get('firm'))) F=u.get('firm');
+  $('#firmF').value=F||'';
+  $('#firmF').onchange=e=>{F=e.target.value||null;if(F&&showFirms) $('#firmsBtn').click();render()};
+  const setMode=m=>{mode=m;$('#modeP').setAttribute('aria-pressed',m==='p');$('#modeV').setAttribute('aria-pressed',m==='v');drawOverall()};
+  $('#modeP').onclick=()=>setMode('p');$('#modeV').onclick=()=>setMode('v');setMode('p');
+  $('#printBtn').onclick=()=>print();
   showFirms=false;$('#firmsBtn').setAttribute('aria-pressed','false');$('#firmsBtn').textContent='Show each firm';
   $('#cmpV').onchange=e=>{cmp=+e.target.value;render()};
   $('#firmsBtn').onclick=e=>{showFirms=!showFirms;e.currentTarget.setAttribute('aria-pressed',showFirms);e.currentTarget.textContent=showFirms?'Hide each firm':'Show each firm';drawOverall()};
@@ -341,13 +388,33 @@ function fillCmp(){
 }
 function select(i,focusChanged){sel=i;cmp=prevChecked(i);$('#selV').value=i;fillCmp();render();if(focusChanged){const h=$('#h-changed');h.scrollIntoView({block:'start'});h.focus({preventScroll:true})}}
 
-function render(){tiles();drawOverall();overallTable();pace();strip();goals();changed();matrix()}
+function urlState(){const u=new URLSearchParams(location.search);u.set('v',V[sel].order);if(cmp>=0&&cmp!==prevChecked(sel)) u.set('cmp',V[cmp].order);else u.delete('cmp');if(F) u.set('firm',F);else u.delete('firm');history.replaceState(null,'','?'+u);
+  $('#printHead').textContent=`${D.plan.name} · ${V[sel].label}, ${dLong(dayOf(V[sel]))}${F?' · '+F+' only':''}${D.example?' · EXAMPLE DATA, SIMULATED':''}`}
+function render(){urlState();gate();gaps();tiles();drawOverall();overallTable();pace();strip();goals();changed();matrix()}
+
+/* ---------- gate and gaps ---------- */
+function gate(){
+  const v=V[sel],m=msOf(v),o=overall(v),left=workingWeeks(dayOf(v),m.date),el=$('#gate');
+  if(o==null){el.innerHTML=`<div class="gate"><div class="gt">${esc(F)} is not on the project at ${esc(v.label)}.</div></div>`;return}
+  const conds=[{t:`${F?esc(F)+' compliance':'Overall compliance'} at least ${m.targetPercent} %`,ok:o>=m.targetPercent,val:pct(o)}];
+  for(const r of D.rules){const x=v.rules[r.id];conds.push({t:`${esc(r.label)}, ${esc(r.limitText)}`,ok:x.pass,val:rv(r,x.value)})}
+  const bad=conds.filter(c=>!c.ok).length,due=left===0;
+  const head=bad?`${due?'Does not pass':'Would not pass today'}: ${bad} of ${conds.length} conditions fail`:`${due?'Passes':'Would pass today'}: all ${conds.length} conditions met`;
+  el.innerHTML=`<div class="gate ${bad?'fail':'pass'}" role="status"><div class="gt">${bad?'✕':'✓'} ${esc(m.name)}: ${head}</div><div class="note">Due ${dLong(m.date)}${due?'':`, ${left} working week${left===1?'':'s'} from this version`}. The gate is the plan's own target and model rules, nothing added by this page.${F?' Model rules apply to the whole model, not to one firm.':''}</div><ul>${conds.map(c=>`<li><span class="${c.ok?'ok':'no'}">${c.ok?'✓':'✕'}</span><span>${c.t}: <span class="num">${c.val}</span></span></li>`).join('')}</ul></div>`;
+}
+function gaps(){
+  const v=V[sel],m=msOf(v),rows=[];
+  for(const vc of D.valueChecks) for(const [c,[q,mm]] of Object.entries(v.valueChecks[vc.id]||{})){if(F&&c!==F) continue;const shortBy=Math.ceil(m.targetPercent/100*q-mm);if(shortBy>0) rows.push({vc,c,q,mm,shortBy})}
+  rows.sort((a,b)=>b.shortBy-a.shortBy);
+  const all=rows.reduce((a,r)=>a+r.shortBy,0),top=rows.slice(0,6);
+  $('#gaps').innerHTML=top.length?`<table><thead><tr><th>Check</th><th>Firm</th><th>Goal</th><th class="num">Filled</th><th class="num">Short of the ${m.targetPercent} % target</th><th class="num">Share of the whole gap</th></tr></thead><tbody>${top.map(r=>`<tr><td><b style="font-weight:500">${esc(r.vc.label)}</b></td><td data-l="Firm"><span class="code"><i style="background:${fc(r.c)}"></i>${esc(r.c)}</span></td><td data-l="Goal">${esc((D.plan.goals.find(g=>g.id===r.vc.goal)||{}).name||'')}</td><td class="num" data-l="Filled"><span class="num">${pct(100*r.mm/r.q)}</span></td><td class="num" data-l="Short of the target"><span class="num">${fmt(r.shortBy)} values</span></td><td class="num" data-l="Share of the whole gap"><span class="num">${pct(100*r.shortBy/all,0)}</span></td></tr>`).join('')}</tbody></table>${rows.length>top.length?`<p class="note" style="padding:8px 10px;margin:0">${rows.length-top.length} smaller shortfall${rows.length-top.length===1?'':'s'} not listed.</p>`:''}`:`<p class="note" style="padding:10px;margin:0">Every check of ${F?esc(F):'every firm'} meets the ${m.targetPercent} % target at this version.</p>`;
+}
 
 /* ---------- tiles ---------- */
 function forecast(i){
   // Working weeks to the milestone in force; net pace over the last four working weeks.
   const v=V[i],m=msOf(v),left=workingWeeks(dayOf(v),m.date);
-  const j=back(i,4); if(j<0) return null;
+  const j=back(i,4); if(j<0||!tot(v,'required')||!checked(V[j])) return null;
   const net=(tot(v,'met')-tot(V[j],'met'))/Math.max(1,workingWeeks(dayOf(V[j]),dayOf(v)));
   return {m,left,net,proj:Math.min(100,100*(tot(v,'met')+net*left)/tot(v,'required'))};
 }
@@ -363,7 +430,7 @@ function tiles(){
   if(f){fc=f.left>0?`<div class="v">${pct(f.proj,0)} <small>by ${dShort(f.m.date)}</small></div><div class="d">Target ${f.m.targetPercent} % at ${esc(f.m.name)}, ${f.left} working week${f.left===1?'':'s'} away. ${f.proj>=f.m.targetPercent?'<span class="status good">✓ On pace</span>':'<span class="status bad">✕ Behind pace</span>'}</div>`
     :`<div class="v">${pct(o,0)} <small>due now</small></div><div class="d">${esc(f.m.name)} is due this week, target ${f.m.targetPercent} %. ${o>=f.m.targetPercent?'<span class="status good">✓ Target met</span>':`<span class="status bad">✕ ${fmt(Math.ceil(f.m.targetPercent/100*tot(v,'required')-tot(v,'met')))} values short</span>`}</div>`}
   $('#tiles').innerHTML=`
-  <div class="tile"><span class="k">Overall compliance</span><div class="v">${pct(o)}</div><div class="d">${b?deltaHtml(o-overall(b),'pt')+` since ${esc(b.label)}`:'First version'} · target ${m.targetPercent} %</div></div>
+  <div class="tile"><span class="k">${F?esc(F)+' compliance':'Overall compliance'}</span><div class="v">${pct(o)}</div><div class="d">${b?deltaHtml(o-overall(b),'pt')+` since ${esc(b.label)}`:'First version'} · target ${m.targetPercent} %</div></div>
   <div class="tile"><span class="k">Model rules met</span><div class="v">${met} <small>of ${rules.length}</small></div><div class="d">${b?deltaHtml(met-bm,'n','higherIsBetter',0).replace(/ \+?−?(\d)/,' $1')+` since ${esc(b.label)}`:''}</div></div>
   <div class="tile"><span class="k">Forecast</span>${fc||'<div class="v">–</div><div class="d">Needs four working weeks of versions.</div>'}</div>
   <div class="tile"><span class="k">Versions</span><div class="v">${nChecked} <small>checked</small></div><div class="d">${nNot} not checked · ${hol} holiday week${hol===1?'':'s'} skipped · ${dShort(dayOf(V[0]))} to ${dShort(dayOf(V[V.length-1]))}</div></div>`;
@@ -371,15 +438,15 @@ function tiles(){
 
 /* ---------- overall chart ---------- */
 let OV=null;
-function lineChart(el,{series,height,yMin,showMs=true,tipFn,compact=false}){
-  const W=Math.max(280,el.clientWidth||600), H=height, padL=compact?30:38, padR=compact?10:(showFirms?66:16), padT=compact?8:28, padB=compact?20:26;
+function lineChart(el,{series,height,yMin,yMax=100,showMs=true,tipFn,compact=false,tick}){
+  const W=Math.max(280,el.clientWidth||600), H=height, padL=compact?30:(tick?52:38), padR=compact?10:(showFirms?66:16), padT=compact?8:28, padB=compact?20:26;
   const days=V.map(dayOf), t0=+new Date(days[0]), t1=+new Date(days[days.length-1]);
   const x=iso=>padL+(W-padL-padR)*((+new Date(iso))-t0)/(t1-t0);
-  const y=p=>padT+(H-padT-padB)*(1-(p-yMin)/(100-yMin));
+  const y=p=>padT+(H-padT-padB)*(1-(p-yMin)/(yMax-yMin));
   let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="${esc(el.dataset.label||'')}"><defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="${css('--hatch')}" stroke-width="2"/></pattern></defs>`;
   s+='<g class="grid axis">';
-  const step=compact?((100-yMin)>=50?25:10):10;
-  for(let p=Math.ceil(yMin/step)*step;p<=100;p+=step) s+=`<line x1="${padL}" x2="${W-padR}" y1="${y(p)}" y2="${y(p)}"/><text x="${padL-6}" y="${y(p)+4}" text-anchor="end">${p}${compact?'':' %'}</text>`;
+  const step=tick?niceStep((yMax-yMin)/5):compact?((100-yMin)>=50?25:10):10;
+  for(let p=Math.ceil(yMin/step)*step;p<=yMax;p+=step) s+=`<line x1="${padL}" x2="${W-padR}" y1="${y(p)}" y2="${y(p)}"/><text x="${padL-6}" y="${y(p)+4}" text-anchor="end">${tick?tick(p):p+(compact?'':' %')}</text>`;
   // month ticks
   const months=[];{let d=new Date(days[0]);d.setDate(1);d.setMonth(d.getMonth()+1);while(+d<=t1){months.push(d.toISOString().slice(0,10));d.setMonth(d.getMonth()+1)}}
   const every=W<520?3:W<800?2:1;
@@ -390,7 +457,7 @@ function lineChart(el,{series,height,yMin,showMs=true,tipFn,compact=false}){
   // milestones and stepped target
   if(showMs){s+='<g class="ms">';let prev=days[0];let path='';MS.forEach((m,i)=>{const a=x(prev),b=x(m.date>days[days.length-1]?days[days.length-1]:m.date);path+=`${i?'L':'M'}${a},${y(m.targetPercent)}H${b}`;prev=m.date;
     if(!compact&&m.date<=days[days.length-1]){s+=`<line x1="${b}" x2="${b}" y1="${padT-4}" y2="${H-padB}"/><circle cx="${b}" cy="${padT-12}" r="8" style="fill:var(--surface);stroke:var(--line2)"/><text x="${b}" y="${padT-8}" text-anchor="middle" style="fill:var(--ink);font-weight:500">${i+1}</text>`}});
-    s+=`</g><path class="tgt" d="${path}"/>`}
+    s+=`</g>${tick?'':`<path class="tgt" d="${path}"/>`}`}
   // series (break at not-checked versions)
   const labels=[];
   for(const se of series){
@@ -419,20 +486,35 @@ function lineChart(el,{series,height,yMin,showMs=true,tipFn,compact=false}){
   svg.addEventListener('click',ev=>select(near(ev)));
   svg.style.cursor='pointer';
 }
+const niceStep=r=>{const e=Math.pow(10,Math.floor(Math.log10(r))),f=r/e;return (f<1.5?1:f<3.5?2:f<7.5?5:10)*e};
+const short=n=>n>=1e6?(n/1e6).toFixed(n%1e6?1:0)+' M':n>=1e3?Math.round(n/1e3)+' k':String(n);
 function tipOverall(v){
   if(!checked(v)) return `<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div>Not checked. ${esc(v.reason||'')}</div>`;
-  const m=msOf(v);let h=`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div class="r"><span><i style="background:var(--accent)"></i>All firms</span><b class="num">${pct(overall(v))}</b></div>`;
+  if(overall(v)==null) return `<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div>${esc(F)} is not on the project yet.</div>`;
+  const m=msOf(v);let h=`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div class="r"><span><i style="background:var(--accent)"></i>${esc(F||'All firms')}</span><b class="num">${pct(overall(v))}</b></div>`;
   if(showFirms) for(const c of CODES) if(v.byRole[c]) h+=`<div class="r"><span><i style="background:${fc(c)}"></i>${c}</span><span class="num">${pct(roleP(v,c))}</span></div>`;
   return h+`<div class="r" style="color:var(--muted)"><span>Target, ${esc(m.name.split(',')[0])}</span><span class="num">${m.targetPercent} %</span></div>`;
 }
 function drawOverall(){
-  const el=$('#chOverall');el.dataset.label='Overall compliance by version, with the milestone targets';
+  $('#firmsBtn').hidden=!!F||mode==='v';
+  const el=$('#chOverall'),who=F?F:'All firms',h=el.clientWidth<520?240:300;
+  if(mode==='v'){
+    el.dataset.label='Required values and filled values by version';
+    const req=v=>checked(v)&&tot(v,'required')?tot(v,'required'):null,met=v=>req(v)==null?null:tot(v,'met'),tg=v=>req(v)==null?null:req(v)*msOf(v).targetPercent/100;
+    const mx=Math.max(...V.map(req).filter(x=>x!=null)),st=niceStep(mx/5);
+    lineChart(el,{series:[{cls:'main',get:met,area:true},{cls:'scope',color:css('--ink'),get:req},{cls:'tgt',color:css('--ink'),get:tg}],height:h,yMin:0,yMax:Math.ceil(mx/st)*st,tick:short,
+      tipFn:v=>checked(v)&&req(v)!=null?`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div class="r"><span>Required by the plan</span><b class="num">${fmt(req(v))}</b></div><div class="r"><span><i style="background:var(--accent)"></i>Filled</span><b class="num">${fmt(met(v))}</b></div><div class="r" style="color:var(--muted)"><span>Target (${msOf(v).targetPercent} %)</span><span class="num">${fmt(tg(v))}</span></div><div class="r"><span>Still to fill for the target</span><span class="num">${fmt(Math.max(0,Math.ceil(tg(v)-met(v))))}</span></div>`:`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div>${checked(v)?'Not on the project yet':'Not checked. '+esc(v.reason||'')}</div>`});
+    $('#lgOverall').innerHTML=`<span><i class="sw" style="border-top-color:var(--ink);border-top-width:1.6px"></i>Required by the plan (grows as firms model more and as milestones ask for more)</span><span><i class="sw"></i>Filled, ${esc(who)}</span><span><i class="sw t"></i>Target in values</span><span><i class="sw h"></i>Agreed holiday, not counted</span><span><i class="sw g"></i>Version not checked</span></div>${msList()}<div>`;
+    return;
+  }
+  el.dataset.label='Overall compliance by version, with the milestone targets';
   const series=[{cls:'main',get:overall,area:!showFirms,label:showFirms?'All':''}];
   if(showFirms) for(const c of CODES) series.push({cls:'firm',color:css('--s'+Math.min(5,CODES.indexOf(c)+1)),get:v=>roleP(v,c),label:c});
-  const lo=Math.min(...V.filter(checked).flatMap(v=>[overall(v),...(showFirms?CODES.map(c=>roleP(v,c)).filter(x=>x!=null):[])]),...MS.map(m=>m.targetPercent));
-  lineChart(el,{series,height:el.clientWidth<520?240:300,yMin:Math.max(0,Math.floor((lo-5)/10)*10),tipFn:tipOverall});
-  $('#lgOverall').innerHTML=`<span><i class="sw"></i>All firms</span>${showFirms?CODES.map(c=>`<span><i class="sq" style="background:${fc(c)}"></i>${c} · ${esc(ROLES.find(r=>r.code===c).role)}</span>`).join(''):''}<span><i class="sw t"></i>Milestone target</span><span><i class="sw h"></i>Agreed holiday, not counted</span><span><i class="sw g"></i>Version not checked</span></div><ol class="mslist">${MS.map(m=>`<li><b>${esc(m.name)}</b> · ${dShort(m.date)} · target ${m.targetPercent} %</li>`).join('')}</ol><div>`;
+  const lo=Math.min(...V.filter(checked).flatMap(v=>[overall(v),...(showFirms?CODES.map(c=>roleP(v,c)):[])]).filter(x=>x!=null),...MS.map(m=>m.targetPercent));
+  lineChart(el,{series,height:h,yMin:Math.max(0,Math.floor((lo-5)/10)*10),tipFn:tipOverall});
+  $('#lgOverall').innerHTML=`<span><i class="sw"></i>${esc(who)}</span>${showFirms?CODES.map(c=>`<span><i class="sq" style="background:${fc(c)}"></i>${c} · ${esc(ROLES.find(r=>r.code===c).role)}</span>`).join(''):''}<span><i class="sw t"></i>Milestone target</span><span><i class="sw h"></i>Agreed holiday, not counted</span><span><i class="sw g"></i>Version not checked</span></div>${msList()}<div>`;
 }
+const msList=()=>`<ol class="mslist">${MS.map(m=>`<li><b>${esc(m.name)}</b> · ${dShort(m.date)} · target ${m.targetPercent} %</li>`).join('')}</ol>`;
 function overallTable(){
   $('#tblOverall').innerHTML=`<table><thead><tr><th>Version</th><th>Date</th><th>Milestone in force</th><th class="num">All firms</th>${CODES.map(c=>`<th class="num">${c}</th>`).join('')}<th class="num">Target</th></tr></thead><tbody>${V.map(v=>`<tr><td>${esc(v.label)}</td><td>${dShort(dayOf(v))}</td><td>${esc(msOf(v).name)}</td>${checked(v)?`<td class="num">${pct(overall(v))}</td>${CODES.map(c=>`<td class="num">${v.byRole[c]?pct(roleP(v,c)):'–'}</td>`).join('')}`:`<td colspan="${CODES.length+1}">Not checked. ${esc(v.reason||'')}</td>`}<td class="num">${msOf(v).targetPercent} %</td></tr>`).join('')}</tbody></table>`;
 }
@@ -440,25 +522,30 @@ function overallTable(){
 /* ---------- pace ---------- */
 function paceOf(c,i){
   const v=V[i],r=v.byRole[c];if(!r) return null;
-  const d=dayOf(v),from=addDays(d,-4*CAD());let fixed=0,broken=0,uploads=0,weeks=0;
-  for(let w=addDays(from,CAD());w<=d;w=addDays(w,CAD())){if(isHol(w)) continue;weeks++;const x=V.find(u=>dayOf(u)===w);if(x&&checked(x)&&x.byRole[c]){fixed+=x.byRole[c].valuesFixed;broken+=x.byRole[c].valuesBroken;if(x.byRole[c].uploaded) uploads++}else if(x&&!checked(x)) uploads+=x.uploadedBy.includes(c)?1:0}
+  const d=dayOf(v),from=addDays(d,-4*CAD());let fixed=0,broken=0,uploads=0,weeks=0,nq=0,nm=0;
+  for(let w=addDays(from,CAD());w<=d;w=addDays(w,CAD())){if(isHol(w)) continue;weeks++;const x=V.find(u=>dayOf(u)===w);if(x&&checked(x)&&x.byRole[c]){fixed+=x.byRole[c].valuesFixed;broken+=x.byRole[c].valuesBroken;nq+=x.byRole[c].newRequired||0;nm+=x.byRole[c].newMet||0;if(x.byRole[c].uploaded) uploads++}else if(x&&!checked(x)) uploads+=x.uploadedBy.includes(c)?1:0}
   const m=msOf(v),left=workingWeeks(d,m.date),gap=Math.max(0,Math.ceil(m.targetPercent/100*r.required-r.met));
-  return {fixed:fixed/Math.max(1,weeks),broken:broken/Math.max(1,weeks),uploads,weeks,left,gap,need:left>0?gap/left:null,m,r};
+  return {fixed:fixed/Math.max(1,weeks),broken:broken/Math.max(1,weeks),uploads,weeks,left,gap,need:left>0?gap/left:null,m,r,clean:nq?100*nm/nq:null};
 }
 function pace(){
   const v=V[sel],b=cmp>=0?V[cmp]:null;
+  const hasWrong=Object.values(v.byRole).some(r=>r.wrong!=null),hasNew=V.some(u=>checked(u)&&Object.values(u.byRole).some(r=>r.newRequired!=null));
   const rows=ROLES.filter(r=>v.byRole[r.code]).map(ro=>{const c=ro.code,p=paceOf(c,sel),now=roleP(v,c),was=b?roleP(b,c):null,net=p.fixed-p.broken;
     let st;if(p.gap===0) st='<span class="status good">✓ Target met</span>';else if(p.left===0) st=`<span class="status bad">✕ ${fmt(p.gap)} values short at the milestone</span>`;else if(net>=p.need) st='<span class="status good">✓ On pace</span>';else if(net>=p.need*.75) st='<span class="status warn">! Slightly behind</span>';else st='<span class="status bad">✕ Behind</span>';
     const firstWeek=ro.from&&ro.from>addDays(dayOf(v),-4*CAD())?' (joined '+dShort(ro.from)+')':'';
-    return `<tr>
+    const wr=p.r.wrong!=null?100*p.r.wrong/p.r.required:0,empty=p.r.required-p.r.met-(p.r.wrong||0);
+    return `<tr${F&&F!==c?' class="dim"':''}>
       <td><div class="firm-n"><span><span class="code"><i style="background:${fc(c)}"></i>${c}</span> ${esc(ro.role)}</span><small>${esc(ro.firm)} · ${fmt(p.r.elements)} elements · ${esc(ro.document)}</small></div></td>
-      <td data-l="Compliance, own elements"><div style="display:flex;align-items:center;gap:10px"><div class="bar" style="flex:1"><b style="width:${now}%;background:${fc(c)}"></b><span class="tk" style="left:${p.m.targetPercent}%" title=""></span></div><span class="num">${pct(now)}</span></div><div style="font-size:12px">${was!=null?deltaHtml(now-was,'pt'):''}</div></td>
+      <td data-l="Compliance, own elements"><div style="display:flex;align-items:center;gap:10px"><div class="bar" style="flex:1"><b style="width:${now}%;background:${fc(c)}"></b>${wr?`<span class="w" style="left:${now}%;width:${wr}%"></span>`:''}<span class="tk" style="left:${p.m.targetPercent}%"></span></div><span class="num">${pct(now)}</span></div><div style="font-size:12px">${was!=null?deltaHtml(now-was,'pt'):''}</div></td>
+      ${hasWrong?`<td class="num" data-l="Not meeting the plan"><span class="num">${p.r.wrong!=null?fmt(p.r.wrong)+' wrong':'–'}</span><div style="font-size:12px;color:var(--muted)" class="num">${p.r.wrong!=null?fmt(empty)+' empty':''}</div></td>`:''}
       <td class="num" data-l="Values filled per week"><span class="num">${fmt(p.fixed)}</span></td>
       <td class="num" data-l="Values broken per week"><span class="num">${fmt(p.broken)}</span></td>
+      ${hasNew?`<td class="num" data-l="New elements arrive filled"><span class="num">${p.clean==null?'–':pct(p.clean,0)}</span></td>`:''}
       <td class="num" data-l="Needed per week"><span class="num">${p.need==null?(p.gap?'due now':'–'):fmt(p.need)}</span><div style="font-size:12px;color:var(--muted)">${p.gap?fmt(p.gap)+' to go':''}</div></td>
       <td data-l="Uploads, last 4 working weeks"><span class="num">${p.uploads} of ${p.weeks}</span>${firstWeek?`<div style="font-size:12px;color:var(--muted)">${esc(firstWeek.trim())}</div>`:''}</td>
       <td data-l="Pace">${st}</td></tr>`}).join('');
-  $('#paceTbl').innerHTML=`<table><thead><tr><th>Firm</th><th>Compliance, own elements <span style="text-transform:none">(| = target ${msOf(v).targetPercent} %)</span></th><th class="num">Values filled per week</th><th class="num">Values broken per week</th><th class="num">Needed per week</th><th>Uploads, last 4 working weeks</th><th>Pace</th></tr></thead><tbody>${rows}</tbody></table>`;
+  $('#paceTbl').innerHTML=`<table><thead><tr><th>Firm</th><th>Compliance, own elements <span style="text-transform:none">(| = target ${msOf(v).targetPercent} %)</span></th>${hasWrong?'<th class="num">Not meeting the plan</th>':''}<th class="num">Values filled per week</th><th class="num">Values broken per week</th>${hasNew?'<th class="num">New elements arrive filled</th>':''}<th class="num">Needed per week</th><th>Uploads, last 4 working weeks</th><th>Pace</th></tr></thead><tbody>${rows}</tbody></table>`;
+  $('#lgPace').innerHTML=`${hasWrong?'<span><i class="sq" style="background:repeating-linear-gradient(135deg,var(--bad) 0 2px,transparent 2px 4px)"></i>Wrong: a value is there but it is a placeholder or not an allowed value</span><span>Empty: nothing entered</span>':''}${hasNew?'<span>New elements arrive filled: of the values required on elements added in the last four working weeks, the share already filled</span>':''}`;
 }
 function strip(){
   const W=weeksAll(),max=Math.max(...V.filter(checked).flatMap(v=>Object.values(v.byRole).map(r=>r.valuesFixed)));
