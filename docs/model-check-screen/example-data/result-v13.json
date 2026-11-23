@@ -1,0 +1,8655 @@
+{
+ "format": "openbep-result",
+ "formatVersion": "1.1",
+ "plan": {
+  "name": "Medical tower (demo)",
+  "fingerprint": "E19A639D8017",
+  "version": null
+ },
+ "model": {
+  "fileName": "v13.vim",
+  "bimDocuments": [
+   "Demo-ARCHITECTURE",
+   "Demo-MEP",
+   "Demo-STRUCTURE",
+   "Demo-SITE"
+  ],
+  "elementCount": 84999,
+  "dateRead": "2026-11-23T19:52:38.463Z",
+  "version": {
+   "label": "Version 13",
+   "order": 13,
+   "tag": null,
+   "created": null,
+   "projectId": null,
+   "sourceId": null,
+   "vimId": null,
+   "fileName": "v13.vim"
+  }
+ },
+ "milestone": {
+  "id": "final90",
+  "name": "Final design 90%",
+  "targetPercent": 90
+ },
+ "elementTypes": [
+  {
+   "id": "light_fixture",
+   "name": "Light fixtures",
+   "n": 9187,
+   "score": 47,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 78,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 326,
+      "invalid": 1688,
+      "valid": 7173
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 47,
+     "states": {
+      "missing": 0,
+      "empty": 2855,
+      "placeholder": 326,
+      "invalid": 1688,
+      "valid": 4318
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 70,
+     "states": {
+      "missing": 0,
+      "empty": 2762,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 6425
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 35,
+     "states": {
+      "missing": 0,
+      "empty": 5985,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3202
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 9187
+     }
+    },
+    {
+     "id": "lf_cri",
+     "label": "Colour rendering index",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 9187,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "lf_colour_temperature",
+     "label": "Colour temperature (CCT)",
+     "present": 96,
+     "ok": 0,
+     "states": {
+      "missing": 395,
+      "empty": 8792,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 72,
+     "states": {
+      "missing": 0,
+      "empty": 2467,
+      "placeholder": 86,
+      "invalid": 0,
+      "valid": 6634
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 69,
+     "states": {
+      "missing": 0,
+      "empty": 2751,
+      "placeholder": 97,
+      "invalid": 0,
+      "valid": 6339
+     }
+    },
+    {
+     "id": "lf_mounting_type",
+     "label": "Mounting type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 9187,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "lf_photometric_file",
+     "label": "Photometric file (IES / LDT)",
+     "present": 95,
+     "ok": 93,
+     "states": {
+      "missing": 500,
+      "empty": 112,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 8575
+     }
+    },
+    {
+     "id": "lf_placing_type",
+     "label": "Placing (ceiling / wall / floor ...)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 9187,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "door",
+   "name": "Doors",
+   "n": 1003,
+   "score": 49,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 2,
+      "valid": 1001
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1003
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1003
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 993,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 10
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 82,
+     "states": {
+      "missing": 0,
+      "empty": 178,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 825
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1003
+     }
+    },
+    {
+     "id": "door_width",
+     "label": "Leaf / nominal width",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 1,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1002
+     }
+    },
+    {
+     "id": "door_height",
+     "label": "Nominal height",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1003
+     }
+    },
+    {
+     "id": "door_frame_material",
+     "label": "Frame material",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "door_hardware_set",
+     "label": "Hardware set",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1002,
+      "empty": 0,
+      "placeholder": 1,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "door_leaf_material",
+     "label": "Leaf material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1003,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "door_operation",
+     "label": "Operation type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1003,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "stc",
+     "label": "Sound transmission class (STC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1003,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "owner:VIM_WorkPackage",
+     "label": "VIM_WorkPackage",
+     "present": 85,
+     "ok": 8,
+     "states": {
+      "missing": 150,
+      "empty": 775,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 78
+     }
+    }
+   ]
+  },
+  {
+   "id": "wall_interior",
+   "name": "Interior walls / partitions",
+   "n": 4227,
+   "score": 60,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4227
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 88,
+     "states": {
+      "missing": 0,
+      "empty": 515,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3712
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 79,
+     "states": {
+      "missing": 0,
+      "empty": 885,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3342
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 10,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4217
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4227
+     }
+    },
+    {
+     "id": "wall_net_side_area",
+     "label": "Net side area",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 4,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4223
+     }
+    },
+    {
+     "id": "wall_thickness",
+     "label": "Overall thickness",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4227
+     }
+    },
+    {
+     "id": "astc",
+     "label": "Apparent sound transmission class (ASTC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4227,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "wall_extend_to_structure",
+     "label": "Extends to structure",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4227,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "fire_resistance_min",
+     "label": "Fire-resistance rating (min)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4227,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "load_bearing",
+     "label": "Load bearing",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4227
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 17,
+      "invalid": 0,
+      "valid": 4210
+     }
+    },
+    {
+     "id": "stc",
+     "label": "Sound transmission class (STC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4227,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "structural_walls:col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 354,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     },
+     "group": "structural_walls",
+     "requirement": "col_exposure_class",
+     "of": 354
+    },
+    {
+     "id": "structural_walls:col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 354,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     },
+     "group": "structural_walls",
+     "requirement": "col_rebar_ratio",
+     "of": 354
+    },
+    {
+     "id": "structural_walls:col_volume",
+     "label": "Net volume",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 435
+     },
+     "group": "structural_walls",
+     "requirement": "col_volume",
+     "of": 435
+    }
+   ]
+  },
+  {
+   "id": "wall_exterior",
+   "name": "Exterior walls",
+   "n": 239,
+   "score": 83,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 239
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 64,
+     "states": {
+      "missing": 0,
+      "empty": 86,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 153
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 56,
+     "states": {
+      "missing": 0,
+      "empty": 105,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 134
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 239
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 239
+     }
+    },
+    {
+     "id": "wall_net_side_area",
+     "label": "Net side area",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 1,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 238
+     }
+    },
+    {
+     "id": "wall_thickness",
+     "label": "Overall thickness",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 239
+     }
+    },
+    {
+     "id": "fire_resistance_min",
+     "label": "Fire-resistance rating (min)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 239,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "load_bearing",
+     "label": "Load bearing",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 239
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 95,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 11,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "structural_walls:col_volume",
+     "label": "Net volume",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 72
+     },
+     "group": "structural_walls",
+     "requirement": "col_volume",
+     "of": 72
+    }
+   ]
+  },
+  {
+   "id": "air_terminal",
+   "name": "Air terminals (diffusers, grilles, registers)",
+   "n": 319,
+   "score": 27,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 87,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 43,
+      "invalid": 0,
+      "valid": 276
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 319,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 34,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 212,
+      "valid": 107
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 319,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 319
+     }
+    },
+    {
+     "id": "at_airflow_type",
+     "label": "Air flow type",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 319
+     }
+    },
+    {
+     "id": "at_face_type",
+     "label": "Face type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 319,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "at_finish_color",
+     "label": "Finish colour",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 319,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 34,
+     "states": {
+      "missing": 0,
+      "empty": 212,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 107
+     }
+    },
+    {
+     "id": "at_mounting_type",
+     "label": "Mounting type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 319,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "at_noise_criterion",
+     "label": "Noise criterion (NC) at design flow",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 319,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "at_shape",
+     "label": "Shape",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 319,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "at_throw",
+     "label": "Throw length",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 319,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "ahu",
+   "name": "Mechanical equipment - air handling unit",
+   "n": 1007,
+   "score": 35,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "ahu_supply_airflow",
+     "label": "Design supply airflow",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_construction",
+     "label": "Construction (factory / site-built)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_fan_arrangement",
+     "label": "Fan arrangement",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_fan_power",
+     "label": "Fan motor power",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_filter_rating",
+     "label": "Filter rating (MERV)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    }
+   ]
+  },
+  {
+   "id": "structural_column",
+   "name": "Structural columns",
+   "n": 720,
+   "score": 50,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 720
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 720,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 720,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 2,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 718
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 720
+     }
+    },
+    {
+     "id": "col_length",
+     "label": "Length",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 720,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 2,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 718
+     }
+    },
+    {
+     "id": "col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 558,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 2,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 718
+     }
+    },
+    {
+     "id": "col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 558,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "plumbing_fixture",
+   "name": "Plumbing fixtures",
+   "n": 1644,
+   "score": 43,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1644
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 15,
+     "states": {
+      "missing": 0,
+      "empty": 1405,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 239
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 71,
+     "states": {
+      "missing": 0,
+      "empty": 472,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1172
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 29,
+     "states": {
+      "missing": 0,
+      "empty": 1174,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 470
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1644
+     }
+    },
+    {
+     "id": "pf_color",
+     "label": "Colour",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1644,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 74,
+     "states": {
+      "missing": 0,
+      "empty": 429,
+      "placeholder": 1,
+      "invalid": 0,
+      "valid": 1214
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 59,
+     "states": {
+      "missing": 0,
+      "empty": 525,
+      "placeholder": 146,
+      "invalid": 0,
+      "valid": 973
+     }
+    },
+    {
+     "id": "pf_mounting",
+     "label": "Mounting",
+     "present": 8,
+     "ok": 8,
+     "states": {
+      "missing": 1516,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 128
+     }
+    },
+    {
+     "id": "pf_nominal_length",
+     "label": "Nominal length",
+     "present": 6,
+     "ok": 6,
+     "states": {
+      "missing": 1546,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 98
+     }
+    },
+    {
+     "id": "pf_nominal_width",
+     "label": "Nominal width",
+     "present": 6,
+     "ok": 6,
+     "states": {
+      "missing": 1546,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 98
+     }
+    }
+   ]
+  },
+  {
+   "id": "footing",
+   "name": "Foundations - footings and pile caps",
+   "n": 223,
+   "score": 44,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 77,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 51,
+      "invalid": 0,
+      "valid": 172
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 223,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 223,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 27,
+     "states": {
+      "missing": 0,
+      "empty": 162,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 61
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 13,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 210
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 223
+     }
+    },
+    {
+     "id": "ftg_length",
+     "label": "Length",
+     "present": 99,
+     "ok": 99,
+     "states": {
+      "missing": 3,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 99,
+     "ok": 99,
+     "states": {
+      "missing": 3,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    },
+    {
+     "id": "col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ftg_depth",
+     "label": "Thickness",
+     "present": 23,
+     "ok": 23,
+     "states": {
+      "missing": 172,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 51
+     }
+    },
+    {
+     "id": "ftg_width",
+     "label": "Width",
+     "present": 99,
+     "ok": 99,
+     "states": {
+      "missing": 3,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    },
+    {
+     "id": "ftg_bottom_elev",
+     "label": "Bottom elevation",
+     "present": 100,
+     "ok": 99,
+     "states": {
+      "missing": 0,
+      "empty": 3,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    },
+    {
+     "id": "col_cover",
+     "label": "Concrete cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ftg_bearing_capacity",
+     "label": "Design bearing resistance",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ftg_frost_cover",
+     "label": "Frost protection depth",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 23,
+     "ok": 23,
+     "states": {
+      "missing": 172,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 51
+     }
+    }
+   ]
+  },
+  {
+   "id": "pile",
+   "name": "Foundations - piles and caissons",
+   "n": 223,
+   "score": 52,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 77,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 51,
+      "invalid": 0,
+      "valid": 172
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 223,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 223,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 27,
+     "states": {
+      "missing": 0,
+      "empty": 162,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 61
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 13,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 210
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 223
+     }
+    },
+    {
+     "id": "pile_size",
+     "label": "Diameter / section",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 99,
+     "ok": 99,
+     "states": {
+      "missing": 3,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    },
+    {
+     "id": "pile_cutoff_elev",
+     "label": "Cut-off elevation",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 223
+     }
+    },
+    {
+     "id": "pile_capacity",
+     "label": "Design axial resistance",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 223,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 23,
+     "ok": 23,
+     "states": {
+      "missing": 172,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 51
+     }
+    },
+    {
+     "id": "pile_tip_elev",
+     "label": "Toe elevation",
+     "present": 100,
+     "ok": 99,
+     "states": {
+      "missing": 0,
+      "empty": 3,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    }
+   ]
+  },
+  {
+   "id": "retaining_wall",
+   "name": "Foundation and retaining walls",
+   "n": 121,
+   "score": 47,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 121,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 121,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 121,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 52,
+     "states": {
+      "missing": 0,
+      "empty": 58,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 63
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    },
+    {
+     "id": "rw_length",
+     "label": "Length",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    },
+    {
+     "id": "col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 121,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "rw_height",
+     "label": "Retained height",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    },
+    {
+     "id": "rw_system",
+     "label": "Wall system",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 121,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_cover",
+     "label": "Concrete cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 121,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 121,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "rw_drainage",
+     "label": "Drainage provisions",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 121,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    },
+    {
+     "id": "wall_thickness",
+     "label": "Overall thickness",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 121
+     }
+    }
+   ]
+  },
+  {
+   "id": "slab",
+   "name": "Floors and structural slabs",
+   "n": 827,
+   "score": 41,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 51,
+      "invalid": 0,
+      "valid": 776
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 51,
+     "states": {
+      "missing": 0,
+      "empty": 406,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 421
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 19,
+     "states": {
+      "missing": 0,
+      "empty": 674,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 153
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 47,
+     "states": {
+      "missing": 0,
+      "empty": 437,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 390
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 827
+     }
+    },
+    {
+     "id": "slab_area",
+     "label": "Net area",
+     "present": 90,
+     "ok": 90,
+     "states": {
+      "missing": 80,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 747
+     }
+    },
+    {
+     "id": "slab_thickness",
+     "label": "Overall thickness",
+     "present": 79,
+     "ok": 79,
+     "states": {
+      "missing": 172,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 655
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 3,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 824
+     }
+    },
+    {
+     "id": "col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 350,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "astc",
+     "label": "Apparent sound transmission class (ASTC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_cover",
+     "label": "Concrete cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 350,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 350,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "slab_live_load",
+     "label": "Design live load",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "iic",
+     "label": "Impact insulation class (IIC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 79,
+     "ok": 79,
+     "states": {
+      "missing": 172,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 655
+     }
+    },
+    {
+     "id": "stc",
+     "label": "Sound transmission class (STC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "roof",
+   "name": "Roofs",
+   "n": 28,
+   "score": 58,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 28
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 93,
+     "states": {
+      "missing": 0,
+      "empty": 2,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 26
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 28,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 28,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 28
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 93,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 2,
+      "invalid": 0,
+      "valid": 26
+     }
+    },
+    {
+     "id": "roof_area",
+     "label": "Roof area",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 28
+     }
+    },
+    {
+     "id": "roof_membrane",
+     "label": "Roofing membrane system",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 28,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "roof_slope",
+     "label": "Slope",
+     "present": 100,
+     "ok": 93,
+     "states": {
+      "missing": 0,
+      "empty": 2,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 26
+     }
+    },
+    {
+     "id": "roof_sri",
+     "label": "Solar reflectance index (SRI)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 28,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "beam",
+   "name": "Beams and girders (building)",
+   "n": 3588,
+   "score": 45,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3588
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3588,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3588,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 211,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3377
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3588
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3588
+     }
+    },
+    {
+     "id": "stl_coating",
+     "label": "Coating / corrosion protection",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mem_delegated_design",
+     "label": "Delegated (supplier) design",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "stl_fire_protection",
+     "label": "Fire protection",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 5,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3583
+     }
+    },
+    {
+     "id": "bm_span",
+     "label": "Span",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "structural_member",
+   "name": "Bracing, joists, trusses and secondary framing",
+   "n": 3588,
+   "score": 49,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3588
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3588,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3588,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 211,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3377
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3588
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3588
+     }
+    },
+    {
+     "id": "stl_coating",
+     "label": "Coating / corrosion protection",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mem_delegated_design",
+     "label": "Delegated (supplier) design",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "curtain_wall",
+   "name": "Curtain walls and storefronts",
+   "n": 66,
+   "score": 30,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 66
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 66,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 2,
+     "states": {
+      "missing": 0,
+      "empty": 65,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 91,
+     "states": {
+      "missing": 0,
+      "empty": 6,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 60
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 66
+     }
+    },
+    {
+     "id": "cw_area",
+     "label": "Curtain wall area",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 66
+     }
+    },
+    {
+     "id": "glz_bird_friendly",
+     "label": "Bird-friendly glazing",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "cw_system",
+     "label": "Curtain wall system",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "fire_resistance_min",
+     "label": "Fire-resistance rating (min)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "glz_makeup",
+     "label": "Glazing make-up",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "glz_performance",
+     "label": "Performance class (NAFS)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "stc",
+     "label": "Sound transmission class (STC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "glz_vlt",
+     "label": "Visible light transmittance",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 66,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "window",
+   "name": "Windows and skylights",
+   "n": 14,
+   "score": 50,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 14,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "win_height",
+     "label": "Height",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "win_width",
+     "label": "Width",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "glz_bird_friendly",
+     "label": "Bird-friendly glazing",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "win_frame_material",
+     "label": "Frame material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "glz_makeup",
+     "label": "Glazing make-up",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "win_operation",
+     "label": "Operation / partitioning",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "glz_performance",
+     "label": "Performance class (NAFS)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "win_sill_height",
+     "label": "Sill height",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14
+     }
+    },
+    {
+     "id": "stc",
+     "label": "Sound transmission class (STC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "glz_vlt",
+     "label": "Visible light transmittance",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "ceiling",
+   "name": "Ceilings",
+   "n": 952,
+   "score": 64,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 952
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 2,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 950
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 2,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 950
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 99,
+     "states": {
+      "missing": 0,
+      "empty": 6,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 946
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 952
+     }
+    },
+    {
+     "id": "clg_area",
+     "label": "Ceiling area",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 952
+     }
+    },
+    {
+     "id": "clg_height",
+     "label": "Ceiling height",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 952
+     }
+    },
+    {
+     "id": "clg_accessible",
+     "label": "Accessible (demountable) ceiling",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 952,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "clg_system",
+     "label": "Ceiling system",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 952,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "clg_finish",
+     "label": "Finish",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 952,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "clg_nrc",
+     "label": "Sound absorption (NRC)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 952,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "stair",
+   "name": "Stairs",
+   "n": 115,
+   "score": 32,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 115
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 115,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 115,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 115,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 17,
+     "states": {
+      "missing": 0,
+      "empty": 96,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 19
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 115
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 7,
+     "ok": 7,
+     "states": {
+      "missing": 107,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 8
+     }
+    }
+   ]
+  },
+  {
+   "id": "ramp",
+   "name": "Ramps",
+   "n": 1,
+   "score": 57,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "rmp_slope",
+     "label": "Slope",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "railing",
+   "name": "Railings, guards and handrails",
+   "n": 127,
+   "score": 49,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 127
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 127,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 127,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 8,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 119
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 127
+     }
+    },
+    {
+     "id": "rlg_height",
+     "label": "Guard / railing height",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 127
+     }
+    },
+    {
+     "id": "rlg_length",
+     "label": "Length",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 127
+     }
+    },
+    {
+     "id": "rlg_design_load",
+     "label": "Design load",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 127,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "rlg_infill",
+     "label": "Infill type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 127,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 127,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "furniture_casework",
+   "name": "Furniture and casework",
+   "n": 9937,
+   "score": 50,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 9937
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 9937
+     }
+    },
+    {
+     "id": "fur_dimensions",
+     "label": "Nominal dimensions",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 9937,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ffe_responsibility",
+     "label": "Supply / install responsibility",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 9937,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "specialty_equipment",
+   "name": "Specialty and owner equipment",
+   "n": 2215,
+   "score": 67,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2215
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2215
+     }
+    },
+    {
+     "id": "ffe_responsibility",
+     "label": "Supply / install responsibility",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "elevator",
+   "name": "Elevators, escalators and moving walks",
+   "n": 2215,
+   "score": 23,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2215
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 5,
+     "states": {
+      "missing": 0,
+      "empty": 2096,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 119
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 2210,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 5
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 12,
+     "states": {
+      "missing": 0,
+      "empty": 1941,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 274
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 35,
+     "states": {
+      "missing": 0,
+      "empty": 1434,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 781
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2215
+     }
+    },
+    {
+     "id": "elv_load",
+     "label": "Rated load",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "elv_car_size",
+     "label": "Car inside dimensions",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "elv_drive",
+     "label": "Drive type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 36,
+     "states": {
+      "missing": 0,
+      "empty": 1410,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 805
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 28,
+     "states": {
+      "missing": 0,
+      "empty": 1596,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 619
+     }
+    },
+    {
+     "id": "elv_people",
+     "label": "Rated passengers",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "elv_speed",
+     "label": "Rated speed",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "elv_stops",
+     "label": "Stops / openings",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "duct",
+   "name": "Ducts and duct fittings",
+   "n": 1751,
+   "score": 49,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 83,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 290,
+      "invalid": 0,
+      "valid": 1461
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1751,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1751
+     }
+    },
+    {
+     "id": "dct_shape",
+     "label": "Cross-section shape",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1751,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "dct_size",
+     "label": "Size",
+     "present": 99,
+     "ok": 99,
+     "states": {
+      "missing": 14,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1737
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 1,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1750
+     }
+    },
+    {
+     "id": "mep_length",
+     "label": "Length",
+     "present": 56,
+     "ok": 56,
+     "states": {
+      "missing": 765,
+      "empty": 0,
+      "placeholder": 1,
+      "invalid": 0,
+      "valid": 985
+     }
+    },
+    {
+     "id": "dct_surface_area",
+     "label": "Outer surface area",
+     "present": 54,
+     "ok": 54,
+     "states": {
+      "missing": 800,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 951
+     }
+    },
+    {
+     "id": "dct_pressure_class",
+     "label": "Pressure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1751,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1751,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "pipe",
+   "name": "Pipes and pipe fittings",
+   "n": 14413,
+   "score": 32,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 54,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 6609,
+      "invalid": 0,
+      "valid": 7804
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 14353,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 60
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14413
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 98,
+     "states": {
+      "missing": 0,
+      "empty": 225,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 14188
+     }
+    },
+    {
+     "id": "pp_fluid",
+     "label": "Fluid / service",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14413,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pp_invert",
+     "label": "Invert elevation",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14413,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pp_joint",
+     "label": "Joint type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14413,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mep_length",
+     "label": "Length",
+     "present": 59,
+     "ok": 59,
+     "states": {
+      "missing": 5854,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 8559
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14345,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 68
+     }
+    },
+    {
+     "id": "pp_slope",
+     "label": "Slope",
+     "present": 53,
+     "ok": 37,
+     "states": {
+      "missing": 6774,
+      "empty": 2288,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 5351
+     }
+    },
+    {
+     "id": "pp_pressure",
+     "label": "Working pressure rating",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 14413,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "valve",
+   "name": "Valves and pipe accessories",
+   "n": 341,
+   "score": 40,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 39,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 207,
+      "invalid": 0,
+      "valid": 134
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 338,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 20,
+     "states": {
+      "missing": 0,
+      "empty": 273,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 68
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 6,
+     "states": {
+      "missing": 0,
+      "empty": 319,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 22
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 341
+     }
+    },
+    {
+     "id": "vlv_size",
+     "label": "Size",
+     "present": 100,
+     "ok": 98,
+     "states": {
+      "missing": 0,
+      "empty": 8,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 333
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 97,
+     "states": {
+      "missing": 0,
+      "empty": 9,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 332
+     }
+    },
+    {
+     "id": "vlv_mechanism",
+     "label": "Valve mechanism",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 341,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "vlv_pressure",
+     "label": "Working / test pressure",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 341,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "pump",
+   "name": "Pumps",
+   "n": 1007,
+   "score": 34,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "pmp_flow",
+     "label": "Design flow",
+     "present": 6,
+     "ok": 6,
+     "states": {
+      "missing": 951,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 56
+     }
+    },
+    {
+     "id": "pmp_head",
+     "label": "Design head",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pmp_base",
+     "label": "Base / drive arrangement",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pmp_connection_size",
+     "label": "Connection size",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "eq_motor_power",
+     "label": "Motor nameplate power",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 848,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 159
+     }
+    }
+   ]
+  },
+  {
+   "id": "boiler",
+   "name": "Boilers",
+   "n": 1007,
+   "score": 39,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "eq_energy_source",
+     "label": "Energy source / fuel",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "blr_output",
+     "label": "Heating output",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "blr_pressure",
+     "label": "Pressure rating",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 849,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 158
+     }
+    }
+   ]
+  },
+  {
+   "id": "chiller",
+   "name": "Chillers",
+   "n": 1007,
+   "score": 39,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "chl_capacity",
+     "label": "Cooling capacity",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "chl_power",
+     "label": "Input power",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "eq_refrigerant",
+     "label": "Refrigerant",
+     "present": 1,
+     "ok": 0,
+     "states": {
+      "missing": 994,
+      "empty": 13,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 848,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 159
+     }
+    }
+   ]
+  },
+  {
+   "id": "cooling_tower",
+   "name": "Cooling towers and fluid coolers",
+   "n": 1007,
+   "score": 36,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "ct_capacity",
+     "label": "Heat rejection capacity",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ct_circuit",
+     "label": "Circuit type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ct_makeup_water",
+     "label": "Make-up water requirement",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "ct_cells",
+     "label": "Number of cells",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 849,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 158
+     }
+    }
+   ]
+  },
+  {
+   "id": "fan",
+   "name": "Fans",
+   "n": 1007,
+   "score": 43,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "fan_airflow",
+     "label": "Design airflow",
+     "present": 98,
+     "ok": 49,
+     "states": {
+      "missing": 25,
+      "empty": 490,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 492
+     }
+    },
+    {
+     "id": "ahu_fan_power",
+     "label": "Fan motor power",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "fan_mounting",
+     "label": "Mounting",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 848,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 159
+     }
+    }
+   ]
+  },
+  {
+   "id": "vav_box",
+   "name": "VAV and terminal units",
+   "n": 1007,
+   "score": 43,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "vav_max_flow",
+     "label": "Maximum airflow",
+     "present": 6,
+     "ok": 6,
+     "states": {
+      "missing": 951,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 56
+     }
+    },
+    {
+     "id": "vav_inlet_size",
+     "label": "Inlet size",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 850,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 157
+     }
+    }
+   ]
+  },
+  {
+   "id": "heat_exchanger",
+   "name": "Heat exchangers",
+   "n": 1007,
+   "score": 43,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "hx_capacity",
+     "label": "Heat transfer capacity",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "hx_flow_arrangement",
+     "label": "Flow arrangement",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 849,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 158
+     }
+    }
+   ]
+  },
+  {
+   "id": "water_heater",
+   "name": "Domestic water heaters",
+   "n": 1007,
+   "score": 43,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 96,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 970
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1000,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 76,
+     "states": {
+      "missing": 0,
+      "empty": 246,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 761
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 23,
+     "states": {
+      "missing": 0,
+      "empty": 779,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 228
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1007
+     }
+    },
+    {
+     "id": "dhw_storage",
+     "label": "Storage capacity",
+     "present": 1,
+     "ok": 1,
+     "states": {
+      "missing": 992,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 15
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1003,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 57,
+     "states": {
+      "missing": 0,
+      "empty": 435,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 572
+     }
+    },
+    {
+     "id": "dhw_recovery",
+     "label": "Recovery rate",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1007,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 16,
+     "states": {
+      "missing": 0,
+      "empty": 848,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 159
+     }
+    }
+   ]
+  },
+  {
+   "id": "sprinkler",
+   "name": "Sprinklers",
+   "n": 3951,
+   "score": 38,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3951
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3951,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3951,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3951
+     }
+    },
+    {
+     "id": "spk_type",
+     "label": "Sprinkler type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3951,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "spk_hazard",
+     "label": "Hazard classification",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3951,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "spk_k_factor",
+     "label": "K-factor",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3951
+     }
+    },
+    {
+     "id": "ahu_system_id",
+     "label": "System served",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 3951,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "fire_alarm_device",
+   "name": "Fire alarm devices",
+   "n": 993,
+   "score": 75,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 49,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 417,
+      "invalid": 90,
+      "valid": 486
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 993
+     }
+    }
+   ]
+  },
+  {
+   "id": "distribution_board",
+   "name": "Switchboards and panelboards",
+   "n": 256,
+   "score": 38,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 256,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 255,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 254,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "el_rated_current",
+     "label": "Rated current (mains / bus)",
+     "present": 100,
+     "ok": 70,
+     "states": {
+      "missing": 0,
+      "empty": 77,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 179
+     }
+    },
+    {
+     "id": "pnl_is_main",
+     "label": "Main board",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pnl_main_device",
+     "label": "Main device",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 6,
+     "states": {
+      "missing": 0,
+      "empty": 240,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 16
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 4,
+     "states": {
+      "missing": 0,
+      "empty": 245,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 11
+     }
+    },
+    {
+     "id": "pnl_mounting",
+     "label": "Mounting",
+     "present": 100,
+     "ok": 92,
+     "states": {
+      "missing": 0,
+      "empty": 21,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 235
+     }
+    },
+    {
+     "id": "pnl_circuits",
+     "label": "Number of circuits / spaces",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "el_poles",
+     "label": "Phases / number of poles",
+     "present": 3,
+     "ok": 3,
+     "states": {
+      "missing": 249,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7
+     }
+    },
+    {
+     "id": "el_short_circuit",
+     "label": "Short-circuit rating",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "transformer",
+   "name": "Transformers",
+   "n": 256,
+   "score": 24,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 256,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 255,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 254,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "tx_kva",
+     "label": "Rated power",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "tx_impedance",
+     "label": "Impedance",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 6,
+     "states": {
+      "missing": 0,
+      "empty": 240,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 16
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 4,
+     "states": {
+      "missing": 0,
+      "empty": 245,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 11
+     }
+    },
+    {
+     "id": "tx_primary_v",
+     "label": "Primary voltage",
+     "present": 18,
+     "ok": 18,
+     "states": {
+      "missing": 209,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 47
+     }
+    },
+    {
+     "id": "tx_secondary_v",
+     "label": "Secondary voltage",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "tx_insulation",
+     "label": "Type (dry / liquid-filled)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "tx_vector_group",
+     "label": "Vector group",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "generator",
+   "name": "Generators and emergency power",
+   "n": 256,
+   "score": 34,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 256,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 255,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 254,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 256
+     }
+    },
+    {
+     "id": "eq_energy_source",
+     "label": "Energy source / fuel",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "gen_kw",
+     "label": "Rated output",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "el_enclosure",
+     "label": "Enclosure rating",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 16,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 240
+     }
+    },
+    {
+     "id": "gen_tank",
+     "label": "Fuel tank capacity",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 256,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 6,
+     "states": {
+      "missing": 0,
+      "empty": 240,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 16
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 4,
+     "states": {
+      "missing": 0,
+      "empty": 245,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 11
+     }
+    }
+   ]
+  },
+  {
+   "id": "cable_carrier",
+   "name": "Cable trays, conduits and busways",
+   "n": 401,
+   "score": 28,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 68,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 129,
+      "invalid": 0,
+      "valid": 272
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 401,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 401
+     }
+    },
+    {
+     "id": "cc_has_cover",
+     "label": "Has cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 401,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mep_length",
+     "label": "Length",
+     "present": 59,
+     "ok": 59,
+     "states": {
+      "missing": 166,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 235
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 401,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "cc_service",
+     "label": "Service type",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 401,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "cc_kind",
+     "label": "Tray / conduit type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 401,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "wiring_device",
+   "name": "Receptacles, switches and wiring devices",
+   "n": 3528,
+   "score": 100,
+   "pass": true,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 99,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 21,
+      "invalid": 0,
+      "valid": 3507
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3528
+     }
+    }
+   ]
+  },
+  {
+   "id": "comm_security_device",
+   "name": "Communication, data and security devices",
+   "n": 2322,
+   "score": 100,
+   "pass": true,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2322
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2322
+     }
+    }
+   ]
+  },
+  {
+   "id": "space",
+   "name": "Rooms and spaces",
+   "n": 1387,
+   "score": 45,
+   "pass": false,
+   "rows": [
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1387,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "spc_planned_area",
+     "label": "Program area",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1387,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "spc_name",
+     "label": "Room name",
+     "present": 100,
+     "ok": 97,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 46,
+      "valid": 1341
+     }
+    },
+    {
+     "id": "spc_number",
+     "label": "Room number",
+     "present": 100,
+     "ok": 81,
+     "states": {
+      "missing": 0,
+      "empty": 263,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1124
+     }
+    }
+   ]
+  },
+  {
+   "id": "zone",
+   "name": "Zones (fire, HVAC, security, tenancy)",
+   "n": 1387,
+   "score": 49,
+   "pass": false,
+   "rows": [
+    {
+     "id": "zn_name",
+     "label": "Zone name",
+     "present": 100,
+     "ok": 97,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 46,
+      "valid": 1341
+     }
+    },
+    {
+     "id": "zn_type",
+     "label": "Zone type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1387,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "paving_parking",
+   "name": "Site paving, parking and curbs",
+   "n": 608,
+   "score": 33,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 608
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 30,
+     "states": {
+      "missing": 0,
+      "empty": 428,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 180
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 608
+     }
+    },
+    {
+     "id": "pav_area",
+     "label": "Paved area",
+     "present": 99,
+     "ok": 99,
+     "states": {
+      "missing": 4,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 604
+     }
+    },
+    {
+     "id": "pav_type",
+     "label": "Pavement type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 608,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pav_slope",
+     "label": "Cross slope",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 608,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "kerb_type",
+     "label": "Curb type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 608,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pav_stalls",
+     "label": "Parking stalls",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 608,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pav_marking",
+     "label": "Pavement marking",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 608,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pav_thickness",
+     "label": "Pavement thickness",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 608,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "utility_pipe",
+   "name": "Site utilities - storm, sanitary and water mains",
+   "n": 7639,
+   "score": 36,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7639
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7639
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7639
+     }
+    },
+    {
+     "id": "ut_service",
+     "label": "Utility service",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ut_bedding",
+     "label": "Bedding class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ut_culvert_opening",
+     "label": "Culvert opening",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ut_cover",
+     "label": "Depth of cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ut_from_to",
+     "label": "From / to structure",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pp_invert",
+     "label": "Invert elevation",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mep_length",
+     "label": "Length",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 7639
+     }
+    },
+    {
+     "id": "ut_pipe_class",
+     "label": "Pipe class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 7639,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pp_slope",
+     "label": "Slope",
+     "present": 100,
+     "ok": 70,
+     "states": {
+      "missing": 0,
+      "empty": 2288,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 5351
+     }
+    }
+   ]
+  },
+  {
+   "id": "utility_structure",
+   "name": "Manholes, catch basins and chambers",
+   "n": 309,
+   "score": 26,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 309
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 309,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 10,
+     "states": {
+      "missing": 0,
+      "empty": 277,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 32
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 2,
+     "states": {
+      "missing": 0,
+      "empty": 303,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 6
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 5,
+     "states": {
+      "missing": 0,
+      "empty": 293,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 16
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 309
+     }
+    },
+    {
+     "id": "mh_size",
+     "label": "Chamber size",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 309,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ut_service",
+     "label": "Utility service",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 309,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mh_cover",
+     "label": "Cover / frame",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 309,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mh_depth",
+     "label": "Depth",
+     "present": 62,
+     "ok": 62,
+     "states": {
+      "missing": 116,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 193
+     }
+    },
+    {
+     "id": "mh_backdrop",
+     "label": "Drop structure",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 309,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mh_invert",
+     "label": "Invert elevation(s)",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 309,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 89,
+     "ok": 89,
+     "states": {
+      "missing": 34,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 275
+     }
+    },
+    {
+     "id": "mh_rim_elev",
+     "label": "Rim / cover elevation",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 309,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "signage",
+   "name": "Signage (building and road)",
+   "n": 2524,
+   "score": 67,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2524
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2524
+     }
+    },
+    {
+     "id": "sgn_category",
+     "label": "Sign category",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2524,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "rail_platform",
+   "name": "Station platforms",
+   "n": 827,
+   "score": 34,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 94,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 51,
+      "invalid": 0,
+      "valid": 776
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 51,
+     "states": {
+      "missing": 0,
+      "empty": 406,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 421
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 2,
+     "states": {
+      "missing": 0,
+      "empty": 808,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 19
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 19,
+     "states": {
+      "missing": 0,
+      "empty": 674,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 153
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 47,
+     "states": {
+      "missing": 0,
+      "empty": 437,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 390
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 827
+     }
+    },
+    {
+     "id": "plt_length",
+     "label": "Platform length",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "lin_alignment_ref",
+     "label": "Reference alignment",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "lin_station",
+     "label": "Station / chainage range",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "plt_edge_offset",
+     "label": "Edge offset from track",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "plt_height",
+     "label": "Platform height above rail",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 827,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 3,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 824
+     }
+    }
+   ]
+  },
+  {
+   "id": "bridge_superstructure",
+   "name": "Bridge superstructure (girders, deck, barriers)",
+   "n": 4192,
+   "score": 27,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4192
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 10,
+     "states": {
+      "missing": 0,
+      "empty": 3771,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 421
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 4173,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 19
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 2,
+     "states": {
+      "missing": 0,
+      "empty": 4100,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 92
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 85,
+     "states": {
+      "missing": 0,
+      "empty": 635,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3557
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4192
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4192
+     }
+    },
+    {
+     "id": "lin_alignment_ref",
+     "label": "Reference alignment",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bm_span",
+     "label": "Span",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "lin_station",
+     "label": "Station / chainage range",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bri_structure_id",
+     "label": "Structure number",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_cover",
+     "label": "Concrete cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bri_design_code",
+     "label": "Design code and live load",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 5,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4187
+     }
+    },
+    {
+     "id": "slab_thickness",
+     "label": "Overall thickness",
+     "present": 14,
+     "ok": 14,
+     "states": {
+      "missing": 3588,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 604
+     }
+    },
+    {
+     "id": "bri_prestress",
+     "label": "Prestressing",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bri_wearing_surface",
+     "label": "Wearing surface / waterproofing",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4192,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "bridge_substructure",
+   "name": "Bridge substructure (piers, abutments)",
+   "n": 4531,
+   "score": 34,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 99,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 51,
+      "invalid": 0,
+      "valid": 4480
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 4531,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 4531,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 4470,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 61
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 95,
+     "states": {
+      "missing": 0,
+      "empty": 226,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4305
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4531
+     }
+    },
+    {
+     "id": "material",
+     "label": "Primary material",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 5,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4526
+     }
+    },
+    {
+     "id": "col_rebar_ratio",
+     "label": "Reinforcement ratio",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "lin_station",
+     "label": "Station / chainage range",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bri_structure_id",
+     "label": "Structure number",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "ftg_bottom_elev",
+     "label": "Bottom elevation",
+     "present": 79,
+     "ok": 78,
+     "states": {
+      "missing": 931,
+      "empty": 70,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3530
+     }
+    },
+    {
+     "id": "col_cover",
+     "label": "Concrete cover",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_exposure_class",
+     "label": "Concrete exposure class",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bri_design_code",
+     "label": "Design code and live load",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "col_length",
+     "label": "Length",
+     "present": 5,
+     "ok": 5,
+     "states": {
+      "missing": 4311,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 220
+     }
+    },
+    {
+     "id": "col_volume",
+     "label": "Net volume",
+     "present": 96,
+     "ok": 96,
+     "states": {
+      "missing": 172,
+      "empty": 7,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 4352
+     }
+    },
+    {
+     "id": "bri_scour",
+     "label": "Scour protection",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 4531,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "bridge_bearing",
+   "name": "Bridge bearings and expansion joints",
+   "n": 1268,
+   "score": 16,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1268
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1268,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 3,
+     "states": {
+      "missing": 0,
+      "empty": 1236,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 32
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 1262,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 6
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 1,
+     "states": {
+      "missing": 0,
+      "empty": 1252,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 16
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1268
+     }
+    },
+    {
+     "id": "bri_structure_id",
+     "label": "Structure number",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1268,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "brgb_movement",
+     "label": "Design movement range",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1268,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "brgb_displacement",
+     "label": "Displacement accommodated",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1268,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 3,
+     "states": {
+      "missing": 0,
+      "empty": 1232,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 36
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 3,
+     "states": {
+      "missing": 0,
+      "empty": 1232,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 36
+     }
+    },
+    {
+     "id": "brgb_rotation",
+     "label": "Rotation accommodated",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1268,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "brgb_vertical_capacity",
+     "label": "Vertical load capacity",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 1268,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "baggage_handling",
+   "name": "Baggage handling system",
+   "n": 3222,
+   "score": 26,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 99,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 37,
+      "invalid": 0,
+      "valid": 3185
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 4,
+     "states": {
+      "missing": 0,
+      "empty": 3096,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 126
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 31,
+     "states": {
+      "missing": 0,
+      "empty": 2210,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1012
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 32,
+     "states": {
+      "missing": 0,
+      "empty": 2187,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1035
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 31,
+     "states": {
+      "missing": 0,
+      "empty": 2213,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1009
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 3222
+     }
+    },
+    {
+     "id": "bhs_function",
+     "label": "Baggage system function",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3222,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bhs_belt_width",
+     "label": "Belt width",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3222,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bhs_section",
+     "label": "Conveyor section ID",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3222,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bhs_speed",
+     "label": "Conveyor speed",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3222,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "bhs_rate",
+     "label": "Design throughput",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3222,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 25,
+     "states": {
+      "missing": 0,
+      "empty": 2413,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 809
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 37,
+     "states": {
+      "missing": 0,
+      "empty": 2031,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 1191
+     }
+    },
+    {
+     "id": "bhs_tob",
+     "label": "Top of belt height",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 3222,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "boarding_bridge",
+   "name": "Passenger boarding bridges",
+   "n": 2215,
+   "score": 20,
+   "pass": false,
+   "rows": [
+    {
+     "id": "type_name",
+     "label": "Type name",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2215
+     }
+    },
+    {
+     "id": "type_mark",
+     "label": "Type mark / reference",
+     "present": 100,
+     "ok": 5,
+     "states": {
+      "missing": 0,
+      "empty": 2096,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 119
+     }
+    },
+    {
+     "id": "mark",
+     "label": "Instance mark / tag",
+     "present": 100,
+     "ok": 0,
+     "states": {
+      "missing": 0,
+      "empty": 2210,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 5
+     }
+    },
+    {
+     "id": "description",
+     "label": "Description",
+     "present": 100,
+     "ok": 12,
+     "states": {
+      "missing": 0,
+      "empty": 1941,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 274
+     }
+    },
+    {
+     "id": "uniformat_code",
+     "label": "UniFormat II code",
+     "present": 100,
+     "ok": 35,
+     "states": {
+      "missing": 0,
+      "empty": 1434,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 781
+     }
+    },
+    {
+     "id": "status",
+     "label": "Status (new / existing / demolish / temporary)",
+     "present": 100,
+     "ok": 100,
+     "states": {
+      "missing": 0,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 2215
+     }
+    },
+    {
+     "id": "pbb_aircraft",
+     "label": "Aircraft served",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pbb_type",
+     "label": "Boarding bridge type",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pbb_gpu",
+     "label": "400 Hz ground power unit",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pbb_cab_range",
+     "label": "Cab floor height range",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pbb_len_max",
+     "label": "Extended length",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pbb_gate",
+     "label": "Gate number",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "manufacturer",
+     "label": "Manufacturer",
+     "present": 100,
+     "ok": 36,
+     "states": {
+      "missing": 0,
+      "empty": 1410,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 805
+     }
+    },
+    {
+     "id": "model_label",
+     "label": "Model name / number",
+     "present": 100,
+     "ok": 28,
+     "states": {
+      "missing": 0,
+      "empty": 1596,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 619
+     }
+    },
+    {
+     "id": "pbb_pca",
+     "label": "Pre-conditioned air unit",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    },
+    {
+     "id": "pbb_len_min",
+     "label": "Retracted length",
+     "present": 0,
+     "ok": 0,
+     "states": {
+      "missing": 2215,
+      "empty": 0,
+      "placeholder": 0,
+      "invalid": 0,
+      "valid": 0
+     }
+    }
+   ]
+  }
+ ],
+ "modelRules": [
+  {
+   "id": "unique-value",
+   "kind": "unique-value",
+   "value": 14,
+   "limit": 0,
+   "pass": false,
+   "failing": 14,
+   "direction": "lowerIsBetter",
+   "label": "No duplicate Mark",
+   "limitText": "limit 0",
+   "statement": "In each listed category, no two elements share a value of the listed parameter.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-2816725",
+    "Demo-ARCHITECTURE-2931808",
+    "Demo-ARCHITECTURE-5040583",
+    "Demo-ARCHITECTURE-6093156",
+    "Demo-ARCHITECTURE-6711502"
+   ],
+   "failingKeysTotal": 14
+  },
+  {
+   "id": "warnings-max",
+   "kind": "warnings-max",
+   "value": 2133,
+   "limit": 2200,
+   "pass": true,
+   "failing": 3954,
+   "direction": "lowerIsBetter",
+   "label": "Revit warnings",
+   "limitText": "at most 2,200",
+   "statement": "The model has no more than 2200 Revit warnings.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-10005733",
+    "Demo-ARCHITECTURE-10123667",
+    "Demo-ARCHITECTURE-10123684",
+    "Demo-ARCHITECTURE-10123685",
+    "Demo-ARCHITECTURE-10123689"
+   ],
+   "failingKeysTotal": 3954
+  },
+  {
+   "id": "no-identical-instances",
+   "kind": "no-identical-instances",
+   "value": 1274,
+   "limit": 0,
+   "pass": false,
+   "failing": 2444,
+   "direction": "lowerIsBetter",
+   "label": "Identical instances in one place",
+   "limitText": "limit 0",
+   "statement": "No two identical instances sit in the same place.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-10004161",
+    "Demo-ARCHITECTURE-10004656",
+    "Demo-ARCHITECTURE-10004918",
+    "Demo-ARCHITECTURE-10004974",
+    "Demo-ARCHITECTURE-10004975"
+   ],
+   "failingKeysTotal": 2444
+  },
+  {
+   "id": "one-grid-set",
+   "kind": "one-grid-set",
+   "value": 0,
+   "limit": 0,
+   "pass": true,
+   "failing": 0,
+   "direction": "lowerIsBetter",
+   "label": "Duplicate grids",
+   "limitText": "limit 0",
+   "statement": "The model has one set of grids, with no duplicate grids.",
+   "failingKeys": []
+  },
+  {
+   "id": "one-level-set",
+   "kind": "one-level-set",
+   "value": 0,
+   "limit": 0,
+   "pass": true,
+   "failing": 0,
+   "direction": "lowerIsBetter",
+   "label": "Duplicate levels",
+   "limitText": "limit 0",
+   "statement": "The model has one set of levels, with no duplicate levels.",
+   "failingKeys": []
+  },
+  {
+   "id": "elements-on-level",
+   "kind": "elements-on-level",
+   "value": 94.4,
+   "limit": 95,
+   "pass": false,
+   "failing": 4760,
+   "direction": "higherIsBetter",
+   "label": "Elements on a level",
+   "limitText": "at least 95 %",
+   "statement": "At least 95% of the model elements are associated with a level.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-10033788",
+    "Demo-ARCHITECTURE-10033818",
+    "Demo-ARCHITECTURE-10160860",
+    "Demo-ARCHITECTURE-10172688",
+    "Demo-ARCHITECTURE-10292314"
+   ],
+   "failingKeysTotal": 4760
+  },
+  {
+   "id": "worksets-named",
+   "kind": "worksets-named",
+   "value": 1,
+   "limit": 0,
+   "pass": false,
+   "failing": 0,
+   "direction": "lowerIsBetter",
+   "label": "Worksets as listed",
+   "limitText": "limit 0",
+   "statement": "Every model uses the worksets listed.",
+   "missing": [
+    "Shared Levels and Grids"
+   ],
+   "others": [
+    {
+     "name": "ELECTRICAL",
+     "n": 12158
+    },
+    {
+     "name": "Workset1",
+     "n": 5531
+    },
+    {
+     "name": "MECHANICAL",
+     "n": 2996
+    },
+    {
+     "name": "ZM-Coordination-Lights",
+     "n": 2871
+    },
+    {
+     "name": "ZM-Floor Finishes",
+     "n": 279
+    },
+    {
+     "name": "ZM-Coordination",
+     "n": 220
+    },
+    {
+     "name": "ZM-Coordination-STRUCTURE",
+     "n": 179
+    },
+    {
+     "name": "ZM-MASSING",
+     "n": 33
+    },
+    {
+     "name": "Shared Views, Levels, Grids",
+     "n": 0
+    },
+    {
+     "name": "Z-Lighting (from MEP)",
+     "n": 0
+    },
+    {
+     "name": "ZL-Links-Revit",
+     "n": 0
+    },
+    {
+     "name": "ZM-Coordination-Mechanical",
+     "n": 0
+    }
+   ]
+  },
+  {
+   "id": "no-in-place-families",
+   "kind": "no-in-place-families",
+   "value": 368,
+   "limit": 400,
+   "pass": true,
+   "failing": 368,
+   "direction": "lowerIsBetter",
+   "label": "In-place families",
+   "limitText": "at most 400",
+   "statement": "The model has no more than 400 in-place families.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-10033788",
+    "Demo-ARCHITECTURE-10033818",
+    "Demo-ARCHITECTURE-10160860",
+    "Demo-ARCHITECTURE-10172688",
+    "Demo-ARCHITECTURE-11007665"
+   ],
+   "failingKeysTotal": 368
+  },
+  {
+   "id": "no-imported-cad",
+   "kind": "no-imported-cad",
+   "value": 0,
+   "limit": 0,
+   "pass": true,
+   "failing": 0,
+   "direction": "lowerIsBetter",
+   "label": "Imported CAD",
+   "limitText": "limit 0",
+   "statement": "No CAD file is imported into the model; CAD files are linked.",
+   "failingKeys": []
+  },
+  {
+   "id": "real-material",
+   "kind": "real-material",
+   "value": 67.4,
+   "limit": 70,
+   "pass": false,
+   "failing": 27705,
+   "direction": "higherIsBetter",
+   "label": "Elements with a real material",
+   "limitText": "at least 70 %",
+   "statement": "At least 70% of the model elements carry a real material; the names listed do not count as a material.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-10004124",
+    "Demo-ARCHITECTURE-10004652",
+    "Demo-ARCHITECTURE-10004665",
+    "Demo-ARCHITECTURE-10005513",
+    "Demo-ARCHITECTURE-10005515"
+   ],
+   "failingKeysTotal": 27705
+  },
+  {
+   "id": "category-owned-by-model",
+   "kind": "category-owned-by-model",
+   "value": 2871,
+   "limit": 0,
+   "pass": false,
+   "failing": 2871,
+   "direction": "lowerIsBetter",
+   "label": "Lighting Fixtures outside the MEP model",
+   "limitText": "limit 0",
+   "statement": "Elements of the listed category are modelled only in the listed discipline's model; other models show none.",
+   "failingKeys": [
+    "Demo-ARCHITECTURE-10205546",
+    "Demo-ARCHITECTURE-10205547",
+    "Demo-ARCHITECTURE-10373364",
+    "Demo-ARCHITECTURE-10377337",
+    "Demo-ARCHITECTURE-10377518"
+   ],
+   "failingKeysTotal": 2871
+  },
+  {
+   "id": "no-empty-parameters",
+   "kind": "no-empty-parameters",
+   "value": 702,
+   "limit": 0,
+   "pass": false,
+   "failing": 702,
+   "direction": "lowerIsBetter",
+   "label": "Project parameters never filled",
+   "limitText": "limit 0",
+   "statement": "Every project parameter has a value on at least one element."
+  },
+  {
+   "id": "elements-near-levels",
+   "kind": "elements-near-levels",
+   "value": 8,
+   "limit": 0,
+   "pass": false,
+   "failing": 8,
+   "direction": "lowerIsBetter",
+   "label": "Elements far from the levels",
+   "limitText": "limit 0",
+   "statement": "No element sits more than 3000 mm below the lowest level or above the highest level.",
+   "failingKeys": [
+    "Demo-STRUCTURE-3643566",
+    "Demo-STRUCTURE-3643577",
+    "Demo-STRUCTURE-3644561",
+    "Demo-STRUCTURE-3644572",
+    "Demo-STRUCTURE-3644613"
+   ],
+   "failingKeysTotal": 8
+  }
+ ],
+ "totals": {
+  "typesPassing": 2,
+  "typesTotal": 55,
+  "rulesMet": 5,
+  "rulesTotal": 13,
+  "overallScore": 44
+ },
+ "notCovered": [
+  {
+   "revitCategory": "OST_Walls",
+   "note": "Wall modelled in place; has no wall type Function.",
+   "n": 22
+  },
+  {
+   "revitCategory": "OST_Walls",
+   "note": "Soffit walls: no element type of this plan covers them.",
+   "n": 185
+  }
+ ],
+ "notCheckedTypes": []
+}
