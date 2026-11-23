@@ -26,6 +26,8 @@
 // Round 7 (format 1.4): walls' Load bearing reads Structural Usage (--break-lb puts the yes/no rule back: FAIL); Assembly Code has the
 // Uniformat II format of the validation rules file (--break-fmt: FAIL); a requirement naming two Revit parameters needs both
 // (--break-pair removes revitParameters: FAIL); the verified Revit names reach the file and the IDS for Revit.
+// Round 8 (format 1.5): --break-case reads Assembly Code ignoring case in the file (c1020 valid): FAIL; --break-none removes noneAllowed
+// (an uninsulated duct counts as not filled): FAIL; --break-part scores panels and mullions as elements: FAIL.
 // Needs Playwright + Chromium, like crawl_app.js. CHROMIUM=/path/to/chrome uses a browser already installed;
 // PW_CHANNEL=msedge uses the installed Microsoft Edge.
 let pw; try { pw = require('playwright'); } catch (e) { pw = require('playwright-core'); }
@@ -82,15 +84,17 @@ function evaluate(F, T, mid) {
   const all = (w, r) => { const h = w.all.map(q => holds(sp, T, q, r)).filter(x => x !== null); return h.length > 0 && h.every(Boolean); };
   const place = r => F.elementTypes.find(t => t.revitWhere && t.revitWhere.all && t.revitWhere.revitCategory === sp.revitCategory && all(t.revitWhere, r));
   const walls = { n: 0, split: on, kind: on && T.head.some(h => sp.columns.wallKind.includes(norm(h))), out: 0 }, why = {};
-  const by = new Map();
-  T.rows.forEach(r => { let t = typeOf(r[ci]);
+  const by = new Map(), parts = {};
+  // revitCategories role "part" (format 1.5: curtain panels, mullions): such rows are counted on their element type, never scored.
+  const partOf = v => { const n = norm(v); return F.elementTypes.find(t => (t.revitCategories || []).some(c => c.role === 'part' && norm(c.name.replace(/\s+-\s+.*$/, '')) === n)); };
+  T.rows.forEach(r => { const pt = partOf(r[ci]); if (pt) { parts[pt.id] = (parts[pt.id] || 0) + 1; return; } let t = typeOf(r[ci]);
     if (t && sp && sp.cells.includes(norm(r[ci]))) { walls.n++;
       if (on) { t = place(r); if (!t) { walls.out++; const u = (F.uncovered || []).find(u => u.revitCategory === sp.revitCategory && all(u.where, r)); const k = u ? u.note : 'matches no element type'; why[k] = (why[k] || 0) + 1; return; } } }
     if (!t) return; if (!by.has(t.id)) by.set(t.id, { t, els: [] }); by.get(t.id).els.push(r); });
   const real = (q, v) => {
     if (v == null) return false; const s = v.trim();
     if (s === '' || q.placeholders.map(x => String(x).toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return false;
-    const w = q.valueRule, byPattern = new RegExp(w.pattern, 'i').test(s);
+    const w = q.valueRule, byPattern = new RegExp(w.pattern, w.caseSensitive ? '' : 'i').test(s); // caseSensitive (format 1.5): Assembly Code
     // check "enum" (format 1.4, Structural Usage): allowed is a list of words; the pattern must give the same answer.
     if (w.check === 'enum') { const byList = w.allowed.some(a => String(a).toLowerCase() === s.toLowerCase());
       assert.strictEqual(byPattern, byList, `${q.id}: valueRule.pattern and allowed disagree on "${s}"`); return byList; }
@@ -120,8 +124,10 @@ function evaluate(F, T, mid) {
       const q = reqs.get(id), pc = pairCols(q), col = pc ? pc[0] : T.head.findIndex(h => q.columnNames.includes(norm(h))), se = wsub(q, els);
       if (!se || !se.length) return null;
       let has = 0, ok = 0;
-      se.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (pc ? pc.every(i => real(q, r[i] || '')) : real(q, v)) ok++; });
-      return { n: q.label, ...(q.when ? { of: se.length } : {}), has: Math.round(100 * has / se.length), ok: Math.round(100 * ok / se.length) };
+      // noneAllowed (format 1.5): a column for every name, all blank = none: left out of the percentage; all none = left out of the mean.
+      const no = pc && q.noneAllowed && pc.length === q.revitParameters.length ? se.filter(r => pc.every(i => !(r[i] || '').trim())) : [], sn = no.length ? se.filter(r => !no.includes(r)) : se;
+      sn.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (pc ? pc.every(i => real(q, r[i] || '')) : real(q, v)) ok++; });
+      return { n: q.label, ...(q.when ? { of: se.length } : {}), ...(no.length ? { none: no.length } : {}), has: sn.length ? Math.round(100 * has / sn.length) : null, ok: sn.length ? Math.round(100 * ok / sn.length) : null };
     }).filter(Boolean);
     // Requirement groups (scoreRule.groups): extra rows over the elements the group's where picks; none picked = rows left out.
     for (const g of F.requirementGroups || []) {
@@ -132,8 +138,8 @@ function evaluate(F, T, mid) {
         sw.forEach(r => { const v = col >= 0 ? (r[col] || '') : null; if (col >= 0) has++; if (real(q, v)) ok++; });
         rows.push({ n: q.label, grp: g.id, of: sw.length, has: Math.round(100 * has / sw.length), ok: Math.round(100 * ok / sw.length) }); }
     }
-    const fill = rows.length ? Math.round(rows.reduce((s, r) => s + r.ok, 0) / rows.length) : 100;
-    return { id: t.id, lod: t.lod[mid], n: els.length, fill, pass: fill >= ms.targetPercent, rows };
+    const sc = rows.filter(r => r.ok !== null), fill = sc.length ? Math.round(sc.reduce((s, r) => s + r.ok, 0) / sc.length) : 100;
+    return { id: t.id, lod: t.lod[mid], n: els.length, ...(parts[t.id] ? { parts: parts[t.id] } : {}), fill, pass: fill >= ms.targetPercent, rows };
   });
   return { cats, walls, why, whenOff };
 }
@@ -163,7 +169,7 @@ function evaluate(F, T, mid) {
 
     const school = await exportFile();
     assert.strictEqual(school.format, 'openbep-requirements');
-    assert.strictEqual(school.formatVersion, '1.4');
+    assert.strictEqual(school.formatVersion, '1.5');
     const sortId = a => [...a].sort((x, y) => x.id.localeCompare(y.id));
     const same = (a, b, where) => { assert.deepStrictEqual(b.map(x => x.id), a.map(x => x.id), where + ': element types found');
       a.forEach((x, i) => { const y = b[i], w = `${where}, ${x.id}`; assert.strictEqual(y.lod, x.lod, w + ': level'); assert.strictEqual(y.n, x.n, w + ': elements');
@@ -557,13 +563,16 @@ function evaluate(F, T, mid) {
       assert.deepStrictEqual([ac.valueRule.source, ac.valueRule.check, ac.revitParameter], ['builder', 'format', 'Assembly Code'], 'Assembly Code rule');
       if (!process.argv.includes('--break-fmt')) assert.strictEqual(ac.valueRule.pattern, VR.pattern, 'Assembly Code: the pattern is not the validation rules file\'s');
       const always = new RegExp(F.placeholders.always, F.placeholders.flags);
-      const state = (q, v) => { const s = v.trim(); if (s === '') return 'empty'; if (q.placeholders.map(x => x.toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return 'placeholder'; return new RegExp(q.valueRule.pattern, 'i').test(s) ? 'valid' : 'invalid'; };
-      const HAND = [['C1020', 'valid', 100], ['B2010.10', 'valid', 100], ['C-1020', 'invalid', 0], ['TBD', 'placeholder', 0], ['', 'empty', 0]];
+      const state = (q, v) => { const s = v.trim(); if (s === '') return 'empty'; if (q.placeholders.map(x => x.toLowerCase()).includes(s.toLowerCase()) || always.test(s)) return 'placeholder'; return new RegExp(q.valueRule.pattern, q.valueRule.caseSensitive ? '' : 'i').test(s) ? 'valid' : 'invalid'; };
+      // Round 8: case-sensitive (Uniformat codes are upper case; an IDS pattern is case-sensitive): c1020 is invalid in all three.
+      assert.strictEqual(ac.valueRule.caseSensitive, true, 'Assembly Code: valueRule.caseSensitive must be true');
+      if (process.argv.includes('--break-case')) { F.elementTypes.forEach(t => t.requirements.forEach(q => { if (q.id === 'uniformat_code') delete q.valueRule.caseSensitive; })); console.log('--break-case: Assembly Code read ignoring case in the file'); }
+      const HAND = [['C1020', 'valid', 100], ['B2010.10', 'valid', 100], ['C-1020', 'invalid', 0], ['c1020', 'invalid', 0], ['TBD', 'placeholder', 0], ['', 'empty', 0]];
       for (const [v, st, ok] of HAND) {
         const TT = { head: ['Category', 'Element ID', 'Assembly Code'], rows: [['Doors', '8001', v]] }, b = await both7(F, TT, 'final90', 'Assembly Code "' + v + '"');
         assert.deepStrictEqual([state(ac, v), rowOf(b, 'door', ac.label)[0].ok], [st, ok], `Assembly Code "${v}": expected ${st}`);
       }
-      console.log(`ASSEMBLY CODE OK: pattern = validation rules file; C1020 valid, B2010.10 valid, C-1020 invalid, TBD placeholder, blank empty; Builder = file = hand (${Object.keys(JSON.parse(fs.readFileSync(path.join(root, 'shared-parameters', 'OpenBEP_Validation_Rules_v0.1.json'), 'utf8'))).length} rules in that file, 1 wired)`);
+      console.log(`ASSEMBLY CODE OK: pattern = validation rules file; C1020 valid, B2010.10 valid, C-1020 invalid, c1020 invalid (case-sensitive), TBD placeholder, blank empty; Builder = file = hand (${Object.keys(JSON.parse(fs.readFileSync(path.join(root, 'shared-parameters', 'OpenBEP_Validation_Rules_v0.1.json'), 'utf8'))).length} rules in that file, 1 wired)`);
       // PAIRS: Insulation Type + Insulation Thickness on ducts: both must be real; with one column, checked on it alone + one note.
       const ins = F.elementTypes.find(t => t.id === 'duct').requirements.find(q => q.id === 'mep_insulation');
       if (process.argv.includes('--break-pair')) { F.elementTypes.forEach(t => t.requirements.forEach(q => { delete q.revitParameters; })); console.log('--break-pair: removed revitParameters from the file'); }
@@ -576,6 +585,36 @@ function evaluate(F, T, mid) {
       assert.ok(h1.includes(PN) && h1.includes('Insulation Thickness') && !h2.includes(PN), 'pair: the one-column note');
       for (const L of ['fr', 'ja']) assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [PN, L]), `no ${L} translation: ${PN}`);
       console.log('PAIRS OK: ducts Insulation Type + Insulation Thickness -> 33% (1 of 3: both filled); Type column alone -> 67% + note naming Insulation Thickness; Builder = file = hand');
+      // Round 8 NONE: Insulation (and Lining) may be none: both blank = none, left out of the row's percentage; all none = row out of the mean.
+      if (process.argv.includes('--break-none')) { F.elementTypes.forEach(t => t.requirements.forEach(q => { delete q.noneAllowed; })); console.log('--break-none: removed noneAllowed from the file'); }
+      if (!process.argv.includes('--break-none')) assert.strictEqual(ins.noneAllowed, true, 'ducts: insulation has no noneAllowed');
+      const N3 = { head: P3.head, rows: [['Ducts', '9101', 'Glass fibre', '25 mm'], ['Ducts', '9102', 'Glass fibre', ''], ['Ducts', '9103', '', '']] };
+      const n3 = await both7(F, N3, 'final90', 'none'), nAll = await both7(F, { head: P3.head, rows: [['Ducts', '9104', '', ''], ['Ducts', '9105', ' ', '']] }, 'final90', 'all none');
+      assert.deepStrictEqual(rowOf(n3, 'duct', ins.label), [{ n: ins.label, none: 1, has: 100, ok: 50 }], 'none: both, one, neither -> 50% of 2, 1 none');
+      assert.deepStrictEqual(rowOf(nAll, 'duct', ins.label), [{ n: ins.label, none: 2, has: null, ok: null }], 'none: all neither -> row out of the mean');
+      const nl = F.elementTypes.flatMap(t => t.requirements.filter(q => q.noneAllowed).map(q => t.id + '/' + q.id));
+      const html = (await page.evaluate(([t, m]) => window.__ckWalls(t, m), [toCsv(N3), 'final90'])).html;
+      assert.ok(html.includes('1 with neither (not scored)'), 'none: the Builder does not show the none count');
+      for (const L of ['fr', 'ja']) assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), ['{1} with neither (not scored)', L]), `no ${L} translation: none count`);
+      console.log(`NONE OK: ducts insulation both / one / neither -> ${rowOf(n3, 'duct', ins.label)[0].ok}% of 2, none 1; all neither -> ok null, row out of the mean (duct score ${(nAll.find(x => x.id === 'duct') || {}).fill}); noneAllowed on ${nl.join(', ')}; Builder = file = hand`);
+    }
+    // Round 8 PARTS: curtain panels and mullions are parts of the curtain wall (role "part"): counted, never scored.
+    {
+      const F = await exportFile(), cw = F.elementTypes.find(t => t.id === 'curtain_wall');
+      if (process.argv.includes('--break-part')) { cw.revitCategories.forEach(c => { c.role = 'element'; }); console.log('--break-part: panels and mullions scored as elements in the file'); }
+      if (!process.argv.includes('--break-part')) assert.deepStrictEqual(cw.revitCategories.map(c => c.id + ':' + c.role), ['OST_Walls:element', 'OST_CurtainWallPanels:part', 'OST_CurtainWallMullions:part'], 'curtain walls: category roles');
+      const dq = cw.requirements.find(q => q.id === 'description');
+      const CW = { head: ['Category', 'Element ID', 'Family', 'Function', 'Description'], rows: [['Walls', '9500', 'Curtain Wall', 'Exterior', 'Storefront, aluminium']]
+        .concat(Array.from({ length: 10 }, (_, i) => ['Curtain Panels', String(9501 + i), 'System Panel', '', ''])) };
+      const a = await both7(F, CW, 'final90', 'parts'), c = a.find(x => x.id === 'curtain_wall');
+      assert.deepStrictEqual([c.n, c.parts, rowOf(a, 'curtain_wall', dq.label)[0].ok], [1, 10, 100], 'curtain wall with a Description and 10 panels without one: 100 % and 10 parts');
+      const html = (await page.evaluate(([t, m]) => window.__ckWalls(t, m), [toCsv(CW), 'final90'])).html;
+      assert.ok(html.includes('10 parts'), 'parts: the Builder does not show the parts count');
+      for (const L of ['fr', 'ja']) assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), ['{1} parts', L]), `no ${L} translation: parts`);
+      const [, ids] = await Promise.all([page.waitForEvent('download'), page.locator('#idsRvBtn').click()]).then(async ([d]) => [d, fs.readFileSync(await d.path(), 'utf8')]);
+      const spec = (ids.match(/<specification [^>]*identifier="curtain_wall"[\s\S]*?<\/specification>/) || [''])[0];
+      assert.ok(spec && !/Curtain Panels|Curtain Wall Mullions/.test(ids), 'IDS for Revit: a curtain wall specification still applies to panels or mullions');
+      console.log(`PARTS OK: curtain wall with Description + 10 panels without one -> ${rowOf(a, 'curtain_wall', dq.label)[0].ok}% on Description, ${c.parts} parts, n ${c.n}; IDS for Revit: curtain wall specification on walls only; Builder = file = hand`);
     }
     // VERIFIED NAMES: switch on the rows the school example leaves off, then read the file and the IDS for Revit.
     await fresh();

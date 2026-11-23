@@ -1,13 +1,13 @@
 {
   "format": "openbep-requirements",
-  "formatVersion": "1.4",
+  "formatVersion": "1.5",
   "plan": {
     "name": "Example: Primary school renovation and extension",
     "fingerprint": "9C37B605B3A9",
     "version": null,
     "listVersion": "0.1",
-    "builderVersion": "0.51",
-    "generated": "2026-11-20T21:32:03.316Z"
+    "builderVersion": "0.52",
+    "generated": "2026-11-23T17:08:01.589Z"
   },
   "scoreRule": {
     "perElementType": "mean of each required parameter real-value percentage",
@@ -15,14 +15,14 @@
     "rowPercent": "round(100 * elements whose value is real / elements of the type)",
     "score": "round(mean of the row percentages); 100 when nothing is required",
     "groups": "For an element type in the appliesTo of a requirementGroups entry, the entry's requirements in requiredAt[element type][milestone] are extra rows computed over the elements its where condition picks only (for example the structural walls): round(100 * those elements whose value is real / those elements). The element type's score is the mean over all its rows: its own rows over all its elements, the extra rows over that subset. An extra row with no element in the subset is left out of the mean. A parameter the element type already requires at that milestone is not repeated as an extra row (it is checked once, on every element).",
-    "pairs": "A requirement with revitParameters (format 1.4) names several Revit parameters, all required: an element's value is real only when each of them is real (revitParameter is the first, for older readers).",
+    "pairs": "A requirement with revitParameters (format 1.4) names several Revit parameters, all required: an element's value is real only when each of them is real (revitParameter is the first, for older readers). noneAllowed (format 1.5: Lining Type + Lining Thickness, Insulation Type + Insulation Thickness): an element with every one of them blank has none (no liner, no insulation); it is counted as none, neither real nor a failure, and left out of the row's percentage (round(100 * real / (elements - none))); a row whose elements all have none is left out of the mean. One filled and another blank is not real.",
     "derived": "derived (format 1.4) is a value a checker may report from the requirement's parameter; it does not change the score. derived.yesWhen: yes when the parameter's value is not one of notIn (Load bearing on walls: Structural Usage not Non-bearing).",
     "when": "A requirement with when (format 1.3) is asked only of the elements its condition picks, among the elements the row is computed over (the element type's, or the structural walls). when.structuralMaterialClass: the element's Structural Material (instance, else type) names a Revit material whose Class is one of the listed values (Revit's own English class names, compared ignoring case). The row is round(100 * those elements whose value is real / those elements); none picked = the row is left out of the mean; when the class of the structural material cannot be read, the row is not checked and is left out of the mean, never guessed from the material's name."
   },
   "placeholders": {
     "always": "^(?:[\\-–—_.*?x]+|xx+|tbc|tba|na|none|unknown|later|todo)$",
     "flags": "i",
-    "note": "A value is trimmed first. It is not real when it is empty, equals one of the requirement placeholders (ignoring case) or matches \"always\". Otherwise it must match valueRule.pattern (ignoring case, anywhere in the value). valueRule.check \"enum\": allowed lists the values the pattern accepts (Structural Usage); \"format\": a pattern taken from shared-parameters/OpenBEP_Validation_Rules_v0.1.json (Assembly Code)."
+    "note": "A value is trimmed first. It is not real when it is empty, equals one of the requirement placeholders (ignoring case) or matches \"always\". Otherwise it must match valueRule.pattern (ignoring case unless valueRule.caseSensitive is true, anywhere in the value). valueRule.check \"enum\": allowed lists the values the pattern accepts (Structural Usage); \"format\": a pattern taken from shared-parameters/OpenBEP_Validation_Rules_v0.1.json (Assembly Code), read with caseSensitive true, so c1020 is invalid as in an IDS."
   },
   "tableRule": {
     "categoryColumn": "category",
@@ -55,7 +55,7 @@
       }
     ],
     "column": "a requirement reads the first column whose normalized header is in its columnNames; with no such column every element fails it",
-    "pairs": "A requirement with revitParameters reads one column per name (normalized header = the normalized name). With all of them, an element is real only when each cell is real; with some of them, on those alone (the checker names the missing column); with none, by the column rule above.",
+    "pairs": "A requirement with revitParameters reads one column per name (normalized header = the normalized name). With all of them, an element is real only when each cell is real; with some of them, on those alone (the checker names the missing column); with none, by the column rule above. noneAllowed: with a column for every name, a row whose columns are all blank is none (left out of the percentage; the row object carries none: count, and has/ok null when every element is none, left out of the mean).",
     "groups": "The extra rows of a requirementGroups entry are checked only when the table has a column whose normalized header is the normalized where parameter (Structural Usage). An element is picked when the normalized cell is one of the normalized in values. When no row placed in the entry's element types has a value in that column and the table has the fallback column (Structural), the fallback condition is read instead. With no such column the extra rows are not checked and the element types are scored on their own rows.",
     "when": "A schedule names the structural material, not its class. A requirement with when.structuralMaterialClass is checked only when the table has a column whose normalized header is structuralmaterialclass with a value on at least one of the row's elements; it is then computed over the elements whose normalized cell is one of the normalized listed classes. Otherwise it is not checked and left out of the mean."
   },
@@ -99,7 +99,8 @@
       "revitCategories": [
         {
           "name": "Lighting Fixtures",
-          "id": "OST_LightingFixtures"
+          "id": "OST_LightingFixtures",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -341,7 +342,8 @@
           "id": "lf_luminous_flux",
           "kind": "parameter",
           "label": "Luminous flux (lumen output)",
-          "revitParameter": "Initial Intensity (luminous flux option)",
+          "revitParameter": null,
+          "notCheckable": "no Revit parameter holds the fixture's lumen output with a known unit",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -495,7 +497,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -804,7 +807,8 @@
           "id": "lf_rated_voltage",
           "kind": "parameter",
           "label": "Rated voltage",
-          "revitParameter": "Voltage (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -852,7 +856,8 @@
       "revitCategories": [
         {
           "name": "Doors",
-          "id": "OST_Doors"
+          "id": "OST_Doors",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -1332,7 +1337,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -1557,7 +1563,8 @@
       "revitCategories": [
         {
           "name": "Walls - Function = Interior",
-          "id": "OST_Walls"
+          "id": "OST_Walls",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -2016,7 +2023,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -2168,7 +2176,8 @@
           "id": "wall_layers",
           "kind": "parameter",
           "label": "Layer build-up",
-          "revitParameter": "Structure (compound structure)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structure (compound structure)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -2351,7 +2360,8 @@
       "revitCategories": [
         {
           "name": "Walls - Function = Exterior",
-          "id": "OST_Walls"
+          "id": "OST_Walls",
+          "role": "element"
         }
       ],
       "categoryNotes": [
@@ -2801,7 +2811,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -2869,7 +2880,8 @@
           "id": "wall_layers",
           "kind": "parameter",
           "label": "Layer build-up",
-          "revitParameter": "Structure (compound structure)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structure (compound structure)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -3012,7 +3024,8 @@
       "revitCategories": [
         {
           "name": "Air Terminals",
-          "id": "OST_DuctTerminal"
+          "id": "OST_DuctTerminal",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -3405,7 +3418,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -3584,7 +3598,8 @@
           "id": "at_neck_size",
           "kind": "parameter",
           "label": "Neck / connection size",
-          "revitParameter": "Connector diameter / width x height",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Connector diameter / width x height\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -3756,7 +3771,8 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -4195,7 +4211,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -4254,7 +4271,8 @@
           "id": "ahu_voltage_phase",
           "kind": "parameter",
           "label": "Electrical supply (V / phase)",
-          "revitParameter": "Voltage / Number of Poles (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Number of Poles (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -4507,7 +4525,8 @@
       "revitCategories": [
         {
           "name": "Structural Columns",
-          "id": "OST_StructuralColumns"
+          "id": "OST_StructuralColumns",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -4822,7 +4841,8 @@
           "id": "col_profile",
           "kind": "parameter",
           "label": "Section / profile",
-          "revitParameter": "Type Name / Section Name Key (structural families)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Type Name / Section Name Key (structural families)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -4978,7 +4998,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -5042,7 +5063,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -5180,7 +5202,8 @@
       "revitCategories": [
         {
           "name": "Plumbing Fixtures",
-          "id": "OST_PlumbingFixtures"
+          "id": "OST_PlumbingFixtures",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -5523,7 +5546,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -5582,7 +5606,8 @@
           "id": "pf_fixture_units",
           "kind": "parameter",
           "label": "Fixture units (DFU / WSFU)",
-          "revitParameter": "Fixture Units (plumbing connector / family)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Fixture Units (plumbing connector / family)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -5838,7 +5863,8 @@
       "revitCategories": [
         {
           "name": "Structural Foundations",
-          "id": "OST_StructuralFoundation"
+          "id": "OST_StructuralFoundation",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -6457,7 +6483,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -6680,7 +6707,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -6773,7 +6801,8 @@
       "revitCategories": [
         {
           "name": "Structural Foundations",
-          "id": "OST_StructuralFoundation"
+          "id": "OST_StructuralFoundation",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -7058,7 +7087,8 @@
           "id": "mem_length",
           "kind": "parameter",
           "label": "Length",
-          "revitParameter": "Cut Length / Length",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Cut Length / Length\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -7294,7 +7324,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -7392,7 +7423,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -7525,7 +7557,8 @@
       "revitCategories": [
         {
           "name": "Walls",
-          "id": "OST_Walls"
+          "id": "OST_Walls",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -8117,7 +8150,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -8258,7 +8292,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -8432,11 +8467,13 @@
       "revitCategories": [
         {
           "name": "Floors",
-          "id": "OST_Floors"
+          "id": "OST_Floors",
+          "role": "element"
         },
         {
           "name": "Structural Foundations - foundation slabs",
-          "id": "OST_StructuralFoundation"
+          "id": "OST_StructuralFoundation",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -8980,7 +9017,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -9214,7 +9252,8 @@
           "id": "wall_layers",
           "kind": "parameter",
           "label": "Layer build-up",
-          "revitParameter": "Structure (compound structure)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structure (compound structure)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -9257,7 +9296,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -9391,7 +9431,8 @@
       "revitCategories": [
         {
           "name": "Roofs",
-          "id": "OST_Roofs"
+          "id": "OST_Roofs",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -9814,7 +9855,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -9832,7 +9874,8 @@
           "id": "wall_layers",
           "kind": "parameter",
           "label": "Layer build-up",
-          "revitParameter": "Structure (compound structure)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structure (compound structure)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -10001,7 +10044,8 @@
       "revitCategories": [
         {
           "name": "Structural Framing",
-          "id": "OST_StructuralFraming"
+          "id": "OST_StructuralFraming",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -10245,7 +10289,8 @@
           "id": "mem_length",
           "kind": "parameter",
           "label": "Length",
-          "revitParameter": "Cut Length / Length",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Cut Length / Length\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -10326,7 +10371,8 @@
           "id": "col_profile",
           "kind": "parameter",
           "label": "Section / profile",
-          "revitParameter": "Type Name / Section Name Key (structural families)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Type Name / Section Name Key (structural families)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -10481,7 +10527,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -10616,7 +10663,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -10746,11 +10794,13 @@
       "revitCategories": [
         {
           "name": "Structural Framing",
-          "id": "OST_StructuralFraming"
+          "id": "OST_StructuralFraming",
+          "role": "element"
         },
         {
           "name": "Structural Trusses",
-          "id": "OST_StructuralTruss"
+          "id": "OST_StructuralTruss",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -11142,7 +11192,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -11238,7 +11289,8 @@
           "id": "mem_length",
           "kind": "parameter",
           "label": "Length",
-          "revitParameter": "Cut Length / Length",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Cut Length / Length\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -11279,7 +11331,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -11323,7 +11376,8 @@
           "id": "col_profile",
           "kind": "parameter",
           "label": "Section / profile",
-          "revitParameter": "Type Name / Section Name Key (structural families)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Type Name / Section Name Key (structural families)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -11418,15 +11472,18 @@
       "revitCategories": [
         {
           "name": "Structural Rebar",
-          "id": "OST_Rebar"
+          "id": "OST_Rebar",
+          "role": "element"
         },
         {
           "name": "Structural Area Reinforcement",
-          "id": "OST_AreaRein"
+          "id": "OST_AreaRein",
+          "role": "element"
         },
         {
           "name": "Structural Fabric Reinforcement",
-          "id": "OST_FabricReinforcement"
+          "id": "OST_FabricReinforcement",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -11523,15 +11580,18 @@
       "revitCategories": [
         {
           "name": "Walls - curtain wall types",
-          "id": "OST_Walls"
+          "id": "OST_Walls",
+          "role": "element"
         },
         {
           "name": "Curtain Panels",
-          "id": "OST_CurtainWallPanels"
+          "id": "OST_CurtainWallPanels",
+          "role": "part"
         },
         {
           "name": "Curtain Wall Mullions",
-          "id": "OST_CurtainWallMullions"
+          "id": "OST_CurtainWallMullions",
+          "role": "part"
         }
       ],
       "categoryNotes": [],
@@ -11935,7 +11995,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -12256,7 +12317,8 @@
       "revitCategories": [
         {
           "name": "Windows",
-          "id": "OST_Windows"
+          "id": "OST_Windows",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -12746,7 +12808,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -13098,7 +13161,8 @@
       "revitCategories": [
         {
           "name": "Ceilings",
-          "id": "OST_Ceilings"
+          "id": "OST_Ceilings",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -13525,7 +13589,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -13706,15 +13771,18 @@
       "revitCategories": [
         {
           "name": "Stairs",
-          "id": "OST_Stairs"
+          "id": "OST_Stairs",
+          "role": "element"
         },
         {
           "name": "Runs",
-          "id": "OST_StairsRuns"
+          "id": "OST_StairsRuns",
+          "role": "element"
         },
         {
           "name": "Landings",
-          "id": "OST_StairsLandings"
+          "id": "OST_StairsLandings",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -13933,7 +14001,8 @@
           "id": "circ_clear_width",
           "kind": "parameter",
           "label": "Clear width",
-          "revitParameter": "Actual Run Width / Width",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Actual Run Width / Width\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -14131,7 +14200,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -14193,7 +14263,8 @@
       "revitCategories": [
         {
           "name": "Ramps",
-          "id": "OST_Ramps"
+          "id": "OST_Ramps",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -14562,7 +14633,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -14624,7 +14696,8 @@
       "revitCategories": [
         {
           "name": "Railings",
-          "id": "OST_StairsRailing"
+          "id": "OST_StairsRailing",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -15048,7 +15121,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -15147,7 +15221,8 @@
           "id": "is_external",
           "kind": "parameter",
           "label": "Is external",
-          "revitParameter": "Function (walls) or shared",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Function (walls) or shared\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -15233,15 +15308,18 @@
       "revitCategories": [
         {
           "name": "Furniture",
-          "id": "OST_Furniture"
+          "id": "OST_Furniture",
+          "role": "element"
         },
         {
           "name": "Casework",
-          "id": "OST_Casework"
+          "id": "OST_Casework",
+          "role": "element"
         },
         {
           "name": "Furniture Systems",
-          "id": "OST_FurnitureSystems"
+          "id": "OST_FurnitureSystems",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -15543,15 +15621,18 @@
       "revitCategories": [
         {
           "name": "Specialty Equipment",
-          "id": "OST_SpecialityEquipment"
+          "id": "OST_SpecialityEquipment",
+          "role": "element"
         },
         {
           "name": "Medical Equipment",
-          "id": "OST_MedicalEquipment"
+          "id": "OST_MedicalEquipment",
+          "role": "element"
         },
         {
           "name": "Food Service Equipment",
-          "id": "OST_FoodServiceEquipment"
+          "id": "OST_FoodServiceEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -15802,11 +15883,13 @@
       "revitCategories": [
         {
           "name": "Specialty Equipment",
-          "id": "OST_SpecialityEquipment"
+          "id": "OST_SpecialityEquipment",
+          "role": "element"
         },
         {
           "name": "Vertical Circulation - newer Revit versions",
-          "id": "OST_VerticalCirculation"
+          "id": "OST_VerticalCirculation",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -16249,7 +16332,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -16310,7 +16394,8 @@
           "id": "el_load",
           "kind": "parameter",
           "label": "Connected electrical load",
-          "revitParameter": "Apparent Load (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Apparent Load (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -16602,15 +16687,18 @@
       "revitCategories": [
         {
           "name": "Ducts",
-          "id": "OST_DuctCurves"
+          "id": "OST_DuctCurves",
+          "role": "element"
         },
         {
           "name": "Flex Ducts",
-          "id": "OST_FlexDuctCurves"
+          "id": "OST_FlexDuctCurves",
+          "role": "element"
         },
         {
           "name": "Duct Fittings",
-          "id": "OST_DuctFitting"
+          "id": "OST_DuctFitting",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -17004,7 +17092,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -17027,6 +17116,7 @@
             "Insulation Type",
             "Insulation Thickness"
           ],
+          "noneAllowed": true,
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -17074,6 +17164,7 @@
             "Lining Type",
             "Lining Thickness"
           ],
+          "noneAllowed": true,
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -17279,7 +17370,8 @@
       "revitCategories": [
         {
           "name": "Duct Accessories",
-          "id": "OST_DuctAccessory"
+          "id": "OST_DuctAccessory",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -17603,7 +17695,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -17711,15 +17804,18 @@
       "revitCategories": [
         {
           "name": "Pipes",
-          "id": "OST_PipeCurves"
+          "id": "OST_PipeCurves",
+          "role": "element"
         },
         {
           "name": "Flex Pipes",
-          "id": "OST_FlexPipeCurves"
+          "id": "OST_FlexPipeCurves",
+          "role": "element"
         },
         {
           "name": "Pipe Fittings",
-          "id": "OST_PipeFitting"
+          "id": "OST_PipeFitting",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -17961,7 +18057,8 @@
           "id": "pp_nominal_size",
           "kind": "parameter",
           "label": "Nominal size",
-          "revitParameter": "Size / Diameter",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Size / Diameter\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -18074,7 +18171,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -18139,6 +18237,7 @@
             "Insulation Type",
             "Insulation Thickness"
           ],
+          "noneAllowed": true,
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -18427,7 +18526,8 @@
       "revitCategories": [
         {
           "name": "Pipe Accessories",
-          "id": "OST_PipeAccessory"
+          "id": "OST_PipeAccessory",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -18800,7 +18900,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -18949,11 +19050,13 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         },
         {
           "name": "Plumbing Equipment - newer Revit versions",
-          "id": "OST_PlumbingEquipment"
+          "id": "OST_PlumbingEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -19439,7 +19542,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -19538,7 +19642,8 @@
           "id": "ahu_voltage_phase",
           "kind": "parameter",
           "label": "Electrical supply (V / phase)",
-          "revitParameter": "Voltage / Number of Poles (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Number of Poles (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -19755,7 +19860,8 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -20232,7 +20338,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -20250,7 +20357,8 @@
           "id": "ahu_voltage_phase",
           "kind": "parameter",
           "label": "Electrical supply (V / phase)",
-          "revitParameter": "Voltage / Number of Poles (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Number of Poles (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -20464,7 +20572,8 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -20899,7 +21008,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -20917,7 +21027,8 @@
           "id": "ahu_voltage_phase",
           "kind": "parameter",
           "label": "Electrical supply (V / phase)",
-          "revitParameter": "Voltage / Number of Poles (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Number of Poles (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -21173,7 +21284,8 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -21612,7 +21724,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -21670,7 +21783,8 @@
           "id": "ahu_voltage_phase",
           "kind": "parameter",
           "label": "Electrical supply (V / phase)",
-          "revitParameter": "Voltage / Number of Poles (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Number of Poles (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -21924,7 +22038,8 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -22360,7 +22475,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -22378,7 +22494,8 @@
           "id": "ahu_voltage_phase",
           "kind": "parameter",
           "label": "Electrical supply (V / phase)",
-          "revitParameter": "Voltage / Number of Poles (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Number of Poles (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -22633,11 +22750,13 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         },
         {
           "name": "Duct Accessories",
-          "id": "OST_DuctAccessory"
+          "id": "OST_DuctAccessory",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -23066,7 +23185,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -23255,7 +23375,8 @@
       "revitCategories": [
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -23687,7 +23808,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -23875,11 +23997,13 @@
       "revitCategories": [
         {
           "name": "Plumbing Equipment - newer Revit versions",
-          "id": "OST_PlumbingEquipment"
+          "id": "OST_PlumbingEquipment",
+          "role": "element"
         },
         {
           "name": "Mechanical Equipment",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -24312,7 +24436,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -24500,7 +24625,8 @@
       "revitCategories": [
         {
           "name": "Sprinklers",
-          "id": "OST_Sprinklers"
+          "id": "OST_Sprinklers",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -24817,7 +24943,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -24965,7 +25092,8 @@
       "revitCategories": [
         {
           "name": "Fire Alarm Devices",
-          "id": "OST_FireAlarmDevices"
+          "id": "OST_FireAlarmDevices",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -25281,7 +25409,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -25304,7 +25433,8 @@
       "revitCategories": [
         {
           "name": "Electrical Equipment",
-          "id": "OST_ElectricalEquipment"
+          "id": "OST_ElectricalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -25597,7 +25727,8 @@
           "id": "el_voltage",
           "kind": "parameter",
           "label": "Rated voltage",
-          "revitParameter": "Voltage / Distribution System",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Distribution System\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -25795,7 +25926,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -26139,7 +26271,8 @@
       "revitCategories": [
         {
           "name": "Electrical Equipment",
-          "id": "OST_ElectricalEquipment"
+          "id": "OST_ElectricalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -26578,7 +26711,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -26883,7 +27017,8 @@
       "revitCategories": [
         {
           "name": "Electrical Equipment",
-          "id": "OST_ElectricalEquipment"
+          "id": "OST_ElectricalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -27360,7 +27495,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -27542,7 +27678,8 @@
           "id": "el_voltage",
           "kind": "parameter",
           "label": "Rated voltage",
-          "revitParameter": "Voltage / Distribution System",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Distribution System\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -27588,19 +27725,23 @@
       "revitCategories": [
         {
           "name": "Cable Trays",
-          "id": "OST_CableTray"
+          "id": "OST_CableTray",
+          "role": "element"
         },
         {
           "name": "Cable Tray Fittings",
-          "id": "OST_CableTrayFitting"
+          "id": "OST_CableTrayFitting",
+          "role": "element"
         },
         {
           "name": "Conduits",
-          "id": "OST_Conduit"
+          "id": "OST_Conduit",
+          "role": "element"
         },
         {
           "name": "Conduit Fittings",
-          "id": "OST_ConduitFitting"
+          "id": "OST_ConduitFitting",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -27825,7 +27966,8 @@
           "id": "cc_size",
           "kind": "parameter",
           "label": "Size",
-          "revitParameter": "Width / Height / Diameter(Trade Size)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Width / Height / Diameter(Trade Size)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -27898,7 +28040,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -28117,11 +28260,13 @@
       "revitCategories": [
         {
           "name": "Electrical Fixtures",
-          "id": "OST_ElectricalFixtures"
+          "id": "OST_ElectricalFixtures",
+          "role": "element"
         },
         {
           "name": "Lighting Devices",
-          "id": "OST_LightingDevices"
+          "id": "OST_LightingDevices",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -28396,7 +28541,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -28614,7 +28760,8 @@
           "id": "el_voltage",
           "kind": "parameter",
           "label": "Rated voltage",
-          "revitParameter": "Voltage / Distribution System",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Voltage / Distribution System\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -28699,23 +28846,28 @@
       "revitCategories": [
         {
           "name": "Communication Devices",
-          "id": "OST_CommunicationDevices"
+          "id": "OST_CommunicationDevices",
+          "role": "element"
         },
         {
           "name": "Data Devices",
-          "id": "OST_DataDevices"
+          "id": "OST_DataDevices",
+          "role": "element"
         },
         {
           "name": "Security Devices",
-          "id": "OST_SecurityDevices"
+          "id": "OST_SecurityDevices",
+          "role": "element"
         },
         {
           "name": "Nurse Call Devices",
-          "id": "OST_NurseCallDevices"
+          "id": "OST_NurseCallDevices",
+          "role": "element"
         },
         {
           "name": "Telephone Devices",
-          "id": "OST_TelephoneDevices"
+          "id": "OST_TelephoneDevices",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -29036,7 +29188,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -29221,15 +29374,18 @@
       "revitCategories": [
         {
           "name": "Rooms",
-          "id": "OST_Rooms"
+          "id": "OST_Rooms",
+          "role": "element"
         },
         {
           "name": "Spaces",
-          "id": "OST_MEPSpaces"
+          "id": "OST_MEPSpaces",
+          "role": "element"
         },
         {
           "name": "Areas",
-          "id": "OST_Areas"
+          "id": "OST_Areas",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -29522,15 +29678,18 @@
       "revitCategories": [
         {
           "name": "HVAC Zones",
-          "id": "OST_HVAC_Zones"
+          "id": "OST_HVAC_Zones",
+          "role": "element"
         },
         {
           "name": "Areas",
-          "id": "OST_Areas"
+          "id": "OST_Areas",
+          "role": "element"
         },
         {
           "name": "Rooms grouped by parameter",
-          "id": "OST_Rooms"
+          "id": "OST_Rooms",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -29724,15 +29883,18 @@
       "revitCategories": [
         {
           "name": "Topography",
-          "id": "OST_Topography"
+          "id": "OST_Topography",
+          "role": "element"
         },
         {
           "name": "Toposolid - newer Revit versions",
-          "id": "OST_Toposolid"
+          "id": "OST_Toposolid",
+          "role": "element"
         },
         {
           "name": "Site",
-          "id": "OST_Site"
+          "id": "OST_Site",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -30158,15 +30320,18 @@
       "revitCategories": [
         {
           "name": "Hardscape - newer Revit versions",
-          "id": "OST_Hardscape"
+          "id": "OST_Hardscape",
+          "role": "element"
         },
         {
           "name": "Floors",
-          "id": "OST_Floors"
+          "id": "OST_Floors",
+          "role": "element"
         },
         {
           "name": "Parking",
-          "id": "OST_Parking"
+          "id": "OST_Parking",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -30504,7 +30669,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -30607,7 +30773,8 @@
           "id": "wall_layers",
           "kind": "parameter",
           "label": "Layer build-up",
-          "revitParameter": "Structure (compound structure)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structure (compound structure)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -30779,7 +30946,8 @@
       "revitCategories": [
         {
           "name": "Pipes",
-          "id": "OST_PipeCurves"
+          "id": "OST_PipeCurves",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -31023,7 +31191,8 @@
           "id": "pp_nominal_size",
           "kind": "parameter",
           "label": "Nominal size",
-          "revitParameter": "Size / Diameter",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Size / Diameter\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -31516,11 +31685,13 @@
       "revitCategories": [
         {
           "name": "Plumbing Equipment",
-          "id": "OST_PlumbingEquipment"
+          "id": "OST_PlumbingEquipment",
+          "role": "element"
         },
         {
           "name": "Generic Models",
-          "id": "OST_GenericModel"
+          "id": "OST_GenericModel",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -32000,7 +32171,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -32781,7 +32953,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -33472,7 +33645,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -33769,15 +33943,18 @@
       "revitCategories": [
         {
           "name": "Signage - newer Revit versions",
-          "id": "OST_Signage"
+          "id": "OST_Signage",
+          "role": "element"
         },
         {
           "name": "Specialty Equipment",
-          "id": "OST_SpecialityEquipment"
+          "id": "OST_SpecialityEquipment",
+          "role": "element"
         },
         {
           "name": "Generic Models",
-          "id": "OST_GenericModel"
+          "id": "OST_GenericModel",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -35445,7 +35622,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -36273,7 +36451,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -37080,7 +37259,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -37467,11 +37647,13 @@
       "revitCategories": [
         {
           "name": "Floors",
-          "id": "OST_Floors"
+          "id": "OST_Floors",
+          "role": "element"
         },
         {
           "name": "Structural Foundations",
-          "id": "OST_StructuralFoundation"
+          "id": "OST_StructuralFoundation",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -37766,7 +37948,8 @@
           "id": "circ_clear_width",
           "kind": "parameter",
           "label": "Clear width",
-          "revitParameter": "Actual Run Width / Width",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Actual Run Width / Width\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -38041,7 +38224,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -38100,7 +38284,8 @@
           "id": "is_external",
           "kind": "parameter",
           "label": "Is external",
-          "revitParameter": "Function (walls) or shared",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Function (walls) or shared\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -38141,7 +38326,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -38269,11 +38455,13 @@
       "revitCategories": [
         {
           "name": "Structural Framing",
-          "id": "OST_StructuralFraming"
+          "id": "OST_StructuralFraming",
+          "role": "element"
         },
         {
           "name": "Floors",
-          "id": "OST_Floors"
+          "id": "OST_Floors",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -38676,7 +38864,8 @@
           "id": "col_profile",
           "kind": "parameter",
           "label": "Section / profile",
-          "revitParameter": "Type Name / Section Name Key (structural families)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Type Name / Section Name Key (structural families)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -38996,7 +39185,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -39135,7 +39325,8 @@
           "id": "mem_length",
           "kind": "parameter",
           "label": "Length",
-          "revitParameter": "Cut Length / Length",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Cut Length / Length\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -39175,7 +39366,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -39392,19 +39584,23 @@
       "revitCategories": [
         {
           "name": "Structural Columns",
-          "id": "OST_StructuralColumns"
+          "id": "OST_StructuralColumns",
+          "role": "element"
         },
         {
           "name": "Structural Framing",
-          "id": "OST_StructuralFraming"
+          "id": "OST_StructuralFraming",
+          "role": "element"
         },
         {
           "name": "Walls",
-          "id": "OST_Walls"
+          "id": "OST_Walls",
+          "role": "element"
         },
         {
           "name": "Structural Foundations",
-          "id": "OST_StructuralFoundation"
+          "id": "OST_StructuralFoundation",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -39990,7 +40186,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -40211,7 +40408,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -40343,11 +40541,13 @@
       "revitCategories": [
         {
           "name": "Structural Connections",
-          "id": "OST_StructConnections"
+          "id": "OST_StructConnections",
+          "role": "element"
         },
         {
           "name": "Generic Models",
-          "id": "OST_GenericModel"
+          "id": "OST_GenericModel",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -40781,7 +40981,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -41507,7 +41708,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -41676,11 +41878,13 @@
       "revitCategories": [
         {
           "name": "Specialty Equipment",
-          "id": "OST_SpecialityEquipment"
+          "id": "OST_SpecialityEquipment",
+          "role": "element"
         },
         {
           "name": "Mechanical Equipment - when the supplier families use it",
-          "id": "OST_MechanicalEquipment"
+          "id": "OST_MechanicalEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -42122,7 +42326,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -42180,7 +42385,8 @@
           "id": "el_load",
           "kind": "parameter",
           "label": "Connected electrical load",
-          "revitParameter": "Apparent Load (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Apparent Load (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -42471,7 +42677,8 @@
       "revitCategories": [
         {
           "name": "Specialty Equipment",
-          "id": "OST_SpecialityEquipment"
+          "id": "OST_SpecialityEquipment",
+          "role": "element"
         }
       ],
       "categoryNotes": [],
@@ -42960,7 +43167,8 @@
             "min": null,
             "max": null,
             "check": "format",
-            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$"
+            "pattern": "^[A-G]([0-9]{2}([0-9]{2}((\\.[0-9]{2}){1,2}|[0-9]{3})?)?)?$",
+            "caseSensitive": true
           },
           "example": "C1020",
           "ifcTarget": "IfcClassificationReference via IfcRelAssociatesClassification",
@@ -43057,7 +43265,8 @@
           "id": "el_load",
           "kind": "parameter",
           "label": "Connected electrical load",
-          "revitParameter": "Apparent Load (connector)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Apparent Load (connector)\")",
           "guid": null,
           "shared": false,
           "bindable": true,
@@ -43493,7 +43702,8 @@
           "id": "col_material_grade",
           "kind": "parameter",
           "label": "Material grade / strength",
-          "revitParameter": "Structural Material (material properties)",
+          "revitParameter": null,
+          "notCheckable": "no single Revit parameter name holds it (the library gives \"Structural Material (material properties)\")",
           "guid": null,
           "shared": false,
           "bindable": true,

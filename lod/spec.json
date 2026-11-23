@@ -3130,7 +3130,8 @@
     "Insulation Thickness"
    ],
    "rn": "Insulation Type / Insulation Thickness",
-   "rk": "builtin"
+   "rk": "builtin",
+   "noneOk": true
   },
   "mep_flow": {
    "l": "Design flow",
@@ -5689,7 +5690,8 @@
     "Lining Thickness"
    ],
    "rn": "Lining Type / Lining Thickness",
-   "rk": "builtin"
+   "rk": "builtin",
+   "noneOk": true
   },
   "dct_surface_area": {
    "l": "Outer surface area",
@@ -20187,6 +20189,10 @@
     "Walls (OST_Walls) - curtain wall types",
     "Curtain Panels (OST_CurtainWallPanels)",
     "Curtain Wall Mullions (OST_CurtainWallMullions)"
+   ],
+   "rcp": [
+    "OST_CurtainWallPanels",
+    "OST_CurtainWallMullions"
    ],
    "ifc": "IfcCurtainWall aggregating IfcMember.MULLION and IfcPlate.CURTAIN_PANEL",
    "sqi": "",

@@ -8848,3 +8848,5 @@
 "Example: Interior","Exemple : Intérieur","例：内装","Element requirements"
 "Example: Option 1","Exemple : Option 1","例：Option 1","Element requirements"
 "Built-in: Thermal Transmittance (U) - analytical properties","Intégré : Thermal Transmittance (U) - propriétés analytiques","標準：Thermal Transmittance (U) - 解析用プロパティ","Element requirements"
+"{1} with neither (not scored)","{1} sans l’un ni l’autre (non noté)","どちらも空欄{1}件（採点対象外）","Check a model now"
+"{1} parts","{1} composants","部品{1}件","Check a model now"
