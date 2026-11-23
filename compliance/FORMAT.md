@@ -6,7 +6,7 @@ results are shown over time, and fixes the contract so that **a different plan n
 The page at `/compliance/` contains no project name, no goal, no firm, no rule and no milestone. It reads all of
 them from one file. A VIM Flex page, or any other screen, can read the same file and follow the same rules.
 
-- Format name: `openbep-compliance-series`, version `0.1` (draft).
+- Format name: `openbep-compliance-series`, version `0.2` (draft). 0.2 adds three optional counts per role; a 0.1 file still loads.
 - Example: [example-school.json](example-school.json), simulated, written by `build_example.py`.
 - Validator: [series.js](series.js), `validateSeries(doc)` returns a list of problems in plain words. The page
   runs it on every file and refuses a file that fails, with the reasons.
@@ -48,7 +48,8 @@ versions[]      in order
   order, label, tag, created, milestone (the one in force), uploadedBy[] (role codes)
   state         checked | notChecked (then: reason)
   elementCount
-  byRole        { CODE: { elements, required, met, uploaded, elementsAdded, valuesFixed, valuesBroken } }
+  byRole        { CODE: { elements, required, met, uploaded, elementsAdded, valuesFixed, valuesBroken,
+                          wrong, newRequired, newMet } }   the last three are optional (0.2)
   valueChecks   { checkId: { CODE: [required, met] } }      adds up to byRole
   rules         { ruleId: { value, pass } }
 ```
@@ -56,8 +57,12 @@ versions[]      in order
 - **required** = the number of values the plan asks for at the milestone in force (elements × the parameters
   required for their element type). **met** = how many hold a real value, by the requirement file's own
   definition of a real value.
-- **valuesFixed** = values that did not meet the plan in the previous version and do now. **valuesBroken** = the
-  reverse. Elements are matched between versions by document name + Revit element id.
+- **valuesFixed** = required values that meet the plan now and did not in the previous version, including
+  values on elements added since. **valuesBroken** = values that met the plan and no longer do. Elements are matched between versions by document name + Revit element id.
+- **wrong** = required values that hold something that is not a real value (a placeholder, a value outside
+  the allowed list). The rest of required − met is empty.
+- **newRequired**, **newMet** = the values required on elements added since the previous version, and how many
+  of them are already filled.
 - A role that uploaded nothing keeps its previous numbers, with `uploaded: false` and zeros for the three
   change counts.
 - A version that could not be checked has no numbers and a `reason`. A gap is never a zero.
@@ -73,12 +78,18 @@ versions[]      in order
 | Pace | valuesFixed over the last four working periods ÷ 4. Holiday periods are skipped. No upload counts as zero. |
 | Needed pace | (target × required − met) ÷ working periods left to the milestone |
 | Model rules | pass or fail as the checker says; never averaged into a percentage |
+| Gate | passes when overall compliance ≥ target and every model rule passes |
+| Gap | per value check and role: target × required − met, largest first |
+| New elements arrive filled | newMet ÷ newRequired over the last four working periods |
 
 ## What every screen shows the same way
 
-1. Summary: overall compliance, model rules met, forecast at the milestone, versions checked.
-2. Overall compliance over time, with the stepped target, milestones, holidays and unchecked versions.
-3. One row per role: compliance, pace, needed pace, uploads. One square per role per week.
+1. The gate: would this version pass the milestone, and which conditions fail. Then the summary: overall
+   compliance, model rules met, forecast, versions checked. Then the largest gaps, by check and by firm.
+2. Overall compliance over time, with the stepped target, milestones, holidays and unchecked versions; the
+   same chart in values shows what the plan requires against what is filled.
+3. One row per role: compliance, wrong and empty, pace, how clean new elements arrive, needed pace, uploads.
+   One square per role per week. A firm filter narrows the whole page to one role.
 4. One card per goal: compliance over time, each role's share, its value checks, its model rules.
 5. What changed between two versions, by role, then rules, then value checks.
 6. Every check by every version. The arrow is the direction of the value; the colour is better or worse.
@@ -105,8 +116,8 @@ from a real project without someone filling the gaps by hand:
    (known fault 7 in `docs/model-check-screen`).
 5. **Per-document counts in the result.** The result file gives counts per element type for the whole model,
    not per Revit document, so a firm's share cannot be worked out.
-6. **Fixed and broken counts.** The result file lists failing elements per model rule only, not per required
-   value.
+6. **Fixed, broken, wrong and new-element counts.** The result file lists failing elements per model rule
+   only, not per required value, and does not tell a wrong value from an empty one.
 
 Items 1 to 4 are an addition to the requirement file (Builder). Items 5 and 6 are an addition to the result
 file (checker). With both, a small script turns a folder of results into this series, with no judgment calls.

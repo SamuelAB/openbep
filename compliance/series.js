@@ -13,7 +13,7 @@
     const need = (ok, msg) => { if (!ok) e.push(msg); return ok; };
     if (!need(d && typeof d === 'object', 'The file is not a JSON object.')) return e;
     need(d.format === 'openbep-compliance-series', 'format must be "openbep-compliance-series".');
-    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1).');
+    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 and 0.2).');
     const p = d.plan || {};
     need(typeof p.name === 'string' && p.name, 'plan.name is missing.');
     const goals = Array.isArray(p.goals) ? p.goals : [], ms = Array.isArray(p.milestones) ? p.milestones : [], roles = Array.isArray(p.roles) ? p.roles : [];
@@ -49,6 +49,9 @@
         need(codes.has(c), `${L}: byRole has "${c}", which is not in plan.roles.`);
         need(['elements', 'required', 'met', 'elementsAdded', 'valuesFixed', 'valuesBroken'].every(k => isNum(r[k])) && typeof r.uploaded === 'boolean', `${L}, ${c}: byRole needs elements, required, met, uploaded, elementsAdded, valuesFixed, valuesBroken.`);
         need(r.required > 0 && r.met >= 0 && r.met <= r.required, `${L}, ${c}: met must be between 0 and required, and required above 0.`);
+        // Optional since 0.2: values that hold something wrong (not empty), and how clean new elements arrive.
+        if (r.wrong != null) need(isNum(r.wrong) && r.wrong >= 0 && r.wrong <= r.required - r.met, `${L}, ${c}: wrong must be between 0 and required − met.`);
+        if (r.newRequired != null || r.newMet != null) need(isNum(r.newRequired) && isNum(r.newMet) && r.newMet >= 0 && r.newMet <= r.newRequired, `${L}, ${c}: newMet must be between 0 and newRequired.`);
       }
       const sums = {};
       for (const [id, per] of Object.entries(v.valueChecks || {})) {

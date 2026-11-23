@@ -94,6 +94,14 @@ const server = http.createServer((req, res) => {
     // Select the first version and back, to exercise the "no earlier version" path.
     await page.selectOption('#selV', '0'); await page.waitForTimeout(50);
     ok(!errs.length, `${k} @${width}: first version selectable`);
+    // Round two: one firm only, the values chart, and a link that reopens the same view.
+    const code = Object.keys(last.byRole)[0];
+    await page.selectOption('#selV', String(d.versions.indexOf(last))); await page.selectOption('#firmF', code); await page.click('#modeV'); await page.waitForTimeout(50);
+    const r2 = await page.evaluate(() => ({ gate: !!document.querySelector('#gate .gate'), gaps: !!document.querySelector('#gaps').textContent.trim(), url: location.search, scope: !!document.querySelector('#chOverall .scope'), wide: document.documentElement.scrollWidth > innerWidth + 1 }));
+    ok(!errs.length && r2.gate && r2.gaps && r2.scope && !r2.wide, `${k} @${width}: firm filter, gate, gaps and values chart ${errs.join(' ')}`);
+    ok(new URLSearchParams(r2.url).get('firm') === code && new URLSearchParams(r2.url).get('v') === String(last.order), `${k} @${width}: the address keeps version and firm (${r2.url})`);
+    await page.goto(`http://127.0.0.1:${port}/compliance/${r2.url}`); await page.waitForSelector('#tiles .tile');
+    ok(await page.evaluate(c => document.querySelector('#firmF').value === c, code), `${k} @${width}: the link reopens the same firm`);
     await page.close();
   }
   await browser.close(); server.close();

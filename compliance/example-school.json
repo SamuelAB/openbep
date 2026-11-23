@@ -1,6 +1,6 @@
 {
  "format": "openbep-compliance-series",
- "formatVersion": "0.1",
+ "formatVersion": "0.2",
  "example": true,
  "note": "SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.",
  "plan": {
@@ -221,34 +221,43 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 12001,
+   "elementCount": 12007,
    "byRole": {
     "ARCH": {
      "elements": 8199,
      "required": 48211,
      "met": 22231,
+     "wrong": 4081,
      "uploaded": true,
      "elementsAdded": 8199,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "STRUCT": {
-     "elements": 2905,
-     "required": 16994,
-     "met": 10161,
+     "elements": 2907,
+     "required": 17005,
+     "met": 10148,
+     "wrong": 351,
      "uploaded": true,
-     "elementsAdded": 2905,
+     "elementsAdded": 2907,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 897,
-     "required": 5068,
-     "met": 1305,
+     "elements": 901,
+     "required": 5091,
+     "met": 1312,
+     "wrong": 1453,
      "uploaded": true,
-     "elementsAdded": 897,
+     "elementsAdded": 901,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
@@ -258,12 +267,12 @@
       3758
      ],
      "STRUCT": [
-      2905,
-      1695
+      2907,
+      1670
      ],
      "MECH": [
-      897,
-      226
+      901,
+      229
      ]
     },
     "real-material": {
@@ -272,8 +281,8 @@
       3430
      ],
      "STRUCT": [
-      2905,
-      1695
+      2907,
+      1693
      ]
     },
     "lod-params": {
@@ -282,12 +291,12 @@
       8192
      ],
      "STRUCT": [
-      7553,
-      4338
+      7558,
+      4359
      ],
      "MECH": [
-      1794,
-      541
+      1802,
+      535
      ]
     },
     "fire-rating": {
@@ -297,7 +306,7 @@
      ],
      "STRUCT": [
       581,
-      338
+      334
      ]
     },
     "asset-data": {
@@ -306,8 +315,8 @@
       401
      ],
      "MECH": [
-      1435,
-      229
+      1442,
+      242
      ]
     },
     "rooms": {
@@ -322,12 +331,12 @@
       4338
      ],
      "STRUCT": [
-      2905,
-      2012
+      2907,
+      2008
      ],
      "MECH": [
-      897,
-      298
+      901,
+      295
      ]
     },
     "view-names": {
@@ -337,7 +346,7 @@
      ],
      "STRUCT": [
       145,
-      83
+      84
      ],
      "MECH": [
       45,
@@ -355,7 +364,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 621,
+     "value": 614,
      "pass": true
     },
     "dup-mark": {
@@ -383,123 +392,132 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 12525,
+   "elementCount": 12537,
    "byRole": {
     "ARCH": {
-     "elements": 8562,
-     "required": 50344,
-     "met": 24700,
+     "elements": 8582,
+     "required": 50462,
+     "met": 24898,
+     "wrong": 2980,
      "uploaded": true,
-     "elementsAdded": 363,
-     "valuesFixed": 2685,
-     "valuesBroken": 216
+     "elementsAdded": 383,
+     "valuesFixed": 2769,
+     "valuesBroken": 102,
+     "newRequired": 2252,
+     "newMet": 1843
     },
     "STRUCT": {
-     "elements": 3066,
-     "required": 17936,
-     "met": 11281,
+     "elements": 3054,
+     "required": 17866,
+     "met": 11283,
+     "wrong": 591,
      "uploaded": true,
-     "elementsAdded": 161,
-     "valuesFixed": 1151,
-     "valuesBroken": 31
+     "elementsAdded": 147,
+     "valuesFixed": 1182,
+     "valuesBroken": 47,
+     "newRequired": 860,
+     "newMet": 838
     },
     "MECH": {
-     "elements": 897,
-     "required": 5068,
-     "met": 1305,
+     "elements": 901,
+     "required": 5091,
+     "met": 1312,
+     "wrong": 1453,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      8562,
-      4143
+      8582,
+      4173
      ],
      "STRUCT": [
-      3066,
-      1852
+      3054,
+      1871
      ],
      "MECH": [
-      897,
-      226
+      901,
+      229
      ]
     },
     "real-material": {
      "ARCH": [
-      8562,
-      3767
+      8582,
+      3797
      ],
      "STRUCT": [
-      3066,
-      1851
+      3054,
+      1878
      ]
     },
     "lod-params": {
      "ARCH": [
-      18836,
-      9233
+      18880,
+      9295
      ],
      "STRUCT": [
-      7972,
-      4876
+      7940,
+      4836
      ],
      "MECH": [
-      1794,
-      541
+      1802,
+      535
      ]
     },
     "fire-rating": {
      "ARCH": [
-      2997,
-      1522
+      3004,
+      1546
      ],
      "STRUCT": [
-      613,
-      377
+      611,
+      376
      ]
     },
     "asset-data": {
      "ARCH": [
-      1284,
-      438
+      1287,
+      434
      ],
      "MECH": [
-      1435,
-      229
+      1442,
+      242
      ]
     },
     "rooms": {
      "ARCH": [
-      1027,
-      553
+      1030,
+      549
      ]
     },
     "worksets": {
      "ARCH": [
-      8562,
-      4791
+      8582,
+      4849
      ],
      "STRUCT": [
-      3066,
-      2232
+      3054,
+      2228
      ],
      "MECH": [
-      897,
-      298
+      901,
+      295
      ]
     },
     "view-names": {
      "ARCH": [
-      514,
-      253
+      515,
+      255
      ],
      "STRUCT": [
       153,
-      93
+      94
      ],
      "MECH": [
       45,
@@ -509,7 +527,7 @@
    },
    "rules": {
     "on-level": {
-     "value": 97.1,
+     "value": 97.2,
      "pass": true
     },
     "clashes": {
@@ -517,7 +535,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 634,
+     "value": 654,
      "pass": true
     },
     "dup-mark": {
@@ -546,133 +564,142 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 13431,
+   "elementCount": 13410,
    "byRole": {
     "ARCH": {
-     "elements": 8999,
-     "required": 52915,
-     "met": 27642,
+     "elements": 8959,
+     "required": 52680,
+     "met": 27627,
+     "wrong": 2797,
      "uploaded": true,
-     "elementsAdded": 437,
-     "valuesFixed": 3166,
-     "valuesBroken": 224
+     "elementsAdded": 377,
+     "valuesFixed": 2878,
+     "valuesBroken": 149,
+     "newRequired": 2217,
+     "newMet": 1774
     },
     "STRUCT": {
-     "elements": 3224,
-     "required": 18860,
-     "met": 12475,
+     "elements": 3238,
+     "required": 18943,
+     "met": 12514,
+     "wrong": 439,
      "uploaded": true,
-     "elementsAdded": 158,
-     "valuesFixed": 1305,
-     "valuesBroken": 111
+     "elementsAdded": 184,
+     "valuesFixed": 1267,
+     "valuesBroken": 36,
+     "newRequired": 1076,
+     "newMet": 1022
     },
     "MECH": {
-     "elements": 1208,
-     "required": 6825,
-     "met": 1997,
+     "elements": 1213,
+     "required": 6854,
+     "met": 2017,
+     "wrong": 1975,
      "uploaded": true,
-     "elementsAdded": 311,
-     "valuesFixed": 707,
-     "valuesBroken": 15
+     "elementsAdded": 312,
+     "valuesFixed": 716,
+     "valuesBroken": 11,
+     "newRequired": 1763,
+     "newMet": 716
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      8999,
-      4663
+      8959,
+      4666
      ],
      "STRUCT": [
-      3224,
-      2070
+      3238,
+      2074
      ],
      "MECH": [
-      1208,
-      351
+      1213,
+      354
      ]
     },
     "real-material": {
      "ARCH": [
-      8999,
-      4249
+      8959,
+      4173
      ],
      "STRUCT": [
-      3224,
-      2045
+      3238,
+      2072
      ]
     },
     "lod-params": {
      "ARCH": [
-      19798,
-      10231
+      19710,
+      10327
      ],
      "STRUCT": [
-      8382,
-      5393
+      8419,
+      5365
      ],
      "MECH": [
-      2416,
-      824
+      2426,
+      834
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3150,
-      1731
+      3136,
+      1717
      ],
      "STRUCT": [
-      645,
-      413
+      648,
+      414
      ]
     },
     "asset-data": {
      "ARCH": [
-      1350,
-      486
+      1344,
+      492
      ],
      "MECH": [
-      1933,
-      359
+      1941,
+      351
      ]
     },
     "rooms": {
      "ARCH": [
-      1080,
-      620
+      1075,
+      607
      ]
     },
     "worksets": {
      "ARCH": [
-      8999,
-      5380
+      8959,
+      5364
      ],
      "STRUCT": [
-      3224,
-      2452
+      3238,
+      2486
      ],
      "MECH": [
-      1208,
-      447
+      1213,
+      461
      ]
     },
     "view-names": {
      "ARCH": [
-      540,
-      282
+      538,
+      281
      ],
      "STRUCT": [
-      161,
-      102
+      162,
+      103
      ],
      "MECH": [
-      60,
-      16
+      61,
+      17
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 97.2,
      "pass": true
     },
     "clashes": {
@@ -680,7 +707,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 676,
+     "value": 677,
      "pass": true
     },
     "dup-mark": {
@@ -708,133 +735,142 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 13966,
+   "elementCount": 13973,
    "byRole": {
     "ARCH": {
-     "elements": 9358,
-     "required": 55025,
-     "met": 30292,
+     "elements": 9360,
+     "required": 55037,
+     "met": 30349,
+     "wrong": 3200,
      "uploaded": true,
-     "elementsAdded": 359,
-     "valuesFixed": 2976,
-     "valuesBroken": 326
+     "elementsAdded": 401,
+     "valuesFixed": 2783,
+     "valuesBroken": 61,
+     "newRequired": 2358,
+     "newMet": 1823
     },
     "STRUCT": {
      "elements": 3400,
      "required": 19890,
      "met": 13797,
+     "wrong": 606,
      "uploaded": true,
-     "elementsAdded": 176,
-     "valuesFixed": 1376,
-     "valuesBroken": 54
+     "elementsAdded": 162,
+     "valuesFixed": 1386,
+     "valuesBroken": 103,
+     "newRequired": 948,
+     "newMet": 881
     },
     "MECH": {
-     "elements": 1208,
-     "required": 6825,
-     "met": 1997,
+     "elements": 1213,
+     "required": 6854,
+     "met": 2017,
+     "wrong": 1975,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      9358,
-      5092
+      9360,
+      5126
      ],
      "STRUCT": [
       3400,
-      2275
+      2277
      ],
      "MECH": [
-      1208,
-      351
+      1213,
+      354
      ]
     },
     "real-material": {
      "ARCH": [
-      9358,
-      4566
+      9360,
+      4596
      ],
      "STRUCT": [
       3400,
-      2287
+      2279
      ]
     },
     "lod-params": {
      "ARCH": [
-      20588,
-      11308
+      20592,
+      11364
      ],
      "STRUCT": [
       8840,
-      5949
+      5947
      ],
      "MECH": [
-      2416,
-      824
+      2426,
+      834
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3275,
-      1874
+      3276,
+      1869
      ],
      "STRUCT": [
       680,
-      456
+      452
      ]
     },
     "asset-data": {
      "ARCH": [
       1404,
-      544
+      543
      ],
      "MECH": [
-      1933,
-      359
+      1941,
+      351
      ]
     },
     "rooms": {
      "ARCH": [
       1123,
-      679
+      680
      ]
     },
     "worksets": {
      "ARCH": [
-      9358,
-      5925
+      9360,
+      5863
      ],
      "STRUCT": [
       3400,
-      2717
+      2728
      ],
      "MECH": [
-      1208,
-      447
+      1213,
+      461
      ]
     },
     "view-names": {
      "ARCH": [
-      561,
-      304
+      562,
+      308
      ],
      "STRUCT": [
       170,
-      113
+      114
      ],
      "MECH": [
-      60,
-      16
+      61,
+      17
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.1,
+     "value": 97.0,
      "pass": true
     },
     "clashes": {
@@ -842,7 +878,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 709,
+     "value": 704,
      "pass": true
     },
     "dup-mark": {
@@ -870,123 +906,132 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 14622,
+   "elementCount": 14674,
    "byRole": {
     "ARCH": {
-     "elements": 9701,
-     "required": 57041,
-     "met": 33042,
+     "elements": 9756,
+     "required": 57365,
+     "met": 33382,
+     "wrong": 3879,
      "uploaded": true,
-     "elementsAdded": 343,
-     "valuesFixed": 3025,
-     "valuesBroken": 275
+     "elementsAdded": 396,
+     "valuesFixed": 3329,
+     "valuesBroken": 296,
+     "newRequired": 2328,
+     "newMet": 1832
     },
     "STRUCT": {
      "elements": 3400,
      "required": 19890,
      "met": 13797,
+     "wrong": 606,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 1521,
-     "required": 8594,
-     "met": 2824,
+     "elements": 1518,
+     "required": 8577,
+     "met": 2811,
+     "wrong": 2303,
      "uploaded": true,
-     "elementsAdded": 313,
-     "valuesFixed": 841,
-     "valuesBroken": 14
+     "elementsAdded": 305,
+     "valuesFixed": 815,
+     "valuesBroken": 21,
+     "newRequired": 1723,
+     "newMet": 815
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      9701,
-      5624
+      9756,
+      5597
      ],
      "STRUCT": [
       3400,
-      2275
+      2277
      ],
      "MECH": [
-      1521,
-      500
+      1518,
+      498
      ]
     },
     "real-material": {
      "ARCH": [
-      9701,
-      5066
+      9756,
+      5103
      ],
      "STRUCT": [
       3400,
-      2287
+      2279
      ]
     },
     "lod-params": {
      "ARCH": [
-      21342,
-      12238
+      21463,
+      12472
      ],
      "STRUCT": [
       8840,
-      5949
+      5947
      ],
      "MECH": [
-      3042,
-      1147
+      3036,
+      1141
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3395,
-      2055
+      3415,
+      2060
      ],
      "STRUCT": [
       680,
-      456
+      452
      ]
     },
     "asset-data": {
      "ARCH": [
-      1455,
-      579
+      1463,
+      595
      ],
      "MECH": [
-      2434,
-      512
+      2429,
+      511
      ]
     },
     "rooms": {
      "ARCH": [
-      1164,
-      732
+      1171,
+      744
      ]
     },
     "worksets": {
      "ARCH": [
-      9701,
-      6410
+      9756,
+      6472
      ],
      "STRUCT": [
       3400,
-      2717
+      2728
      ],
      "MECH": [
-      1521,
-      642
+      1518,
+      638
      ]
     },
     "view-names": {
      "ARCH": [
-      582,
-      338
+      585,
+      339
      ],
      "STRUCT": [
       170,
-      113
+      114
      ],
      "MECH": [
       76,
@@ -996,7 +1041,7 @@
    },
    "rules": {
     "on-level": {
-     "value": 97.1,
+     "value": 97.0,
      "pass": true
     },
     "clashes": {
@@ -1032,122 +1077,131 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 15346,
+   "elementCount": 15322,
    "byRole": {
     "ARCH": {
-     "elements": 10099,
-     "required": 59383,
-     "met": 36308,
+     "elements": 10095,
+     "required": 59358,
+     "met": 36042,
+     "wrong": 2671,
      "uploaded": true,
-     "elementsAdded": 398,
-     "valuesFixed": 3598,
-     "valuesBroken": 332
+     "elementsAdded": 339,
+     "valuesFixed": 2741,
+     "valuesBroken": 81,
+     "newRequired": 1993,
+     "newMet": 1515
     },
     "STRUCT": {
-     "elements": 3726,
-     "required": 21797,
-     "met": 16342,
+     "elements": 3709,
+     "required": 21697,
+     "met": 16309,
+     "wrong": 532,
      "uploaded": true,
-     "elementsAdded": 326,
-     "valuesFixed": 2671,
-     "valuesBroken": 126
+     "elementsAdded": 309,
+     "valuesFixed": 2561,
+     "valuesBroken": 49,
+     "newRequired": 1808,
+     "newMet": 1599
     },
     "MECH": {
-     "elements": 1521,
-     "required": 8594,
-     "met": 2824,
+     "elements": 1518,
+     "required": 8577,
+     "met": 2811,
+     "wrong": 2303,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      10099,
-      6159
+      10095,
+      6075
      ],
      "STRUCT": [
-      3726,
-      2691
+      3709,
+      2713
      ],
      "MECH": [
-      1521,
-      500
+      1518,
+      498
      ]
     },
     "real-material": {
      "ARCH": [
-      10099,
-      5476
+      10095,
+      5533
      ],
      "STRUCT": [
-      3726,
-      2719
+      3709,
+      2679
      ]
     },
     "lod-params": {
      "ARCH": [
-      22218,
-      13548
+      22209,
+      13331
      ],
      "STRUCT": [
-      9688,
-      7025
+      9643,
+      7029
      ],
      "MECH": [
-      3042,
-      1147
+      3036,
+      1141
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3535,
-      2264
+      3533,
+      2257
      ],
      "STRUCT": [
-      745,
-      544
+      742,
+      542
      ]
     },
     "asset-data": {
      "ARCH": [
-      1515,
-      639
+      1514,
+      638
      ],
      "MECH": [
-      2434,
-      512
+      2429,
+      511
      ]
     },
     "rooms": {
      "ARCH": [
-      1212,
-      811
+      1211,
+      810
      ]
     },
     "worksets": {
      "ARCH": [
-      10099,
-      7044
+      10095,
+      7030
      ],
      "STRUCT": [
-      3726,
-      3228
+      3709,
+      3211
      ],
      "MECH": [
-      1521,
-      642
+      1518,
+      638
      ]
     },
     "view-names": {
      "ARCH": [
       606,
-      367
+      368
      ],
      "STRUCT": [
-      186,
+      185,
       135
      ],
      "MECH": [
@@ -1158,7 +1212,7 @@
    },
    "rules": {
     "on-level": {
-     "value": 97.1,
+     "value": 97.0,
      "pass": true
     },
     "clashes": {
@@ -1166,7 +1220,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 790,
+     "value": 774,
      "pass": true
     },
     "dup-mark": {
@@ -1195,113 +1249,122 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 16221,
+   "elementCount": 16225,
    "byRole": {
     "ARCH": {
-     "elements": 10507,
-     "required": 61780,
-     "met": 39503,
+     "elements": 10508,
+     "required": 61787,
+     "met": 39449,
+     "wrong": 3428,
      "uploaded": true,
-     "elementsAdded": 408,
-     "valuesFixed": 3532,
-     "valuesBroken": 337
+     "elementsAdded": 413,
+     "valuesFixed": 3534,
+     "valuesBroken": 127,
+     "newRequired": 2428,
+     "newMet": 2046
     },
     "STRUCT": {
-     "elements": 3882,
-     "required": 22709,
-     "met": 17630,
+     "elements": 3894,
+     "required": 22780,
+     "met": 17704,
+     "wrong": 263,
      "uploaded": true,
-     "elementsAdded": 156,
-     "valuesFixed": 1361,
-     "valuesBroken": 73
+     "elementsAdded": 185,
+     "valuesFixed": 1589,
+     "valuesBroken": 194,
+     "newRequired": 1082,
+     "newMet": 1070
     },
     "MECH": {
-     "elements": 1832,
-     "required": 10351,
-     "met": 3745,
+     "elements": 1823,
+     "required": 10300,
+     "met": 3733,
+     "wrong": 2592,
      "uploaded": true,
-     "elementsAdded": 311,
-     "valuesFixed": 950,
-     "valuesBroken": 29
+     "elementsAdded": 305,
+     "valuesFixed": 931,
+     "valuesBroken": 9,
+     "newRequired": 1723,
+     "newMet": 815
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      10507,
-      6720
+      10508,
+      6708
      ],
      "STRUCT": [
-      3882,
-      2937
+      3894,
+      2939
      ],
      "MECH": [
-      1832,
-      663
+      1823,
+      655
      ]
     },
     "real-material": {
      "ARCH": [
-      10507,
-      6049
+      10508,
+      6015
      ],
      "STRUCT": [
-      3882,
-      2908
+      3894,
+      2923
      ]
     },
     "lod-params": {
      "ARCH": [
-      23115,
-      14621
+      23118,
+      14579
      ],
      "STRUCT": [
-      10093,
-      7555
+      10124,
+      7583
      ],
      "MECH": [
-      3664,
-      1521
+      3646,
+      1520
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3677,
-      2436
+      3678,
+      2469
      ],
      "STRUCT": [
-      776,
-      582
+      779,
+      583
      ]
     },
     "asset-data": {
      "ARCH": [
       1576,
-      705
+      699
      ],
      "MECH": [
-      2931,
-      692
+      2917,
+      689
      ]
     },
     "rooms": {
      "ARCH": [
       1261,
-      874
+      876
      ]
     },
     "worksets": {
      "ARCH": [
-      10507,
-      7700
+      10508,
+      7705
      ],
      "STRUCT": [
-      3882,
-      3500
+      3894,
+      3529
      ],
      "MECH": [
-      1832,
-      839
+      1823,
+      838
      ]
     },
     "view-names": {
@@ -1310,12 +1373,12 @@
       398
      ],
      "STRUCT": [
-      194,
-      148
+      195,
+      147
      ],
      "MECH": [
-      92,
-      30
+      91,
+      31
      ]
     }
    },
@@ -1329,7 +1392,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 808,
+     "value": 819,
      "pass": true
     },
     "dup-mark": {
@@ -1357,133 +1420,142 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 16774,
+   "elementCount": 16759,
    "byRole": {
     "ARCH": {
-     "elements": 10890,
-     "required": 64033,
-     "met": 42756,
+     "elements": 10902,
+     "required": 64103,
+     "met": 42667,
+     "wrong": 3257,
      "uploaded": true,
-     "elementsAdded": 383,
-     "valuesFixed": 3392,
-     "valuesBroken": 139
+     "elementsAdded": 394,
+     "valuesFixed": 3442,
+     "valuesBroken": 224,
+     "newRequired": 2317,
+     "newMet": 1819
     },
     "STRUCT": {
-     "elements": 4052,
-     "required": 23704,
-     "met": 19218,
+     "elements": 4034,
+     "required": 23599,
+     "met": 19184,
+     "wrong": 445,
      "uploaded": true,
-     "elementsAdded": 170,
-     "valuesFixed": 1724,
-     "valuesBroken": 136
+     "elementsAdded": 140,
+     "valuesFixed": 1629,
+     "valuesBroken": 149,
+     "newRequired": 819,
+     "newMet": 795
     },
     "MECH": {
-     "elements": 1832,
-     "required": 10351,
-     "met": 3745,
+     "elements": 1823,
+     "required": 10300,
+     "met": 3733,
+     "wrong": 2592,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      10890,
-      7268
+      10902,
+      7253
      ],
      "STRUCT": [
-      4052,
-      3186
+      4034,
+      3142
      ],
      "MECH": [
-      1832,
-      663
+      1823,
+      655
      ]
     },
     "real-material": {
      "ARCH": [
-      10890,
-      6518
+      10902,
+      6468
      ],
      "STRUCT": [
-      4052,
-      3195
+      4034,
+      3184
      ]
     },
     "lod-params": {
      "ARCH": [
-      23958,
-      15806
+      23984,
+      15821
      ],
      "STRUCT": [
-      10535,
-      8259
+      10488,
+      8257
      ],
      "MECH": [
-      3664,
-      1521
+      3646,
+      1520
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3811,
-      2675
+      3816,
+      2652
      ],
      "STRUCT": [
-      810,
-      632
+      807,
+      629
      ]
     },
     "asset-data": {
      "ARCH": [
-      1634,
+      1635,
       758
      ],
      "MECH": [
-      2931,
-      692
+      2917,
+      689
      ]
     },
     "rooms": {
      "ARCH": [
-      1307,
+      1308,
       950
      ]
     },
     "worksets": {
      "ARCH": [
-      10890,
-      8349
+      10902,
+      8334
      ],
      "STRUCT": [
-      4052,
-      3788
+      4034,
+      3814
      ],
      "MECH": [
-      1832,
-      839
+      1823,
+      838
      ]
     },
     "view-names": {
      "ARCH": [
-      653,
-      432
+      654,
+      431
      ],
      "STRUCT": [
-      203,
+      202,
       158
      ],
      "MECH": [
-      92,
-      30
+      91,
+      31
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 96.9,
      "pass": true
     },
     "clashes": {
@@ -1491,7 +1563,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 846,
+     "value": 834,
      "pass": true
     },
     "dup-mark": {
@@ -1520,133 +1592,142 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 17644,
+   "elementCount": 17606,
    "byRole": {
     "ARCH": {
-     "elements": 11299,
-     "required": 66439,
-     "met": 46258,
+     "elements": 11266,
+     "required": 66244,
+     "met": 46284,
+     "wrong": 2229,
      "uploaded": true,
-     "elementsAdded": 409,
-     "valuesFixed": 3918,
-     "valuesBroken": 416
+     "elementsAdded": 364,
+     "valuesFixed": 3788,
+     "valuesBroken": 171,
+     "newRequired": 2140,
+     "newMet": 1634
     },
     "STRUCT": {
-     "elements": 4217,
-     "required": 24669,
-     "met": 20766,
+     "elements": 4203,
+     "required": 24588,
+     "met": 20646,
+     "wrong": 391,
      "uploaded": true,
-     "elementsAdded": 165,
-     "valuesFixed": 1663,
-     "valuesBroken": 115
+     "elementsAdded": 169,
+     "valuesFixed": 1687,
+     "valuesBroken": 225,
+     "newRequired": 989,
+     "newMet": 965
     },
     "MECH": {
-     "elements": 2128,
-     "required": 12023,
-     "met": 4778,
+     "elements": 2137,
+     "required": 12074,
+     "met": 4797,
+     "wrong": 2683,
      "uploaded": true,
-     "elementsAdded": 296,
-     "valuesFixed": 1061,
-     "valuesBroken": 28
+     "elementsAdded": 314,
+     "valuesFixed": 1095,
+     "valuesBroken": 31,
+     "newRequired": 1774,
+     "newMet": 715
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      11299,
-      7763
+      11266,
+      7751
      ],
      "STRUCT": [
-      4217,
-      3434
+      4203,
+      3400
      ],
      "MECH": [
-      2128,
-      842
+      2137,
+      843
      ]
     },
     "real-material": {
      "ARCH": [
-      11299,
-      7001
+      11266,
+      7074
      ],
      "STRUCT": [
-      4217,
-      3433
+      4203,
+      3417
      ]
     },
     "lod-params": {
      "ARCH": [
-      24858,
-      17283
+      24785,
+      17275
      ],
      "STRUCT": [
-      10964,
-      8944
+      10928,
+      8896
      ],
      "MECH": [
-      4256,
-      1973
+      4274,
+      1982
      ]
     },
     "fire-rating": {
      "ARCH": [
-      3955,
-      2864
+      3943,
+      2867
      ],
      "STRUCT": [
-      843,
-      681
+      841,
+      687
      ]
     },
     "asset-data": {
      "ARCH": [
-      1695,
-      831
+      1690,
+      822
      ],
      "MECH": [
-      3405,
-      858
+      3419,
+      861
      ]
     },
     "rooms": {
      "ARCH": [
-      1356,
-      1030
+      1352,
+      1033
      ]
     },
     "worksets": {
      "ARCH": [
-      11299,
-      9019
+      11266,
+      8997
      ],
      "STRUCT": [
-      4217,
-      4102
+      4203,
+      4075
      ],
      "MECH": [
-      2128,
-      1066
+      2137,
+      1072
      ]
     },
     "view-names": {
      "ARCH": [
-      678,
-      467
+      676,
+      465
      ],
      "STRUCT": [
-      211,
-      172
+      210,
+      171
      ],
      "MECH": [
-      106,
+      107,
       39
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 96.9,
      "pass": true
     },
     "clashes": {
@@ -1682,133 +1763,142 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 18184,
+   "elementCount": 18165,
    "byRole": {
     "ARCH": {
-     "elements": 11679,
-     "required": 68673,
-     "met": 50032,
+     "elements": 11669,
+     "required": 68613,
+     "met": 49706,
+     "wrong": 3078,
      "uploaded": true,
-     "elementsAdded": 380,
-     "valuesFixed": 4297,
-     "valuesBroken": 523
+     "elementsAdded": 403,
+     "valuesFixed": 3644,
+     "valuesBroken": 222,
+     "newRequired": 2370,
+     "newMet": 1908
     },
     "STRUCT": {
-     "elements": 4377,
-     "required": 25605,
-     "met": 22272,
+     "elements": 4359,
+     "required": 25500,
+     "met": 22084,
+     "wrong": 257,
      "uploaded": true,
-     "elementsAdded": 160,
-     "valuesFixed": 1685,
-     "valuesBroken": 179
+     "elementsAdded": 156,
+     "valuesFixed": 1567,
+     "valuesBroken": 129,
+     "newRequired": 913,
+     "newMet": 846
     },
     "MECH": {
-     "elements": 2128,
-     "required": 12023,
-     "met": 4778,
+     "elements": 2137,
+     "required": 12074,
+     "met": 4797,
+     "wrong": 2683,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      11679,
-      8473
+      11669,
+      8364
      ],
      "STRUCT": [
-      4377,
-      3664
+      4359,
+      3645
      ],
      "MECH": [
-      2128,
-      842
+      2137,
+      843
      ]
     },
     "real-material": {
      "ARCH": [
-      11679,
-      7540
+      11669,
+      7646
      ],
      "STRUCT": [
-      4377,
-      3704
+      4359,
+      3660
      ]
     },
     "lod-params": {
      "ARCH": [
-      25694,
-      18678
+      25672,
+      18455
      ],
      "STRUCT": [
-      11380,
-      9628
+      11333,
+      9528
      ],
      "MECH": [
-      4256,
-      1973
+      4274,
+      1982
      ]
     },
     "fire-rating": {
      "ARCH": [
-      4088,
-      3090
+      4084,
+      3081
      ],
      "STRUCT": [
-      875,
-      736
+      872,
+      729
      ]
     },
     "asset-data": {
      "ARCH": [
-      1752,
-      888
+      1750,
+      884
      ],
      "MECH": [
-      3405,
-      858
+      3419,
+      861
      ]
     },
     "rooms": {
      "ARCH": [
-      1401,
-      1118
+      1400,
+      1104
      ]
     },
     "worksets": {
      "ARCH": [
-      11679,
-      9743
+      11669,
+      9670
      ],
      "STRUCT": [
-      4377,
-      4355
+      4359,
+      4337
      ],
      "MECH": [
-      2128,
-      1066
+      2137,
+      1072
      ]
     },
     "view-names": {
      "ARCH": [
-      701,
+      700,
       502
      ],
      "STRUCT": [
-      219,
+      218,
       185
      ],
      "MECH": [
-      106,
+      107,
       39
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 96.8,
+     "value": 96.9,
      "pass": true
     },
     "clashes": {
@@ -1816,7 +1906,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 907,
+     "value": 914,
      "pass": true
     },
     "dup-mark": {
@@ -1845,123 +1935,132 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 19009,
+   "elementCount": 18983,
    "byRole": {
     "ARCH": {
-     "elements": 12040,
-     "required": 70795,
-     "met": 53659,
+     "elements": 11996,
+     "required": 70537,
+     "met": 53378,
+     "wrong": 2541,
      "uploaded": true,
-     "elementsAdded": 361,
-     "valuesFixed": 3752,
-     "valuesBroken": 125
+     "elementsAdded": 327,
+     "valuesFixed": 3775,
+     "valuesBroken": 103,
+     "newRequired": 1923,
+     "newMet": 1608
     },
     "STRUCT": {
-     "elements": 4523,
-     "required": 26460,
-     "met": 23683,
+     "elements": 4539,
+     "required": 26553,
+     "met": 23682,
+     "wrong": 169,
      "uploaded": true,
-     "elementsAdded": 146,
-     "valuesFixed": 1576,
-     "valuesBroken": 165
+     "elementsAdded": 180,
+     "valuesFixed": 1791,
+     "valuesBroken": 193,
+     "newRequired": 1053,
+     "newMet": 993
     },
     "MECH": {
-     "elements": 2446,
-     "required": 13820,
-     "met": 5928,
+     "elements": 2448,
+     "required": 13831,
+     "met": 5929,
+     "wrong": 3028,
      "uploaded": true,
-     "elementsAdded": 318,
-     "valuesFixed": 1201,
-     "valuesBroken": 51
+     "elementsAdded": 311,
+     "valuesFixed": 1187,
+     "valuesBroken": 55,
+     "newRequired": 1757,
+     "newMet": 738
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      12040,
-      9061
+      11996,
+      9058
      ],
      "STRUCT": [
-      4523,
-      3965
+      4539,
+      3968
      ],
      "MECH": [
-      2446,
-      1044
+      2448,
+      1035
      ]
     },
     "real-material": {
      "ARCH": [
-      12040,
-      8206
+      11996,
+      8050
      ],
      "STRUCT": [
-      4523,
-      3952
+      4539,
+      3974
      ]
     },
     "lod-params": {
      "ARCH": [
-      26488,
-      19963
+      26391,
+      19899
      ],
      "STRUCT": [
-      11760,
-      10283
+      11801,
+      10238
      ],
      "MECH": [
-      4892,
-      2434
+      4896,
+      2421
      ]
     },
     "fire-rating": {
      "ARCH": [
-      4214,
-      3331
+      4199,
+      3297
      ],
      "STRUCT": [
-      905,
-      787
+      908,
+      789
      ]
     },
     "asset-data": {
      "ARCH": [
-      1806,
-      940
+      1799,
+      948
      ],
      "MECH": [
-      3914,
-      1069
+      3917,
+      1090
      ]
     },
     "rooms": {
      "ARCH": [
-      1445,
-      1201
+      1440,
+      1196
      ]
     },
     "worksets": {
      "ARCH": [
-      12040,
-      10414
+      11996,
+      10387
      ],
      "STRUCT": [
-      4523,
-      4500
+      4539,
+      4516
      ],
      "MECH": [
-      2446,
-      1332
+      2448,
+      1334
      ]
     },
     "view-names": {
      "ARCH": [
-      722,
+      720,
       543
      ],
      "STRUCT": [
-      226,
-      196
+      227,
+      197
      ],
      "MECH": [
       122,
@@ -1971,7 +2070,7 @@
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 96.9,
      "pass": true
     },
     "clashes": {
@@ -1979,7 +2078,7 @@
      "pass": false
     },
     "warnings": {
-     "value": 942,
+     "value": 936,
      "pass": true
     },
     "dup-mark": {
@@ -2008,127 +2107,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 19754,
+   "elementCount": 19709,
    "byRole": {
     "ARCH": {
-     "elements": 12447,
-     "required": 73188,
-     "met": 57294,
+     "elements": 12419,
+     "required": 73024,
+     "met": 57408,
+     "wrong": 2268,
      "uploaded": true,
-     "elementsAdded": 407,
-     "valuesFixed": 4114,
-     "valuesBroken": 479
+     "elementsAdded": 423,
+     "valuesFixed": 4277,
+     "valuesBroken": 247,
+     "newRequired": 2487,
+     "newMet": 2059
     },
     "STRUCT": {
-     "elements": 4717,
-     "required": 27594,
-     "met": 25227,
+     "elements": 4692,
+     "required": 27448,
+     "met": 25115,
+     "wrong": 127,
      "uploaded": true,
-     "elementsAdded": 194,
-     "valuesFixed": 1635,
-     "valuesBroken": 91
+     "elementsAdded": 153,
+     "valuesFixed": 1480,
+     "valuesBroken": 47,
+     "newRequired": 895,
+     "newMet": 813
     },
     "MECH": {
-     "elements": 2590,
-     "required": 14634,
-     "met": 6553,
+     "elements": 2598,
+     "required": 14679,
+     "met": 6547,
+     "wrong": 3226,
      "uploaded": true,
-     "elementsAdded": 144,
-     "valuesFixed": 648,
-     "valuesBroken": 23
+     "elementsAdded": 150,
+     "valuesFixed": 666,
+     "valuesBroken": 48,
+     "newRequired": 848,
+     "newMet": 357
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      12447,
-      9670
+      12419,
+      9692
      ],
      "STRUCT": [
-      4717,
-      4255
+      4692,
+      4211
      ],
      "MECH": [
-      2590,
-      1147
+      2598,
+      1145
      ]
     },
     "real-material": {
      "ARCH": [
-      12447,
-      8795
+      12419,
+      8727
      ],
      "STRUCT": [
-      4717,
-      4224
+      4692,
+      4202
      ]
     },
     "lod-params": {
      "ARCH": [
-      27383,
-      21206
+      27322,
+      21471
      ],
      "STRUCT": [
-      12264,
-      10997
+      12199,
+      10976
      ],
      "MECH": [
-      5180,
-      2688
+      5196,
+      2673
      ]
     },
     "fire-rating": {
      "ARCH": [
-      4356,
-      3593
+      4347,
+      3542
      ],
      "STRUCT": [
-      943,
-      845
+      938,
+      846
      ]
     },
     "asset-data": {
      "ARCH": [
-      1867,
-      1011
+      1863,
+      1008
      ],
      "MECH": [
-      4144,
-      1180
+      4157,
+      1202
      ]
     },
     "rooms": {
      "ARCH": [
-      1494,
-      1283
+      1490,
+      1274
      ]
     },
     "worksets": {
      "ARCH": [
-      12447,
-      11155
+      12419,
+      11115
      ],
      "STRUCT": [
-      4717,
-      4693
+      4692,
+      4669
      ],
      "MECH": [
-      2590,
-      1485
+      2598,
+      1473
      ]
     },
     "view-names": {
      "ARCH": [
-      747,
-      581
+      745,
+      579
      ],
      "STRUCT": [
-      236,
-      213
+      235,
+      211
      ],
      "MECH": [
       130,
-      53
+      54
      ]
     }
    },
@@ -2138,11 +2246,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 62,
+     "value": 67,
      "pass": false
     },
     "warnings": {
-     "value": 982,
+     "value": 979,
      "pass": true
     },
     "dup-mark": {
@@ -2171,123 +2279,132 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 20691,
+   "elementCount": 20711,
    "byRole": {
     "ARCH": {
-     "elements": 12835,
-     "required": 89054,
-     "met": 59214,
+     "elements": 12866,
+     "required": 89270,
+     "met": 59265,
+     "wrong": 4675,
      "uploaded": true,
-     "elementsAdded": 388,
-     "valuesFixed": 2240,
-     "valuesBroken": 320
+     "elementsAdded": 447,
+     "valuesFixed": 2060,
+     "valuesBroken": 203,
+     "newRequired": 3101,
+     "newMet": 2060
     },
     "STRUCT": {
-     "elements": 4816,
-     "required": 33245,
-     "met": 27526,
+     "elements": 4813,
+     "required": 33223,
+     "met": 27446,
+     "wrong": 313,
      "uploaded": true,
-     "elementsAdded": 99,
-     "valuesFixed": 2360,
-     "valuesBroken": 61
+     "elementsAdded": 121,
+     "valuesFixed": 2479,
+     "valuesBroken": 148,
+     "newRequired": 835,
+     "newMet": 772
     },
     "MECH": {
-     "elements": 3040,
-     "required": 20267,
-     "met": 7184,
+     "elements": 3032,
+     "required": 20215,
+     "met": 7227,
+     "wrong": 5178,
      "uploaded": true,
-     "elementsAdded": 450,
-     "valuesFixed": 674,
-     "valuesBroken": 43
+     "elementsAdded": 434,
+     "valuesFixed": 696,
+     "valuesBroken": 16,
+     "newRequired": 2894,
+     "newMet": 696
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      15145,
-      10042
+      15182,
+      9957
      ],
      "STRUCT": [
-      5683,
-      4530
+      5679,
+      4563
      ],
      "MECH": [
-      3587,
-      1231
+      3578,
+      1257
      ]
     },
     "real-material": {
      "ARCH": [
-      15145,
-      8906
+      15182,
+      8952
      ],
      "STRUCT": [
-      5683,
-      4558
+      5679,
+      4511
      ]
     },
     "lod-params": {
      "ARCH": [
-      33320,
-      22045
+      33400,
+      22153
      ],
      "STRUCT": [
-      14775,
-      11840
+      14766,
+      11771
      ],
      "MECH": [
-      7174,
-      2958
+      7156,
+      2966
      ]
     },
     "fire-rating": {
      "ARCH": [
-      5301,
-      3682
+      5314,
+      3659
      ],
      "STRUCT": [
-      1137,
-      905
+      1136,
+      908
      ]
     },
     "asset-data": {
      "ARCH": [
-      2272,
-      1052
+      2277,
+      1040
      ],
      "MECH": [
-      5740,
-      1325
+      5724,
+      1320
      ]
     },
     "rooms": {
      "ARCH": [
-      1817,
-      1325
+      1822,
+      1313
      ]
     },
     "worksets": {
      "ARCH": [
-      15145,
-      11565
+      15182,
+      11589
      ],
      "STRUCT": [
-      5683,
-      5466
+      5679,
+      5465
      ],
      "MECH": [
-      3587,
-      1611
+      3578,
+      1625
      ]
     },
     "view-names": {
      "ARCH": [
-      909,
-      597
+      911,
+      602
      ],
      "STRUCT": [
       284,
-      227
+      228
      ],
      "MECH": [
       179,
@@ -2297,15 +2414,15 @@
    },
    "rules": {
     "on-level": {
-     "value": 96.8,
+     "value": 96.9,
      "pass": true
     },
     "clashes": {
-     "value": 75,
+     "value": 73,
      "pass": false
     },
     "warnings": {
-     "value": 1034,
+     "value": 1014,
      "pass": true
     },
     "dup-mark": {
@@ -2333,123 +2450,132 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 21193,
+   "elementCount": 21190,
    "byRole": {
     "ARCH": {
-     "elements": 13234,
-     "required": 91822,
-     "met": 62676,
+     "elements": 13244,
+     "required": 91892,
+     "met": 63098,
+     "wrong": 3544,
      "uploaded": true,
-     "elementsAdded": 399,
-     "valuesFixed": 3916,
-     "valuesBroken": 454
+     "elementsAdded": 378,
+     "valuesFixed": 4016,
+     "valuesBroken": 183,
+     "newRequired": 2623,
+     "newMet": 2082
     },
     "STRUCT": {
-     "elements": 4919,
-     "required": 33954,
-     "met": 28449,
+     "elements": 4914,
+     "required": 33923,
+     "met": 28455,
+     "wrong": 557,
      "uploaded": true,
-     "elementsAdded": 103,
-     "valuesFixed": 1106,
-     "valuesBroken": 183
+     "elementsAdded": 101,
+     "valuesFixed": 1308,
+     "valuesBroken": 299,
+     "newRequired": 697,
+     "newMet": 670
     },
     "MECH": {
-     "elements": 3040,
-     "required": 20267,
-     "met": 7184,
+     "elements": 3032,
+     "required": 20215,
+     "met": 7227,
+     "wrong": 5178,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      15616,
-      10631
+      15628,
+      10581
      ],
      "STRUCT": [
-      5804,
-      4701
+      5799,
+      4714
      ],
      "MECH": [
-      3587,
-      1231
+      3578,
+      1257
      ]
     },
     "real-material": {
      "ARCH": [
-      15616,
-      9648
+      15628,
+      9599
      ],
      "STRUCT": [
-      5804,
-      4701
+      5799,
+      4678
      ]
     },
     "lod-params": {
      "ARCH": [
-      34355,
-      23219
+      34381,
+      23570
      ],
      "STRUCT": [
-      15091,
-      12195
+      15076,
+      12224
      ],
      "MECH": [
-      7174,
-      2958
+      7156,
+      2966
      ]
     },
     "fire-rating": {
      "ARCH": [
-      5466,
-      3876
+      5470,
+      3892
      ],
      "STRUCT": [
-      1161,
-      943
+      1160,
+      937
      ]
     },
     "asset-data": {
      "ARCH": [
-      2342,
-      1107
+      2344,
+      1102
      ],
      "MECH": [
-      5740,
-      1325
+      5724,
+      1320
      ]
     },
     "rooms": {
      "ARCH": [
-      1874,
+      1875,
       1398
      ]
     },
     "worksets": {
      "ARCH": [
-      15616,
-      12163
+      15628,
+      12315
      ],
      "STRUCT": [
-      5804,
-      5672
+      5799,
+      5666
      ],
      "MECH": [
-      3587,
-      1611
+      3578,
+      1625
      ]
     },
     "view-names": {
      "ARCH": [
-      937,
-      634
+      938,
+      641
      ],
      "STRUCT": [
       290,
-      237
+      236
      ],
      "MECH": [
       179,
@@ -2463,11 +2589,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 81,
+     "value": 84,
      "pass": false
     },
     "warnings": {
-     "value": 1058,
+     "value": 1068,
      "pass": true
     },
     "dup-mark": {
@@ -2495,127 +2621,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 22153,
+   "elementCount": 22192,
    "byRole": {
     "ARCH": {
-     "elements": 13234,
-     "required": 91822,
-     "met": 62676,
+     "elements": 13244,
+     "required": 91892,
+     "met": 63098,
+     "wrong": 3544,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "STRUCT": {
-     "elements": 5023,
-     "required": 34673,
-     "met": 29450,
+     "elements": 5043,
+     "required": 34813,
+     "met": 29718,
+     "wrong": 316,
      "uploaded": true,
-     "elementsAdded": 104,
-     "valuesFixed": 1198,
-     "valuesBroken": 197
+     "elementsAdded": 129,
+     "valuesFixed": 1601,
+     "valuesBroken": 338,
+     "newRequired": 891,
+     "newMet": 877
     },
     "MECH": {
-     "elements": 3896,
-     "required": 25975,
-     "met": 9846,
+     "elements": 3905,
+     "required": 26035,
+     "met": 9763,
+     "wrong": 5764,
      "uploaded": true,
-     "elementsAdded": 856,
-     "valuesFixed": 2686,
-     "valuesBroken": 24
+     "elementsAdded": 873,
+     "valuesFixed": 2588,
+     "valuesBroken": 52,
+     "newRequired": 5820,
+     "newMet": 2310
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      15616,
-      10631
+      15628,
+      10581
      ],
      "STRUCT": [
-      5927,
-      4872
+      5951,
+      4912
      ],
      "MECH": [
-      4597,
-      1716
+      4608,
+      1702
      ]
     },
     "real-material": {
      "ARCH": [
-      15616,
-      9648
+      15628,
+      9599
      ],
      "STRUCT": [
-      5927,
-      4877
+      5951,
+      4913
      ]
     },
     "lod-params": {
      "ARCH": [
-      34355,
-      23219
+      34381,
+      23570
      ],
      "STRUCT": [
-      15411,
-      12640
+      15472,
+      12782
      ],
      "MECH": [
-      9195,
-      4041
+      9216,
+      4018
      ]
     },
     "fire-rating": {
      "ARCH": [
-      5466,
-      3876
+      5470,
+      3892
      ],
      "STRUCT": [
-      1185,
-      981
+      1190,
+      988
      ]
     },
     "asset-data": {
      "ARCH": [
-      2342,
-      1107
+      2344,
+      1102
      ],
      "MECH": [
-      7356,
-      1788
+      7373,
+      1771
      ]
     },
     "rooms": {
      "ARCH": [
-      1874,
+      1875,
       1398
      ]
     },
     "worksets": {
      "ARCH": [
-      15616,
-      12163
+      15628,
+      12315
      ],
      "STRUCT": [
-      5927,
-      5835
+      5951,
+      5876
      ],
      "MECH": [
-      4597,
-      2222
+      4608,
+      2191
      ]
     },
     "view-names": {
      "ARCH": [
-      937,
-      634
+      938,
+      641
      ],
      "STRUCT": [
-      296,
-      245
+      298,
+      247
      ],
      "MECH": [
       230,
-      79
+      81
      ]
     }
    },
@@ -2625,11 +2760,11 @@
      "pass": false
     },
     "clashes": {
-     "value": 89,
+     "value": 92,
      "pass": false
     },
     "warnings": {
-     "value": 1111,
+     "value": 1107,
      "pass": true
     },
     "dup-mark": {
@@ -2657,127 +2792,136 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 23029,
+   "elementCount": 23164,
    "byRole": {
     "ARCH": {
-     "elements": 14012,
-     "required": 97220,
-     "met": 67188,
+     "elements": 14110,
+     "required": 97901,
+     "met": 67526,
+     "wrong": 4893,
      "uploaded": true,
-     "elementsAdded": 778,
-     "valuesFixed": 4654,
-     "valuesBroken": 142
+     "elementsAdded": 866,
+     "valuesFixed": 4918,
+     "valuesBroken": 490,
+     "newRequired": 6009,
+     "newMet": 4918
     },
     "STRUCT": {
-     "elements": 5121,
-     "required": 35351,
-     "met": 30608,
+     "elements": 5149,
+     "required": 35544,
+     "met": 30692,
+     "wrong": 263,
      "uploaded": true,
-     "elementsAdded": 98,
-     "valuesFixed": 1353,
-     "valuesBroken": 195
+     "elementsAdded": 106,
+     "valuesFixed": 1204,
+     "valuesBroken": 230,
+     "newRequired": 732,
+     "newMet": 716
     },
     "MECH": {
-     "elements": 3896,
-     "required": 25975,
-     "met": 9846,
+     "elements": 3905,
+     "required": 26035,
+     "met": 9763,
+     "wrong": 5764,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      16534,
-      11267
+      16650,
+      11471
      ],
      "STRUCT": [
-      6043,
-      5056
+      6076,
+      5065
      ],
      "MECH": [
-      4597,
-      1716
+      4608,
+      1702
      ]
     },
     "real-material": {
      "ARCH": [
-      16534,
-      10289
+      16650,
+      10213
      ],
      "STRUCT": [
-      6043,
-      5075
+      6076,
+      5078
      ]
     },
     "lod-params": {
      "ARCH": [
-      36375,
-      25025
+      36630,
+      25113
      ],
      "STRUCT": [
-      15711,
-      13202
+      15797,
+      13236
      ],
      "MECH": [
-      9195,
-      4041
+      9216,
+      4018
      ]
     },
     "fire-rating": {
      "ARCH": [
-      5787,
-      4148
+      5827,
+      4212
      ],
      "STRUCT": [
-      1209,
-      1011
+      1215,
+      1012
      ]
     },
     "asset-data": {
      "ARCH": [
-      2480,
-      1183
+      2497,
+      1202
      ],
      "MECH": [
-      7356,
-      1788
+      7373,
+      1771
      ]
     },
     "rooms": {
      "ARCH": [
-      1984,
-      1505
+      1998,
+      1512
      ]
     },
     "worksets": {
      "ARCH": [
-      16534,
-      13086
+      16650,
+      13119
      ],
      "STRUCT": [
-      6043,
-      6013
+      6076,
+      6046
      ],
      "MECH": [
-      4597,
-      2222
+      4608,
+      2191
      ]
     },
     "view-names": {
      "ARCH": [
-      992,
-      685
+      999,
+      684
      ],
      "STRUCT": [
-      302,
-      251
+      304,
+      255
      ],
      "MECH": [
       230,
-      79
+      81
      ]
     }
    },
@@ -2787,11 +2931,11 @@
      "pass": false
     },
     "clashes": {
-     "value": 103,
+     "value": 100,
      "pass": false
     },
     "warnings": {
-     "value": 1157,
+     "value": 1166,
      "pass": true
     },
     "dup-mark": {
@@ -2819,141 +2963,150 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 24019,
+   "elementCount": 24117,
    "byRole": {
     "ARCH": {
-     "elements": 14012,
-     "required": 97220,
-     "met": 67188,
+     "elements": 14110,
+     "required": 97901,
+     "met": 67526,
+     "wrong": 4893,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "STRUCT": {
-     "elements": 5250,
-     "required": 36241,
-     "met": 31622,
+     "elements": 5255,
+     "required": 36275,
+     "met": 31842,
+     "wrong": 433,
      "uploaded": true,
-     "elementsAdded": 129,
-     "valuesFixed": 1267,
-     "valuesBroken": 253
+     "elementsAdded": 106,
+     "valuesFixed": 1335,
+     "valuesBroken": 185,
+     "newRequired": 732,
+     "newMet": 690
     },
     "MECH": {
-     "elements": 4757,
-     "required": 31715,
-     "met": 12539,
+     "elements": 4752,
+     "required": 31681,
+     "met": 12560,
+     "wrong": 7366,
      "uploaded": true,
-     "elementsAdded": 861,
-     "valuesFixed": 2811,
-     "valuesBroken": 118
+     "elementsAdded": 847,
+     "valuesFixed": 2822,
+     "valuesBroken": 25,
+     "newRequired": 5647,
+     "newMet": 2273
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      16534,
-      11267
+      16650,
+      11471
      ],
      "STRUCT": [
-      6195,
-      5292
+      6201,
+      5280
      ],
      "MECH": [
-      5613,
-      2198
+      5607,
+      2195
      ]
     },
     "real-material": {
      "ARCH": [
-      16534,
-      10289
+      16650,
+      10213
      ],
      "STRUCT": [
-      6195,
-      5232
+      6201,
+      5282
      ]
     },
     "lod-params": {
      "ARCH": [
-      36375,
-      25025
+      36630,
+      25113
      ],
      "STRUCT": [
-      16107,
-      13613
+      16122,
+      13797
      ],
      "MECH": [
-      11227,
-      5204
+      11215,
+      5182
      ]
     },
     "fire-rating": {
      "ARCH": [
-      5787,
-      4148
+      5827,
+      4212
      ],
      "STRUCT": [
-      1239,
-      1058
+      1240,
+      1048
      ]
     },
     "asset-data": {
      "ARCH": [
-      2480,
-      1183
+      2497,
+      1202
      ],
      "MECH": [
-      8981,
-      2239
+      8972,
+      2236
      ]
     },
     "rooms": {
      "ARCH": [
-      1984,
-      1505
+      1998,
+      1512
      ]
     },
     "worksets": {
      "ARCH": [
-      16534,
-      13086
+      16650,
+      13119
      ],
      "STRUCT": [
-      6195,
-      6164
+      6201,
+      6170
      ],
      "MECH": [
-      5613,
-      2796
+      5607,
+      2844
      ]
     },
     "view-names": {
      "ARCH": [
-      992,
-      685
+      999,
+      684
      ],
      "STRUCT": [
       310,
-      263
+      265
      ],
      "MECH": [
-      281,
-      102
+      280,
+      103
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 94.4,
+     "value": 94.3,
      "pass": false
     },
     "clashes": {
-     "value": 106,
+     "value": 109,
      "pass": false
     },
     "warnings": {
-     "value": 1203,
+     "value": 1191,
      "pass": true
     },
     "dup-mark": {
@@ -2981,127 +3134,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 24550,
+   "elementCount": 24662,
    "byRole": {
     "ARCH": {
-     "elements": 14012,
-     "required": 97220,
-     "met": 67188,
+     "elements": 14110,
+     "required": 97901,
+     "met": 67526,
+     "wrong": 4893,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "STRUCT": {
-     "elements": 5337,
-     "required": 36843,
-     "met": 32585,
+     "elements": 5333,
+     "required": 36815,
+     "met": 32515,
+     "wrong": 396,
      "uploaded": true,
-     "elementsAdded": 87,
-     "valuesFixed": 1237,
-     "valuesBroken": 274
+     "elementsAdded": 78,
+     "valuesFixed": 763,
+     "valuesBroken": 90,
+     "newRequired": 538,
+     "newMet": 521
     },
     "MECH": {
-     "elements": 5201,
-     "required": 34674,
-     "met": 14131,
+     "elements": 5219,
+     "required": 34794,
+     "met": 14164,
+     "wrong": 7552,
      "uploaded": true,
-     "elementsAdded": 444,
-     "valuesFixed": 1741,
-     "valuesBroken": 149
+     "elementsAdded": 467,
+     "valuesFixed": 1686,
+     "valuesBroken": 82,
+     "newRequired": 3113,
+     "newMet": 1185
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      16534,
-      11267
+      16650,
+      11471
      ],
      "STRUCT": [
-      6298,
-      5411
+      6293,
+      5404
      ],
      "MECH": [
-      6137,
-      2480
+      6158,
+      2431
      ]
     },
     "real-material": {
      "ARCH": [
-      16534,
-      10289
+      16650,
+      10213
      ],
      "STRUCT": [
-      6298,
-      5429
+      6293,
+      5393
      ]
     },
     "lod-params": {
      "ARCH": [
-      36375,
-      25025
+      36630,
+      25113
      ],
      "STRUCT": [
-      16374,
-      14129
+      16362,
+      14090
      ],
      "MECH": [
-      12274,
-      5807
+      12317,
+      5849
      ]
     },
     "fire-rating": {
      "ARCH": [
-      5787,
-      4148
+      5827,
+      4212
      ],
      "STRUCT": [
-      1260,
-      1079
+      1259,
+      1093
      ]
     },
     "asset-data": {
      "ARCH": [
-      2480,
-      1183
+      2497,
+      1202
      ],
      "MECH": [
-      9819,
-      2581
+      9853,
+      2562
      ]
     },
     "rooms": {
      "ARCH": [
-      1984,
-      1505
+      1998,
+      1512
      ]
     },
     "worksets": {
      "ARCH": [
-      16534,
-      13086
+      16650,
+      13119
      ],
      "STRUCT": [
-      6298,
-      6267
+      6293,
+      6262
      ],
      "MECH": [
-      6137,
-      3147
+      6158,
+      3205
      ]
     },
     "view-names": {
      "ARCH": [
-      992,
-      685
+      999,
+      684
      ],
      "STRUCT": [
       315,
-      270
+      273
      ],
      "MECH": [
-      307,
-      116
+      308,
+      117
      ]
     }
    },
@@ -3111,11 +3273,11 @@
      "pass": false
     },
     "clashes": {
-     "value": 119,
+     "value": 116,
      "pass": false
     },
     "warnings": {
-     "value": 1242,
+     "value": 1245,
      "pass": true
     },
     "dup-mark": {
@@ -3158,127 +3320,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 28180,
+   "elementCount": 28176,
    "byRole": {
     "ARCH": {
-     "elements": 15705,
-     "required": 108968,
-     "met": 76846,
+     "elements": 15694,
+     "required": 108892,
+     "met": 76690,
+     "wrong": 4903,
      "uploaded": true,
-     "elementsAdded": 386,
-     "valuesFixed": 2308,
-     "valuesBroken": 244
+     "elementsAdded": 342,
+     "valuesFixed": 2588,
+     "valuesBroken": 752,
+     "newRequired": 2373,
+     "newMet": 1804
     },
     "STRUCT": {
-     "elements": 5554,
-     "required": 38341,
-     "met": 34817,
+     "elements": 5564,
+     "required": 38409,
+     "met": 34721,
+     "wrong": 213,
      "uploaded": true,
-     "elementsAdded": 95,
-     "valuesFixed": 1429,
-     "valuesBroken": 369
+     "elementsAdded": 101,
+     "valuesFixed": 1027,
+     "valuesBroken": 172,
+     "newRequired": 697,
+     "newMet": 630
     },
     "MECH": {
-     "elements": 6921,
-     "required": 46143,
-     "met": 20304,
+     "elements": 6918,
+     "required": 46121,
+     "met": 20370,
+     "wrong": 10320,
      "uploaded": true,
-     "elementsAdded": 843,
-     "valuesFixed": 3341,
-     "valuesBroken": 103
+     "elementsAdded": 884,
+     "valuesFixed": 3573,
+     "valuesBroken": 93,
+     "newRequired": 5893,
+     "newMet": 2941
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      18532,
-      12943
+      18519,
+      13071
      ],
      "STRUCT": [
-      6554,
-      5821
+      6566,
+      5799
      ],
      "MECH": [
-      8167,
-      3555
+      8163,
+      3537
      ]
     },
     "real-material": {
      "ARCH": [
-      18532,
-      11692
+      18519,
+      11592
      ],
      "STRUCT": [
-      6554,
-      5822
+      6566,
+      5816
      ]
     },
     "lod-params": {
      "ARCH": [
-      40770,
-      28671
+      40742,
+      28467
      ],
      "STRUCT": [
-      17040,
-      15205
+      17070,
+      15121
      ],
      "MECH": [
-      16334,
-      8425
+      16326,
+      8404
      ]
     },
     "fire-rating": {
      "ARCH": [
-      6486,
-      4795
+      6482,
+      4761
      ],
      "STRUCT": [
-      1311,
-      1157
+      1313,
+      1160
      ]
     },
     "asset-data": {
      "ARCH": [
-      2780,
-      1377
+      2778,
+      1354
      ],
      "MECH": [
-      13067,
-      3600
+      13061,
+      3722
      ]
     },
     "rooms": {
      "ARCH": [
-      2224,
-      1704
+      2222,
+      1710
      ]
     },
     "worksets": {
      "ARCH": [
-      18532,
-      14885
+      18519,
+      14963
      ],
      "STRUCT": [
-      6554,
-      6521
+      6566,
+      6533
      ],
      "MECH": [
-      8167,
-      4556
+      8163,
+      4541
      ]
     },
     "view-names": {
      "ARCH": [
-      1112,
-      779
+      1111,
+      772
      ],
      "STRUCT": [
       328,
-      291
+      292
      ],
      "MECH": [
       408,
-      168
+      166
      ]
     }
    },
@@ -3321,133 +3492,142 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 29507,
+   "elementCount": 29632,
    "byRole": {
     "ARCH": {
-     "elements": 16105,
-     "required": 111743,
-     "met": 82456,
+     "elements": 16198,
+     "required": 112390,
+     "met": 82532,
+     "wrong": 4581,
      "uploaded": true,
-     "elementsAdded": 400,
-     "valuesFixed": 6463,
-     "valuesBroken": 853
+     "elementsAdded": 504,
+     "valuesFixed": 6283,
+     "valuesBroken": 441,
+     "newRequired": 3497,
+     "newMet": 2958
     },
     "STRUCT": {
-     "elements": 5651,
-     "required": 39008,
-     "met": 35854,
+     "elements": 5686,
+     "required": 39249,
+     "met": 36040,
+     "wrong": 234,
      "uploaded": true,
-     "elementsAdded": 97,
-     "valuesFixed": 1309,
-     "valuesBroken": 272
+     "elementsAdded": 122,
+     "valuesFixed": 1725,
+     "valuesBroken": 406,
+     "newRequired": 842,
+     "newMet": 797
     },
     "MECH": {
-     "elements": 7751,
-     "required": 51675,
-     "met": 23734,
+     "elements": 7748,
+     "required": 51656,
+     "met": 23516,
+     "wrong": 10312,
      "uploaded": true,
      "elementsAdded": 830,
-     "valuesFixed": 3484,
-     "valuesBroken": 54
+     "valuesFixed": 3305,
+     "valuesBroken": 159,
+     "newRequired": 5534,
+     "newMet": 2644
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      19004,
-      13801
+      19114,
+      13953
      ],
      "STRUCT": [
-      6668,
-      5999
+      6709,
+      6009
      ],
      "MECH": [
-      9146,
-      4168
+      9143,
+      4172
      ]
     },
     "real-material": {
      "ARCH": [
-      19004,
-      12548
+      19114,
+      12490
      ],
      "STRUCT": [
-      6668,
-      6034
+      6709,
+      6041
      ]
     },
     "lod-params": {
      "ARCH": [
-      41809,
-      30772
+      42050,
+      30596
      ],
      "STRUCT": [
-      17337,
-      15679
+      17445,
+      15801
      ],
      "MECH": [
-      18292,
-      9793
+      18285,
+      9611
      ]
     },
     "fire-rating": {
      "ARCH": [
-      6651,
-      5127
+      6690,
+      5178
      ],
      "STRUCT": [
-      1334,
-      1208
+      1342,
+      1211
      ]
     },
     "asset-data": {
      "ARCH": [
-      2851,
-      1470
+      2867,
+      1475
      ],
      "MECH": [
-      14634,
-      4235
+      14628,
+      4245
      ]
     },
     "rooms": {
      "ARCH": [
-      2280,
-      1825
+      2294,
+      1861
      ]
     },
     "worksets": {
      "ARCH": [
-      19004,
-      16081
+      19114,
+      16142
      ],
      "STRUCT": [
-      6668,
-      6635
+      6709,
+      6675
      ],
      "MECH": [
-      9146,
-      5344
+      9143,
+      5295
      ]
     },
     "view-names": {
      "ARCH": [
-      1140,
-      832
+      1147,
+      837
      ],
      "STRUCT": [
-      333,
-      299
+      335,
+      303
      ],
      "MECH": [
       457,
-      194
+      193
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 96.8,
+     "value": 97.0,
      "pass": true
     },
     "clashes": {
@@ -3455,7 +3635,7 @@
      "pass": false
     },
     "warnings": {
-     "value": 1378,
+     "value": 1387,
      "pass": true
     },
     "dup-mark": {
@@ -3484,141 +3664,150 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 30978,
+   "elementCount": 31022,
    "byRole": {
     "ARCH": {
-     "elements": 16584,
-     "required": 115065,
-     "met": 88274,
+     "elements": 16578,
+     "required": 115024,
+     "met": 88585,
+     "wrong": 3117,
      "uploaded": true,
-     "elementsAdded": 479,
-     "valuesFixed": 6557,
-     "valuesBroken": 739
+     "elementsAdded": 380,
+     "valuesFixed": 6292,
+     "valuesBroken": 239,
+     "newRequired": 2637,
+     "newMet": 2090
     },
     "STRUCT": {
-     "elements": 5791,
-     "required": 39975,
-     "met": 37029,
+     "elements": 5793,
+     "required": 39990,
+     "met": 37126,
+     "wrong": 312,
      "uploaded": true,
-     "elementsAdded": 140,
-     "valuesFixed": 1402,
-     "valuesBroken": 227
+     "elementsAdded": 107,
+     "valuesFixed": 1303,
+     "valuesBroken": 217,
+     "newRequired": 739,
+     "newMet": 692
     },
     "MECH": {
-     "elements": 8603,
-     "required": 57357,
-     "met": 27301,
+     "elements": 8651,
+     "required": 57675,
+     "met": 27391,
+     "wrong": 11185,
      "uploaded": true,
-     "elementsAdded": 852,
-     "valuesFixed": 3830,
-     "valuesBroken": 263
+     "elementsAdded": 903,
+     "valuesFixed": 3988,
+     "valuesBroken": 113,
+     "newRequired": 6020,
+     "newMet": 2315
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      19569,
-      15040
+      19562,
+      14980
      ],
      "STRUCT": [
-      6833,
-      6215
+      6836,
+      6203
      ],
      "MECH": [
-      10152,
-      4758
+      10208,
+      4765
      ]
     },
     "real-material": {
      "ARCH": [
-      19569,
-      13402
+      19562,
+      13532
      ],
      "STRUCT": [
-      6833,
-      6228
+      6836,
+      6246
      ]
     },
     "lod-params": {
      "ARCH": [
-      43052,
-      32707
+      43036,
+      32882
      ],
      "STRUCT": [
-      17767,
-      16232
+      17773,
+      16322
      ],
      "MECH": [
-      20303,
-      11249
+      20416,
+      11230
      ]
     },
     "fire-rating": {
      "ARCH": [
-      6849,
-      5488
+      6847,
+      5476
      ],
      "STRUCT": [
       1367,
-      1242
+      1241
      ]
     },
     "asset-data": {
      "ARCH": [
-      2935,
-      1571
+      2934,
+      1585
      ],
      "MECH": [
-      16242,
-      4897
+      16333,
+      5035
      ]
     },
     "rooms": {
      "ARCH": [
-      2348,
-      1981
+      2347,
+      1966
      ]
     },
     "worksets": {
      "ARCH": [
-      19569,
-      17195
+      19562,
+      17266
      ],
      "STRUCT": [
-      6833,
-      6799
+      6836,
+      6802
      ],
      "MECH": [
-      10152,
-      6173
+      10208,
+      6136
      ]
     },
     "view-names": {
      "ARCH": [
       1174,
-      890
+      898
      ],
      "STRUCT": [
       342,
-      313
+      312
      ],
      "MECH": [
-      508,
-      224
+      510,
+      225
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 96.9,
      "pass": true
     },
     "clashes": {
-     "value": 71,
+     "value": 75,
      "pass": false
     },
     "warnings": {
-     "value": 1408,
+     "value": 1423,
      "pass": true
     },
     "dup-mark": {
@@ -3647,127 +3836,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 32284,
+   "elementCount": 32325,
    "byRole": {
     "ARCH": {
-     "elements": 16922,
-     "required": 117412,
-     "met": 94222,
+     "elements": 16959,
+     "required": 117670,
+     "met": 94292,
+     "wrong": 2844,
      "uploaded": true,
-     "elementsAdded": 338,
-     "valuesFixed": 6167,
-     "valuesBroken": 219
+     "elementsAdded": 381,
+     "valuesFixed": 6185,
+     "valuesBroken": 478,
+     "newRequired": 2644,
+     "newMet": 2240
     },
     "STRUCT": {
-     "elements": 5886,
-     "required": 40629,
-     "met": 38001,
+     "elements": 5887,
+     "required": 40638,
+     "met": 37996,
+     "wrong": 167,
      "uploaded": true,
-     "elementsAdded": 95,
-     "valuesFixed": 1233,
-     "valuesBroken": 261
+     "elementsAdded": 94,
+     "valuesFixed": 997,
+     "valuesBroken": 127,
+     "newRequired": 649,
+     "newMet": 639
     },
     "MECH": {
-     "elements": 9476,
-     "required": 63177,
-     "met": 33777,
+     "elements": 9479,
+     "required": 63195,
+     "met": 33937,
+     "wrong": 10527,
      "uploaded": true,
-     "elementsAdded": 873,
-     "valuesFixed": 6717,
-     "valuesBroken": 241
+     "elementsAdded": 828,
+     "valuesFixed": 6776,
+     "valuesBroken": 230,
+     "newRequired": 5520,
+     "newMet": 2484
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      19968,
-      15787
+      20012,
+      15993
      ],
      "STRUCT": [
-      6945,
-      6405
+      6947,
+      6394
      ],
      "MECH": [
-      11182,
-      5904
+      11185,
+      5907
      ]
     },
     "real-material": {
      "ARCH": [
-      19968,
-      14326
+      20012,
+      14315
      ],
      "STRUCT": [
-      6945,
-      6395
+      6947,
+      6412
      ]
     },
     "lod-params": {
      "ARCH": [
-      43930,
-      35159
+      44026,
+      35059
      ],
      "STRUCT": [
-      18058,
-      16689
+      18061,
+      16663
      ],
      "MECH": [
-      22363,
-      13817
+      22370,
+      13969
      ]
     },
     "fire-rating": {
      "ARCH": [
-      6989,
-      5870
+      7004,
+      5869
      ],
      "STRUCT": [
       1389,
-      1282
+      1292
      ]
     },
     "asset-data": {
      "ARCH": [
-      2995,
-      1683
+      3002,
+      1675
      ],
      "MECH": [
-      17891,
-      6160
+      17896,
+      6108
      ]
     },
     "rooms": {
      "ARCH": [
-      2396,
-      2106
+      2401,
+      2102
      ]
     },
     "worksets": {
      "ARCH": [
-      19968,
-      18341
+      20012,
+      18318
      ],
      "STRUCT": [
-      6945,
-      6910
+      6947,
+      6912
      ],
      "MECH": [
-      11182,
-      7615
+      11185,
+      7676
      ]
     },
     "view-names": {
      "ARCH": [
-      1198,
-      950
+      1201,
+      961
      ],
      "STRUCT": [
       347,
-      320
+      323
      ],
      "MECH": [
       559,
-      281
+      277
      ]
     }
    },
@@ -3777,11 +3975,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 60,
+     "value": 65,
      "pass": false
     },
     "warnings": {
-     "value": 1589,
+     "value": 1581,
      "pass": false
     },
     "dup-mark": {
@@ -3810,141 +4008,150 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 33723,
+   "elementCount": 33754,
    "byRole": {
     "ARCH": {
-     "elements": 17396,
-     "required": 120700,
-     "met": 100652,
+     "elements": 17406,
+     "required": 120770,
+     "met": 100361,
+     "wrong": 2543,
      "uploaded": true,
-     "elementsAdded": 474,
-     "valuesFixed": 7010,
-     "valuesBroken": 580
+     "elementsAdded": 447,
+     "valuesFixed": 6456,
+     "valuesBroken": 387,
+     "newRequired": 3101,
+     "newMet": 2402
     },
     "STRUCT": {
-     "elements": 6014,
-     "required": 41516,
-     "met": 39283,
+     "elements": 5980,
+     "required": 41279,
+     "met": 39091,
+     "wrong": 195,
      "uploaded": true,
-     "elementsAdded": 128,
-     "valuesFixed": 1379,
-     "valuesBroken": 97
+     "elementsAdded": 93,
+     "valuesFixed": 1348,
+     "valuesBroken": 253,
+     "newRequired": 642,
+     "newMet": 570
     },
     "MECH": {
-     "elements": 10313,
-     "required": 68756,
-     "met": 41548,
+     "elements": 10368,
+     "required": 69123,
+     "met": 41497,
+     "wrong": 10324,
      "uploaded": true,
-     "elementsAdded": 837,
-     "valuesFixed": 7965,
-     "valuesBroken": 194
+     "elementsAdded": 889,
+     "valuesFixed": 7942,
+     "valuesBroken": 382,
+     "newRequired": 5927,
+     "newMet": 2525
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      20527,
-      17010
+      20539,
+      17058
      ],
      "STRUCT": [
-      7097,
-      6625
+      7056,
+      6651
      ],
      "MECH": [
-      12169,
-      7271
+      12234,
+      7240
      ]
     },
     "real-material": {
      "ARCH": [
-      20527,
-      15356
+      20539,
+      15188
      ],
      "STRUCT": [
-      7097,
-      6619
+      7056,
+      6634
      ]
     },
     "lod-params": {
      "ARCH": [
-      45160,
-      37516
+      45186,
+      37317
      ],
      "STRUCT": [
-      18451,
-      17310
+      18347,
+      17124
      ],
      "MECH": [
-      24339,
-      17005
+      24468,
+      16973
      ]
     },
     "fire-rating": {
      "ARCH": [
-      7185,
-      6240
+      7189,
+      6277
      ],
      "STRUCT": [
-      1419,
-      1335
+      1411,
+      1329
      ]
     },
     "asset-data": {
      "ARCH": [
-      3079,
-      1779
+      3081,
+      1774
      ],
      "MECH": [
-      19471,
-      7576
+      19575,
+      7558
      ]
     },
     "rooms": {
      "ARCH": [
-      2463,
-      2256
+      2465,
+      2250
      ]
     },
     "worksets": {
      "ARCH": [
-      20527,
-      19476
+      20539,
+      19472
      ],
      "STRUCT": [
-      7097,
-      7062
+      7056,
+      7021
      ],
      "MECH": [
-      12169,
-      9358
+      12234,
+      9385
      ]
     },
     "view-names": {
      "ARCH": [
       1232,
-      1019
+      1025
      ],
      "STRUCT": [
-      355,
+      353,
       332
      ],
      "MECH": [
-      608,
-      338
+      612,
+      341
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 97.1,
      "pass": true
     },
     "clashes": {
-     "value": 54,
+     "value": 50,
      "pass": false
     },
     "warnings": {
-     "value": 1742,
+     "value": 1739,
      "pass": false
     },
     "dup-mark": {
@@ -3973,141 +4180,150 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 35114,
+   "elementCount": 35025,
    "byRole": {
     "ARCH": {
-     "elements": 17852,
-     "required": 123864,
-     "met": 107471,
+     "elements": 17770,
+     "required": 123296,
+     "met": 106866,
+     "wrong": 1899,
      "uploaded": true,
-     "elementsAdded": 456,
-     "valuesFixed": 7404,
-     "valuesBroken": 585
+     "elementsAdded": 364,
+     "valuesFixed": 7647,
+     "valuesBroken": 1142,
+     "newRequired": 2526,
+     "newMet": 2068
     },
     "STRUCT": {
-     "elements": 6082,
-     "required": 41985,
-     "met": 40190,
+     "elements": 6086,
+     "required": 42010,
+     "met": 40135,
+     "wrong": 151,
      "uploaded": true,
-     "elementsAdded": 68,
-     "valuesFixed": 1306,
-     "valuesBroken": 399
+     "elementsAdded": 106,
+     "valuesFixed": 1301,
+     "valuesBroken": 257,
+     "newRequired": 732,
+     "newMet": 650
     },
     "MECH": {
-     "elements": 11180,
-     "required": 74537,
-     "met": 49692,
+     "elements": 11169,
+     "required": 74463,
+     "met": 49600,
+     "wrong": 8860,
      "uploaded": true,
-     "elementsAdded": 867,
-     "valuesFixed": 8437,
-     "valuesBroken": 293
+     "elementsAdded": 801,
+     "valuesFixed": 8341,
+     "valuesBroken": 238,
+     "newRequired": 5340,
+     "newMet": 2090
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      21065,
-      18023
+      20969,
+      18071
      ],
      "STRUCT": [
-      7177,
-      6860
+      7181,
+      6783
      ],
      "MECH": [
-      13192,
-      8678
+      13179,
+      8646
      ]
     },
     "real-material": {
      "ARCH": [
-      21065,
-      16313
+      20969,
+      16338
      ],
      "STRUCT": [
-      7177,
-      6787
+      7181,
+      6838
      ]
     },
     "lod-params": {
      "ARCH": [
-      46344,
-      40122
+      46131,
+      39895
      ],
      "STRUCT": [
-      18660,
-      17703
+      18672,
+      17658
      ],
      "MECH": [
-      26385,
-      20422
+      26359,
+      20423
      ]
     },
     "fire-rating": {
      "ARCH": [
-      7373,
-      6677
+      7339,
+      6596
      ],
      "STRUCT": [
-      1435,
-      1358
+      1436,
+      1370
      ]
     },
     "asset-data": {
      "ARCH": [
-      3160,
-      1893
+      3145,
+      1883
      ],
      "MECH": [
-      21108,
-      8986
+      21087,
+      9037
      ]
     },
     "rooms": {
      "ARCH": [
-      2528,
-      2402
+      2516,
+      2377
      ]
     },
     "worksets": {
      "ARCH": [
-      21065,
-      20952
+      20969,
+      20631
      ],
      "STRUCT": [
-      7177,
-      7141
+      7181,
+      7145
      ],
      "MECH": [
-      13192,
-      11197
+      13179,
+      11090
      ]
     },
     "view-names": {
      "ARCH": [
-      1264,
-      1089
+      1258,
+      1075
      ],
      "STRUCT": [
       359,
       341
      ],
      "MECH": [
-      660,
-      409
+      659,
+      404
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 97.1,
      "pass": true
     },
     "clashes": {
-     "value": 40,
+     "value": 38,
      "pass": false
     },
     "warnings": {
-     "value": 1888,
+     "value": 1883,
      "pass": false
     },
     "dup-mark": {
@@ -4136,127 +4352,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 35694,
+   "elementCount": 35566,
    "byRole": {
     "ARCH": {
-     "elements": 18103,
-     "required": 138380,
-     "met": 109734,
+     "elements": 17995,
+     "required": 137556,
+     "met": 108982,
+     "wrong": 3766,
      "uploaded": true,
-     "elementsAdded": 251,
-     "valuesFixed": 2601,
-     "valuesBroken": 338
+     "elementsAdded": 225,
+     "valuesFixed": 2811,
+     "valuesBroken": 695,
+     "newRequired": 1720,
+     "newMet": 1500
     },
     "STRUCT": {
-     "elements": 6111,
-     "required": 46473,
-     "met": 42587,
+     "elements": 6131,
+     "required": 46626,
+     "met": 42679,
+     "wrong": 325,
      "uploaded": true,
-     "elementsAdded": 29,
-     "valuesFixed": 2680,
-     "valuesBroken": 283
+     "elementsAdded": 45,
+     "valuesFixed": 2723,
+     "valuesBroken": 179,
+     "newRequired": 342,
+     "newMet": 337
     },
     "MECH": {
-     "elements": 11480,
-     "required": 84320,
-     "met": 49268,
+     "elements": 11440,
+     "required": 84027,
+     "met": 48961,
+     "wrong": 12379,
      "uploaded": true,
-     "elementsAdded": 300,
+     "elementsAdded": 271,
      "valuesFixed": 0,
-     "valuesBroken": 230
+     "valuesBroken": 392,
+     "newRequired": 1990,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      23534,
-      18623
+      23394,
+      18345
      ],
      "STRUCT": [
-      7944,
-      7145
+      7970,
+      7131
      ],
      "MECH": [
-      14924,
-      8568
+      14872,
+      8511
      ]
     },
     "real-material": {
      "ARCH": [
-      23534,
-      16617
+      23394,
+      16612
      ],
      "STRUCT": [
-      7944,
-      7140
+      7970,
+      7177
      ]
     },
     "lod-params": {
      "ARCH": [
-      51775,
-      40760
+      51466,
+      40371
      ],
      "STRUCT": [
-      20655,
-      18602
+      20723,
+      18657
      ],
      "MECH": [
-      29848,
-      20349
+      29744,
+      20132
      ]
     },
     "fire-rating": {
      "ARCH": [
-      8237,
-      6796
+      8188,
+      6804
      ],
      "STRUCT": [
-      1589,
-      1439
+      1594,
+      1427
      ]
     },
     "asset-data": {
      "ARCH": [
-      3530,
-      1967
+      3509,
+      1957
      ],
      "MECH": [
-      23878,
-      8867
+      23795,
+      8858
      ]
     },
     "rooms": {
      "ARCH": [
-      2824,
-      2439
+      2807,
+      2430
      ]
     },
     "worksets": {
      "ARCH": [
-      23534,
-      21408
+      23394,
+      21358
      ],
      "STRUCT": [
-      7944,
-      7904
+      7970,
+      7930
      ],
      "MECH": [
-      14924,
-      11080
+      14872,
+      11058
      ]
     },
     "view-names": {
      "ARCH": [
-      1412,
-      1124
+      1404,
+      1105
      ],
      "STRUCT": [
-      397,
+      399,
       357
      ],
      "MECH": [
-      746,
-      404
+      744,
+      402
      ]
     }
    },
@@ -4270,7 +4495,7 @@
      "pass": false
     },
     "warnings": {
-     "value": 1883,
+     "value": 1881,
      "pass": false
     },
     "dup-mark": {
@@ -4298,141 +4523,150 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 36086,
+   "elementCount": 36091,
    "byRole": {
     "ARCH": {
-     "elements": 18282,
-     "required": 139749,
-     "met": 112890,
+     "elements": 18307,
+     "required": 139939,
+     "met": 112758,
+     "wrong": 4260,
      "uploaded": true,
-     "elementsAdded": 179,
-     "valuesFixed": 3891,
-     "valuesBroken": 735
+     "elementsAdded": 312,
+     "valuesFixed": 4076,
+     "valuesBroken": 300,
+     "newRequired": 2385,
+     "newMet": 2002
     },
     "STRUCT": {
-     "elements": 6111,
-     "required": 46473,
-     "met": 42587,
+     "elements": 6131,
+     "required": 46626,
+     "met": 42679,
+     "wrong": 325,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 11693,
-     "required": 85885,
-     "met": 51075,
+     "elements": 11653,
+     "required": 85591,
+     "met": 50893,
+     "wrong": 12436,
      "uploaded": true,
      "elementsAdded": 213,
-     "valuesFixed": 2347,
-     "valuesBroken": 540
+     "valuesFixed": 2184,
+     "valuesBroken": 252,
+     "newRequired": 1564,
+     "newMet": 733
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      23767,
-      19204
+      23799,
+      19090
      ],
      "STRUCT": [
-      7944,
-      7145
+      7970,
+      7131
      ],
      "MECH": [
-      15201,
-      8806
+      15149,
+      8870
      ]
     },
     "real-material": {
      "ARCH": [
-      23767,
-      17104
+      23799,
+      17103
      ],
      "STRUCT": [
-      7944,
-      7140
+      7970,
+      7177
      ]
     },
     "lod-params": {
      "ARCH": [
-      52287,
-      41907
+      52358,
+      41841
      ],
      "STRUCT": [
-      20655,
-      18602
+      20723,
+      18657
      ],
      "MECH": [
-      30402,
-      21060
+      30298,
+      21025
      ]
     },
     "fire-rating": {
      "ARCH": [
-      8318,
-      6981
+      8330,
+      7038
      ],
      "STRUCT": [
-      1589,
-      1439
+      1594,
+      1427
      ]
     },
     "asset-data": {
      "ARCH": [
-      3565,
-      2002
+      3570,
+      2021
      ],
      "MECH": [
-      24321,
-      9333
+      24238,
+      9106
      ]
     },
     "rooms": {
      "ARCH": [
-      2852,
-      2537
+      2856,
+      2528
      ]
     },
     "worksets": {
      "ARCH": [
-      23767,
-      22013
+      23799,
+      21980
      ],
      "STRUCT": [
-      7944,
-      7904
+      7970,
+      7930
      ],
      "MECH": [
-      15201,
-      11461
+      15149,
+      11478
      ]
     },
     "view-names": {
      "ARCH": [
-      1426,
-      1142
+      1428,
+      1157
      ],
      "STRUCT": [
-      397,
+      399,
       357
      ],
      "MECH": [
-      760,
-      415
+      757,
+      414
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.0,
+     "value": 97.1,
      "pass": true
     },
     "clashes": {
-     "value": 48,
+     "value": 45,
      "pass": false
     },
     "warnings": {
-     "value": 1848,
+     "value": 1860,
      "pass": false
     },
     "dup-mark": {
@@ -4461,127 +4695,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 36561,
+   "elementCount": 36674,
    "byRole": {
     "ARCH": {
-     "elements": 18496,
-     "required": 141385,
-     "met": 116835,
+     "elements": 18601,
+     "required": 142185,
+     "met": 117384,
+     "wrong": 3434,
      "uploaded": true,
-     "elementsAdded": 214,
-     "valuesFixed": 4243,
-     "valuesBroken": 298
+     "elementsAdded": 294,
+     "valuesFixed": 5328,
+     "valuesBroken": 702,
+     "newRequired": 2247,
+     "newMet": 1762
     },
     "STRUCT": {
-     "elements": 6140,
-     "required": 46694,
-     "met": 43284,
+     "elements": 6135,
+     "required": 46658,
+     "met": 43348,
+     "wrong": 223,
      "uploaded": true,
-     "elementsAdded": 29,
-     "valuesFixed": 1007,
-     "valuesBroken": 310
+     "elementsAdded": 4,
+     "valuesFixed": 908,
+     "valuesBroken": 239,
+     "newRequired": 30,
+     "newMet": 27
     },
     "MECH": {
-     "elements": 11925,
-     "required": 87588,
-     "met": 52499,
+     "elements": 11938,
+     "required": 87684,
+     "met": 52568,
+     "wrong": 14375,
      "uploaded": true,
-     "elementsAdded": 232,
-     "valuesFixed": 1713,
-     "valuesBroken": 289
+     "elementsAdded": 285,
+     "valuesFixed": 2000,
+     "valuesBroken": 325,
+     "newRequired": 2093,
+     "newMet": 916
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      24045,
-      19841
+      24181,
+      19914
      ],
      "STRUCT": [
-      7982,
-      7304
+      7976,
+      7252
      ],
      "MECH": [
-      15502,
-      9131
+      15519,
+      9184
      ]
     },
     "real-material": {
      "ARCH": [
-      24045,
-      17656
+      24181,
+      17870
      ],
      "STRUCT": [
-      7982,
-      7331
+      7976,
+      7259
      ]
     },
     "lod-params": {
      "ARCH": [
-      52899,
-      43445
+      53199,
+      43497
      ],
      "STRUCT": [
-      20753,
-      18878
+      20736,
+      19072
      ],
      "MECH": [
-      31005,
-      21522
+      31039,
+      21618
      ]
     },
     "fire-rating": {
      "ARCH": [
-      8416,
-      7290
+      8463,
+      7332
      ],
      "STRUCT": [
-      1596,
-      1464
+      1595,
+      1462
      ]
     },
     "asset-data": {
      "ARCH": [
-      3607,
-      2085
+      3627,
+      2076
      ],
      "MECH": [
-      24804,
-      9602
+      24831,
+      9471
      ]
     },
     "rooms": {
      "ARCH": [
-      2885,
-      2616
+      2902,
+      2624
      ]
     },
     "worksets": {
      "ARCH": [
-      24045,
-      22716
+      24181,
+      22883
      ],
      "STRUCT": [
-      7982,
-      7942
+      7976,
+      7936
      ],
      "MECH": [
-      15502,
-      11809
+      15519,
+      11859
      ]
     },
     "view-names": {
      "ARCH": [
-      1443,
-      1186
+      1451,
+      1188
      ],
      "STRUCT": [
       399,
-      365
+      367
      ],
      "MECH": [
-      775,
-      435
+      776,
+      436
      ]
     }
    },
@@ -4591,11 +4834,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 51,
+     "value": 52,
      "pass": false
     },
     "warnings": {
-     "value": 1826,
+     "value": 1823,
      "pass": false
     },
     "dup-mark": {
@@ -4623,141 +4866,150 @@
     "STRUCT"
    ],
    "state": "checked",
-   "elementCount": 37461,
+   "elementCount": 37522,
    "byRole": {
     "ARCH": {
-     "elements": 19338,
-     "required": 147819,
-     "met": 123683,
+     "elements": 19368,
+     "required": 148047,
+     "met": 123400,
+     "wrong": 3782,
      "uploaded": true,
-     "elementsAdded": 842,
-     "valuesFixed": 7210,
-     "valuesBroken": 362
+     "elementsAdded": 767,
+     "valuesFixed": 7050,
+     "valuesBroken": 1034,
+     "newRequired": 5863,
+     "newMet": 4564
     },
     "STRUCT": {
-     "elements": 6198,
-     "required": 47134,
-     "met": 44705,
+     "elements": 6216,
+     "required": 47273,
+     "met": 44729,
+     "wrong": 183,
      "uploaded": true,
-     "elementsAdded": 58,
-     "valuesFixed": 1757,
-     "valuesBroken": 336
+     "elementsAdded": 81,
+     "valuesFixed": 1734,
+     "valuesBroken": 353,
+     "newRequired": 616,
+     "newMet": 593
     },
     "MECH": {
-     "elements": 11925,
-     "required": 87588,
-     "met": 52499,
+     "elements": 11938,
+     "required": 87684,
+     "met": 52568,
+     "wrong": 14375,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      25139,
-      20906
+      25178,
+      20815
      ],
      "STRUCT": [
-      8057,
-      7561
+      8081,
+      7583
      ],
      "MECH": [
-      15502,
-      9131
+      15519,
+      9184
      ]
     },
     "real-material": {
      "ARCH": [
-      25139,
-      18875
+      25178,
+      18790
      ],
      "STRUCT": [
-      8057,
-      7515
+      8081,
+      7598
      ]
     },
     "lod-params": {
      "ARCH": [
-      55307,
-      46079
+      55392,
+      45963
      ],
      "STRUCT": [
-      20949,
-      19725
+      21010,
+      19607
      ],
      "MECH": [
-      31005,
-      21522
+      31039,
+      21618
      ]
     },
     "fire-rating": {
      "ARCH": [
-      8799,
-      7676
+      8812,
+      7718
      ],
      "STRUCT": [
-      1611,
-      1510
+      1616,
+      1521
      ]
     },
     "asset-data": {
      "ARCH": [
-      3771,
-      2171
+      3777,
+      2207
      ],
      "MECH": [
-      24804,
-      9602
+      24831,
+      9471
      ]
     },
     "rooms": {
      "ARCH": [
-      3017,
-      2763
+      3021,
+      2755
      ]
     },
     "worksets": {
      "ARCH": [
-      25139,
-      23964
+      25178,
+      23897
      ],
      "STRUCT": [
-      8057,
-      8017
+      8081,
+      8041
      ],
      "MECH": [
-      15502,
-      11809
+      15519,
+      11859
      ]
     },
     "view-names": {
      "ARCH": [
-      1508,
-      1249
+      1511,
+      1255
      ],
      "STRUCT": [
-      403,
-      377
+      404,
+      379
      ],
      "MECH": [
-      775,
-      435
+      776,
+      436
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.2,
+     "value": 97.1,
      "pass": true
     },
     "clashes": {
-     "value": 58,
+     "value": 60,
      "pass": false
     },
     "warnings": {
-     "value": 1775,
+     "value": 1789,
      "pass": false
     },
     "dup-mark": {
@@ -4785,133 +5037,142 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 38651,
+   "elementCount": 38680,
    "byRole": {
     "ARCH": {
-     "elements": 19645,
-     "required": 150165,
-     "met": 128677,
+     "elements": 19636,
+     "required": 150098,
+     "met": 128992,
+     "wrong": 3331,
      "uploaded": true,
-     "elementsAdded": 307,
-     "valuesFixed": 5493,
-     "valuesBroken": 499
+     "elementsAdded": 268,
+     "valuesFixed": 6850,
+     "valuesBroken": 1258,
+     "newRequired": 2049,
+     "newMet": 1644
     },
     "STRUCT": {
-     "elements": 6198,
-     "required": 47134,
-     "met": 44705,
+     "elements": 6216,
+     "required": 47273,
+     "met": 44729,
+     "wrong": 183,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 12808,
-     "required": 94075,
-     "met": 61397,
+     "elements": 12828,
+     "required": 94221,
+     "met": 61216,
+     "wrong": 13129,
      "uploaded": true,
-     "elementsAdded": 883,
-     "valuesFixed": 9243,
-     "valuesBroken": 345
+     "elementsAdded": 890,
+     "valuesFixed": 9132,
+     "valuesBroken": 484,
+     "newRequired": 6537,
+     "newMet": 2667
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      25538,
-      21700
+      25527,
+      21684
      ],
      "STRUCT": [
-      8057,
-      7561
+      8081,
+      7583
      ],
      "MECH": [
-      16650,
-      10737
+      16676,
+      10732
      ]
     },
     "real-material": {
      "ARCH": [
-      25538,
-      19546
+      25527,
+      19760
      ],
      "STRUCT": [
-      8057,
-      7515
+      8081,
+      7598
      ]
     },
     "lod-params": {
      "ARCH": [
-      56185,
-      47917
+      56159,
+      47988
      ],
      "STRUCT": [
-      20949,
-      19725
+      21010,
+      19607
      ],
      "MECH": [
-      33301,
-      25032
+      33353,
+      25045
      ]
     },
     "fire-rating": {
      "ARCH": [
-      8938,
-      7969
+      8934,
+      8018
      ],
      "STRUCT": [
-      1611,
-      1510
+      1616,
+      1521
      ]
     },
     "asset-data": {
      "ARCH": [
-      3831,
-      2271
+      3829,
+      2281
      ],
      "MECH": [
-      26641,
-      11186
+      26682,
+      11052
      ]
     },
     "rooms": {
      "ARCH": [
-      3065,
-      2895
+      3063,
+      2879
      ]
     },
     "worksets": {
      "ARCH": [
-      25538,
-      25078
+      25527,
+      25077
      ],
      "STRUCT": [
-      8057,
-      8017
+      8081,
+      8041
      ],
      "MECH": [
-      16650,
-      13938
+      16676,
+      13880
      ]
     },
     "view-names": {
      "ARCH": [
       1532,
-      1301
+      1305
      ],
      "STRUCT": [
-      403,
-      377
+      404,
+      379
      ],
      "MECH": [
-      833,
-      504
+      834,
+      507
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.2,
+     "value": 97.3,
      "pass": true
     },
     "clashes": {
@@ -4919,7 +5180,7 @@
      "pass": false
     },
     "warnings": {
-     "value": 1759,
+     "value": 1768,
      "pass": false
     },
     "dup-mark": {
@@ -4948,127 +5209,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 39133,
+   "elementCount": 39209,
    "byRole": {
     "ARCH": {
-     "elements": 19782,
-     "required": 151215,
-     "met": 133546,
+     "elements": 19809,
+     "required": 151421,
+     "met": 132985,
+     "wrong": 2506,
      "uploaded": true,
-     "elementsAdded": 137,
-     "valuesFixed": 6248,
-     "valuesBroken": 1379
+     "elementsAdded": 173,
+     "valuesFixed": 4861,
+     "valuesBroken": 868,
+     "newRequired": 1322,
+     "newMet": 1115
     },
     "STRUCT": {
-     "elements": 6221,
-     "required": 47309,
-     "met": 45293,
+     "elements": 6270,
+     "required": 47684,
+     "met": 45809,
+     "wrong": 206,
      "uploaded": true,
-     "elementsAdded": 23,
-     "valuesFixed": 774,
-     "valuesBroken": 186
+     "elementsAdded": 54,
+     "valuesFixed": 1500,
+     "valuesBroken": 420,
+     "newRequired": 411,
+     "newMet": 403
     },
     "MECH": {
      "elements": 13130,
      "required": 96439,
-     "met": 65886,
+     "met": 65749,
+     "wrong": 11925,
      "uploaded": true,
-     "elementsAdded": 322,
-     "valuesFixed": 4652,
-     "valuesBroken": 163
+     "elementsAdded": 302,
+     "valuesFixed": 4795,
+     "valuesBroken": 262,
+     "newRequired": 2218,
+     "newMet": 882
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      25717,
-      22620
+      25752,
+      22634
      ],
      "STRUCT": [
-      8087,
-      7663
+      8151,
+      7793
      ],
      "MECH": [
       17069,
-      11445
+      11421
      ]
     },
     "real-material": {
      "ARCH": [
-      25717,
-      20445
+      25752,
+      20213
      ],
      "STRUCT": [
-      8087,
-      7656
+      8151,
+      7751
      ]
     },
     "lod-params": {
      "ARCH": [
-      56577,
-      49961
+      56654,
+      49497
      ],
      "STRUCT": [
-      21027,
-      20009
+      21193,
+      20206
      ],
      "MECH": [
       34138,
-      27017
+      26868
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9001,
-      8248
+      9013,
+      8311
      ],
      "STRUCT": [
-      1617,
-      1531
+      1630,
+      1560
      ]
     },
     "asset-data": {
      "ARCH": [
-      3857,
-      2361
+      3863,
+      2378
      ],
      "MECH": [
       27310,
-      12038
+      12018
      ]
     },
     "rooms": {
      "ARCH": [
-      3086,
-      2976
+      3090,
+      2974
      ]
     },
     "worksets": {
      "ARCH": [
-      25717,
-      25588
+      25752,
+      25623
      ],
      "STRUCT": [
-      8087,
-      8047
+      8151,
+      8110
      ],
      "MECH": [
       17069,
-      14843
+      14904
      ]
     },
     "view-names": {
      "ARCH": [
-      1543,
-      1347
+      1545,
+      1355
      ],
      "STRUCT": [
-      404,
-      387
+      408,
+      389
      ],
      "MECH": [
       853,
-      543
+      538
      ]
     }
    },
@@ -5078,11 +5348,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 41,
+     "value": 39,
      "pass": false
     },
     "warnings": {
-     "value": 1659,
+     "value": 1657,
      "pass": false
     },
     "dup-mark": {
@@ -5110,127 +5380,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 39534,
+   "elementCount": 39687,
    "byRole": {
     "ARCH": {
-     "elements": 20025,
-     "required": 153070,
-     "met": 137663,
+     "elements": 20042,
+     "required": 153202,
+     "met": 137919,
+     "wrong": 2146,
      "uploaded": true,
-     "elementsAdded": 243,
-     "valuesFixed": 4856,
-     "valuesBroken": 739
+     "elementsAdded": 233,
+     "valuesFixed": 5915,
+     "valuesBroken": 981,
+     "newRequired": 1781,
+     "newMet": 1565
     },
     "STRUCT": {
-     "elements": 6221,
-     "required": 47309,
-     "met": 45293,
+     "elements": 6270,
+     "required": 47684,
+     "met": 45809,
+     "wrong": 206,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 13288,
-     "required": 97600,
-     "met": 69463,
+     "elements": 13375,
+     "required": 98240,
+     "met": 70130,
+     "wrong": 11463,
      "uploaded": true,
-     "elementsAdded": 158,
-     "valuesFixed": 4011,
-     "valuesBroken": 434
+     "elementsAdded": 245,
+     "valuesFixed": 4776,
+     "valuesBroken": 395,
+     "newRequired": 1800,
+     "newMet": 855
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      26032,
-      23610
+      26055,
+      23551
      ],
      "STRUCT": [
-      8087,
-      7663
+      8151,
+      7793
      ],
      "MECH": [
-      17274,
-      12095
+      17388,
+      12215
      ]
     },
     "real-material": {
      "ARCH": [
-      26032,
-      21014
+      26055,
+      21228
      ],
      "STRUCT": [
-      8087,
-      7656
+      8151,
+      7751
      ]
     },
     "lod-params": {
      "ARCH": [
-      57272,
-      51485
+      57320,
+      51591
      ],
      "STRUCT": [
-      21027,
-      20009
+      21193,
+      20206
      ],
      "MECH": [
-      34549,
-      28644
+      34775,
+      28828
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9111,
-      8680
+      9119,
+      8644
      ],
      "STRUCT": [
-      1617,
-      1531
+      1630,
+      1560
      ]
     },
     "asset-data": {
      "ARCH": [
-      3905,
-      2467
+      3908,
+      2470
      ],
      "MECH": [
-      27639,
-      12508
+      27820,
+      12709
      ]
     },
     "rooms": {
      "ARCH": [
-      3124,
-      3101
+      3127,
+      3104
      ]
     },
     "worksets": {
      "ARCH": [
-      26032,
-      25902
+      26055,
+      25925
      ],
      "STRUCT": [
-      8087,
-      8047
+      8151,
+      8110
      ],
      "MECH": [
-      17274,
-      15640
+      17388,
+      15807
      ]
     },
     "view-names": {
      "ARCH": [
-      1562,
-      1404
+      1563,
+      1406
      ],
      "STRUCT": [
-      404,
-      387
+      408,
+      389
      ],
      "MECH": [
-      864,
-      576
+      869,
+      571
      ]
     }
    },
@@ -5244,7 +5523,7 @@
      "pass": false
     },
     "warnings": {
-     "value": 1530,
+     "value": 1533,
      "pass": false
     },
     "dup-mark": {
@@ -5273,141 +5552,150 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 40062,
+   "elementCount": 40217,
    "byRole": {
     "ARCH": {
-     "elements": 20266,
-     "required": 154914,
-     "met": 142350,
+     "elements": 20359,
+     "required": 155625,
+     "met": 142679,
+     "wrong": 1834,
      "uploaded": true,
-     "elementsAdded": 241,
-     "valuesFixed": 6034,
-     "valuesBroken": 1347
+     "elementsAdded": 317,
+     "valuesFixed": 6356,
+     "valuesBroken": 1596,
+     "newRequired": 2423,
+     "newMet": 2007
     },
     "STRUCT": {
-     "elements": 6271,
-     "required": 47690,
-     "met": 46361,
+     "elements": 6279,
+     "required": 47753,
+     "met": 46460,
+     "wrong": 127,
      "uploaded": true,
-     "elementsAdded": 50,
-     "valuesFixed": 1493,
-     "valuesBroken": 425
+     "elementsAdded": 9,
+     "valuesFixed": 1032,
+     "valuesBroken": 381,
+     "newRequired": 68,
+     "newMet": 65
     },
     "MECH": {
-     "elements": 13525,
-     "required": 99340,
-     "met": 74012,
+     "elements": 13579,
+     "required": 99738,
+     "met": 74061,
+     "wrong": 9797,
      "uploaded": true,
-     "elementsAdded": 237,
-     "valuesFixed": 4898,
-     "valuesBroken": 349
+     "elementsAdded": 204,
+     "valuesFixed": 4750,
+     "valuesBroken": 819,
+     "newRequired": 1498,
+     "newMet": 676
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      26346,
-      24242
+      26467,
+      24378
      ],
      "STRUCT": [
-      8152,
-      7893
+      8163,
+      7927
      ],
      "MECH": [
-      17582,
-      12928
+      17653,
+      12911
      ]
     },
     "real-material": {
      "ARCH": [
-      26346,
-      21947
+      26467,
+      21973
      ],
      "STRUCT": [
-      8152,
-      7935
+      8163,
+      7943
      ]
     },
     "lod-params": {
      "ARCH": [
-      57961,
-      53821
+      58227,
+      53804
      ],
      "STRUCT": [
-      21196,
-      20450
+      21223,
+      20497
      ],
      "MECH": [
-      35165,
-      30251
+      35305,
+      30400
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9221,
-      8961
+      9263,
+      8962
      ],
      "STRUCT": [
-      1630,
-      1578
+      1633,
+      1576
      ]
     },
     "asset-data": {
      "ARCH": [
-      3952,
-      2553
+      3970,
+      2597
      ],
      "MECH": [
-      28132,
-      13453
+      28244,
+      13362
      ]
     },
     "rooms": {
      "ARCH": [
-      3161,
-      3145
+      3176,
+      3160
      ]
     },
     "worksets": {
      "ARCH": [
-      26346,
-      26214
+      26467,
+      26335
      ],
      "STRUCT": [
-      8152,
-      8111
+      8163,
+      8122
      ],
      "MECH": [
-      17582,
-      16772
+      17653,
+      16780
      ]
     },
     "view-names": {
      "ARCH": [
-      1581,
-      1467
+      1588,
+      1470
      ],
      "STRUCT": [
       408,
-      394
+      395
      ],
      "MECH": [
-      879,
+      883,
       608
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.4,
+     "value": 97.2,
      "pass": true
     },
     "clashes": {
-     "value": 20,
+     "value": 18,
      "pass": true
     },
     "warnings": {
-     "value": 1431,
+     "value": 1425,
      "pass": true
     },
     "dup-mark": {
@@ -5436,127 +5724,136 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 40663,
+   "elementCount": 40754,
    "byRole": {
     "ARCH": {
-     "elements": 20632,
-     "required": 157713,
-     "met": 148119,
+     "elements": 20605,
+     "required": 157502,
+     "met": 147995,
+     "wrong": 1602,
      "uploaded": true,
-     "elementsAdded": 366,
-     "valuesFixed": 6742,
-     "valuesBroken": 973
+     "elementsAdded": 246,
+     "valuesFixed": 5947,
+     "valuesBroken": 631,
+     "newRequired": 1880,
+     "newMet": 1508
     },
     "STRUCT": {
-     "elements": 6286,
-     "required": 47806,
-     "met": 46876,
+     "elements": 6319,
+     "required": 48057,
+     "met": 47079,
+     "wrong": 56,
      "uploaded": true,
-     "elementsAdded": 15,
-     "valuesFixed": 987,
-     "valuesBroken": 472
+     "elementsAdded": 40,
+     "valuesFixed": 1131,
+     "valuesBroken": 512,
+     "newRequired": 304,
+     "newMet": 265
     },
     "MECH": {
-     "elements": 13745,
-     "required": 100956,
-     "met": 78256,
+     "elements": 13830,
+     "required": 101581,
+     "met": 78813,
+     "wrong": 8066,
      "uploaded": true,
-     "elementsAdded": 220,
-     "valuesFixed": 4666,
-     "valuesBroken": 422
+     "elementsAdded": 251,
+     "valuesFixed": 5539,
+     "valuesBroken": 787,
+     "newRequired": 1844,
+     "newMet": 740
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      26822,
-      25401
+      26786,
+      25571
      ],
      "STRUCT": [
-      8172,
-      7954
+      8215,
+      8041
      ],
      "MECH": [
-      17868,
-      13722
+      17979,
+      13748
      ]
     },
     "real-material": {
      "ARCH": [
-      26822,
-      22951
+      26786,
+      22999
      ],
      "STRUCT": [
-      8172,
-      7990
+      8215,
+      8044
      ]
     },
     "lod-params": {
      "ARCH": [
-      59008,
-      56324
+      58930,
+      56024
      ],
      "STRUCT": [
-      21247,
-      20804
+      21358,
+      20807
      ],
      "MECH": [
-      35737,
-      32128
+      35958,
+      32160
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9388,
-      9341
+      9375,
+      9328
      ],
      "STRUCT": [
-      1634,
-      1598
+      1643,
+      1610
      ]
     },
     "asset-data": {
      "ARCH": [
-      4023,
-      2691
+      4018,
+      2692
      ],
      "MECH": [
-      28590,
-      14118
+      28766,
+      14370
      ]
     },
     "rooms": {
      "ARCH": [
-      3219,
-      3203
+      3214,
+      3198
      ]
     },
     "worksets": {
      "ARCH": [
-      26822,
-      26688
+      26786,
+      26652
      ],
      "STRUCT": [
-      8172,
-      8131
+      8215,
+      8174
      ],
      "MECH": [
-      17868,
-      17643
+      17979,
+      17889
      ]
     },
     "view-names": {
      "ARCH": [
-      1609,
-      1520
+      1607,
+      1531
      ],
      "STRUCT": [
-      409,
-      399
+      411,
+      403
      ],
      "MECH": [
-      893,
-      645
+      899,
+      646
      ]
     }
    },
@@ -5566,11 +5863,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 9,
+     "value": 13,
      "pass": true
     },
     "warnings": {
-     "value": 1322,
+     "value": 1311,
      "pass": true
     },
     "dup-mark": {
@@ -5602,138 +5899,147 @@
    "elementCount": 40870,
    "byRole": {
     "ARCH": {
-     "elements": 20699,
-     "required": 161875,
-     "met": 149001,
+     "elements": 20641,
+     "required": 161422,
+     "met": 148986,
+     "wrong": 2023,
      "uploaded": true,
-     "elementsAdded": 67,
-     "valuesFixed": 2040,
-     "valuesBroken": 1158
+     "elementsAdded": 36,
+     "valuesFixed": 2477,
+     "valuesBroken": 1486,
+     "newRequired": 282,
+     "newMet": 242
     },
     "STRUCT": {
-     "elements": 6339,
-     "required": 49321,
-     "met": 47494,
+     "elements": 6340,
+     "required": 49328,
+     "met": 47759,
+     "wrong": 120,
      "uploaded": true,
-     "elementsAdded": 53,
-     "valuesFixed": 1112,
-     "valuesBroken": 494
+     "elementsAdded": 21,
+     "valuesFixed": 1225,
+     "valuesBroken": 545,
+     "newRequired": 163,
+     "newMet": 155
     },
     "MECH": {
-     "elements": 13832,
-     "required": 103941,
-     "met": 76714,
+     "elements": 13889,
+     "required": 104369,
+     "met": 77545,
+     "wrong": 9730,
      "uploaded": true,
-     "elementsAdded": 87,
+     "elementsAdded": 59,
      "valuesFixed": 0,
-     "valuesBroken": 701
+     "valuesBroken": 804,
+     "newRequired": 443,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      27530,
-      25541
+      27453,
+      25396
      ],
      "STRUCT": [
-      8431,
-      8047
+      8432,
+      8130
      ],
      "MECH": [
-      18397,
-      13400
+      18472,
+      13502
      ]
     },
     "real-material": {
      "ARCH": [
-      27530,
-      23019
+      27453,
+      22893
      ],
      "STRUCT": [
-      8431,
-      8098
+      8432,
+      8118
      ]
     },
     "lod-params": {
      "ARCH": [
-      60565,
-      56138
+      60396,
+      56453
      ],
      "STRUCT": [
-      21920,
-      20943
+      21924,
+      21108
      ],
      "MECH": [
-      36793,
-      31466
+      36945,
+      31716
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9635,
-      9410
+      9608,
+      9411
      ],
      "STRUCT": [
       1686,
-      1611
+      1610
      ]
     },
     "asset-data": {
      "ARCH": [
-      4129,
-      2677
+      4118,
+      2703
      ],
      "MECH": [
-      29434,
-      13751
+      29556,
+      14113
      ]
     },
     "rooms": {
      "ARCH": [
-      3304,
-      3287
+      3294,
+      3278
      ]
     },
     "worksets": {
      "ARCH": [
-      27530,
-      27392
+      27453,
+      27316
      ],
      "STRUCT": [
-      8431,
-      8389
+      8432,
+      8390
      ],
      "MECH": [
-      18397,
-      17459
+      18472,
+      17574
      ]
     },
     "view-names": {
      "ARCH": [
-      1652,
-      1537
+      1647,
+      1536
      ],
      "STRUCT": [
       422,
-      406
+      403
      ],
      "MECH": [
-      920,
-      638
+      924,
+      640
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 97.4,
+     "value": 97.3,
      "pass": true
     },
     "clashes": {
-     "value": 21,
+     "value": 20,
      "pass": true
     },
     "warnings": {
-     "value": 1291,
+     "value": 1306,
      "pass": true
     },
     "dup-mark": {
@@ -5763,58 +6069,70 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 41345,
+   "elementCount": 41286,
    "byRole": {
     "ARCH": {
-     "elements": 20734,
-     "required": 162148,
-     "met": 149978,
+     "elements": 20686,
+     "required": 161771,
+     "met": 149548,
+     "wrong": 1355,
      "uploaded": true,
-     "elementsAdded": 35,
-     "valuesFixed": 1637,
-     "valuesBroken": 660
+     "elementsAdded": 45,
+     "valuesFixed": 1251,
+     "valuesBroken": 689,
+     "newRequired": 352,
+     "newMet": 304
     },
     "STRUCT": {
-     "elements": 6340,
-     "required": 49328,
-     "met": 47697,
+     "elements": 6342,
+     "required": 49345,
+     "met": 47630,
+     "wrong": 149,
      "uploaded": true,
-     "elementsAdded": 1,
-     "valuesFixed": 676,
-     "valuesBroken": 473
+     "elementsAdded": 2,
+     "valuesFixed": 181,
+     "valuesBroken": 310,
+     "newRequired": 16,
+     "newMet": 15
     },
     "MECH": {
-     "elements": 13971,
-     "required": 104984,
-     "met": 78663,
+     "elements": 13958,
+     "required": 104887,
+     "met": 78287,
+     "wrong": 10490,
      "uploaded": true,
-     "elementsAdded": 139,
-     "valuesFixed": 2209,
-     "valuesBroken": 260
+     "elementsAdded": 69,
+     "valuesFixed": 949,
+     "valuesBroken": 207,
+     "newRequired": 518,
+     "newMet": 240
     },
     "CON": {
      "elements": 300,
      "required": 1888,
-     "met": 602,
+     "met": 604,
+     "wrong": 248,
      "uploaded": true,
      "elementsAdded": 300,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      27576,
-      25762
+      27512,
+      25820
      ],
      "STRUCT": [
-      8432,
-      8069
+      8435,
+      8068
      ],
      "MECH": [
-      18581,
-      13802
+      18564,
+      13786
      ],
      "CON": [
       80,
@@ -5823,92 +6141,92 @@
     },
     "real-material": {
      "ARCH": [
-      27576,
-      23110
+      27512,
+      23109
      ],
      "STRUCT": [
-      8432,
-      8098
+      8435,
+      8115
      ]
     },
     "lod-params": {
      "ARCH": [
-      60668,
-      56669
+      60527,
+      56254
      ],
      "STRUCT": [
-      21924,
-      21107
+      21931,
+      21023
      ],
      "MECH": [
-      37163,
-      32369
+      37128,
+      32058
      ],
      "CON": [
       200,
-      69
+      70
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9652,
-      9463
+      9629,
+      9480
      ],
      "STRUCT": [
-      1686,
-      1628
+      1687,
+      1623
      ]
     },
     "asset-data": {
      "ARCH": [
-      4136,
-      2693
+      4127,
+      2690
      ],
      "MECH": [
-      29730,
-      14115
+      29703,
+      13988
      ],
      "CON": [
       1197,
-      334
+      337
      ]
     },
     "rooms": {
      "ARCH": [
-      3309,
-      3292
+      3301,
+      3284
      ]
     },
     "worksets": {
      "ARCH": [
-      27576,
-      27438
+      27512,
+      27374
      ],
      "STRUCT": [
-      8432,
-      8390
+      8435,
+      8393
      ],
      "MECH": [
-      18581,
-      17738
+      18564,
+      17809
      ],
      "CON": [
       399,
-      167
+      165
      ]
     },
     "view-names": {
      "ARCH": [
-      1655,
-      1551
+      1651,
+      1537
      ],
      "STRUCT": [
       422,
-      405
+      408
      ],
      "MECH": [
-      929,
-      639
+      928,
+      646
      ],
      "CON": [
       12,
@@ -5918,15 +6236,15 @@
    },
    "rules": {
     "on-level": {
-     "value": 97.4,
+     "value": 97.5,
      "pass": true
     },
     "clashes": {
-     "value": 24,
-     "pass": true
+     "value": 27,
+     "pass": false
     },
     "warnings": {
-     "value": 1298,
+     "value": 1286,
      "pass": true
     },
     "dup-mark": {
@@ -5955,152 +6273,164 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 41777,
+   "elementCount": 41655,
    "byRole": {
     "ARCH": {
-     "elements": 20872,
-     "required": 163228,
-     "met": 151606,
+     "elements": 20827,
+     "required": 162876,
+     "met": 150811,
+     "wrong": 1742,
      "uploaded": true,
-     "elementsAdded": 138,
-     "valuesFixed": 3420,
-     "valuesBroken": 1792
+     "elementsAdded": 141,
+     "valuesFixed": 2642,
+     "valuesBroken": 1379,
+     "newRequired": 1103,
+     "newMet": 942
     },
     "STRUCT": {
-     "elements": 6340,
-     "required": 49328,
-     "met": 47697,
+     "elements": 6342,
+     "required": 49345,
+     "met": 47630,
+     "wrong": 149,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 14033,
-     "required": 105451,
-     "met": 79347,
+     "elements": 13952,
+     "required": 104842,
+     "met": 79130,
+     "wrong": 9369,
      "uploaded": true,
-     "elementsAdded": 62,
-     "valuesFixed": 1021,
-     "valuesBroken": 337
+     "elementsAdded": -6,
+     "valuesFixed": 1018,
+     "valuesBroken": 175,
+     "newRequired": 0,
+     "newMet": 0
     },
     "CON": {
-     "elements": 532,
-     "required": 3348,
-     "met": 1203,
+     "elements": 534,
+     "required": 3359,
+     "met": 1195,
+     "wrong": 495,
      "uploaded": true,
-     "elementsAdded": 232,
-     "valuesFixed": 606,
-     "valuesBroken": 5
+     "elementsAdded": 234,
+     "valuesFixed": 594,
+     "valuesBroken": 3,
+     "newRequired": 1472,
+     "newMet": 594
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      27760,
-      26109
+      27700,
+      25793
      ],
      "STRUCT": [
-      8432,
-      8069
+      8435,
+      8068
      ],
      "MECH": [
-      18664,
-      13789
+      18556,
+      13800
      ],
      "CON": [
       142,
-      56
+      57
      ]
     },
     "real-material": {
      "ARCH": [
-      27760,
-      23365
+      27700,
+      23198
      ],
      "STRUCT": [
-      8432,
-      8098
+      8435,
+      8115
      ]
     },
     "lod-params": {
      "ARCH": [
-      61071,
-      57280
+      60940,
+      57135
      ],
      "STRUCT": [
-      21924,
-      21107
+      21931,
+      21023
      ],
      "MECH": [
-      37328,
-      32440
+      37112,
+      32560
      ],
      "CON": [
-      354,
-      140
+      355,
+      138
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9716,
-      9602
+      9695,
+      9525
      ],
      "STRUCT": [
-      1686,
-      1628
+      1687,
+      1623
      ]
     },
     "asset-data": {
      "ARCH": [
-      4164,
-      2746
+      4155,
+      2741
      ],
      "MECH": [
-      29862,
-      14488
+      29690,
+      14256
      ],
      "CON": [
-      2123,
-      663
+      2131,
+      658
      ]
     },
     "rooms": {
      "ARCH": [
-      3331,
-      3314
+      3324,
+      3307
      ]
     },
     "worksets": {
      "ARCH": [
-      27760,
-      27621
+      27700,
+      27562
      ],
      "STRUCT": [
-      8432,
-      8390
+      8435,
+      8393
      ],
      "MECH": [
-      18664,
-      17980
+      18556,
+      17869
      ],
      "CON": [
-      708,
-      336
+      710,
+      334
      ]
     },
     "view-names": {
      "ARCH": [
-      1666,
-      1569
+      1662,
+      1550
      ],
      "STRUCT": [
       422,
-      405
+      408
      ],
      "MECH": [
-      933,
-      650
+      928,
+      645
      ],
      "CON": [
       21,
@@ -6110,15 +6440,15 @@
    },
    "rules": {
     "on-level": {
-     "value": 95.6,
+     "value": 95.5,
      "pass": true
     },
     "clashes": {
-     "value": 30,
+     "value": 31,
      "pass": false
     },
     "warnings": {
-     "value": 1265,
+     "value": 1270,
      "pass": true
     },
     "dup-mark": {
@@ -6147,152 +6477,164 @@
     "MECH"
    ],
    "state": "checked",
-   "elementCount": 41812,
+   "elementCount": 41806,
    "byRole": {
     "ARCH": {
-     "elements": 20866,
-     "required": 163181,
-     "met": 151524,
+     "elements": 20841,
+     "required": 162986,
+     "met": 151930,
+     "wrong": 1863,
      "uploaded": true,
-     "elementsAdded": -6,
-     "valuesFixed": 814,
-     "valuesBroken": 896
+     "elementsAdded": 14,
+     "valuesFixed": 1799,
+     "valuesBroken": 680,
+     "newRequired": 109,
+     "newMet": 85
     },
     "STRUCT": {
-     "elements": 6377,
-     "required": 49615,
-     "met": 48051,
+     "elements": 6355,
+     "required": 49445,
+     "met": 47857,
+     "wrong": 92,
      "uploaded": true,
-     "elementsAdded": 37,
-     "valuesFixed": 691,
-     "valuesBroken": 337
+     "elementsAdded": 13,
+     "valuesFixed": 587,
+     "valuesBroken": 360,
+     "newRequired": 101,
+     "newMet": 91
     },
     "MECH": {
-     "elements": 14037,
-     "required": 105480,
-     "met": 79797,
+     "elements": 14076,
+     "required": 105774,
+     "met": 80511,
+     "wrong": 9281,
      "uploaded": true,
-     "elementsAdded": 4,
-     "valuesFixed": 1394,
-     "valuesBroken": 944
+     "elementsAdded": 124,
+     "valuesFixed": 2040,
+     "valuesBroken": 659,
+     "newRequired": 932,
+     "newMet": 364
     },
     "CON": {
-     "elements": 532,
-     "required": 3348,
-     "met": 1203,
+     "elements": 534,
+     "required": 3359,
+     "met": 1195,
+     "wrong": 495,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      27752,
-      26117
+      27719,
+      25907
      ],
      "STRUCT": [
-      8481,
-      8205
+      8452,
+      8115
      ],
      "MECH": [
-      18669,
-      13999
+      18721,
+      14122
      ],
      "CON": [
       142,
-      56
+      57
      ]
     },
     "real-material": {
      "ARCH": [
-      27752,
-      23504
+      27719,
+      23531
      ],
      "STRUCT": [
-      8481,
-      8178
+      8452,
+      8120
      ]
     },
     "lod-params": {
      "ARCH": [
-      61054,
-      57089
+      60981,
+      57710
      ],
      "STRUCT": [
-      22052,
-      21181
+      21976,
+      21174
      ],
      "MECH": [
-      37338,
-      32711
+      37442,
+      33032
      ],
      "CON": [
-      354,
-      140
+      355,
+      138
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9713,
-      9570
+      9701,
+      9569
      ],
      "STRUCT": [
-      1696,
-      1636
+      1690,
+      1629
      ]
     },
     "asset-data": {
      "ARCH": [
-      4163,
-      2743
+      4158,
+      2759
      ],
      "MECH": [
-      29871,
-      14378
+      29954,
+      14569
      ],
      "CON": [
-      2123,
-      663
+      2131,
+      658
      ]
     },
     "rooms": {
      "ARCH": [
-      3330,
-      3313
+      3326,
+      3309
      ]
     },
     "worksets": {
      "ARCH": [
-      27752,
-      27613
+      27719,
+      27580
      ],
      "STRUCT": [
-      8481,
-      8439
+      8452,
+      8410
      ],
      "MECH": [
-      18669,
-      18056
+      18721,
+      18128
      ],
      "CON": [
-      708,
-      336
+      710,
+      334
      ]
     },
     "view-names": {
      "ARCH": [
-      1665,
-      1575
+      1663,
+      1565
      ],
      "STRUCT": [
-      424,
-      412
+      423,
+      409
      ],
      "MECH": [
-      933,
-      653
+      936,
+      660
      ],
      "CON": [
       21,
@@ -6302,15 +6644,15 @@
    },
    "rules": {
     "on-level": {
-     "value": 95.8,
+     "value": 95.9,
      "pass": true
     },
     "clashes": {
-     "value": 35,
+     "value": 36,
      "pass": false
     },
     "warnings": {
-     "value": 1270,
+     "value": 1256,
      "pass": true
     },
     "dup-mark": {
@@ -6339,152 +6681,164 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 42404,
+   "elementCount": 42373,
    "byRole": {
     "ARCH": {
-     "elements": 20912,
-     "required": 163542,
-     "met": 152824,
+     "elements": 20872,
+     "required": 163228,
+     "met": 152406,
+     "wrong": 1317,
      "uploaded": true,
-     "elementsAdded": 46,
-     "valuesFixed": 2503,
-     "valuesBroken": 1203
+     "elementsAdded": 31,
+     "valuesFixed": 1489,
+     "valuesBroken": 1013,
+     "newRequired": 242,
+     "newMet": 194
     },
     "STRUCT": {
-     "elements": 6377,
-     "required": 49615,
-     "met": 48051,
+     "elements": 6355,
+     "required": 49445,
+     "met": 47857,
+     "wrong": 92,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 14116,
-     "required": 106075,
-     "met": 81443,
+     "elements": 14148,
+     "required": 106316,
+     "met": 81658,
+     "wrong": 9637,
      "uploaded": true,
-     "elementsAdded": 79,
-     "valuesFixed": 2009,
-     "valuesBroken": 363
+     "elementsAdded": 72,
+     "valuesFixed": 1574,
+     "valuesBroken": 427,
+     "newRequired": 541,
+     "newMet": 270
     },
     "CON": {
-     "elements": 999,
-     "required": 6285,
-     "met": 2769,
+     "elements": 998,
+     "required": 6278,
+     "met": 2732,
+     "wrong": 787,
      "uploaded": true,
-     "elementsAdded": 467,
-     "valuesFixed": 1569,
-     "valuesBroken": 3
+     "elementsAdded": 464,
+     "valuesFixed": 1542,
+     "valuesBroken": 5,
+     "newRequired": 2919,
+     "newMet": 1542
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      27813,
-      26408
+      27760,
+      26152
      ],
      "STRUCT": [
-      8481,
-      8205
+      8452,
+      8115
      ],
      "MECH": [
-      18774,
-      14200
+      18817,
+      14153
      ],
      "CON": [
-      266,
+      265,
       127
      ]
     },
     "real-material": {
      "ARCH": [
-      27813,
-      23653
+      27760,
+      23562
      ],
      "STRUCT": [
-      8481,
-      8178
+      8452,
+      8120
      ]
     },
     "lod-params": {
      "ARCH": [
-      61189,
-      57783
+      61071,
+      57828
      ],
      "STRUCT": [
-      22052,
-      21181
+      21976,
+      21174
      ],
      "MECH": [
-      37549,
-      33427
+      37634,
+      33616
      ],
      "CON": [
       664,
-      315
+      319
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9735,
-      9642
+      9716,
+      9595
      ],
      "STRUCT": [
-      1696,
-      1636
+      1690,
+      1629
      ]
     },
     "asset-data": {
      "ARCH": [
-      4172,
-      2772
+      4164,
+      2756
      ],
      "MECH": [
-      30039,
-      14781
+      30107,
+      14843
      ],
      "CON": [
-      3986,
-      1545
+      3982,
+      1510
      ]
     },
     "rooms": {
      "ARCH": [
-      3338,
-      3321
+      3331,
+      3314
      ]
     },
     "worksets": {
      "ARCH": [
-      27813,
-      27674
+      27760,
+      27621
      ],
      "STRUCT": [
-      8481,
-      8439
+      8452,
+      8410
      ],
      "MECH": [
-      18774,
-      18371
+      18817,
+      18378
      ],
      "CON": [
-      1329,
-      763
+      1327,
+      757
      ]
     },
     "view-names": {
      "ARCH": [
-      1669,
-      1571
+      1666,
+      1578
      ],
      "STRUCT": [
-      424,
-      412
+      423,
+      409
      ],
      "MECH": [
-      939,
-      664
+      941,
+      668
      ],
      "CON": [
       40,
@@ -6498,11 +6852,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 34,
+     "value": 35,
      "pass": false
     },
     "warnings": {
-     "value": 1257,
+     "value": 1242,
      "pass": true
     },
     "dup-mark": {
@@ -6532,152 +6886,164 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 42946,
+   "elementCount": 42749,
    "byRole": {
     "ARCH": {
-     "elements": 21047,
-     "required": 164598,
-     "met": 154170,
+     "elements": 20930,
+     "required": 163681,
+     "met": 153436,
+     "wrong": 1716,
      "uploaded": true,
-     "elementsAdded": 135,
-     "valuesFixed": 2189,
-     "valuesBroken": 843
+     "elementsAdded": 58,
+     "valuesFixed": 2739,
+     "valuesBroken": 1709,
+     "newRequired": 454,
+     "newMet": 349
     },
     "STRUCT": {
-     "elements": 6433,
-     "required": 50052,
-     "met": 48924,
+     "elements": 6401,
+     "required": 49803,
+     "met": 48686,
+     "wrong": 112,
      "uploaded": true,
-     "elementsAdded": 56,
-     "valuesFixed": 1400,
-     "valuesBroken": 527
+     "elementsAdded": 46,
+     "valuesFixed": 1036,
+     "valuesBroken": 207,
+     "newRequired": 358,
+     "newMet": 341
     },
     "MECH": {
-     "elements": 14228,
-     "required": 106915,
-     "met": 82288,
+     "elements": 14185,
+     "required": 106593,
+     "met": 81903,
+     "wrong": 9736,
      "uploaded": true,
-     "elementsAdded": 112,
-     "valuesFixed": 1723,
-     "valuesBroken": 878
+     "elementsAdded": 37,
+     "valuesFixed": 872,
+     "valuesBroken": 627,
+     "newRequired": 278,
+     "newMet": 135
     },
     "CON": {
-     "elements": 1238,
-     "required": 7788,
-     "met": 3683,
+     "elements": 1233,
+     "required": 7757,
+     "met": 3709,
+     "wrong": 863,
      "uploaded": true,
-     "elementsAdded": 239,
-     "valuesFixed": 936,
-     "valuesBroken": 22
+     "elementsAdded": 235,
+     "valuesFixed": 1004,
+     "valuesBroken": 27,
+     "newRequired": 1478,
+     "newMet": 1004
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      27993,
-      26625
+      27837,
+      26269
      ],
      "STRUCT": [
-      8556,
-      8338
+      8513,
+      8279
      ],
      "MECH": [
-      18923,
-      14286
+      18866,
+      14264
      ],
      "CON": [
-      329,
-      171
+      328,
+      169
      ]
     },
     "real-material": {
      "ARCH": [
-      27993,
-      23890
+      27837,
+      23871
      ],
      "STRUCT": [
-      8556,
-      8332
+      8513,
+      8272
      ]
     },
     "lod-params": {
      "ARCH": [
-      61584,
-      58327
+      61241,
+      58281
      ],
      "STRUCT": [
-      22245,
-      21670
+      22135,
+      21604
      ],
      "MECH": [
-      37846,
-      33703
+      37732,
+      33567
      ],
      "CON": [
-      823,
-      432
+      820,
+      430
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9797,
-      9748
+      9743,
+      9652
      ],
      "STRUCT": [
-      1711,
-      1658
+      1703,
+      1649
      ]
     },
     "asset-data": {
      "ARCH": [
-      4199,
-      2798
+      4176,
+      2764
      ],
      "MECH": [
-      30277,
-      15003
+      30186,
+      14786
      ],
      "CON": [
-      4940,
-      2036
+      4920,
+      2065
      ]
     },
     "rooms": {
      "ARCH": [
-      3359,
-      3342
+      3340,
+      3323
      ]
     },
     "worksets": {
      "ARCH": [
-      27993,
-      27853
+      27837,
+      27698
      ],
      "STRUCT": [
-      8556,
-      8513
+      8513,
+      8470
      ],
      "MECH": [
-      18923,
-      18624
+      18866,
+      18616
      ],
      "CON": [
-      1647,
-      1019
+      1640,
+      1020
      ]
     },
     "view-names": {
      "ARCH": [
-      1680,
-      1587
+      1670,
+      1578
      ],
      "STRUCT": [
-      428,
-      413
+      426,
+      412
      ],
      "MECH": [
-      946,
-      672
+      943,
+      670
      ],
      "CON": [
       49,
@@ -6687,15 +7053,15 @@
    },
    "rules": {
     "on-level": {
-     "value": 96.1,
+     "value": 96.2,
      "pass": true
     },
     "clashes": {
-     "value": 26,
+     "value": 27,
      "pass": false
     },
     "warnings": {
-     "value": 1234,
+     "value": 1232,
      "pass": true
     },
     "dup-mark": {
@@ -6724,151 +7090,163 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 43254,
+   "elementCount": 43181,
    "byRole": {
     "ARCH": {
-     "elements": 21122,
-     "required": 165182,
-     "met": 155137,
+     "elements": 21058,
+     "required": 164681,
+     "met": 154488,
+     "wrong": 1522,
      "uploaded": true,
-     "elementsAdded": 75,
-     "valuesFixed": 1495,
-     "valuesBroken": 528
+     "elementsAdded": 128,
+     "valuesFixed": 1809,
+     "valuesBroken": 757,
+     "newRequired": 1001,
+     "newMet": 824
     },
     "STRUCT": {
-     "elements": 6433,
-     "required": 50052,
-     "met": 48924,
+     "elements": 6401,
+     "required": 49803,
+     "met": 48686,
+     "wrong": 112,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 14229,
-     "required": 106924,
-     "met": 83101,
+     "elements": 14255,
+     "required": 107119,
+     "met": 83154,
+     "wrong": 9011,
      "uploaded": true,
-     "elementsAdded": 1,
-     "valuesFixed": 1746,
-     "valuesBroken": 933
+     "elementsAdded": 70,
+     "valuesFixed": 1644,
+     "valuesBroken": 393,
+     "newRequired": 526,
+     "newMet": 203
     },
     "CON": {
-     "elements": 1470,
-     "required": 9248,
-     "met": 4890,
+     "elements": 1467,
+     "required": 9229,
+     "met": 4873,
+     "wrong": 798,
      "uploaded": true,
-     "elementsAdded": 232,
-     "valuesFixed": 1243,
-     "valuesBroken": 36
+     "elementsAdded": 234,
+     "valuesFixed": 1201,
+     "valuesBroken": 37,
+     "newRequired": 1472,
+     "newMet": 909
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      28092,
-      26802
+      28007,
+      26681
      ],
      "STRUCT": [
-      8556,
-      8338
+      8513,
+      8279
      ],
      "MECH": [
-      18925,
-      14584
+      18959,
+      14570
      ],
      "CON": [
-      391,
-      228
+      390,
+      226
      ]
     },
     "real-material": {
      "ARCH": [
-      28092,
-      24030
+      28007,
+      24062
      ],
      "STRUCT": [
-      8556,
-      8332
+      8513,
+      8272
      ]
     },
     "lod-params": {
      "ARCH": [
-      61803,
-      58808
+      61616,
+      58365
      ],
      "STRUCT": [
-      22245,
-      21670
+      22135,
+      21604
      ],
      "MECH": [
-      37849,
-      34221
+      37918,
+      34197
      ],
      "CON": [
-      978,
-      567
+      976,
+      566
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9832,
-      9783
+      9802,
+      9753
      ],
      "STRUCT": [
-      1711,
-      1658
+      1703,
+      1649
      ]
     },
     "asset-data": {
      "ARCH": [
-      4214,
-      2800
+      4201,
+      2819
      ],
      "MECH": [
-      30279,
-      14868
+      30335,
+      14885
      ],
      "CON": [
-      5865,
-      2694
+      5853,
+      2699
      ]
     },
     "rooms": {
      "ARCH": [
-      3371,
-      3354
+      3361,
+      3344
      ]
     },
     "worksets": {
      "ARCH": [
-      28092,
-      27952
+      28007,
+      27867
      ],
      "STRUCT": [
-      8556,
-      8513
+      8513,
+      8470
      ],
      "MECH": [
-      18925,
-      18743
+      18959,
+      18817
      ],
      "CON": [
-      1955,
-      1367
+      1951,
+      1348
      ]
     },
     "view-names": {
      "ARCH": [
-      1686,
-      1608
+      1680,
+      1597
      ],
      "STRUCT": [
-      428,
-      413
+      426,
+      412
      ],
      "MECH": [
-      946,
+      948,
       685
      ],
      "CON": [
@@ -6883,11 +7261,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 22,
+     "value": 24,
      "pass": true
     },
     "warnings": {
-     "value": 1217,
+     "value": 1235,
      "pass": true
     },
     "dup-mark": {
@@ -6917,134 +7295,146 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 43554,
+   "elementCount": 43581,
    "byRole": {
     "ARCH": {
-     "elements": 21095,
-     "required": 164970,
-     "met": 155530,
+     "elements": 21093,
+     "required": 164956,
+     "met": 155044,
+     "wrong": 1267,
      "uploaded": true,
-     "elementsAdded": -27,
-     "valuesFixed": 1738,
-     "valuesBroken": 1345
+     "elementsAdded": 35,
+     "valuesFixed": 2080,
+     "valuesBroken": 1524,
+     "newRequired": 274,
+     "newMet": 231
     },
     "STRUCT": {
-     "elements": 6463,
-     "required": 50286,
-     "met": 49210,
+     "elements": 6440,
+     "required": 50106,
+     "met": 48846,
+     "wrong": 126,
      "uploaded": true,
-     "elementsAdded": 30,
-     "valuesFixed": 494,
-     "valuesBroken": 208
+     "elementsAdded": 39,
+     "valuesFixed": 318,
+     "valuesBroken": 158,
+     "newRequired": 303,
+     "newMet": 297
     },
     "MECH": {
-     "elements": 14291,
-     "required": 107389,
-     "met": 84119,
+     "elements": 14343,
+     "required": 107780,
+     "met": 84664,
+     "wrong": 8584,
      "uploaded": true,
-     "elementsAdded": 62,
-     "valuesFixed": 1413,
-     "valuesBroken": 395
+     "elementsAdded": 88,
+     "valuesFixed": 2329,
+     "valuesBroken": 819,
+     "newRequired": 661,
+     "newMet": 315
     },
     "CON": {
      "elements": 1705,
      "required": 10727,
-     "met": 6266,
+     "met": 6194,
+     "wrong": 994,
      "uploaded": true,
-     "elementsAdded": 235,
-     "valuesFixed": 1389,
-     "valuesBroken": 13
+     "elementsAdded": 238,
+     "valuesFixed": 1375,
+     "valuesBroken": 54,
+     "newRequired": 1497,
+     "newMet": 971
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      28056,
-      26900
+      28054,
+      26917
      ],
      "STRUCT": [
-      8596,
-      8363
+      8565,
+      8296
      ],
      "MECH": [
-      19007,
-      14645
+      19076,
+      14851
      ],
      "CON": [
       454,
-      287
+      291
      ]
     },
     "real-material": {
      "ARCH": [
-      28056,
-      24163
+      28054,
+      24121
      ],
      "STRUCT": [
-      8596,
-      8342
+      8565,
+      8351
      ]
     },
     "lod-params": {
      "ARCH": [
-      61724,
-      59024
+      61718,
+      58554
      ],
      "STRUCT": [
-      22349,
-      21858
+      22270,
+      21590
      ],
      "MECH": [
-      38014,
-      34609
+      38152,
+      34863
      ],
      "CON": [
       1134,
-      717
+      716
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9820,
-      9771
+      9819,
+      9770
      ],
      "STRUCT": [
-      1719,
-      1673
+      1713,
+      1670
      ]
     },
     "asset-data": {
      "ARCH": [
       4208,
-      2804
+      2806
      ],
      "MECH": [
-      30411,
-      15264
+      30522,
+      15279
      ],
      "CON": [
       6803,
-      3500
+      3424
      ]
     },
     "rooms": {
      "ARCH": [
-      3367,
-      3350
+      3366,
+      3349
      ]
     },
     "worksets": {
      "ARCH": [
-      28056,
-      27916
+      28054,
+      27914
      ],
      "STRUCT": [
-      8596,
-      8553
+      8565,
+      8522
      ],
      "MECH": [
-      19007,
-      18912
+      19076,
+      18981
      ],
      "CON": [
       2268,
@@ -7054,19 +7444,19 @@
     "view-names": {
      "ARCH": [
       1683,
-      1602
+      1613
      ],
      "STRUCT": [
-      430,
-      421
+      428,
+      417
      ],
      "MECH": [
-      950,
-      689
+      954,
+      690
      ],
      "CON": [
       68,
-      43
+      44
      ]
     }
    },
@@ -7076,11 +7466,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 24,
+     "value": 21,
      "pass": true
     },
     "warnings": {
-     "value": 1226,
+     "value": 1227,
      "pass": true
     },
     "dup-mark": {
@@ -7109,58 +7499,70 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 43919,
+   "elementCount": 43929,
    "byRole": {
     "ARCH": {
-     "elements": 21165,
-     "required": 165517,
-     "met": 156194,
+     "elements": 21129,
+     "required": 165238,
+     "met": 155509,
+     "wrong": 1078,
      "uploaded": true,
-     "elementsAdded": 70,
-     "valuesFixed": 1303,
-     "valuesBroken": 639
+     "elementsAdded": 36,
+     "valuesFixed": 1271,
+     "valuesBroken": 806,
+     "newRequired": 282,
+     "newMet": 235
     },
     "STRUCT": {
-     "elements": 6463,
-     "required": 50286,
-     "met": 49210,
+     "elements": 6440,
+     "required": 50106,
+     "met": 48846,
+     "wrong": 126,
      "uploaded": false,
      "elementsAdded": 0,
      "valuesFixed": 0,
-     "valuesBroken": 0
+     "valuesBroken": 0,
+     "newRequired": 0,
+     "newMet": 0
     },
     "MECH": {
-     "elements": 14359,
-     "required": 107900,
-     "met": 85095,
+     "elements": 14428,
+     "required": 108418,
+     "met": 85437,
+     "wrong": 8074,
      "uploaded": true,
-     "elementsAdded": 68,
-     "valuesFixed": 1467,
-     "valuesBroken": 491
+     "elementsAdded": 85,
+     "valuesFixed": 1442,
+     "valuesBroken": 669,
+     "newRequired": 639,
+     "newMet": 295
     },
     "CON": {
      "elements": 1932,
      "required": 12155,
-     "met": 7752,
+     "met": 7730,
+     "wrong": 1012,
      "uploaded": true,
      "elementsAdded": 227,
-     "valuesFixed": 1508,
-     "valuesBroken": 22
+     "valuesFixed": 1577,
+     "valuesBroken": 41,
+     "newRequired": 1428,
+     "newMet": 912
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      28149,
-      26824
+      28102,
+      26783
      ],
      "STRUCT": [
-      8596,
-      8363
+      8565,
+      8296
      ],
      "MECH": [
-      19097,
-      14902
+      19189,
+      14943
      ],
      "CON": [
       514,
@@ -7169,102 +7571,102 @@
     },
     "real-material": {
      "ARCH": [
-      28149,
-      24102
+      28102,
+      24219
      ],
      "STRUCT": [
-      8596,
-      8342
+      8565,
+      8351
      ]
     },
     "lod-params": {
      "ARCH": [
-      61929,
-      59650
+      61823,
+      58957
      ],
      "STRUCT": [
-      22349,
-      21858
+      22270,
+      21590
      ],
      "MECH": [
-      38195,
-      35081
+      38378,
+      35078
      ],
      "CON": [
       1285,
-      897
+      888
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9852,
-      9803
+      9836,
+      9787
      ],
      "STRUCT": [
-      1719,
-      1673
+      1713,
+      1670
      ]
     },
     "asset-data": {
      "ARCH": [
-      4222,
-      2823
+      4215,
+      2828
      ],
      "MECH": [
-      30556,
-      15408
+      30703,
+      15616
      ],
      "CON": [
       7709,
-      4309
+      4287
      ]
     },
     "rooms": {
      "ARCH": [
-      3378,
-      3361
+      3372,
+      3355
      ]
     },
     "worksets": {
      "ARCH": [
-      28149,
-      28008
+      28102,
+      27961
      ],
      "STRUCT": [
-      8596,
-      8553
+      8565,
+      8522
      ],
      "MECH": [
-      19097,
-      19002
+      19189,
+      19093
      ],
      "CON": [
       2570,
-      2138
+      2148
      ]
     },
     "view-names": {
      "ARCH": [
-      1689,
-      1623
+      1686,
+      1619
      ],
      "STRUCT": [
-      430,
-      421
+      428,
+      417
      ],
      "MECH": [
-      955,
-      702
+      959,
+      707
      ],
      "CON": [
       77,
-      54
+      53
      ]
     }
    },
    "rules": {
     "on-level": {
-     "value": 96.7,
+     "value": 96.8,
      "pass": true
     },
     "clashes": {
@@ -7272,7 +7674,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 1206,
+     "value": 1201,
      "pass": true
     },
     "dup-mark": {
@@ -7302,156 +7704,168 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 44332,
+   "elementCount": 44265,
    "byRole": {
     "ARCH": {
-     "elements": 21290,
-     "required": 166497,
-     "met": 157545,
+     "elements": 21237,
+     "required": 166081,
+     "met": 157098,
+     "wrong": 1056,
      "uploaded": true,
-     "elementsAdded": 125,
-     "valuesFixed": 2369,
-     "valuesBroken": 1018
+     "elementsAdded": 108,
+     "valuesFixed": 2937,
+     "valuesBroken": 1348,
+     "newRequired": 845,
+     "newMet": 739
     },
     "STRUCT": {
-     "elements": 6485,
-     "required": 50456,
-     "met": 49524,
+     "elements": 6461,
+     "required": 50270,
+     "met": 49221,
+     "wrong": 97,
      "uploaded": true,
-     "elementsAdded": 22,
-     "valuesFixed": 767,
-     "valuesBroken": 453
+     "elementsAdded": 21,
+     "valuesFixed": 561,
+     "valuesBroken": 186,
+     "newRequired": 163,
+     "newMet": 155
     },
     "MECH": {
-     "elements": 14385,
-     "required": 108096,
-     "met": 85417,
+     "elements": 14401,
+     "required": 108216,
+     "met": 85583,
+     "wrong": 8519,
      "uploaded": true,
-     "elementsAdded": 26,
-     "valuesFixed": 867,
-     "valuesBroken": 545
+     "elementsAdded": -27,
+     "valuesFixed": 897,
+     "valuesBroken": 751,
+     "newRequired": 0,
+     "newMet": 0
     },
     "CON": {
-     "elements": 2172,
-     "required": 13664,
-     "met": 9415,
+     "elements": 2166,
+     "required": 13625,
+     "met": 9389,
+     "wrong": 914,
      "uploaded": true,
-     "elementsAdded": 240,
-     "valuesFixed": 1740,
-     "valuesBroken": 77
+     "elementsAdded": 234,
+     "valuesFixed": 1690,
+     "valuesBroken": 31,
+     "newRequired": 1472,
+     "newMet": 908
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      28316,
-      27132
+      28245,
+      27277
      ],
      "STRUCT": [
-      8625,
-      8396
+      8593,
+      8420
      ],
      "MECH": [
-      19132,
-      15070
+      19153,
+      15109
      ],
      "CON": [
-      578,
+      576,
       435
      ]
     },
     "real-material": {
      "ARCH": [
-      28316,
-      24637
+      28245,
+      24570
      ],
      "STRUCT": [
-      8625,
-      8483
+      8593,
+      8411
      ]
     },
     "lod-params": {
      "ARCH": [
-      62295,
-      59890
+      62139,
+      59452
      ],
      "STRUCT": [
-      22425,
-      21948
+      22342,
+      21737
      ],
      "MECH": [
-      38264,
-      35241
+      38307,
+      35205
      ],
      "CON": [
-      1444,
-      1080
+      1440,
+      1088
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9910,
-      9860
+      9886,
+      9837
      ],
      "STRUCT": [
-      1725,
-      1695
+      1719,
+      1683
      ]
     },
     "asset-data": {
      "ARCH": [
-      4247,
-      2843
+      4237,
+      2866
      ],
      "MECH": [
-      30611,
-      15368
+      30645,
+      15500
      ],
      "CON": [
-      8666,
-      5231
+      8642,
+      5210
      ]
     },
     "rooms": {
      "ARCH": [
-      3398,
-      3381
+      3389,
+      3372
      ]
     },
     "worksets": {
      "ARCH": [
-      28316,
-      28174
+      28245,
+      28104
      ],
      "STRUCT": [
-      8625,
-      8582
+      8593,
+      8550
      ],
      "MECH": [
-      19132,
-      19036
+      19153,
+      19057
      ],
      "CON": [
-      2889,
-      2603
+      2881,
+      2592
      ]
     },
     "view-names": {
      "ARCH": [
-      1699,
-      1628
+      1695,
+      1620
      ],
      "STRUCT": [
-      431,
+      430,
       420
      ],
      "MECH": [
-      957,
-      702
+      958,
+      712
      ],
      "CON": [
-      87,
-      66
+      86,
+      64
      ]
     }
    },
@@ -7465,7 +7879,7 @@
      "pass": true
     },
     "warnings": {
-     "value": 1202,
+     "value": 1197,
      "pass": true
     },
     "dup-mark": {
@@ -7495,156 +7909,168 @@
     "CON"
    ],
    "state": "checked",
-   "elementCount": 44777,
+   "elementCount": 44734,
    "byRole": {
     "ARCH": {
-     "elements": 21361,
-     "required": 167052,
-     "met": 158287,
+     "elements": 21372,
+     "required": 167138,
+     "met": 158942,
+     "wrong": 1044,
      "uploaded": true,
-     "elementsAdded": 71,
-     "valuesFixed": 1535,
-     "valuesBroken": 793
+     "elementsAdded": 135,
+     "valuesFixed": 3122,
+     "valuesBroken": 1278,
+     "newRequired": 1056,
+     "newMet": 843
     },
     "STRUCT": {
-     "elements": 6498,
-     "required": 50556,
-     "met": 49740,
+     "elements": 6513,
+     "required": 50673,
+     "met": 49711,
+     "wrong": 79,
      "uploaded": true,
-     "elementsAdded": 13,
-     "valuesFixed": 709,
-     "valuesBroken": 493
+     "elementsAdded": 52,
+     "valuesFixed": 701,
+     "valuesBroken": 211,
+     "newRequired": 405,
+     "newMet": 392
     },
     "MECH": {
-     "elements": 14510,
-     "required": 109035,
-     "met": 86534,
+     "elements": 14450,
+     "required": 108584,
+     "met": 86801,
+     "wrong": 7690,
      "uploaded": true,
-     "elementsAdded": 125,
-     "valuesFixed": 1564,
-     "valuesBroken": 447
+     "elementsAdded": 49,
+     "valuesFixed": 1408,
+     "valuesBroken": 190,
+     "newRequired": 368,
+     "newMet": 153
     },
     "CON": {
-     "elements": 2408,
-     "required": 15149,
-     "met": 11229,
+     "elements": 2399,
+     "required": 15092,
+     "met": 11131,
+     "wrong": 803,
      "uploaded": true,
-     "elementsAdded": 236,
-     "valuesFixed": 1907,
-     "valuesBroken": 93
+     "elementsAdded": 233,
+     "valuesFixed": 1802,
+     "valuesBroken": 60,
+     "newRequired": 1466,
+     "newMet": 1016
     }
    },
    "valueChecks": {
     "assembly-code": {
      "ARCH": [
-      28410,
-      27391
+      28425,
+      27598
      ],
      "STRUCT": [
-      8642,
-      8432
+      8662,
+      8481
      ],
      "MECH": [
-      19298,
-      15177
+      19218,
+      15280
      ],
      "CON": [
-      641,
-      519
+      638,
+      513
      ]
     },
     "real-material": {
      "ARCH": [
-      28410,
-      24536
+      28425,
+      24653
      ],
      "STRUCT": [
-      8642,
-      8498
+      8662,
+      8506
      ]
     },
     "lod-params": {
      "ARCH": [
-      62502,
-      60260
+      62534,
+      60594
      ],
      "STRUCT": [
-      22470,
-      22089
+      22522,
+      21986
      ],
      "MECH": [
-      38597,
-      35730
+      38437,
+      35773
      ],
      "CON": [
-      1601,
-      1300
+      1595,
+      1287
      ]
     },
     "fire-rating": {
      "ARCH": [
-      9944,
-      9894
+      9949,
+      9899
      ],
      "STRUCT": [
-      1728,
-      1700
+      1732,
+      1694
      ]
     },
     "asset-data": {
      "ARCH": [
-      4262,
-      2901
+      4264,
+      2867
      ],
      "MECH": [
-      30877,
-      15706
+      30750,
+      15913
      ],
      "CON": [
-      9608,
-      6221
+      9572,
+      6149
      ]
     },
     "rooms": {
      "ARCH": [
-      3409,
-      3392
+      3411,
+      3394
      ]
     },
     "worksets": {
      "ARCH": [
-      28410,
-      28268
+      28425,
+      28283
      ],
      "STRUCT": [
-      8642,
-      8599
+      8662,
+      8619
      ],
      "MECH": [
-      19298,
-      19202
+      19218,
+      19122
      ],
      "CON": [
-      3203,
-      3112
+      3191,
+      3104
      ]
     },
     "view-names": {
      "ARCH": [
       1705,
-      1645
+      1654
      ],
      "STRUCT": [
-      432,
-      422
+      433,
+      425
      ],
      "MECH": [
-      965,
-      719
+      961,
+      713
      ],
      "CON": [
       96,
-      77
+      78
      ]
     }
    },
@@ -7654,11 +8080,11 @@
      "pass": true
     },
     "clashes": {
-     "value": 6,
+     "value": 9,
      "pass": true
     },
     "warnings": {
-     "value": 1178,
+     "value": 1187,
      "pass": true
     },
     "dup-mark": {
