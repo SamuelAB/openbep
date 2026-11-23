@@ -1489,7 +1489,7 @@
    "ifc": null,
    "rv": [
     "builtin",
-    "Heat Transfer Coefficient (U) - analytical properties"
+    "Thermal Transmittance (U) - analytical properties"
    ],
    "cb": null,
    "sc": "type",
@@ -1503,11 +1503,10 @@
    ],
    "ip": [
     "ThermalTransmittance",
-    "Heat Transfer Coefficient (U)"
+    "Thermal Transmittance (U)"
    ],
-   "rn": "Heat Transfer Coefficient",
-   "rk": "builtin",
-   "rnote": "U"
+   "rn": "Thermal Transmittance (U)",
+   "rk": "builtin"
   },
   "door_hardware_set": {
    "l": "Hardware set",
@@ -1831,7 +1830,7 @@
    "ifc": null,
    "rv": [
     "builtin",
-    "Heat Transfer Coefficient (U) - analytical properties"
+    "Thermal Transmittance (U) - analytical properties"
    ],
    "cb": null,
    "sc": "type",
@@ -1845,11 +1844,10 @@
    ],
    "ip": [
     "ThermalTransmittance",
-    "Heat Transfer Coefficient (U)"
+    "Thermal Transmittance (U)"
    ],
-   "rn": "Heat Transfer Coefficient",
-   "rk": "builtin",
-   "rnote": "U"
+   "rn": "Thermal Transmittance (U)",
+   "rk": "builtin"
   },
   "at_airflow_type": {
    "l": "Air flow type",
@@ -3132,7 +3130,8 @@
     "Insulation Thickness"
    ],
    "rn": "Insulation Type / Insulation Thickness",
-   "rk": "builtin"
+   "rk": "builtin",
+   "noneOk": true
   },
   "mep_flow": {
    "l": "Design flow",
@@ -3734,9 +3733,8 @@
    "ip": [
     "Thermal Resistance (R)"
    ],
-   "rn": "Thermal Resistance",
-   "rk": "builtin",
-   "rnote": "R"
+   "rn": "Thermal Resistance (R)",
+   "rk": "builtin"
   },
   "roof_sri": {
    "l": "Solar reflectance index (SRI)",
@@ -4185,9 +4183,8 @@
     "RequiredSlope",
     "Ramp Max Slope (1/x)"
    ],
-   "rn": "Ramp Max Slope",
-   "rk": "builtin",
-   "rnote": "1/x"
+   "rn": "Ramp Max Slope (1/x)",
+   "rk": "builtin"
   },
   "rlg_height": {
    "l": "Guard / railing height",
@@ -4339,7 +4336,7 @@
    "ifc": "Pset_WindowCommon.ThermalTransmittance / Pset_CurtainWallCommon.ThermalTransmittance",
    "rv": [
     "builtin",
-    "Heat Transfer Coefficient (U) - analytical properties"
+    "Thermal Transmittance (U) - analytical properties"
    ],
    "cb": null,
    "sc": "type",
@@ -4353,11 +4350,10 @@
    ],
    "ip": [
     "ThermalTransmittance",
-    "Heat Transfer Coefficient (U)"
+    "Thermal Transmittance (U)"
    ],
-   "rn": "Heat Transfer Coefficient",
-   "rk": "builtin",
-   "rnote": "U"
+   "rn": "Thermal Transmittance (U)",
+   "rk": "builtin"
   },
   "glz_shgc": {
    "l": "Solar heat gain coefficient",
@@ -4829,7 +4825,7 @@
    "ifc": null,
    "rv": [
     "builtin",
-    "Moment Connection Start / End"
+    "Start Connection / End Connection"
    ],
    "cb": null,
    "sc": "instance",
@@ -4842,10 +4838,10 @@
     "Generic"
    ],
    "ip": [
-    "Moment Connection Start",
-    "Moment Connection End"
+    "Start Connection",
+    "End Connection"
    ],
-   "rn": "Moment Connection Start / End",
+   "rn": "Start Connection / End Connection",
    "rk": "builtin"
   },
   "stl_fire_protection": {
@@ -5694,7 +5690,8 @@
     "Lining Thickness"
    ],
    "rn": "Lining Type / Lining Thickness",
-   "rk": "builtin"
+   "rk": "builtin",
+   "noneOk": true
   },
   "dct_surface_area": {
    "l": "Outer surface area",
@@ -9283,7 +9280,7 @@
    "ifc": "Pset_SpaceCoveringRequirements.FloorCovering / Pset_SpaceCoveringRequirements.WallCovering / Pset_SpaceCoveringRequirements.CeilingCovering / Pset_SpaceCoveringRequirements.SkirtingBoard",
    "rv": [
     "builtin",
-    "Floor / Wall / Ceiling / Base Finish"
+    "Floor Finish / Wall Finish / Ceiling Finish / Base Finish"
    ],
    "cb": null,
    "sc": "instance",
@@ -9305,7 +9302,7 @@
     "Ceiling Finish",
     "Base Finish"
    ],
-   "rn": "Floor / Wall / Ceiling / Base Finish",
+   "rn": "Floor Finish / Wall Finish / Ceiling Finish / Base Finish",
    "rk": "builtin"
   },
   "spc_setpoints": {
@@ -12711,6 +12708,485 @@
    "rk": "shared",
    "rn": "OB_GroundPower400Hz",
    "guid": "37fed21b-4ca2-5cdd-b9a1-56e2a013ce8a"
+  },
+  "fire_resistance_min": {
+   "l": "Fire-resistance rating (min)",
+   "lf": "Degré de résistance au feu (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire-resistance rating of the assembly, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Blank means not filled in.",
+   "ifc": "Pset_WallCommon.FireRating / Pset_SlabCommon.FireRating / Pset_RoofCommon.FireRating / Pset_ColumnCommon.FireRating / Pset_BeamCommon.FireRating / Pset_MemberCommon.FireRating / Pset_CoveringCommon.FireRating / Pset_StairCommon.FireRating / Pset_CurtainWallCommon.FireRating",
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireResistanceRating_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireResistanceRating_min",
+   "guid": "bfeb7680-37fc-51c0-b00b-f85a3f61cde4",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "fire_protection_min": {
+   "l": "Fire-protection rating (min)",
+   "lf": "Degré pare-flammes (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "45",
+   "d": "Fire-protection rating of the closure (door, window, damper), in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Blank means not filled in.",
+   "ifc": "Pset_DoorCommon.FireRating / Pset_WindowCommon.FireRating",
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireProtectionRating_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireProtectionRating_min",
+   "guid": "d9d7febd-b4a9-5567-ab44-9c543ff3b52c",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "stc": {
+   "l": "Sound transmission class (STC)",
+   "lf": "Indice de transmission du son (ITS)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "50",
+   "d": "Sound transmission class of the assembly, a whole number from 20 to 80.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "0",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_STC"
+   ],
+   "rk": "shared",
+   "rn": "OB_STC",
+   "guid": "9886d4d5-7706-5ec7-8a28-125fe7c31aef",
+   "vr": {
+    "min": 20,
+    "max": 80
+   }
+  },
+  "astc": {
+   "l": "Apparent sound transmission class (ASTC)",
+   "lf": "Indice de transmission du son apparent (ITSA)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "47",
+   "d": "Apparent sound transmission class of the separation between occupancies, flanking paths included, a whole number from 20 to 80.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "0",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_ASTC"
+   ],
+   "rk": "shared",
+   "rn": "OB_ASTC",
+   "guid": "d1ffbccf-01e0-503c-b2ae-3eb461d7140d",
+   "vr": {
+    "min": 20,
+    "max": 80
+   }
+  },
+  "iic": {
+   "l": "Impact insulation class (IIC)",
+   "lf": "Indice d’isolation aux bruits d’impact (IIC)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "55",
+   "d": "Impact insulation class of the floor assembly, a whole number from 20 to 80.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "0",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_IIC"
+   ],
+   "rk": "shared",
+   "rn": "OB_IIC",
+   "guid": "a0e15cf3-6a6b-5534-a353-137b3ec58afc",
+   "vr": {
+    "min": 20,
+    "max": 80
+   }
+  },
+  "fire_head_joint_min": {
+   "l": "Head joint fire rating (min)",
+   "lf": "Degré de résistance au feu du joint de tête (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire rating of the joint at the top of a rated wall, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireRatingHeadJoint_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireRatingHeadJoint_min",
+   "guid": "9b900f8c-f350-59af-817c-bbd907a0f3e6",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "fire_base_joint_min": {
+   "l": "Base joint fire rating (min)",
+   "lf": "Degré de résistance au feu du joint de pied (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire rating of the joint at the base of a rated wall, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireRatingBaseJoint_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireRatingBaseJoint_min",
+   "guid": "d5140b10-a7d2-57ad-9d4a-37e54ff4ce27",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "fire_from_above_min": {
+   "l": "Fire-resistance rating, fire from above (min)",
+   "lf": "Degré de résistance au feu, feu par le dessus (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire-resistance rating with the fire above the assembly, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireRatingFromAbove_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireRatingFromAbove_min",
+   "guid": "9c16bee3-1e37-57f8-bdbd-ef79b338d5aa",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "fire_from_below_min": {
+   "l": "Fire-resistance rating, fire from below (min)",
+   "lf": "Degré de résistance au feu, feu par le dessous (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire-resistance rating with the fire below the assembly, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireRatingFromBelow_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireRatingFromBelow_min",
+   "guid": "d8a76398-bcbd-5cb5-8ce9-da3ea7fb4abf",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "fire_from_inside_min": {
+   "l": "Fire-resistance rating, fire from inside (min)",
+   "lf": "Degré de résistance au feu, feu de l’intérieur (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire-resistance rating with the fire inside the building, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireRatingFromInside_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireRatingFromInside_min",
+   "guid": "2a9aa623-1d7c-502c-b1af-6bf2dd72c8ef",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "fire_from_outside_min": {
+   "l": "Fire-resistance rating, fire from outside (min)",
+   "lf": "Degré de résistance au feu, feu de l’extérieur (min)",
+   "t": "IfcInteger",
+   "u": null,
+   "ex": "60",
+   "d": "Fire-resistance rating with the fire outside the building, in minutes: 0 (no rating required), 20, 30, 45, 60, 90, 120, 180 or 240. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "shared",
+    null
+   ],
+   "cb": null,
+   "sc": "type",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default",
+    "<By Category>"
+   ],
+   "ip": [
+    "OB_FireRatingFromOutside_min"
+   ],
+   "rk": "shared",
+   "rn": "OB_FireRatingFromOutside_min",
+   "guid": "31b2daf8-f3ec-546c-90dd-134917396b66",
+   "vr": {
+    "allowed": [
+     0,
+     20,
+     30,
+     45,
+     60,
+     90,
+     120,
+     180,
+     240
+    ]
+   }
+  },
+  "workset": {
+   "l": "Workset",
+   "lf": "Sous-projet",
+   "t": "IfcLabel",
+   "u": null,
+   "ex": "Interior",
+   "d": "Revit workset the element is on. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "builtin",
+    "Workset"
+   ],
+   "cb": null,
+   "sc": "instance",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default"
+   ],
+   "ip": [
+    "Workset"
+   ],
+   "rn": "Workset",
+   "rk": "builtin"
+  },
+  "design_option": {
+   "l": "Design option",
+   "lf": "Option de conception",
+   "t": "IfcLabel",
+   "u": null,
+   "ex": "Option 1",
+   "d": "Design option the element belongs to. Optional: asked only when the owner switches it on.",
+   "ifc": null,
+   "rv": [
+    "builtin",
+    "Design Option"
+   ],
+   "cb": null,
+   "sc": "instance",
+   "sus": [
+    "",
+    "TBD",
+    "N/A",
+    "Default"
+   ],
+   "ip": [
+    "Design Option"
+   ],
+   "rn": "Design Option",
+   "rk": "builtin"
   }
  },
  "C": [
@@ -13123,6 +13599,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -13399,6 +13887,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_protection_min",
+     "300",
      [
       "code_check",
       "fm"
@@ -13441,6 +13935,12 @@
     ],
     [
      "door_acoustic_rating",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "stc",
      "300",
      [
       "design_review"
@@ -13641,6 +14141,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -13899,14 +14411,48 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
+      "design_review",
       "code_check",
       "fm"
      ],
      ""
     ],
     [
+     "fire_head_joint_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_base_joint_min",
+     "300",
+     [],
+     ""
+    ],
+    [
      "wall_acoustic_rating",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "stc",
+     "300",
+     [
+      "design_review",
+      "code_check"
+     ],
+     ""
+    ],
+    [
+     "astc",
      "300",
      [
       "design_review",
@@ -14015,6 +14561,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -14316,9 +14874,40 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
+      "design_review",
       "code_check"
      ],
+     ""
+    ],
+    [
+     "fire_head_joint_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_base_joint_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_from_inside_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_from_outside_min",
+     "300",
+     [],
      ""
     ],
     [
@@ -14340,6 +14929,12 @@
     ],
     [
      "wall_acoustic_rating",
+     "350",
+     [],
+     ""
+    ],
+    [
+     "stc",
      "350",
      [
       "design_review"
@@ -14410,6 +15005,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -14798,6 +15405,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -15295,6 +15914,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -15588,6 +16219,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
@@ -15683,6 +16320,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -16132,6 +16781,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -16511,6 +17172,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -16902,6 +17575,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -17315,6 +18000,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -17650,19 +18347,61 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
      ""
     ],
     [
+     "fire_from_above_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_from_below_min",
+     "300",
+     [],
+     ""
+    ],
+    [
      "wall_acoustic_rating",
+     "300",
+     [],
+     "STC / IIC of the floor assembly"
+    ],
+    [
+     "stc",
      "300",
      [
       "design_review",
       "code_check"
      ],
-     "STC / IIC of the floor assembly"
+     ""
+    ],
+    [
+     "astc",
+     "300",
+     [
+      "design_review",
+      "code_check"
+     ],
+     ""
+    ],
+    [
+     "iic",
+     "300",
+     [
+      "design_review",
+      "code_check"
+     ],
+     ""
     ],
     [
      "wall_compartmentation",
@@ -17745,6 +18484,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -18067,9 +18818,27 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
+     ""
+    ],
+    [
+     "fire_from_above_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_from_below_min",
+     "300",
+     [],
      ""
     ],
     [
@@ -18173,6 +18942,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -18457,6 +19238,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
@@ -18576,6 +19363,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -18858,6 +19657,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
@@ -18944,6 +19749,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -19229,6 +20046,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -19360,6 +20189,10 @@
     "Walls (OST_Walls) - curtain wall types",
     "Curtain Panels (OST_CurtainWallPanels)",
     "Curtain Wall Mullions (OST_CurtainWallMullions)"
+   ],
+   "rcp": [
+    "OST_CurtainWallPanels",
+    "OST_CurtainWallMullions"
    ],
    "ifc": "IfcCurtainWall aggregating IfcMember.MULLION and IfcPlate.CURTAIN_PANEL",
    "sqi": "",
@@ -19525,6 +20358,12 @@
     [
      "wall_acoustic_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "stc",
+     "300",
      [
       "design_review"
      ],
@@ -19533,9 +20372,28 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
+      "design_review",
       "code_check"
      ],
+     ""
+    ],
+    [
+     "fire_from_inside_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_from_outside_min",
+     "300",
+     [],
      ""
     ],
     [
@@ -19651,6 +20509,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -20015,6 +20885,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_protection_min",
+     "300",
      [
       "code_check"
      ],
@@ -20030,6 +20906,12 @@
     ],
     [
      "wall_acoustic_rating",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "stc",
      "300",
      [
       "design_review"
@@ -20151,6 +21033,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -20450,9 +21344,27 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
+     ""
+    ],
+    [
+     "fire_from_above_min",
+     "300",
+     [],
+     ""
+    ],
+    [
+     "fire_from_below_min",
+     "300",
+     [],
      ""
     ],
     [
@@ -20527,6 +21439,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -20828,6 +21752,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
@@ -20903,6 +21833,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -21247,6 +22189,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -21573,6 +22527,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -21976,6 +22942,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -22408,6 +23386,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -22863,6 +23853,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -23234,6 +24236,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -23492,6 +24506,12 @@
     [
      "dmp_fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_protection_min",
+     "300",
      [
       "code_check",
       "fm"
@@ -23554,9 +24574,7 @@
     [
      "fire_rating",
      "300",
-     [
-      "code_check"
-     ],
+     [],
      "Rating of the separation the damper protects"
     ],
     [
@@ -23701,6 +24719,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -24066,6 +25096,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -24495,6 +25537,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -24987,6 +26041,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -25464,6 +26530,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -25936,6 +27014,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -26400,6 +27490,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -26878,6 +27980,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -27319,6 +28433,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -27735,6 +28861,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -28164,6 +29302,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -28505,6 +29655,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -28918,6 +30080,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -29368,6 +30542,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -29814,6 +31000,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -30284,6 +31482,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -30604,6 +31814,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -30939,6 +32161,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -31353,6 +32587,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -31738,6 +32984,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -31936,6 +33194,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     "Fire compartments"
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
@@ -31980,6 +33244,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -32221,6 +33497,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -32544,6 +33832,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -32927,6 +34227,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -33335,6 +34647,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -33734,6 +35058,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -34087,6 +35423,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -34397,6 +35745,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -34765,6 +36125,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -35201,6 +36573,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -35622,6 +37006,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -36072,6 +37468,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -36485,6 +37893,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -36962,6 +38382,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -37388,6 +38820,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -37798,6 +39242,18 @@
       "sustain"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [],
@@ -38057,6 +39513,12 @@
     [
      "fire_rating",
      "300",
+     [],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
      [
       "code_check"
      ],
@@ -38153,6 +39615,18 @@
      [
       "sustain"
      ],
+     ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
      ""
     ]
    ],
@@ -38574,6 +40048,18 @@
       "asset_reg"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -38985,6 +40471,18 @@
       "asset_reg"
      ],
      ""
+    ],
+    [
+     "workset",
+     "200",
+     [],
+     ""
+    ],
+    [
+     "design_option",
+     "200",
+     [],
+     ""
     ]
    ],
    "notes": [
@@ -39150,5 +40648,147 @@
    "conn",
    "part"
   ]
+ },
+ "RG": [
+  {
+   "id": "structural_walls",
+   "n": "Structural walls",
+   "nf": "Murs structuraux",
+   "h": "Also required when the wall is structural",
+   "m": "Structural walls only",
+   "d": "Rows marked Structural walls only apply to a wall whose Structural Usage is Bearing, Shear or Structural combined, on top of the requirements of its wall type. When the model has no Structural Usage value, Structural = Yes is read instead. A parameter the wall type already asks is checked once, on every wall.",
+   "appliesTo": [
+    "wall_interior",
+    "wall_exterior",
+    "retaining_wall"
+   ],
+   "where": {
+    "all": [
+     {
+      "parameter": "Structural Usage",
+      "scope": "instance",
+      "in": [
+       "Bearing",
+       "Shear",
+       "Structural combined"
+      ]
+     }
+    ],
+    "fallback": {
+     "all": [
+      {
+       "parameter": "Structural",
+       "scope": "instance",
+       "in": [
+        "Yes"
+       ]
+      }
+     ]
+    }
+   },
+   "r": [
+    [
+     "material",
+     "200",
+     [
+      "cost",
+      "quantities",
+      "energy"
+     ],
+     ""
+    ],
+    [
+     "col_material_grade",
+     "300",
+     [
+      "cost",
+      "code_check"
+     ],
+     ""
+    ],
+    [
+     "fire_resistance_min",
+     "300",
+     [
+      "code_check"
+     ],
+     ""
+    ],
+    [
+     "uniformat_code",
+     "300",
+     [
+      "cost",
+      "quantities",
+      "asset_reg"
+     ],
+     ""
+    ],
+    [
+     "col_exposure_class",
+     "300",
+     [
+      "code_check",
+      "cost"
+     ],
+     "Concrete only"
+    ],
+    [
+     "col_cover",
+     "350",
+     [
+      "coordination",
+      "code_check"
+     ],
+     "Concrete only"
+    ],
+    [
+     "col_rebar_ratio",
+     "300",
+     [
+      "cost",
+      "quantities"
+     ],
+     "Concrete only, before detailing"
+    ],
+    [
+     "col_volume",
+     "300",
+     [
+      "quantities",
+      "cost"
+     ],
+     ""
+    ]
+   ]
+  }
+ ],
+ "RW": {
+  "concrete": {
+   "m": "Concrete only",
+   "when": {
+    "structuralMaterialClass": [
+     "Concrete"
+    ]
+   },
+   "d": "Rows marked Concrete only are asked only of elements whose structural material is concrete: the Class of the Revit material named by the element's Structural Material is Concrete.",
+   "rows": {
+    "structural_column": [
+     "col_exposure_class",
+     "col_cover",
+     "col_rebar_ratio"
+    ],
+    "slab": [
+     "col_exposure_class",
+     "col_cover",
+     "col_rebar_ratio"
+    ],
+    "structural_walls": [
+     "col_exposure_class",
+     "col_cover",
+     "col_rebar_ratio"
+    ]
+   }
+  }
  }
 }

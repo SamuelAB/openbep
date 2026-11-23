@@ -19,6 +19,7 @@ Why it matters, with the evidence and every source: [openbep.com/why](https://op
 | [`docs/parameter-dictionary.md`](docs/parameter-dictionary.md) | The parameter dictionary: every parameter with English and French labels, data type, accepted values, categories, uses and LOD. | Draft v0.1 |
 | [`docs/graphics-and-materials-standard.md`](docs/graphics-and-materials-standard.md) | One set of line weights, text styles and material names for Revit projects in Canada. | Draft v0.1 |
 | [`revit-addin/`](revit-addin/) | **OpenBEP Sync**: a Revit add-in that makes a model's shared parameters match the plan. | Source only, not yet built or tested |
+| [Requirement file](shared-parameters/README.md#requirement-file-json) | One JSON file from the BEP Builder (step "Element requirements") that states what the plan asks of every element type at each milestone, and the plan's model rules, for a model checking tool to read. OpenBEP itself checks nothing with it. Example: [`OpenBEP-requirements-school-example.json`](revit-addin/OpenBepSync/test/OpenBEP-requirements-school-example.json). | Draft v1.0, proven against the Builder's own check by `translations/tools/reqfile_parity.js` |
 | [`translations/`](translations/) | One English-keyed dictionary for every page of the site, with French (Quebec), and a glossary of BIM terms it is checked against. | Filled for French |
 
 ## Try it or run your own copy

@@ -22,14 +22,14 @@ namespace OpenBepSync.Tests
         {
             var e = SharedParameterFile.Parse(Fixture("OpenBEP-shared-parameters-school-example.txt"), out var groups, out var warnings);
             Assert.Empty(warnings);
-            Assert.Equal(129, e.Count);
+            Assert.Equal(132, e.Count);
             Assert.Equal(7, groups.Count);
             Assert.Equal("OpenBEP 01 Identity and asset", groups[1]);
-            var a = e.Single(x => x.Name == "OB_AcousticRating");
-            Assert.Equal(new Guid("783c7406-f04c-5678-99c4-1c7190c1de23"), a.Guid);
-            Assert.Equal("TEXT", a.DataType);
+            var a = e.Single(x => x.Name == "OB_STC");
+            Assert.Equal(new Guid("9886d4d5-7706-5ec7-8a28-125fe7c31aef"), a.Guid);
+            Assert.Equal("INTEGER", a.DataType);
             Assert.Equal(2, a.Group);
-            Assert.StartsWith("Acoustic rating", a.Description);
+            Assert.StartsWith("Sound transmission class", a.Description);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace OpenBepSync.Tests
         }
 
         [Theory]
-        [InlineData("school-example", 129, 0)]
+        [InlineData("school-example", 132, 0)]
         [InlineData("rail-example", 124, NoRevitCategoryInRail)]
         [InlineData("custom-levels", 129, 0)]
         public void BuilderExports_ReadAndMatchTheirSharedParameterFile(string example, int count, int withoutCategory)
@@ -136,15 +136,15 @@ namespace OpenBepSync.Tests
         {
             var req = Csv("school-example", out _, out _).ToList();
             var txt = Txt("school-example").ToList();
-            var ac = txt.Single(e => e.Name == "OB_AcousticRating");
+            var ac = txt.Single(e => e.Name == "OB_STC");
             txt.Remove(ac);
-            txt.Add(new SharedParameterEntry { Guid = ac.Guid, Name = "OB_AcousticRatingX", Group = 2 });   // renamed in the file
+            txt.Add(new SharedParameterEntry { Guid = ac.Guid, Name = "OB_STCX", Group = 2 });   // renamed in the file
             txt.Single(e => e.Name == "OB_FireProtection").Guid = Guid.NewGuid();                                // breaks the rule; the list's GUID goes missing
             var w = BindingList.Check(req, txt);
-            Assert.Contains(w, x => x.StartsWith("OB_AcousticRating:") && x.Contains("OB_AcousticRatingX"));
+            Assert.Contains(w, x => x.StartsWith("OB_STC:") && x.Contains("OB_STCX"));
             Assert.Contains(w, x => x.StartsWith("OB_FireProtection:") && x.Contains("not in the shared parameter file"));
             Assert.Contains(w, x => x.StartsWith("OB_FireProtection:") && x.Contains("not the fixed OpenBEP GUID"));
-            Assert.Contains(w, x => x.StartsWith("OB_AcousticRatingX:") && x.Contains("not the fixed OpenBEP GUID"));
+            Assert.Contains(w, x => x.StartsWith("OB_STCX:") && x.Contains("not the fixed OpenBEP GUID"));
         }
     }
 }
