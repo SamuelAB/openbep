@@ -6,8 +6,8 @@
     "fingerprint": "9C37B605B3A9",
     "version": null,
     "listVersion": "0.1",
-    "builderVersion": "0.52",
-    "generated": "2026-11-23T17:08:01.589Z"
+    "builderVersion": "0.53",
+    "generated": "2026-11-23T18:29:55.255Z"
   },
   "scoreRule": {
     "perElementType": "mean of each required parameter real-value percentage",
@@ -44433,7 +44433,8 @@
       "params": {
         "names": [
           "Shared Levels and Grids"
-        ]
+        ],
+        "onlyThese": false
       },
       "appliesFrom": null,
       "severity": "major"

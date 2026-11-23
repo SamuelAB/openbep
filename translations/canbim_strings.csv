@@ -8764,6 +8764,8 @@
 "The model has one set of levels, with no duplicate levels.","La maquette a un seul jeu de niveaux, sans niveau en double.","モデルのレベルは1組だけで、重複したレベルはありません。","Information and software"
 "At least {1}% of the model elements are associated with a level.","Au moins {1} % des éléments de la maquette sont associés à un niveau.","モデルの要素の{1}%以上がレベルに関連付けられています。","Information and software"
 "Every model uses the worksets listed.","Chaque maquette utilise les sous-projets indiqués.","すべてのモデルが記載したワークセットを使います。","Information and software"
+"Every model uses the worksets listed and no other user worksets.","Chaque maquette utilise les sous-projets indiqués et aucun autre sous-projet utilisateur.","すべてのモデルが記載したワークセットを使い、それ以外のユーザーワークセットを持ちません。","Information and software"
+"No other worksets allowed","Aucun autre sous-projet permis","ほかのワークセットは不可","Information and software"
 "Every model has the 3D export view listed, used for milestone exports.","Chaque maquette a la vue d’exportation 3D indiquée, utilisée pour les exportations aux jalons.","すべてのモデルに記載した3D書き出しビューがあり、マイルストーンの書き出しに使います。","Information and software"
 "Every model has a named 3D export view, used for milestone exports.","Chaque maquette a une vue d’exportation 3D nommée, utilisée pour les exportations aux jalons.","すべてのモデルに名前付きの3D書き出しビューがあり、マイルストーンの書き出しに使います。","Information and software"
 "The model has no more than {1} in-place families.","La maquette compte au plus {1} familles in situ.","モデルのインプレイスファミリは{1}個以下です。","Information and software"

@@ -447,6 +447,22 @@ function evaluate(F, T, mid) {
     await page.reload(); await page.waitForTimeout(300);
     typed(await exportFile());
     console.log('model rule settings OK: typed 50 and "Doors, Windows" kept focus, changed the sentence, are in the file and survive a reload');
+    // v0.53 worksets: "No other worksets allowed" (params.onlyThese, default false) changes the sentence and travels in the file.
+    const WS0 = 'Every model uses the worksets listed.', WS1 = 'Every model uses the worksets listed and no other user worksets.';
+    const wsOf = F => F.modelRules.find(r => r.kind === 'worksets-named');
+    const WSA = wsOf(await exportFile());
+    assert.deepStrictEqual([WSA.params.onlyThese, WSA.statement], [false, WS0], 'worksets: default is not onlyThese false: ' + JSON.stringify([WSA.params.onlyThese, WSA.statement]));
+    await go(8); await page.locator('[data-mr="worksets-named"][data-k="p.onlyThese"]').check(); await page.waitForTimeout(150);
+    const wsRow = await page.locator('#mrSec').innerText();
+    await page.reload(); await page.waitForTimeout(300);
+    const W1 = wsOf(await exportFile());
+    if (process.argv.includes('--break-only')) { delete W1.params.onlyThese; console.log('--break-only: removed params.onlyThese from the file'); }
+    assert.ok(wsRow.includes(WS1), 'worksets: the sentence did not follow the switch');
+    assert.deepStrictEqual([W1.params.onlyThese, W1.statement], [true, WS1], 'worksets: the switch is not in the file after a reload: ' + JSON.stringify([W1.params.onlyThese, W1.statement]));
+    for (const L of ['fr', 'ja']) for (const t of [WS1, 'No other worksets allowed']) assert.ok(await page.evaluate(([t, L]) => window.__trText(t, L), [t, L]), `no ${L} translation: ${t}`);
+    await go(8); await page.locator('[data-mr="worksets-named"][data-k="p.onlyThese"]').uncheck(); await page.waitForTimeout(150);
+    assert.strictEqual(wsOf(await exportFile()).params.onlyThese, false, 'worksets: unticking did not bring onlyThese back to false');
+    console.log('WORKSETS OK: onlyThese false by default; ticked -> true, sentence "' + WS1 + '", kept on reload, French and Japanese present; unticked -> false');
     await go(8);
     for (const k of kinds) { const b = page.locator(`[data-mr="${k}"][data-k="on"]`); if (!(await b.isChecked())) { await b.click(); await page.waitForTimeout(100); } }
     await page.selectOption('#mr-f-warnings-max', 'final90');

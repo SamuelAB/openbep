@@ -176,7 +176,7 @@ Rules start switched off, except those the plan already fixes elsewhere: one set
 | `one-grid-set` | none | One set of grids, no duplicates (a background model re-exported brings its grids back). |
 | `one-level-set` | none | One set of levels, no duplicates. |
 | `elements-on-level` | `minPercent` | At least that share of the model elements are associated with a level. |
-| `worksets-named` | `names` (default `Shared Levels and Grids`) | Every model uses the worksets listed. |
+| `worksets-named` | `names` (default `Shared Levels and Grids`), `onlyThese` (default false; v0.53) | Every model uses the worksets listed. Only user worksets count (Revit's own worksets for views, families and project standards are ignored). A checker counts the listed names missing from the model's user worksets (trimmed, ignoring case; limit 0); a missing name has no elements to show. The model's other user worksets are information only (name and element count). With `onlyThese` true (Builder switch "No other worksets allowed") the sentence reads "Every model uses the worksets listed and no other user worksets." and each other user workset fails, with its elements as the failing set. |
 | `export-view-present` | `viewName` (empty: any named view) | Every model has the 3D export view used for milestone exports. |
 | `no-in-place-families` | `maxCount` | No more than that many in-place families. |
 | `no-imported-cad` | none | CAD files are linked, never imported. |
