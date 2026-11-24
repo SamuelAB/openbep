@@ -164,6 +164,18 @@ tr:last-child td{border-bottom:0}
 .chg ul{margin:6px 0 0;padding-left:18px}
 .chg li{margin:3px 0}
 .mslist{margin:8px 0 0;padding-left:22px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 22px}.mslist b{color:var(--ink);font-weight:500}
+.msgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.msc{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--line2);border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.msc.pass{border-top-color:var(--good)}.msc.miss{border-top-color:var(--bad)}.msc.now{border-top-color:var(--accent)}
+.msc .mn{display:flex;gap:8px;align-items:baseline}.msc .mn i{font-style:normal;font-family:var(--mono);font-size:12px;border:1px solid var(--line2);border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.msc .md{font-size:12px;color:var(--muted)}
+.msc .mv{font-size:22px;font-weight:700}.msc .mv small{font-size:13px;font-weight:400;color:var(--muted)}
+.msc ul{list-style:none;margin:0;padding:0;font-size:12px;display:flex;flex-direction:column;gap:3px}
+.msc .who{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:12px}
+.msc .btn{align-self:flex-start;margin-top:auto}
+.fblock{margin-bottom:14px;min-width:0}.fh{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between;padding:8px 2px}.fh .md{color:var(--muted);font-size:12px}.fs{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px}
+.rules{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--muted);max-width:100ch}.rules li{margin:2px 0}.rules b{color:var(--ink)}
+td small.sm{display:block;color:var(--muted);font-size:12px}
 .seg{display:inline-flex}.seg .btn{border-radius:0;margin-left:-1px}.seg .btn:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm);margin-left:0}.seg .btn:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0}
 .gate{margin-top:14px;padding:12px 16px;border:1px solid var(--line);border-left:5px solid var(--faint);border-radius:var(--r-md);background:var(--surface);display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
 .gate.pass{border-left-color:var(--good)}.gate.fail{border-left-color:var(--bad)}
@@ -239,9 +251,21 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
     <div id="gate"></div>
     <div class="tiles" id="tiles"></div>
 
+    <section aria-labelledby="h-ms">
+      <div class="sh"><h2 id="h-ms">Major milestones</h2><span class="note">What the model had to reach at each milestone, and what it reached. Seen from the version selected above.</span></div>
+      <div class="msgrid" id="msCards"></div>
+    </section>
+
     <section aria-labelledby="h-gap">
-      <div class="sh"><h2 id="h-gap">Where the gap is</h2><span class="note">The largest shortfalls against the milestone target, by check and by firm. Closing these moves the overall number most.</span></div>
-      <div class="tw pace" id="gaps"></div>
+      <div class="sh"><h2 id="h-gap">Active deficiencies</h2><span class="note" id="defSum"></span></div>
+      <div class="ctl" style="margin-bottom:8px"><span role="group" aria-label="How the list is grouped" class="seg"><button class="btn" type="button" id="grpF" aria-pressed="true">By firm</button><button class="btn" type="button" id="grpU" aria-pressed="false">All together, by urgency</button></span></div>
+      <div id="gaps"></div>
+      <ul class="rules" id="defKey"></ul>
+    </section>
+
+    <section aria-labelledby="h-acc">
+      <div class="sh"><h2 id="h-acc">Accountability</h2><span class="note">Each firm's record against the milestones, what it has open now, and the step the plan sets.</span></div>
+      <div class="tw pace" id="acc"></div>
     </section>
 
     <section aria-labelledby="h-overall">
@@ -292,6 +316,9 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
       <li><b>The gate</b> at the top is one answer: would this version pass the milestone? It lists the plan's own conditions, the target and each model rule, and which ones fail.</li>
       <li><b>Wrong or empty:</b> a required value that does not meet the plan is either empty or holds something that is not a real value (a placeholder such as "TBD", or a value outside the allowed list). The two need different fixes, so they are counted apart.</li>
       <li><b>New elements arrive filled:</b> of the values required on elements a firm added in its last four working weeks, the share that was already filled. A firm that fills as it models stays high; a firm that models first and fills later does not, and its backlog grows.</li>
+      <li><b>Milestones:</b> a milestone is judged on the last version checked on or before its date. It passes when overall compliance reaches its target and every model rule passes.</li>
+      <li><b>Deficiencies:</b> one line for each value check of a firm that is below the target, and one for each failing model rule. "Open since" is the first version of the current unbroken run. "Closes at this pace" projects the last four working weeks forward, skipping holidays.</li>
+      <li><b>Step set by the plan:</b> counted in milestones a firm missed in a row on its own elements. The steps are the plan's own wording; this page adds none. With no steps in the plan, the column is left out.</li>
       <li><b>Holidays:</b> weeks inside the agreed holidays in the plan have no version and are left out of every count, as on the Scorecard. They never count as a slow week.</li>
       <li><b>A gap is never a zero:</b> a version that could not be checked keeps its place with the reason, and the line breaks there.</li>
       <li><b>Where the data would come from:</b> one version per week on VIM Server, each built from the Revit models the firms uploaded, checked against the requirement file the BEP Builder exports. The example file is <a href="example-school.json">example-school.json</a>, written by <span class="mono">compliance/build_example.py</span>.</li>
@@ -376,6 +403,8 @@ function init(data){
   const setMode=m=>{mode=m;$('#modeP').setAttribute('aria-pressed',m==='p');$('#modeV').setAttribute('aria-pressed',m==='v');drawOverall()};
   $('#modeP').onclick=()=>setMode('p');$('#modeV').onclick=()=>setMode('v');setMode('p');
   $('#printBtn').onclick=()=>print();
+  const setGroup=g=>{group=g;$('#grpF').setAttribute('aria-pressed',g==='f');$('#grpU').setAttribute('aria-pressed',g==='u');if(D&&V) gaps()};
+  $('#grpF').onclick=()=>setGroup('f');$('#grpU').onclick=()=>setGroup('u');
   showFirms=false;$('#firmsBtn').setAttribute('aria-pressed','false');$('#firmsBtn').textContent='Show each firm';
   $('#cmpV').onchange=e=>{cmp=+e.target.value;render()};
   $('#firmsBtn').onclick=e=>{showFirms=!showFirms;e.currentTarget.setAttribute('aria-pressed',showFirms);e.currentTarget.textContent=showFirms?'Hide each firm':'Show each firm';drawOverall()};
@@ -390,7 +419,7 @@ function select(i,focusChanged){sel=i;cmp=prevChecked(i);$('#selV').value=i;fill
 
 function urlState(){const u=new URLSearchParams(location.search);u.set('v',V[sel].order);if(cmp>=0&&cmp!==prevChecked(sel)) u.set('cmp',V[cmp].order);else u.delete('cmp');if(F) u.set('firm',F);else u.delete('firm');history.replaceState(null,'','?'+u);
   $('#printHead').textContent=`${D.plan.name} · ${V[sel].label}, ${dLong(dayOf(V[sel]))}${F?' · '+F+' only':''}${D.example?' · EXAMPLE DATA, SIMULATED':''}`}
-function render(){urlState();gate();gaps();tiles();drawOverall();overallTable();pace();strip();goals();changed();matrix()}
+function render(){urlState();gate();milestones();gaps();tiles();drawOverall();overallTable();pace();strip();goals();changed();matrix()}
 
 /* ---------- gate and gaps ---------- */
 function gate(){
@@ -402,12 +431,92 @@ function gate(){
   const head=bad?`${due?'Does not pass':'Would not pass today'}: ${bad} of ${conds.length} conditions fail`:`${due?'Passes':'Would pass today'}: all ${conds.length} conditions met`;
   el.innerHTML=`<div class="gate ${bad?'fail':'pass'}" role="status"><div class="gt">${bad?'✕':'✓'} ${esc(m.name)}: ${head}</div><div class="note">Due ${dLong(m.date)}${due?'':`, ${left} working week${left===1?'':'s'} from this version`}. The gate is the plan's own target and model rules, nothing added by this page.${F?' Model rules apply to the whole model, not to one firm.':''}</div><ul>${conds.map(c=>`<li><span class="${c.ok?'ok':'no'}">${c.ok?'✓':'✕'}</span><span>${c.t}: <span class="num">${c.val}</span></span></li>`).join('')}</ul></div>`;
 }
+/* ---------- milestones, deficiencies, accountability ---------- */
+// The version that stands for a milestone: the last checked one while it was in force, on or before its date.
+function msVer(m){let k=-1;V.forEach((v,i)=>{if(checked(v)&&v.milestone===m.id&&dayOf(v)<=m.date) k=i});return k}
+const now=()=>dayOf(V[sel]);
+const msPassed=m=>m.date<=now()&&msVer(m)>=0&&msVer(m)<=sel;   // deadline reached, as seen from the selected version
+const vcPair=(v,id,c)=>checked(v)&&v.valueChecks[id]&&v.valueChecks[id][c]||null;
+const ruleMine=(x,c)=>!c||!x.byRole||x.byRole[c]>0;
+function addWeeks(iso,n){let d=iso,k=0;while(k<n){d=addDays(d,CAD());if(!isHol(d)) k++}return d}
+function milestones(){
+  const cur=msOf(V[sel]);
+  $('#msCards').innerHTML=MS.map((m,i)=>{
+    const k=msVer(m),passed=msPassed(m),isCur=m.id===cur.id,u=passed?V[k]:isCur?V[sel]:null;
+    let cls='',st,body='';
+    if(u){const o=overall(u),rules=D.rules.map(r=>({r,x:u.rules[r.id]})),failR=rules.filter(q=>!q.x.pass),short=CODES.filter(c=>u.byRole[c]&&roleP(u,c)<m.targetPercent&&(!F||c===F)),ok=o!=null&&o>=m.targetPercent&&!failR.length;
+      if(passed){cls=ok?'pass':'miss';st=ok?'<span class="status good">✓ Passed</span>':'<span class="status bad">✕ Missed</span>'}
+      else{cls='now';const left=workingWeeks(now(),m.date);st=`<span class="status ${ok?'good':'warn'}">${ok?'✓ Would pass today':'! Would not pass today'}</span> <span class="md">due in ${left} working week${left===1?'':'s'}</span>`}
+      body=`<div class="mv">${pct(o)} <small>against ${m.targetPercent} %${passed?', at '+esc(u.label):''}</small></div>
+        <ul>${D.rules.length?`<li>Model rules met: <span class="num">${rules.length-failR.length} of ${rules.length}</span></li>`:''}${failR.map(q=>`<li><span class="delta worse">✕</span> ${esc(q.r.label)}: <span class="num">${rv(q.r,q.x.value)}</span> <span class="md">${esc(q.r.limitText)}</span></li>`).join('')}</ul>
+        ${short.length?`<div class="who">Below the target: ${short.map(c=>`<span class="code"><i style="background:${fc(c)}"></i>${esc(c)} ${pct(roleP(u,c),0)}</span>`).join('')}</div>`:o!=null?'<div class="who">Every firm at or above the target.</div>':''}
+        ${passed&&k!==sel?`<button class="btn" type="button" data-i="${k}">Open ${esc(u.label)}</button>`:''}`;
+    }else{st='<span class="status na">Not started</span>';body=`<div class="md">Target ${m.targetPercent} %. The plan asks for more values per element from the day after the milestone before it.</div>`}
+    return `<article class="msc ${cls}"><div class="mn"><i>${i+1}</i><h3>${esc(m.name)}</h3></div><div class="md">${dLong(m.date)}</div><div>${st}</div>${body}</article>`}).join('');
+  $('#msCards').querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>select(+b.dataset.i));
+}
+// Every open deficiency at the selected version: a value check of one firm below the target, or a failing model rule.
+function deficiencies(){
+  const v=V[sel],m=msOf(v),left=workingWeeks(now(),m.date),j=back(sel,4),wk=j>=0?Math.max(1,workingWeeks(dayOf(V[j]),now())):0,past=MS.filter(msPassed).filter(x=>msVer(x)<sel||x.date===now()),out=[];
+  const finish=(d,failAt)=>{ // failAt(i): is it open at version i
+    let s0=sel;for(let i=sel-1;i>=0;i--){if(!checked(V[i])) continue;if(failAt(i)) s0=i;else break}
+    d.since=s0;d.weeks=workingWeeks(dayOf(V[s0]),now());
+    d.missed=past.filter(x=>msVer(x)>=s0&&msVer(x)<=sel&&failAt(msVer(x))&&(x.id!==m.id||left===0));
+    d.urg=d.missed.length?0:(d.closeW==null||d.closeW>left)?1:2;
+    d.closes=d.closeW==null?null:addWeeks(now(),Math.ceil(d.closeW));out.push(d)};
+  for(const vc of D.valueChecks) for(const c of CODES){if(F&&c!==F) continue;const p=vcPair(v,vc.id,c);if(!p) continue;
+    const shortBy=Math.ceil(m.targetPercent/100*p[0]-p[1]);if(shortBy<=0) continue;
+    const pb=j>=0?vcPair(V[j],vc.id,c):null,pace=pb?(p[1]-pb[1])/wk:null;
+    finish({kind:'v',label:vc.label,goal:vc.goal,owners:[c],size:`${fmt(shortBy)} values short`,sub:`${pct(100*p[1]/p[0])} filled, target ${m.targetPercent} %`,n:shortBy,pace,need:left>0?shortBy/left:null,closeW:pace>0?shortBy/pace:null},
+      i=>{const q=vcPair(V[i],vc.id,c);return !!q&&q[1]<msOf(V[i]).targetPercent/100*q[0]})}
+  for(const r of D.rules){const x=v.rules[r.id];if(x.pass||!ruleMine(x,F)) continue;
+    const xb=j>=0?V[j].rules[r.id]:null,toward=r.direction==='lowerIsBetter'?-1:1,dist=Math.abs(x.value-r.limit),pace=xb?toward*(x.value-xb.value)/wk:null;
+    finish({kind:'r',label:r.label,goal:r.goal,owners:x.byRole?Object.keys(x.byRole).filter(c=>x.byRole[c]>0):[],by:x.byRole,size:rv(r,x.value),sub:esc(r.limitText),n:Infinity,pace,need:left>0?dist/left:null,closeW:pace>0?dist/pace:null,unit:r.unit==='%'?'pt':''},
+      i=>!V[i].rules[r.id].pass)}
+  return out.sort((a,b)=>a.urg-b.urg||b.n-a.n||b.weeks-a.weeks);
+}
+let group='f';
+const URG=[['bad','✕ Overdue'],['warn','! Will miss the milestone'],['good','✓ On course']];
 function gaps(){
-  const v=V[sel],m=msOf(v),rows=[];
-  for(const vc of D.valueChecks) for(const [c,[q,mm]] of Object.entries(v.valueChecks[vc.id]||{})){if(F&&c!==F) continue;const shortBy=Math.ceil(m.targetPercent/100*q-mm);if(shortBy>0) rows.push({vc,c,q,mm,shortBy})}
-  rows.sort((a,b)=>b.shortBy-a.shortBy);
-  const all=rows.reduce((a,r)=>a+r.shortBy,0),top=rows.slice(0,6);
-  $('#gaps').innerHTML=top.length?`<table><thead><tr><th>Check</th><th>Firm</th><th>Goal</th><th class="num">Filled</th><th class="num">Short of the ${m.targetPercent} % target</th><th class="num">Share of the whole gap</th></tr></thead><tbody>${top.map(r=>`<tr><td><b style="font-weight:500">${esc(r.vc.label)}</b></td><td data-l="Firm"><span class="code"><i style="background:${fc(r.c)}"></i>${esc(r.c)}</span></td><td data-l="Goal">${esc((D.plan.goals.find(g=>g.id===r.vc.goal)||{}).name||'')}</td><td class="num" data-l="Filled"><span class="num">${pct(100*r.mm/r.q)}</span></td><td class="num" data-l="Short of the target"><span class="num">${fmt(r.shortBy)} values</span></td><td class="num" data-l="Share of the whole gap"><span class="num">${pct(100*r.shortBy/all,0)}</span></td></tr>`).join('')}</tbody></table>${rows.length>top.length?`<p class="note" style="padding:8px 10px;margin:0">${rows.length-top.length} smaller shortfall${rows.length-top.length===1?'':'s'} not listed.</p>`:''}`:`<p class="note" style="padding:10px;margin:0">Every check of ${F?esc(F):'every firm'} meets the ${m.targetPercent} % target at this version.</p>`;
+  const v=V[sel],m=msOf(v),ds=deficiencies(),n=[0,1,2].map(k=>ds.filter(d=>d.urg===k).length);
+  $('#defSum').textContent=ds.length?`${ds.length} open at ${v.label}${F?' for '+F:''}: ${n[0]} overdue, ${n[1]} will miss ${m.name}, ${n[2]} on course.`:'';
+  const pv=(d,x)=>x==null?'–':d.kind==='r'&&d.unit==='pt'?x.toFixed(2)+' pt':fmt(x);
+  const row=d=>`<tr><td><span class="status ${URG[d.urg][0]}">${URG[d.urg][1]}</span>${d.missed.length?`<small class="sm">missed at ${d.missed.map(x=>esc(x.name)).join(', ')}</small>`:''}</td>
+    <td data-l="Deficiency"><b style="font-weight:500">${esc(d.label)}</b><small class="sm">${d.kind==='r'?'Model rule':'Required values'} · ${esc((D.plan.goals.find(g=>g.id===d.goal)||{}).name||'')}</small></td>
+    <td data-l="Owner">${d.owners.length?d.owners.map(c=>`<span class="code"><i style="background:${fc(c)}"></i>${esc(c)}${d.by?' '+fmt(d.by[c]):''}</span>`).join(' '):'Whole model'}</td>
+    <td class="num" data-l="Size"><span class="num">${d.size}</span><small class="sm">${d.sub}</small></td>
+    <td data-l="Open since">${esc(V[d.since].label)}, ${dShort(dayOf(V[d.since]))}<small class="sm">${d.weeks} working week${d.weeks===1?'':'s'}</small></td>
+    <td class="num" data-l="Pace per week"><span class="num">${d.pace==null?'–':(d.pace>0?'':d.pace<0?'−':'')+pv(d,Math.abs(d.pace))}</span><small class="sm num">${d.need==null?'due now':'needs '+pv(d,d.need)}</small></td>
+    <td data-l="Closes at this pace">${d.closes?dShort(d.closes)+(d.closes.slice(0,4)!==now().slice(0,4)?', '+d.closes.slice(0,4):''):d.pace==null?'Not enough versions yet':'<span class="delta worse">Not at this pace</span>'}</td></tr>`;
+  const head='<thead><tr><th>Urgency</th><th>Deficiency</th><th>Owner</th><th class="num">Size</th><th>Open since</th><th class="num">Pace per week</th><th>Closes at this pace</th></tr></thead>';
+  const tbl=(list,cap)=>{const top=list.slice(0,cap),rest=list.slice(cap);return `<div class="tw pace"><table>${head}<tbody>${top.map(row).join('')}</tbody></table>${rest.length?`<details style="padding:0 10px 10px"><summary>Show ${rest.length} more</summary><div class="tw pace" style="margin-top:8px"><table>${head}<tbody>${rest.map(row).join('')}</tbody></table></div></details>`:''}</div>`};
+  const none=`<p class="note panel" style="margin:0">Nothing open: every check of ${F?esc(F):'every firm'} meets the ${m.targetPercent} % target and every model rule passes at this version.</p>`;
+  if(!ds.length) $('#gaps').innerHTML=none;
+  else if(group==='u') $('#gaps').innerHTML=tbl(ds,8);
+  else{ // one block per firm, the firm with the most urgent load first; a rule owned by two firms shows under both
+    const blocks=ROLES.filter(r=>v.byRole[r.code]&&(!F||r.code===F)).map(ro=>{const c=ro.code,mine=ds.filter(d=>d.owners.includes(c)).map(d=>d.by?{...d,owners:[c]}:d),k=[0,1,2].map(q=>mine.filter(d=>d.urg===q).length);return {ro,c,mine,k,p:roleP(v,c)}})
+      .sort((a,b)=>b.k[0]-a.k[0]||b.k[1]-a.k[1]||b.mine.length-a.mine.length);
+    const whole=ds.filter(d=>!d.owners.length);
+    $('#gaps').innerHTML=blocks.map(b=>`<div class="fblock"><div class="fh"><span><span class="code"><i style="background:${fc(b.c)}"></i>${esc(b.c)}</span> <b>${esc(b.ro.role)}</b> <span class="md">${esc(b.ro.firm||'')}</span></span><span class="fs"><span>Own compliance <b class="num">${pct(b.p)}</b> against ${m.targetPercent} %</span><span><b class="num">${b.mine.length}</b> open</span>${b.k[0]?`<span class="status bad">✕ ${b.k[0]} overdue</span>`:''}${b.k[1]?`<span class="status warn">! ${b.k[1]} will miss</span>`:''}${b.k[2]?`<span class="status good">✓ ${b.k[2]} on course</span>`:''}</span></div>${b.mine.length?tbl(b.mine,5):'<p class="note" style="margin:0;padding:8px 2px">Nothing open for this firm at this version.</p>'}</div>`).join('')
+      +(whole.length?`<div class="fblock"><div class="fh"><span><b>Whole model</b> <span class="md">rules the checker does not split by firm</span></span></div>${tbl(whole,5)}</div>`:'');
+  }
+  $('#defKey').innerHTML=`<li><b>Overdue:</b> still open after a milestone it should have met.</li><li><b>Will miss the milestone:</b> at the pace of the last four working weeks it closes after ${esc(m.name)} (${dShort(m.date)}), or not at all.</li><li><b>On course:</b> at that pace it closes in time.</li><li><b>Owner:</b> the firm whose elements carry the deficiency. For a model rule, the number beside the code is how many of its elements fail.</li>`;
+  accountability(ds);
+}
+function accountability(ds){
+  const v=V[sel],esc2=D.plan.escalation||[],past=MS.filter(msPassed);
+  const rows=ROLES.filter(r=>v.byRole[r.code]).map(ro=>{const c=ro.code;
+    const rec=past.map(x=>{const u=V[msVer(x)];return u.byRole[c]?{x,ok:roleP(u,c)>=x.targetPercent,p:roleP(u,c)}:null}).filter(Boolean);
+    let run=0;for(let i=rec.length-1;i>=0&&!rec[i].ok;i--) run++;
+    const mine=ds.filter(d=>d.owners.includes(c)),k=[0,1,2].map(q=>mine.filter(d=>d.urg===q).length),old=mine.slice().sort((a,b)=>b.weeks-a.weeks)[0];
+    const step=!esc2.length?null:run===0?'No step: last milestone met':`Step ${Math.min(run,esc2.length)}: ${esc(esc2[Math.min(run,esc2.length)-1])}`;
+    return `<tr${F&&F!==c?' class="dim"':''}><td><div class="firm-n"><span><span class="code"><i style="background:${fc(c)}"></i>${esc(c)}</span> ${esc(ro.role)}</span><small>${esc(ro.firm||'')}</small></div></td>
+      <td data-l="Milestones met">${rec.length?`<span class="num">${rec.filter(q=>q.ok).length} of ${rec.length}</span>${rec.filter(q=>!q.ok).map(q=>`<small class="sm">Missed ${esc(q.x.name)}: ${pct(q.p,0)} against ${q.x.targetPercent} %</small>`).join('')}`:'None due yet'}</td>
+      <td data-l="Missed in a row"><span class="num">${run}</span></td>
+      ${esc2.length?`<td data-l="Step set by the plan">${run?`<span class="status ${run>1?'bad':'warn'}">${step}</span>`:step}</td>`:''}
+      <td data-l="Open now">${mine.length?`<span class="num">${mine.length}</span><small class="sm">${k[0]} overdue · ${k[1]} will miss · ${k[2]} on course</small>`:'<span class="status good">✓ Nothing open</span>'}</td>
+      <td data-l="Oldest open">${old?`${esc(old.label)}<small class="sm">${old.weeks} working week${old.weeks===1?'':'s'}, since ${esc(V[old.since].label)}</small>`:'–'}</td></tr>`}).join('');
+  $('#acc').innerHTML=`<table><thead><tr><th>Firm</th><th>Milestones met</th><th>Missed in a row</th>${esc2.length?'<th>Step set by the plan</th>':''}<th>Open now</th><th>Oldest open</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 /* ---------- tiles ---------- */

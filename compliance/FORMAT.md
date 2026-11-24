@@ -6,7 +6,7 @@ results are shown over time, and fixes the contract so that **a different plan n
 The page at `/compliance/` contains no project name, no goal, no firm, no rule and no milestone. It reads all of
 them from one file. A VIM Flex page, or any other screen, can read the same file and follow the same rules.
 
-- Format name: `openbep-compliance-series`, version `0.2` (draft). 0.2 adds three optional counts per role; a 0.1 file still loads.
+- Format name: `openbep-compliance-series`, version `0.3` (draft). 0.2 added three optional counts per role; 0.3 adds the plan's escalation steps and the owner of a failing rule, both optional. Older files still load.
 - Example: [example-school.json](example-school.json), simulated, written by `build_example.py`.
 - Validator: [series.js](series.js), `validateSeries(doc)` returns a list of problems in plain words. The page
   runs it on every file and refuses a file that fails, with the reasons.
@@ -40,6 +40,7 @@ plan
   milestones[]  { id, name, date, targetPercent }          in date order
   holidays[]    { name, from, to }                         weeks inside are not counted
   roles[]       { code, role, firm, document, from }       from = null, or the date the role joins
+  escalation[]  the plan's steps when a firm misses milestones in a row, in order (optional, 0.3)
 model           { server, project, source, schedule, cadenceDays (7 when absent) }
 valueChecks[]   { id, goal, label }
 rules[]         { id, goal, label, limit, unit, limitText, direction }
@@ -51,7 +52,7 @@ versions[]      in order
   byRole        { CODE: { elements, required, met, uploaded, elementsAdded, valuesFixed, valuesBroken,
                           wrong, newRequired, newMet } }   the last three are optional (0.2)
   valueChecks   { checkId: { CODE: [required, met] } }      adds up to byRole
-  rules         { ruleId: { value, pass } }
+  rules         { ruleId: { value, pass, byRole } }         byRole = failing elements per role (optional, 0.3)
 ```
 
 - **required** = the number of values the plan asks for at the milestone in force (elements × the parameters
@@ -80,12 +81,22 @@ versions[]      in order
 | Model rules | pass or fail as the checker says; never averaged into a percentage |
 | Gate | passes when overall compliance ≥ target and every model rule passes |
 | Gap | per value check and role: target × required − met, largest first |
+| Milestone result | judged on the last version checked on or before the milestone date: passed when the gate passes |
+| Deficiency | one per value check and role below the target, one per failing model rule |
+| Open since | first version of the current unbroken run of that deficiency |
+| Closes at this pace | size ÷ pace of the last four working periods, counted forward skipping holidays |
+| Urgency | Overdue: open through a milestone it should have met. Will miss: closes after the milestone, or never. On course: closes in time. |
+| Step set by the plan | milestones a firm missed in a row on its own elements, read against `plan.escalation` |
 | New elements arrive filled | newMet ÷ newRequired over the last four working periods |
 
 ## What every screen shows the same way
 
 1. The gate: would this version pass the milestone, and which conditions fail. Then the summary: overall
-   compliance, model rules met, forecast, versions checked. Then the largest gaps, by check and by firm.
+   compliance, model rules met, forecast, versions checked.
+   Then one card per milestone: date, target, result, failing rules, firms below the target.
+   Then the active deficiencies, grouped by firm or all together, most urgent first, each with its owner,
+   size, age, pace and closing date. Then one accountability row per firm: milestones met and missed,
+   missed in a row, the plan's step, what is open now.
 2. Overall compliance over time, with the stepped target, milestones, holidays and unchecked versions; the
    same chart in values shows what the plan requires against what is filled.
 3. One row per role: compliance, wrong and empty, pace, how clean new elements arrive, needed pace, uploads.

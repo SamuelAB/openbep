@@ -1,6 +1,6 @@
 {
  "format": "openbep-compliance-series",
- "formatVersion": "0.2",
+ "formatVersion": "0.3",
  "example": true,
  "note": "SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.",
  "plan": {
@@ -102,6 +102,11 @@
     "document": "SCH-CON.rvt",
     "from": "2027-09-24"
    }
+  ],
+  "escalation": [
+   "Recovery plan within 10 working days",
+   "Formal notice under the contract",
+   "Milestone not accepted and its payment held until the gap is closed"
   ]
  },
  "model": {
@@ -365,15 +370,26 @@
     },
     "warnings": {
      "value": 614,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 339,
+      "MECH": 214,
+      "STRUCT": 61
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 2,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 2
+     }
     },
     "dup-levels": {
      "value": 0,
@@ -536,15 +552,26 @@
     },
     "warnings": {
      "value": 654,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 361,
+      "MECH": 228,
+      "STRUCT": 65
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 2,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 2
+     }
     },
     "dup-levels": {
      "value": 0,
@@ -708,15 +735,26 @@
     },
     "warnings": {
      "value": 677,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 374,
+      "MECH": 236,
+      "STRUCT": 67
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 2,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 2
+     }
     },
     "dup-levels": {
      "value": 0,
@@ -879,15 +917,26 @@
     },
     "warnings": {
      "value": 704,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 388,
+      "MECH": 246,
+      "STRUCT": 70
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 2,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 2
+     }
     },
     "dup-levels": {
      "value": 0,
@@ -1050,11 +1099,19 @@
     },
     "warnings": {
      "value": 733,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 404,
+      "MECH": 256,
+      "STRUCT": 73
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -1221,11 +1278,19 @@
     },
     "warnings": {
      "value": 774,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 427,
+      "MECH": 270,
+      "STRUCT": 77
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -1393,11 +1458,19 @@
     },
     "warnings": {
      "value": 819,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 452,
+      "MECH": 286,
+      "STRUCT": 81
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -1564,11 +1637,19 @@
     },
     "warnings": {
      "value": 834,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 460,
+      "MECH": 291,
+      "STRUCT": 83
+     }
     },
     "dup-mark": {
      "value": 3,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 3
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -1736,7 +1817,12 @@
     },
     "warnings": {
      "value": 879,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 485,
+      "MECH": 307,
+      "STRUCT": 87
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -1903,11 +1989,21 @@
     },
     "clashes": {
      "value": 21,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 13,
+      "STRUCT": 5,
+      "ARCH": 3
+     }
     },
     "warnings": {
      "value": 914,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 504,
+      "MECH": 319,
+      "STRUCT": 91
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2075,11 +2171,21 @@
     },
     "clashes": {
      "value": 42,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 26,
+      "STRUCT": 10,
+      "ARCH": 6
+     }
     },
     "warnings": {
      "value": 936,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 516,
+      "MECH": 327,
+      "STRUCT": 93
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2247,11 +2353,21 @@
     },
     "clashes": {
      "value": 67,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 41,
+      "STRUCT": 16,
+      "ARCH": 10
+     }
     },
     "warnings": {
      "value": 979,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 540,
+      "MECH": 342,
+      "STRUCT": 97
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2419,11 +2535,21 @@
     },
     "clashes": {
      "value": 73,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 45,
+      "STRUCT": 18,
+      "ARCH": 10
+     }
     },
     "warnings": {
      "value": 1014,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 559,
+      "MECH": 354,
+      "STRUCT": 101
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2590,11 +2716,21 @@
     },
     "clashes": {
      "value": 84,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 51,
+      "STRUCT": 21,
+      "ARCH": 12
+     }
     },
     "warnings": {
      "value": 1068,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 589,
+      "MECH": 373,
+      "STRUCT": 106
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2761,11 +2897,21 @@
     },
     "clashes": {
      "value": 92,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 56,
+      "STRUCT": 23,
+      "ARCH": 13
+     }
     },
     "warnings": {
      "value": 1107,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 610,
+      "MECH": 387,
+      "STRUCT": 110
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2777,7 +2923,10 @@
     },
     "dup-levels": {
      "value": 1,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "STRUCT": 1
+     }
     }
    }
   },
@@ -2932,11 +3081,21 @@
     },
     "clashes": {
      "value": 100,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 60,
+      "STRUCT": 25,
+      "ARCH": 15
+     }
     },
     "warnings": {
      "value": 1166,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 642,
+      "MECH": 408,
+      "STRUCT": 116
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -2948,7 +3107,10 @@
     },
     "dup-levels": {
      "value": 1,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "STRUCT": 1
+     }
     }
    }
   },
@@ -3103,11 +3265,21 @@
     },
     "clashes": {
      "value": 109,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 66,
+      "STRUCT": 27,
+      "ARCH": 16
+     }
     },
     "warnings": {
      "value": 1191,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 656,
+      "MECH": 416,
+      "STRUCT": 119
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -3274,11 +3446,21 @@
     },
     "clashes": {
      "value": 116,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 70,
+      "STRUCT": 29,
+      "ARCH": 17
+     }
     },
     "warnings": {
      "value": 1245,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 686,
+      "MECH": 435,
+      "STRUCT": 124
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -3460,11 +3642,21 @@
     },
     "clashes": {
      "value": 99,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 61,
+      "STRUCT": 24,
+      "ARCH": 14
+     }
     },
     "warnings": {
      "value": 1323,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 728,
+      "MECH": 463,
+      "STRUCT": 132
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -3632,11 +3824,21 @@
     },
     "clashes": {
      "value": 88,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 53,
+      "STRUCT": 22,
+      "ARCH": 13
+     }
     },
     "warnings": {
      "value": 1387,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 764,
+      "MECH": 485,
+      "STRUCT": 138
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -3804,15 +4006,29 @@
     },
     "clashes": {
      "value": 75,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 46,
+      "STRUCT": 18,
+      "ARCH": 11
+     }
     },
     "warnings": {
      "value": 1423,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 783,
+      "MECH": 498,
+      "STRUCT": 142
+     }
     },
     "dup-mark": {
      "value": 22,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 16,
+      "MECH": 6
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -3976,15 +4192,29 @@
     },
     "clashes": {
      "value": 65,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 40,
+      "STRUCT": 16,
+      "ARCH": 9
+     }
     },
     "warnings": {
      "value": 1581,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 870,
+      "MECH": 553,
+      "STRUCT": 158
+     }
     },
     "dup-mark": {
      "value": 25,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 18,
+      "MECH": 7
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -4148,15 +4378,29 @@
     },
     "clashes": {
      "value": 50,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 31,
+      "STRUCT": 12,
+      "ARCH": 7
+     }
     },
     "warnings": {
      "value": 1739,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 958,
+      "MECH": 608,
+      "STRUCT": 173
+     }
     },
     "dup-mark": {
      "value": 28,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 20,
+      "MECH": 8
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -4320,15 +4564,29 @@
     },
     "clashes": {
      "value": 38,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 24,
+      "STRUCT": 9,
+      "ARCH": 5
+     }
     },
     "warnings": {
      "value": 1883,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 1036,
+      "MECH": 659,
+      "STRUCT": 188
+     }
     },
     "dup-mark": {
      "value": 31,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 22,
+      "MECH": 9
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -4492,15 +4750,29 @@
     },
     "clashes": {
      "value": 44,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 27,
+      "STRUCT": 11,
+      "ARCH": 6
+     }
     },
     "warnings": {
      "value": 1881,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 1035,
+      "MECH": 658,
+      "STRUCT": 188
+     }
     },
     "dup-mark": {
      "value": 23,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 17,
+      "MECH": 6
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -4663,15 +4935,29 @@
     },
     "clashes": {
      "value": 45,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 28,
+      "STRUCT": 11,
+      "ARCH": 6
+     }
     },
     "warnings": {
      "value": 1860,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 1023,
+      "MECH": 651,
+      "STRUCT": 186
+     }
     },
     "dup-mark": {
      "value": 14,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 10,
+      "MECH": 4
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -4835,15 +5121,29 @@
     },
     "clashes": {
      "value": 52,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 32,
+      "STRUCT": 13,
+      "ARCH": 7
+     }
     },
     "warnings": {
      "value": 1823,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 1003,
+      "MECH": 638,
+      "STRUCT": 182
+     }
     },
     "dup-mark": {
      "value": 6,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 5,
+      "MECH": 1
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -5006,11 +5306,21 @@
     },
     "clashes": {
      "value": 60,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 36,
+      "STRUCT": 15,
+      "ARCH": 9
+     }
     },
     "warnings": {
      "value": 1789,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 985,
+      "MECH": 626,
+      "STRUCT": 178
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -5177,11 +5487,21 @@
     },
     "clashes": {
      "value": 50,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 31,
+      "STRUCT": 12,
+      "ARCH": 7
+     }
     },
     "warnings": {
      "value": 1768,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 974,
+      "MECH": 618,
+      "STRUCT": 176
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -5349,11 +5669,21 @@
     },
     "clashes": {
      "value": 39,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 25,
+      "STRUCT": 9,
+      "ARCH": 5
+     }
     },
     "warnings": {
      "value": 1657,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 913,
+      "MECH": 579,
+      "STRUCT": 165
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -5520,11 +5850,21 @@
     },
     "clashes": {
      "value": 29,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 18,
+      "STRUCT": 7,
+      "ARCH": 4
+     }
     },
     "warnings": {
      "value": 1533,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 844,
+      "MECH": 536,
+      "STRUCT": 153
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -5692,11 +6032,21 @@
     },
     "clashes": {
      "value": 18,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 12,
+      "STRUCT": 4,
+      "ARCH": 2
+     }
     },
     "warnings": {
      "value": 1425,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 785,
+      "MECH": 498,
+      "STRUCT": 142
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -5864,11 +6214,21 @@
     },
     "clashes": {
      "value": 13,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 9,
+      "STRUCT": 3,
+      "ARCH": 1
+     }
     },
     "warnings": {
      "value": 1311,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 722,
+      "MECH": 458,
+      "STRUCT": 131
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -6036,11 +6396,21 @@
     },
     "clashes": {
      "value": 20,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 12,
+      "STRUCT": 5,
+      "ARCH": 3
+     }
     },
     "warnings": {
      "value": 1306,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 719,
+      "MECH": 457,
+      "STRUCT": 130
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -6241,11 +6611,21 @@
     },
     "clashes": {
      "value": 27,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 17,
+      "STRUCT": 6,
+      "ARCH": 4
+     }
     },
     "warnings": {
      "value": 1286,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 708,
+      "MECH": 450,
+      "STRUCT": 128
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -6445,11 +6825,21 @@
     },
     "clashes": {
      "value": 31,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 20,
+      "STRUCT": 7,
+      "ARCH": 4
+     }
     },
     "warnings": {
      "value": 1270,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 699,
+      "MECH": 444,
+      "STRUCT": 127
+     }
     },
     "dup-mark": {
      "value": 0,
@@ -6649,15 +7039,29 @@
     },
     "clashes": {
      "value": 36,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 22,
+      "STRUCT": 9,
+      "ARCH": 5
+     }
     },
     "warnings": {
      "value": 1256,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 692,
+      "MECH": 439,
+      "STRUCT": 125
+     }
     },
     "dup-mark": {
      "value": 14,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 10,
+      "MECH": 4
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -6853,15 +7257,29 @@
     },
     "clashes": {
      "value": 35,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 22,
+      "STRUCT": 8,
+      "ARCH": 5
+     }
     },
     "warnings": {
      "value": 1242,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 684,
+      "MECH": 434,
+      "STRUCT": 124
+     }
     },
     "dup-mark": {
      "value": 11,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 8,
+      "MECH": 3
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -7058,15 +7476,29 @@
     },
     "clashes": {
      "value": 27,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "MECH": 17,
+      "STRUCT": 6,
+      "ARCH": 4
+     }
     },
     "warnings": {
      "value": 1232,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 678,
+      "MECH": 431,
+      "STRUCT": 123
+     }
     },
     "dup-mark": {
      "value": 8,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 6,
+      "MECH": 2
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -7262,15 +7694,29 @@
     },
     "clashes": {
      "value": 24,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 15,
+      "STRUCT": 6,
+      "ARCH": 3
+     }
     },
     "warnings": {
      "value": 1235,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 680,
+      "MECH": 432,
+      "STRUCT": 123
+     }
     },
     "dup-mark": {
      "value": 5,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 4,
+      "MECH": 1
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -7467,15 +7913,28 @@
     },
     "clashes": {
      "value": 21,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 13,
+      "STRUCT": 5,
+      "ARCH": 3
+     }
     },
     "warnings": {
      "value": 1227,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 676,
+      "MECH": 429,
+      "STRUCT": 122
+     }
     },
     "dup-mark": {
      "value": 2,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 2
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -7671,15 +8130,28 @@
     },
     "clashes": {
      "value": 14,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 9,
+      "STRUCT": 3,
+      "ARCH": 2
+     }
     },
     "warnings": {
      "value": 1201,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 661,
+      "MECH": 420,
+      "STRUCT": 120
+     }
     },
     "dup-mark": {
      "value": 1,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 1
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -7876,15 +8348,28 @@
     },
     "clashes": {
      "value": 13,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 9,
+      "STRUCT": 3,
+      "ARCH": 1
+     }
     },
     "warnings": {
      "value": 1197,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 660,
+      "MECH": 418,
+      "STRUCT": 119
+     }
     },
     "dup-mark": {
      "value": 1,
-     "pass": false
+     "pass": false,
+     "byRole": {
+      "ARCH": 1
+     }
     },
     "worksets-exist": {
      "value": 0,
@@ -8081,11 +8566,21 @@
     },
     "clashes": {
      "value": 9,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "MECH": 6,
+      "STRUCT": 2,
+      "ARCH": 1
+     }
     },
     "warnings": {
      "value": 1187,
-     "pass": true
+     "pass": true,
+     "byRole": {
+      "ARCH": 654,
+      "MECH": 415,
+      "STRUCT": 118
+     }
     },
     "dup-mark": {
      "value": 0,

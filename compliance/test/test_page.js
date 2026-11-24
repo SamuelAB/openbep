@@ -16,6 +16,7 @@ function keepRoles(d, codes) {
     if (v.state !== 'checked') continue;
     for (const c of Object.keys(v.byRole)) if (!codes.includes(c)) delete v.byRole[c];
     for (const per of Object.values(v.valueChecks)) for (const c of Object.keys(per)) if (!codes.includes(c)) delete per[c];
+    for (const x of Object.values(v.rules)) if (x.byRole) for (const c of Object.keys(x.byRole)) if (!codes.includes(c)) delete x.byRole[c];
   }
   return d;
 }
@@ -26,6 +27,7 @@ function renameRoles(d, map) {
     if (v.state !== 'checked') continue;
     v.byRole = Object.fromEntries(Object.entries(v.byRole).map(([c, x]) => [map[c], x]));
     for (const k of Object.keys(v.valueChecks)) v.valueChecks[k] = Object.fromEntries(Object.entries(v.valueChecks[k]).map(([c, x]) => [map[c], x]));
+    for (const x of Object.values(v.rules)) if (x.byRole) x.byRole = Object.fromEntries(Object.entries(x.byRole).map(([c, n]) => [map[c], n]));
   }
   return d;
 }
@@ -33,7 +35,7 @@ const fixtures = {};
 fixtures.example = ex;
 { // Two firms, goals renamed, one goal with nothing checkable, holidays removed.
   const d = keepRoles(clone(ex), ['ARCH', 'MECH']);
-  d.example = false; d.plan.name = 'Test: two firms'; d.plan.holidays = [];
+  d.example = false; d.plan.name = 'Test: two firms'; d.plan.holidays = []; delete d.plan.escalation;
   d.plan.goals = d.plan.goals.map((g, i) => ({ ...g, name: 'Goal number ' + (i + 1) + ' with a long name that must wrap and never be cut' }));
   d.plan.goals.push({ id: 'carbon', name: 'Energy and carbon targets', uses: ['Energy analysis'] });
   fixtures.two = d;
@@ -97,7 +99,7 @@ const server = http.createServer((req, res) => {
     // Round two: one firm only, the values chart, and a link that reopens the same view.
     const code = Object.keys(last.byRole)[0];
     await page.selectOption('#selV', String(d.versions.indexOf(last))); await page.selectOption('#firmF', code); await page.click('#modeV'); await page.waitForTimeout(50);
-    const r2 = await page.evaluate(() => ({ gate: !!document.querySelector('#gate .gate'), gaps: !!document.querySelector('#gaps').textContent.trim(), url: location.search, scope: !!document.querySelector('#chOverall .scope'), wide: document.documentElement.scrollWidth > innerWidth + 1 }));
+    const r2 = await page.evaluate(() => ({ gate: !!document.querySelector('#gate .gate'), gaps: !!document.querySelector('#gaps').textContent.trim() && document.querySelectorAll('#msCards .msc').length > 0 && document.querySelectorAll('#acc tbody tr').length > 0, url: location.search, scope: !!document.querySelector('#chOverall .scope'), wide: document.documentElement.scrollWidth > innerWidth + 1 }));
     ok(!errs.length && r2.gate && r2.gaps && r2.scope && !r2.wide, `${k} @${width}: firm filter, gate, gaps and values chart ${errs.join(' ')}`);
     ok(new URLSearchParams(r2.url).get('firm') === code && new URLSearchParams(r2.url).get('v') === String(last.order), `${k} @${width}: the address keeps version and firm (${r2.url})`);
     await page.goto(`http://127.0.0.1:${port}/compliance/${r2.url}`); await page.waitForSelector('#tiles .tile');
