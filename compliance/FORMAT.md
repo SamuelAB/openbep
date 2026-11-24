@@ -6,7 +6,7 @@ results are shown over time, and fixes the contract so that **a different plan n
 The page at `/compliance/` contains no project name, no goal, no firm, no rule and no milestone. It reads all of
 them from one file. A VIM Flex page, or any other screen, can read the same file and follow the same rules.
 
-- Format name: `openbep-compliance-series`, version `0.4` (draft). 0.2 added three optional counts per role; 0.3 the plan's escalation steps and the owner of a failing rule; 0.4 an icon per check. All optional. Older files still load.
+- Format name: `openbep-compliance-series`, version `0.5` (draft). 0.2 added three optional counts per role; 0.3 the plan's escalation steps and the owner of a failing rule; 0.4 an icon per check; 0.5 the roles that use each check's data. All optional. Older files still load.
 - Example: [example-school.json](example-school.json), simulated, written by `build_example.py`.
 - Validator: [series.js](series.js), `validateSeries(doc)` returns a list of problems in plain words. The page
   runs it on every file and refuses a file that fails, with the reasons.
@@ -42,8 +42,9 @@ plan
   roles[]       { code, role, firm, document, from }       from = null, or the date the role joins
   escalation[]  the plan's steps when a firm misses milestones in a row, in order (optional, 0.3)
 model           { server, project, source, schedule, cadenceDays (7 when absent) }
-valueChecks[]   { id, goal, label, icon }
-rules[]         { id, goal, label, limit, unit, limitText, direction, icon }
+valueChecks[]   { id, goal, label, icon, usedBy }
+rules[]         { id, goal, label, limit, unit, limitText, direction, icon, usedBy }
+                usedBy (optional, 0.5): role codes that need this data to do their own work.
                 icon (optional, 0.4): one of value, code, material, fire, asset, room, workset, name, level,
                 clash, warning, duplicate. Anything else, or none, shows the icon of the kind of check.
                 direction: lowerIsBetter | higherIsBetter
@@ -90,10 +91,22 @@ versions[]      in order
 | Urgency | Overdue: open through a milestone it should have met. Will miss: closes after the milestone, or never. On course: closes in time. |
 | Severity | Required values: points below the target. Critical 15 or more, major 5 to 15, minor under 5. A rule in %: the same, in points from its limit. A counted rule: critical at half its limit or more beyond it, major from a tenth; with a limit of 0, critical from 10, major from 3. |
 | Payment check | Per firm, four conditions: its model was uploaded and checked in the latest working period; its own compliance is at the target; no model rule fails on its elements; nothing of its own is overdue. A rule not split by firm holds no single firm. The contract decides payment. |
+| Late or ahead | values short of the target ÷ (values fixed − values broken per working period), against the working periods left |
+| Firm verdict | Badly behind: 4 working periods or more late, or never reaches the target at its pace, or 2 milestones missed in a row. Behind: late by less, or an item overdue or going to miss. Otherwise on track. |
+| Holds back | a firm holds back each other role named in `usedBy` of one of its open deficiencies |
+| Share of what is missing | the firm's values short of the target ÷ all firms' values short |
 | Step set by the plan | milestones a firm missed in a row on its own elements, read against `plan.escalation` |
 | New elements arrive filled | newMet ÷ newRequired over the last four working periods |
 
 ## What every screen shows the same way
+
+Three levels, from the owner to the investigator. The address keeps the level (`firm`, `item`).
+
+- **Project.** The gate, who needs attention first and who is doing well, one card per firm (verdict, compliance and trend, late or ahead, share of what is missing, who it holds back, milestones missed in a row, open items, payment claim), the five biggest problems, the milestone track, compliance over time.
+- **Firm.** Its verdict and facts, its compliance over time, its deficiencies, its accountability row, its payment check.
+- **Item.** One check of one firm: severity and urgency, the numbers now, the chart over every version, the timeline, the result at each milestone, and every version's numbers.
+
+The parts, in the order they were added:
 
 1. The gate: would this version pass the milestone, and which conditions fail. Then the summary: overall
    compliance, model rules met, forecast, versions checked.

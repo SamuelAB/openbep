@@ -13,7 +13,7 @@
     const need = (ok, msg) => { if (!ok) e.push(msg); return ok; };
     if (!need(d && typeof d === 'object', 'The file is not a JSON object.')) return e;
     need(d.format === 'openbep-compliance-series', 'format must be "openbep-compliance-series".');
-    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 to 0.4).');
+    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 to 0.5).');
     const p = d.plan || {};
     need(typeof p.name === 'string' && p.name, 'plan.name is missing.');
     const goals = Array.isArray(p.goals) ? p.goals : [], ms = Array.isArray(p.milestones) ? p.milestones : [], roles = Array.isArray(p.roles) ? p.roles : [];
@@ -28,8 +28,8 @@
     (p.holidays || []).forEach((h, i) => need(isDate(h.from) && isDate(h.to) && h.to >= h.from, `plan.holidays[${i}] needs from and to dates, in order.`));
     const vcs = Array.isArray(d.valueChecks) ? d.valueChecks : [], rules = Array.isArray(d.rules) ? d.rules : [];
     const vid = new Set(), rid = new Set();
-    vcs.forEach((c, i) => { need(c.id && c.label, `valueChecks[${i}] needs id and label.`); need(gid.has(c.goal), `Value check "${c.label}" names goal "${c.goal}", which is not in plan.goals.`); need(c.icon == null || typeof c.icon === 'string', `Value check "${c.label}": icon must be a word.`); vid.add(c.id); });
-    rules.forEach((r, i) => { need(r.id && r.label, `rules[${i}] needs id and label.`); need(gid.has(r.goal), `Rule "${r.label}" names goal "${r.goal}", which is not in plan.goals.`); need(r.icon == null || typeof r.icon === 'string', `Rule "${r.label}": icon must be a word.`); need(DIRS.includes(r.direction), `Rule "${r.label}": direction must be lowerIsBetter or higherIsBetter.`); need(isNum(r.limit), `Rule "${r.label}" needs a numeric limit.`); need(typeof r.limitText === 'string' && r.limitText, `Rule "${r.label}" needs limitText (for example "at most 1,500").`); rid.add(r.id); });
+    vcs.forEach((c, i) => { need(c.id && c.label, `valueChecks[${i}] needs id and label.`); need(gid.has(c.goal), `Value check "${c.label}" names goal "${c.goal}", which is not in plan.goals.`); need(c.icon == null || typeof c.icon === 'string', `Value check "${c.label}": icon must be a word.`); need(c.usedBy == null || (Array.isArray(c.usedBy) && c.usedBy.every(x => codes.has(x))), `Value check "${c.label}": usedBy must list role codes from plan.roles.`); vid.add(c.id); });
+    rules.forEach((r, i) => { need(r.id && r.label, `rules[${i}] needs id and label.`); need(gid.has(r.goal), `Rule "${r.label}" names goal "${r.goal}", which is not in plan.goals.`); need(r.icon == null || typeof r.icon === 'string', `Rule "${r.label}": icon must be a word.`); need(r.usedBy == null || (Array.isArray(r.usedBy) && r.usedBy.every(x => codes.has(x))), `Rule "${r.label}": usedBy must list role codes from plan.roles.`); need(DIRS.includes(r.direction), `Rule "${r.label}": direction must be lowerIsBetter or higherIsBetter.`); need(isNum(r.limit), `Rule "${r.label}" needs a numeric limit.`); need(typeof r.limitText === 'string' && r.limitText, `Rule "${r.label}" needs limitText (for example "at most 1,500").`); rid.add(r.id); });
     need(vcs.length, 'valueChecks needs at least one check: compliance is the share of required values filled.');
     const vs = Array.isArray(d.versions) ? d.versions : [];
     if (!need(vs.length, 'versions is empty.')) return e;

@@ -1,6 +1,6 @@
 {
  "format": "openbep-compliance-series",
- "formatVersion": "0.4",
+ "formatVersion": "0.5",
  "example": true,
  "note": "SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.",
  "plan": {
@@ -118,6 +118,9 @@
  "valueChecks": [
   {
    "id": "assembly-code",
+   "usedBy": [
+    "CON"
+   ],
    "icon": "code",
    "goal": "cost",
    "label": "Assembly Code filled"
@@ -136,18 +139,27 @@
   },
   {
    "id": "fire-rating",
+   "usedBy": [
+    "MECH"
+   ],
    "icon": "fire",
    "goal": "change",
    "label": "Fire rating on walls, doors and floors"
   },
   {
    "id": "asset-data",
+   "usedBy": [
+    "CON"
+   ],
    "icon": "asset",
    "goal": "handover",
    "label": "Equipment asset data (OB_ asset parameters)"
   },
   {
    "id": "rooms",
+   "usedBy": [
+    "MECH"
+   ],
    "icon": "room",
    "goal": "handover",
    "label": "Rooms numbered and named by the plan"
@@ -168,6 +180,9 @@
  "rules": [
   {
    "id": "on-level",
+   "usedBy": [
+    "CON"
+   ],
    "icon": "level",
    "goal": "cost",
    "label": "Elements on a level",
@@ -178,6 +193,12 @@
   },
   {
    "id": "clashes",
+   "usedBy": [
+    "ARCH",
+    "STRUCT",
+    "MECH",
+    "CON"
+   ],
    "icon": "clash",
    "goal": "change",
    "label": "Clashes open for more than one coordination cycle",
