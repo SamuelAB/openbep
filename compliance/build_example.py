@@ -29,8 +29,8 @@ GOALS = [
     {'id': 'basics', 'name': 'Basics every plan requires', 'uses': ['Design in BIM, all disciplines']},
 ]
 MILESTONES = [
-    {'id': 'prelim100', 'name': 'Preliminary design 100%', 'date': '2027-03-26', 'targetPercent': 70},
-    {'id': 'final90', 'name': 'Final design 90%', 'date': '2027-06-25', 'targetPercent': 85},
+    {'id': 'prelim100', 'name': 'Preliminary design', 'date': '2027-03-26', 'targetPercent': 70},
+    {'id': 'final90', 'name': 'Final design', 'date': '2027-06-25', 'targetPercent': 85},
     {'id': 'ifc', 'name': 'Issued for construction', 'date': '2027-09-10', 'targetPercent': 95},
     {'id': 'constr', 'name': 'Construction, first coordination cycle', 'date': '2027-11-26', 'targetPercent': 95},
 ]
@@ -39,22 +39,22 @@ HOLIDAYS = [{'name': 'Construction holiday (example)', 'from': '2027-07-18', 'to
 # Value checks: required values that must be filled with a real value. k = required values per element, by role.
 # lag < 1 means the role fills this check later than its other work.
 VALUE_CHECKS = [
-    {'id': 'assembly-code', 'icon': 'code', 'goal': 'cost', 'label': 'Assembly Code filled', 'k': {'ARCH': 1, 'STRUCT': 1, 'MECH': 1, 'CON': .2}, 'lag': {'MECH': .85}},
-    {'id': 'real-material', 'icon': 'material', 'goal': 'cost', 'label': 'Elements with a real material', 'k': {'ARCH': 1, 'STRUCT': 1}, 'lag': {'ARCH': .9}},
-    {'id': 'lod-params', 'icon': 'value', 'goal': 'change', 'label': 'Parameters required by the LOD matrix at this milestone', 'k': {'ARCH': 2.2, 'STRUCT': 2.6, 'MECH': 2.0, 'CON': .5}, 'lag': {}},
-    {'id': 'fire-rating', 'icon': 'fire', 'goal': 'change', 'label': 'Fire rating on walls, doors and floors', 'k': {'ARCH': .35, 'STRUCT': .2}, 'lag': {'ARCH': 1.05}},
-    {'id': 'asset-data', 'icon': 'asset', 'goal': 'handover', 'label': 'Equipment asset data (OB_ asset parameters)', 'k': {'MECH': 1.6, 'ARCH': .15, 'CON': 3.0}, 'lag': {'MECH': .55, 'ARCH': .7, 'CON': .8}},
-    {'id': 'rooms', 'icon': 'room', 'goal': 'handover', 'label': 'Rooms numbered and named by the plan', 'k': {'ARCH': .12}, 'lag': {'ARCH': 1.1}},
-    {'id': 'worksets', 'icon': 'workset', 'goal': 'basics', 'label': 'Elements on a named workset', 'k': {'ARCH': 1, 'STRUCT': 1, 'MECH': 1, 'CON': 1}, 'lag': {'ARCH': 1.15, 'STRUCT': 1.2, 'MECH': 1.1, 'CON': 1.2}},
-    {'id': 'view-names', 'icon': 'name', 'goal': 'basics', 'label': 'Views named by the naming rules', 'k': {'ARCH': .06, 'STRUCT': .05, 'MECH': .05, 'CON': .03}, 'lag': {'MECH': .8}},
+    {'id': 'assembly-code', 'help': 'Every element needs its cost code so quantities can be priced.', 'usedBy': ['CON'], 'icon': 'code', 'goal': 'cost', 'label': 'Assembly Code filled', 'k': {'ARCH': 1, 'STRUCT': 1, 'MECH': 1, 'CON': .2}, 'lag': {'MECH': .85}},
+    {'id': 'real-material', 'help': 'An element with a placeholder material cannot be measured or priced.', 'icon': 'material', 'goal': 'cost', 'label': 'Elements with a real material', 'k': {'ARCH': 1, 'STRUCT': 1}, 'lag': {'ARCH': .9}},
+    {'id': 'lod-params', 'help': 'The information the plan asks for on each element at this stage of the project.', 'icon': 'value', 'goal': 'change', 'label': 'Parameters required by the LOD matrix at this milestone', 'k': {'ARCH': 2.2, 'STRUCT': 2.6, 'MECH': 2.0, 'CON': .5}, 'lag': {}},
+    {'id': 'fire-rating', 'help': 'Walls, doors and floors must carry their fire rating so the other trades can coordinate with them.', 'usedBy': ['MECH'], 'icon': 'fire', 'goal': 'change', 'label': 'Fire rating on walls, doors and floors', 'k': {'ARCH': .35, 'STRUCT': .2}, 'lag': {'ARCH': 1.05}},
+    {'id': 'asset-data', 'help': 'Each piece of equipment needs its maintenance data so the owner can run the building after handover.', 'usedBy': ['CON'], 'icon': 'asset', 'goal': 'handover', 'label': 'Equipment asset data (OB_ asset parameters)', 'k': {'MECH': 1.6, 'ARCH': .15, 'CON': 3.0}, 'lag': {'MECH': .55, 'ARCH': .7, 'CON': .8}},
+    {'id': 'rooms', 'help': 'Rooms need a number and a name so equipment and finishes can be tied to a place.', 'usedBy': ['MECH'], 'icon': 'room', 'goal': 'handover', 'label': 'Rooms numbered and named by the plan', 'k': {'ARCH': .12}, 'lag': {'ARCH': 1.1}},
+    {'id': 'worksets', 'help': 'Elements must sit on a named workset so each team can find and control its own work.', 'icon': 'workset', 'goal': 'basics', 'label': 'Elements on a named workset', 'k': {'ARCH': 1, 'STRUCT': 1, 'MECH': 1, 'CON': 1}, 'lag': {'ARCH': 1.15, 'STRUCT': 1.2, 'MECH': 1.1, 'CON': 1.2}},
+    {'id': 'view-names', 'help': 'Views named by the rules can be found by everyone on the project.', 'icon': 'name', 'goal': 'basics', 'label': 'Views named by the naming rules', 'k': {'ARCH': .06, 'STRUCT': .05, 'MECH': .05, 'CON': .03}, 'lag': {'MECH': .8}},
 ]
 RULES = [
-    {'id': 'on-level', 'icon': 'level', 'goal': 'cost', 'label': 'Elements on a level', 'limit': 95, 'unit': '%', 'limitText': 'at least 95 %', 'direction': 'higherIsBetter'},
-    {'id': 'clashes', 'icon': 'clash', 'goal': 'change', 'label': 'Clashes open for more than one coordination cycle', 'limit': 25, 'unit': '', 'limitText': 'at most 25', 'direction': 'lowerIsBetter'},
-    {'id': 'warnings', 'icon': 'warning', 'goal': 'change', 'label': 'Revit warnings', 'limit': 1500, 'unit': '', 'limitText': 'at most 1,500', 'direction': 'lowerIsBetter'},
-    {'id': 'dup-mark', 'icon': 'duplicate', 'goal': 'handover', 'label': 'No duplicate Mark', 'limit': 0, 'unit': '', 'limitText': 'limit 0', 'direction': 'lowerIsBetter'},
-    {'id': 'worksets-exist', 'icon': 'workset', 'goal': 'basics', 'label': 'The named worksets exist', 'limit': 0, 'unit': '', 'limitText': 'limit 0 missing', 'direction': 'lowerIsBetter'},
-    {'id': 'dup-levels', 'icon': 'level', 'goal': 'basics', 'label': 'Duplicate levels', 'limit': 0, 'unit': '', 'limitText': 'limit 0', 'direction': 'lowerIsBetter'},
+    {'id': 'on-level', 'help': 'An element that is not tied to a level cannot be counted by floor.', 'usedBy': ['CON'], 'icon': 'level', 'goal': 'cost', 'label': 'Elements on a level', 'limit': 95, 'unit': '%', 'limitText': 'at least 95 %', 'direction': 'higherIsBetter'},
+    {'id': 'clashes', 'help': 'Places where elements of two firms occupy the same space and nobody has resolved it.', 'usedBy': ['ARCH', 'STRUCT', 'MECH', 'CON'], 'icon': 'clash', 'goal': 'change', 'label': 'Clashes open for more than one coordination cycle', 'limit': 25, 'unit': '', 'limitText': 'at most 25', 'direction': 'lowerIsBetter'},
+    {'id': 'warnings', 'help': 'Revit warnings point to modelling errors that make quantities unreliable.', 'icon': 'warning', 'goal': 'change', 'label': 'Revit warnings', 'limit': 1500, 'unit': '', 'limitText': 'at most 1,500', 'direction': 'lowerIsBetter'},
+    {'id': 'dup-mark', 'help': 'Two pieces of equipment with the same Mark cannot be told apart at handover.', 'icon': 'duplicate', 'goal': 'handover', 'label': 'No duplicate Mark', 'limit': 0, 'unit': '', 'limitText': 'limit 0', 'direction': 'lowerIsBetter'},
+    {'id': 'worksets-exist', 'help': 'The worksets named in the plan must exist in every model.', 'icon': 'workset', 'goal': 'basics', 'label': 'The named worksets exist', 'limit': 0, 'unit': '', 'limitText': 'limit 0 missing', 'direction': 'lowerIsBetter'},
+    {'id': 'dup-levels', 'help': 'Two levels at the same height make elements land on the wrong floor.', 'icon': 'level', 'goal': 'basics', 'label': 'Duplicate levels', 'limit': 0, 'unit': '', 'limitText': 'limit 0', 'direction': 'lowerIsBetter'},
 ]
 
 D = date.fromisoformat
@@ -201,13 +201,13 @@ for day in weeks:
     versions.append(v)
 
 doc = {
-    'format': 'openbep-compliance-series', 'formatVersion': '0.4', 'example': True,
+    'format': 'openbep-compliance-series', 'formatVersion': '0.6', 'example': True,
     'note': 'SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.',
     'plan': {'name': 'Example: Primary school renovation and extension', 'owner': 'School service centre (example)', 'delivery': 'Design-bid-build',
              'goals': GOALS, 'milestones': MILESTONES, 'holidays': HOLIDAYS, 'roles': ROLES, 'escalation': ESCALATION},
     'model': {'server': 'VIM Server (simulated)', 'project': 'Primary school (example)', 'source': 'SCH-FEDERATED.vim',
               'schedule': 'One version every Friday, built from the Revit models each firm uploaded that week.'},
-    'valueChecks': [{k: v for k, v in vc.items() if k in ('id', 'goal', 'label', 'icon')} for vc in VALUE_CHECKS],
+    'valueChecks': [{k: v for k, v in vc.items() if k in ('id', 'goal', 'label', 'icon', 'usedBy', 'help')} for vc in VALUE_CHECKS],
     'rules': RULES,
     'versions': versions,
 }

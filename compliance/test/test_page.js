@@ -10,6 +10,7 @@ const ex = JSON.parse(fs.readFileSync(path.join(root, 'compliance', 'example-sch
 const clone = o => JSON.parse(JSON.stringify(o));
 
 function keepRoles(d, codes) {
+  for (const x of [...d.valueChecks, ...d.rules]) if (x.usedBy) x.usedBy = x.usedBy.filter(c => codes.includes(c));
   d.plan.roles = d.plan.roles.filter(r => codes.includes(r.code));
   for (const v of d.versions) {
     v.uploadedBy = v.uploadedBy.filter(c => codes.includes(c));
@@ -22,6 +23,7 @@ function keepRoles(d, codes) {
 }
 function renameRoles(d, map) {
   for (const r of d.plan.roles) r.code = map[r.code];
+  for (const x of [...d.valueChecks, ...d.rules]) if (x.usedBy) x.usedBy = x.usedBy.map(c => map[c]);
   for (const v of d.versions) {
     v.uploadedBy = v.uploadedBy.map(c => map[c]);
     if (v.state !== 'checked') continue;
@@ -103,13 +105,37 @@ const server = http.createServer((req, res) => {
     // Select the first version and back, to exercise the "no earlier version" path.
     await page.selectOption('#selV', '0'); await page.waitForTimeout(50);
     ok(!errs.length, `${k} @${width}: first version selectable`);
+    // Round five: three levels. The overview, then a firm, then one item, and back up.
+    await page.selectOption('#selV', String(d.versions.indexOf(last))); await page.waitForTimeout(50);
+    const vis = sel => page.evaluate(q => { const e = document.querySelector(q); return !!e && e.getClientRects().length > 0; }, sel);
+    const cards = await page.locator('#firms .fc').count();
+    ok(cards === Object.keys(last.byRole).length && await vis('#firms') && !(await vis('#gaps')) && !(await vis('#item')), `${k} @${width}: level 1 shows one card per firm and no detail (${cards})`);
+    await page.locator('#firms .fc .btn').first().click(); await page.waitForTimeout(50);
+    ok(await vis('#firmSum .gate') && await vis('#chOverall svg') && !(await vis('#firms')) && await vis('#crumb button'), `${k} @${width}: level 2 shows the firm summary, its chart and the way back`);
+    const l2 = await page.evaluate(() => ({ wide: document.documentElement.scrollWidth > innerWidth + 1, cut: [...document.querySelectorAll('#firmSum *, #gaps *, #pay *, #acc *')].filter(e => { const b = e.getBoundingClientRect(); return innerWidth < 700 && !e.closest('svg') && b.width && b.right > innerWidth + 1; }).length }));
+    ok(!l2.wide && !l2.cut, `${k} @${width}: level 2 fits the screen (${l2.cut})`);
+    const items = await page.locator('#gaps .lnk').count();
+    if (items) {
+      await page.locator('#gaps .lnk').first().click(); await page.waitForTimeout(50);
+      ok(await vis('#chItem svg') && !(await vis('#gaps')) && new URLSearchParams(await page.evaluate(() => location.search)).get('item'), `${k} @${width}: level 3 shows one item with its chart`);
+      const l3 = await page.evaluate(() => ({ wide: document.documentElement.scrollWidth > innerWidth + 1, cut: [...document.querySelectorAll('#item *')].filter(e => { const b = e.getBoundingClientRect(); return !e.closest('.tw') && !e.closest('svg') && b.width && b.right > innerWidth + 1; }).length }));
+      ok(!l3.wide && !l3.cut, `${k} @${width}: level 3 fits the screen`);
+      const u3 = await page.evaluate(() => location.search);
+      await page.goto(`http://127.0.0.1:${port}/compliance/${u3}`); await page.waitForSelector('#chItem svg');
+      ok(await vis('#item .gate'), `${k} @${width}: the link reopens the same item`);
+    }
+    await page.locator('#crumb button').first().click(); await page.waitForTimeout(50);
+    ok(await vis('#firms') && !(await vis('#crumb')), `${k} @${width}: the trail leads back to the overview`);
+    ok(!errs.length, `${k} @${width}: no page errors across the levels ${errs.join(' ')}`);
+    const l1 = await page.evaluate(() => ({ wide: document.documentElement.scrollWidth > innerWidth + 1, cut: [...document.querySelectorAll('#lead *, #firms *, #top *')].filter(e => { const b = e.getBoundingClientRect(); return !e.closest('svg') && b.width && b.right > innerWidth + 1; }).length }));
+    ok(!l1.wide && !l1.cut, `${k} @${width}: level 1 fits the screen (${l1.cut})`);
     // Round two: one firm only, the values chart, and a link that reopens the same view.
     const code = Object.keys(last.byRole)[0];
     await page.selectOption('#selV', String(d.versions.indexOf(last))); await page.selectOption('#firmF', code); await page.click('#modeV'); await page.waitForTimeout(50);
     const r2 = await page.evaluate(() => ({ gate: !!document.querySelector('#gate .gate'), gaps: !!document.querySelector('#gaps').textContent.trim() && document.querySelectorAll('#msCards .msc').length > 0 && document.querySelectorAll('#acc tbody tr').length > 0, url: location.search, scope: !!document.querySelector('#chOverall .scope'), wide: document.documentElement.scrollWidth > innerWidth + 1 }));
     ok(!errs.length && r2.gate && r2.gaps && r2.scope && !r2.wide, `${k} @${width}: firm filter, gate, gaps and values chart ${errs.join(' ')}`);
     ok(new URLSearchParams(r2.url).get('firm') === code && new URLSearchParams(r2.url).get('v') === String(last.order), `${k} @${width}: the address keeps version and firm (${r2.url})`);
-    await page.goto(`http://127.0.0.1:${port}/compliance/${r2.url}`); await page.waitForSelector('#tiles .tile');
+    await page.goto(`http://127.0.0.1:${port}/compliance/${r2.url}`); await page.waitForSelector('#firmSum .gate');
     ok(await page.evaluate(c => document.querySelector('#firmF').value === c, code), `${k} @${width}: the link reopens the same firm`);
     await page.close();
   }
