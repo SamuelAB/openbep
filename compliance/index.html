@@ -220,6 +220,7 @@ td small.sm{display:block;color:var(--muted);font-size:12px}
 .gate li{display:inline-flex;gap:6px;align-items:baseline}
 .gate .ok{color:var(--good);font-weight:700}.gate .no{color:var(--bad);font-weight:700}
 .bar .w{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,var(--bad) 0 2px,transparent 2px 4px);opacity:.75}
+.chart .miss{fill:var(--bad-soft)}.chart .solid{fill:var(--surface)}.chart .none{fill:none;stroke:none}
 .chart .scope{fill:none;stroke:var(--ink);stroke-width:1.6;opacity:.75}
 tr.dim td{opacity:.45}
 @media print{
@@ -287,9 +288,9 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
     <nav class="crumb" id="crumb" aria-label="Where you are"></nav>
     <div id="firmSum" data-lv="2"></div>
     <section data-lv="1 2" aria-labelledby="h-overall">
-      <div class="sh"><h2 id="h-overall">Compliance over time</h2><span class="note">Share of the values the plan requires that are filled, in every element of every firm's model. The dashed line is the target of the milestone in force.</span></div>
+      <div class="sh"><h2 id="h-overall">Compliance over time</h2><span class="note">The plan asks for more values as firms model more and as each milestone raises the bar. The dark line is what is required, the blue area what is filled, the red band what is missing.</span></div>
       <div class="panel">
-        <div class="ctl" style="margin-bottom:8px"><span role="group" aria-label="What the chart shows" class="seg"><button class="btn" type="button" id="modeP" aria-pressed="true">Percent</button><button class="btn" type="button" id="modeV" aria-pressed="false">Values: required and filled</button></span><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
+        <div class="ctl" style="margin-bottom:8px"><span role="group" aria-label="What the chart shows" class="seg"><button class="btn" type="button" id="modeV" aria-pressed="true">Values: required and filled</button><button class="btn" type="button" id="modeP" aria-pressed="false">Percent</button></span><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
         <div class="chart" id="chOverall"></div>
         <div class="legend" id="lgOverall"></div>
         <details><summary>Show the numbers as a table</summary><div class="tw" style="margin-top:8px" id="tblOverall"></div></details>
@@ -457,7 +458,7 @@ function init(data){
   $('#selV').value=sel; fillCmp();
   $('#selV').onchange=e=>{select(+e.target.value)};
   $('#firmF').innerHTML='<option value="">All firms</option>'+ROLES.map(r=>`<option value="${esc(r.code)}">${esc(r.code)} · ${esc(r.role)}</option>`).join('');
-  F=null;mode='p';
+  F=null;mode='v';
   const u=new URLSearchParams(location.search),uv=V.findIndex(v=>String(v.order)===u.get('v')),uc=V.findIndex(v=>String(v.order)===u.get('cmp'));
   if(uv>=0){sel=uv;cmp=uc>=0&&uc<uv&&checked(V[uc])?uc:prevChecked(uv);$('#selV').value=sel;fillCmp()}
   if(CODES.includes(u.get('firm'))) F=u.get('firm');
@@ -467,7 +468,7 @@ function init(data){
   $('#firmF').value=F||'';
   $('#firmF').onchange=e=>{F=e.target.value||null;ITEM=null;if(F&&showFirms) $('#firmsBtn').click();render()};
   const setMode=m=>{mode=m;$('#modeP').setAttribute('aria-pressed',m==='p');$('#modeV').setAttribute('aria-pressed',m==='v');drawOverall()};
-  $('#modeP').onclick=()=>setMode('p');$('#modeV').onclick=()=>setMode('v');setMode('p');
+  $('#modeP').onclick=()=>setMode('p');$('#modeV').onclick=()=>setMode('v');setMode('v');
   $('#printBtn').onclick=()=>{$('#dig').open=true;drawGoalCharts();print()};
   const setGroup=g=>{group=g;$('#grpF').setAttribute('aria-pressed',g==='f');$('#grpU').setAttribute('aria-pressed',g==='u');if(D&&V) gaps()};
   $('#grpF').onclick=()=>setGroup('f');$('#grpU').onclick=()=>setGroup('u');
@@ -812,7 +813,7 @@ function tiles(){
 
 /* ---------- overall chart ---------- */
 let OV=null;
-function lineChart(el,{series,height,yMin,yMax=100,showMs=true,tipFn,compact=false,tick}){
+function lineChart(el,{series,height,yMin,yMax=100,showMs=true,tipFn,compact=false,tick,marks}){
   const W=Math.max(280,el.clientWidth||600), H=height, padL=compact?30:(tick?52:38), padR=compact?10:(showFirms?66:16), padT=compact?8:28, padB=compact?20:26;
   const days=V.map(dayOf), t0=+new Date(days[0]), t1=+new Date(days[days.length-1]);
   const x=iso=>padL+(W-padL-padR)*((+new Date(iso))-t0)/(t1-t0);
@@ -837,7 +838,7 @@ function lineChart(el,{series,height,yMin,yMax=100,showMs=true,tipFn,compact=fal
   for(const se of series){
     let d='',pen=false,area='',first=null,last=null;
     V.forEach(v=>{const p=se.get(v);if(p==null){pen=false;return}const X=x(dayOf(v)),Y=y(Math.max(yMin,p));d+=(pen?'L':'M')+X.toFixed(1)+','+Y.toFixed(1);pen=true;if(!first)first=[X,Y];last=[X,Y,p]});
-    if(se.area&&first) {area=d.replace(/M/g,'L').replace(/^L/,'M')+`L${last[0]},${y(yMin)}L${first[0]},${y(yMin)}Z`;s+=`<path class="area" d="${area}"/>`}
+    if(se.area&&first) {area=d.replace(/M/g,'L').replace(/^L/,'M')+`L${last[0]},${y(yMin)}L${first[0]},${y(yMin)}Z`;s+=`<path class="${se.areaCls||'area'}" d="${area}"/>`}
     s+=`<path class="${se.cls}" d="${d}" ${se.color?`stroke="${se.color}"`:''}/>`;
     if(se.label&&last) labels.push({x:last[0]+6,y:last[1]+4,t:se.label});
   }
@@ -845,6 +846,7 @@ function lineChart(el,{series,height,yMin,yMax=100,showMs=true,tipFn,compact=fal
   for(const l of labels) s+=`<text class="lbl" x="${l.x}" y="${l.y}">${esc(l.t)}</text>`;
   // not-checked markers
   if(!compact) V.forEach(v=>{if(!checked(v)){const X=x(dayOf(v));s+=`<circle class="gap" cx="${X}" cy="${y(yMin)+0}" r="5"><title></title></circle><text x="${X}" y="${y(yMin)-9}" text-anchor="middle" style="fill:var(--muted);font-size:11px">not checked</text>`}});
+  for(const k of (marks||[])) s+=`<circle cx="${x(k.iso)}" cy="${y(k.val)}" r="3.5" style="fill:var(--accent);stroke:var(--surface);stroke-width:1.5"/><text class="lbl" x="${Math.min(W-padR-14,x(k.iso))}" y="${y(k.val)-9}" text-anchor="middle">${esc(k.text)}</text>`;
   // selected version marker
   const sx=x(dayOf(V[sel]));s+=`<line class="xh" x1="${sx}" x2="${sx}" y1="${padT}" y2="${H-padB}" stroke-dasharray="2 3"/>`;
   s+=`<g class="hover"></g></svg><div class="tip" hidden></div>`;
@@ -876,9 +878,10 @@ function drawOverall(){
     el.dataset.label='Required values and filled values by version';
     const req=v=>checked(v)&&tot(v,'required')?tot(v,'required'):null,met=v=>req(v)==null?null:tot(v,'met'),tg=v=>req(v)==null?null:req(v)*msOf(v).targetPercent/100;
     const mx=Math.max(...V.map(req).filter(x=>x!=null)),st=niceStep(mx/5);
-    lineChart(el,{series:[{cls:'main',get:met,area:true},{cls:'scope',color:css('--ink'),get:req},{cls:'tgt',color:css('--ink'),get:tg}],height:h,yMin:0,yMax:Math.ceil(mx/st)*st,tick:short,
+    const mk=[...new Set([...MS.filter(msPassed).map(msVer),sel])].filter(i=>req(V[i])!=null).map(i=>({iso:dayOf(V[i]),val:met(V[i]),text:pct(100*met(V[i])/req(V[i]),0)}));
+    lineChart(el,{series:[{cls:'scope',color:css('--ink'),get:req,area:true,areaCls:'miss'},{cls:'none',get:met,area:true,areaCls:'solid'},{cls:'main',get:met,area:true},{cls:'tgt',color:css('--ink'),get:tg}],marks:mk,height:h,yMin:0,yMax:Math.ceil(mx/st)*st,tick:short,
       tipFn:v=>checked(v)&&req(v)!=null?`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div class="r"><span>Required by the plan</span><b class="num">${fmt(req(v))}</b></div><div class="r"><span><i style="background:var(--accent)"></i>Filled</span><b class="num">${fmt(met(v))}</b></div><div class="r" style="color:var(--muted)"><span>Target (${msOf(v).targetPercent} %)</span><span class="num">${fmt(tg(v))}</span></div><div class="r"><span>Still to fill for the target</span><span class="num">${fmt(Math.max(0,Math.ceil(tg(v)-met(v))))}</span></div>`:`<div class="h">${esc(v.label)} · ${dShort(dayOf(v))}</div><div>${checked(v)?'Not on the project yet':'Not checked. '+esc(v.reason||'')}</div>`});
-    $('#lgOverall').innerHTML=`<span><i class="sw" style="border-top-color:var(--ink);border-top-width:1.6px"></i>Required by the plan (grows as firms model more and as milestones ask for more)</span><span><i class="sw"></i>Filled, ${esc(who)}</span><span><i class="sw t"></i>Target in values</span><span><i class="sw h"></i>Agreed holiday, not counted</span><span><i class="sw g"></i>Version not checked</span></div>${msList()}<div>`;
+    $('#lgOverall').innerHTML=`<span><i class="sw" style="border-top-color:var(--ink);border-top-width:1.6px"></i>Required by the plan (grows as firms model more and as milestones ask for more)</span><span><i class="sw"></i>Filled, ${esc(who)}, with the share filled at each milestone</span><span><i class="sq" style="background:var(--bad-soft);border:1px solid var(--line2)"></i>Required and not filled</span><span><i class="sw t"></i>Target in values</span><span><i class="sw h"></i>Agreed holiday, not counted</span><span><i class="sw g"></i>Version not checked</span></div>${msList()}<div>`;
     return;
   }
   el.dataset.label='Overall compliance by version, with the milestone targets';
