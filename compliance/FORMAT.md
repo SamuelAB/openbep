@@ -6,7 +6,7 @@ results are shown over time, and fixes the contract so that **a different plan n
 The page at `/compliance/` contains no project name, no goal, no firm, no rule and no milestone. It reads all of
 them from one file. A VIM Flex page, or any other screen, can read the same file and follow the same rules.
 
-- Format name: `openbep-compliance-series`, version `0.3` (draft). 0.2 added three optional counts per role; 0.3 adds the plan's escalation steps and the owner of a failing rule, both optional. Older files still load.
+- Format name: `openbep-compliance-series`, version `0.4` (draft). 0.2 added three optional counts per role; 0.3 the plan's escalation steps and the owner of a failing rule; 0.4 an icon per check. All optional. Older files still load.
 - Example: [example-school.json](example-school.json), simulated, written by `build_example.py`.
 - Validator: [series.js](series.js), `validateSeries(doc)` returns a list of problems in plain words. The page
   runs it on every file and refuses a file that fails, with the reasons.
@@ -42,8 +42,10 @@ plan
   roles[]       { code, role, firm, document, from }       from = null, or the date the role joins
   escalation[]  the plan's steps when a firm misses milestones in a row, in order (optional, 0.3)
 model           { server, project, source, schedule, cadenceDays (7 when absent) }
-valueChecks[]   { id, goal, label }
-rules[]         { id, goal, label, limit, unit, limitText, direction }
+valueChecks[]   { id, goal, label, icon }
+rules[]         { id, goal, label, limit, unit, limitText, direction, icon }
+                icon (optional, 0.4): one of value, code, material, fire, asset, room, workset, name, level,
+                clash, warning, duplicate. Anything else, or none, shows the icon of the kind of check.
                 direction: lowerIsBetter | higherIsBetter
 versions[]      in order
   order, label, tag, created, milestone (the one in force), uploadedBy[] (role codes)
@@ -86,6 +88,8 @@ versions[]      in order
 | Open since | first version of the current unbroken run of that deficiency |
 | Closes at this pace | size ÷ pace of the last four working periods, counted forward skipping holidays |
 | Urgency | Overdue: open through a milestone it should have met. Will miss: closes after the milestone, or never. On course: closes in time. |
+| Severity | Required values: points below the target. Critical 15 or more, major 5 to 15, minor under 5. A rule in %: the same, in points from its limit. A counted rule: critical at half its limit or more beyond it, major from a tenth; with a limit of 0, critical from 10, major from 3. |
+| Payment check | Per firm, four conditions: its model was uploaded and checked in the latest working period; its own compliance is at the target; no model rule fails on its elements; nothing of its own is overdue. A rule not split by firm holds no single firm. The contract decides payment. |
 | Step set by the plan | milestones a firm missed in a row on its own elements, read against `plan.escalation` |
 | New elements arrive filled | newMet ÷ newRequired over the last four working periods |
 
@@ -97,6 +101,10 @@ versions[]      in order
    Then the active deficiencies, grouped by firm or all together, most urgent first, each with its owner,
    size, age, pace and closing date. Then one accountability row per firm: milestones met and missed,
    missed in a row, the plan's step, what is open now.
+   Then one payment card per firm: the four conditions, met or missing.
+   Every deficiency carries the same graphics: severity bars, the icon of its check, a bar of size against
+   the target or limit, a trend line with an arrow, and a timeline (opened, this version, milestone, closing date).
+   The milestones are also drawn as one track.
 2. Overall compliance over time, with the stepped target, milestones, holidays and unchecked versions; the
    same chart in values shows what the plan requires against what is filled.
 3. One row per role: compliance, wrong and empty, pace, how clean new elements arrive, needed pace, uploads.
