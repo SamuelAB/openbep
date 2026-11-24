@@ -34,5 +34,7 @@ jobs:
         run: node translations/tools/reqfile_parity.js && node translations/tools/reqfile_parity.js --no-function-column
       - name: Compliance page shows any plan with no custom code
         run: node compliance/test/test_page.js
+      - name: Model page drills to one element with any results file
+        run: node compliance/test/test_model.js
       - name: Dictionary, glossary and coverage
         run: python3 translations/check_i18n.py --app --strict

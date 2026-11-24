@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenBEP Compliance in the model</title>
+<meta name="description" content="Where in the model the plan is not followed: by model, workset, category, family, type and single element, with the model in 3D coloured by compliance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Same look as ../index.html: VIM's public style tokens (github.com/vimaec/vim-web, MIT). */
+:root{
+  --bar:#050c1a; --on-bar:#ffffff;
+  --bg:#f6f6f6; --surface:#ffffff; --sunk:#eef0f3; --ink:#212329; --muted:#56585f; --faint:#8a8d95; --line:#e3e3e3; --line2:#d1d3d8;
+  --accent:#0590cc; --accent-ink:#036c99; --accent-soft:#d9edf9;
+  --good:#1e7f3c; --good-soft:#e2f3e7; --bad:#c62828; --bad-soft:#fbe5e3; --warn:#9a6a00; --warn-soft:#fff8e5;
+  /* The three states of an element, the same in the lists and in 3D. */
+  --st-ok:#2e9b57; --st-part:#e0a100; --st-bad:#d2463c; --st-none:#c9ccd2;
+  --font:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'Roboto Mono',ui-monospace,Menlo,Consolas,monospace;
+  --r-sm:4px; --r-md:6px; --ctl:32px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#050c1a; --surface:#0f1623; --sunk:#172030; --ink:#e8eaee; --muted:#a3a7b0; --faint:#7d818b; --line:#232c3b; --line2:#313b4c;
+  --accent:#2fb3ea; --accent-ink:#5cc4ef; --accent-soft:#0c2a3d;
+  --good:#4cc26e; --good-soft:#0f2a1a; --bad:#f2675f; --bad-soft:#3a1615; --warn:#eca500; --warn-soft:#33270a; --st-none:#4a5364; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#050c1a; --surface:#0f1623; --sunk:#172030; --ink:#e8eaee; --muted:#a3a7b0; --faint:#7d818b; --line:#232c3b; --line2:#313b4c;
+  --accent:#2fb3ea; --accent-ink:#5cc4ef; --accent-soft:#0c2a3d;
+  --good:#4cc26e; --good-soft:#0f2a1a; --bad:#f2675f; --bad-soft:#3a1615; --warn:#eca500; --warn-soft:#33270a; --st-none:#4a5364; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* VIM's viewer stylesheet pins the body to the window; this page scrolls. */
+html body{position:static;height:auto;width:auto;overflow:visible;margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5}
+h1,h2,h3{margin:0;font-weight:700;text-wrap:balance}
+h2{font-size:17px} h3{font-size:14px}
+a{color:var(--accent-ink)}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.top{background:var(--bar);color:var(--on-bar)}
+.top .in{max-width:1480px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.top .home{color:var(--on-bar);font-weight:700;font-size:17px;text-decoration:none}
+.top h1{font-size:17px;font-weight:500}
+.top h1:before{content:'/';margin-right:10px;opacity:.5}
+.top nav{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;margin-left:auto}
+.top nav a{color:#c8e2f4;text-decoration:none}.top nav a:hover{text-decoration:underline}
+.top nav a[aria-current]{color:var(--on-bar);font-weight:500}
+.wrap{max-width:1480px;margin:0 auto;padding:0 16px 48px}
+.example{margin:14px 0 0;padding:10px 12px;border:1px solid var(--line2);border-left:4px solid #eca500;background:var(--warn-soft);border-radius:var(--r-md);font-size:13px}
+.note{color:var(--muted);font-size:13px}
+.btn{min-height:var(--ctl);border:1px solid var(--line2);background:var(--surface);border-radius:var(--r-sm);padding:0 12px;cursor:pointer;font-weight:500;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.seg{display:inline-flex}.seg .btn{border-radius:0;margin-left:-1px}.seg .btn:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm);margin-left:0}.seg .btn:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0}
+.lnk{background:none;border:0;padding:0;color:var(--accent-ink);cursor:pointer;font:inherit;font-weight:500;text-align:left;text-decoration:underline}
+.head{padding:16px 0 4px}.head .t{font-size:20px;font-weight:700}
+.verdict{margin-top:12px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--st-bad);border-radius:var(--r-md)}
+.verdict.v-ok{border-left-color:var(--st-ok)}.verdict.v-part{border-left-color:var(--st-part)}
+.verdict .gt{font-size:17px;font-weight:700}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px}
+.card+.card{margin-top:16px}
+.sh{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctl label{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+select{min-height:var(--ctl);border:1px solid var(--line2);border-radius:var(--r-sm);background:var(--surface);padding:0 8px;max-width:100%}
+.crumb{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:baseline;font-size:14px;margin:4px 0 10px}
+.crumb .lv{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);display:block}
+.crumb .c{display:inline-flex;flex-direction:column}
+.crumb .sep{color:var(--faint);align-self:flex-end}
+.crumb b{font-weight:700}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(90px,1fr) 64px 20px;gap:4px 12px;align-items:center;width:100%;background:none;border:0;padding:9px 6px;text-align:left;cursor:pointer;border-radius:var(--r-sm)}
+.row:hover,.row.on{background:var(--accent-soft)}
+.row .nm{font-weight:500;overflow-wrap:anywhere}
+.row .sm{display:block;color:var(--muted);font-size:12px;font-weight:400}
+.row .pc{text-align:right;font-family:var(--mono);font-weight:500}
+.row .go{color:var(--faint)}
+.bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--sunk)}
+.bar i{display:block;height:100%}
+.ok{background:var(--st-ok)}.part{background:var(--st-part)}.badc{background:var(--st-bad)}.none{background:var(--st-none)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+.ico{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+.chk{display:grid;grid-template-columns:20px minmax(0,1.4fr) minmax(80px,1fr) 64px;gap:4px 12px;align-items:center;width:100%;background:none;border:0;padding:8px 6px;text-align:left;cursor:pointer;border-radius:var(--r-sm)}
+.chk:hover,.chk.on{background:var(--accent-soft)}
+.chk .fix{grid-column:2 / -1;color:var(--muted);font-size:12px}
+.dots{display:inline-flex;gap:3px;vertical-align:middle}
+.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.el table{border-collapse:collapse;width:100%;margin-top:8px}
+.el td,.el th{padding:6px 8px 6px 0;border-top:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+.el th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:500;border-top:0}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:500;white-space:nowrap}
+.pill.y{background:var(--good-soft);color:var(--good)}.pill.n{background:var(--bad-soft);color:var(--bad)}.pill.x{background:var(--sunk);color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:4px 18px;margin:6px 0 0;padding:0;list-style:none;font-size:13px}
+.facts span{color:var(--muted)}
+.view{position:sticky;top:12px}
+.stage{position:relative;height:min(68vh,640px);min-height:360px;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--sunk)}
+.stage .ph{position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;text-align:center;padding:20px}
+#vim{position:absolute;inset:0}.stage .ph[hidden]{display:none}
+.err{margin-top:14px;padding:12px 14px;border:1px solid var(--bad);background:var(--bad-soft);border-radius:var(--r-md)}
+.foot{margin-top:28px;color:var(--muted);font-size:13px}
+.foot li{margin:4px 0}
+@media (max-width:980px){.cols{grid-template-columns:minmax(0,1fr)}.view{position:static}.stage{height:60vh}}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr) 64px 20px}.row .bar{grid-column:1 / -1;grid-row:2}.chk{grid-template-columns:20px minmax(0,1fr) 64px}.chk .bar{grid-column:2 / -1;grid-row:2}.chk .fix{grid-row:3}}
+@media (pointer:coarse){.btn,select{min-height:44px}.lnk{padding:10px 0}.top nav a{padding:8px 0}}
+@media print{.top nav,.ctl,.view,.foot{display:none!important}.cols{grid-template-columns:1fr}}
+</style>
+
+<header class="top"><div class="in">
+  <a class="home" href="../../" title="OpenBEP home">OpenBEP</a><h1>Compliance in the model</h1>
+  <nav aria-label="OpenBEP pages">
+    <a href="../../">Home</a>
+    <a href="../../app/bep-builder.html">BEP Builder</a>
+    <a href="../../lod/">LOD specification</a>
+    <a href="../../names/">Naming lists</a>
+    <a href="../../training/">Owner training</a>
+    <a href="../../app/scorecard.html">Project scorecard</a>
+    <a href="../">Compliance over time</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <p class="example" role="note" id="exNote" hidden></p>
+  <div id="fail"></div>
+  <div id="app" hidden>
+    <div class="head"><div class="t" id="title"></div><div class="note" id="sub"></div></div>
+    <div id="verdict"></div>
+    <div class="cols">
+      <div>
+        <section class="card" aria-labelledby="h-where">
+          <div class="sh"><h2 id="h-where">Where it is missing</h2>
+            <div class="ctl"><label id="byL">Start from</label><span class="seg" role="group" aria-labelledby="byL" id="by"></span></div></div>
+          <nav class="crumb" id="crumb" aria-label="Where you are in the model"></nav>
+          <div id="el"></div>
+          <ul class="rows" id="rows"></ul>
+          <div id="more"></div>
+          <div class="legend" id="legend"></div>
+        </section>
+        <section class="card" aria-labelledby="h-what">
+          <div class="sh"><h2 id="h-what">What is missing here</h2><span class="note" id="whatSub"></span></div>
+          <div id="checks"></div>
+        </section>
+      </div>
+      <section class="view" aria-labelledby="h-3d">
+        <div class="sh"><h2 id="h-3d">The model, coloured by compliance</h2><span class="note" id="viewSub"></span></div>
+        <div class="stage"><div id="vim"></div><div class="ph" id="ph"></div></div>
+        <div class="legend" id="legend3d"></div>
+      </section>
+    </div>
+    <details style="margin-top:22px"><summary>Use another results file</summary>
+      <p class="note">The page reads one file in the format <code>openbep-compliance-elements</code>, described in <a href="../FORMAT.md">FORMAT.md</a>. The file stays in your browser.</p>
+      <input type="file" id="fileIn" accept=".json,application/json">
+    </details>
+    <footer class="foot"><ul>
+      <li><b>Compliance</b> is the required values that are filled, out of the required values. A value is required on an element only where the plan asks for it.</li>
+      <li><b>Colours:</b> green, every required value on the element is filled. Yellow, at least half. Red, less than half. Grey, nothing is asked of that element by the check you are looking at.</li>
+      <li><b>Order of the levels:</b> model, workset, category, family, type, element, then each required value on that element. A level with only one group is passed through and shown in the path.</li>
+      <li>OpenBEP writes the plan. It does not check models. The 3D view is VIM's open web viewer (<a href="https://github.com/vimaec/vim-web">vim-web</a>, MIT licence) and the results come from the file.</li>
+    </ul></footer>
+  </div>
+</main>
+
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Math.round(n).toLocaleString('en-CA'),pct=(a,b)=>b?(Math.floor(1000*a/b)/10).toFixed(1)+' %':'–';
+const ICONS={
+  value:'<rect x="2" y="4" width="12" height="8" rx="1" stroke-dasharray="2 2"/><path d="M5 6.5v3"/>',
+  code:'<path d="M2 2h5l7 7-5 5-7-7z"/><circle cx="5" cy="5" r=".8"/>',
+  material:'<path d="M8 2l6 3-6 3-6-3z"/><path d="M2 8l6 3 6-3M2 11l6 3 6-3"/>',
+  fire:'<path d="M8 14c-2.5 0-4-1.7-4-3.8C4 7.5 6.5 6.5 6.5 3c2 1 5.5 3.5 5.5 7.2 0 2.1-1.5 3.8-4 3.8z"/>',
+  asset:'<path d="M8 2l5.5 3v6L8 14l-5.5-3V5z"/><path d="M2.5 5L8 8l5.5-3M8 8v6"/>',
+  room:'<rect x="2" y="2" width="12" height="12"/><path d="M8 2v5M8 10v4M2 9h3"/>',
+  workset:'<rect x="2" y="3" width="5" height="4"/><rect x="9" y="3" width="5" height="4"/><rect x="2" y="9" width="5" height="4"/><rect x="9" y="9" width="5" height="4"/>',
+  name:'<path d="M2 12l3-8 3 8M3 9.5h4M10 12V7.5a2 2 0 014 0V12M10 9.5h4"/>',
+  level:'<path d="M2 12h12M2 8h12M2 4h12"/>',
+  duplicate:'<rect x="2" y="2" width="8" height="8"/><rect x="6" y="6" width="8" height="8"/>'};
+const ico=n=>`<svg class="ico" viewBox="0 0 16 16" aria-hidden="true">${ICONS[n]||ICONS.value}</svg>`;
+// Columns of one element row, fixed by the format.
+const C={id:0,model:1,workset:2,category:3,family:4,type:5,level:6,req:7,met:8};
+const LV={model:{one:'Model',many:'models',blank:'Unnamed model'},workset:{one:'Workset',many:'worksets',blank:'No worksets (the model is not workshared)'},
+  category:{one:'Category',many:'categories',blank:'No category'},family:{one:'Family',many:'families',blank:'No family'},
+  type:{one:'Type',many:'types',blank:'No type'},level:{one:'Level',many:'levels',blank:'Not tied to a level'}};
+const ORDERS={model:{label:'Model and workset',keys:['model','workset','category','family','type']},level:{label:'Level',keys:['level','category','family','type']}};
+const SHOW=200;
+let D,S,ROWS,by='model',path=[],check='',el=null,showAll=false;
+const pop=x=>{let n=0;while(x){n+=x&1;x>>>=1}return n};
+const mask=()=>{const i=D.checks.findIndex(c=>c.id===check);return i<0?(1<<D.checks.length)-1:1<<i};
+const st=(r,M)=>{const q=pop(r[C.req]&M);if(!q) return 'none';const m=pop(r[C.met]&M);return m===q?'ok':m*2>=q?'part':'badc'};
+const nameOf=(k,i)=>S[i]||LV[k].blank;
+
+function validate(d){const e=[];
+  if(!d||d.format!=='openbep-compliance-elements') e.push('format must be "openbep-compliance-elements".');
+  if(!d||!Array.isArray(d.checks)||!d.checks.length||d.checks.length>30) e.push('checks must list 1 to 30 checks.');
+  if(!d||!Array.isArray(d.strings)||!Array.isArray(d.elements)) e.push('strings and elements must be lists.');
+  else if(JSON.stringify(d.columns)!==JSON.stringify(['id','model','workset','category','family','type','level','required','filled'])) e.push('columns must be id, model, workset, category, family, type, level, required, filled, in that order.');
+  else{const bad=d.elements.findIndex(r=>!Array.isArray(r)||r.length!==9||r.slice(1,7).some(i=>!(i>=0&&i<d.strings.length))||(r[8]&~r[7]));
+    if(bad>=0) e.push(`elements[${bad}] is not a valid row (9 numbers, names that exist in strings, and no value filled that is not required).`)}
+  return e}
+function fail(list){$('#app').hidden=true;$('#fail').innerHTML=`<div class="err" role="alert"><b>This file cannot be shown.</b><ul>${list.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`}
+
+function init(d){const e=validate(d);if(e.length) return fail(e);
+  $('#fail').innerHTML='';D=d;S=d.strings;ROWS=d.elements;$('#app').hidden=false;
+  const n=$('#exNote');n.hidden=!d.example;n.innerHTML=d.example?`<b>Example.</b> ${esc(d.note||'')} The other compliance page shows a different, invented project; the two examples are not the same building.`:'';
+  $('#title').textContent=(d.project&&d.project.name)||'Model';
+  $('#sub').textContent=[d.model&&d.model.name,d.version&&d.version.label,d.version&&d.version.date].filter(Boolean).join(' · ');
+  $('#by').innerHTML=Object.entries(ORDERS).map(([k,o])=>`<button class="btn" type="button" data-by="${k}">${esc(o.label)}</button>`).join('');
+  read();render();ph()}
+
+// The elements under the current path, and the path made whole: a level with one group is passed through.
+function scope(){const keys=ORDERS[by].keys;let rows=ROWS,auto=[];path=path.slice(0,keys.length);
+  for(let i=0;i<keys.length;i++){
+    if(i<path.length){const k=keys[i],hit=rows.filter(r=>nameOf(k,r[C[k]])===path[i]);if(hit.length){const all=new Set(rows.map(r=>r[C[k]])).size===1;auto[i]=all;rows=hit;continue}path=path.slice(0,i)}
+    const vals=new Set(rows.map(r=>r[C[keys[i]]]));if(vals.size!==1) break;
+    path[i]=nameOf(keys[i],[...vals][0]);auto[i]=true}
+  return {rows,auto,keys}}
+
+function tally(rows,M){const t={n:rows.length,req:0,met:0,ok:0,part:0,badc:0,none:0};for(const r of rows){t.req+=pop(r[C.req]&M);t.met+=pop(r[C.met]&M);t[st(r,M)]++}return t}
+const bar=t=>`<span class="bar" role="img" aria-label="${fmt(t.ok)} complete, ${fmt(t.part)} partly, ${fmt(t.badc)} mostly missing">${['ok','part','badc','none'].map(k=>t[k]?`<i class="${k}" style="width:${100*t[k]/t.n}%"></i>`:'').join('')}</span>`;
+
+function render(){const {rows,auto,keys}=scope(),M=mask(),all=tally(ROWS,(1<<D.checks.length)-1);url();
+  document.querySelectorAll('#by .btn').forEach(b=>b.setAttribute('aria-pressed',b.dataset.by===by));
+  // Level 0: one verdict for the whole model.
+  const worst=D.checks.map((c,i)=>({c,t:tally(ROWS,1<<i)})).filter(x=>x.t.req).sort((a,b)=>(b.t.req-b.t.met)-(a.t.req-a.t.met))[0];
+  const share=all.req?all.met/all.req:1;
+  $('#verdict').innerHTML=`<div class="verdict ${share>=1?'v-ok':share>=.5?'v-part':''}"><div class="gt">${pct(all.met,all.req)} of the required values are filled</div><div>${fmt(all.req-all.met)} values are missing on ${fmt(all.n-all.ok-all.none)} of ${fmt(all.n)} elements.${worst&&worst.t.req>worst.t.met?` The biggest gap: <button class="lnk" type="button" data-check="${esc(worst.c.id)}">${esc(worst.c.label)}</button>, ${fmt(worst.t.met)} of ${fmt(worst.t.req)} filled.`:''}</div></div>`;
+  // Path.
+  const cr=[`<span class="c"><span class="lv">All</span>${path.length||el!=null?`<button class="lnk" type="button" data-depth="0">Whole model</button>`:'<b>Whole model</b>'}</span>`];
+  path.forEach((p,i)=>{const last=i===path.length-1&&el==null;
+    cr.push(`<span class="sep">›</span><span class="c"><span class="lv">${LV[keys[i]].one}</span>${last?`<b>${esc(p)}</b>`:`<button class="lnk" type="button" data-depth="${i+1}">${esc(p)}</button>`}</span>`)});
+  if(el!=null) cr.push(`<span class="sep">›</span><span class="c"><span class="lv">Element</span><b>id ${el}</b></span>`);
+  $('#crumb').innerHTML=cr.join('');
+  // The list: groups of the next level, or the elements themselves.
+  const depth=path.length,leaf=depth>=keys.length;let html='';
+  if(el!=null){const r=ROWS.find(x=>x[C.id]===el);$('#el').innerHTML=r?elCard(r):'';$('#rows').innerHTML='';$('#more').innerHTML=''}
+  else{$('#el').innerHTML='';
+    if(!leaf){const k=keys[depth],g=new Map();for(const r of rows){const v=nameOf(k,r[C[k]]);(g.get(v)||g.set(v,[]).get(v)).push(r)}
+      const list=[...g].map(([v,rs])=>({v,t:tally(rs,M)})).sort((a,b)=>(b.t.req-b.t.met)-(a.t.req-a.t.met)||a.v.localeCompare(b.v));
+      html=list.map(x=>`<li><button class="row" type="button" data-into="${esc(x.v)}"><span class="nm">${esc(x.v)}<span class="sm">${fmt(x.t.n)} element${x.t.n===1?'':'s'} · ${x.t.req?fmt(x.t.req-x.t.met)+' value'+(x.t.req-x.t.met===1?'':'s')+' missing':'nothing required'}</span></span>${bar(x.t)}<span class="pc">${pct(x.t.met,x.t.req)}</span><span class="go" aria-hidden="true">›</span></button></li>`).join('');
+      $('#h-where').textContent=`Where it is missing: by ${LV[k].one.toLowerCase()}`;$('#more').innerHTML=''}
+    else{const list=rows.slice().sort((a,b)=>(pop(b[C.req]&M)-pop(b[C.met]&M))-(pop(a[C.req]&M)-pop(a[C.met]&M))||a[C.id]-b[C.id]),cut=showAll?list:list.slice(0,SHOW);
+      html=cut.map(r=>{const q=pop(r[C.req]&M),m=pop(r[C.met]&M);return `<li><button class="row" type="button" data-el="${r[C.id]}"><span class="nm">Element id ${r[C.id]}<span class="sm">${esc(nameOf('level',r[C.level]))}</span></span><span class="dots" role="img" aria-label="${m} of ${q} required values filled">${D.checks.map((c,i)=>!(M>>i&1)||!(r[C.req]>>i&1)?'':`<i class="${r[C.met]>>i&1?'ok':'badc'}" title="${esc(c.label)}"></i>`).join('')}</span><span class="pc">${q?m+' of '+q:'–'}</span><span class="go" aria-hidden="true">›</span></button></li>`}).join('');
+      $('#h-where').textContent='Where it is missing: each element';
+      $('#more').innerHTML=list.length>cut.length?`<p class="note">Showing the ${SHOW} elements with the most missing, out of ${fmt(list.length)}. <button class="lnk" type="button" id="allBtn">Show all ${fmt(list.length)}</button></p>`:''}
+    $('#rows').innerHTML=html}
+  $('#legend').innerHTML=el!=null?'':['ok|Every required value filled','part|At least half','badc|Less than half','none|Nothing required here'].map(x=>x.split('|')).map(([k,t])=>`<span><i class="${k}"></i>${t}</span>`).join('');
+  $('#legend3d').innerHTML=$('#legend').innerHTML||['ok|Every required value filled','part|At least half','badc|Less than half','none|Nothing required here'].map(x=>x.split('|')).map(([k,t])=>`<span><i class="${k}"></i>${t}</span>`).join('');
+  // What is missing here: one line per check, with the cheapest way to fix it.
+  const here=el!=null?ROWS.filter(x=>x[C.id]===el):rows;
+  $('#whatSub').textContent=el!=null?'':`In ${path.length?path[path.length-1]:'the whole model'}. Pick one to colour the model by it.`;
+  $('#checks').innerHTML=el!=null?'':`<ul class="rows">${D.checks.map((c,i)=>{const m=1<<i,rs=here.filter(r=>r[C.req]&m),miss=rs.filter(r=>!(r[C.met]&m));if(!rs.length) return '';
+    const t={n:rs.length,ok:rs.length-miss.length,part:0,badc:miss.length,none:0},types=new Set(miss.map(r=>r[C.category]+'|'+r[C.family]+'|'+r[C.type])).size;
+    const fix=!miss.length?'Nothing to fix.':c.on==='type'?`Fill ${esc(c.parameter)} on ${fmt(types)} type${types===1?'':'s'}. That fixes ${fmt(miss.length)} element${miss.length===1?'':'s'}.`:c.on==='instance'?`Fill ${esc(c.parameter)} on ${fmt(miss.length)} element${miss.length===1?'':'s'}, one by one.`:`${fmt(miss.length)} element${miss.length===1?'':'s'} to correct, one by one.`;
+    return `<li><button class="chk${check===c.id?' on':''}" type="button" data-check="${esc(c.id)}" aria-pressed="${check===c.id}">${ico(c.icon)}<span><b>${esc(c.label)}</b>${c.help?`<span class="note" style="display:block">${esc(c.help)}</span>`:''}</span>${bar(t)}<span class="num" style="text-align:right">${pct(rs.length-miss.length,rs.length)}</span><span class="fix">${fix}</span></button></li>`}).join('')}</ul>${check?`<p style="margin:8px 0 0"><button class="btn" type="button" data-check="">Show all checks together</button></p>`:''}`;
+  paint(here,M)}
+
+function elCard(r){const same=ROWS.filter(x=>x[C.category]===r[C.category]&&x[C.family]===r[C.family]&&x[C.type]===r[C.type]).length;
+  return `<div class="el"><h3>${esc(nameOf('type',r[C.type]))}</h3>
+  <ul class="facts"><li><span>Element id</span> <b class="num">${r[C.id]}</b></li><li><span>Category</span> ${esc(nameOf('category',r[C.category]))}</li><li><span>Family</span> ${esc(nameOf('family',r[C.family]))}</li><li><span>Level</span> ${esc(nameOf('level',r[C.level]))}</li><li><span>Workset</span> ${esc(nameOf('workset',r[C.workset]))}</li><li><span>Model</span> ${esc(nameOf('model',r[C.model]))}</li></ul>
+  <table><thead><tr><th>Required value</th><th>Revit parameter</th><th>State</th><th>Where to fix it</th></tr></thead><tbody>${D.checks.map((c,i)=>{const q=r[C.req]>>i&1,m=r[C.met]>>i&1;
+    return `<tr><td>${ico(c.icon)} ${esc(c.label)}</td><td class="num">${esc(c.parameter||'–')}</td><td><span class="pill ${!q?'x':m?'y':'n'}">${!q?'Not required':m?'✓ Filled':'✕ Missing'}</span></td><td>${!q||m?'':c.on==='type'?`On the type. It fixes all ${fmt(same)} element${same===1?'':'s'} of this type.`:c.on==='instance'?'On this element.':'On this element, in the model.'}</td></tr>`}).join('')}</tbody></table>
+  <p style="margin:10px 0 0"><button class="btn" type="button" data-el="">Back to the list</button></p></div>`}
+
+// ---- address: the same link opens the same place
+function read(){const q=new URLSearchParams(location.search);by=ORDERS[q.get('by')]?q.get('by'):'model';path=q.getAll('p');check=D.checks.some(c=>c.id===q.get('check'))?q.get('check'):'';
+  const e=Number(q.get('el'));el=q.has('el')&&ROWS.some(r=>r[C.id]===e)?e:null;if(el!=null) pathTo(el)}
+function pathTo(id){const r=ROWS.find(x=>x[C.id]===id);if(r) path=ORDERS[by].keys.map(k=>nameOf(k,r[C[k]]))}
+let PUSH=false;
+function url(){const q=new URLSearchParams(location.search),keep=q.get('file');const n=new URLSearchParams();if(keep) n.set('file',keep);if(by!=='model') n.set('by',by);
+  if(el!=null) n.set('el',el);else path.forEach(p=>n.append('p',p));if(check) n.set('check',check);
+  const u=location.pathname+(n.toString()?'?'+n:'');if(u!==location.pathname+location.search) history[PUSH?'pushState':'replaceState'](null,'',u);PUSH=false}
+addEventListener('popstate',()=>{if(D){read();showAll=false;render()}});
+document.addEventListener('click',e=>{const t=e.target.closest('[data-by],[data-into],[data-depth],[data-el],[data-check],#allBtn,#loadBtn');if(!t||!D) return;
+  if(t.id==='loadBtn') return load3d();
+  if(t.id==='allBtn'){showAll=true;return render()}
+  PUSH=true;showAll=false;
+  if(t.dataset.by){by=t.dataset.by;path=[];el=null}
+  else if(t.dataset.into!=null){path.push(t.dataset.into)}
+  else if(t.dataset.depth!=null){path=path.slice(0,+t.dataset.depth);el=null}
+  else if(t.dataset.el!=null){el=t.dataset.el===''?null:+t.dataset.el;if(el!=null) pathTo(el)}
+  else if(t.dataset.check!=null){check=check===t.dataset.check?'':t.dataset.check}
+  render();if(t.dataset.into!=null||t.dataset.depth!=null) $('#crumb').scrollIntoView({block:'nearest'})});
+$('#fileIn').onchange=e=>{const f=e.target.files[0];if(!f) return;f.text().then(t=>{let d;try{d=JSON.parse(t)}catch(x){return fail(['The file is not valid JSON: '+x.message])}history.replaceState(null,'',location.pathname);unload3d();init(d)})};
+
+// ---- 3D: VIM's web viewer, coloured from the same rows
+const V3={state:'idle',viewer:null,vim:null,byId:null,ids:null};
+const COL={ok:0x2e9b57,part:0xe0a100,badc:0xd2463c,none:0xc9ccd2};
+const script=src=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s)});
+function ph(msg){const m=D.model||{},box=$('#ph');
+  if(V3.state==='ready'){box.hidden=true;return}
+  box.hidden=false;
+  if(!m.url||m.format!=='vim'){box.innerHTML='<p class="note">This results file names no .vim model, so there is no 3D view. The lists work without it.</p>';return}
+  if(V3.state==='loading'){box.innerHTML=`<p><b>Loading the model…</b></p><p class="note">${esc(msg||'')}</p>`;return}
+  if(V3.state==='error'){box.innerHTML=`<p><b>The 3D view could not be loaded.</b></p><p class="note">${esc(msg||'')}</p><button class="btn" type="button" id="loadBtn">Try again</button>`;return}
+  box.innerHTML=`<p><b>${esc(m.name||'Model')}</b> in 3D, coloured by compliance.</p><button class="btn" type="button" id="loadBtn">Show the model in 3D${m.sizeMB?` (${m.sizeMB} MB download)`:''}</button><p class="note">The lists on this page work without it.</p>`;
+  // On a wide screen that has not asked to save data, load it without asking.
+  if(matchMedia('(min-width:981px)').matches&&!(navigator.connection&&navigator.connection.saveData)&&!new URLSearchParams(location.search).has('no3d')) load3d()}
+async function load3d(){if(V3.state==='loading'||V3.state==='ready') return;V3.state='loading';ph('Getting the viewer.');
+  try{
+    if(!window.VIMReact){
+      const css=document.createElement('link');css.rel='stylesheet';css.href='https://cdn.jsdelivr.net/npm/vim-web@1.0.0-beta.2/dist/style.css';document.head.appendChild(css);
+      await script('https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js');
+      await script('https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js');
+      // The viewer's script build expects two names the plain React build does not carry.
+      window.process=window.process||{env:{NODE_ENV:'production'}};
+      window.React.jsx=window.React.jsxs=(t,p,k)=>window.React.createElement(t,k===undefined?p:Object.assign({},p,{key:k}));
+      await script('https://cdn.jsdelivr.net/npm/vim-web@1.0.0-beta.2/dist/vim-web.iife.js')}
+    const VIM=window.VIMReact;ph(`Getting the model${D.model.sizeMB?', '+D.model.sizeMB+' MB':''}.`);
+    V3.viewer=await VIM.React.Webgl.createViewer($('#vim'),{ui:{panelBimTree:false,panelBimInfo:false,panelLogo:true,miscProjectInspector:false,miscHelp:false,miscMaximise:false}});
+    V3.vim=await V3.viewer.load({url:D.model.url}).getVim();
+    V3.byId=new Map();for(const e of V3.vim.getAllElements()) if(e.hasMesh) V3.byId.set(Number(e.elementId),e);
+    V3.state='ready';ph();V3.viewer.framing.frameScene.call();
+    // Picking an element in 3D opens it in the list.
+    V3.viewer.core.selection.onSelectionChanged.sub(()=>{const s=V3.viewer.core.selection.getAll().filter(x=>x.type==='Element3D');if(s.length!==1) return;const id=Number(s[0].elementId);if(id===el||!ROWS.some(r=>r[C.id]===id)) return;PUSH=true;el=id;pathTo(id);render()});
+    render()}
+  catch(x){V3.state='error';ph(String(x&&x.message||x))}}
+function unload3d(){if(V3.viewer){try{V3.viewer.dispose()}catch(x){}}$('#vim').innerHTML='';Object.assign(V3,{state:'idle',viewer:null,vim:null,byId:null,ids:null})}
+let frameJob=0;
+function paint(here,M){$('#viewSub').textContent=V3.state==='ready'?(el!=null?'This element is shown; the rest is hidden.':here.length<ROWS.length?`Showing ${fmt(here.length)} of ${fmt(ROWS.length)} elements; the rest is hidden.`:''):'';
+  if(V3.state!=='ready') return;const T=window.VIMReact.THREE,inScope=new Map(here.map(r=>[r[C.id],r])),whole=here.length===ROWS.length;
+  for(const [id,e] of V3.byId){const r=inScope.get(id);e.visible=whole||!!r;if(r) e.color=new T.Color(COL[st(r,M)]);else if(whole) e.color=new T.Color(COL.none)}
+  // Frame what is shown. Bounding boxes come back one by one, so only do it for the latest request.
+  const key=here.length===ROWS.length?'all':here.map(r=>r[C.id]).slice(0,50).join(',')+here.length;if(key===V3.ids) return;V3.ids=key;const job=++frameJob;
+  if(whole) return V3.viewer.framing.frameScene.call();
+  (async()=>{const box=new T.Box3();let n=0;for(const r of here.slice(0,300)){const e=V3.byId.get(r[C.id]);if(!e) continue;const b=await e.getBoundingBox();if(job!==frameJob) return;if(b){box.union(b);n++}}
+    if(n) V3.viewer.core.camera.lerp(.6).frame(box)})().catch(()=>{})}
+
+const file=new URLSearchParams(location.search).get('file')||'example-residence.json';
+fetch(/^[\w.-]+\.json$/.test(file)?file:'example-residence.json').then(r=>{if(!r.ok) throw new Error('The results file could not be read ('+r.status+').');return r.json()}).then(init).catch(x=>fail([x.message]));
+})();
+</script>
+</html>
