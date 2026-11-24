@@ -1,6 +1,6 @@
 {
  "format": "openbep-compliance-series",
- "formatVersion": "0.5",
+ "formatVersion": "0.6",
  "example": true,
  "note": "SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.",
  "plan": {
@@ -43,13 +43,13 @@
   "milestones": [
    {
     "id": "prelim100",
-    "name": "Preliminary design 100%",
+    "name": "Preliminary design",
     "date": "2027-03-26",
     "targetPercent": 70
    },
    {
     "id": "final90",
-    "name": "Final design 90%",
+    "name": "Final design",
     "date": "2027-06-25",
     "targetPercent": 85
    },
@@ -118,6 +118,7 @@
  "valueChecks": [
   {
    "id": "assembly-code",
+   "help": "Every element needs its cost code so quantities can be priced.",
    "usedBy": [
     "CON"
    ],
@@ -127,18 +128,21 @@
   },
   {
    "id": "real-material",
+   "help": "An element with a placeholder material cannot be measured or priced.",
    "icon": "material",
    "goal": "cost",
    "label": "Elements with a real material"
   },
   {
    "id": "lod-params",
+   "help": "The information the plan asks for on each element at this stage of the project.",
    "icon": "value",
    "goal": "change",
    "label": "Parameters required by the LOD matrix at this milestone"
   },
   {
    "id": "fire-rating",
+   "help": "Walls, doors and floors must carry their fire rating so the other trades can coordinate with them.",
    "usedBy": [
     "MECH"
    ],
@@ -148,6 +152,7 @@
   },
   {
    "id": "asset-data",
+   "help": "Each piece of equipment needs its maintenance data so the owner can run the building after handover.",
    "usedBy": [
     "CON"
    ],
@@ -157,6 +162,7 @@
   },
   {
    "id": "rooms",
+   "help": "Rooms need a number and a name so equipment and finishes can be tied to a place.",
    "usedBy": [
     "MECH"
    ],
@@ -166,12 +172,14 @@
   },
   {
    "id": "worksets",
+   "help": "Elements must sit on a named workset so each team can find and control its own work.",
    "icon": "workset",
    "goal": "basics",
    "label": "Elements on a named workset"
   },
   {
    "id": "view-names",
+   "help": "Views named by the rules can be found by everyone on the project.",
    "icon": "name",
    "goal": "basics",
    "label": "Views named by the naming rules"
@@ -180,6 +188,7 @@
  "rules": [
   {
    "id": "on-level",
+   "help": "An element that is not tied to a level cannot be counted by floor.",
    "usedBy": [
     "CON"
    ],
@@ -193,6 +202,7 @@
   },
   {
    "id": "clashes",
+   "help": "Places where elements of two firms occupy the same space and nobody has resolved it.",
    "usedBy": [
     "ARCH",
     "STRUCT",
@@ -209,6 +219,7 @@
   },
   {
    "id": "warnings",
+   "help": "Revit warnings point to modelling errors that make quantities unreliable.",
    "icon": "warning",
    "goal": "change",
    "label": "Revit warnings",
@@ -219,6 +230,7 @@
   },
   {
    "id": "dup-mark",
+   "help": "Two pieces of equipment with the same Mark cannot be told apart at handover.",
    "icon": "duplicate",
    "goal": "handover",
    "label": "No duplicate Mark",
@@ -229,6 +241,7 @@
   },
   {
    "id": "worksets-exist",
+   "help": "The worksets named in the plan must exist in every model.",
    "icon": "workset",
    "goal": "basics",
    "label": "The named worksets exist",
@@ -239,6 +252,7 @@
   },
   {
    "id": "dup-levels",
+   "help": "Two levels at the same height make elements land on the wrong floor.",
    "icon": "level",
    "goal": "basics",
    "label": "Duplicate levels",

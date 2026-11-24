@@ -13,7 +13,7 @@
     const need = (ok, msg) => { if (!ok) e.push(msg); return ok; };
     if (!need(d && typeof d === 'object', 'The file is not a JSON object.')) return e;
     need(d.format === 'openbep-compliance-series', 'format must be "openbep-compliance-series".');
-    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 to 0.5).');
+    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 to 0.6).');
     const p = d.plan || {};
     need(typeof p.name === 'string' && p.name, 'plan.name is missing.');
     const goals = Array.isArray(p.goals) ? p.goals : [], ms = Array.isArray(p.milestones) ? p.milestones : [], roles = Array.isArray(p.roles) ? p.roles : [];

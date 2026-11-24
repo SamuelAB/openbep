@@ -6,7 +6,7 @@ results are shown over time, and fixes the contract so that **a different plan n
 The page at `/compliance/` contains no project name, no goal, no firm, no rule and no milestone. It reads all of
 them from one file. A VIM Flex page, or any other screen, can read the same file and follow the same rules.
 
-- Format name: `openbep-compliance-series`, version `0.5` (draft). 0.2 added three optional counts per role; 0.3 the plan's escalation steps and the owner of a failing rule; 0.4 an icon per check; 0.5 the roles that use each check's data. All optional. Older files still load.
+- Format name: `openbep-compliance-series`, version `0.6` (draft). 0.2 added three optional counts per role; 0.3 the plan's escalation steps and the owner of a failing rule; 0.4 an icon per check; 0.5 the roles that use each check's data; 0.6 a plain-words sentence per check. All optional. Older files still load.
 - Example: [example-school.json](example-school.json), simulated, written by `build_example.py`.
 - Validator: [series.js](series.js), `validateSeries(doc)` returns a list of problems in plain words. The page
   runs it on every file and refuses a file that fails, with the reasons.
@@ -45,6 +45,7 @@ model           { server, project, source, schedule, cadenceDays (7 when absent)
 valueChecks[]   { id, goal, label, icon, usedBy }
 rules[]         { id, goal, label, limit, unit, limitText, direction, icon, usedBy }
                 usedBy (optional, 0.5): role codes that need this data to do their own work.
+                help (optional, 0.6): one plain sentence saying why this check matters, for readers who do not know BIM.
                 icon (optional, 0.4): one of value, code, material, fire, asset, room, workset, name, level,
                 clash, warning, duplicate. Anything else, or none, shows the icon of the kind of check.
                 direction: lowerIsBetter | higherIsBetter
