@@ -285,6 +285,17 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
   <p id="printHead" hidden></p>
   <div id="app" data-level="1">
     <nav class="crumb" id="crumb" aria-label="Where you are"></nav>
+    <div id="firmSum" data-lv="2"></div>
+    <section data-lv="1 2" aria-labelledby="h-overall">
+      <div class="sh"><h2 id="h-overall">Compliance over time</h2><span class="note">Share of the values the plan requires that are filled, in every element of every firm's model. The dashed line is the target of the milestone in force.</span></div>
+      <div class="panel">
+        <div class="ctl" style="margin-bottom:8px"><span role="group" aria-label="What the chart shows" class="seg"><button class="btn" type="button" id="modeP" aria-pressed="true">Percent</button><button class="btn" type="button" id="modeV" aria-pressed="false">Values: required and filled</button></span><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
+        <div class="chart" id="chOverall"></div>
+        <div class="legend" id="lgOverall"></div>
+        <details><summary>Show the numbers as a table</summary><div class="tw" style="margin-top:8px" id="tblOverall"></div></details>
+      </div>
+    </section>
+
     <div id="gate" data-lv="1"></div>
     <div class="tiles" id="tiles" data-lv="1"></div>
     <div id="lead" data-lv="1"></div>
@@ -296,22 +307,12 @@ details>summary{cursor:pointer;color:var(--accent-ink);font-size:13px;margin-top
       <div class="sh"><h2 id="h-top">Biggest problems</h2><span class="note">The most urgent and most severe open items across all firms. Open one for its full history.</span></div>
       <div id="top"></div>
     </section>
-    <div id="firmSum" data-lv="2"></div>
+
 
     <section data-lv="1" aria-labelledby="h-ms">
       <div class="sh"><h2 id="h-ms">Major milestones</h2><span class="note">What the model had to reach at each milestone, and what it reached. Seen from the version selected above.</span></div>
       <div class="tw" style="margin-bottom:12px"><ol class="steps" id="msTrack"></ol></div>
       <details class="keep"><summary>Show each milestone in detail</summary><div class="msgrid" id="msCards" style="margin-top:10px"></div></details>
-    </section>
-
-    <section data-lv="1 2" aria-labelledby="h-overall">
-      <div class="sh"><h2 id="h-overall">Compliance over time</h2><span class="note">Share of the values the plan requires that are filled, in every element of every firm's model. The dashed line is the target of the milestone in force.</span></div>
-      <div class="panel">
-        <div class="ctl" style="margin-bottom:8px"><span role="group" aria-label="What the chart shows" class="seg"><button class="btn" type="button" id="modeP" aria-pressed="true">Percent</button><button class="btn" type="button" id="modeV" aria-pressed="false">Values: required and filled</button></span><button class="btn" type="button" id="firmsBtn" aria-pressed="false">Show each firm</button></div>
-        <div class="chart" id="chOverall"></div>
-        <div class="legend" id="lgOverall"></div>
-        <details><summary>Show the numbers as a table</summary><div class="tw" style="margin-top:8px" id="tblOverall"></div></details>
-      </div>
     </section>
 
     <section data-lv="2" aria-labelledby="h-gap">
@@ -510,10 +511,12 @@ function milestones(){
     const k=msVer(m),passed=msPassed(m),isCur=m.id===cur.id,u=passed?V[k]:isCur?V[sel]:null;
     let cls='',st,body='';
     if(u){const o=overall(u),rules=D.rules.map(r=>({r,x:u.rules[r.id]})),failR=rules.filter(q=>!q.x.pass),short=CODES.filter(c=>u.byRole[c]&&roleP(u,c)<m.targetPercent&&(!F||c===F)),ok=o!=null&&o>=m.targetPercent&&!failR.length;
-      if(passed){cls=ok?'pass':'miss';st=ok?'<span class="status good">✓ Passed</span>':'<span class="status bad">✕ Missed</span>'}
+      const why=o<m.targetPercent?(failR.length?`compliance below the target and ${failR.length} model rule${failR.length===1?'':'s'} failed`:'compliance below the target'):`${failR.length} model rule${failR.length===1?'':'s'} failed`;
+      if(passed){cls=ok?'pass':'miss';st=ok?'<span class="status good">✓ Passed</span>':`<span class="status bad">✕ Missed: ${why}</span>`}
       else{cls='now';const left=workingWeeks(now(),m.date);st=`<span class="status ${ok?'good':'warn'}">${ok?'✓ Would pass today':'! Would not pass today'}</span> <span class="md">due in ${left} working week${left===1?'':'s'}</span>`}
-      body=`<div class="mv">${pct(o)} <small>against ${m.targetPercent} %${passed?', at '+esc(u.label):''}</small></div>
-        <ul>${D.rules.length?`<li>Model rules met: <span class="num">${rules.length-failR.length} of ${rules.length}</span></li>`:''}${failR.map(q=>`<li><span class="delta worse">✕</span> ${esc(q.r.label)}: <span class="num">${rv(q.r,q.x.value)}</span> <span class="md">${esc(q.r.limitText)}</span></li>`).join('')}</ul>
+      body=`<div class="md">A milestone passes when compliance reaches the target${D.rules.length?' and every model rule passes':''}.${passed?' Judged at '+esc(u.label)+'.':''}</div>
+        <ul class="cond"><li><span class="ib ${o>=m.targetPercent?'ok':'no'}">${ico('target')}</span><span><b>${o>=m.targetPercent?'✓':'✕'} Compliance ${pct(o)}</b><small>target ${m.targetPercent} %</small></span></li>${D.rules.length?`<li><span class="ib ${failR.length?'no':'ok'}">${ico('rule')}</span><span><b>${failR.length?'✕':'✓'} Model rules: ${rules.length-failR.length} of ${rules.length} pass</b></span></li>`:''}</ul>
+        <ul>${failR.map(q=>`<li><span class="delta worse">✕</span> ${esc(q.r.label)}: <span class="num">${rv(q.r,q.x.value)}</span> <span class="md">${esc(q.r.limitText)}</span></li>`).join('')}</ul>
         ${short.length?`<div class="who">Below the target: ${short.map(c=>`<span class="code"><i style="background:${fc(c)}"></i>${esc(c)} ${pct(roleP(u,c),0)}</span>`).join('')}</div>`:o!=null?'<div class="who">Every firm at or above the target.</div>':''}
         ${passed&&k!==sel?`<button class="btn" type="button" data-i="${k}">Open ${esc(u.label)}</button>`:''}`;
     }else{st='<span class="status na">Not started</span>';body=`<div class="md">Target ${m.targetPercent} %. The plan asks for more values per element from the day after the milestone before it.</div>`}
@@ -647,7 +650,7 @@ function msTrack(){
     const ok=u&&o!=null&&o>=m.targetPercent&&D.rules.every(r=>u.rules[r.id].pass),cls=passed?(ok?'pass':'miss'):isCur?'now':'todo';
     const prev=i?MS[i-1].date:dayOf(V[0]),p=m.date>prev?Math.max(0,Math.min(1,(Date.parse(now())-Date.parse(prev))/(Date.parse(m.date)-Date.parse(prev)))):1;
     const here=isCur&&!passed?`<span class="td" style="left:calc(${i?-50:0}% + ${(p*(i?100:50)).toFixed(1)}%)">${dShort(now())}<br>▼</span>`:'';
-    return `<li class="${cls}" style="--p:${(p*100).toFixed(1)}%">${here}<span class="nd">${passed?(ok?'✓':'✕'):i+1}</span><b>${esc(m.name)}</b><span>${dShort(m.date)}${m.date.slice(0,4)!==now().slice(0,4)?', '+m.date.slice(0,4):''}</span><span class="num">${o!=null?pct(o,0)+' / ':'target '}${m.targetPercent} %</span><span>${passed?(ok?'Passed':'Missed'):isCur?'In force':'To come'}</span></li>`}).join('');
+    return `<li class="${cls}" style="--p:${(p*100).toFixed(1)}%">${here}<span class="nd">${passed?(ok?'✓':'✕'):i+1}</span><b>${esc(m.name)}</b><span>${dShort(m.date)}${m.date.slice(0,4)!==now().slice(0,4)?', '+m.date.slice(0,4):''}</span><span class="num">${o!=null?pct(o,0)+' / ':'target '}${m.targetPercent} %</span><span>${passed?(ok?'Passed':o>=m.targetPercent?'Missed: a model rule failed':'Missed: below the target'):isCur?'In force':'To come'}</span></li>`}).join('');
 }
 
 /* ---------- levels: the project, one firm, one item ---------- */
