@@ -1,6 +1,6 @@
 {
  "format": "openbep-compliance-series",
- "formatVersion": "0.3",
+ "formatVersion": "0.4",
  "example": true,
  "note": "SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.",
  "plan": {
@@ -118,41 +118,49 @@
  "valueChecks": [
   {
    "id": "assembly-code",
+   "icon": "code",
    "goal": "cost",
    "label": "Assembly Code filled"
   },
   {
    "id": "real-material",
+   "icon": "material",
    "goal": "cost",
    "label": "Elements with a real material"
   },
   {
    "id": "lod-params",
+   "icon": "value",
    "goal": "change",
    "label": "Parameters required by the LOD matrix at this milestone"
   },
   {
    "id": "fire-rating",
+   "icon": "fire",
    "goal": "change",
    "label": "Fire rating on walls, doors and floors"
   },
   {
    "id": "asset-data",
+   "icon": "asset",
    "goal": "handover",
    "label": "Equipment asset data (OB_ asset parameters)"
   },
   {
    "id": "rooms",
+   "icon": "room",
    "goal": "handover",
    "label": "Rooms numbered and named by the plan"
   },
   {
    "id": "worksets",
+   "icon": "workset",
    "goal": "basics",
    "label": "Elements on a named workset"
   },
   {
    "id": "view-names",
+   "icon": "name",
    "goal": "basics",
    "label": "Views named by the naming rules"
   }
@@ -160,6 +168,7 @@
  "rules": [
   {
    "id": "on-level",
+   "icon": "level",
    "goal": "cost",
    "label": "Elements on a level",
    "limit": 95,
@@ -169,6 +178,7 @@
   },
   {
    "id": "clashes",
+   "icon": "clash",
    "goal": "change",
    "label": "Clashes open for more than one coordination cycle",
    "limit": 25,
@@ -178,6 +188,7 @@
   },
   {
    "id": "warnings",
+   "icon": "warning",
    "goal": "change",
    "label": "Revit warnings",
    "limit": 1500,
@@ -187,6 +198,7 @@
   },
   {
    "id": "dup-mark",
+   "icon": "duplicate",
    "goal": "handover",
    "label": "No duplicate Mark",
    "limit": 0,
@@ -196,6 +208,7 @@
   },
   {
    "id": "worksets-exist",
+   "icon": "workset",
    "goal": "basics",
    "label": "The named worksets exist",
    "limit": 0,
@@ -205,6 +218,7 @@
   },
   {
    "id": "dup-levels",
+   "icon": "level",
    "goal": "basics",
    "label": "Duplicate levels",
    "limit": 0,

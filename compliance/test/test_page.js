@@ -80,6 +80,9 @@ const server = http.createServer((req, res) => {
     await page.goto(`http://127.0.0.1:${port}/compliance/${q}`);
     await page.waitForFunction(() => document.querySelector('#tiles .tile') || document.querySelector('.err'), null, { timeout: 10000 });
     const r = await page.evaluate(() => ({
+      pay: document.querySelectorAll('#pay .msc').length, payConds: [...document.querySelectorAll('#pay .msc')].every(c => c.querySelectorAll('.cond li').length === 4), steps: document.querySelectorAll('#msTrack li').length,
+      defRows: document.querySelectorAll('#gaps tbody tr').length, defGfx: [...document.querySelectorAll('#gaps tbody tr')].every(t => t.querySelector('.sev') && t.querySelector('.tl') && t.querySelector('.ib .ico')),
+      gapCut: [...document.querySelectorAll('#gaps *, #pay *')].filter(e => { const b = e.getBoundingClientRect(); return innerWidth < 700 && !e.closest('details:not([open])') && b.width && b.right > innerWidth + 1; }).length,
       err: !!document.querySelector('.err'), goals: document.querySelectorAll('#goals .goal').length, pace: document.querySelectorAll('#paceTbl tbody tr').length,
       wide: document.documentElement.scrollWidth > innerWidth + 1, ell: [...document.querySelectorAll('main *')].filter(e => e.tagName !== 'SELECT' && e.tagName !== 'OPTION' && !e.closest('svg') && !e.closest('.mx') && !e.matches('.tw') && !e.closest('details') && !e.closest('.stripbox') && !e.closest('#changed') && e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX !== 'visible').map(e => e.className || e.tagName).slice(0, 3).join(','),
       msg: (document.querySelector('.err') || {}).innerText, cut: [...document.querySelectorAll('#paceTbl *')].filter(e => { const b = e.getBoundingClientRect(), t = document.querySelector('#paceTbl').getBoundingClientRect(); return innerWidth < 700 && b.width && b.right > t.right + 1; }).length, wideEl: [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1 && !e.closest('.mx') && !e.closest('.tw') && !e.closest('.stripbox')).map(e => e.id || e.className || e.tagName).slice(0, 4).join(','),
@@ -90,6 +93,10 @@ const server = http.createServer((req, res) => {
     ok(!r.err, `${k} @${width}: renders ${r.msg || ''}`);
     ok(r.goals === d.plan.goals.length, `${k} @${width}: one card per goal (${r.goals}/${d.plan.goals.length})`);
     ok(r.pace === Object.keys(last.byRole).length, `${k} @${width}: one pace row per firm (${r.pace})`);
+    ok(r.pay === Object.keys(last.byRole).length && r.payConds, `${k} @${width}: one payment check per firm, four conditions each (${r.pay})`);
+    ok(r.steps === d.plan.milestones.length, `${k} @${width}: one step per milestone on the track (${r.steps})`);
+    ok(r.defGfx, `${k} @${width}: every deficiency has severity, icon and timeline (${r.defRows} rows)`);
+    ok(!r.gapCut, `${k} @${width}: deficiencies and payment cards fit the phone (${r.gapCut} past the edge)`);
     ok(!r.wide, `${k} @${width}: no page-wide horizontal scroll ${r.wideEl}`);
     ok(!r.ell, `${k} @${width}: nothing clipped ${r.ell}`);
     ok(!r.cut, `${k} @${width}: pace cards fit the phone (${r.cut} past the edge)`);
