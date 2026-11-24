@@ -13,7 +13,7 @@
     const need = (ok, msg) => { if (!ok) e.push(msg); return ok; };
     if (!need(d && typeof d === 'object', 'The file is not a JSON object.')) return e;
     need(d.format === 'openbep-compliance-series', 'format must be "openbep-compliance-series".');
-    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 and 0.2).');
+    need(typeof d.formatVersion === 'string' && /^0\./.test(d.formatVersion), 'formatVersion must be 0.x (this page reads 0.1 to 0.3).');
     const p = d.plan || {};
     need(typeof p.name === 'string' && p.name, 'plan.name is missing.');
     const goals = Array.isArray(p.goals) ? p.goals : [], ms = Array.isArray(p.milestones) ? p.milestones : [], roles = Array.isArray(p.roles) ? p.roles : [];
@@ -24,6 +24,7 @@
     goals.forEach((g, i) => { need(g.id && g.name, `plan.goals[${i}] needs id and name.`); need(!gid.has(g.id), `Goal id "${g.id}" is used twice.`); gid.add(g.id); need(!g.uses || Array.isArray(g.uses), `plan.goals[${i}].uses must be a list.`); });
     ms.forEach((m, i) => { need(m.id && m.name, `plan.milestones[${i}] needs id and name.`); need(isDate(m.date), `Milestone "${m.name}" needs a date (YYYY-MM-DD).`); need(isNum(m.targetPercent) && m.targetPercent >= 0 && m.targetPercent <= 100, `Milestone "${m.name}" needs targetPercent between 0 and 100.`); if (i) need(m.date >= ms[i - 1].date, 'plan.milestones must be in date order.'); mid.add(m.id); });
     roles.forEach((r, i) => { need(r.code && r.role, `plan.roles[${i}] needs code and role.`); need(!codes.has(r.code), `Role code "${r.code}" is used twice.`); codes.add(r.code); need(r.from == null || isDate(r.from), `Role ${r.code}: from must be a date or null.`); });
+    if (p.escalation != null) need(Array.isArray(p.escalation) && p.escalation.every(x => typeof x === 'string' && x), 'plan.escalation must be a list of steps, in order.');
     (p.holidays || []).forEach((h, i) => need(isDate(h.from) && isDate(h.to) && h.to >= h.from, `plan.holidays[${i}] needs from and to dates, in order.`));
     const vcs = Array.isArray(d.valueChecks) ? d.valueChecks : [], rules = Array.isArray(d.rules) ? d.rules : [];
     const vid = new Set(), rid = new Set();
@@ -62,7 +63,9 @@
         }
       }
       for (const [c, r] of Object.entries(br)) if (sums[c]) need(sums[c][0] === r.required && sums[c][1] === r.met, `${L}, ${c}: the value checks add up to ${sums[c][1]} of ${sums[c][0]}, but byRole says ${r.met} of ${r.required}.`);
-      for (const id of rid) { const x = (v.rules || {})[id]; need(x && isNum(x.value) && typeof x.pass === 'boolean', `${L}: rule "${id}" needs value and pass.`); }
+      for (const id of rid) { const x = (v.rules || {})[id]; need(x && isNum(x.value) && typeof x.pass === 'boolean', `${L}: rule "${id}" needs value and pass.`);
+        // Optional since 0.3: whose elements fail the rule.
+        if (x && x.byRole != null) need(typeof x.byRole === 'object' && Object.entries(x.byRole).every(([c, n]) => codes.has(c) && isNum(n) && n >= 0), `${L}: rule "${id}" byRole must give a count per role code.`); }
     });
     need(nChecked, 'No version was checked.');
     return e;

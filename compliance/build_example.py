@@ -102,6 +102,11 @@ WRONG = {'ARCH': .14, 'STRUCT': .08, 'MECH': .38, 'CON': .2}
 # Of the values required on elements added this week, the share that arrives filled. A firm that models
 # clean keeps this high; a firm that models first and fills later does not.
 CLEAN = {'ARCH': .82, 'STRUCT': .93, 'MECH': .44, 'CON': .66}
+# Whose elements fail each count rule (share of the failing elements). A rule with no entry belongs to the whole model.
+RULE_OWNERS = {'clashes': {'MECH': .6, 'STRUCT': .25, 'ARCH': .15}, 'warnings': {'ARCH': .55, 'MECH': .35, 'STRUCT': .1},
+               'dup-mark': {'ARCH': .7, 'MECH': .3}, 'worksets-exist': {'MECH': 1}, 'dup-levels': {'STRUCT': 1}}
+# What the plan says happens when a firm misses milestones in a row (same steps as the Scorecard's example).
+ESCALATION = ['Recovery plan within 10 working days', 'Formal notice under the contract', 'Milestone not accepted and its payment held until the gap is closed']
 # Weeks a role uploaded nothing new. The federated version keeps that role's previous model.
 NO_UPLOAD = {
     'ARCH': {'2027-04-16', '2027-04-30', '2027-05-07'},
@@ -188,13 +193,18 @@ for day in weeks:
         for ru in RULES:
             val = rv[ru['id']]
             v['rules'][ru['id']] = {'value': val, 'pass': val >= ru['limit'] if ru['direction'] == 'higherIsBetter' else val <= ru['limit']}
+            sh = {c: w for c, w in RULE_OWNERS.get(ru['id'], {}).items() if state.get(c)}
+            if sh and val:   # whose elements fail the rule
+                tot_w = sum(sh.values()); parts = {c: int(val * w / tot_w) for c, w in sh.items()}
+                parts[max(sh, key=sh.get)] += val - sum(parts.values())
+                v['rules'][ru['id']]['byRole'] = {c: n for c, n in parts.items() if n}
     versions.append(v)
 
 doc = {
-    'format': 'openbep-compliance-series', 'formatVersion': '0.2', 'example': True,
+    'format': 'openbep-compliance-series', 'formatVersion': '0.3', 'example': True,
     'note': 'SIMULATED. Invented numbers for a made-up school project. No real model, firm or VIM Server was measured. Written by compliance/build_example.py.',
     'plan': {'name': 'Example: Primary school renovation and extension', 'owner': 'School service centre (example)', 'delivery': 'Design-bid-build',
-             'goals': GOALS, 'milestones': MILESTONES, 'holidays': HOLIDAYS, 'roles': ROLES},
+             'goals': GOALS, 'milestones': MILESTONES, 'holidays': HOLIDAYS, 'roles': ROLES, 'escalation': ESCALATION},
     'model': {'server': 'VIM Server (simulated)', 'project': 'Primary school (example)', 'source': 'SCH-FEDERATED.vim',
               'schedule': 'One version every Friday, built from the Revit models each firm uploaded that week.'},
     'valueChecks': [{k: v for k, v in vc.items() if k in ('id', 'goal', 'label')} for vc in VALUE_CHECKS],
