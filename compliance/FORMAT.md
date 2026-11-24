@@ -154,3 +154,35 @@ from a real project without someone filling the gaps by hand:
 
 Items 1 to 4 are an addition to the requirement file (Builder). Items 5 and 6 are an addition to the result
 file (checker). With both, a small script turns a folder of results into this series, with no judgment calls.
+
+## Element results: `openbep-compliance-elements` 0.1 (draft)
+
+The page `/compliance/model/` shows where in one model version the plan is not followed, down to the single element and the single required value, and colours the model in 3D. It reads one file and has no project-specific code.
+
+```
+format            "openbep-compliance-elements"
+formatVersion     "0.1"
+example, note     optional: true and a sentence when the file is an example
+project.name
+model             name, url (https link to a .vim file, optional), format "vim", sizeMB, workshared
+version           label, date
+checks[]          1 to 30. id, label, icon, help, parameter (the Revit parameter name),
+                  on: "type" | "instance" | "element" (where the value is fixed)
+columns           always ["id","model","workset","category","family","type","level","required","filled"]
+strings[]         every name used once
+elements[]        one row per element, in the order of columns:
+                  id       the Revit element id
+                  model to level   positions in strings ("" means none)
+                  required bit i is 1 when check i asks something of this element
+                  filled   bit i is 1 when that value is filled (never 1 where required is 0)
+```
+
+Rules the page applies, the same for every file:
+
+- Compliance of any group is filled bits over required bits.
+- An element is green when every required value is filled, yellow at half or more, red below half, grey when nothing is required of it by the check being looked at. The lists and the 3D view use the same four colours.
+- Levels: model, workset, category, family, type, element, required value. Or level (storey) first. A level with a single group is passed through.
+- For a check fixed on the type, the page counts the types to fill and the elements that fixes.
+- Without `model.url` the lists still work; there is no 3D view.
+
+The 3D view is VIM's open web viewer (github.com/vimaec/vim-web, MIT), loaded from a public CDN only when the model is shown. The example file is built once by `compliance/model/tools/build_residence.js` from real values in VIM's public sample model. Open gaps: a real file needs VIM Server (or another checker) to export one row per element, which the result file 1.1 does not carry yet. One file is one version; change over time per element is not in the format yet.

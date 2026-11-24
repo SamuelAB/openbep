@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><title>Build the element results for VIM's sample house</title><body>
+<!-- One-off tool, not part of the site. Run with build_residence.js. It reads real parameter values
+     from VIM's public sample model and writes them in the openbep-compliance-elements format. -->
+<div id="v" style="width:800px;height:500px;position:relative"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script>window.process=window.process||{env:{NODE_ENV:'production'}};React.jsx=React.jsxs=(t,p,k)=>React.createElement(t,k===undefined?p:Object.assign({},p,{key:k}))</script>
+<script src="https://cdn.jsdelivr.net/npm/vim-web@1.0.0-beta.2/dist/vim-web.iife.js"></script>
+<script>
+const URL_='https://storage.cdn.vimaec.com/samples/residence.v1.2.75.vim';
+// The example's checks. Each names one Revit parameter, where it lives, and the categories it is required on.
+const CHECKS=[
+ {id:'assembly-code',label:'Assembly Code filled',icon:'code',param:'Assembly Code',on:'type',cats:null,help:'Every element needs its cost code so quantities can be priced.'},
+ {id:'fire-rating',label:'Fire rating on walls, doors and floors',icon:'fire',param:'Fire Rating',on:'type',cats:['Walls','Doors','Floors'],help:'Walls, doors and floors must carry their fire rating so the other trades can coordinate with them.'},
+ {id:'mark',label:'Mark on doors, windows, fixtures and equipment',icon:'duplicate',param:'Mark',on:'instance',cats:['Doors','Windows','Plumbing Fixtures','Mechanical Equipment','Electrical Equipment','Electrical Fixtures','Lighting Fixtures','Specialty Equipment'],help:'Each door, window and piece of equipment needs its own number so it can be found on site and at handover.'},
+ {id:'type-mark',label:'Type Mark on doors and windows',icon:'name',param:'Type Mark',on:'type',cats:['Doors','Windows'],help:'The type mark ties each door and window to its line in the schedule.'},
+ {id:'manufacturer',label:'Manufacturer on fixtures and equipment',icon:'asset',param:'Manufacturer',on:'type',cats:['Plumbing Fixtures','Mechanical Equipment','Electrical Equipment','Electrical Fixtures','Lighting Fixtures','Specialty Equipment','Doors','Windows'],help:'The owner needs to know who made each product to maintain or replace it.'},
+ {id:'level',label:'Element tied to a level',icon:'level',param:null,on:'element',cats:null,help:'An element that is not tied to a level cannot be counted by floor.'},
+];
+(async()=>{try{
+const VIM=window.VIMReact;const viewer=await VIM.React.Webgl.createViewer(document.getElementById('v'),{});
+const vim=await viewer.load({url:new URLSearchParams(location.search).get('vim')||URL_}).getVim();
+const b=vim.bim,els=vim.getAllElements();
+const [E,C,W,L,PD,P,D,FI,FT]=await Promise.all([b.element.getAll(),b.category.getAll(),b.workset.getAll(),b.level.getAll(),b.parameterDescriptor.getAll(),b.parameter.getAll(),b.bimDocument.getAll(),b.familyInstance.getAll(),b.familyType.getAll()]);
+const mesh=new Set(els.filter(e=>e.hasMesh).map(e=>e.element));
+const names=new Set(CHECKS.map(c=>c.param).filter(Boolean)),val={};         // val[param][elementIndex]=value
+for(const p of P){const n=PD[p.parameterDescriptorIndex]&&PD[p.parameterDescriptorIndex].name;if(!names.has(n)) continue;(val[n]||(val[n]={}))[p.elementIndex]=p.value||''}
+const filled=v=>{if(v==null) return null;const s=String(v).split('|');const t=(s.length>1?s[s.length-1]:s[0]).trim();return !!t&&t!=='<None>'&&t!=='<By Category>'};
+const typeEl={};for(const fi of FI){const ft=FT[fi.familyTypeIndex];if(ft&&ft.elementIndex>=0) typeEl[fi.elementIndex]=ft.elementIndex}
+const byKey={};for(const ft of FT){const e=E[ft.elementIndex];if(e) byKey[e.categoryIndex+'|'+e.familyName+'|'+e.name]=e.index}
+const lvlName=i=>i>=0&&L[i]&&E[L[i].elementIndex]?E[L[i].elementIndex].name:'';
+const S=[],si={},sx=s=>{s=s||'';if(!(s in si)){si[s]=S.length;S.push(s)}return si[s]};
+const rows=[];let noType=0;
+for(const e of E){if(!mesh.has(e.index)) continue;const c=C[e.categoryIndex];if(!c||c.categoryType!=='Model') continue;
+  let t=typeEl[e.index];if(t==null) t=byKey[e.categoryIndex+'|'+e.familyName+'|'+e.type];if(t==null) noType++;
+  let req=0,met=0;CHECKS.forEach((k,i)=>{if(k.cats&&!k.cats.includes(c.name)) return;let f;
+    if(k.on==='element') f=e.levelIndex>=0;else{const src=k.on==='type'?t:e.index;f=src==null?null:filled((val[k.param]||{})[src]);if(f===null) return}   // parameter absent: not required here
+    req|=1<<i;if(f) met|=1<<i});
+  if(!req) continue;
+  const w=W[e.worksetIndex];
+  rows.push([Number(e.id),sx(D[e.bimDocumentIndex]?D[e.bimDocumentIndex].title:''),sx(w&&w.kind==='UserWorkset'?w.name:''),sx(c.name),sx(e.familyName),sx(e.type),sx(lvlName(e.levelIndex)),req,met])}
+rows.sort((a,b)=>a[0]-b[0]);
+window.out={format:'openbep-compliance-elements',formatVersion:'0.1',example:true,
+ note:"Real values, read once from VIM's public sample model by compliance/model/tools/build_residence.js. No VIM Server checked this model; the checks are examples.",
+ project:{name:'Example: sample house (Wolford Residence)'},
+ model:{name:D[0]?D[0].title:'',url:URL_,format:'vim',sizeMB:37,workshared:!!(D[0]&&D[0].isWorkshared)},
+ version:{label:'Sample file',date:'2023-08-28'},
+ checks:CHECKS.map(({id,label,icon,param,on,help})=>({id,label,icon,parameter:param,on,help})),
+ columns:['id','model','workset','category','family','type','level','required','filled'],strings:S,elements:rows};
+window.stats={elements:E.length,withMesh:mesh.size,rows:rows.length,noType};window.done=true}catch(x){window.err=String(x&&x.stack||x);window.done=true}})()
+</script>
