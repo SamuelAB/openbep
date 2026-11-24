@@ -88,7 +88,7 @@ select{min-height:var(--ctl);border:1px solid var(--line2);border-radius:var(--r
 .dots{display:inline-flex;gap:3px;vertical-align:middle}
 .dots i{width:9px;height:9px;border-radius:50%;display:block}
 .el table{border-collapse:collapse;width:100%;margin-top:8px}
-.el td,.el th{padding:6px 8px 6px 0;border-top:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+.el td,.el th{overflow-wrap:anywhere;padding:6px 8px 6px 0;border-top:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
 .el th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:500;border-top:0}
 .pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:500;white-space:nowrap}
 .pill.y{background:var(--good-soft);color:var(--good)}.pill.n{background:var(--bad-soft);color:var(--bad)}.pill.x{background:var(--sunk);color:var(--muted)}
@@ -102,7 +102,7 @@ select{min-height:var(--ctl);border:1px solid var(--line2);border-radius:var(--r
 .foot{margin-top:28px;color:var(--muted);font-size:13px}
 .foot li{margin:4px 0}
 @media (max-width:980px){.cols{grid-template-columns:minmax(0,1fr)}.view{position:static}.stage{height:60vh}}
-@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr) 64px 20px}.row .bar{grid-column:1 / -1;grid-row:2}.chk{grid-template-columns:20px minmax(0,1fr) 64px}.chk .bar{grid-column:2 / -1;grid-row:2}.chk .fix{grid-row:3}}
+@media (max-width:560px){.el thead{display:none}.el tr{display:block;border-top:1px solid var(--line);padding:6px 0}.el td{display:block;border:0;padding:2px 0;overflow-wrap:anywhere}.el td:empty{display:none}.facts{overflow-wrap:anywhere}.row{grid-template-columns:minmax(0,1fr) 64px 20px}.row .bar{grid-column:1 / -1;grid-row:2}.chk{grid-template-columns:20px minmax(0,1fr) 64px}.chk .bar{grid-column:2 / -1;grid-row:2}.chk .fix{grid-row:3}}
 @media (pointer:coarse){.btn,select{min-height:44px}.lnk{padding:10px 0}.top nav a{padding:8px 0}}
 @media print{.top nav,.ctl,.view,.foot{display:none!important}.cols{grid-template-columns:1fr}}
 </style>
